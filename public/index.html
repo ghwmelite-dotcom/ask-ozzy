@@ -135,12 +135,8 @@
             <input type="email" id="login-email" placeholder="your.name@gov.gh" required />
           </div>
           <div class="form-group">
-            <label>Password</label>
-            <input type="password" id="login-password" placeholder="Enter your password" required />
-          </div>
-          <div class="form-group">
-            <label style="font-size:11px;color:var(--text-muted);text-transform:none;letter-spacing:0;">Referral Code (optional)</label>
-            <input type="text" id="login-referral" placeholder="e.g. OZZY-KWAME" />
+            <label>Access Code</label>
+            <input type="text" id="login-access-code" class="access-code-input" placeholder="e.g. 7K9F-M2XH" required autocomplete="off" spellcheck="false" />
           </div>
           <button type="submit" class="btn-auth">Sign In</button>
         </form>
@@ -160,10 +156,6 @@
             <input type="text" id="reg-dept" placeholder="e.g. Ministry of Finance" />
           </div>
           <div class="form-group">
-            <label>Password</label>
-            <input type="password" id="reg-password" placeholder="Min 8 characters" required minlength="8" />
-          </div>
-          <div class="form-group">
             <label style="font-size:11px;color:var(--text-muted);text-transform:none;letter-spacing:0;">Referral Code (optional)</label>
             <input type="text" id="reg-referral" placeholder="e.g. OZZY-KWAME" />
           </div>
@@ -178,6 +170,21 @@
         <div class="privacy-banner" style="margin-top:16px;">
           <strong>🔒 Your Privacy Matters</strong>
           Unlike ChatGPT and other public tools, your data never leaves this platform. Complete confidentiality for government work.
+        </div>
+
+        <!-- Code Reveal (shown after registration) -->
+        <div id="code-reveal" class="hidden">
+          <div style="text-align:center;padding:8px 0;">
+            <div style="font-size:48px;margin-bottom:12px;">🔐</div>
+            <h3 style="font-size:20px;font-weight:700;margin-bottom:8px;color:var(--text-primary);">Your Access Code</h3>
+            <p style="font-size:13px;color:var(--text-secondary);margin-bottom:20px;">Use this code to sign in. Save it somewhere safe!</p>
+            <div id="reveal-code-display" class="access-code-input" style="font-size:32px;letter-spacing:6px;color:var(--gold);background:var(--bg-tertiary);border:2px dashed var(--gold-dim);border-radius:12px;padding:20px;margin:0 auto 16px;display:inline-block;min-width:260px;font-weight:700;"></div>
+            <div style="margin-bottom:16px;">
+              <button type="button" id="btn-copy-code" onclick="copyAccessCode()" style="background:var(--gold);color:var(--text-on-accent);border:none;border-radius:8px;padding:10px 24px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s;">Copy Code</button>
+            </div>
+            <p style="font-size:12px;color:var(--red-error-text);font-weight:600;margin-bottom:20px;">This code will only be shown once!</p>
+            <button type="button" onclick="finishRegistration()" style="width:100%;padding:12px;background:linear-gradient(135deg, var(--green), var(--green-light));color:var(--text-on-green);border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;">I've Saved My Code — Continue →</button>
+          </div>
         </div>
       </div>
     </div>

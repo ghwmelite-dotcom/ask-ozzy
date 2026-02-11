@@ -93,7 +93,27 @@ function openAuthModal() {
   }, 100);
 }
 
+let _pendingCodeReveal = false;
+
 function closeAuthModal() {
+  if (_pendingCodeReveal) {
+    if (!confirm("You haven't saved your access code yet! Are you sure you want to close? You won't be able to see it again.")) {
+      return;
+    }
+    _pendingCodeReveal = false;
+    onAuthenticated();
+  }
+  // Reset code reveal UI
+  const codeReveal = document.getElementById("code-reveal");
+  if (codeReveal) codeReveal.classList.add("hidden");
+  document.getElementById("login-form").classList.remove("hidden");
+  document.getElementById("register-form").classList.add("hidden");
+  const authToggle = document.querySelector(".auth-toggle");
+  if (authToggle) authToggle.style.display = "";
+  const privacyBanner = document.querySelector("#auth-modal .privacy-banner");
+  if (privacyBanner) privacyBanner.style.display = "";
+  document.getElementById("auth-modal-title").textContent = "Sign in to AskOzzy";
+
   document.getElementById("auth-modal").classList.remove("active");
   state.pendingAction = null;
 }
@@ -107,6 +127,17 @@ function toggleAuthForm() {
   const errorEl = document.getElementById("auth-error");
 
   errorEl.classList.remove("visible");
+
+  // Reset code reveal if it's visible
+  const codeReveal = document.getElementById("code-reveal");
+  if (codeReveal && !codeReveal.classList.contains("hidden")) {
+    codeReveal.classList.add("hidden");
+    const authToggle = document.querySelector(".auth-toggle");
+    if (authToggle) authToggle.style.display = "";
+    const privacyBanner = document.querySelector("#auth-modal .privacy-banner");
+    if (privacyBanner) privacyBanner.style.display = "";
+    _pendingCodeReveal = false;
+  }
 
   if (loginForm.classList.contains("hidden")) {
     loginForm.classList.remove("hidden");
@@ -129,6 +160,50 @@ function showAuthError(msg) {
   el.classList.add("visible");
 }
 
+function showAccessCodeReveal(code) {
+  document.getElementById("auth-error").classList.remove("visible");
+  document.getElementById("login-form").classList.add("hidden");
+  document.getElementById("register-form").classList.add("hidden");
+  const authToggle = document.querySelector(".auth-toggle");
+  if (authToggle) authToggle.style.display = "none";
+  const privacyBanner = document.querySelector("#auth-modal .privacy-banner");
+  if (privacyBanner) privacyBanner.style.display = "none";
+
+  document.getElementById("code-reveal").classList.remove("hidden");
+  document.getElementById("reveal-code-display").textContent = code;
+  document.getElementById("auth-modal-title").textContent = "Account Created!";
+  _pendingCodeReveal = true;
+}
+
+function copyAccessCode() {
+  const code = document.getElementById("reveal-code-display").textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.getElementById("btn-copy-code");
+    btn.textContent = "Copied!";
+    btn.style.background = "var(--green-light)";
+    setTimeout(() => {
+      btn.textContent = "Copy Code";
+      btn.style.background = "var(--gold)";
+    }, 2000);
+  });
+}
+
+function finishRegistration() {
+  _pendingCodeReveal = false;
+  document.getElementById("code-reveal").classList.add("hidden");
+  // Restore form visibility for next time
+  document.getElementById("login-form").classList.remove("hidden");
+  document.getElementById("register-form").classList.add("hidden");
+  const authToggle = document.querySelector(".auth-toggle");
+  if (authToggle) authToggle.style.display = "";
+  const privacyBanner = document.querySelector("#auth-modal .privacy-banner");
+  if (privacyBanner) privacyBanner.style.display = "";
+  document.getElementById("auth-modal-title").textContent = "Sign in to AskOzzy";
+
+  document.getElementById("auth-modal").classList.remove("active");
+  onAuthenticated();
+}
+
 // Runs after successful login or register
 function onAuthenticated() {
   updateSidebarFooter();
@@ -146,7 +221,7 @@ function onAuthenticated() {
 document.getElementById("login-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   const email = document.getElementById("login-email").value;
-  const password = document.getElementById("login-password").value;
+  const accessCode = document.getElementById("login-access-code").value;
   const btn = e.target.querySelector(".btn-auth");
   btn.disabled = true;
   btn.textContent = "Signing in...";
@@ -155,7 +230,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     const res = await fetch(`${API}/api/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, accessCode }),
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || "Login failed");
@@ -179,7 +254,6 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
   const fullName = document.getElementById("reg-name").value;
   const email = document.getElementById("reg-email").value;
   const department = document.getElementById("reg-dept").value;
-  const password = document.getElementById("reg-password").value;
   const btn = e.target.querySelector(".btn-auth");
   btn.disabled = true;
   btn.textContent = "Creating account...";
@@ -188,7 +262,7 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
     const res = await fetch(`${API}/api/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password, fullName, department, referralCode: document.getElementById("reg-referral").value }),
+      body: JSON.stringify({ email, fullName, department, referralCode: document.getElementById("reg-referral").value }),
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || "Registration failed");
@@ -197,8 +271,8 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
     state.user = data.user;
     localStorage.setItem("askozzy_token", data.token);
     localStorage.setItem("askozzy_user", JSON.stringify(data.user));
-    closeAuthModal();
-    onAuthenticated();
+
+    showAccessCodeReveal(data.accessCode);
   } catch (err) {
     showAuthError(err.message);
   } finally {
@@ -1158,9 +1232,7 @@ async function upgradeToPlan(planId, planName, price) {
     const savedRef = localStorage.getItem("askozzy_pending_ref");
     if (savedRef) {
       const regRef = document.getElementById("reg-referral");
-      const loginRef = document.getElementById("login-referral");
       if (regRef) regRef.value = savedRef;
-      if (loginRef) loginRef.value = savedRef;
     }
   };
 })();

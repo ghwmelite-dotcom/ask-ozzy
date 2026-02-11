@@ -29,6 +29,25 @@ async function hashPassword(password: string): Promise<string> {
   return btoa(String.fromCharCode(...new Uint8Array(hash)));
 }
 
+function generateAccessCode(): string {
+  const chars = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+  const bytes = new Uint8Array(8);
+  crypto.getRandomValues(bytes);
+  let code = "";
+  for (let i = 0; i < 8; i++) {
+    code += chars[bytes[i] % chars.length];
+  }
+  return code.slice(0, 4) + "-" + code.slice(4);
+}
+
+function normalizeAccessCode(input: string): string {
+  const stripped = input.toUpperCase().replace(/[^A-Z0-9]/g, "");
+  if (stripped.length === 8) {
+    return stripped.slice(0, 4) + "-" + stripped.slice(4);
+  }
+  return input;
+}
+
 async function createToken(userId: string, env: Env): Promise<string> {
   const token = generateId();
   await env.SESSIONS.put(`session:${token}`, userId, {
@@ -66,13 +85,10 @@ async function authMiddleware(
 // ─── Auth Routes ────────────────────────────────────────────────────
 
 app.post("/api/auth/register", async (c) => {
-  const { email, password, fullName, department, referralCode } = await c.req.json();
+  const { email, fullName, department, referralCode } = await c.req.json();
 
-  if (!email || !password || !fullName) {
-    return c.json({ error: "Email, password, and full name are required" }, 400);
-  }
-  if (password.length < 8) {
-    return c.json({ error: "Password must be at least 8 characters" }, 400);
+  if (!email || !fullName) {
+    return c.json({ error: "Email and full name are required" }, 400);
   }
 
   const existing = await c.env.DB.prepare(
@@ -86,7 +102,8 @@ app.post("/api/auth/register", async (c) => {
   }
 
   const userId = generateId();
-  const passwordHash = await hashPassword(password);
+  const accessCode = generateAccessCode();
+  const passwordHash = await hashPassword(accessCode);
 
   // Generate unique referral code for this user: OZZY-FIRSTNAME-XXXX
   const firstName = fullName.split(" ")[0].toUpperCase();
@@ -155,15 +172,17 @@ app.post("/api/auth/register", async (c) => {
 
   return c.json({
     token,
+    accessCode,
     user: { id: userId, email: email.toLowerCase().trim(), fullName, department, tier: "free", referralCode: userReferralCode },
   });
 });
 
 app.post("/api/auth/login", async (c) => {
-  const { email, password } = await c.req.json();
+  const { email, password, accessCode } = await c.req.json();
+  const credential = accessCode || password;
 
-  if (!email || !password) {
-    return c.json({ error: "Email and password are required" }, 400);
+  if (!email || !credential) {
+    return c.json({ error: "Email and access code are required" }, 400);
   }
 
   const user = await c.env.DB.prepare(
@@ -184,12 +203,21 @@ app.post("/api/auth/login", async (c) => {
     }>();
 
   if (!user) {
-    return c.json({ error: "Invalid email or password" }, 401);
+    return c.json({ error: "Invalid email or access code" }, 401);
   }
 
-  const passwordHash = await hashPassword(password);
-  if (passwordHash !== user.password_hash) {
-    return c.json({ error: "Invalid email or password" }, 401);
+  const normalized = normalizeAccessCode(credential);
+  const normalizedHash = await hashPassword(normalized);
+  let match = normalizedHash === user.password_hash;
+
+  // Fallback: try raw credential for legacy password users
+  if (!match && normalized !== credential) {
+    const rawHash = await hashPassword(credential);
+    match = rawHash === user.password_hash;
+  }
+
+  if (!match) {
+    return c.json({ error: "Invalid email or access code" }, 401);
   }
 
   await c.env.DB.prepare(
