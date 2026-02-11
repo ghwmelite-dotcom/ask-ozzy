@@ -1486,7 +1486,7 @@ async function trainDocument() {
   var allFiles = getTrainFiles();
 
   // Filter binary formats and give clear feedback
-  var BINARY_EXT = [".doc", ".docx", ".pptx", ".ppt", ".xls", ".xlsx", ".pdf", ".zip", ".rar", ".7z", ".exe", ".bin", ".dll", ".iso", ".img", ".mp3", ".mp4", ".avi", ".mov", ".png", ".jpg", ".jpeg", ".gif", ".bmp", ".ico", ".woff", ".woff2", ".ttf", ".eot"];
+  var BINARY_EXT = [".pdf", ".zip", ".rar", ".7z", ".exe", ".bin", ".dll", ".iso", ".img", ".mp3", ".mp4", ".avi", ".mov", ".png", ".jpg", ".jpeg", ".gif", ".bmp", ".ico", ".woff", ".woff2", ".ttf", ".eot"];
   var textFiles = [];
   var skippedBinary = [];
   for (let i = 0; i < allFiles.length; i++) {
@@ -1502,7 +1502,7 @@ async function trainDocument() {
   if (allFiles.length > 0 && textFiles.length === 0) {
     resultEl.innerHTML = '<span class="msg-error">All ' + allFiles.length + ' selected files are binary formats that cannot be processed.</span>' +
       '<br><span style="font-size:11px;color:var(--text-muted);">Unsupported: ' + skippedBinary.slice(0, 5).join(", ") + (skippedBinary.length > 5 ? ", ..." : "") + '</span>' +
-      '<br><span style="font-size:11px;color:var(--gold);">Supported formats: .txt, .md, .csv, .json, .html — Please convert your documents first.</span>';
+      '<br><span style="font-size:11px;color:var(--gold);">Supported formats: .docx, .pptx, .doc, .txt, .md, .csv, .json, .html</span>';
     return;
   }
 

@@ -503,6 +503,178 @@ RESPONSE GUIDELINES:
 - Structure responses with headings, bullet points, and numbered steps
 - For document drafting, follow GoG formatting standards above`;
 
+// ─── DOCX/PPTX Text Extraction (ZIP-based Office files) ──────────────
+
+async function extractDocxText(file: File): Promise<string> {
+  const buffer = await file.arrayBuffer();
+  const entries = parseZipEntries(new Uint8Array(buffer));
+
+  // DOCX: main content is in word/document.xml
+  const docEntry = entries.find(e => e.filename === "word/document.xml");
+  if (!docEntry) throw new Error("Not a valid DOCX file (missing word/document.xml)");
+
+  const xml = await decompressEntry(docEntry);
+  // Extract text from <w:t> tags and preserve paragraph breaks
+  return xml
+    .replace(/<\/w:p>/g, "\n")
+    .replace(/<w:tab\/>/g, "\t")
+    .replace(/<w:br[^>]*\/>/g, "\n")
+    .replace(/<w:t[^>]*>([\s\S]*?)<\/w:t>/g, "$1")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+async function extractPptxText(file: File): Promise<string> {
+  const buffer = await file.arrayBuffer();
+  const entries = parseZipEntries(new Uint8Array(buffer));
+
+  // PPTX: slides are in ppt/slides/slide1.xml, slide2.xml, etc.
+  const slideEntries = entries
+    .filter(e => /^ppt\/slides\/slide\d+\.xml$/.test(e.filename))
+    .sort((a, b) => {
+      const numA = parseInt(a.filename.match(/slide(\d+)/)?.[1] || "0");
+      const numB = parseInt(b.filename.match(/slide(\d+)/)?.[1] || "0");
+      return numA - numB;
+    });
+
+  if (slideEntries.length === 0) throw new Error("Not a valid PPTX file (no slides found)");
+
+  const texts: string[] = [];
+  for (const entry of slideEntries) {
+    const xml = await decompressEntry(entry);
+    const slideText = xml
+      .replace(/<\/a:p>/g, "\n")
+      .replace(/<a:t>([\s\S]*?)<\/a:t>/g, "$1")
+      .replace(/<[^>]+>/g, "")
+      .replace(/&amp;/g, "&")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&quot;/g, '"')
+      .replace(/&apos;/g, "'")
+      .trim();
+    if (slideText) texts.push(slideText);
+  }
+  return texts.join("\n\n---\n\n");
+}
+
+async function extractDocText(file: File): Promise<string> {
+  // .doc is old binary format — extract readable ASCII/Unicode strings
+  const buffer = await file.arrayBuffer();
+  const bytes = new Uint8Array(buffer);
+  const chunks: string[] = [];
+  let current = "";
+
+  for (let i = 0; i < bytes.length; i++) {
+    const b = bytes[i];
+    // Printable ASCII range + common whitespace
+    if ((b >= 32 && b <= 126) || b === 10 || b === 13 || b === 9) {
+      current += String.fromCharCode(b);
+    } else {
+      if (current.trim().length > 20) {
+        chunks.push(current.trim());
+      }
+      current = "";
+    }
+  }
+  if (current.trim().length > 20) chunks.push(current.trim());
+
+  // Filter out binary noise (strings with too many special chars)
+  const filtered = chunks.filter(c => {
+    const alphaRatio = (c.match(/[a-zA-Z\s]/g) || []).length / c.length;
+    return alphaRatio > 0.6 && c.length > 30;
+  });
+
+  return filtered.join("\n\n");
+}
+
+// Minimal ZIP parser for Cloudflare Workers (no external dependencies)
+interface ZipEntry {
+  filename: string;
+  compressedData: Uint8Array;
+  compressionMethod: number;
+  uncompressedSize: number;
+}
+
+function parseZipEntries(data: Uint8Array): ZipEntry[] {
+  const entries: ZipEntry[] = [];
+  const view = new DataView(data.buffer, data.byteOffset, data.byteLength);
+  let offset = 0;
+
+  while (offset < data.length - 4) {
+    const sig = view.getUint32(offset, true);
+    if (sig !== 0x04034b50) break; // Local file header signature
+
+    const compressionMethod = view.getUint16(offset + 8, true);
+    const compressedSize = view.getUint32(offset + 18, true);
+    const uncompressedSize = view.getUint32(offset + 22, true);
+    const nameLength = view.getUint16(offset + 26, true);
+    const extraLength = view.getUint16(offset + 28, true);
+
+    const nameBytes = data.slice(offset + 30, offset + 30 + nameLength);
+    const filename = new TextDecoder().decode(nameBytes);
+
+    const dataStart = offset + 30 + nameLength + extraLength;
+    const compressedData = data.slice(dataStart, dataStart + compressedSize);
+
+    entries.push({ filename, compressedData, compressionMethod, uncompressedSize });
+    offset = dataStart + compressedSize;
+
+    // Skip optional data descriptor
+    if (offset < data.length - 4) {
+      const maybeSig = view.getUint32(offset, true);
+      if (maybeSig === 0x08074b50) {
+        offset += 16; // Skip data descriptor with signature
+      }
+    }
+  }
+
+  return entries;
+}
+
+async function decompressEntry(entry: ZipEntry): Promise<string> {
+  if (entry.compressionMethod === 0) {
+    // Stored (no compression)
+    return new TextDecoder().decode(entry.compressedData);
+  }
+
+  if (entry.compressionMethod === 8) {
+    // Deflated — use DecompressionStream
+    const ds = new DecompressionStream("deflate-raw");
+    const writer = ds.writable.getWriter();
+    const reader = ds.readable.getReader();
+
+    const writePromise = writer.write(entry.compressedData).then(() => writer.close());
+
+    const chunks: Uint8Array[] = [];
+    let totalLength = 0;
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      chunks.push(value);
+      totalLength += value.length;
+    }
+
+    await writePromise;
+
+    const result = new Uint8Array(totalLength);
+    let pos = 0;
+    for (const chunk of chunks) {
+      result.set(chunk, pos);
+      pos += chunk.length;
+    }
+
+    return new TextDecoder().decode(result);
+  }
+
+  throw new Error(`Unsupported compression method: ${entry.compressionMethod}`);
+}
+
 // ─── RAG Utility Functions ─────────────────────────────────────────
 
 function chunkText(text: string, maxSize = 500, overlap = 50): string[] {
@@ -2612,19 +2784,44 @@ app.post("/api/admin/documents/upload-file", adminMiddleware, async (c) => {
     if (!file) return c.json({ error: "File is required" }, 400);
     if (!title) return c.json({ error: "Title is required" }, 400);
 
-    // Reject known binary formats upfront
+    // Reject truly unsupported binary formats
     const fileName = file.name.toLowerCase();
-    const binaryExts = [".doc", ".docx", ".pptx", ".ppt", ".xls", ".xlsx", ".pdf", ".zip", ".rar", ".7z", ".exe", ".bin", ".dll", ".iso", ".mp3", ".mp4", ".avi", ".mov", ".png", ".jpg", ".jpeg", ".gif", ".bmp", ".woff", ".woff2", ".ttf"];
-    for (const ext of binaryExts) {
+    const unsupportedExts = [".zip", ".rar", ".7z", ".exe", ".bin", ".dll", ".iso", ".mp3", ".mp4", ".avi", ".mov", ".png", ".jpg", ".jpeg", ".gif", ".bmp", ".woff", ".woff2", ".ttf", ".pdf"];
+    for (const ext of unsupportedExts) {
       if (fileName.endsWith(ext)) {
-        return c.json({ error: `Binary format (${ext}) is not supported. Convert to .txt, .md, .csv, .json, or .html first.` }, 400);
+        return c.json({ error: `Format (${ext}) is not supported. Supported: .docx, .pptx, .doc, .txt, .md, .csv, .json, .html` }, 400);
       }
     }
 
-    // Extract text content from file
+    // Extract text content from file based on format
     let content = "";
 
-    if (fileName.endsWith(".txt") || fileName.endsWith(".md") || fileName.endsWith(".csv")) {
+    if (fileName.endsWith(".docx")) {
+      try {
+        content = await extractDocxText(file);
+      } catch (err) {
+        return c.json({ error: "Failed to extract text from DOCX: " + (err as Error).message }, 400);
+      }
+    } else if (fileName.endsWith(".pptx")) {
+      try {
+        content = await extractPptxText(file);
+      } catch (err) {
+        return c.json({ error: "Failed to extract text from PPTX: " + (err as Error).message }, 400);
+      }
+    } else if (fileName.endsWith(".doc")) {
+      try {
+        content = await extractDocText(file);
+        if (content.length < 50) {
+          return c.json({ error: "Could not extract enough readable text from this .doc file. Try converting it to .docx first." }, 400);
+        }
+      } catch (err) {
+        return c.json({ error: "Failed to extract text from DOC: " + (err as Error).message + ". Try converting to .docx." }, 400);
+      }
+    } else if (fileName.endsWith(".ppt")) {
+      return c.json({ error: "Old .ppt format is not supported. Please convert to .pptx first (open in PowerPoint and Save As .pptx)." }, 400);
+    } else if (fileName.endsWith(".xls") || fileName.endsWith(".xlsx")) {
+      return c.json({ error: "Excel files are not yet supported. Export as .csv first." }, 400);
+    } else if (fileName.endsWith(".txt") || fileName.endsWith(".md") || fileName.endsWith(".csv")) {
       content = await file.text();
     } else if (fileName.endsWith(".json")) {
       const jsonText = await file.text();
@@ -2636,18 +2833,16 @@ app.post("/api/admin/documents/upload-file", adminMiddleware, async (c) => {
       }
     } else if (fileName.endsWith(".html") || fileName.endsWith(".htm")) {
       const htmlText = await file.text();
-      // Strip HTML tags for plain text extraction
       content = htmlText.replace(/<script[\s\S]*?<\/script>/gi, "")
         .replace(/<style[\s\S]*?<\/style>/gi, "")
         .replace(/<[^>]+>/g, " ")
         .replace(/\s{2,}/g, " ")
         .trim();
     } else {
-      // For unsupported formats, try reading as text
       try {
         content = await file.text();
       } catch {
-        return c.json({ error: "Unable to extract text from this file format. Supported: .txt, .md, .csv, .json, .html" }, 400);
+        return c.json({ error: "Unable to extract text. Supported: .docx, .pptx, .doc, .txt, .md, .csv, .json, .html" }, 400);
       }
     }
 
