@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AskOzzy — AI Assistant for the Ghana Civil Service</title>
+  <meta name="description" content="AskOzzy is a private, AI-powered productivity platform built exclusively for Ghana Civil Service professionals." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/app.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+</head>
+<body>
+
+  <!-- ═══ Main App (always visible) ═══ -->
+  <div id="app-screen" class="app-container">
+    <div class="flag-stripe" style="position:fixed;top:0;left:0;right:0;z-index:999;"></div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar" style="margin-top:3px;">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <div class="logo-icon"></div>
+          <h1>AskOzzy <span>AI for Civil Service</span></h1>
+        </div>
+      </div>
+
+      <button class="btn-new-chat" onclick="requireAuth(createNewChat)">
+        <span>+</span> New Conversation
+      </button>
+
+      <div class="conversation-list" id="conversation-list">
+        <div class="section-label">Recent Conversations</div>
+      </div>
+
+      <!-- Footer: changes based on auth state -->
+      <div class="sidebar-footer" id="sidebar-footer">
+        <!-- Populated by JS -->
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" style="margin-top:3px;">
+      <header class="main-header">
+        <button class="btn-toggle-sidebar" onclick="toggleSidebar()" title="Toggle sidebar">☰</button>
+        <select class="model-selector" id="model-selector" onchange="onModelChange()">
+          <optgroup label="Premium Models (Paid Plans)">
+            <option value="@cf/openai/gpt-oss-120b">🔒 GPT-OSS 120B — OpenAI (Best)</option>
+            <option value="@cf/meta/llama-4-scout-17b-16e-instruct">🔒 Llama 4 Scout 17B — Meta</option>
+            <option value="@cf/meta/llama-3.3-70b-instruct-fp8-fast">🔒 Llama 3.3 70B — Meta</option>
+            <option value="@cf/qwen/qwq-32b">🔒 QwQ 32B — Qwen (Deep Thinking)</option>
+            <option value="@cf/qwen/qwen3-30b-a3b-fp8">🔒 Qwen3 30B — Qwen (Latest)</option>
+            <option value="@cf/mistralai/mistral-small-3.1-24b-instruct">🔒 Mistral Small 3.1 24B</option>
+            <option value="@cf/ibm-granite/granite-4.0-h-micro">🔒 Granite 4.0 — IBM</option>
+          </optgroup>
+          <optgroup label="Free Models">
+            <option value="@cf/openai/gpt-oss-20b" selected>GPT-OSS 20B — OpenAI (Fast)</option>
+            <option value="@cf/google/gemma-3-12b-it">Gemma 3 12B — Google</option>
+            <option value="@cf/meta/llama-3.1-8b-instruct-fast">Llama 3.1 8B Fast — Instant</option>
+          </optgroup>
+        </select>
+        <div class="usage-badge" id="usage-badge" onclick="openPricingModal()" title="Click to view plans"></div>
+        <div class="privacy-badge">Private & Encrypted</div>
+      </header>
+
+      <!-- Welcome Screen -->
+      <div id="welcome-screen" class="welcome-screen">
+        <div class="welcome-logo">⚡</div>
+        <h2>Welcome to AskOzzy</h2>
+        <p>Your private AI assistant for the Ghana Civil Service. Choose a template below or start a free conversation.</p>
+
+        <div class="category-tabs" id="category-tabs"></div>
+        <div class="template-grid" id="template-grid"></div>
+      </div>
+
+      <!-- Chat Screen -->
+      <div id="chat-screen" class="hidden" style="display:flex;flex-direction:column;flex:1;min-height:0;">
+        <div class="chat-area" id="chat-area">
+          <div class="chat-messages" id="chat-messages"></div>
+        </div>
+
+        <div class="input-area">
+          <div class="input-wrapper">
+            <div class="input-row">
+              <textarea
+                id="chat-input"
+                rows="1"
+                placeholder="Ask Ozzy anything... (Shift+Enter for new line)"
+                onkeydown="handleInputKeydown(event)"
+                oninput="autoResizeInput()"
+              ></textarea>
+              <button class="btn-send" id="btn-send" onclick="sendMessage()" disabled title="Send message">
+                ➤
+              </button>
+            </div>
+            <div class="input-footer">
+              <button class="btn-template-picker" onclick="openTemplateModal()">
+                📋 Templates
+              </button>
+              <span>AskOzzy may produce inaccurate information. Verify critical details.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ═══ Auth Modal ═══ -->
+  <div class="modal-overlay" id="auth-modal">
+    <div class="modal auth-modal">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="auth-modal-icon">⚡</div>
+          <div>
+            <h3 id="auth-modal-title">Sign in to AskOzzy</h3>
+            <p style="font-size:12px;color:var(--text-muted);margin:0;">Your conversations are private and encrypted</p>
+          </div>
+        </div>
+        <button class="modal-close" onclick="closeAuthModal()">✕</button>
+      </div>
+      <div class="modal-body" style="padding:24px;">
+        <div id="auth-error" class="auth-error"></div>
+
+        <!-- Login Form -->
+        <form id="login-form">
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="login-email" placeholder="your.name@gov.gh" required />
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="login-password" placeholder="Enter your password" required />
+          </div>
+          <div class="form-group">
+            <label style="font-size:11px;color:var(--text-muted);text-transform:none;letter-spacing:0;">Referral Code (optional)</label>
+            <input type="text" id="login-referral" placeholder="e.g. OZZY-KWAME" />
+          </div>
+          <button type="submit" class="btn-auth">Sign In</button>
+        </form>
+
+        <!-- Register Form -->
+        <form id="register-form" class="hidden">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="reg-name" placeholder="e.g. Kwame Asante" required />
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="reg-email" placeholder="your.name@gov.gh" required />
+          </div>
+          <div class="form-group">
+            <label>Department / MDA</label>
+            <input type="text" id="reg-dept" placeholder="e.g. Ministry of Finance" />
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="reg-password" placeholder="Min 8 characters" required minlength="8" />
+          </div>
+          <div class="form-group">
+            <label style="font-size:11px;color:var(--text-muted);text-transform:none;letter-spacing:0;">Referral Code (optional)</label>
+            <input type="text" id="reg-referral" placeholder="e.g. OZZY-KWAME" />
+          </div>
+          <button type="submit" class="btn-auth">Create Account</button>
+        </form>
+
+        <div class="auth-toggle">
+          <span id="toggle-text">Don't have an account?</span>
+          <a id="auth-toggle-link" onclick="toggleAuthForm()">Create one</a>
+        </div>
+
+        <div class="privacy-banner" style="margin-top:16px;">
+          <strong>🔒 Your Privacy Matters</strong>
+          Unlike ChatGPT and other public tools, your data never leaves this platform. Complete confidentiality for government work.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Affiliate Modal ═══ -->
+  <div class="modal-overlay" id="affiliate-modal">
+    <div class="modal" style="max-width:560px;">
+      <div class="modal-header">
+        <h3>💰 AskOzzy Affiliate Programme</h3>
+        <button class="modal-close" onclick="closeAffiliateModal()">✕</button>
+      </div>
+      <div class="modal-body" id="affiliate-modal-body">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Template Modal ═══ -->
+  <div class="modal-overlay" id="template-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>📋 Prompt Templates</h3>
+        <button class="modal-close" onclick="closeTemplateModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-categories" id="modal-categories"></div>
+        <div class="modal-template-list" id="modal-template-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Pricing Modal ═══ -->
+  <div class="modal-overlay" id="pricing-modal">
+    <div class="modal" style="max-width:800px;">
+      <div class="modal-header">
+        <div>
+          <h3>Choose Your Plan</h3>
+          <p style="font-size:12px;color:var(--text-muted);margin:4px 0 0;">Unlock premium AI models and unlimited productivity</p>
+        </div>
+        <button class="modal-close" onclick="closePricingModal()">✕</button>
+      </div>
+      <div class="modal-body" id="pricing-modal-body" style="padding:24px;">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Upgrade Limit Banner (injected by JS when limit reached) ═══ -->
+
+  <script src="/js/templates.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

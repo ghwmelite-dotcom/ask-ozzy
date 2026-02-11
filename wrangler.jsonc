@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ghana-civil-ai",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-12-01",
+  "assets": {
+    "directory": "./public"
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "ghana-civil-ai-db",
+      "database_id": "87f5e159-aabb-4abe-b697-8fca449c94f9"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "SESSIONS",
+      "id": "ab4c606dc306424499681ecdcd99dbdc"
+    }
+  ]
+}
