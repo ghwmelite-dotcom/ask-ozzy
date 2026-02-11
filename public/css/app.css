@@ -236,8 +236,8 @@ html, body {
 }
 
 .sidebar-logo .logo-icon::after {
-  content: '\2605';
-  font-size: 16px;
+  content: '\26A1';
+  font-size: 18px;
 }
 
 .sidebar-logo h1 {
