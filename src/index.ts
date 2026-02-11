@@ -504,8 +504,13 @@ Key guidelines:
             if (line.startsWith("data: ") && !line.includes("[DONE]")) {
               try {
                 const data = JSON.parse(line.slice(6));
+                // Workers AI legacy format
                 if (data.response) {
                   fullResponse += data.response;
+                }
+                // OpenAI-compatible format (gpt-oss, newer models)
+                else if (data.choices?.[0]?.delta?.content) {
+                  fullResponse += data.choices[0].delta.content;
                 }
               } catch {
                 // skip malformed chunks

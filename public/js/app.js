@@ -625,8 +625,14 @@ async function sendMessage() {
         if (line.startsWith("data: ") && !line.includes("[DONE]")) {
           try {
             const data = JSON.parse(line.slice(6));
-            if (data.response) {
-              fullText += data.response;
+            // Workers AI legacy format
+            let token = data.response || null;
+            // OpenAI-compatible format (gpt-oss, newer models)
+            if (!token && data.choices?.[0]?.delta?.content) {
+              token = data.choices[0].delta.content;
+            }
+            if (token) {
+              fullText += token;
               state.messages[state.messages.length - 1].content = fullText;
               updateLastMessage(fullText);
             }
