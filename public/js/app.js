@@ -3,6 +3,36 @@
 //  Interface-first: users see everything, auth on interaction
 // ═══════════════════════════════════════════════════════════════════
 
+// ─── Theme Initialization (runs before paint) ────────────────────────
+(function initTheme() {
+  const saved = localStorage.getItem("askozzy_theme");
+  const preferLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+  const theme = saved || (preferLight ? "light" : "dark");
+  document.documentElement.setAttribute("data-theme", theme);
+  document.documentElement.classList.add("no-transition");
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document.documentElement.classList.remove("no-transition");
+    });
+  });
+})();
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute("data-theme");
+  const next = current === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  localStorage.setItem("askozzy_theme", next);
+  const btn = document.getElementById("theme-toggle");
+  if (btn) btn.setAttribute("aria-label", `Switch to ${current} mode`);
+}
+
+// Auto-switch on system preference change (only if no explicit choice saved)
+window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", (e) => {
+  if (!localStorage.getItem("askozzy_theme")) {
+    document.documentElement.setAttribute("data-theme", e.matches ? "light" : "dark");
+  }
+});
+
 const API = "";
 let state = {
   token: localStorage.getItem("askozzy_token") || null,
@@ -225,8 +255,8 @@ function updateSidebarFooter() {
       .toUpperCase()
       .slice(0, 2);
 
-    const tierName = { free: "Free", starter: "Starter", professional: "Professional", enterprise: "Enterprise" }[state.user.tier || "free"] || "Free";
-    const tierColor = { free: "#6b7280", starter: "#FCD116", professional: "#00a86b", enterprise: "#C0C0C0" }[state.user.tier || "free"] || "#6b7280";
+    const tier = state.user.tier || "free";
+    const tierName = { free: "Free", starter: "Starter", professional: "Professional", enterprise: "Enterprise" }[tier] || "Free";
 
     footer.innerHTML = `
       <div class="user-info">
@@ -237,10 +267,10 @@ function updateSidebarFooter() {
         </div>
       </div>
       <div style="display:flex;gap:6px;">
-        <button style="flex:1;background:var(--bg-tertiary);border:1px solid ${tierColor}44;color:${tierColor};padding:6px 10px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;transition:all 0.2s;" onclick="openPricingModal()">
-          ${tierName} Plan ${state.user.tier === 'free' ? '— Upgrade' : ''}
+        <button class="sidebar-tier-btn tier-${tier}" onclick="openPricingModal()">
+          ${tierName} Plan ${tier === 'free' ? '— Upgrade' : ''}
         </button>
-        <button style="flex:1;background:linear-gradient(135deg,#006B3F,#00a86b);border:none;color:#fff;padding:6px 10px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;" onclick="openAffiliateModal()">
+        <button class="sidebar-earn-btn" onclick="openAffiliateModal()">
           Earn GHS
         </button>
       </div>
@@ -836,14 +866,12 @@ async function openAffiliateModal() {
     if (!res.ok) throw new Error(data.error);
 
     const referralLink = `${window.location.origin}?ref=${data.referralCode}`;
-    const tierColors = { starter: "#708090", bronze: "#CD7F32", silver: "#C0C0C0", gold: "#FFD700" };
-    const tierColor = tierColors[data.affiliateTier] || tierColors.starter;
 
     body.innerHTML = `
       <div style="padding:4px 0;">
         <!-- Tier Badge -->
         <div style="text-align:center;margin-bottom:20px;">
-          <div style="display:inline-block;padding:6px 20px;background:${tierColor}22;border:1px solid ${tierColor}55;border-radius:20px;color:${tierColor};font-weight:700;font-size:14px;text-transform:uppercase;">
+          <div class="affiliate-tier-badge tier-${data.affiliateTier || 'starter'}">
             ${data.currentTier.name} Affiliate
           </div>
         </div>
@@ -859,7 +887,7 @@ async function openAffiliateModal() {
             <div style="font-size:11px;color:var(--text-muted);">Total Earned</div>
           </div>
           <div style="background:var(--bg-tertiary);border-radius:10px;padding:14px;text-align:center;">
-            <div style="font-size:24px;font-weight:700;color:#fff;">${data.currentTier.recurringPercent}%</div>
+            <div style="font-size:24px;font-weight:700;color:var(--text-strong);">${data.currentTier.recurringPercent}%</div>
             <div style="font-size:11px;color:var(--text-muted);">Recurring Rate</div>
           </div>
         </div>
@@ -904,7 +932,7 @@ async function openAffiliateModal() {
           <div style="font-size:13px;font-weight:600;margin-bottom:6px;">Your Referral Code</div>
           <div style="display:flex;gap:8px;">
             <input type="text" value="${data.referralCode}" readonly style="flex:1;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:8px;padding:10px 14px;color:var(--gold);font-size:15px;font-weight:700;font-family:monospace;letter-spacing:1px;" />
-            <button onclick="copyToClipboard('${data.referralCode}')" style="background:var(--gold);color:#000;border:none;border-radius:8px;padding:10px 16px;font-weight:600;cursor:pointer;font-size:12px;">Copy</button>
+            <button onclick="copyToClipboard('${data.referralCode}')" style="background:var(--gold);color:var(--text-on-accent);border:none;border-radius:8px;padding:10px 16px;font-weight:600;cursor:pointer;font-size:12px;">Copy</button>
           </div>
         </div>
 
@@ -912,7 +940,7 @@ async function openAffiliateModal() {
           <div style="font-size:13px;font-weight:600;margin-bottom:6px;">Your Referral Link</div>
           <div style="display:flex;gap:8px;">
             <input type="text" value="${referralLink}" readonly style="flex:1;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:8px;padding:10px 14px;color:var(--text-primary);font-size:12px;" />
-            <button onclick="copyToClipboard('${referralLink}')" style="background:var(--gold);color:#000;border:none;border-radius:8px;padding:10px 16px;font-weight:600;cursor:pointer;font-size:12px;">Copy</button>
+            <button onclick="copyToClipboard('${referralLink}')" style="background:var(--gold);color:var(--text-on-accent);border:none;border-radius:8px;padding:10px 16px;font-weight:600;cursor:pointer;font-size:12px;">Copy</button>
           </div>
           <div style="font-size:11px;color:var(--text-muted);margin-top:6px;">Share this link — when someone signs up using it, you earn commissions automatically!</div>
         </div>
@@ -947,7 +975,7 @@ function copyToClipboard(text) {
     const btn = event.target;
     const original = btn.textContent;
     btn.textContent = "Copied!";
-    btn.style.background = "#00a86b";
+    btn.style.background = "var(--green-light)";
     setTimeout(() => {
       btn.textContent = original;
       btn.style.background = "var(--gold)";
