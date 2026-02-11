@@ -1441,7 +1441,7 @@ function updateTrainCharCount() {
 }
 
 function getTrainFiles() {
-  // Collect files from both the file input and folder input
+  // Collect ALL files from both inputs (no filtering here — filtering happens in trainDocument)
   const fileInput = document.getElementById("train-doc-file");
   const folderInput = document.getElementById("train-doc-folder");
   const allFiles = [];
@@ -1451,13 +1451,11 @@ function getTrainFiles() {
     for (let i = 0; i < files.length; i++) allFiles.push(files[i]);
   }
   if (folderInput && folderInput.files && folderInput.files.length > 0) {
-    const BINARY_EXT = [".doc", ".docx", ".pptx", ".ppt", ".xls", ".xlsx", ".pdf", ".zip", ".rar", ".7z", ".exe", ".bin", ".dll", ".iso", ".img", ".mp3", ".mp4", ".avi", ".mov", ".png", ".jpg", ".jpeg", ".gif", ".bmp", ".ico", ".woff", ".woff2", ".ttf", ".eot"];
     const files = Array.from(folderInput.files);
     for (let i = 0; i < files.length; i++) {
       const f = files[i];
+      // Only skip hidden/system files
       if (f.name.startsWith(".") || f.name === "Thumbs.db" || f.name === "desktop.ini") continue;
-      var ext = "." + f.name.split(".").pop().toLowerCase();
-      if (BINARY_EXT.indexOf(ext) !== -1) continue;
       allFiles.push(f);
     }
   }
@@ -1485,43 +1483,42 @@ async function trainDocument() {
   const textContent = document.getElementById("train-doc-content").value.trim();
   const resultEl = document.getElementById("train-result");
 
-  const files = getTrainFiles();
+  var allFiles = getTrainFiles();
 
-  if (files.length > 1) {
-    // Batch upload multiple files
+  // Filter binary formats and give clear feedback
+  var BINARY_EXT = [".doc", ".docx", ".pptx", ".ppt", ".xls", ".xlsx", ".pdf", ".zip", ".rar", ".7z", ".exe", ".bin", ".dll", ".iso", ".img", ".mp3", ".mp4", ".avi", ".mov", ".png", ".jpg", ".jpeg", ".gif", ".bmp", ".ico", ".woff", ".woff2", ".ttf", ".eot"];
+  var textFiles = [];
+  var skippedBinary = [];
+  for (let i = 0; i < allFiles.length; i++) {
+    var ext = "." + allFiles[i].name.split(".").pop().toLowerCase();
+    if (BINARY_EXT.indexOf(ext) !== -1) {
+      skippedBinary.push(allFiles[i].name);
+    } else {
+      textFiles.push(allFiles[i]);
+    }
+  }
+
+  // Case: Files were selected but ALL are binary
+  if (allFiles.length > 0 && textFiles.length === 0) {
+    resultEl.innerHTML = '<span class="msg-error">All ' + allFiles.length + ' selected files are binary formats that cannot be processed.</span>' +
+      '<br><span style="font-size:11px;color:var(--text-muted);">Unsupported: ' + skippedBinary.slice(0, 5).join(", ") + (skippedBinary.length > 5 ? ", ..." : "") + '</span>' +
+      '<br><span style="font-size:11px;color:var(--gold);">Supported formats: .txt, .md, .csv, .json, .html — Please convert your documents first.</span>';
+    return;
+  }
+
+  if (textFiles.length > 1) {
+    // Batch upload multiple text files
     if (!source) {
       resultEl.innerHTML = '<span class="msg-error">Please enter a source/author for batch uploads</span>';
       return;
     }
 
-    // Filter out binary formats that can't be read as text
-    var BINARY_EXT = [".doc", ".docx", ".pptx", ".ppt", ".xls", ".xlsx", ".pdf", ".zip", ".rar", ".7z", ".exe", ".bin", ".dll", ".iso", ".img", ".mp3", ".mp4", ".avi", ".mov", ".png", ".jpg", ".jpeg", ".gif", ".bmp", ".ico", ".woff", ".woff2", ".ttf", ".eot"];
-    var textFiles = [];
-    var skippedBinary = [];
-    for (let i = 0; i < files.length; i++) {
-      var ext = "." + files[i].name.split(".").pop().toLowerCase();
-      if (BINARY_EXT.indexOf(ext) !== -1) {
-        skippedBinary.push(files[i].name);
-      } else {
-        textFiles.push(files[i]);
-      }
-    }
-
-    if (textFiles.length === 0) {
-      resultEl.innerHTML = '<span class="msg-error">No supported text files found. Binary formats (.doc, .docx, .pptx, .pdf, etc.) are not yet supported. Use .txt, .md, .csv, .json, or .html files.</span>';
-      if (skippedBinary.length > 0) {
-        resultEl.innerHTML += '<br><span style="font-size:11px;color:var(--text-muted);">Skipped ' + skippedBinary.length + ' binary files: ' + skippedBinary.slice(0, 5).join(", ") + (skippedBinary.length > 5 ? "..." : "") + '</span>';
-      }
-      return;
-    }
-
-    var skipNote = skippedBinary.length > 0 ? ' (skipping ' + skippedBinary.length + ' unsupported binary files)' : '';
+    var skipNote = skippedBinary.length > 0 ? ' (skipping ' + skippedBinary.length + ' binary files)' : '';
     resultEl.innerHTML = '<span style="color:var(--gold);">Uploading ' + textFiles.length + ' files...' + skipNote + ' (0/' + textFiles.length + ')</span>';
 
     let uploaded = 0, failed = 0, errors = [];
     for (let i = 0; i < textFiles.length; i++) {
       const file = textFiles[i];
-      // For batch uploads, always use the filename as title (ignore shared title field)
       const docTitle = file.name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ");
       const formData = new FormData();
       formData.append("file", file);
@@ -1564,17 +1561,14 @@ async function trainDocument() {
     updateFilePreview();
     loadTrainingStatus();
 
-  } else if (files.length === 1) {
+  } else if (textFiles.length === 1) {
     // Single file upload
-    if (!title) {
-      resultEl.innerHTML = '<span class="msg-error">Document title is required</span>';
-      return;
-    }
+    var singleTitle = title || textFiles[0].name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ");
     resultEl.innerHTML = '<span style="color:var(--gold);">Uploading file...</span>';
 
     const formData = new FormData();
-    formData.append("file", files[0]);
-    formData.append("title", title);
+    formData.append("file", textFiles[0]);
+    formData.append("title", singleTitle);
     formData.append("source", source);
     formData.append("category", category);
 
@@ -1589,7 +1583,11 @@ async function trainDocument() {
       if (!res.ok) {
         resultEl.innerHTML = '<span class="msg-error">' + escapeHtml(d.error || "Upload failed") + '</span>';
       } else {
-        resultEl.innerHTML = '<span class="msg-success">Document uploaded! ' + d.charCount.toLocaleString() + ' characters extracted. Processing embeddings...</span>';
+        var successMsg = '<span class="msg-success">Document uploaded! ' + d.charCount.toLocaleString() + ' characters extracted. Processing embeddings...</span>';
+        if (skippedBinary.length > 0) {
+          successMsg += '<br><span style="font-size:11px;color:var(--text-muted);">' + skippedBinary.length + ' binary files skipped</span>';
+        }
+        resultEl.innerHTML = successMsg;
         document.getElementById("train-doc-title").value = "";
         document.getElementById("train-doc-source").value = "";
         document.getElementById("train-doc-content").value = "";
@@ -1600,12 +1598,12 @@ async function trainDocument() {
         loadTrainingStatus();
       }
     } catch {
-      resultEl.innerHTML = '<span class="msg-error">Upload failed</span>';
+      resultEl.innerHTML = '<span class="msg-error">Upload failed — network error</span>';
     }
   } else if (textContent) {
     // Text content paste (single document)
     if (!title) {
-      resultEl.innerHTML = '<span class="msg-error">Document title is required</span>';
+      resultEl.innerHTML = '<span class="msg-error">Document title is required for pasted content</span>';
       return;
     }
     if (textContent.length < 50) {
@@ -1633,10 +1631,10 @@ async function trainDocument() {
         loadTrainingStatus();
       }
     } catch {
-      resultEl.innerHTML = '<span class="msg-error">Upload failed</span>';
+      resultEl.innerHTML = '<span class="msg-error">Upload failed — network error</span>';
     }
   } else {
-    resultEl.innerHTML = '<span class="msg-error">Please upload file(s), a folder, or paste document content</span>';
+    resultEl.innerHTML = '<span class="msg-error">No files selected and no content pasted. Please choose files, select a folder, or paste document text above.</span>';
   }
 }
 
