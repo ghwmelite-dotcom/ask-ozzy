@@ -1444,16 +1444,19 @@ function getTrainFiles() {
   // Collect files from both the file input and folder input
   const fileInput = document.getElementById("train-doc-file");
   const folderInput = document.getElementById("train-doc-folder");
-  const ALLOWED_EXT = [".txt", ".md", ".csv", ".json", ".html", ".htm"];
   const allFiles = [];
 
-  if (fileInput && fileInput.files.length > 0) {
-    for (const f of fileInput.files) allFiles.push(f);
+  if (fileInput && fileInput.files && fileInput.files.length > 0) {
+    const files = Array.from(fileInput.files);
+    for (let i = 0; i < files.length; i++) allFiles.push(files[i]);
   }
-  if (folderInput && folderInput.files.length > 0) {
-    for (const f of folderInput.files) {
-      const ext = "." + f.name.split(".").pop().toLowerCase();
-      if (ALLOWED_EXT.includes(ext)) allFiles.push(f);
+  if (folderInput && folderInput.files && folderInput.files.length > 0) {
+    const files = Array.from(folderInput.files);
+    // Filter out hidden files and system files, but allow all text-based formats
+    for (let i = 0; i < files.length; i++) {
+      const f = files[i];
+      if (f.name.startsWith(".") || f.name === "Thumbs.db" || f.name === "desktop.ini") continue;
+      allFiles.push(f);
     }
   }
   return allFiles;
