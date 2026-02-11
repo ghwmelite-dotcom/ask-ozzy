@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AskOzzy — Super Admin Portal</title>
+
+  <!-- PWA Meta Tags -->
+  <meta name="theme-color" content="#0f1117" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f5f3ef" media="(prefers-color-scheme: light)" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="AskOzzy" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/app.css" />
+  <link rel="stylesheet" href="/css/admin.css" />
+  <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
+</head>
+<body>
+  <div class="flag-stripe" style="position:fixed;top:0;left:0;right:0;z-index:999;"></div>
+
+  <!-- Loading screen (shown until auth verified) -->
+  <div id="admin-loading" class="admin-loading">
+    <div class="spinner" style="width:32px;height:32px;border-width:3px;"></div>
+    <p>Verifying admin access...</p>
+  </div>
+
+  <!-- Main admin app (hidden until verified) -->
+  <div id="admin-app" class="admin-app hidden">
+
+    <!-- Header -->
+    <header class="admin-header">
+      <div class="admin-header-left">
+        <div class="admin-logo-icon"></div>
+        <div>
+          <h1>AskOzzy <span>Super Admin</span></h1>
+        </div>
+      </div>
+      <div class="admin-header-right">
+        <span class="admin-user-name" id="admin-user-name"></span>
+        <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
+          <div class="theme-toggle-track">
+            <span class="theme-toggle-icon-dark">&#x1F319;</span>
+            <span class="theme-toggle-icon-light">&#x2600;&#xFE0F;</span>
+            <div class="theme-toggle-thumb"></div>
+          </div>
+        </button>
+        <a href="/" class="admin-back-link">Back to App</a>
+        <button class="btn-admin-logout" onclick="adminLogout()">Sign Out</button>
+      </div>
+    </header>
+
+    <!-- Tabs -->
+    <nav class="admin-tabs" id="admin-tabs">
+      <button class="admin-tab active" data-tab="dashboard" onclick="switchTab('dashboard')">Dashboard</button>
+      <button class="admin-tab" data-tab="users" onclick="switchTab('users')">Users</button>
+      <button class="admin-tab" data-tab="conversations" onclick="switchTab('conversations')">Conversations</button>
+      <button class="admin-tab" data-tab="analytics" onclick="switchTab('analytics')">Analytics</button>
+      <button class="admin-tab" data-tab="referrals" onclick="switchTab('referrals')">Referrals</button>
+      <button class="admin-tab" data-tab="system" onclick="switchTab('system')">System</button>
+      <button class="admin-tab" data-tab="announcements" onclick="switchTab('announcements')">Announcements</button>
+      <button class="admin-tab" data-tab="moderation" onclick="switchTab('moderation')">Moderation</button>
+      <button class="admin-tab" data-tab="audit-log" onclick="switchTab('audit-log')">Audit Log</button>
+      <button class="admin-tab" data-tab="knowledge" onclick="switchTab('knowledge')">Knowledge Base</button>
+      <button class="admin-tab" data-tab="bulk-import" onclick="switchTab('bulk-import')">Bulk Import</button>
+      <button class="admin-tab" data-tab="document-training" onclick="switchTab('document-training')">Document Training</button>
+    </nav>
+
+    <!-- Tab Panels -->
+    <div class="admin-content">
+
+      <!-- Dashboard -->
+      <div class="admin-tab-panel active" id="panel-dashboard">
+        <div id="dashboard-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+      </div>
+
+      <!-- Users -->
+      <div class="admin-tab-panel" id="panel-users">
+        <div class="admin-toolbar">
+          <input type="text" id="user-search" class="admin-search" placeholder="Search by name or email..." oninput="debouncedUserSearch()" />
+          <span class="admin-count" id="user-count"></span>
+        </div>
+        <div id="users-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+        <div id="users-pagination" class="pagination"></div>
+      </div>
+
+      <!-- Conversations -->
+      <div class="admin-tab-panel" id="panel-conversations">
+        <div id="conversations-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+        <div id="conversations-pagination" class="pagination"></div>
+      </div>
+
+      <!-- Analytics -->
+      <div class="admin-tab-panel" id="panel-analytics">
+        <div id="analytics-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+      </div>
+
+      <!-- Referrals -->
+      <div class="admin-tab-panel" id="panel-referrals">
+        <div id="referrals-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+      </div>
+
+      <!-- System -->
+      <div class="admin-tab-panel" id="panel-system">
+        <div id="system-content">
+          <div class="admin-row">
+            <div class="admin-card">
+              <h3>Platform Configuration</h3>
+              <table class="admin-table">
+                <tbody>
+                  <tr><td>Platform</td><td>AskOzzy</td></tr>
+                  <tr><td>Backend</td><td>Cloudflare Workers (Hono)</td></tr>
+                  <tr><td>AI Provider</td><td>Cloudflare Workers AI</td></tr>
+                  <tr><td>Database</td><td>Cloudflare D1 (SQLite)</td></tr>
+                  <tr><td>Sessions</td><td>Cloudflare KV</td></tr>
+                  <tr><td>Pricing Tiers</td><td>Free, Starter (GHS 30), Professional (GHS 60), Enterprise (GHS 100)</td></tr>
+                  <tr><td>AI Models</td><td>10 models (3 free, 7 premium)</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="admin-card">
+              <h3>Quick Actions</h3>
+              <div style="margin-bottom:16px;">
+                <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Promote User to Super Admin</label>
+                <div style="display:flex;gap:8px;">
+                  <input type="email" id="promote-email" placeholder="user@email.com" style="flex:1;padding:10px 14px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:14px;outline:none;" />
+                  <button class="btn-action" onclick="promoteUser()">Promote</button>
+                </div>
+                <div id="promote-result" style="margin-top:8px;font-size:12px;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="admin-row">
+            <div class="admin-card">
+              <h3>Data Export</h3>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <button class="btn-action export-btn" onclick="exportCSV('users')">Export Users CSV</button>
+                <button class="btn-action export-btn" onclick="exportCSV('analytics')">Export Analytics CSV</button>
+              </div>
+            </div>
+            <div class="admin-card">
+              <h3>Rate Limiting</h3>
+              <div id="rate-limits-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Announcements -->
+      <div class="admin-tab-panel" id="panel-announcements">
+        <div class="admin-card announcement-form" style="margin-bottom:24px;">
+          <h3>Create Announcement</h3>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <input type="text" id="announce-title" placeholder="Announcement title" class="admin-search" style="max-width:100%;" />
+            <textarea id="announce-content" placeholder="Announcement content..." rows="3" style="padding:10px 14px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:13px;font-family:inherit;resize:vertical;outline:none;"></textarea>
+            <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+              <select id="announce-type" class="inline-select" style="padding:8px 12px;">
+                <option value="info">Info</option>
+                <option value="warning">Warning</option>
+                <option value="success">Success</option>
+                <option value="maintenance">Maintenance</option>
+              </select>
+              <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-secondary);cursor:pointer;">
+                <input type="checkbox" id="announce-dismissible" checked /> Dismissible
+              </label>
+              <label style="font-size:12px;color:var(--text-muted);">Expires:
+                <input type="date" id="announce-expires" style="padding:6px 10px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:12px;font-family:inherit;outline:none;margin-left:4px;" />
+              </label>
+              <button class="btn-action primary" onclick="createAnnouncement()">Publish</button>
+            </div>
+            <div id="announce-result" style="font-size:12px;"></div>
+          </div>
+        </div>
+        <div id="announcements-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+      </div>
+
+      <!-- Moderation -->
+      <div class="admin-tab-panel" id="panel-moderation">
+        <div id="moderation-stats" style="margin-bottom:24px;"></div>
+        <div class="moderation-status-tabs" id="moderation-status-tabs">
+          <button class="mod-tab active" data-status="pending" onclick="switchModerationStatus('pending')">Pending</button>
+          <button class="mod-tab" data-status="reviewed" onclick="switchModerationStatus('reviewed')">Reviewed</button>
+          <button class="mod-tab" data-status="dismissed" onclick="switchModerationStatus('dismissed')">Dismissed</button>
+        </div>
+        <div id="moderation-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+      </div>
+
+      <!-- Audit Log -->
+      <div class="admin-tab-panel" id="panel-audit-log">
+        <div id="audit-log-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+        <div id="audit-log-pagination" class="pagination"></div>
+      </div>
+
+      <!-- Knowledge Base -->
+      <div class="admin-tab-panel" id="panel-knowledge">
+        <!-- Stats Cards -->
+        <div id="kb-stats"><div class="admin-loader"><div class="spinner"></div></div></div>
+
+        <!-- Sub-tabs: Documents / FAQ -->
+        <div class="moderation-status-tabs" id="kb-sub-tabs" style="margin-bottom:20px;">
+          <button class="mod-tab active" data-kbtab="documents" onclick="switchKbTab('documents')">Documents</button>
+          <button class="mod-tab" data-kbtab="faq" onclick="switchKbTab('faq')">FAQ Entries</button>
+        </div>
+
+        <!-- Documents Sub-panel -->
+        <div id="kb-documents-panel">
+          <div class="admin-card" style="margin-bottom:24px;">
+            <h3>Upload Document</h3>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <input type="text" id="doc-title" placeholder="Document title (e.g., Public Procurement Act Summary)" class="admin-search" style="max-width:100%;" />
+              <input type="text" id="doc-source" placeholder="Source (e.g., PPA, Ministry of Finance)" class="admin-search" style="max-width:100%;" />
+              <select id="doc-category" class="inline-select" style="padding:8px 12px;width:fit-content;">
+                <option value="general">General</option>
+                <option value="procurement">Procurement</option>
+                <option value="finance">Finance & Budget</option>
+                <option value="hr">Human Resources</option>
+                <option value="legal">Legal & Regulations</option>
+                <option value="ict">ICT & Digital</option>
+                <option value="health">Health</option>
+                <option value="education">Education</option>
+                <option value="governance">Governance</option>
+              </select>
+              <div style="position:relative;">
+                <textarea id="doc-content" placeholder="Paste the full document content here..." rows="8" style="width:100%;padding:10px 14px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:13px;font-family:inherit;resize:vertical;outline:none;box-sizing:border-box;" oninput="updateDocCharCount()"></textarea>
+                <span id="doc-char-count" style="position:absolute;bottom:8px;right:12px;font-size:10px;color:var(--text-muted);">0 / 100,000</span>
+              </div>
+              <div style="display:flex;gap:12px;align-items:center;">
+                <button class="btn-action primary" onclick="uploadDocument()">Upload & Process</button>
+                <span id="doc-upload-result" style="font-size:12px;"></span>
+              </div>
+            </div>
+          </div>
+          <div id="documents-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+          <div id="documents-pagination" class="pagination"></div>
+        </div>
+
+        <!-- FAQ Sub-panel -->
+        <div id="kb-faq-panel" style="display:none;">
+          <div class="admin-card" style="margin-bottom:24px;">
+            <h3>Create FAQ Entry</h3>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <select id="faq-category" class="inline-select" style="padding:8px 12px;width:fit-content;">
+                <option value="general">General</option>
+                <option value="procurement">Procurement</option>
+                <option value="finance">Finance & Budget</option>
+                <option value="hr">Human Resources</option>
+                <option value="legal">Legal & Regulations</option>
+                <option value="ict">ICT & Digital</option>
+                <option value="health">Health</option>
+                <option value="education">Education</option>
+                <option value="governance">Governance</option>
+              </select>
+              <input type="text" id="faq-question" placeholder="Question (e.g., What is the procurement threshold for goods?)" class="admin-search" style="max-width:100%;" />
+              <textarea id="faq-answer" placeholder="Answer..." rows="4" style="width:100%;padding:10px 14px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:13px;font-family:inherit;resize:vertical;outline:none;box-sizing:border-box;"></textarea>
+              <input type="text" id="faq-keywords" placeholder="Keywords (comma-separated, e.g., procurement, threshold, goods, tender)" class="admin-search" style="max-width:100%;" />
+              <div style="display:flex;gap:12px;align-items:center;">
+                <label style="font-size:12px;color:var(--text-secondary);">Priority:
+                  <input type="number" id="faq-priority" value="0" min="0" max="100" style="width:60px;padding:6px 10px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:12px;font-family:inherit;outline:none;margin-left:4px;" />
+                </label>
+                <button class="btn-action primary" onclick="createFaqEntry()">Create FAQ</button>
+                <span id="faq-create-result" style="font-size:12px;"></span>
+              </div>
+            </div>
+          </div>
+          <div id="faq-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+          <div id="faq-pagination" class="pagination"></div>
+        </div>
+      </div>
+
+      <!-- Bulk Import -->
+      <div class="admin-tab-panel" id="panel-bulk-import">
+        <div class="admin-card" style="margin-bottom:24px;">
+          <h3>Bulk Import Users</h3>
+          <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;">Upload a CSV file or paste user data to create multiple accounts at once. Maximum 500 users per batch.</p>
+
+          <div style="display:flex;gap:16px;margin-bottom:16px;">
+            <div style="flex:1;">
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Upload CSV File</label>
+              <input type="file" id="bulk-csv-file" accept=".csv" onchange="parseBulkCSV()" style="padding:8px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:13px;width:100%;box-sizing:border-box;" />
+              <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">CSV columns: email, full_name, department (header row required)</div>
+            </div>
+            <div style="flex:1;">
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Default Tier</label>
+              <select id="bulk-tier" class="inline-select" style="padding:8px 12px;">
+                <option value="free">Free</option>
+                <option value="starter">Starter</option>
+                <option value="professional">Professional</option>
+                <option value="enterprise">Enterprise</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Or Paste User Data (one per line: email, full_name, department)</label>
+            <textarea id="bulk-paste" rows="6" placeholder="kwame@gov.gh, Kwame Asante, Ministry of Finance&#10;ama@gov.gh, Ama Mensah, Ministry of Health" style="width:100%;padding:10px 14px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:13px;font-family:monospace;resize:vertical;outline:none;box-sizing:border-box;"></textarea>
+          </div>
+
+          <div id="bulk-preview" style="margin-bottom:16px;display:none;">
+            <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Preview (<span id="bulk-count">0</span> users)</label>
+            <div id="bulk-preview-table" style="max-height:200px;overflow-y:auto;"></div>
+          </div>
+
+          <div style="display:flex;gap:12px;align-items:center;">
+            <button class="btn-action primary" id="btn-bulk-import" onclick="executeBulkImport()" disabled>Import Users</button>
+            <span id="bulk-result" style="font-size:12px;"></span>
+          </div>
+        </div>
+
+        <div id="bulk-results-content" style="display:none;">
+          <div class="admin-card">
+            <h3>Import Results</h3>
+            <div id="bulk-results-table"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Document Training (Enhanced) -->
+      <div class="admin-tab-panel" id="panel-document-training">
+        <div class="admin-card" style="margin-bottom:24px;">
+          <h3>Train AI on Government Documents</h3>
+          <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;">Upload official documents to train the AI knowledge base. Ozzy will use these documents to provide more accurate, Ghana-specific answers.</p>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Document Title</label>
+              <input type="text" id="train-doc-title" placeholder="e.g., Public Procurement Act 2003 Summary" class="admin-search" style="max-width:100%;" />
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Source / Author</label>
+              <input type="text" id="train-doc-source" placeholder="e.g., PPA, Ministry of Finance" class="admin-search" style="max-width:100%;" />
+            </div>
+          </div>
+
+          <div style="display:flex;gap:16px;margin-bottom:16px;">
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Category</label>
+              <select id="train-doc-category" class="inline-select" style="padding:8px 12px;">
+                <option value="general">General</option>
+                <option value="procurement">Procurement</option>
+                <option value="finance">Finance & Budget</option>
+                <option value="hr">Human Resources</option>
+                <option value="legal">Legal & Regulations</option>
+                <option value="ict">ICT & Digital</option>
+                <option value="health">Health</option>
+                <option value="education">Education</option>
+                <option value="governance">Governance</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Upload File (.txt, .md, .csv, .json, .html)</label>
+            <input type="file" id="train-doc-file" accept=".txt,.md,.csv,.json,.html,.htm" style="padding:8px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:13px;" />
+            <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">Or paste content directly below</div>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Or Paste Document Content</label>
+            <textarea id="train-doc-content" placeholder="Paste the full document content here..." rows="10" style="width:100%;padding:10px 14px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:13px;font-family:inherit;resize:vertical;outline:none;box-sizing:border-box;" oninput="updateTrainCharCount()"></textarea>
+            <span id="train-char-count" style="font-size:10px;color:var(--text-muted);">0 / 200,000</span>
+          </div>
+
+          <div style="display:flex;gap:12px;align-items:center;">
+            <button class="btn-action primary" onclick="trainDocument()">Upload &amp; Train AI</button>
+            <span id="train-result" style="font-size:12px;"></span>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <h3>Training Status</h3>
+          <div id="training-status-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Message Viewer Modal -->
+  <div class="modal-overlay" id="message-modal">
+    <div class="modal" style="max-width:800px;">
+      <div class="modal-header">
+        <div>
+          <h3 id="message-modal-title">Conversation Messages</h3>
+          <p id="message-modal-subtitle" style="font-size:12px;color:var(--text-muted);margin:4px 0 0;"></p>
+        </div>
+        <button class="modal-close" onclick="closeMessageModal()">&#x2715;</button>
+      </div>
+      <div class="modal-body" id="message-modal-body" style="padding:16px 24px;">
+        <div class="admin-loader"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>

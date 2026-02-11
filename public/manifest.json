@@ -1,0 +1,65 @@
+{
+  "name": "AskOzzy — AI Assistant for GoG Operations",
+  "short_name": "AskOzzy",
+  "description": "Private, AI-powered productivity platform built exclusively for Government of Ghana operations.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#0f1117",
+  "background_color": "#0f1117",
+  "categories": ["productivity", "utilities", "business"],
+  "lang": "en",
+  "dir": "ltr",
+  "scope": "/",
+  "id": "/",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Conversation",
+      "short_name": "New Chat",
+      "url": "/?action=new-chat",
+      "description": "Start a new AI conversation",
+      "icons": [{ "src": "/icons/icon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Admin Portal",
+      "short_name": "Admin",
+      "url": "/admin",
+      "description": "Super Admin dashboard",
+      "icons": [{ "src": "/icons/icon.svg", "sizes": "any" }]
+    }
+  ],
+  "screenshots": [],
+  "prefer_related_applications": false
+}

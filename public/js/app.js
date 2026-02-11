@@ -24,6 +24,9 @@ function toggleTheme() {
   localStorage.setItem("askozzy_theme", next);
   const btn = document.getElementById("theme-toggle");
   if (btn) btn.setAttribute("aria-label", `Switch to ${current} mode`);
+  // Update PWA theme-color meta tag
+  const themeColor = next === "dark" ? "#0f1117" : "#f5f3ef";
+  document.querySelectorAll('meta[name="theme-color"]').forEach((m) => m.setAttribute("content", themeColor));
 }
 
 // Auto-switch on system preference change (only if no explicit choice saved)
@@ -209,6 +212,11 @@ function onAuthenticated() {
   updateSidebarFooter();
   loadConversations();
   loadUsageStatus();
+  loadFolders();
+  loadAnnouncements();
+
+  // Show onboarding tour for new users (after a short delay for UI to settle)
+  setTimeout(() => showOnboardingTour(), 800);
 
   // Run the action the user was trying to do before auth
   if (state.pendingAction) {
@@ -348,6 +356,12 @@ function updateSidebarFooter() {
           Earn GHS
         </button>
       </div>
+      <div class="sidebar-links">
+        <button class="sidebar-link-btn" onclick="openUserDashboard()">Dashboard</button>
+        <button class="sidebar-link-btn" onclick="open2FASetup()">2FA Security</button>
+        <button class="sidebar-link-btn" onclick="revokeAllSessions()">Revoke Sessions</button>
+        ${state.user.role === 'super_admin' ? '<a class="sidebar-link-btn" href="/admin" style="text-decoration:none;text-align:center;">Admin</a>' : ''}
+      </div>
       <button class="btn-logout" onclick="logout()">Sign Out</button>`;
   } else {
     footer.innerHTML = `
@@ -383,30 +397,67 @@ async function loadConversations() {
 
 function renderConversationList() {
   const container = document.getElementById("conversation-list");
-  const label = '<div class="section-label">Recent Conversations</div>';
 
   if (!isLoggedIn() || state.conversations.length === 0) {
     container.innerHTML =
-      label +
+      '<div class="section-label">Recent Conversations</div>' +
       `<div style="padding:12px;font-size:12px;color:var(--text-muted);text-align:center;">
         ${isLoggedIn() ? "No conversations yet. Start a new one!" : "Sign in to see your conversations"}
       </div>`;
     return;
   }
 
-  container.innerHTML =
-    label +
-    state.conversations
-      .map(
-        (c) => `
-    <div class="conversation-item ${c.id === state.activeConversationId ? "active" : ""}"
-         onclick="openConversation('${c.id}')">
-      <span class="convo-icon">💬</span>
+  const pinned = state.conversations.filter(c => c.pinned);
+  const unpinned = state.conversations.filter(c => !c.pinned);
+  const folders = state.folders || [];
+
+  let html = "";
+
+  // Folders section
+  if (folders.length > 0) {
+    html += `<div class="folder-section">
+      <div class="folder-header">
+        <div class="section-label">Folders</div>
+        <button class="folder-add-btn" onclick="createFolder()" title="New folder">+</button>
+      </div>`;
+    for (const folder of folders) {
+      const folderConvos = state.conversations.filter(c => c.folder_id === folder.id);
+      html += `<div class="folder-item">
+        <span class="folder-icon">📁</span> ${escapeHtml(folder.name)} (${folderConvos.length})
+        <button class="folder-delete" onclick="event.stopPropagation();deleteFolder('${folder.id}')" title="Delete folder">×</button>
+      </div>`;
+      html += folderConvos.map(c => renderConvoItem(c, true)).join("");
+    }
+    html += `</div>`;
+  }
+
+  // Pinned conversations
+  if (pinned.length > 0) {
+    html += '<div class="section-label">Pinned</div>';
+    html += pinned.map(c => renderConvoItem(c)).join("");
+  }
+
+  // Recent conversations (not in folders, not pinned)
+  const unfiled = unpinned.filter(c => !c.folder_id);
+  html += '<div class="section-label">Recent Conversations</div>';
+  if (folders.length > 0 && isLoggedIn()) {
+    html += `<div style="padding:2px 12px;">
+      <button class="folder-add-btn" onclick="createFolder()" title="New folder" style="font-size:11px;color:var(--text-muted);background:none;border:none;cursor:pointer;">+ New Folder</button>
+    </div>`;
+  }
+  html += unfiled.map(c => renderConvoItem(c)).join("");
+
+  container.innerHTML = html;
+}
+
+function renderConvoItem(c, inFolder) {
+  return `
+    <div class="conversation-item ${c.id === state.activeConversationId ? "active" : ""} ${c.pinned ? "pinned" : ""}"
+         onclick="openConversation('${c.id}')" ${inFolder ? 'style="padding-left:28px;"' : ""}>
+      <span class="convo-icon">${c.pinned ? "📌" : "💬"}</span>
       <span class="convo-title">${escapeHtml(c.title)}</span>
       <button class="convo-delete" onclick="event.stopPropagation();deleteConversation('${c.id}')" title="Delete">🗑</button>
-    </div>`
-      )
-      .join("");
+    </div>`;
 }
 
 async function createNewChat(templateId) {
@@ -526,6 +577,13 @@ function renderMessages() {
           <button class="msg-action-btn" onclick="printMessage(${i})" title="Print or save as PDF">
             <span class="msg-action-icon">&#x1F5A8;</span> Print
           </button>
+          ${msg.id ? `
+          <button class="msg-rate-btn ${msg.userRating === 1 ? 'rated' : ''}" data-rate-msg="${msg.id}" data-rating="1" onclick="rateMessage('${msg.id}', 1)" title="Good response">&#x1F44D;</button>
+          <button class="msg-rate-btn ${msg.userRating === -1 ? 'rated' : ''}" data-rate-msg="${msg.id}" data-rating="-1" onclick="rateMessage('${msg.id}', -1)" title="Poor response">&#x1F44E;</button>
+          <button class="msg-action-btn" onclick="regenerateMessage('${msg.id}')" title="Regenerate response">
+            <span class="msg-action-icon">&#x1F504;</span> Regenerate
+          </button>
+          ` : ""}
           ` : ""}
         </div>
       </div>
@@ -673,6 +731,8 @@ async function sendMessage() {
   } finally {
     state.isStreaming = false;
     updateSendButton();
+    // Load follow-up suggestions after response
+    setTimeout(loadFollowUpSuggestions, 500);
   }
 }
 
@@ -1270,6 +1330,592 @@ document.getElementById("pricing-modal").addEventListener("click", (e) => {
 });
 
 async function upgradeToPlan(planId, planName, price) {
+  // Route through Paystack payment system
+  await initPaystackPayment(planId, planName, price);
+}
+
+// ─── Keyboard Shortcuts ──────────────────────────────────────────────
+
+document.addEventListener("keydown", (e) => {
+  // Ctrl/Cmd + K — focus search (or open search modal)
+  if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+    e.preventDefault();
+    openSearchModal();
+    return;
+  }
+  // Ctrl/Cmd + N — new conversation
+  if ((e.ctrlKey || e.metaKey) && e.key === "n") {
+    e.preventDefault();
+    requireAuth(createNewChat);
+    return;
+  }
+  // Ctrl/Cmd + B — toggle sidebar
+  if ((e.ctrlKey || e.metaKey) && e.key === "b") {
+    e.preventDefault();
+    toggleSidebar();
+    return;
+  }
+  // Ctrl/Cmd + Shift + D — toggle theme
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === "D") {
+    e.preventDefault();
+    toggleTheme();
+    return;
+  }
+  // Escape — close any open modal
+  if (e.key === "Escape") {
+    document.querySelectorAll(".modal-overlay.active").forEach(m => m.classList.remove("active"));
+  }
+});
+
+// ─── Voice Input (Web Speech API) ────────────────────────────────────
+
+let _recognition = null;
+let _isListening = false;
+
+function initVoiceInput() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) return; // Not supported
+
+  _recognition = new SpeechRecognition();
+  _recognition.continuous = false;
+  _recognition.interimResults = true;
+  _recognition.lang = "en-GH";
+
+  _recognition.onresult = (event) => {
+    const input = document.getElementById("chat-input");
+    let transcript = "";
+    for (let i = event.resultIndex; i < event.results.length; i++) {
+      transcript += event.results[i][0].transcript;
+    }
+    if (event.results[event.results.length - 1].isFinal) {
+      input.value += (input.value ? " " : "") + transcript;
+    }
+    autoResizeInput();
+    updateSendButton();
+  };
+
+  _recognition.onend = () => {
+    _isListening = false;
+    updateVoiceButton();
+  };
+
+  _recognition.onerror = () => {
+    _isListening = false;
+    updateVoiceButton();
+  };
+}
+
+function toggleVoice() {
+  if (!_recognition) {
+    alert("Voice input is not supported in this browser. Try Chrome or Edge.");
+    return;
+  }
+  if (_isListening) {
+    _recognition.stop();
+    _isListening = false;
+  } else {
+    _recognition.start();
+    _isListening = true;
+  }
+  updateVoiceButton();
+}
+
+function updateVoiceButton() {
+  const btn = document.getElementById("btn-voice");
+  if (!btn) return;
+  btn.classList.toggle("listening", _isListening);
+  btn.title = _isListening ? "Stop listening" : "Voice input";
+}
+
+// Init voice on load
+document.addEventListener("DOMContentLoaded", initVoiceInput);
+
+// ─── Response Rating ─────────────────────────────────────────────────
+
+async function rateMessage(messageId, rating) {
+  if (!isLoggedIn()) return;
+  try {
+    await fetch(`${API}/api/messages/${messageId}/rate`, {
+      method: "POST",
+      headers: authHeaders(),
+      body: JSON.stringify({ rating }),
+    });
+    // Update UI
+    const btns = document.querySelectorAll(`[data-rate-msg="${messageId}"]`);
+    btns.forEach(btn => {
+      const r = parseInt(btn.dataset.rating);
+      btn.classList.toggle("rated", r === rating);
+    });
+  } catch (err) {
+    console.error("Rating failed:", err);
+  }
+}
+
+// ─── Regenerate Response ─────────────────────────────────────────────
+
+async function regenerateMessage(messageId) {
+  if (!isLoggedIn() || state.isStreaming) return;
+
+  state.isStreaming = true;
+  updateSendButton();
+
+  try {
+    const res = await fetch(`${API}/api/messages/${messageId}/regenerate`, {
+      method: "POST",
+      headers: authHeaders(),
+      body: JSON.stringify({ model: state.selectedModel }),
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.error || "Regeneration failed");
+    }
+
+    // Find and replace the message in state
+    const idx = state.messages.findIndex(m => m.id === messageId);
+    if (idx !== -1) {
+      state.messages[idx].content = "";
+      renderMessages();
+    }
+
+    // Stream new response
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let fullText = "";
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      const chunk = decoder.decode(value);
+      const lines = chunk.split("\n");
+      for (const line of lines) {
+        if (line.startsWith("data: ") && !line.includes("[DONE]")) {
+          try {
+            const data = JSON.parse(line.slice(6));
+            let token = data.response || null;
+            if (!token && data.choices?.[0]?.delta?.content) token = data.choices[0].delta.content;
+            if (token) {
+              fullText += token;
+              if (idx !== -1) {
+                state.messages[idx].content = fullText;
+                updateLastMessage(fullText);
+              }
+            }
+          } catch {}
+        }
+      }
+    }
+
+    renderMessages();
+    await loadConversations();
+  } catch (err) {
+    console.error("Regenerate error:", err);
+    alert("Failed to regenerate: " + err.message);
+  } finally {
+    state.isStreaming = false;
+    updateSendButton();
+  }
+}
+
+// ─── Conversation Search ─────────────────────────────────────────────
+
+function openSearchModal() {
+  if (!isLoggedIn()) {
+    requireAuth(openSearchModal);
+    return;
+  }
+  let modal = document.getElementById("search-modal");
+  if (!modal) {
+    // Create search modal dynamically
+    modal = document.createElement("div");
+    modal.className = "modal-overlay";
+    modal.id = "search-modal";
+    modal.innerHTML = `
+      <div class="modal" style="max-width:600px;">
+        <div class="modal-header">
+          <h3>Search Conversations</h3>
+          <button class="modal-close" onclick="closeSearchModal()">&#x2715;</button>
+        </div>
+        <div class="modal-body" style="padding:16px 24px;">
+          <input type="text" id="search-input" class="search-input" placeholder="Search messages and conversations..." oninput="debouncedSearch()" autofocus />
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>`;
+    document.body.appendChild(modal);
+    modal.addEventListener("click", (e) => { if (e.target === modal) closeSearchModal(); });
+  }
+  modal.classList.add("active");
+  setTimeout(() => document.getElementById("search-input")?.focus(), 100);
+}
+
+function closeSearchModal() {
+  const modal = document.getElementById("search-modal");
+  if (modal) modal.classList.remove("active");
+}
+
+const debouncedSearch = debounce(async () => {
+  const q = document.getElementById("search-input")?.value || "";
+  const container = document.getElementById("search-results");
+  if (!container) return;
+
+  if (q.length < 2) {
+    container.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted);font-size:13px;">Type at least 2 characters to search</div>';
+    return;
+  }
+
+  container.innerHTML = '<div style="text-align:center;padding:24px;"><div class="spinner"></div></div>';
+
+  try {
+    const res = await fetch(`${API}/api/conversations/search?q=${encodeURIComponent(q)}`, { headers: authHeaders() });
+    const data = await res.json();
+
+    if (!data.results || data.results.length === 0) {
+      container.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted);font-size:13px;">No results found</div>';
+      return;
+    }
+
+    container.innerHTML = data.results.map(r => `
+      <div class="search-result-item" onclick="closeSearchModal();openConversation('${r.id}')">
+        <div class="search-result-title">${escapeHtml(r.title)}</div>
+        ${r.matched_content ? `<div class="search-result-preview">${escapeHtml(r.matched_content.substring(0, 120))}...</div>` : ""}
+        <div class="search-result-date">${formatDateShort(r.updated_at)}</div>
+      </div>
+    `).join("");
+  } catch {
+    container.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted);">Search failed</div>';
+  }
+}, 300);
+
+function debounce(fn, ms) {
+  let timer;
+  return function(...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), ms);
+  };
+}
+
+function formatDateShort(dateStr) {
+  if (!dateStr) return "";
+  const d = new Date(dateStr);
+  return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+}
+
+// ─── Folders ─────────────────────────────────────────────────────────
+
+async function loadFolders() {
+  if (!isLoggedIn()) return;
+  try {
+    const res = await fetch(`${API}/api/folders`, { headers: authHeaders() });
+    const data = await res.json();
+    state.folders = data.folders || [];
+  } catch {}
+}
+
+async function createFolder() {
+  const name = prompt("Folder name:");
+  if (!name) return;
+  try {
+    await fetch(`${API}/api/folders`, {
+      method: "POST",
+      headers: authHeaders(),
+      body: JSON.stringify({ name }),
+    });
+    await loadFolders();
+    renderConversationList();
+  } catch {}
+}
+
+async function deleteFolder(id) {
+  if (!confirm("Delete this folder? Conversations will be unassigned.")) return;
+  try {
+    await fetch(`${API}/api/folders/${id}`, { method: "DELETE", headers: authHeaders() });
+    await loadFolders();
+    await loadConversations();
+  } catch {}
+}
+
+async function moveToFolder(convoId, folderId) {
+  try {
+    await fetch(`${API}/api/conversations/${convoId}`, {
+      method: "PATCH",
+      headers: authHeaders(),
+      body: JSON.stringify({ folder_id: folderId || null }),
+    });
+    await loadConversations();
+  } catch {}
+}
+
+async function togglePin(convoId) {
+  const convo = state.conversations.find(c => c.id === convoId);
+  if (!convo) return;
+  try {
+    await fetch(`${API}/api/conversations/${convoId}`, {
+      method: "PATCH",
+      headers: authHeaders(),
+      body: JSON.stringify({ pinned: !convo.pinned }),
+    });
+    await loadConversations();
+  } catch {}
+}
+
+// ─── Announcements Banner ────────────────────────────────────────────
+
+async function loadAnnouncements() {
+  try {
+    const res = await fetch(`${API}/api/announcements`);
+    const data = await res.json();
+    const dismissed = JSON.parse(localStorage.getItem("askozzy_dismissed_announcements") || "[]");
+    const active = (data.announcements || []).filter(a => !dismissed.includes(a.id));
+
+    const container = document.getElementById("announcements-area");
+    if (!container || active.length === 0) return;
+
+    container.innerHTML = active.map(a => `
+      <div class="announcement-banner announcement-${a.type}">
+        <div class="announcement-content">
+          <strong>${escapeHtml(a.title)}</strong>
+          <span>${escapeHtml(a.content)}</span>
+        </div>
+        ${a.dismissible ? `<button class="announcement-dismiss" onclick="dismissAnnouncement('${a.id}')">&times;</button>` : ""}
+      </div>
+    `).join("");
+  } catch {}
+}
+
+function dismissAnnouncement(id) {
+  const dismissed = JSON.parse(localStorage.getItem("askozzy_dismissed_announcements") || "[]");
+  dismissed.push(id);
+  localStorage.setItem("askozzy_dismissed_announcements", JSON.stringify(dismissed));
+  const container = document.getElementById("announcements-area");
+  if (container) {
+    const banner = container.querySelector(`[onclick*="${id}"]`);
+    if (banner) banner.parentElement.remove();
+  }
+}
+
+// ─── User Usage Dashboard ────────────────────────────────────────────
+
+async function openUserDashboard() {
+  if (!isLoggedIn()) { requireAuth(openUserDashboard); return; }
+
+  let modal = document.getElementById("user-dashboard-modal");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.className = "modal-overlay";
+    modal.id = "user-dashboard-modal";
+    modal.innerHTML = `
+      <div class="modal" style="max-width:640px;">
+        <div class="modal-header">
+          <h3>Your Usage Dashboard</h3>
+          <button class="modal-close" onclick="document.getElementById('user-dashboard-modal').classList.remove('active')">&#x2715;</button>
+        </div>
+        <div class="modal-body" id="user-dashboard-body" style="padding:24px;">
+          <div style="text-align:center;padding:40px;"><div class="spinner"></div></div>
+        </div>
+      </div>`;
+    document.body.appendChild(modal);
+    modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("active"); });
+  }
+
+  modal.classList.add("active");
+  const body = document.getElementById("user-dashboard-body");
+
+  try {
+    const res = await fetch(`${API}/api/user/dashboard`, { headers: authHeaders() });
+    const d = await res.json();
+    const maxMsg = Math.max(...(d.messagesPerDay || []).map(x => x.count), 1);
+
+    body.innerHTML = `
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px;">
+        <div style="background:var(--bg-tertiary);border-radius:10px;padding:16px;text-align:center;">
+          <div style="font-size:28px;font-weight:700;color:var(--gold);">${d.totalMessages}</div>
+          <div style="font-size:11px;color:var(--text-muted);">Total Messages</div>
+        </div>
+        <div style="background:var(--bg-tertiary);border-radius:10px;padding:16px;text-align:center;">
+          <div style="font-size:28px;font-weight:700;color:var(--green-light);">${d.totalConversations}</div>
+          <div style="font-size:11px;color:var(--text-muted);">Conversations</div>
+        </div>
+        <div style="background:var(--bg-tertiary);border-radius:10px;padding:16px;text-align:center;">
+          <div style="font-size:28px;font-weight:700;color:var(--text-strong);">${formatDateShort(d.memberSince)}</div>
+          <div style="font-size:11px;color:var(--text-muted);">Member Since</div>
+        </div>
+      </div>
+      <div style="background:var(--bg-tertiary);border-radius:10px;padding:16px;margin-bottom:16px;">
+        <div style="font-size:13px;font-weight:600;margin-bottom:12px;">Messages — Last 7 Days</div>
+        ${(d.messagesPerDay || []).map(day => `
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+            <span style="font-size:11px;color:var(--text-muted);min-width:60px;">${day.day.slice(5)}</span>
+            <div style="flex:1;background:var(--bg-primary);border-radius:4px;height:18px;overflow:hidden;">
+              <div style="background:var(--gold);height:100%;width:${(day.count / maxMsg) * 100}%;border-radius:4px;transition:width 0.3s;"></div>
+            </div>
+            <span style="font-size:11px;color:var(--text-secondary);min-width:24px;text-align:right;">${day.count}</span>
+          </div>
+        `).join("")}
+      </div>
+      <div style="background:var(--bg-tertiary);border-radius:10px;padding:16px;">
+        <div style="font-size:13px;font-weight:600;margin-bottom:12px;">Models Used</div>
+        ${(d.modelUsage || []).map(m => `
+          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-color);font-size:12px;">
+            <span style="color:var(--text-primary);">${m.model.split("/").pop()}</span>
+            <span style="color:var(--gold);font-weight:600;">${m.count} msgs</span>
+          </div>
+        `).join("")}
+      </div>`;
+  } catch {
+    body.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">Failed to load dashboard</div>';
+  }
+}
+
+// ─── Session Management ──────────────────────────────────────────────
+
+async function revokeAllSessions() {
+  if (!confirm("This will sign you out of ALL devices and generate a new access code. Continue?")) return;
+
+  try {
+    const res = await fetch(`${API}/api/user/sessions/revoke-all`, {
+      method: "POST",
+      headers: authHeaders(),
+    });
+    const data = await res.json();
+    if (data.newAccessCode) {
+      alert(`All sessions revoked!\n\nYour NEW access code is:\n${data.newAccessCode}\n\nSave this code — you'll need it to sign in again!`);
+      logout();
+    }
+  } catch {
+    alert("Failed to revoke sessions");
+  }
+}
+
+// ─── 2FA Setup ───────────────────────────────────────────────────────
+
+async function open2FASetup() {
+  if (!isLoggedIn()) return;
+
+  let modal = document.getElementById("2fa-modal");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.className = "modal-overlay";
+    modal.id = "2fa-modal";
+    modal.innerHTML = `
+      <div class="modal" style="max-width:460px;">
+        <div class="modal-header">
+          <h3>Two-Factor Authentication</h3>
+          <button class="modal-close" onclick="document.getElementById('2fa-modal').classList.remove('active')">&#x2715;</button>
+        </div>
+        <div class="modal-body" id="2fa-body" style="padding:24px;">
+          <div style="text-align:center;padding:40px;"><div class="spinner"></div></div>
+        </div>
+      </div>`;
+    document.body.appendChild(modal);
+    modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("active"); });
+  }
+
+  modal.classList.add("active");
+  const body = document.getElementById("2fa-body");
+
+  try {
+    const res = await fetch(`${API}/api/user/2fa/setup`, { method: "POST", headers: authHeaders() });
+    const data = await res.json();
+
+    body.innerHTML = `
+      <div style="text-align:center;">
+        <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">
+          Scan this code with your authenticator app (Google Authenticator, Authy, etc.):
+        </p>
+        <div style="background:#fff;padding:16px;border-radius:12px;display:inline-block;margin-bottom:16px;">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(data.uri)}" alt="QR Code" width="200" height="200" />
+        </div>
+        <p style="font-size:11px;color:var(--text-muted);margin-bottom:16px;">
+          Or enter this secret manually: <code style="color:var(--gold);font-size:13px;">${data.secret}</code>
+        </p>
+        <div class="form-group">
+          <label>Enter the 6-digit code from your app:</label>
+          <input type="text" id="totp-verify-code" maxlength="6" placeholder="000000" style="text-align:center;font-size:24px;letter-spacing:8px;" />
+        </div>
+        <button class="btn-auth" onclick="verify2FA()">Verify & Enable 2FA</button>
+        <div id="2fa-error" style="color:var(--red-error-text);font-size:12px;margin-top:8px;"></div>
+      </div>`;
+  } catch {
+    body.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted);">Failed to set up 2FA</div>';
+  }
+}
+
+async function verify2FA() {
+  const code = document.getElementById("totp-verify-code")?.value || "";
+  const errEl = document.getElementById("2fa-error");
+
+  if (code.length !== 6) {
+    if (errEl) errEl.textContent = "Enter a 6-digit code";
+    return;
+  }
+
+  try {
+    const res = await fetch(`${API}/api/user/2fa/verify`, {
+      method: "POST",
+      headers: authHeaders(),
+      body: JSON.stringify({ code }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    alert("2FA enabled successfully! You'll need your authenticator app code when signing in.");
+    document.getElementById("2fa-modal").classList.remove("active");
+  } catch (err) {
+    if (errEl) errEl.textContent = err.message;
+  }
+}
+
+// ─── Onboarding Tour ─────────────────────────────────────────────────
+
+function showOnboardingTour() {
+  if (localStorage.getItem("askozzy_onboarding_done")) return;
+
+  const steps = [
+    { target: ".model-selector", text: "Choose from 10 AI models. Free plans get 3 models, paid plans unlock all 10.", position: "bottom" },
+    { target: ".btn-new-chat", text: "Start conversations here. Try a template for guided prompts!", position: "right" },
+    { target: ".theme-toggle", text: "Switch between dark and light modes.", position: "bottom" },
+    { target: ".usage-badge", text: "Track your daily usage. Click to see upgrade plans.", position: "bottom" },
+  ];
+
+  let currentStep = 0;
+
+  function showStep(index) {
+    // Remove previous overlay
+    const prev = document.querySelector(".onboarding-overlay");
+    if (prev) prev.remove();
+
+    if (index >= steps.length) {
+      localStorage.setItem("askozzy_onboarding_done", "1");
+      return;
+    }
+
+    const step = steps[index];
+    const target = document.querySelector(step.target);
+    if (!target) { showStep(index + 1); return; }
+
+    const rect = target.getBoundingClientRect();
+    const overlay = document.createElement("div");
+    overlay.className = "onboarding-overlay";
+    overlay.innerHTML = `
+      <div class="onboarding-highlight" style="top:${rect.top - 4}px;left:${rect.left - 4}px;width:${rect.width + 8}px;height:${rect.height + 8}px;"></div>
+      <div class="onboarding-tooltip onboarding-${step.position}" style="top:${step.position === "bottom" ? rect.bottom + 12 : rect.top}px;left:${rect.left}px;">
+        <p>${step.text}</p>
+        <div style="display:flex;gap:8px;margin-top:12px;">
+          <button class="onboarding-skip" onclick="this.closest('.onboarding-overlay').remove();localStorage.setItem('askozzy_onboarding_done','1')">Skip Tour</button>
+          <button class="onboarding-next" onclick="showOnboardingStep(${index + 1})">${index === steps.length - 1 ? "Finish" : "Next"}</button>
+        </div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:6px;">${index + 1} of ${steps.length}</div>
+      </div>`;
+    document.body.appendChild(overlay);
+  }
+
+  window.showOnboardingStep = showStep;
+  showStep(0);
+}
+
+// ─── Paystack Payment ────────────────────────────────────────────────
+
+async function initPaystackPayment(planId, planName, price) {
   if (!isLoggedIn()) {
     closePricingModal();
     state.pendingAction = () => openPricingModal();
@@ -1277,12 +1923,8 @@ async function upgradeToPlan(planId, planName, price) {
     return;
   }
 
-  // In production: integrate Paystack / MTN MoMo here
-  // For now: confirm and activate
-  if (!confirm(`Upgrade to ${planName} for GHS ${price}/month?\n\nPayment integration with Mobile Money and card coming soon. For now, this activates a trial.`)) return;
-
   try {
-    const res = await fetch(`${API}/api/upgrade`, {
+    const res = await fetch(`${API}/api/payments/initialize`, {
       method: "POST",
       headers: authHeaders(),
       body: JSON.stringify({ tier: planId }),
@@ -1290,23 +1932,141 @@ async function upgradeToPlan(planId, planName, price) {
     const data = await res.json();
     if (!res.ok) throw new Error(data.error);
 
-    // Update local state
-    state.user.tier = planId;
-    localStorage.setItem("askozzy_user", JSON.stringify(state.user));
-
-    closePricingModal();
-    loadUsageStatus();
-    updateSidebarFooter();
-
-    // Remove limit banner if present
-    const banner = document.querySelector(".limit-banner");
-    if (banner) banner.remove();
-
-    alert(`Welcome to ${planName}! Your plan has been upgraded successfully.`);
+    if (data.authorization_url) {
+      // Real Paystack — redirect to payment page
+      window.location.href = data.authorization_url;
+    } else if (data.simulated) {
+      // Dev mode — instant upgrade
+      state.user.tier = planId;
+      localStorage.setItem("askozzy_user", JSON.stringify(state.user));
+      closePricingModal();
+      loadUsageStatus();
+      updateSidebarFooter();
+      const banner = document.querySelector(".limit-banner");
+      if (banner) banner.remove();
+      alert(`Welcome to ${planName}! ${data.message}`);
+    }
   } catch (err) {
-    alert("Upgrade failed: " + err.message);
+    alert("Payment failed: " + err.message);
   }
 }
+
+// ─── PWA: Service Worker Registration ────────────────────────────────
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/sw.js")
+      .then((reg) => {
+        // Check for updates periodically
+        setInterval(() => reg.update(), 60 * 60 * 1000); // every hour
+
+        reg.addEventListener("updatefound", () => {
+          const newWorker = reg.installing;
+          newWorker.addEventListener("statechange", () => {
+            if (newWorker.state === "activated" && navigator.serviceWorker.controller) {
+              showUpdateBanner();
+            }
+          });
+        });
+      })
+      .catch((err) => console.log("SW registration failed:", err));
+  });
+}
+
+function showUpdateBanner() {
+  const existing = document.querySelector(".pwa-update-banner");
+  if (existing) return;
+
+  const banner = document.createElement("div");
+  banner.className = "pwa-update-banner";
+  banner.innerHTML = `
+    <span>A new version of AskOzzy is available.</span>
+    <button onclick="window.location.reload()">Update Now</button>
+    <button class="dismiss" onclick="this.parentElement.remove()">Later</button>
+  `;
+  document.body.appendChild(banner);
+}
+
+// ─── PWA: Install Prompt ─────────────────────────────────────────────
+
+let _deferredInstallPrompt = null;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  _deferredInstallPrompt = e;
+  showInstallBanner();
+});
+
+window.addEventListener("appinstalled", () => {
+  _deferredInstallPrompt = null;
+  const banner = document.querySelector(".pwa-install-banner");
+  if (banner) banner.remove();
+});
+
+function showInstallBanner() {
+  // Don't show if already dismissed this session
+  if (sessionStorage.getItem("askozzy_install_dismissed")) return;
+
+  const existing = document.querySelector(".pwa-install-banner");
+  if (existing) return;
+
+  const banner = document.createElement("div");
+  banner.className = "pwa-install-banner";
+  banner.innerHTML = `
+    <div class="pwa-install-content">
+      <div class="pwa-install-icon">&#x26A1;</div>
+      <div class="pwa-install-text">
+        <strong>Install AskOzzy</strong>
+        <span>Add to your home screen for quick access</span>
+      </div>
+    </div>
+    <div class="pwa-install-actions">
+      <button class="pwa-install-btn" onclick="installPWA()">Install</button>
+      <button class="pwa-install-dismiss" onclick="dismissInstallBanner()">Not now</button>
+    </div>
+  `;
+  document.body.appendChild(banner);
+}
+
+async function installPWA() {
+  if (!_deferredInstallPrompt) return;
+
+  _deferredInstallPrompt.prompt();
+  const { outcome } = await _deferredInstallPrompt.userChoice;
+
+  if (outcome === "accepted") {
+    _deferredInstallPrompt = null;
+  }
+
+  const banner = document.querySelector(".pwa-install-banner");
+  if (banner) banner.remove();
+}
+
+function dismissInstallBanner() {
+  sessionStorage.setItem("askozzy_install_dismissed", "1");
+  const banner = document.querySelector(".pwa-install-banner");
+  if (banner) banner.remove();
+}
+
+// ─── PWA: Online/Offline Detection ───────────────────────────────────
+
+function updateOnlineStatus() {
+  const existing = document.querySelector(".offline-indicator");
+
+  if (!navigator.onLine) {
+    if (existing) return;
+    const indicator = document.createElement("div");
+    indicator.className = "offline-indicator";
+    indicator.innerHTML = '<span class="offline-dot"></span> You are offline — messages will fail until reconnected';
+    document.body.appendChild(indicator);
+  } else {
+    if (existing) existing.remove();
+  }
+}
+
+window.addEventListener("online", updateOnlineStatus);
+window.addEventListener("offline", updateOnlineStatus);
 
 // ─── Auto-capture referral code from URL ─────────────────────────────
 
@@ -1330,4 +2090,262 @@ async function upgradeToPlan(planId, planName, price) {
       if (regRef) regRef.value = savedRef;
     }
   };
+
+  // Handle PWA shortcut ?action=new-chat
+  const action = params.get("action");
+  if (action === "new-chat") {
+    window.history.replaceState({}, "", window.location.pathname);
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => requireAuth(createNewChat), 500);
+    });
+  }
 })();
+
+// ─── Paystack Payment Success Banner ─────────────────────────────────
+
+function showPaymentSuccess(planName) {
+  const banner = document.createElement("div");
+  banner.className = "payment-success-banner";
+  banner.innerHTML = `
+    <div style="display:flex;align-items:center;gap:12px;padding:16px 24px;background:linear-gradient(135deg, var(--green), var(--green-light));color:white;border-radius:12px;margin:12px;font-size:14px;font-weight:600;animation:slideDown 0.3s ease;">
+      <span style="font-size:24px;">&#x2705;</span>
+      <span>Successfully upgraded to ${planName}! All premium features are now unlocked.</span>
+      <button onclick="this.parentElement.parentElement.remove()" style="background:none;border:none;color:white;font-size:18px;cursor:pointer;margin-left:auto;">&#x2715;</button>
+    </div>`;
+  document.querySelector(".main-content").prepend(banner);
+  setTimeout(() => banner.remove(), 8000);
+}
+
+// Handle payment callback from Paystack redirect
+(function checkPaymentCallback() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("payment") === "success") {
+    // Clean URL
+    window.history.replaceState({}, "", "/");
+    // Refresh user data
+    setTimeout(() => {
+      if (isLoggedIn()) {
+        loadUsageStatus();
+        showPaymentSuccess("your new plan");
+      }
+    }, 500);
+  }
+})();
+
+// ─── Folders (Paid Feature Gating) ───────────────────────────────────
+
+function showFolderPremiumPrompt() {
+  const go = confirm("Folders are a premium feature!\n\nUpgrade to Starter (GHS 30/mo) or higher to organize your conversations into folders.\n\nWould you like to view plans?");
+  if (go) openPricingModal();
+}
+
+async function pinConversation(conversationId, pinned) {
+  try {
+    await fetch(`${API}/api/conversations/${conversationId}`, {
+      method: "PATCH",
+      headers: authHeaders(),
+      body: JSON.stringify({ pinned }),
+    });
+    await loadConversations();
+  } catch {
+    alert("Failed to update conversation");
+  }
+}
+
+// ─── File Upload in Chat ─────────────────────────────────────────────
+
+function openFileUpload() {
+  if (!isLoggedIn()) {
+    requireAuth(openFileUpload);
+    return;
+  }
+
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = ".txt,.md,.csv,.json,.html,.htm";
+  input.onchange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (file.size > 2 * 1024 * 1024) {
+      alert("File size must be under 2MB");
+      return;
+    }
+
+    try {
+      const text = await file.text();
+      const chatInput = document.getElementById("chat-input");
+      chatInput.value = `[Uploaded file: ${file.name}]\n\n${text.substring(0, 10000)}${text.length > 10000 ? "\n\n... (truncated)" : ""}\n\nPlease analyze this document and provide a summary.`;
+      autoResizeInput();
+      updateSendButton();
+      showChatScreen();
+    } catch {
+      alert("Failed to read file");
+    }
+  };
+  input.click();
+}
+
+// ─── Conversation Sharing ────────────────────────────────────────────
+
+async function shareConversation(conversationId) {
+  if (!isLoggedIn()) return;
+
+  try {
+    const res = await fetch(`${API}/api/conversations/${conversationId}/share`, {
+      method: "POST",
+      headers: authHeaders(),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      alert(data.error || "Failed to share");
+      return;
+    }
+
+    const shareUrl = `${window.location.origin}/?shared=${data.shareToken}`;
+    showShareModal(shareUrl, data.shareToken, conversationId);
+  } catch {
+    alert("Failed to share conversation");
+  }
+}
+
+function showShareModal(shareUrl, shareToken, conversationId) {
+  let modal = document.getElementById("share-modal");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.className = "modal-overlay";
+    modal.id = "share-modal";
+    modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("active"); });
+    document.body.appendChild(modal);
+  }
+
+  modal.innerHTML = `
+    <div class="modal" style="max-width:500px;">
+      <div class="modal-header">
+        <h3>Share Conversation</h3>
+        <button class="modal-close" onclick="document.getElementById('share-modal').classList.remove('active')">&#x2715;</button>
+      </div>
+      <div class="modal-body" style="padding:24px;">
+        <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">Anyone with this link can view (read-only) this conversation.</p>
+        <div style="display:flex;gap:8px;margin-bottom:16px;">
+          <input type="text" value="${shareUrl}" readonly id="share-url-input" style="flex:1;padding:10px 14px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:8px;color:var(--text-primary);font-size:13px;" />
+          <button onclick="navigator.clipboard.writeText('${shareUrl}');this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',2000)" style="background:var(--gold);color:var(--text-on-accent);border:none;border-radius:8px;padding:10px 16px;font-weight:600;cursor:pointer;">Copy</button>
+        </div>
+        <button onclick="revokeShare('${conversationId}')" style="background:none;border:1px solid var(--red-error-text);color:var(--red-error-text);border-radius:8px;padding:8px 16px;font-size:12px;cursor:pointer;">Revoke Sharing</button>
+      </div>
+    </div>`;
+  modal.classList.add("active");
+}
+
+async function revokeShare(conversationId) {
+  try {
+    await fetch(`${API}/api/conversations/${conversationId}/share`, {
+      method: "DELETE",
+      headers: authHeaders(),
+    });
+    document.getElementById("share-modal")?.classList.remove("active");
+    alert("Share link revoked");
+  } catch {
+    alert("Failed to revoke share");
+  }
+}
+
+// Check if loading a shared conversation
+(function checkSharedConversation() {
+  const params = new URLSearchParams(window.location.search);
+  const sharedToken = params.get("shared");
+  if (sharedToken) {
+    window.history.replaceState({}, "", "/");
+    loadSharedConversation(sharedToken);
+  }
+})();
+
+async function loadSharedConversation(token) {
+  try {
+    const res = await fetch(`${API}/api/shared/${token}`);
+    const data = await res.json();
+    if (!res.ok) {
+      alert(data.error || "Shared conversation not found");
+      return;
+    }
+
+    // Show in a modal
+    let modal = document.getElementById("shared-view-modal");
+    if (!modal) {
+      modal = document.createElement("div");
+      modal.className = "modal-overlay active";
+      modal.id = "shared-view-modal";
+      modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("active"); });
+      document.body.appendChild(modal);
+    }
+
+    modal.innerHTML = `
+      <div class="modal" style="max-width:800px;max-height:85vh;">
+        <div class="modal-header">
+          <div>
+            <h3>${escapeHtml(data.title)}</h3>
+            <p style="font-size:12px;color:var(--text-muted);margin:4px 0 0;">Shared by ${escapeHtml(data.authorName)} (${escapeHtml(data.authorDept || "GoG")})</p>
+          </div>
+          <button class="modal-close" onclick="document.getElementById('shared-view-modal').classList.remove('active')">&#x2715;</button>
+        </div>
+        <div class="modal-body" style="padding:16px 24px;overflow-y:auto;max-height:65vh;">
+          ${data.messages.map(m => `
+            <div class="message ${m.role}" style="margin-bottom:16px;">
+              <div class="message-avatar">${m.role === 'user' ? 'U' : 'G'}</div>
+              <div class="message-body">
+                <div class="message-sender">${m.role === 'user' ? 'User' : 'AskOzzy'}</div>
+                <div class="message-content">${m.role === 'user' ? escapeHtml(m.content) : renderMarkdown(m.content)}</div>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      </div>`;
+    modal.classList.add("active");
+  } catch {
+    alert("Failed to load shared conversation");
+  }
+}
+
+// ─── Follow-up Suggestions ───────────────────────────────────────────
+
+async function loadFollowUpSuggestions() {
+  if (!isLoggedIn() || !state.activeConversationId || state.messages.length < 2) return;
+
+  try {
+    const res = await fetch(`${API}/api/chat/suggestions/${state.activeConversationId}`, {
+      headers: authHeaders(),
+    });
+    const data = await res.json();
+
+    if (data.suggestions && data.suggestions.length > 0) {
+      renderSuggestionPills(data.suggestions);
+    }
+  } catch {}
+}
+
+function renderSuggestionPills(suggestions) {
+  // Remove existing pills
+  const existing = document.getElementById("suggestion-pills");
+  if (existing) existing.remove();
+
+  const container = document.createElement("div");
+  container.id = "suggestion-pills";
+  container.className = "suggestion-pills";
+  container.innerHTML = suggestions.map(s =>
+    `<button class="suggestion-pill" onclick="useSuggestion(this, '${escapeHtml(s).replace(/'/g, "\\'")}')">${escapeHtml(s)}</button>`
+  ).join("");
+
+  const inputArea = document.querySelector(".input-area");
+  if (inputArea) inputArea.prepend(container);
+}
+
+function useSuggestion(btn, text) {
+  const input = document.getElementById("chat-input");
+  input.value = text;
+  autoResizeInput();
+  updateSendButton();
+  input.focus();
+  // Remove pills after use
+  const pills = document.getElementById("suggestion-pills");
+  if (pills) pills.remove();
+}

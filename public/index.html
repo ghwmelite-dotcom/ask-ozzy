@@ -2,13 +2,27 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>AskOzzy — AI Assistant for GoG Operations</title>
   <meta name="description" content="AskOzzy is a private, AI-powered productivity platform built exclusively for Government of Ghana (GoG) operations." />
+
+  <!-- PWA Meta Tags -->
+  <meta name="theme-color" content="#0f1117" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f5f3ef" media="(prefers-color-scheme: light)" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="AskOzzy" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="application-name" content="AskOzzy" />
+  <meta name="msapplication-TileColor" content="#0f1117" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/app.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
 </head>
 <body>
 
@@ -70,6 +84,9 @@
         <div class="privacy-badge">Private & Encrypted</div>
       </header>
 
+      <!-- Announcements Area -->
+      <div id="announcements-area"></div>
+
       <!-- Welcome Screen -->
       <div id="welcome-screen" class="welcome-screen">
         <div class="welcome-logo">⚡</div>
@@ -96,14 +113,26 @@
                 onkeydown="handleInputKeydown(event)"
                 oninput="autoResizeInput()"
               ></textarea>
+              <button class="btn-file-upload" onclick="openFileUpload()" title="Upload a document">
+                📎
+              </button>
+              <button class="btn-voice" id="btn-voice" onclick="toggleVoice()" title="Voice input">
+                🎤
+              </button>
               <button class="btn-send" id="btn-send" onclick="sendMessage()" disabled title="Send message">
                 ➤
               </button>
             </div>
             <div class="input-footer">
-              <button class="btn-template-picker" onclick="openTemplateModal()">
-                📋 Templates
-              </button>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <button class="btn-template-picker" onclick="openTemplateModal()">
+                  📋 Templates
+                </button>
+                <button class="btn-template-picker" onclick="state.activeConversationId && shareConversation(state.activeConversationId)" id="btn-share" style="display:none;">
+                  🔗 Share
+                </button>
+                <span class="shortcut-hint"><kbd>Ctrl</kbd>+<kbd>K</kbd> Search</span>
+              </div>
               <span>AskOzzy may produce inaccurate information. Verify critical details.</span>
             </div>
           </div>
