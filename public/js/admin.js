@@ -1328,6 +1328,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (pasteEl) {
     pasteEl.addEventListener("input", debounce(parseBulkPaste, 500));
   }
+  // File preview listeners for document training
+  const trainFile = document.getElementById("train-doc-file");
+  if (trainFile) trainFile.addEventListener("change", updateFilePreview);
+  const trainFolder = document.getElementById("train-doc-folder");
+  if (trainFolder) trainFolder.addEventListener("change", updateFilePreview);
 });
 
 function showBulkPreview() {
@@ -1435,28 +1440,108 @@ function updateTrainCharCount() {
   counter.style.color = len > 200000 ? "var(--red)" : "var(--text-muted)";
 }
 
+function getTrainFiles() {
+  // Collect files from both the file input and folder input
+  const fileInput = document.getElementById("train-doc-file");
+  const folderInput = document.getElementById("train-doc-folder");
+  const ALLOWED_EXT = [".txt", ".md", ".csv", ".json", ".html", ".htm"];
+  const allFiles = [];
+
+  if (fileInput && fileInput.files.length > 0) {
+    for (const f of fileInput.files) allFiles.push(f);
+  }
+  if (folderInput && folderInput.files.length > 0) {
+    for (const f of folderInput.files) {
+      const ext = "." + f.name.split(".").pop().toLowerCase();
+      if (ALLOWED_EXT.includes(ext)) allFiles.push(f);
+    }
+  }
+  return allFiles;
+}
+
+function updateFilePreview() {
+  const el = document.getElementById("train-file-preview");
+  if (!el) return;
+  const files = getTrainFiles();
+  if (files.length === 0) { el.innerHTML = ""; return; }
+  if (files.length === 1) {
+    el.innerHTML = "Selected: <strong>" + escapeHtml(files[0].name) + "</strong> (" + (files[0].size / 1024).toFixed(1) + " KB)";
+  } else {
+    const totalSize = files.reduce((s, f) => s + f.size, 0);
+    el.innerHTML = "<strong>" + files.length + " files</strong> selected (" + (totalSize / 1024).toFixed(1) + " KB total): " +
+      files.slice(0, 5).map(f => escapeHtml(f.name)).join(", ") + (files.length > 5 ? ", ..." : "");
+  }
+}
+
 async function trainDocument() {
   const title = document.getElementById("train-doc-title").value.trim();
   const source = document.getElementById("train-doc-source").value.trim();
   const category = document.getElementById("train-doc-category").value;
-  const fileInput = document.getElementById("train-doc-file");
   const textContent = document.getElementById("train-doc-content").value.trim();
   const resultEl = document.getElementById("train-result");
 
-  if (!title) {
-    resultEl.innerHTML = '<span class="msg-error">Document title is required</span>';
-    return;
-  }
+  const files = getTrainFiles();
 
-  // Determine if using file upload or text paste
-  const file = fileInput.files[0];
+  if (files.length > 1) {
+    // Batch upload multiple files
+    if (!title && !source) {
+      resultEl.innerHTML = '<span class="msg-error">Please enter at least a source/author for batch uploads</span>';
+      return;
+    }
+    resultEl.innerHTML = '<span style="color:var(--gold);">Uploading ' + files.length + ' files... (0/' + files.length + ')</span>';
 
-  if (file) {
-    // Use file upload endpoint
+    let uploaded = 0, failed = 0, errors = [];
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const docTitle = title || file.name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ");
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("title", docTitle);
+      formData.append("source", source);
+      formData.append("category", category);
+
+      try {
+        const res = await fetch(API + "/api/admin/documents/upload-file", {
+          method: "POST",
+          headers: { Authorization: "Bearer " + token },
+          body: formData,
+        });
+        const d = await res.json();
+        if (res.ok) {
+          uploaded++;
+        } else {
+          failed++;
+          errors.push(file.name + ": " + (d.error || "failed"));
+        }
+      } catch {
+        failed++;
+        errors.push(file.name + ": network error");
+      }
+      resultEl.innerHTML = '<span style="color:var(--gold);">Uploading... (' + (i + 1) + '/' + files.length + ')</span>';
+    }
+
+    let msg = '<span class="msg-success">' + uploaded + ' of ' + files.length + ' documents uploaded successfully!</span>';
+    if (failed > 0) {
+      msg += '<br><span class="msg-error">' + failed + ' failed: ' + escapeHtml(errors.slice(0, 3).join("; ")) + (errors.length > 3 ? "..." : "") + '</span>';
+    }
+    resultEl.innerHTML = msg;
+    document.getElementById("train-doc-title").value = "";
+    document.getElementById("train-doc-source").value = "";
+    document.getElementById("train-doc-file").value = "";
+    if (document.getElementById("train-doc-folder")) document.getElementById("train-doc-folder").value = "";
+    updateFilePreview();
+    loadTrainingStatus();
+
+  } else if (files.length === 1) {
+    // Single file upload
+    if (!title) {
+      resultEl.innerHTML = '<span class="msg-error">Document title is required</span>';
+      return;
+    }
     resultEl.innerHTML = '<span style="color:var(--gold);">Uploading file...</span>';
 
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append("file", files[0]);
     formData.append("title", title);
     formData.append("source", source);
     formData.append("category", category);
@@ -1476,7 +1561,9 @@ async function trainDocument() {
         document.getElementById("train-doc-title").value = "";
         document.getElementById("train-doc-source").value = "";
         document.getElementById("train-doc-content").value = "";
-        fileInput.value = "";
+        document.getElementById("train-doc-file").value = "";
+        if (document.getElementById("train-doc-folder")) document.getElementById("train-doc-folder").value = "";
+        updateFilePreview();
         updateTrainCharCount();
         loadTrainingStatus();
       }
@@ -1484,7 +1571,11 @@ async function trainDocument() {
       resultEl.innerHTML = '<span class="msg-error">Upload failed</span>';
     }
   } else if (textContent) {
-    // Use text content endpoint (existing)
+    // Text content paste (single document)
+    if (!title) {
+      resultEl.innerHTML = '<span class="msg-error">Document title is required</span>';
+      return;
+    }
     if (textContent.length < 50) {
       resultEl.innerHTML = '<span class="msg-error">Content must be at least 50 characters</span>';
       return;
@@ -1513,7 +1604,7 @@ async function trainDocument() {
       resultEl.innerHTML = '<span class="msg-error">Upload failed</span>';
     }
   } else {
-    resultEl.innerHTML = '<span class="msg-error">Please upload a file or paste document content</span>';
+    resultEl.innerHTML = '<span class="msg-error">Please upload file(s), a folder, or paste document content</span>';
   }
 }
 

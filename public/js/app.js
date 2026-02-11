@@ -47,6 +47,8 @@ let state = {
   selectedModel: "@cf/openai/gpt-oss-20b",
   activeCategory: "All",
   pendingAction: null,
+  folders: [],
+  collapsedFolders: {},
 };
 
 // ─── Initialization ──────────────────────────────────────────────────
@@ -413,20 +415,28 @@ function renderConversationList() {
 
   let html = "";
 
-  // Folders section
-  if (folders.length > 0) {
+  const isPaid = state.user && state.user.tier && state.user.tier !== "free";
+
+  // Folders section (always visible for paid users)
+  if (isPaid) {
     html += `<div class="folder-section">
       <div class="folder-header">
         <div class="section-label">Folders</div>
         <button class="folder-add-btn" onclick="createFolder()" title="New folder">+</button>
       </div>`;
+    if (folders.length === 0) {
+      html += `<div style="padding:8px 16px;font-size:11px;color:var(--text-muted);text-align:center;">No folders yet. Click + to create one.</div>`;
+    }
     for (const folder of folders) {
       const folderConvos = state.conversations.filter(c => c.folder_id === folder.id);
-      html += `<div class="folder-item">
-        <span class="folder-icon">📁</span> ${escapeHtml(folder.name)} (${folderConvos.length})
+      const isOpen = !state.collapsedFolders || !state.collapsedFolders[folder.id];
+      html += `<div class="folder-item" onclick="toggleFolderCollapse('${folder.id}')">
+        <span class="folder-icon">${isOpen ? "📂" : "📁"}</span> ${escapeHtml(folder.name)} <span style="font-size:10px;color:var(--text-muted);">(${folderConvos.length})</span>
         <button class="folder-delete" onclick="event.stopPropagation();deleteFolder('${folder.id}')" title="Delete folder">×</button>
       </div>`;
-      html += folderConvos.map(c => renderConvoItem(c, true)).join("");
+      if (isOpen) {
+        html += folderConvos.map(c => renderConvoItem(c, true)).join("");
+      }
     }
     html += `</div>`;
   }
@@ -440,23 +450,23 @@ function renderConversationList() {
   // Recent conversations (not in folders, not pinned)
   const unfiled = unpinned.filter(c => !c.folder_id);
   html += '<div class="section-label">Recent Conversations</div>';
-  if (folders.length > 0 && isLoggedIn()) {
-    html += `<div style="padding:2px 12px;">
-      <button class="folder-add-btn" onclick="createFolder()" title="New folder" style="font-size:11px;color:var(--text-muted);background:none;border:none;cursor:pointer;">+ New Folder</button>
-    </div>`;
-  }
   html += unfiled.map(c => renderConvoItem(c)).join("");
 
   container.innerHTML = html;
 }
 
 function renderConvoItem(c, inFolder) {
+  const isPaid = state.user && state.user.tier && state.user.tier !== "free";
   return `
     <div class="conversation-item ${c.id === state.activeConversationId ? "active" : ""} ${c.pinned ? "pinned" : ""}"
-         onclick="openConversation('${c.id}')" ${inFolder ? 'style="padding-left:28px;"' : ""}>
+         onclick="openConversation('${c.id}')" oncontextmenu="showConvoContextMenu(event,'${c.id}',${!!c.pinned},${c.folder_id ? `'${c.folder_id}'` : 'null'})" ${inFolder ? 'style="padding-left:28px;"' : ""}>
       <span class="convo-icon">${c.pinned ? "📌" : "💬"}</span>
       <span class="convo-title">${escapeHtml(c.title)}</span>
-      <button class="convo-delete" onclick="event.stopPropagation();deleteConversation('${c.id}')" title="Delete">🗑</button>
+      <div class="convo-actions">
+        ${isPaid ? `<button class="convo-action-btn" onclick="event.stopPropagation();showMoveToFolderMenu(event,'${c.id}')" title="Move to folder">📁</button>` : ""}
+        <button class="convo-action-btn" onclick="event.stopPropagation();togglePin('${c.id}')" title="${c.pinned ? 'Unpin' : 'Pin'}">${c.pinned ? "📌" : "📍"}</button>
+        <button class="convo-action-btn convo-delete" onclick="event.stopPropagation();deleteConversation('${c.id}')" title="Delete">🗑</button>
+      </div>
     </div>`;
 }
 
@@ -1612,17 +1622,100 @@ async function loadFolders() {
 }
 
 async function createFolder() {
+  const isPaid = state.user && state.user.tier && state.user.tier !== "free";
+  if (!isPaid) {
+    showFolderPremiumPrompt();
+    return;
+  }
   const name = prompt("Folder name:");
   if (!name) return;
   try {
-    await fetch(`${API}/api/folders`, {
+    const res = await fetch(`${API}/api/folders`, {
       method: "POST",
       headers: authHeaders(),
       body: JSON.stringify({ name }),
     });
+    const data = await res.json();
+    if (!res.ok) {
+      if (data.code === "PREMIUM_REQUIRED") { showFolderPremiumPrompt(); return; }
+      alert(data.error || "Failed to create folder");
+      return;
+    }
     await loadFolders();
     renderConversationList();
   } catch {}
+}
+
+function toggleFolderCollapse(folderId) {
+  if (!state.collapsedFolders) state.collapsedFolders = {};
+  state.collapsedFolders[folderId] = !state.collapsedFolders[folderId];
+  renderConversationList();
+}
+
+function showMoveToFolderMenu(event, convoId) {
+  event.preventDefault();
+  event.stopPropagation();
+  closeContextMenu();
+  const folders = state.folders || [];
+  const convo = state.conversations.find(c => c.id === convoId);
+
+  let menuHtml = '<div class="context-menu" id="context-menu">';
+  menuHtml += '<div class="context-menu-title">Move to folder</div>';
+  if (convo && convo.folder_id) {
+    menuHtml += `<button class="context-menu-item" onclick="moveToFolder('${convoId}',null);closeContextMenu();">Remove from folder</button>`;
+  }
+  for (const f of folders) {
+    const isCurrent = convo && convo.folder_id === f.id;
+    menuHtml += `<button class="context-menu-item ${isCurrent ? 'active' : ''}" onclick="moveToFolder('${convoId}','${f.id}');closeContextMenu();">📁 ${escapeHtml(f.name)}${isCurrent ? ' ✓' : ''}</button>`;
+  }
+  if (folders.length === 0) {
+    menuHtml += '<div class="context-menu-empty">No folders yet</div>';
+  }
+  menuHtml += `<button class="context-menu-item context-menu-new" onclick="closeContextMenu();createFolder();">+ New Folder</button>`;
+  menuHtml += '</div>';
+
+  document.body.insertAdjacentHTML("beforeend", menuHtml);
+  const menu = document.getElementById("context-menu");
+  menu.style.left = Math.min(event.clientX, window.innerWidth - 200) + "px";
+  menu.style.top = Math.min(event.clientY, window.innerHeight - 250) + "px";
+  setTimeout(() => document.addEventListener("click", closeContextMenu, { once: true }), 10);
+}
+
+function showConvoContextMenu(event, convoId, isPinned, folderId) {
+  event.preventDefault();
+  event.stopPropagation();
+  closeContextMenu();
+  const isPaid = state.user && state.user.tier && state.user.tier !== "free";
+  const folders = state.folders || [];
+
+  let menuHtml = '<div class="context-menu" id="context-menu">';
+  menuHtml += `<button class="context-menu-item" onclick="togglePin('${convoId}');closeContextMenu();">${isPinned ? '📌 Unpin' : '📍 Pin to top'}</button>`;
+  if (isPaid) {
+    menuHtml += '<div class="context-menu-divider"></div>';
+    menuHtml += '<div class="context-menu-title">Move to folder</div>';
+    if (folderId) {
+      menuHtml += `<button class="context-menu-item" onclick="moveToFolder('${convoId}',null);closeContextMenu();">Remove from folder</button>`;
+    }
+    for (const f of folders) {
+      const isCurrent = folderId === f.id;
+      menuHtml += `<button class="context-menu-item ${isCurrent ? 'active' : ''}" onclick="moveToFolder('${convoId}','${f.id}');closeContextMenu();">📁 ${escapeHtml(f.name)}${isCurrent ? ' ✓' : ''}</button>`;
+    }
+    menuHtml += `<button class="context-menu-item context-menu-new" onclick="closeContextMenu();createFolder();">+ New Folder</button>`;
+  }
+  menuHtml += '<div class="context-menu-divider"></div>';
+  menuHtml += `<button class="context-menu-item context-menu-danger" onclick="deleteConversation('${convoId}');closeContextMenu();">🗑 Delete</button>`;
+  menuHtml += '</div>';
+
+  document.body.insertAdjacentHTML("beforeend", menuHtml);
+  const menu = document.getElementById("context-menu");
+  menu.style.left = Math.min(event.clientX, window.innerWidth - 200) + "px";
+  menu.style.top = Math.min(event.clientY, window.innerHeight - 250) + "px";
+  setTimeout(() => document.addEventListener("click", closeContextMenu, { once: true }), 10);
+}
+
+function closeContextMenu() {
+  const menu = document.getElementById("context-menu");
+  if (menu) menu.remove();
 }
 
 async function deleteFolder(id) {
