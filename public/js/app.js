@@ -504,7 +504,7 @@ function renderMessages() {
 
   container.innerHTML = state.messages
     .map(
-      (msg) => `
+      (msg, i) => `
     <div class="message ${msg.role}">
       <div class="message-avatar">
         ${msg.role === "user" ? getUserInitials() : "G"}
@@ -512,6 +512,22 @@ function renderMessages() {
       <div class="message-body">
         <div class="message-sender">${msg.role === "user" ? "You" : "AskOzzy"}</div>
         <div class="message-content">${msg.role === "user" ? escapeHtml(msg.content) : renderMarkdown(msg.content)}</div>
+        <div class="msg-actions">
+          <button class="msg-action-btn" onclick="copyMessageText(${i})" title="Copy text">
+            <span class="msg-action-icon">&#x2398;</span> Copy
+          </button>
+          ${msg.role === "assistant" ? `
+          <button class="msg-action-btn" onclick="downloadMessageTxt(${i})" title="Download as text file">
+            <span class="msg-action-icon">&#x1F4C4;</span> .txt
+          </button>
+          <button class="msg-action-btn" onclick="downloadMessageDoc(${i})" title="Download as Word document">
+            <span class="msg-action-icon">&#x1F4DD;</span> .doc
+          </button>
+          <button class="msg-action-btn" onclick="printMessage(${i})" title="Print or save as PDF">
+            <span class="msg-action-icon">&#x1F5A8;</span> Print
+          </button>
+          ` : ""}
+        </div>
       </div>
     </div>`
     )
@@ -697,6 +713,79 @@ function scrollToBottom() {
   if (chatArea) {
     chatArea.scrollTop = chatArea.scrollHeight;
   }
+}
+
+// ─── Message Actions (Copy / Download / Print) ──────────────────────
+
+function copyMessageText(index) {
+  const msg = state.messages[index];
+  if (!msg) return;
+  navigator.clipboard.writeText(msg.content).then(() => {
+    // Flash the button
+    const btns = document.querySelectorAll(`.message:nth-child(${index + 1}) .msg-action-btn`);
+    const btn = btns[0];
+    if (btn) {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<span class="msg-action-icon">&#x2713;</span> Copied!';
+      btn.classList.add("copied");
+      setTimeout(() => { btn.innerHTML = orig; btn.classList.remove("copied"); }, 1500);
+    }
+  });
+}
+
+function _getMessageFilename(index, ext) {
+  const msg = state.messages[index];
+  if (!msg) return `message.${ext}`;
+  const preview = msg.content.replace(/[^a-zA-Z0-9 ]/g, "").trim().slice(0, 40).trim().replace(/\s+/g, "_");
+  return `AskOzzy_${preview || "response"}.${ext}`;
+}
+
+function _triggerDownload(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function downloadMessageTxt(index) {
+  const msg = state.messages[index];
+  if (!msg) return;
+  const blob = new Blob([msg.content], { type: "text/plain;charset=utf-8" });
+  _triggerDownload(blob, _getMessageFilename(index, "txt"));
+}
+
+function downloadMessageDoc(index) {
+  const msg = state.messages[index];
+  if (!msg) return;
+  const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head><meta charset="utf-8"><title>AskOzzy Document</title>
+<style>body{font-family:Calibri,Arial,sans-serif;font-size:12pt;line-height:1.6;color:#1a1a1a;max-width:700px;margin:40px auto;padding:0 20px}h1{font-size:18pt;color:#006B3F}h2{font-size:16pt;color:#006B3F}h3{font-size:14pt;color:#333}pre{background:#f5f5f5;padding:12px;border:1px solid #ddd;border-radius:4px;font-family:Consolas,monospace;font-size:10pt;white-space:pre-wrap}code{font-family:Consolas,monospace;font-size:10pt;background:#f5f5f5;padding:2px 4px}blockquote{border-left:3px solid #006B3F;padding-left:12px;color:#555;font-style:italic}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccc;padding:8px;text-align:left}th{background:#f0f0f0;font-weight:bold}</style></head>
+<body>${renderMarkdown(msg.content)}</body></html>`;
+  const blob = new Blob([html], { type: "application/msword" });
+  _triggerDownload(blob, _getMessageFilename(index, "doc"));
+}
+
+function printMessage(index) {
+  const msg = state.messages[index];
+  if (!msg) return;
+  const win = window.open("", "_blank");
+  if (!win) { alert("Please allow popups to print."); return; }
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>AskOzzy — Print</title>
+<style>body{font-family:Georgia,'Times New Roman',serif;font-size:12pt;line-height:1.7;color:#1a1a1a;max-width:700px;margin:40px auto;padding:0 20px}h1{font-size:18pt;color:#006B3F;border-bottom:2px solid #006B3F;padding-bottom:4px}h2{font-size:16pt;color:#006B3F}h3{font-size:14pt;color:#333}pre{background:#f5f5f5;padding:12px;border:1px solid #ddd;border-radius:4px;font-family:Consolas,monospace;font-size:10pt;white-space:pre-wrap}code{font-family:Consolas,monospace;font-size:10pt;background:#f5f5f5;padding:2px 4px}blockquote{border-left:3px solid #006B3F;padding-left:12px;color:#555;font-style:italic}table{border-collapse:collapse;width:100%}th,td{border:1px solid #999;padding:8px;text-align:left}th{background:#eee;font-weight:bold}.footer{margin-top:40px;padding-top:12px;border-top:1px solid #ccc;font-size:9pt;color:#999;text-align:center}@media print{body{margin:0;padding:20px}}</style>
+</head><body>
+<div style="text-align:center;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid #006B3F;">
+<div style="font-size:20pt;font-weight:bold;">AskOzzy</div>
+<div style="font-size:10pt;color:#666;">AI Assistant for GoG Operations</div>
+</div>
+${renderMarkdown(msg.content)}
+<div class="footer">Generated by AskOzzy &mdash; ${new Date().toLocaleDateString("en-GB", { day:"numeric", month:"long", year:"numeric" })}</div>
+</body></html>`);
+  win.document.close();
+  setTimeout(() => win.print(), 300);
 }
 
 // ─── Input Handling ──────────────────────────────────────────────────

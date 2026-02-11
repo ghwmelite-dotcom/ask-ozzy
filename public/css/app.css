@@ -1877,6 +1877,56 @@ html, body {
   }
 }
 
+/* ─── Message Action Bar ─────────────────────────────────────────── */
+
+.msg-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border-color);
+}
+
+.msg-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.msg-action-btn:hover {
+  border-color: var(--gold-dim);
+  color: var(--gold);
+  background: var(--bg-hover);
+}
+
+.msg-action-btn.copied {
+  border-color: var(--green-light);
+  color: var(--green-light);
+}
+
+.msg-action-icon {
+  font-size: 12px;
+  line-height: 1;
+}
+
+@media (max-width: 480px) {
+  .msg-action-btn {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+}
+
 /* ─── Access Code Input ──────────────────────────────────────────── */
 
 .access-code-input {
