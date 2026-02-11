@@ -381,6 +381,56 @@
           </div>
         </div>
 
+        <!-- URL Scraping Card -->
+        <div class="admin-card" style="margin-bottom:24px;">
+          <h3>Train from Website URLs</h3>
+          <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;">Scrape content from government websites, policy pages, or any public URL. The AI will extract the text and use it for training.</p>
+
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Website URL(s) — one per line</label>
+            <textarea id="scrape-urls" placeholder="https://mofep.gov.gh/publications/budget-statement&#10;https://ppaghana.org/about&#10;https://example.gov.gh/policy-document" rows="4" style="width:100%;padding:10px 14px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:13px;font-family:inherit;resize:vertical;outline:none;box-sizing:border-box;"></textarea>
+            <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">Enter up to 20 URLs. Each page will be scraped and trained as a separate document.</div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Title (optional — auto-detected from page)</label>
+              <input type="text" id="scrape-title" placeholder="Leave blank to use page title" class="admin-search" style="max-width:100%;" />
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Source / Author</label>
+              <input type="text" id="scrape-source" placeholder="e.g., Ministry of Finance" class="admin-search" style="max-width:100%;" />
+            </div>
+          </div>
+
+          <div style="display:flex;gap:16px;align-items:center;margin-bottom:16px;">
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Category</label>
+              <select id="scrape-category" class="inline-select" style="padding:8px 12px;">
+                <option value="general">General</option>
+                <option value="procurement">Procurement</option>
+                <option value="finance">Finance & Budget</option>
+                <option value="hr">Human Resources</option>
+                <option value="legal">Legal & Regulations</option>
+                <option value="ict">ICT & Digital</option>
+                <option value="health">Health</option>
+                <option value="education">Education</option>
+                <option value="governance">Governance</option>
+              </select>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;margin-top:18px;">
+              <input type="checkbox" id="scrape-follow-links" style="accent-color:var(--gold);" />
+              <label for="scrape-follow-links" style="font-size:12px;color:var(--text-secondary);cursor:pointer;">Follow links on page (scrape linked pages on same domain, max 10)</label>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;align-items:center;">
+            <button class="btn-action primary" onclick="trainFromURLs()">Scrape &amp; Train AI</button>
+            <span id="scrape-result" style="font-size:12px;"></span>
+          </div>
+          <div id="scrape-results-detail" style="margin-top:12px;"></div>
+        </div>
+
         <div class="admin-card">
           <h3>Training Status</h3>
           <div id="training-status-content"><div class="admin-loader"><div class="spinner"></div></div></div>

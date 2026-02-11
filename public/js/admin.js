@@ -1653,6 +1653,110 @@ async function loadTrainingStatus() {
   }
 }
 
+// ═══════════════════════════════════════════════════════════════════
+//  URL Scraping for Document Training
+// ═══════════════════════════════════════════════════════════════════
+
+async function trainFromURLs() {
+  const urlsRaw = document.getElementById("scrape-urls").value.trim();
+  const title = document.getElementById("scrape-title").value.trim();
+  const source = document.getElementById("scrape-source").value.trim();
+  const category = document.getElementById("scrape-category").value;
+  const followLinks = document.getElementById("scrape-follow-links").checked;
+  const resultEl = document.getElementById("scrape-result");
+  const detailEl = document.getElementById("scrape-results-detail");
+
+  if (!urlsRaw) {
+    resultEl.innerHTML = '<span class="msg-error">Please enter at least one URL</span>';
+    return;
+  }
+
+  // Parse URLs (one per line, filter empty lines)
+  const urls = urlsRaw.split("\n").map(function(u) { return u.trim(); }).filter(function(u) { return u.length > 0; });
+
+  if (urls.length === 0) {
+    resultEl.innerHTML = '<span class="msg-error">No valid URLs found</span>';
+    return;
+  }
+
+  // Basic URL validation
+  for (var i = 0; i < urls.length; i++) {
+    try {
+      new URL(urls[i]);
+    } catch (e) {
+      resultEl.innerHTML = '<span class="msg-error">Invalid URL: ' + escapeHtml(urls[i]) + '</span>';
+      return;
+    }
+  }
+
+  resultEl.innerHTML = '<span style="color:var(--gold);">Scraping ' + urls.length + ' URL' + (urls.length > 1 ? 's' : '') + '... This may take a moment.</span>';
+  detailEl.innerHTML = '';
+
+  try {
+    var res = await fetch(API + "/api/admin/documents/scrape-url", {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        urls: urls,
+        title: title,
+        source: source,
+        category: category,
+        followLinks: followLinks,
+      }),
+    });
+
+    var data = await res.json();
+
+    if (!res.ok) {
+      resultEl.innerHTML = '<span class="msg-error">' + escapeHtml(data.error || "Scraping failed") + '</span>';
+      return;
+    }
+
+    var summary = data.summary;
+    resultEl.innerHTML = '<span class="msg-success">' + summary.succeeded + ' of ' + summary.total + ' URLs scraped successfully!</span>' +
+      (summary.failed > 0 ? ' <span class="msg-error">(' + summary.failed + ' failed)</span>' : '');
+
+    // Show detailed results
+    if (data.results && data.results.length > 0) {
+      var tableHtml = '<div class="admin-table-wrapper"><table class="admin-table"><thead><tr>' +
+        '<th>URL</th><th>Title</th><th>Characters</th><th>Status</th>' +
+        '</tr></thead><tbody>';
+
+      for (var j = 0; j < data.results.length; j++) {
+        var r = data.results[j];
+        var shortUrl = r.url.length > 50 ? r.url.substring(0, 50) + '...' : r.url;
+        if (r.status === 'success') {
+          tableHtml += '<tr><td title="' + escapeHtml(r.url) + '">' + escapeHtml(shortUrl) + '</td>' +
+            '<td>' + escapeHtml(r.title || '—') + '</td>' +
+            '<td>' + (r.charCount || 0).toLocaleString() + '</td>' +
+            '<td><span style="color:var(--green-light);font-weight:600;">Success</span></td></tr>';
+        } else {
+          tableHtml += '<tr><td title="' + escapeHtml(r.url) + '">' + escapeHtml(shortUrl) + '</td>' +
+            '<td>—</td><td>—</td>' +
+            '<td><span style="color:var(--red);font-weight:600;">' + escapeHtml(r.error || 'Failed') + '</span></td></tr>';
+        }
+      }
+
+      tableHtml += '</tbody></table></div>';
+      detailEl.innerHTML = tableHtml;
+    }
+
+    // Clear inputs on success
+    if (summary.succeeded > 0) {
+      document.getElementById("scrape-urls").value = "";
+      document.getElementById("scrape-title").value = "";
+      document.getElementById("scrape-source").value = "";
+      document.getElementById("scrape-follow-links").checked = false;
+      loadTrainingStatus();
+    }
+  } catch (e) {
+    resultEl.innerHTML = '<span class="msg-error">Network error: ' + escapeHtml(e.message || "Failed to connect") + '</span>';
+  }
+}
+
 // ─── Init ───────────────────────────────────────────────────────────
 
 document.addEventListener("DOMContentLoaded", verifyAdmin);

@@ -2632,6 +2632,172 @@ app.post("/api/admin/documents/upload-file", adminMiddleware, async (c) => {
   }
 });
 
+// Admin: Scrape URL(s) for document training
+app.post("/api/admin/documents/scrape-url", adminMiddleware, async (c) => {
+  const adminId = c.get("userId");
+
+  try {
+    const { urls, title, source, category, followLinks } = await c.req.json();
+
+    // Accept single URL string or array of URLs
+    const urlList: string[] = Array.isArray(urls) ? urls : [urls];
+    if (urlList.length === 0 || !urlList[0]) {
+      return c.json({ error: "At least one URL is required" }, 400);
+    }
+    if (urlList.length > 20) {
+      return c.json({ error: "Maximum 20 URLs per batch" }, 400);
+    }
+
+    // Validate URLs
+    for (const u of urlList) {
+      try { new URL(u); } catch {
+        return c.json({ error: `Invalid URL: ${u}` }, 400);
+      }
+    }
+
+    const results: Array<{ url: string; status: string; docId?: string; charCount?: number; error?: string; title?: string }> = [];
+
+    for (const url of urlList) {
+      try {
+        // Fetch the page
+        const response = await fetch(url, {
+          headers: {
+            "User-Agent": "AskOzzy-Bot/1.0 (Government of Ghana AI Training)",
+            "Accept": "text/html,application/xhtml+xml,text/plain,application/json",
+          },
+          redirect: "follow",
+        });
+
+        if (!response.ok) {
+          results.push({ url, status: "failed", error: `HTTP ${response.status}` });
+          continue;
+        }
+
+        const contentType = response.headers.get("content-type") || "";
+        const rawText = await response.text();
+
+        let content = "";
+        let pageTitle = title || "";
+
+        if (contentType.includes("html")) {
+          // Extract title from HTML if not provided
+          if (!pageTitle) {
+            const titleMatch = rawText.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+            pageTitle = titleMatch ? titleMatch[1].trim().replace(/\s+/g, " ") : new URL(url).hostname;
+          }
+
+          // Strip HTML to extract text content
+          content = rawText
+            .replace(/<script[\s\S]*?<\/script>/gi, "")
+            .replace(/<style[\s\S]*?<\/style>/gi, "")
+            .replace(/<nav[\s\S]*?<\/nav>/gi, "")
+            .replace(/<footer[\s\S]*?<\/footer>/gi, "")
+            .replace(/<header[\s\S]*?<\/header>/gi, "")
+            .replace(/<!--[\s\S]*?-->/g, "")
+            .replace(/<[^>]+>/g, " ")
+            .replace(/&nbsp;/gi, " ")
+            .replace(/&amp;/gi, "&")
+            .replace(/&lt;/gi, "<")
+            .replace(/&gt;/gi, ">")
+            .replace(/&quot;/gi, '"')
+            .replace(/&#39;/gi, "'")
+            .replace(/\s{2,}/g, " ")
+            .trim();
+
+          // If followLinks is true, extract and scrape linked pages on same domain
+          if (followLinks && urlList.length === 1) {
+            const baseDomain = new URL(url).hostname;
+            const linkRegex = /href=["']([^"']+)["']/gi;
+            const foundLinks = new Set<string>();
+            let match;
+            while ((match = linkRegex.exec(rawText)) !== null) {
+              try {
+                const absUrl = new URL(match[1], url).href;
+                const linkDomain = new URL(absUrl).hostname;
+                if (linkDomain === baseDomain && absUrl !== url && !absUrl.includes("#") && foundLinks.size < 10) {
+                  foundLinks.add(absUrl);
+                }
+              } catch {}
+            }
+
+            // Scrape child pages and append content
+            for (const childUrl of foundLinks) {
+              try {
+                const childRes = await fetch(childUrl, {
+                  headers: { "User-Agent": "AskOzzy-Bot/1.0 (Government of Ghana AI Training)", "Accept": "text/html" },
+                  redirect: "follow",
+                });
+                if (childRes.ok) {
+                  const childHtml = await childRes.text();
+                  const childText = childHtml
+                    .replace(/<script[\s\S]*?<\/script>/gi, "")
+                    .replace(/<style[\s\S]*?<\/style>/gi, "")
+                    .replace(/<nav[\s\S]*?<\/nav>/gi, "")
+                    .replace(/<footer[\s\S]*?<\/footer>/gi, "")
+                    .replace(/<!--[\s\S]*?-->/g, "")
+                    .replace(/<[^>]+>/g, " ")
+                    .replace(/\s{2,}/g, " ")
+                    .trim();
+                  if (childText.length > 100) {
+                    content += `\n\n--- Page: ${childUrl} ---\n\n${childText}`;
+                  }
+                }
+              } catch {}
+            }
+          }
+
+        } else if (contentType.includes("json")) {
+          pageTitle = pageTitle || new URL(url).pathname.split("/").pop() || "JSON Data";
+          try {
+            const parsed = JSON.parse(rawText);
+            content = JSON.stringify(parsed, null, 2);
+          } catch {
+            content = rawText;
+          }
+        } else {
+          // Plain text or other text format
+          pageTitle = pageTitle || new URL(url).pathname.split("/").pop() || url;
+          content = rawText;
+        }
+
+        // Truncate if too long
+        if (content.length > 200000) {
+          content = content.slice(0, 200000);
+        }
+
+        if (content.length < 50) {
+          results.push({ url, status: "failed", error: "Extracted content too short (< 50 chars)" });
+          continue;
+        }
+
+        // Create document record
+        const docId = generateId();
+        const docSource = source || new URL(url).hostname;
+        await c.env.DB.prepare(
+          "INSERT INTO documents (id, title, source, category, content, uploaded_by, status) VALUES (?, ?, ?, ?, ?, ?, 'processing')"
+        ).bind(docId, pageTitle, docSource, category || "general", content, adminId).run();
+
+        // Process embeddings in background
+        c.executionCtx.waitUntil(processDocumentEmbeddings(c.env, docId, pageTitle, docSource, content));
+
+        await logAudit(c.env.DB, adminId, "scrape_url", "document", docId, `${pageTitle} (${url}, ${content.length} chars)`);
+
+        results.push({ url, status: "success", docId, charCount: content.length, title: pageTitle });
+      } catch (err) {
+        results.push({ url, status: "failed", error: (err as Error).message });
+      }
+    }
+
+    const succeeded = results.filter(r => r.status === "success").length;
+    return c.json({
+      results,
+      summary: { total: urlList.length, succeeded, failed: urlList.length - succeeded },
+    });
+  } catch (err) {
+    return c.json({ error: "URL scraping failed: " + (err as Error).message }, 500);
+  }
+});
+
 // 2. List documents
 app.get("/api/admin/documents", adminMiddleware, async (c) => {
   const page = parseInt(c.req.query("page") || "1");
