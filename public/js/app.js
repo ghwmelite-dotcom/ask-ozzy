@@ -233,7 +233,7 @@ function updateSidebarFooter() {
         <div class="user-avatar">${initials}</div>
         <div>
           <div class="user-name">${escapeHtml(state.user.fullName)}</div>
-          <div class="user-dept">${escapeHtml(state.user.department || "Ghana Civil Service")}</div>
+          <div class="user-dept">${escapeHtml(state.user.department || "GoG Operations")}</div>
         </div>
       </div>
       <div style="display:flex;gap:6px;">

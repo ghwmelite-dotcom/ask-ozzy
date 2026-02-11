@@ -1,7 +1,7 @@
 {
   "name": "ghana-civil-ai",
   "version": "1.0.0",
-  "description": "AI-powered assistant platform for Ghana Civil Service",
+  "description": "AI-powered assistant platform for GoG operations",
   "private": true,
   "scripts": {
     "dev": "wrangler dev",
