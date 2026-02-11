@@ -2434,18 +2434,44 @@ async function processDocumentEmbeddings(env: Env, docId: string, title: string,
   try {
     const chunks = chunkText(content, 500, 50);
 
-    for (let i = 0; i < chunks.length; i += 10) {
-      const batch = chunks.slice(i, i + 10);
-      const embeddings = await generateEmbeddings(env.AI, batch);
+    if (chunks.length === 0) {
+      await env.DB.prepare(
+        "UPDATE documents SET status = 'error' WHERE id = ?"
+      ).bind(docId).run();
+      return;
+    }
+
+    let totalSaved = 0;
+
+    for (let i = 0; i < chunks.length; i += 5) {
+      const batch = chunks.slice(i, i + 5);
+
+      // Generate embeddings with retry
+      let embeddings: number[][];
+      try {
+        embeddings = await generateEmbeddings(env.AI, batch);
+      } catch (embErr) {
+        // Retry once after a short delay
+        await new Promise(r => setTimeout(r, 1000));
+        try {
+          embeddings = await generateEmbeddings(env.AI, batch);
+        } catch {
+          // Skip this batch if embedding fails twice
+          continue;
+        }
+      }
+
+      if (!embeddings || embeddings.length !== batch.length) continue;
 
       const vectors: Array<{ id: string; values: number[]; metadata: Record<string, string> }> = [];
       for (let j = 0; j < batch.length; j++) {
+        if (!embeddings[j] || embeddings[j].length === 0) continue;
         const chunkId = `${docId}_chunk_${i + j}`;
         vectors.push({
           id: chunkId,
           values: embeddings[j],
           metadata: {
-            content: batch[j],
+            content: batch[j].slice(0, 1000),
             source: source || title,
             title: title,
             docId: docId,
@@ -2454,21 +2480,38 @@ async function processDocumentEmbeddings(env: Env, docId: string, title: string,
         });
 
         // Save chunk to DB
-        await env.DB.prepare(
-          "INSERT INTO document_chunks (id, document_id, chunk_index, content, vector_id) VALUES (?, ?, ?, ?, ?)"
-        ).bind(chunkId, docId, i + j, batch[j], chunkId).run();
+        try {
+          await env.DB.prepare(
+            "INSERT OR IGNORE INTO document_chunks (id, document_id, chunk_index, content, vector_id) VALUES (?, ?, ?, ?, ?)"
+          ).bind(chunkId, docId, i + j, batch[j], chunkId).run();
+        } catch {}
       }
 
-      await env.VECTORIZE.upsert(vectors);
+      if (vectors.length > 0) {
+        try {
+          await env.VECTORIZE.upsert(vectors);
+          totalSaved += vectors.length;
+        } catch {
+          // Vectorize upsert failed for this batch, continue with remaining
+        }
+      }
     }
 
-    await env.DB.prepare(
-      "UPDATE documents SET status = 'ready', chunk_count = ? WHERE id = ?"
-    ).bind(chunks.length, docId).run();
+    if (totalSaved > 0) {
+      await env.DB.prepare(
+        "UPDATE documents SET status = 'ready', chunk_count = ? WHERE id = ?"
+      ).bind(totalSaved, docId).run();
+    } else {
+      await env.DB.prepare(
+        "UPDATE documents SET status = 'error' WHERE id = ?"
+      ).bind(docId).run();
+    }
   } catch (err) {
-    await env.DB.prepare(
-      "UPDATE documents SET status = 'error' WHERE id = ?"
-    ).bind(docId).run();
+    try {
+      await env.DB.prepare(
+        "UPDATE documents SET status = 'error' WHERE id = ?"
+      ).bind(docId).run();
+    } catch {}
   }
 }
 
@@ -2569,9 +2612,17 @@ app.post("/api/admin/documents/upload-file", adminMiddleware, async (c) => {
     if (!file) return c.json({ error: "File is required" }, 400);
     if (!title) return c.json({ error: "Title is required" }, 400);
 
+    // Reject known binary formats upfront
+    const fileName = file.name.toLowerCase();
+    const binaryExts = [".doc", ".docx", ".pptx", ".ppt", ".xls", ".xlsx", ".pdf", ".zip", ".rar", ".7z", ".exe", ".bin", ".dll", ".iso", ".mp3", ".mp4", ".avi", ".mov", ".png", ".jpg", ".jpeg", ".gif", ".bmp", ".woff", ".woff2", ".ttf"];
+    for (const ext of binaryExts) {
+      if (fileName.endsWith(ext)) {
+        return c.json({ error: `Binary format (${ext}) is not supported. Convert to .txt, .md, .csv, .json, or .html first.` }, 400);
+      }
+    }
+
     // Extract text content from file
     let content = "";
-    const fileName = file.name.toLowerCase();
 
     if (fileName.endsWith(".txt") || fileName.endsWith(".md") || fileName.endsWith(".csv")) {
       content = await file.text();

@@ -1451,11 +1451,13 @@ function getTrainFiles() {
     for (let i = 0; i < files.length; i++) allFiles.push(files[i]);
   }
   if (folderInput && folderInput.files && folderInput.files.length > 0) {
+    const BINARY_EXT = [".doc", ".docx", ".pptx", ".ppt", ".xls", ".xlsx", ".pdf", ".zip", ".rar", ".7z", ".exe", ".bin", ".dll", ".iso", ".img", ".mp3", ".mp4", ".avi", ".mov", ".png", ".jpg", ".jpeg", ".gif", ".bmp", ".ico", ".woff", ".woff2", ".ttf", ".eot"];
     const files = Array.from(folderInput.files);
-    // Filter out hidden files and system files, but allow all text-based formats
     for (let i = 0; i < files.length; i++) {
       const f = files[i];
       if (f.name.startsWith(".") || f.name === "Thumbs.db" || f.name === "desktop.ini") continue;
+      var ext = "." + f.name.split(".").pop().toLowerCase();
+      if (BINARY_EXT.indexOf(ext) !== -1) continue;
       allFiles.push(f);
     }
   }
@@ -1487,16 +1489,40 @@ async function trainDocument() {
 
   if (files.length > 1) {
     // Batch upload multiple files
-    if (!title && !source) {
-      resultEl.innerHTML = '<span class="msg-error">Please enter at least a source/author for batch uploads</span>';
+    if (!source) {
+      resultEl.innerHTML = '<span class="msg-error">Please enter a source/author for batch uploads</span>';
       return;
     }
-    resultEl.innerHTML = '<span style="color:var(--gold);">Uploading ' + files.length + ' files... (0/' + files.length + ')</span>';
+
+    // Filter out binary formats that can't be read as text
+    var BINARY_EXT = [".doc", ".docx", ".pptx", ".ppt", ".xls", ".xlsx", ".pdf", ".zip", ".rar", ".7z", ".exe", ".bin", ".dll", ".iso", ".img", ".mp3", ".mp4", ".avi", ".mov", ".png", ".jpg", ".jpeg", ".gif", ".bmp", ".ico", ".woff", ".woff2", ".ttf", ".eot"];
+    var textFiles = [];
+    var skippedBinary = [];
+    for (let i = 0; i < files.length; i++) {
+      var ext = "." + files[i].name.split(".").pop().toLowerCase();
+      if (BINARY_EXT.indexOf(ext) !== -1) {
+        skippedBinary.push(files[i].name);
+      } else {
+        textFiles.push(files[i]);
+      }
+    }
+
+    if (textFiles.length === 0) {
+      resultEl.innerHTML = '<span class="msg-error">No supported text files found. Binary formats (.doc, .docx, .pptx, .pdf, etc.) are not yet supported. Use .txt, .md, .csv, .json, or .html files.</span>';
+      if (skippedBinary.length > 0) {
+        resultEl.innerHTML += '<br><span style="font-size:11px;color:var(--text-muted);">Skipped ' + skippedBinary.length + ' binary files: ' + skippedBinary.slice(0, 5).join(", ") + (skippedBinary.length > 5 ? "..." : "") + '</span>';
+      }
+      return;
+    }
+
+    var skipNote = skippedBinary.length > 0 ? ' (skipping ' + skippedBinary.length + ' unsupported binary files)' : '';
+    resultEl.innerHTML = '<span style="color:var(--gold);">Uploading ' + textFiles.length + ' files...' + skipNote + ' (0/' + textFiles.length + ')</span>';
 
     let uploaded = 0, failed = 0, errors = [];
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const docTitle = title || file.name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ");
+    for (let i = 0; i < textFiles.length; i++) {
+      const file = textFiles[i];
+      // For batch uploads, always use the filename as title (ignore shared title field)
+      const docTitle = file.name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ");
       const formData = new FormData();
       formData.append("file", file);
       formData.append("title", docTitle);
@@ -1520,10 +1546,13 @@ async function trainDocument() {
         failed++;
         errors.push(file.name + ": network error");
       }
-      resultEl.innerHTML = '<span style="color:var(--gold);">Uploading... (' + (i + 1) + '/' + files.length + ')</span>';
+      resultEl.innerHTML = '<span style="color:var(--gold);">Uploading... (' + (i + 1) + '/' + textFiles.length + ')</span>';
     }
 
-    let msg = '<span class="msg-success">' + uploaded + ' of ' + files.length + ' documents uploaded successfully!</span>';
+    let msg = '<span class="msg-success">' + uploaded + ' of ' + textFiles.length + ' documents uploaded successfully!</span>';
+    if (skippedBinary.length > 0) {
+      msg += '<br><span style="font-size:11px;color:var(--text-muted);">' + skippedBinary.length + ' binary files skipped (unsupported format)</span>';
+    }
     if (failed > 0) {
       msg += '<br><span class="msg-error">' + failed + ' failed: ' + escapeHtml(errors.slice(0, 3).join("; ")) + (errors.length > 3 ? "..." : "") + '</span>';
     }
