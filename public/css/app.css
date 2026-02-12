@@ -525,6 +525,8 @@ html, body {
   flex-direction: column;
   min-width: 0;
   position: relative;
+  background: var(--bg-primary);
+  z-index: 1;
 }
 
 .main-header {
@@ -534,6 +536,8 @@ html, body {
   align-items: center;
   gap: 12px;
   min-height: 56px;
+  flex-wrap: wrap;
+  overflow: hidden;
 }
 
 .btn-toggle-sidebar {
@@ -7947,172 +7951,114 @@ button, a, [onclick], [role="button"], .tool-pill, .category-tab,
 /* ─── Tablet portrait (≤ 768px) improvements ─────────────────────── */
 
 @media (max-width: 768px) {
-  .modal-overlay {
-    padding: 12px;
+  .modal-overlay { padding: 12px; }
+  .auth-screen { padding: 12px; }
+  .auth-form { padding: 20px; }
+  .modal { max-height: 85vh; max-height: 85dvh; }
+  .chat-messages { padding: 0 12px; }
+
+  /* Header: compact layout on tablets/phones */
+  .main-header {
+    padding: 8px 10px;
+    gap: 6px;
+    min-height: 48px;
   }
 
-  .auth-screen {
-    padding: 12px;
+  /* Hide non-essential header elements */
+  .privacy-badge { display: none !important; }
+  .offline-status-badge .offline-status-text { display: none; }
+  .offline-status-badge { padding: 3px 6px; min-width: 0; }
+
+  /* Compact model selector */
+  .model-selector {
+    font-size: 11px;
+    padding: 4px 6px;
+    max-width: 140px;
+    flex-shrink: 1;
+    min-width: 0;
   }
 
-  .auth-form {
-    padding: 20px;
-  }
+  /* Usage badge compact */
+  .usage-badge { font-size: 10px; flex-shrink: 0; }
 
-  .modal {
-    max-height: 85vh;
-    max-height: 85dvh;
-  }
-
-  .chat-messages {
-    padding: 0 12px;
-  }
-
-  /* Touch targets: minimum 44px on mobile */
-  .input-action-btn {
-    width: 40px;
-    height: 40px;
-  }
-
-  .btn-send {
-    width: 40px;
-    height: 40px;
-  }
-
-  .category-tab {
-    min-height: 36px;
-    padding: 6px 12px;
-  }
-
-  .conversation-item {
-    min-height: 44px;
-  }
-
-  .header-help-btn {
-    min-width: 36px;
-    min-height: 36px;
-  }
+  /* Touch targets */
+  .input-action-btn { width: 40px; height: 40px; }
+  .btn-send { width: 40px; height: 40px; }
+  .category-tab { min-height: 36px; padding: 6px 12px; }
+  .conversation-item { min-height: 44px; }
+  .header-help-btn { min-width: 36px; min-height: 36px; }
 }
 
 /* ─── Mobile phones (≤ 480px) improvements ────────────────────────── */
 
 @media (max-width: 480px) {
-  .modal-overlay {
-    padding: 8px;
+  .modal-overlay { padding: 8px; }
+  .modal { max-width: 100%; margin: 0; border-radius: 12px; max-height: 90vh; max-height: 90dvh; }
+  .modal-body { padding: 14px; }
+  .modal-header { padding: 14px 16px; }
+  .auth-screen { padding: 8px; }
+  .auth-form { padding: 16px; border-radius: 12px; }
+  .auth-header { margin-bottom: 20px; }
+  .auth-header .auth-logo { width: 52px; height: 52px; font-size: 26px; margin-bottom: 12px; }
+  .auth-header h2 { font-size: 20px; }
+  .chat-messages { padding: 0 8px; }
+
+  /* Header: even more compact on phones */
+  .main-header {
+    padding: 6px 8px;
+    gap: 4px;
+    min-height: 44px;
   }
 
-  .modal {
-    max-width: 100%;
-    margin: 0;
-    border-radius: 12px;
-    max-height: 90vh;
-    max-height: 90dvh;
+  /* Hide help button and lang selector on very small screens */
+  .header-help-btn { display: none !important; }
+  .lang-selector-wrap { display: none !important; }
+
+  /* Model selector: truncated on phones */
+  .model-selector {
+    font-size: 10px;
+    padding: 4px 6px;
+    max-width: 120px;
   }
 
-  .modal-body {
-    padding: 14px;
-  }
-
-  .modal-header {
-    padding: 14px 16px;
-  }
-
-  .auth-screen {
-    padding: 8px;
-  }
-
-  .auth-form {
-    padding: 16px;
-    border-radius: 12px;
-  }
-
-  .auth-header {
-    margin-bottom: 20px;
-  }
-
-  .auth-header .auth-logo {
-    width: 52px;
-    height: 52px;
-    font-size: 26px;
-    margin-bottom: 12px;
-  }
-
-  .auth-header h2 {
-    font-size: 20px;
-  }
-
-  .chat-messages {
-    padding: 0 8px;
-  }
+  /* Theme toggle compact */
+  .theme-toggle { flex-shrink: 0; }
 
   /* Input action buttons: 44px touch targets */
-  .input-action-btn {
-    width: 44px;
-    height: 44px;
-  }
-
-  .btn-send {
-    width: 44px;
-    height: 44px;
-  }
-
-  .input-actions-left,
-  .input-actions-right {
-    gap: 2px;
-  }
+  .input-action-btn { width: 44px; height: 44px; }
+  .btn-send { width: 44px; height: 44px; }
+  .input-actions-left, .input-actions-right { gap: 2px; }
 
   /* Citizen bot safe area + full-width */
-  .citizen-bot {
-    right: 4px;
-    left: 4px;
-    width: auto;
-    max-height: 70vh;
-    max-height: 70dvh;
-  }
+  .citizen-bot { right: 4px; left: 4px; width: auto; max-height: 70vh; max-height: 70dvh; }
 
-  /* Sidebar: narrower on small phones */
-  .sidebar {
-    width: 260px;
-    min-width: 260px;
-  }
+  /* Sidebar: narrower on phones */
+  .sidebar { width: 260px; min-width: 260px; }
 
-  /* Category tabs: proper touch targets */
-  .category-tab {
-    min-height: 32px;
-    padding: 5px 10px;
-    font-size: 11px;
-  }
+  /* Category tabs */
+  .category-tab { min-height: 32px; padding: 5px 10px; font-size: 11px; }
+
+  /* Persona selector: ensure it fits on phones */
+  .persona-options { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .persona-option { padding: 10px 8px; }
+  .persona-icon { font-size: 22px; }
+  .persona-text { font-size: 12px; }
 }
 
 /* ─── Small phones (≤ 360px) improvements ─────────────────────────── */
 
 @media (max-width: 360px) {
-  .modal-overlay {
-    padding: 4px;
-  }
+  .modal-overlay { padding: 4px; }
+  .modal-body { padding: 12px; }
+  .auth-form { padding: 14px; }
+  .chat-messages { padding: 0 6px; }
+  .sidebar { width: 240px; min-width: 240px; }
 
-  .modal-body {
-    padding: 12px;
-  }
+  .main-header { padding: 4px 6px; gap: 3px; }
+  .model-selector { max-width: 100px; font-size: 10px; }
 
-  .auth-form {
-    padding: 14px;
-  }
-
-  .chat-messages {
-    padding: 0 6px;
-  }
-
-  .sidebar {
-    width: 240px;
-    min-width: 240px;
-  }
-
-  /* Referral code auto-fill button: stack on tiny screens */
-  #btn-auto-referral {
-    font-size: 10px;
-    padding: 6px 8px;
-  }
+  /* Referral code auto-fill button: smaller text */
+  #btn-auto-referral { font-size: 10px; padding: 6px 8px; }
 }
 
 /* ─── Landscape phones: prevent cramped layout ────────────────────── */

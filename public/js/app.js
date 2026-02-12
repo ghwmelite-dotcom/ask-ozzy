@@ -1700,9 +1700,9 @@ function onModelChange() {
 
 // ─── Sidebar ─────────────────────────────────────────────────────────
 
-// Auto-collapse sidebar on mobile on page load
-if (window.innerWidth <= 768) {
-  document.getElementById("sidebar").classList.add("collapsed");
+// Sidebar starts collapsed in HTML. Expand it on desktop.
+if (window.innerWidth > 768) {
+  document.getElementById("sidebar").classList.remove("collapsed");
 }
 
 function toggleSidebar() {
