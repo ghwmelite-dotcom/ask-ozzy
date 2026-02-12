@@ -1617,15 +1617,7 @@ html, body {
 
 /* ─── Loading Spinner ─────────────────────────────────────────────── */
 
-.spinner {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  border: 2px solid var(--border-color);
-  border-top-color: var(--gold);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
+/* Spinner — overridden in Ghana Branding section with tri-color variant */
 
 @keyframes spin {
   to { transform: rotate(360deg); }
@@ -5459,6 +5451,99 @@ html, body {
   .citizen-bot-fab {
     bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   }
+}
+
+/* ─── Ghana Branding ─────────────────────────────────────────────────── */
+
+/* Sovereignty Badge */
+.sovereignty-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  margin-bottom: 24px;
+  background: var(--green-badge-bg);
+  border: 1px solid var(--green-badge-border);
+  border-radius: var(--radius);
+  max-width: 480px;
+}
+.sovereignty-badge strong {
+  display: block;
+  font-size: 13px;
+  color: var(--green-light);
+  font-weight: 700;
+}
+.sovereignty-badge span {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.sovereignty-icon {
+  flex-shrink: 0;
+}
+
+/* Ghana Tri-Color Spinner */
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--flag-red);
+  border-right-color: var(--flag-gold);
+  border-bottom-color: var(--flag-green);
+  animation: spin 0.8s linear infinite;
+}
+
+/* Adinkra Typing Indicator */
+.typing-adinkra {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  animation: adinkra-pulse 1.5s ease-in-out infinite;
+  color: var(--gold);
+}
+@keyframes adinkra-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* Ghana Pride Footer Badge */
+.ghana-pride-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 0 4px;
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  border-top: 1px solid var(--border-color);
+  margin-top: 8px;
+}
+.ghana-pride-flag {
+  width: 18px;
+  height: 12px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom,
+    var(--flag-red) 33.3%,
+    var(--flag-gold) 33.3% 66.6%,
+    var(--flag-green) 66.6%
+  );
+  position: relative;
+}
+.ghana-pride-flag::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-bottom: 4px solid #000;
 }
 
 /* ─── Print Styles ──────────────────────────────────────────────────── */

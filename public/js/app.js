@@ -60,6 +60,19 @@ let state = {
   spacesLoaded: false,
 };
 
+// ─── Adinkra Symbol System ───────────────────────────────────────────
+
+const ADINKRA = {
+  // Gye Nyame — Supremacy of God → AI Intelligence
+  gyeNyame: (size = 24, color = 'currentColor') => `<svg width="${size}" height="${size}" viewBox="0 0 64 64" fill="none"><path d="M32 8c-2 0-4 1.5-5 4l-3 8c-1 2.5-3 4-6 4h-4c-3 0-5 2-5 5s2 5 5 5h2c3 0 5 1.5 6 4l2 6c1 3 3 5 5 5h2c2 0 4-2 5-5l2-6c1-2.5 3-4 6-4h2c3 0 5-2 5-5s-2-5-5-5h-4c-3 0-5-1.5-6-4l-3-8c-1-2.5-3-4-5-4z" fill="${color}"/><circle cx="32" cy="29" r="6" fill="${color}" opacity="0.3"/></svg>`,
+  // Sankofa — Learn from past → Memory
+  sankofa: (size = 24, color = 'currentColor') => `<svg width="${size}" height="${size}" viewBox="0 0 64 64" fill="none"><path d="M42 12c-4 0-7 2-9 5l-4 7c-1 2-3 3-5 3-4 0-7 3-7 7s3 7 7 7c2 0 4-1 5-3l2-3v10c0 4 3 7 7 7s7-3 7-7V26c0-8-1-14-3-14z" fill="${color}"/><circle cx="42" cy="18" r="3" fill="${color}" opacity="0.5"/></svg>`,
+  // Dwennimmen — Strength → Security
+  dwennimmen: (size = 24, color = 'currentColor') => `<svg width="${size}" height="${size}" viewBox="0 0 64 64" fill="none"><path d="M16 16c0 8 4 14 10 16v16h4V32c6-2 10-8 10-16" stroke="${color}" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M16 16c-4 4-6 10-4 16 2 5 6 8 10 8" stroke="${color}" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M40 16c4 4 6 10 4 16-2 5-6 8-10 8" stroke="${color}" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="20" cy="16" r="3" fill="${color}"/><circle cx="36" cy="16" r="3" fill="${color}"/></svg>`,
+  // Aya — Endurance → Offline mode
+  aya: (size = 24, color = 'currentColor') => `<svg width="${size}" height="${size}" viewBox="0 0 64 64" fill="none"><line x1="32" y1="8" x2="32" y2="56" stroke="${color}" stroke-width="2.5"/><path d="M32 16l-10 6 10-2m0 0l10 6-10-2m0 6l-12 7 12-2m0 0l12 7-12-2m0 6l-10 6 10-2m0 0l10 6-10-2" stroke="${color}" stroke-width="2" stroke-linecap="round"/><circle cx="32" cy="10" r="2.5" fill="${color}"/></svg>`,
+};
+
 // ─── User Guide Data ────────────────────────────────────────────────
 
 const GUIDE_SECTION_EMOJIS = {
@@ -572,6 +585,7 @@ function updateSidebarFooter() {
         <button class="sidebar-link-btn" onclick="openGuide()">User Guide</button>
       </div>`;
   }
+  footer.innerHTML += `<div class="ghana-pride-badge"><div class="ghana-pride-flag"></div><span>Made with pride in Ghana</span></div>`;
 }
 
 // ─── Conversations ───────────────────────────────────────────────────
@@ -1034,7 +1048,7 @@ function addTypingIndicator() {
     <div class="message-avatar">G</div>
     <div class="message-body">
       <div class="message-sender">AskOzzy</div>
-      <div class="typing-indicator"><span></span><span></span><span></span></div>
+      <div class="typing-adinkra">${ADINKRA.gyeNyame(28, 'var(--gold)')}</div>
     </div>`;
   container.appendChild(div);
   scrollToBottom();
