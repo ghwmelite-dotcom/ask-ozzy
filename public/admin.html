@@ -70,6 +70,8 @@
       <button class="admin-tab" data-tab="document-training" onclick="switchTab('document-training')">Document Training</button>
       <button class="admin-tab" data-tab="agents" onclick="switchTab('agents')">AI Agents</button>
       <button class="admin-tab" data-tab="productivity" onclick="switchTab('productivity')">Productivity</button>
+      <button class="admin-tab" data-tab="ussd" onclick="switchTab('ussd')">USSD</button>
+      <button class="admin-tab" data-tab="messaging" onclick="switchTab('messaging')">Messaging</button>
     </nav>
 
     <!-- Tab Panels -->
@@ -377,9 +379,56 @@
 
       <!-- Document Training (Enhanced) -->
       <div class="admin-tab-panel" id="panel-document-training">
+
+        <!-- Stats Dashboard -->
+        <div id="dt-stats-dashboard" style="margin-bottom:24px;">
+          <div class="admin-loader"><div class="spinner"></div></div>
+        </div>
+
+        <!-- GoG Document Library -->
+        <div class="admin-card" style="margin-bottom:24px;">
+          <h3>GoG Document Library</h3>
+          <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;">Recommended Government of Ghana documents to upload for comprehensive AI training. This checklist helps ensure Ozzy has access to all key regulatory documents.</p>
+          <div id="gog-library-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+        </div>
+
+        <!-- Bulk Upload Section -->
+        <div class="admin-card" style="margin-bottom:24px;">
+          <h3>Bulk Document Upload</h3>
+          <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;">Drag and drop or select multiple files at once. Categories are auto-detected from filenames but can be overridden. Supports: .txt, .csv, .md, .docx, .pptx, .doc, .json, .html</p>
+
+          <div id="bulk-drop-zone" style="border:2px dashed var(--border-color);border-radius:var(--radius-md);padding:40px 20px;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:16px;background:var(--bg-tertiary);"
+               ondragover="event.preventDefault();this.style.borderColor='var(--gold)';this.style.background='rgba(218,165,32,0.05)';"
+               ondragleave="this.style.borderColor='var(--border-color)';this.style.background='var(--bg-tertiary)';"
+               ondrop="handleBulkDrop(event)"
+               onclick="document.getElementById('bulk-file-input').click()">
+            <div style="font-size:36px;margin-bottom:8px;opacity:0.5;">+</div>
+            <div style="font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:4px;">Drop files here or click to browse</div>
+            <div style="font-size:11px;color:var(--text-muted);">Select multiple files — up to 50 files per batch</div>
+          </div>
+          <input type="file" id="bulk-file-input" multiple style="display:none;" onchange="handleBulkFileSelect(this.files)" />
+
+          <!-- File list preview with category overrides -->
+          <div id="bulk-file-list" style="display:none;margin-bottom:16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <span style="font-size:13px;font-weight:600;color:var(--text-primary);">Files to Upload</span>
+              <button class="btn-action" onclick="clearBulkFiles()" style="font-size:11px;padding:4px 10px;">Clear All</button>
+            </div>
+            <div id="bulk-file-table-wrapper" style="max-height:300px;overflow-y:auto;">
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;align-items:center;">
+            <button class="btn-action primary" id="btn-bulk-upload" onclick="executeBulkUpload()" style="display:none;">Upload All Files</button>
+            <span id="bulk-upload-result" style="font-size:12px;"></span>
+          </div>
+          <div id="bulk-upload-detail" style="margin-top:12px;"></div>
+        </div>
+
+        <!-- Single Document Upload -->
         <div class="admin-card" style="margin-bottom:24px;">
           <h3>Train AI on Government Documents</h3>
-          <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;">Upload official documents to train the AI knowledge base. Ozzy will use these documents to provide more accurate, Ghana-specific answers.</p>
+          <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;">Upload individual documents or paste content directly.</p>
 
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
             <div>
@@ -398,9 +447,15 @@
               <select id="train-doc-category" class="inline-select" style="padding:8px 12px;">
                 <option value="general">General</option>
                 <option value="procurement">Procurement</option>
+                <option value="procurement_law">Procurement Law</option>
                 <option value="finance">Finance & Budget</option>
+                <option value="financial_admin">Financial Administration</option>
                 <option value="hr">Human Resources</option>
                 <option value="legal">Legal & Regulations</option>
+                <option value="civil_service">Civil Service</option>
+                <option value="budget_policy">Budget Policy</option>
+                <option value="gog_forms">GoG Forms</option>
+                <option value="general_regulation">General Regulation</option>
                 <option value="ict">ICT & Digital</option>
                 <option value="health">Health</option>
                 <option value="education">Education</option>
@@ -488,9 +543,34 @@
           <div id="scrape-results-detail" style="margin-top:12px;"></div>
         </div>
 
+        <!-- Enhanced Training Status with search/filter -->
         <div class="admin-card">
-          <h3>Training Status</h3>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <h3>Trained Documents</h3>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <input type="text" id="dt-search" placeholder="Search by title..." class="admin-search" style="max-width:200px;padding:6px 10px;font-size:12px;" oninput="debouncedDtSearch()" />
+              <select id="dt-category-filter" class="inline-select" style="padding:6px 10px;font-size:12px;" onchange="loadEnhancedTrainingStatus()">
+                <option value="">All Categories</option>
+                <option value="general">General</option>
+                <option value="procurement">Procurement</option>
+                <option value="procurement_law">Procurement Law</option>
+                <option value="finance">Finance & Budget</option>
+                <option value="financial_admin">Financial Admin</option>
+                <option value="hr">Human Resources</option>
+                <option value="legal">Legal & Regulations</option>
+                <option value="civil_service">Civil Service</option>
+                <option value="budget_policy">Budget Policy</option>
+                <option value="gog_forms">GoG Forms</option>
+                <option value="general_regulation">General Regulation</option>
+                <option value="ict">ICT & Digital</option>
+                <option value="health">Health</option>
+                <option value="education">Education</option>
+                <option value="governance">Governance</option>
+              </select>
+            </div>
+          </div>
           <div id="training-status-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+          <div id="dt-pagination" class="pagination"></div>
         </div>
       </div>
 
@@ -566,6 +646,133 @@
       <!-- Productivity -->
       <div class="admin-tab-panel" id="panel-productivity">
         <div id="productivity-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+      </div>
+
+      <!-- USSD -->
+      <div class="admin-tab-panel" id="panel-ussd">
+        <div id="ussd-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+      </div>
+
+      <!-- Messaging (WhatsApp / SMS) -->
+      <div class="admin-tab-panel" id="panel-messaging">
+
+        <!-- Config Section -->
+        <div class="admin-card" style="margin-bottom:24px;">
+          <h3>WhatsApp / SMS Configuration</h3>
+          <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;">Configure Africa's Talking integration for WhatsApp and SMS messaging. Enable the channels below and paste your API credentials.</p>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+            <div>
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-primary);cursor:pointer;margin-bottom:12px;">
+                <input type="checkbox" id="msg-whatsapp-enabled" style="accent-color:var(--gold);width:16px;height:16px;" />
+                Enable WhatsApp
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-primary);cursor:pointer;">
+                <input type="checkbox" id="msg-sms-enabled" style="accent-color:var(--gold);width:16px;height:16px;" />
+                Enable SMS
+              </label>
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Sender ID</label>
+              <input type="text" id="msg-sender-id" placeholder="AskOzzy" class="admin-search" style="max-width:100%;" />
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">API Key (Africa's Talking)</label>
+              <input type="password" id="msg-api-key" placeholder="Enter API key..." class="admin-search" style="max-width:100%;" />
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">API Username</label>
+              <input type="text" id="msg-api-username" placeholder="sandbox or your username" class="admin-search" style="max-width:100%;" />
+            </div>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Webhook Secret</label>
+            <input type="text" id="msg-webhook-secret" placeholder="Shared secret for webhook validation (optional)" class="admin-search" style="max-width:100%;" />
+            <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">If set, incoming webhooks must include this value in the X-Webhook-Secret or X-AT-Signature header.</div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);padding:12px 16px;">
+            <div>
+              <label style="display:block;font-size:11px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.3px;">WhatsApp Webhook URL</label>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <input type="text" id="msg-wa-webhook-url" readonly class="admin-search" style="max-width:100%;font-size:11px;font-family:monospace;background:var(--bg-primary);" />
+                <button class="btn-action" onclick="copyToClipboard(document.getElementById('msg-wa-webhook-url').value)" style="white-space:nowrap;padding:6px 10px;font-size:11px;">Copy</button>
+              </div>
+            </div>
+            <div>
+              <label style="display:block;font-size:11px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.3px;">SMS Webhook URL</label>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <input type="text" id="msg-sms-webhook-url" readonly class="admin-search" style="max-width:100%;font-size:11px;font-family:monospace;background:var(--bg-primary);" />
+                <button class="btn-action" onclick="copyToClipboard(document.getElementById('msg-sms-webhook-url').value)" style="white-space:nowrap;padding:6px 10px;font-size:11px;">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;align-items:center;">
+            <button class="btn-action primary" onclick="saveMessagingConfig()">Save Configuration</button>
+            <span id="msg-config-result" style="font-size:12px;"></span>
+          </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div id="messaging-stats" style="margin-bottom:24px;">
+          <div class="stats-grid" id="messaging-stats-grid">
+            <div class="stat-card"><div class="stat-value" id="msg-stat-sessions">--</div><div class="stat-label">Total Sessions</div></div>
+            <div class="stat-card green"><div class="stat-value" id="msg-stat-today">--</div><div class="stat-label">Messages Today</div></div>
+            <div class="stat-card"><div class="stat-value" id="msg-stat-week">--</div><div class="stat-label">This Week</div></div>
+            <div class="stat-card green"><div class="stat-value" id="msg-stat-active">--</div><div class="stat-label">Active (24h)</div></div>
+          </div>
+        </div>
+
+        <!-- Webhook Test -->
+        <div class="admin-card" style="margin-bottom:24px;">
+          <h3>Webhook Test</h3>
+          <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">Simulate an inbound message to verify the pipeline works end-to-end. Uses a test phone number (+233000000000).</p>
+          <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;">
+            <div style="flex:1;min-width:200px;">
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Test Message</label>
+              <input type="text" id="msg-test-input" placeholder="What is the procurement threshold for goods?" class="admin-search" style="max-width:100%;" />
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Channel</label>
+              <select id="msg-test-channel" class="inline-select" style="padding:8px 12px;">
+                <option value="whatsapp">WhatsApp</option>
+                <option value="sms">SMS</option>
+              </select>
+            </div>
+            <button class="btn-action primary" id="btn-msg-test" onclick="testMessagingWebhook()">Send Test</button>
+          </div>
+          <div id="msg-test-result" style="margin-top:12px;display:none;">
+            <div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Response:</div>
+            <div id="msg-test-response" style="background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);padding:12px 16px;font-size:13px;white-space:pre-wrap;max-height:300px;overflow-y:auto;"></div>
+          </div>
+        </div>
+
+        <!-- Sessions List -->
+        <div class="admin-card">
+          <h3>Recent Sessions</h3>
+          <div id="messaging-sessions-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+        </div>
+
+        <!-- Session Message Viewer Modal -->
+        <div class="modal-overlay" id="wa-message-modal" style="display:none;">
+          <div class="modal" style="max-width:600px;">
+            <div class="modal-header">
+              <div>
+                <h3 id="wa-modal-title">Session Messages</h3>
+                <p id="wa-modal-subtitle" style="font-size:12px;color:var(--text-muted);margin:4px 0 0;"></p>
+              </div>
+              <button class="modal-close" onclick="document.getElementById('wa-message-modal').style.display='none'">&#x2715;</button>
+            </div>
+            <div class="modal-body" id="wa-modal-body" style="padding:16px 24px;max-height:500px;overflow-y:auto;">
+              <div class="admin-loader"><div class="spinner"></div></div>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>

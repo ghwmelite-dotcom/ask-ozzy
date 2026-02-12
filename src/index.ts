@@ -735,10 +735,10 @@ async function generateEmbeddings(ai: Ai, texts: string[]): Promise<number[][]> 
 }
 
 async function searchKnowledge(env: Env, query: string, topK = 5): Promise<{
-  ragResults: Array<{ content: string; score: number; source: string }>;
+  ragResults: Array<{ content: string; score: number; source: string; title: string; category: string }>;
   faqResults: Array<{ question: string; answer: string; category: string }>;
 }> {
-  let ragResults: Array<{ content: string; score: number; source: string }> = [];
+  let ragResults: Array<{ content: string; score: number; source: string; title: string; category: string }> = [];
   let faqResults: Array<{ question: string; answer: string; category: string }> = [];
 
   // RAG: Embed query and search Vectorize
@@ -755,6 +755,8 @@ async function searchKnowledge(env: Env, query: string, topK = 5): Promise<{
             content: metadata.content,
             score: match.score,
             source: metadata.source || metadata.title || 'Knowledge Base',
+            title: metadata.title || metadata.source || 'Knowledge Base',
+            category: metadata.category || 'general',
           });
         }
       }
@@ -785,16 +787,16 @@ async function searchKnowledge(env: Env, query: string, topK = 5): Promise<{
 
 function buildAugmentedPrompt(
   base: string,
-  ragResults: Array<{ content: string; score: number; source: string }>,
+  ragResults: Array<{ content: string; score: number; source: string; title: string; category: string }>,
   faqResults: Array<{ question: string; answer: string; category: string }>
 ): string {
   let prompt = base;
 
   if (ragResults.length > 0) {
-    prompt += '\n\n--- RELEVANT KNOWLEDGE BASE CONTEXT ---\n';
-    prompt += 'The following excerpts are from official GoG documents and may be relevant to the user\'s query. Use them to provide accurate, well-sourced answers:\n\n';
+    prompt += '\n\n--- RELEVANT KNOWLEDGE BASE CONTEXT (cite sources when using this information) ---\n';
+    prompt += 'The following excerpts are from official GoG documents and may be relevant to the user\'s query. Use them to provide accurate, well-sourced answers. When citing information from the knowledge base, reference the source document title and category using the format: [Source: Document Title, Category].\n\n';
     for (const r of ragResults) {
-      prompt += `[Source: ${r.source}]\n${r.content}\n\n`;
+      prompt += `[Source: ${r.title} | Category: ${r.category}]\n${r.content}\n\n`;
     }
   }
 
@@ -807,7 +809,7 @@ function buildAugmentedPrompt(
   }
 
   if (ragResults.length > 0 || faqResults.length > 0) {
-    prompt += '---\nWhen using the above context, cite the source where possible. If the context does not fully answer the question, supplement with your general knowledge of GoG procedures.';
+    prompt += '---\nIMPORTANT: When using the above context, ALWAYS cite the source document title and category in your response using the format [Source: Document Title, Category]. If the context does not fully answer the question, supplement with your general knowledge of GoG procedures but clearly distinguish between cited knowledge base content and general knowledge.';
   }
 
   return prompt;
@@ -1322,7 +1324,7 @@ app.post("/api/research", authMiddleware, async (c) => {
           try {
             const { ragResults, faqResults } = await searchKnowledge(c.env, sq, 3);
             for (const r of ragResults) {
-              kbContext += `[KB: ${r.source}] ${r.content}\n\n`;
+              kbContext += `[Source: ${r.title} | Category: ${r.category}] ${r.content}\n\n`;
             }
             for (const f of faqResults) {
               kbContext += `[FAQ] Q: ${f.question}\nA: ${f.answer}\n\n`;
@@ -4064,7 +4066,7 @@ app.get("/api/admin/kb/stats", adminMiddleware, async (c) => {
 });
 
 // Helper: Process document embeddings (used by text and file upload)
-async function processDocumentEmbeddings(env: Env, docId: string, title: string, source: string, content: string) {
+async function processDocumentEmbeddings(env: Env, docId: string, title: string, source: string, content: string, category: string = 'general') {
   try {
     const chunks = chunkText(content, 500, 50);
 
@@ -4108,6 +4110,7 @@ async function processDocumentEmbeddings(env: Env, docId: string, title: string,
             content: batch[j].slice(0, 1000),
             source: source || title,
             title: title,
+            category: category,
             docId: docId,
             chunkIndex: String(i + j),
           },
@@ -4322,7 +4325,7 @@ app.post("/api/admin/documents/upload-file", adminMiddleware, async (c) => {
     ).bind(docId, title, source, category, content, adminId).run();
 
     // Process embeddings in background
-    c.executionCtx.waitUntil(processDocumentEmbeddings(c.env, docId, title, source, content));
+    c.executionCtx.waitUntil(processDocumentEmbeddings(c.env, docId, title, source, content, category));
 
     await logAudit(c.env.DB, adminId, "upload_document_file", "document", docId, `${title} (${file.name}, ${content.length} chars)`);
 
@@ -4486,7 +4489,7 @@ app.post("/api/admin/documents/scrape-url", adminMiddleware, async (c) => {
         ).bind(docId, pageTitle, docSource, category || "general", content, adminId).run();
 
         // Process embeddings in background
-        c.executionCtx.waitUntil(processDocumentEmbeddings(c.env, docId, pageTitle, docSource, content));
+        c.executionCtx.waitUntil(processDocumentEmbeddings(c.env, docId, pageTitle, docSource, content, category || "general"));
 
         await logAudit(c.env.DB, adminId, "scrape_url", "document", docId, `${pageTitle} (${url}, ${content.length} chars)`);
 
@@ -5482,6 +5485,1464 @@ app.get("/api/admin/departments/stats", deptAdminMiddleware, async (c) => {
   } catch (err) {
     console.error("Department stats error:", err);
     return c.json({ error: "Failed to load department stats" }, 500);
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════════════
+//  KNOWLEDGE BASE — Bulk Upload & Enhanced Stats
+// ═══════════════════════════════════════════════════════════════════════
+
+// GoG category auto-detection from filename/content
+const GOG_CATEGORIES: Record<string, string[]> = {
+  procurement_law: ['procurement', 'tender', 'bidding', 'act 663', 'ppa', 'public procurement'],
+  financial_admin: ['financial administration', 'act 654', 'fiscal', 'revenue', 'expenditure', 'treasury', 'cagd', 'controller and accountant'],
+  civil_service: ['civil service', 'public service', 'civil servant', 'ohcs', 'head of civil service'],
+  budget_policy: ['budget', 'economic policy', 'medium term', 'mtef', 'budget statement', 'appropriation'],
+  gog_forms: ['form', 'template', 'application form', 'requisition', 'voucher'],
+  general_regulation: ['regulation', 'directive', 'circular', 'policy', 'guideline', 'act', 'law'],
+  procurement: ['procurement', 'tender', 'contract', 'bid'],
+  finance: ['finance', 'budget', 'fiscal', 'revenue', 'tax', 'payroll'],
+  hr: ['human resource', 'staff', 'leave', 'recruitment', 'pension', 'ssnit'],
+  legal: ['legal', 'law', 'act', 'regulation', 'constitution', 'court'],
+  ict: ['ict', 'digital', 'technology', 'cyber', 'e-government', 'nita'],
+  health: ['health', 'medical', 'nhis', 'hospital', 'disease'],
+  education: ['education', 'school', 'university', 'ges', 'waec', 'curriculum'],
+  governance: ['governance', 'decentralization', 'assembly', 'district', 'parliament'],
+};
+
+function detectCategory(filename: string, content: string): string {
+  const searchText = (filename + ' ' + content.slice(0, 2000)).toLowerCase();
+
+  let bestCategory = 'general';
+  let bestScore = 0;
+
+  for (const [category, keywords] of Object.entries(GOG_CATEGORIES)) {
+    let score = 0;
+    for (const kw of keywords) {
+      if (searchText.includes(kw)) score++;
+    }
+    if (score > bestScore) {
+      bestScore = score;
+      bestCategory = category;
+    }
+  }
+
+  return bestCategory;
+}
+
+// Bulk Upload Endpoint — multipart/form-data with multiple files
+app.post("/api/admin/knowledge/bulk", adminMiddleware, async (c) => {
+  const adminId = c.get("userId");
+
+  try {
+    const formData = await c.req.formData();
+    const files: File[] = [];
+    const categoryOverrides: Record<string, string> = {};
+
+    // Collect all files and category overrides from formData
+    for (const [key, value] of formData.entries()) {
+      if (key === 'files' || key.startsWith('file')) {
+        if (typeof value !== 'string' && (value as any).name) {
+          files.push(value as File);
+        }
+      }
+      // Category overrides: category_0, category_1, etc.
+      if (key.startsWith('category_')) {
+        const idx = key.replace('category_', '');
+        categoryOverrides[idx] = value as string;
+      }
+    }
+
+    // Also accept a single "category" for all files
+    const globalCategory = formData.get("category") as string || "";
+
+    if (files.length === 0) {
+      return c.json({ error: "No files provided" }, 400);
+    }
+
+    if (files.length > 50) {
+      return c.json({ error: "Maximum 50 files per bulk upload" }, 400);
+    }
+
+    // Supported text-based extensions
+    const SUPPORTED_EXT = ['.txt', '.csv', '.md', '.json', '.html', '.htm', '.docx', '.pptx', '.doc'];
+    const BINARY_EXT = ['.pdf', '.zip', '.rar', '.7z', '.exe', '.bin', '.dll', '.iso', '.mp3', '.mp4', '.avi', '.mov', '.png', '.jpg', '.jpeg', '.gif', '.bmp', '.woff', '.woff2', '.ttf'];
+
+    const results: Array<{ filename: string; status: string; docId?: string; chunks?: number; category?: string; error?: string }> = [];
+    let totalUploaded = 0;
+    let totalChunks = 0;
+
+    for (let fileIdx = 0; fileIdx < files.length; fileIdx++) {
+      const file = files[fileIdx];
+      const fileName = file.name.toLowerCase();
+      const ext = '.' + fileName.split('.').pop();
+
+      // Check if binary/unsupported
+      if (BINARY_EXT.includes(ext)) {
+        if (ext === '.pdf') {
+          results.push({ filename: file.name, status: 'error', error: 'PDF files not yet supported in bulk upload. Convert to .txt or .docx first.' });
+        } else {
+          results.push({ filename: file.name, status: 'error', error: `Unsupported binary format (${ext})` });
+        }
+        continue;
+      }
+
+      if (!SUPPORTED_EXT.includes(ext) && ext !== '.txt') {
+        // Try to read as text anyway
+      }
+
+      try {
+        let content = '';
+
+        if (fileName.endsWith('.docx')) {
+          try {
+            content = await extractDocxText(file);
+          } catch (err) {
+            results.push({ filename: file.name, status: 'error', error: 'Failed to extract DOCX text: ' + (err as Error).message });
+            continue;
+          }
+        } else if (fileName.endsWith('.pptx')) {
+          try {
+            content = await extractPptxText(file);
+          } catch (err) {
+            results.push({ filename: file.name, status: 'error', error: 'Failed to extract PPTX text: ' + (err as Error).message });
+            continue;
+          }
+        } else if (fileName.endsWith('.doc')) {
+          try {
+            content = await extractDocText(file);
+            if (content.length < 50) {
+              results.push({ filename: file.name, status: 'error', error: 'Could not extract enough text from .doc file. Convert to .docx.' });
+              continue;
+            }
+          } catch (err) {
+            results.push({ filename: file.name, status: 'error', error: 'Failed to extract DOC text. Convert to .docx.' });
+            continue;
+          }
+        } else if (fileName.endsWith('.json')) {
+          const jsonText = await file.text();
+          try {
+            const parsed = JSON.parse(jsonText);
+            content = typeof parsed === 'string' ? parsed : JSON.stringify(parsed, null, 2);
+          } catch {
+            content = jsonText;
+          }
+        } else if (fileName.endsWith('.html') || fileName.endsWith('.htm')) {
+          const htmlText = await file.text();
+          content = htmlText.replace(/<script[\s\S]*?<\/script>/gi, '')
+            .replace(/<style[\s\S]*?<\/style>/gi, '')
+            .replace(/<[^>]+>/g, ' ')
+            .replace(/\s{2,}/g, ' ')
+            .trim();
+        } else {
+          // .txt, .csv, .md, and others — read as text
+          content = await file.text();
+        }
+
+        if (content.length < 50) {
+          results.push({ filename: file.name, status: 'error', error: 'Content too short (< 50 characters)' });
+          continue;
+        }
+        if (content.length > 200000) {
+          content = content.slice(0, 200000);
+        }
+
+        // Determine category: per-file override > global > auto-detect
+        const category = categoryOverrides[String(fileIdx)] || globalCategory || detectCategory(file.name, content);
+
+        // Generate title from filename
+        const title = file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+
+        // Create document record
+        const docId = generateId();
+        await c.env.DB.prepare(
+          "INSERT INTO documents (id, title, source, category, content, uploaded_by, status) VALUES (?, ?, ?, ?, ?, ?, 'processing')"
+        ).bind(docId, title, 'Bulk Upload', category, content, adminId).run();
+
+        // Process embeddings in background
+        c.executionCtx.waitUntil(processDocumentEmbeddings(c.env, docId, title, 'Bulk Upload', content, category));
+
+        const estimatedChunks = Math.ceil(content.length / 450); // Rough estimate with overlap
+        totalUploaded++;
+        totalChunks += estimatedChunks;
+
+        results.push({
+          filename: file.name,
+          status: 'success',
+          docId,
+          chunks: estimatedChunks,
+          category,
+        });
+
+        await logAudit(c.env.DB, adminId, "bulk_upload_document", "document", docId, `${title} (${file.name}, ${content.length} chars)`);
+
+      } catch (err) {
+        results.push({ filename: file.name, status: 'error', error: (err as Error).message });
+      }
+    }
+
+    return c.json({
+      uploaded: totalUploaded,
+      chunks_created: totalChunks,
+      total_files: files.length,
+      errors: results.filter(r => r.status === 'error'),
+      results,
+    });
+
+  } catch (err) {
+    return c.json({ error: "Bulk upload failed: " + (err as Error).message }, 500);
+  }
+});
+
+// Enhanced Knowledge Base Stats
+app.get("/api/admin/knowledge/stats", adminMiddleware, async (c) => {
+  try {
+    const docCount = await c.env.DB.prepare(
+      "SELECT COUNT(*) as count FROM documents"
+    ).first<{ count: number }>();
+
+    const chunkCount = await c.env.DB.prepare(
+      "SELECT COUNT(*) as count FROM document_chunks"
+    ).first<{ count: number }>();
+
+    const faqCount = await c.env.DB.prepare(
+      "SELECT COUNT(*) as count FROM knowledge_base"
+    ).first<{ count: number }>();
+
+    const { results: byCategory } = await c.env.DB.prepare(
+      "SELECT category, COUNT(*) as doc_count, SUM(chunk_count) as chunk_count FROM documents GROUP BY category ORDER BY doc_count DESC"
+    ).all<{ category: string; doc_count: number; chunk_count: number }>();
+
+    const readyDocs = await c.env.DB.prepare(
+      "SELECT COUNT(*) as count FROM documents WHERE status = 'ready'"
+    ).first<{ count: number }>();
+
+    const processingDocs = await c.env.DB.prepare(
+      "SELECT COUNT(*) as count FROM documents WHERE status = 'processing'"
+    ).first<{ count: number }>();
+
+    const errorDocs = await c.env.DB.prepare(
+      "SELECT COUNT(*) as count FROM documents WHERE status = 'error'"
+    ).first<{ count: number }>();
+
+    // Estimate storage: average ~500 chars per chunk, 4 bytes per float * 384 dims for embeddings
+    const totalChunks = chunkCount?.count || 0;
+    const textStorageBytes = totalChunks * 500;
+    const vectorStorageBytes = totalChunks * 384 * 4;
+    const storageEstimate = {
+      text_mb: +(textStorageBytes / (1024 * 1024)).toFixed(2),
+      vector_mb: +(vectorStorageBytes / (1024 * 1024)).toFixed(2),
+      total_mb: +((textStorageBytes + vectorStorageBytes) / (1024 * 1024)).toFixed(2),
+    };
+
+    // GoG document library status — check which recommended docs have been uploaded
+    const gogDocuments = [
+      { name: "Public Procurement Act (Act 663)", category: "procurement_law", keywords: ["procurement act", "act 663"] },
+      { name: "Financial Administration Act (Act 654)", category: "financial_admin", keywords: ["financial administration", "act 654"] },
+      { name: "Civil Service Act", category: "civil_service", keywords: ["civil service act"] },
+      { name: "Budget Statement & Economic Policy", category: "budget_policy", keywords: ["budget statement", "economic policy"] },
+      { name: "Standard GoG Forms & Templates", category: "gog_forms", keywords: ["gog forms", "standard forms", "government forms"] },
+    ];
+
+    const gogStatus: Array<{ name: string; category: string; uploaded: boolean; doc_count: number }> = [];
+    for (const gogDoc of gogDocuments) {
+      const likeClauses = gogDoc.keywords.map(() => 'LOWER(title) LIKE ?').join(' OR ');
+      const params = gogDoc.keywords.map(kw => `%${kw}%`);
+      const found = await c.env.DB.prepare(
+        `SELECT COUNT(*) as count FROM documents WHERE (${likeClauses}) OR category = ?`
+      ).bind(...params, gogDoc.category).first<{ count: number }>();
+      gogStatus.push({
+        name: gogDoc.name,
+        category: gogDoc.category,
+        uploaded: (found?.count || 0) > 0,
+        doc_count: found?.count || 0,
+      });
+    }
+
+    return c.json({
+      total_documents: docCount?.count || 0,
+      total_chunks: totalChunks,
+      total_faqs: faqCount?.count || 0,
+      ready_documents: readyDocs?.count || 0,
+      processing_documents: processingDocs?.count || 0,
+      error_documents: errorDocs?.count || 0,
+      by_category: byCategory || [],
+      categories_covered: (byCategory || []).length,
+      storage_estimate: storageEstimate,
+      gog_library: gogStatus,
+    });
+  } catch (err) {
+    return c.json({ error: "Failed to load knowledge stats: " + (err as Error).message }, 500);
+  }
+});
+
+// Enhanced document listing with search and category filter
+app.get("/api/admin/knowledge/documents", adminMiddleware, async (c) => {
+  const page = parseInt(c.req.query("page") || "1");
+  const limit = Math.min(parseInt(c.req.query("limit") || "20"), 100);
+  const offset = (page - 1) * limit;
+  const category = c.req.query("category") || "";
+  const search = c.req.query("search") || "";
+
+  let countQuery = "SELECT COUNT(*) as count FROM documents";
+  let dataQuery = `SELECT d.id, d.title, d.source, d.category, d.chunk_count, d.status, d.created_at, d.updated_at,
+          u.full_name as uploaded_by_name
+   FROM documents d
+   JOIN users u ON u.id = d.uploaded_by`;
+
+  const conditions: string[] = [];
+  const params: string[] = [];
+
+  if (category) {
+    conditions.push("d.category = ?");
+    params.push(category);
+  }
+  if (search) {
+    conditions.push("(LOWER(d.title) LIKE ? OR LOWER(d.source) LIKE ?)");
+    params.push(`%${search.toLowerCase()}%`, `%${search.toLowerCase()}%`);
+  }
+
+  if (conditions.length > 0) {
+    const where = " WHERE " + conditions.join(" AND ");
+    countQuery += where.replace(/d\./g, '');
+    dataQuery += where;
+  }
+
+  dataQuery += " ORDER BY d.created_at DESC LIMIT ? OFFSET ?";
+
+  const total = await c.env.DB.prepare(countQuery).bind(...params).first<{ count: number }>();
+  const { results } = await c.env.DB.prepare(dataQuery).bind(...params, limit, offset).all();
+
+  return c.json({ documents: results || [], total: total?.count || 0, page, limit });
+});
+
+// ═══════════════════════════════════════════════════════════════════
+//  USSD Fallback — Africa's Talking Callback
+// ═══════════════════════════════════════════════════════════════════
+
+// Lazy table creation flag (per isolate)
+let ussdTableCreated = false;
+
+async function ensureUSSDTable(db: D1Database): Promise<void> {
+  if (ussdTableCreated) return;
+  await db.prepare(`
+    CREATE TABLE IF NOT EXISTS ussd_sessions (
+      id TEXT PRIMARY KEY,
+      session_id TEXT NOT NULL,
+      phone_number TEXT NOT NULL,
+      service_code TEXT,
+      current_menu TEXT DEFAULT 'main',
+      input_history TEXT DEFAULT '',
+      ai_response TEXT,
+      message_count INTEGER DEFAULT 0,
+      created_at TEXT DEFAULT (datetime('now')),
+      updated_at TEXT DEFAULT (datetime('now'))
+    )
+  `).run();
+  await db.batch([
+    db.prepare(`CREATE INDEX IF NOT EXISTS idx_ussd_session ON ussd_sessions(session_id)`),
+    db.prepare(`CREATE INDEX IF NOT EXISTS idx_ussd_phone ON ussd_sessions(phone_number)`),
+  ]);
+  ussdTableCreated = true;
+}
+
+// ─── USSD Helpers ────────────────────────────────────────────────
+
+function truncateForUSSD(text: string, maxLen: number = 182): string {
+  if (!text) return "";
+  // Strip any markdown artifacts
+  const clean = text.replace(/[*_#`]/g, "").replace(/\n{3,}/g, "\n\n").trim();
+
+  if (clean.length <= maxLen) return clean;
+
+  // Try to cut at a sentence boundary
+  const truncated = clean.substring(0, maxLen);
+  const lastPeriod = truncated.lastIndexOf(".");
+  const lastQuestion = truncated.lastIndexOf("?");
+  const lastExclamation = truncated.lastIndexOf("!");
+  const sentenceEnd = Math.max(lastPeriod, lastQuestion, lastExclamation);
+
+  if (sentenceEnd > maxLen * 0.4) {
+    return clean.substring(0, sentenceEnd + 1);
+  }
+
+  // Fall back to word boundary
+  const lastSpace = truncated.lastIndexOf(" ");
+  if (lastSpace > maxLen * 0.4) {
+    return clean.substring(0, lastSpace) + "...";
+  }
+
+  return truncated.substring(0, maxLen - 3) + "...";
+}
+
+async function getUSSDResponse(ai: Ai, prompt: string): Promise<string> {
+  try {
+    const result = await ai.run(
+      "@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels,
+      {
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are AskOzzy USSD assistant for Ghana government workers. Give extremely brief answers (under 150 characters). No markdown, no bullet points, no asterisks, plain text only. Be direct and concise.",
+          },
+          { role: "user", content: prompt },
+        ],
+        max_tokens: 100,
+      }
+    );
+    return (result as any)?.response || "Sorry, I could not process that request.";
+  } catch (err) {
+    console.error("USSD AI error:", err);
+    return "Service temporarily unavailable. Please try again.";
+  }
+}
+
+async function getUSSDMemoResponse(ai: Ai, topic: string): Promise<string> {
+  try {
+    const result = await ai.run(
+      "@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels,
+      {
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are AskOzzy USSD assistant. Generate a very brief memo outline for Ghana government workers. Keep it under 150 characters. No markdown, plain text only. Format: TO/FROM/RE/Body in one line each.",
+          },
+          { role: "user", content: `Draft a brief memo about: ${topic}` },
+        ],
+        max_tokens: 120,
+      }
+    );
+    return (result as any)?.response || "Could not generate memo. Please try again.";
+  } catch (err) {
+    console.error("USSD memo AI error:", err);
+    return "Service temporarily unavailable. Please try again.";
+  }
+}
+
+// ─── USSD Template Responses ─────────────────────────────────────
+
+const USSD_TEMPLATES: Record<string, string> = {
+  "1": "INTERNAL MEMO\nTO: [Recipient]\nFROM: [Your Name]\nDATE: [Date]\nRE: [Subject]\n\n[Body]",
+  "2": "OFFICIAL LETTER\n[Your Office]\n[Date]\n\nDear [Title/Name],\n\nRE: [Subject]\n\n[Body]\n\nYours faithfully,\n[Name/Title]",
+  "3": "MEETING MINUTES\nDate: [Date]\nVenue: [Place]\nPresent: [Names]\n\nAgenda:\n1. [Item]\n\nResolutions:\n- [Decision]\n\nAdjourned: [Time]",
+  "4": "BUDGET REQUEST\nTO: Finance Dept\nFROM: [Your Dept]\nDATE: [Date]\n\nItem: [Description]\nAmount: GHS [Amount]\nJustification: [Reason]\n\nApproval: ________",
+};
+
+// ─── USSD Main Menu Builder ──────────────────────────────────────
+
+function ussdMainMenu(): string {
+  return (
+    "CON Welcome to AskOzzy - Ghana's AI Assistant\n\n" +
+    "1. Ask a Question\n" +
+    "2. Draft a Memo\n" +
+    "3. Use a Template\n" +
+    "4. My Account"
+  );
+}
+
+function ussdTemplateMenu(): string {
+  return (
+    "CON Select template:\n\n" +
+    "1. Internal Memo\n" +
+    "2. Official Letter\n" +
+    "3. Meeting Minutes\n" +
+    "4. Budget Request\n" +
+    "0. Back"
+  );
+}
+
+// ─── USSD Callback Endpoint ──────────────────────────────────────
+
+app.post("/api/ussd/callback", async (c) => {
+  try {
+    await ensureUSSDTable(c.env.DB);
+
+    // Africa's Talking sends form-encoded data by default, but also accept JSON
+    const contentType = c.req.header("Content-Type") || "";
+    let sessionId: string,
+      phoneNumber: string,
+      serviceCode: string,
+      text: string;
+
+    if (contentType.includes("application/json")) {
+      const body = await c.req.json();
+      sessionId = body.sessionId || "";
+      phoneNumber = body.phoneNumber || "";
+      serviceCode = body.serviceCode || "";
+      text = body.text || "";
+    } else {
+      const body = await c.req.parseBody();
+      sessionId = (body.sessionId as string) || "";
+      phoneNumber = (body.phoneNumber as string) || "";
+      serviceCode = (body.serviceCode as string) || "";
+      text = (body.text as string) || "";
+    }
+
+    if (!sessionId) {
+      return new Response("END Invalid session", {
+        headers: { "Content-Type": "text/plain" },
+      });
+    }
+
+    // Check if USSD is enabled via KV config
+    const ussdConfig = await c.env.SESSIONS.get("ussd_config");
+    if (ussdConfig) {
+      try {
+        const config = JSON.parse(ussdConfig);
+        if (config.enabled === false) {
+          return new Response(
+            "END AskOzzy USSD is currently disabled.\nVisit askozzy.ghwmelite.workers.dev",
+            { headers: { "Content-Type": "text/plain" } }
+          );
+        }
+      } catch {}
+    }
+
+    // Parse the cumulative text input to determine menu navigation
+    // Africa's Talking format: "" -> "1" -> "1*hello" -> "1*hello*0"
+    const inputs = text === "" ? [] : text.split("*");
+    const level = inputs.length;
+
+    let response = "";
+    let menuState = "main";
+    let isEnd = false;
+
+    // ── Level 0: Initial dial — show main menu ──
+    if (level === 0) {
+      response = ussdMainMenu();
+      menuState = "main";
+    }
+    // ── Level 1: User selected a main menu option ──
+    else if (level === 1) {
+      const choice = inputs[0].trim();
+
+      if (choice === "1") {
+        response = "CON Type your question:";
+        menuState = "ask_question";
+      } else if (choice === "2") {
+        response = "CON Enter memo topic:";
+        menuState = "draft_memo";
+      } else if (choice === "3") {
+        response = ussdTemplateMenu();
+        menuState = "templates";
+      } else if (choice === "4") {
+        // Look up user by phone number (best-effort match)
+        const cleanPhone = phoneNumber.replace(/^\+/, "");
+        const last9 = cleanPhone.length >= 9 ? cleanPhone.slice(-9) : cleanPhone;
+        const user = await c.env.DB.prepare(
+          "SELECT full_name, tier, email FROM users WHERE email LIKE ? OR email LIKE ? LIMIT 1"
+        )
+          .bind(`%${cleanPhone}%`, `%${last9}%`)
+          .first<{ full_name: string; tier: string; email: string }>();
+
+        if (user) {
+          const msgCount = await c.env.DB.prepare(
+            `SELECT COUNT(*) as cnt FROM messages
+             WHERE conversation_id IN (
+               SELECT id FROM conversations WHERE user_id = (
+                 SELECT id FROM users WHERE email = ?
+               )
+             )`
+          )
+            .bind(user.email)
+            .first<{ cnt: number }>();
+
+          response =
+            "END Account Info:\n" +
+            `Name: ${user.full_name}\n` +
+            `Tier: ${user.tier}\n` +
+            `Messages: ${msgCount?.cnt || 0}`;
+        } else {
+          response =
+            "END No account linked to this number.\n" +
+            "Visit askozzy.ghwmelite.workers.dev\nto register and link your phone.";
+        }
+        isEnd = true;
+        menuState = "account";
+      } else if (choice === "0") {
+        response = ussdMainMenu();
+        menuState = "main";
+      } else {
+        response =
+          "CON Invalid choice. Try again:\n\n" +
+          "1. Ask a Question\n" +
+          "2. Draft a Memo\n" +
+          "3. Use a Template\n" +
+          "4. My Account";
+        menuState = "main";
+      }
+    }
+    // ── Level 2: Second-level interactions ──
+    else if (level === 2) {
+      const firstChoice = inputs[0].trim();
+      const secondInput = inputs[1].trim();
+
+      if (firstChoice === "1") {
+        // Ask a Question — secondInput is the user's question
+        if (secondInput.length < 2) {
+          response = "END Please type a longer question next time.";
+        } else {
+          const aiAnswer = await getUSSDResponse(c.env.AI, secondInput);
+          const truncated = truncateForUSSD(aiAnswer, 140);
+          response = `END AI: ${truncated}`;
+        }
+        isEnd = true;
+        menuState = "ai_response";
+      } else if (firstChoice === "2") {
+        // Draft a Memo — secondInput is the topic
+        if (secondInput.length < 2) {
+          response = "END Please enter a longer topic next time.";
+        } else {
+          const memoResponse = await getUSSDMemoResponse(c.env.AI, secondInput);
+          const truncated = truncateForUSSD(memoResponse, 140);
+          response = `END Memo:\n${truncated}`;
+        }
+        isEnd = true;
+        menuState = "memo_response";
+      } else if (firstChoice === "3") {
+        // Template selection
+        if (secondInput === "0") {
+          response = ussdMainMenu();
+          menuState = "main";
+        } else if (USSD_TEMPLATES[secondInput]) {
+          const template = truncateForUSSD(USSD_TEMPLATES[secondInput], 180);
+          response = `END ${template}`;
+          isEnd = true;
+          menuState = "template_view";
+        } else {
+          response =
+            "CON Invalid choice.\n\n" +
+            "1. Internal Memo\n" +
+            "2. Official Letter\n" +
+            "3. Meeting Minutes\n" +
+            "4. Budget Request\n" +
+            "0. Back";
+          menuState = "templates";
+        }
+      } else {
+        response = "END Invalid input. Dial again to restart.";
+        isEnd = true;
+        menuState = "error";
+      }
+    }
+    // ── Level 3+: Deep navigation ──
+    else {
+      const lastInput = inputs[inputs.length - 1].trim();
+      if (lastInput === "0") {
+        response = ussdMainMenu();
+        menuState = "main";
+      } else {
+        response = "END Thank you for using AskOzzy. Dial again to start over.";
+        isEnd = true;
+        menuState = "end";
+      }
+    }
+
+    // Persist session to D1
+    const existingSession = await c.env.DB.prepare(
+      "SELECT id FROM ussd_sessions WHERE session_id = ?"
+    )
+      .bind(sessionId)
+      .first<{ id: string }>();
+
+    if (existingSession) {
+      await c.env.DB.prepare(
+        `UPDATE ussd_sessions
+         SET current_menu = ?, input_history = ?, ai_response = ?,
+             message_count = message_count + 1, updated_at = datetime('now')
+         WHERE session_id = ?`
+      )
+        .bind(
+          menuState,
+          text,
+          isEnd ? response.replace(/^(CON |END )/, "") : null,
+          sessionId
+        )
+        .run();
+    } else {
+      await c.env.DB.prepare(
+        `INSERT INTO ussd_sessions (id, session_id, phone_number, service_code, current_menu, input_history, ai_response, message_count)
+         VALUES (?, ?, ?, ?, ?, ?, ?, 1)`
+      )
+        .bind(
+          generateId(),
+          sessionId,
+          phoneNumber,
+          serviceCode,
+          menuState,
+          text,
+          isEnd ? response.replace(/^(CON |END )/, "") : null
+        )
+        .run();
+    }
+
+    return new Response(response, {
+      headers: { "Content-Type": "text/plain" },
+    });
+  } catch (err: any) {
+    console.error("USSD callback error:", err);
+    return new Response("END An error occurred. Please try again later.", {
+      headers: { "Content-Type": "text/plain" },
+    });
+  }
+});
+
+// ─── USSD Admin Stats ───────────────────────────────────────────
+
+app.get("/api/admin/ussd/stats", adminMiddleware, async (c) => {
+  try {
+    await ensureUSSDTable(c.env.DB);
+
+    const [totalResult, todayResult, phonesResult, menuResult] = await c.env.DB.batch([
+      c.env.DB.prepare("SELECT COUNT(DISTINCT session_id) as total FROM ussd_sessions"),
+      c.env.DB.prepare(
+        "SELECT COUNT(DISTINCT session_id) as today FROM ussd_sessions WHERE created_at >= date('now')"
+      ),
+      c.env.DB.prepare(
+        "SELECT COUNT(DISTINCT phone_number) as unique_phones FROM ussd_sessions"
+      ),
+      c.env.DB.prepare(
+        "SELECT current_menu, COUNT(*) as count FROM ussd_sessions GROUP BY current_menu ORDER BY count DESC LIMIT 10"
+      ),
+    ]);
+
+    const total = (totalResult.results?.[0] as any)?.total || 0;
+    const today = (todayResult.results?.[0] as any)?.today || 0;
+    const uniquePhones = (phonesResult.results?.[0] as any)?.unique_phones || 0;
+    const menuChoices = (menuResult.results || []) as Array<{
+      current_menu: string;
+      count: number;
+    }>;
+
+    return c.json({
+      total_sessions: total,
+      sessions_today: today,
+      unique_phones: uniquePhones,
+      popular_menu_choices: menuChoices,
+    });
+  } catch (err: any) {
+    console.error("USSD stats error:", err);
+    return c.json({ error: "Failed to load USSD stats" }, 500);
+  }
+});
+
+// ─── USSD Admin Config ──────────────────────────────────────────
+
+app.get("/api/admin/ussd/config", adminMiddleware, async (c) => {
+  try {
+    const raw = await c.env.SESSIONS.get("ussd_config");
+    if (raw) {
+      return c.json(JSON.parse(raw));
+    }
+    return c.json({
+      enabled: true,
+      serviceCode: "*713*OZZY#",
+      callbackUrl: "https://askozzy.ghwmelite.workers.dev/api/ussd/callback",
+    });
+  } catch {
+    return c.json({
+      enabled: true,
+      serviceCode: "*713*OZZY#",
+      callbackUrl: "https://askozzy.ghwmelite.workers.dev/api/ussd/callback",
+    });
+  }
+});
+
+app.put("/api/admin/ussd/config", adminMiddleware, async (c) => {
+  try {
+    const body = await c.req.json();
+    const config = {
+      enabled: body.enabled !== false,
+      serviceCode: body.serviceCode || "*713*OZZY#",
+      callbackUrl: "https://askozzy.ghwmelite.workers.dev/api/ussd/callback",
+    };
+    await c.env.SESSIONS.put("ussd_config", JSON.stringify(config));
+    return c.json({ success: true, config });
+  } catch (err: any) {
+    return c.json({ error: "Failed to save USSD config" }, 500);
+  }
+});
+
+// ─── USSD Test Endpoint (Admin) ─────────────────────────────────
+
+app.post("/api/admin/ussd/test", adminMiddleware, async (c) => {
+  try {
+    const { text } = await c.req.json();
+
+    await ensureUSSDTable(c.env.DB);
+
+    const inputs = !text || text === "" ? [] : text.split("*");
+    const level = inputs.length;
+
+    let response = "";
+
+    if (level === 0) {
+      response = ussdMainMenu();
+    } else if (level === 1) {
+      const choice = inputs[0].trim();
+      if (choice === "1") {
+        response = "CON Type your question:";
+      } else if (choice === "2") {
+        response = "CON Enter memo topic:";
+      } else if (choice === "3") {
+        response = ussdTemplateMenu();
+      } else if (choice === "4") {
+        response =
+          "END Account Info (Test):\nName: Test User\nTier: free\nMessages: 0";
+      } else {
+        response =
+          "CON Invalid choice. Try again:\n\n" +
+          "1. Ask a Question\n" +
+          "2. Draft a Memo\n" +
+          "3. Use a Template\n" +
+          "4. My Account";
+      }
+    } else if (level === 2) {
+      const firstChoice = inputs[0].trim();
+      const secondInput = inputs[1].trim();
+
+      if (firstChoice === "1") {
+        const aiAnswer = await getUSSDResponse(c.env.AI, secondInput);
+        response = `END AI: ${truncateForUSSD(aiAnswer, 140)}`;
+      } else if (firstChoice === "2") {
+        const memoResponse = await getUSSDMemoResponse(c.env.AI, secondInput);
+        response = `END Memo:\n${truncateForUSSD(memoResponse, 140)}`;
+      } else if (firstChoice === "3") {
+        if (USSD_TEMPLATES[secondInput]) {
+          response = `END ${truncateForUSSD(USSD_TEMPLATES[secondInput], 180)}`;
+        } else {
+          response = "END Invalid template selection.";
+        }
+      } else {
+        response = "END Invalid input.";
+      }
+    } else {
+      response = "END Session ended. Dial again to restart.";
+    }
+
+    return c.json({
+      response,
+      isEnd: response.startsWith("END"),
+    });
+  } catch (err: any) {
+    console.error("USSD test error:", err);
+    return c.json(
+      { error: "Test failed: " + (err.message || "Unknown error") },
+      500
+    );
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════════
+//  WhatsApp / SMS Messaging Integration
+// ═══════════════════════════════════════════════════════════════════
+
+// ─── Lazy Migration: Create messaging tables if they don't exist ──
+
+let messagingTablesCreated = false;
+
+async function ensureMessagingTables(db: D1Database): Promise<void> {
+  if (messagingTablesCreated) return;
+  try {
+    await db.prepare(`CREATE TABLE IF NOT EXISTS whatsapp_sessions (
+      id TEXT PRIMARY KEY,
+      phone_number TEXT NOT NULL UNIQUE,
+      user_id TEXT,
+      last_message TEXT,
+      last_response TEXT,
+      message_count INTEGER DEFAULT 0,
+      created_at TEXT DEFAULT (datetime('now')),
+      updated_at TEXT DEFAULT (datetime('now'))
+    )`).run();
+
+    await db.batch([
+      db.prepare(`CREATE INDEX IF NOT EXISTS idx_wa_phone ON whatsapp_sessions(phone_number)`),
+      db.prepare(`CREATE TABLE IF NOT EXISTS whatsapp_messages (
+        id TEXT PRIMARY KEY,
+        session_id TEXT NOT NULL,
+        direction TEXT NOT NULL CHECK(direction IN ('inbound', 'outbound')),
+        content TEXT NOT NULL,
+        channel TEXT DEFAULT 'whatsapp' CHECK(channel IN ('whatsapp', 'sms')),
+        created_at TEXT DEFAULT (datetime('now')),
+        FOREIGN KEY (session_id) REFERENCES whatsapp_sessions(id)
+      )`),
+    ]);
+
+    await db.prepare(`CREATE INDEX IF NOT EXISTS idx_wa_msg_session ON whatsapp_messages(session_id, created_at)`).run();
+    messagingTablesCreated = true;
+  } catch {
+    // Tables likely already exist — safe to ignore
+    messagingTablesCreated = true;
+  }
+}
+
+// ─── Helper: Get AI Response (non-streaming, for messaging) ──────
+
+async function getMessagingAIResponse(
+  env: Env,
+  userMessage: string,
+  conversationHistory: Array<{ role: string; content: string }> = []
+): Promise<string> {
+  const { ragResults, faqResults } = await searchKnowledge(env, userMessage, 3);
+  const augmentedPrompt = buildAugmentedPrompt(
+    GOG_SYSTEM_PROMPT + `\n\nIMPORTANT: You are responding via WhatsApp/SMS. Keep responses concise and mobile-friendly:
+- Use short paragraphs (2-3 sentences max)
+- Use simple bullet points with dashes (-) instead of complex formatting
+- NO markdown headers (#), NO bold (**), NO code blocks, NO tables
+- Keep total response under 2000 characters when possible
+- Be direct and actionable
+- If a topic needs a long answer, summarize the key points and suggest the user visit AskOzzy web app for the full details`,
+    ragResults,
+    faqResults
+  );
+
+  const messages: Array<{ role: string; content: string }> = [
+    { role: "system", content: augmentedPrompt },
+  ];
+
+  for (const msg of conversationHistory.slice(-10)) {
+    messages.push(msg);
+  }
+  messages.push({ role: "user", content: userMessage });
+
+  try {
+    const result = await env.AI.run("@cf/meta/llama-4-scout-17b-16e-instruct" as BaseAiTextGenerationModels, {
+      messages: messages as any,
+      max_tokens: 1024,
+    });
+
+    if (typeof result === "string") return result;
+    if (result && typeof result === "object" && "response" in result) return (result as any).response || "";
+    return String(result);
+  } catch (err) {
+    console.error("Messaging AI error:", err);
+    return "Sorry, I'm having trouble processing your request right now. Please try again or use the AskOzzy web app at https://askozzy.ghwmelite.workers.dev";
+  }
+}
+
+// ─── Helper: Format response for WhatsApp (4096 char limit) ──────
+
+function formatForWhatsApp(text: string): string {
+  let formatted = text;
+  formatted = formatted.replace(/^#{1,6}\s+/gm, "");
+  formatted = formatted.replace(/\*\*(.+?)\*\*/g, "$1");
+  formatted = formatted.replace(/\*(.+?)\*/g, "$1");
+  formatted = formatted.replace(/```[\s\S]*?```/g, "");
+  formatted = formatted.replace(/`([^`]+)`/g, "$1");
+  formatted = formatted.replace(/\n{3,}/g, "\n\n").trim();
+  if (formatted.length > 4096) {
+    formatted = formatted.substring(0, 4060) + "\n\n... [Message truncated. Visit AskOzzy for full response]";
+  }
+  return formatted;
+}
+
+// ─── Helper: Format response for SMS (split into 160-char parts) ──
+
+function formatForSMS(text: string): string[] {
+  let plain = text;
+  plain = plain.replace(/^#{1,6}\s+/gm, "");
+  plain = plain.replace(/\*\*(.+?)\*\*/g, "$1");
+  plain = plain.replace(/\*(.+?)\*/g, "$1");
+  plain = plain.replace(/```[\s\S]*?```/g, "");
+  plain = plain.replace(/`([^`]+)`/g, "$1");
+  plain = plain.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
+  plain = plain.replace(/\n{2,}/g, "\n").trim();
+
+  if (plain.length <= 160) return [plain];
+
+  const parts: string[] = [];
+  const maxPartLen = 153;
+  let remaining = plain;
+
+  while (remaining.length > 0 && parts.length < 5) {
+    if (remaining.length <= 160 && parts.length === 0) {
+      parts.push(remaining);
+      break;
+    }
+    let cut = maxPartLen;
+    const sentenceEnd = remaining.lastIndexOf(". ", cut);
+    const wordEnd = remaining.lastIndexOf(" ", cut);
+    if (sentenceEnd > cut * 0.5) cut = sentenceEnd + 1;
+    else if (wordEnd > cut * 0.5) cut = wordEnd;
+
+    parts.push(remaining.substring(0, cut).trim());
+    remaining = remaining.substring(cut).trim();
+  }
+
+  if (remaining.length > 0) {
+    parts[parts.length - 1] = parts[parts.length - 1].substring(0, 120) + "... Reply MORE for full answer.";
+  }
+
+  if (parts.length > 1) {
+    return parts.map((p, i) => `(${i + 1}/${parts.length}) ${p}`);
+  }
+  return parts;
+}
+
+// ─── Helper: Validate webhook secret ─────────────────────────────
+
+async function validateWebhookSecret(env: Env, request: Request): Promise<boolean> {
+  try {
+    const configStr = await env.SESSIONS.get("messaging_config");
+    if (!configStr) return true;
+    const config = JSON.parse(configStr);
+    if (!config.webhook_secret) return true;
+
+    const signature = request.headers.get("X-AT-Signature") ||
+                      request.headers.get("X-Webhook-Secret") ||
+                      request.headers.get("x-webhook-secret");
+    return signature === config.webhook_secret;
+  } catch {
+    return true;
+  }
+}
+
+// ─── Helper: Parse WhatsApp command ──────────────────────────────
+
+function parseMessagingCommand(text: string): { command: string; args: string } {
+  const trimmed = text.trim();
+  if (trimmed.startsWith("/")) {
+    const spaceIdx = trimmed.indexOf(" ");
+    if (spaceIdx === -1) {
+      return { command: trimmed.substring(1).toLowerCase(), args: "" };
+    }
+    return {
+      command: trimmed.substring(1, spaceIdx).toLowerCase(),
+      args: trimmed.substring(spaceIdx + 1).trim(),
+    };
+  }
+  return { command: "ask", args: trimmed };
+}
+
+// ─── WhatsApp Webhook Endpoint ───────────────────────────────────
+
+app.post("/api/whatsapp/webhook", async (c) => {
+  const isValid = await validateWebhookSecret(c.env, c.req.raw);
+  if (!isValid) {
+    return c.json({ error: "Invalid webhook signature" }, 403);
+  }
+
+  await ensureMessagingTables(c.env.DB);
+
+  try {
+    const configStr = await c.env.SESSIONS.get("messaging_config");
+    if (configStr) {
+      const config = JSON.parse(configStr);
+      if (config.whatsapp_enabled === false) {
+        return c.json({ error: "WhatsApp integration is disabled" }, 503);
+      }
+    }
+  } catch {}
+
+  let phoneNumber: string;
+  let messageText: string;
+  let incomingSessionId: string;
+
+  const contentType = c.req.header("content-type") || "";
+
+  if (contentType.includes("application/json")) {
+    const body = await c.req.json();
+    phoneNumber = body.from || body.phoneNumber || body.phone || "";
+    messageText = body.text || body.message || body.body || "";
+    incomingSessionId = body.sessionId || body.session_id || "";
+  } else {
+    const body = await c.req.parseBody();
+    phoneNumber = String(body.from || body.phoneNumber || body.phone || "");
+    messageText = String(body.text || body.message || body.body || "");
+    incomingSessionId = String(body.sessionId || body.session_id || "");
+  }
+
+  if (!phoneNumber || !messageText) {
+    return c.json({ error: "Phone number and message text are required" }, 400);
+  }
+
+  phoneNumber = phoneNumber.replace(/\s+/g, "");
+  if (!phoneNumber.startsWith("+")) phoneNumber = "+" + phoneNumber;
+
+  let session = await c.env.DB.prepare(
+    "SELECT id, message_count FROM whatsapp_sessions WHERE phone_number = ?"
+  ).bind(phoneNumber).first<{ id: string; message_count: number }>();
+
+  if (!session) {
+    const sessionId = generateId();
+    await c.env.DB.prepare(
+      "INSERT INTO whatsapp_sessions (id, phone_number, message_count) VALUES (?, ?, 0)"
+    ).bind(sessionId, phoneNumber).run();
+    session = { id: sessionId, message_count: 0 };
+  }
+
+  await c.env.DB.prepare(
+    "INSERT INTO whatsapp_messages (id, session_id, direction, content, channel) VALUES (?, ?, 'inbound', ?, 'whatsapp')"
+  ).bind(generateId(), session.id, messageText).run();
+
+  const { command, args } = parseMessagingCommand(messageText);
+  let responseText: string;
+
+  switch (command) {
+    case "help": {
+      responseText = `Welcome to AskOzzy on WhatsApp!
+
+Available commands:
+- /ask <question> - Ask Ozzy anything about GoG operations
+- /memo <topic> - Get a quick memo drafted
+- /template <name> - Use a GoG template (e.g., /template cabinet-memo)
+- /help - Show this help message
+
+You can also just type your question directly without any command.
+
+For the full experience, visit: https://askozzy.ghwmelite.workers.dev`;
+      break;
+    }
+
+    case "memo": {
+      if (!args) {
+        responseText = "Please provide a memo topic. Example: /memo request for additional budget allocation for Q3";
+        break;
+      }
+      const memoPrompt = `Draft a brief professional memo for a Ghana Government civil servant about: ${args}. Keep it concise and mobile-friendly. Use standard GoG memo format but abbreviated for WhatsApp.`;
+      const { results: memoHistory } = await c.env.DB.prepare(
+        "SELECT direction, content FROM whatsapp_messages WHERE session_id = ? ORDER BY created_at DESC LIMIT 6"
+      ).bind(session.id).all<{ direction: string; content: string }>();
+      const memoConvHistory = (memoHistory || []).reverse().map(m => ({
+        role: m.direction === "inbound" ? "user" : "assistant",
+        content: m.content,
+      }));
+      responseText = await getMessagingAIResponse(c.env, memoPrompt, memoConvHistory);
+      break;
+    }
+
+    case "template": {
+      if (!args) {
+        responseText = `Available templates:
+- cabinet-memo (Cabinet Memorandum)
+- budget-proposal (Budget Proposal)
+- procurement-plan (Procurement Plan)
+- meeting-minutes (Meeting Minutes)
+- policy-brief (Policy Brief)
+- official-letter (Official Letter)
+
+Usage: /template cabinet-memo <your topic>
+
+For all 25+ templates, visit the AskOzzy web app.`;
+        break;
+      }
+      const templateParts = args.split(" ");
+      const templateName = templateParts[0].toLowerCase();
+      const templateTopic = templateParts.slice(1).join(" ") || "general topic";
+      const templatePrompts: Record<string, string> = {
+        "cabinet-memo": `Draft a Cabinet Memorandum following the 9-section GoG format (Title, Sponsoring Ministry, Problem Statement, Background, Policy Options, Recommendation, Fiscal Impact, Implementation Plan, Conclusion) about: ${templateTopic}`,
+        "budget-proposal": `Draft a budget proposal following GoG MTEF format about: ${templateTopic}`,
+        "procurement-plan": `Draft a procurement plan following PPA Act 663 guidelines about: ${templateTopic}`,
+        "meeting-minutes": `Draft professional meeting minutes in GoG standard format about: ${templateTopic}`,
+        "policy-brief": `Draft a concise policy brief for GoG leadership about: ${templateTopic}`,
+        "official-letter": `Draft an official block-format letter following GoG correspondence standards about: ${templateTopic}`,
+      };
+      const prompt = templatePrompts[templateName];
+      if (!prompt) {
+        responseText = `Template "${templateName}" not found. Type /template to see available templates.`;
+        break;
+      }
+      responseText = await getMessagingAIResponse(c.env, prompt);
+      break;
+    }
+
+    default: {
+      const question = args || messageText;
+      const { results: chatHistory } = await c.env.DB.prepare(
+        "SELECT direction, content FROM whatsapp_messages WHERE session_id = ? ORDER BY created_at DESC LIMIT 10"
+      ).bind(session.id).all<{ direction: string; content: string }>();
+      const convHistory = (chatHistory || []).reverse().map(m => ({
+        role: m.direction === "inbound" ? "user" : "assistant",
+        content: m.content,
+      }));
+      responseText = await getMessagingAIResponse(c.env, question, convHistory);
+      break;
+    }
+  }
+
+  const formattedResponse = formatForWhatsApp(responseText);
+
+  await c.env.DB.prepare(
+    "INSERT INTO whatsapp_messages (id, session_id, direction, content, channel) VALUES (?, ?, 'outbound', ?, 'whatsapp')"
+  ).bind(generateId(), session.id, formattedResponse).run();
+
+  await c.env.DB.prepare(
+    "UPDATE whatsapp_sessions SET last_message = ?, last_response = ?, message_count = message_count + 1, updated_at = datetime('now') WHERE id = ?"
+  ).bind(messageText, formattedResponse, session.id).run();
+
+  return c.json({
+    message: formattedResponse,
+    to: phoneNumber,
+    sessionId: incomingSessionId || session.id,
+  });
+});
+
+// ─── SMS Webhook Endpoint ────────────────────────────────────────
+
+app.post("/api/sms/webhook", async (c) => {
+  const isValid = await validateWebhookSecret(c.env, c.req.raw);
+  if (!isValid) {
+    return c.json({ error: "Invalid webhook signature" }, 403);
+  }
+
+  await ensureMessagingTables(c.env.DB);
+
+  try {
+    const configStr = await c.env.SESSIONS.get("messaging_config");
+    if (configStr) {
+      const config = JSON.parse(configStr);
+      if (config.sms_enabled === false) {
+        return c.json({ error: "SMS integration is disabled" }, 503);
+      }
+    }
+  } catch {}
+
+  let phoneNumber: string;
+  let messageText: string;
+  const contentType = c.req.header("content-type") || "";
+
+  if (contentType.includes("application/json")) {
+    const body = await c.req.json();
+    phoneNumber = body.from || body.phoneNumber || body.phone || "";
+    messageText = body.text || body.message || body.body || "";
+  } else {
+    const body = await c.req.parseBody();
+    phoneNumber = String(body.from || body.phoneNumber || body.phone || "");
+    messageText = String(body.text || body.message || body.body || "");
+  }
+
+  if (!phoneNumber || !messageText) {
+    return c.json({ error: "Phone number and message text are required" }, 400);
+  }
+
+  phoneNumber = phoneNumber.replace(/\s+/g, "");
+  if (!phoneNumber.startsWith("+")) phoneNumber = "+" + phoneNumber;
+
+  let session = await c.env.DB.prepare(
+    "SELECT id, message_count FROM whatsapp_sessions WHERE phone_number = ?"
+  ).bind(phoneNumber).first<{ id: string; message_count: number }>();
+
+  if (!session) {
+    const sessionId = generateId();
+    await c.env.DB.prepare(
+      "INSERT INTO whatsapp_sessions (id, phone_number, message_count) VALUES (?, ?, 0)"
+    ).bind(sessionId, phoneNumber).run();
+    session = { id: sessionId, message_count: 0 };
+  }
+
+  await c.env.DB.prepare(
+    "INSERT INTO whatsapp_messages (id, session_id, direction, content, channel) VALUES (?, ?, 'inbound', ?, 'sms')"
+  ).bind(generateId(), session.id, messageText).run();
+
+  const trimmedMsg = messageText.trim().toUpperCase();
+  let responseText: string;
+
+  if (trimmedMsg === "HELP" || trimmedMsg === "/HELP") {
+    responseText = "AskOzzy SMS: Send any question about GoG operations. Send HELP for this message. For full features visit askozzy.ghwmelite.workers.dev";
+  } else {
+    const { results: smsHistory } = await c.env.DB.prepare(
+      "SELECT direction, content FROM whatsapp_messages WHERE session_id = ? AND channel = 'sms' ORDER BY created_at DESC LIMIT 4"
+    ).bind(session.id).all<{ direction: string; content: string }>();
+    const convHistory = (smsHistory || []).reverse().map(m => ({
+      role: m.direction === "inbound" ? "user" : "assistant",
+      content: m.content,
+    }));
+    responseText = await getMessagingAIResponse(c.env, messageText, convHistory);
+  }
+
+  const smsParts = formatForSMS(responseText);
+
+  await c.env.DB.prepare(
+    "INSERT INTO whatsapp_messages (id, session_id, direction, content, channel) VALUES (?, ?, 'outbound', ?, 'sms')"
+  ).bind(generateId(), session.id, smsParts.join(" | ")).run();
+
+  await c.env.DB.prepare(
+    "UPDATE whatsapp_sessions SET last_message = ?, last_response = ?, message_count = message_count + 1, updated_at = datetime('now') WHERE id = ?"
+  ).bind(messageText, smsParts[0], session.id).run();
+
+  return c.json({
+    messages: smsParts.map(part => ({
+      to: phoneNumber,
+      message: part,
+    })),
+  });
+});
+
+// ─── Admin: Messaging Config ─────────────────────────────────────
+
+app.get("/api/admin/messaging/config", adminMiddleware, async (c) => {
+  try {
+    const configStr = await c.env.SESSIONS.get("messaging_config");
+    const config = configStr ? JSON.parse(configStr) : {
+      whatsapp_enabled: false,
+      sms_enabled: false,
+      webhook_secret: "",
+      api_key: "",
+      api_username: "",
+      sender_id: "AskOzzy",
+    };
+    const url = new URL(c.req.url);
+    const baseUrl = `${url.protocol}//${url.host}`;
+    return c.json({
+      config,
+      webhook_urls: {
+        whatsapp: `${baseUrl}/api/whatsapp/webhook`,
+        sms: `${baseUrl}/api/sms/webhook`,
+      },
+    });
+  } catch (err) {
+    return c.json({ error: "Failed to load messaging config" }, 500);
+  }
+});
+
+app.put("/api/admin/messaging/config", adminMiddleware, async (c) => {
+  try {
+    const body = await c.req.json();
+    const config = {
+      whatsapp_enabled: !!body.whatsapp_enabled,
+      sms_enabled: !!body.sms_enabled,
+      webhook_secret: body.webhook_secret || "",
+      api_key: body.api_key || "",
+      api_username: body.api_username || "",
+      sender_id: body.sender_id || "AskOzzy",
+    };
+    await c.env.SESSIONS.put("messaging_config", JSON.stringify(config));
+    return c.json({ success: true, config });
+  } catch (err) {
+    return c.json({ error: "Failed to save messaging config" }, 500);
+  }
+});
+
+// ─── Admin: Messaging Stats ──────────────────────────────────────
+
+app.get("/api/admin/messaging/stats", adminMiddleware, async (c) => {
+  try {
+    await ensureMessagingTables(c.env.DB);
+
+    const totalSessions = await c.env.DB.prepare(
+      "SELECT COUNT(*) as count FROM whatsapp_sessions"
+    ).first<{ count: number }>();
+
+    const messagesToday = await c.env.DB.prepare(
+      "SELECT COUNT(*) as count FROM whatsapp_messages WHERE date(created_at) = date('now')"
+    ).first<{ count: number }>();
+
+    const messagesThisWeek = await c.env.DB.prepare(
+      "SELECT COUNT(*) as count FROM whatsapp_messages WHERE created_at >= datetime('now', '-7 days')"
+    ).first<{ count: number }>();
+
+    const activeSessions = await c.env.DB.prepare(
+      "SELECT COUNT(*) as count FROM whatsapp_sessions WHERE updated_at >= datetime('now', '-24 hours')"
+    ).first<{ count: number }>();
+
+    const channelBreakdown = await c.env.DB.prepare(
+      "SELECT channel, COUNT(*) as count FROM whatsapp_messages GROUP BY channel"
+    ).all<{ channel: string; count: number }>();
+
+    const { results: recentSessions } = await c.env.DB.prepare(
+      "SELECT id, phone_number, last_message, last_response, message_count, created_at, updated_at FROM whatsapp_sessions ORDER BY updated_at DESC LIMIT 20"
+    ).all<{
+      id: string;
+      phone_number: string;
+      last_message: string;
+      last_response: string;
+      message_count: number;
+      created_at: string;
+      updated_at: string;
+    }>();
+
+    return c.json({
+      total_sessions: totalSessions?.count || 0,
+      messages_today: messagesToday?.count || 0,
+      messages_this_week: messagesThisWeek?.count || 0,
+      active_sessions: activeSessions?.count || 0,
+      channel_breakdown: channelBreakdown?.results || [],
+      recent_sessions: recentSessions || [],
+    });
+  } catch (err) {
+    console.error("Messaging stats error:", err);
+    return c.json({
+      total_sessions: 0,
+      messages_today: 0,
+      messages_this_week: 0,
+      active_sessions: 0,
+      channel_breakdown: [],
+      recent_sessions: [],
+    });
+  }
+});
+
+// ─── Admin: Webhook Test (simulate inbound message) ──────────────
+
+app.post("/api/admin/messaging/test", adminMiddleware, async (c) => {
+  try {
+    await ensureMessagingTables(c.env.DB);
+
+    const { channel, message: testMessage } = await c.req.json();
+    const testPhone = "+233000000000";
+
+    let session = await c.env.DB.prepare(
+      "SELECT id, message_count FROM whatsapp_sessions WHERE phone_number = ?"
+    ).bind(testPhone).first<{ id: string; message_count: number }>();
+
+    if (!session) {
+      const sessionId = generateId();
+      await c.env.DB.prepare(
+        "INSERT INTO whatsapp_sessions (id, phone_number, message_count) VALUES (?, ?, 0)"
+      ).bind(sessionId, testPhone).run();
+      session = { id: sessionId, message_count: 0 };
+    }
+
+    await c.env.DB.prepare(
+      "INSERT INTO whatsapp_messages (id, session_id, direction, content, channel) VALUES (?, ?, 'inbound', ?, ?)"
+    ).bind(generateId(), session.id, testMessage || "Hello, what is AskOzzy?", channel || "whatsapp").run();
+
+    const responseText = await getMessagingAIResponse(c.env, testMessage || "Hello, what is AskOzzy?");
+
+    const formatted = channel === "sms"
+      ? formatForSMS(responseText)
+      : [formatForWhatsApp(responseText)];
+
+    await c.env.DB.prepare(
+      "INSERT INTO whatsapp_messages (id, session_id, direction, content, channel) VALUES (?, ?, 'outbound', ?, ?)"
+    ).bind(generateId(), session.id, formatted[0], channel || "whatsapp").run();
+
+    await c.env.DB.prepare(
+      "UPDATE whatsapp_sessions SET last_message = ?, last_response = ?, message_count = message_count + 1, updated_at = datetime('now') WHERE id = ?"
+    ).bind(testMessage || "Hello, what is AskOzzy?", formatted[0], session.id).run();
+
+    return c.json({
+      success: true,
+      channel: channel || "whatsapp",
+      input: testMessage || "Hello, what is AskOzzy?",
+      response: formatted,
+      session_id: session.id,
+    });
+  } catch (err) {
+    console.error("Messaging test error:", err);
+    return c.json({ error: "Test failed: " + (err instanceof Error ? err.message : "Unknown error") }, 500);
+  }
+});
+
+// ─── Admin: Get session messages ─────────────────────────────────
+
+app.get("/api/admin/messaging/sessions/:sessionId/messages", adminMiddleware, async (c) => {
+  try {
+    const sessionId = c.req.param("sessionId");
+    const { results: messages } = await c.env.DB.prepare(
+      "SELECT id, direction, content, channel, created_at FROM whatsapp_messages WHERE session_id = ? ORDER BY created_at ASC"
+    ).bind(sessionId).all<{
+      id: string;
+      direction: string;
+      content: string;
+      channel: string;
+      created_at: string;
+    }>();
+    return c.json({ messages: messages || [] });
+  } catch (err) {
+    return c.json({ error: "Failed to load messages" }, 500);
   }
 });
 

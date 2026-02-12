@@ -161,6 +161,8 @@ function switchTab(tab) {
     "document-training": loadTrainingStatus,
     "agents": loadAgentsList,
     "productivity": loadProductivityTab,
+    "ussd": loadUSSDTab,
+    "messaging": loadMessagingTab,
   };
   if (loaders[tab]) loaders[tab]();
 }
@@ -1890,8 +1892,353 @@ async function loadDepartmentStats() {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  TAB: Document Training (Enhanced)
+//  TAB: Document Training (Enhanced with Bulk Upload & Stats)
 // ═══════════════════════════════════════════════════════════════════
+
+// Category display names
+var CATEGORY_LABELS = {
+  general: "General",
+  procurement: "Procurement",
+  procurement_law: "Procurement Law",
+  finance: "Finance & Budget",
+  financial_admin: "Financial Admin",
+  hr: "Human Resources",
+  legal: "Legal & Regulations",
+  civil_service: "Civil Service",
+  budget_policy: "Budget Policy",
+  gog_forms: "GoG Forms",
+  general_regulation: "General Regulation",
+  ict: "ICT & Digital",
+  health: "Health",
+  education: "Education",
+  governance: "Governance",
+};
+
+function categoryLabel(cat) {
+  return CATEGORY_LABELS[cat] || cat || "General";
+}
+
+// Bulk upload state
+var bulkUploadFiles = [];
+
+var dtSearchPage = 1;
+var debouncedDtSearch = debounce(function() {
+  dtSearchPage = 1;
+  loadEnhancedTrainingStatus();
+}, 400);
+
+// ─── Stats Dashboard ─────────────────────────────────────────────
+
+async function loadDtStatsDashboard() {
+  var el = document.getElementById("dt-stats-dashboard");
+  if (!el) return;
+
+  try {
+    var res = await apiFetch("/api/admin/knowledge/stats");
+    var s = await res.json();
+
+    var html = '<div class="stats-grid" style="margin-bottom:16px;">' +
+      '<div class="stat-card"><div class="stat-value">' + (s.total_documents || 0) + '</div><div class="stat-label">Total Documents</div></div>' +
+      '<div class="stat-card"><div class="stat-value">' + (s.total_chunks || 0).toLocaleString() + '</div><div class="stat-label">Total Chunks</div></div>' +
+      '<div class="stat-card green"><div class="stat-value">' + (s.categories_covered || 0) + '</div><div class="stat-label">Categories</div></div>' +
+      '<div class="stat-card"><div class="stat-value">' + (s.storage_estimate ? s.storage_estimate.total_mb : 0) + ' MB</div><div class="stat-label">Est. Storage</div></div>' +
+      '<div class="stat-card"><div class="stat-value">' + (s.ready_documents || 0) + '</div><div class="stat-label">Ready</div></div>' +
+      '<div class="stat-card"><div class="stat-value">' + (s.processing_documents || 0) + '</div><div class="stat-label">Processing</div></div>' +
+    '</div>';
+
+    var cats = s.by_category || [];
+    if (cats.length > 0) {
+      var maxCount = Math.max.apply(null, cats.map(function(c) { return c.doc_count; }));
+      html += '<div style="margin-top:8px;">' +
+        '<div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:8px;">Documents by Category</div>';
+      for (var i = 0; i < cats.length; i++) {
+        var pct = maxCount > 0 ? Math.round((cats[i].doc_count / maxCount) * 100) : 0;
+        html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">' +
+          '<span style="min-width:120px;font-size:11px;color:var(--text-secondary);text-align:right;">' + categoryLabel(cats[i].category) + '</span>' +
+          '<div style="flex:1;height:18px;background:var(--bg-tertiary);border-radius:9px;overflow:hidden;">' +
+            '<div style="width:' + pct + '%;height:100%;background:linear-gradient(90deg,var(--gold),var(--green-light));border-radius:9px;transition:width 0.3s;"></div>' +
+          '</div>' +
+          '<span style="min-width:60px;font-size:11px;color:var(--text-muted);">' + cats[i].doc_count + ' docs / ' + (cats[i].chunk_count || 0) + ' chunks</span>' +
+        '</div>';
+      }
+      html += '</div>';
+    }
+
+    el.innerHTML = html;
+  } catch (err) {
+    el.innerHTML = '<div class="admin-empty">Failed to load knowledge base stats</div>';
+  }
+}
+
+// ─── GoG Document Library ─────────────────────────────────────────
+
+async function loadGogLibrary() {
+  var el = document.getElementById("gog-library-content");
+  if (!el) return;
+
+  try {
+    var res = await apiFetch("/api/admin/knowledge/stats");
+    var s = await res.json();
+    var library = s.gog_library || [];
+
+    if (library.length === 0) {
+      el.innerHTML = '<div class="admin-empty">Unable to load GoG document library status</div>';
+      return;
+    }
+
+    var html = '<div style="display:grid;gap:8px;">';
+    for (var i = 0; i < library.length; i++) {
+      var doc = library[i];
+      var statusColor = doc.uploaded ? 'var(--green-light)' : 'var(--text-muted)';
+      var statusText = doc.uploaded ? 'Uploaded (' + doc.doc_count + ')' : 'Not yet uploaded';
+      var statusIcon = doc.uploaded ? '&#x2713;' : '&#x25CB;';
+      html += '<div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg-tertiary);border-radius:var(--radius-sm);border:1px solid var(--border-color);">' +
+        '<span style="font-size:18px;color:' + statusColor + ';">' + statusIcon + '</span>' +
+        '<div style="flex:1;">' +
+          '<div style="font-size:13px;font-weight:600;color:var(--text-primary);">' + escapeHtml(doc.name) + '</div>' +
+          '<div style="font-size:11px;color:var(--text-muted);">Category: ' + categoryLabel(doc.category) + '</div>' +
+        '</div>' +
+        '<span style="font-size:11px;font-weight:600;color:' + statusColor + ';">' + statusText + '</span>' +
+      '</div>';
+    }
+    html += '</div>';
+    el.innerHTML = html;
+  } catch (err) {
+    el.innerHTML = '<div class="admin-empty">Failed to load GoG library status</div>';
+  }
+}
+
+// ─── Bulk Upload ─────────────────────────────────────────────────
+
+function detectCategoryFromName(filename) {
+  var name = filename.toLowerCase();
+  if (name.includes('procurement') || name.includes('tender') || name.includes('act 663') || name.includes('ppa')) return 'procurement_law';
+  if (name.includes('financial admin') || name.includes('act 654') || name.includes('treasury')) return 'financial_admin';
+  if (name.includes('civil service') || name.includes('ohcs')) return 'civil_service';
+  if (name.includes('budget') || name.includes('economic policy') || name.includes('mtef')) return 'budget_policy';
+  if (name.includes('form') || name.includes('template') || name.includes('voucher')) return 'gog_forms';
+  if (name.includes('procurement')) return 'procurement';
+  if (name.includes('finance') || name.includes('fiscal') || name.includes('revenue')) return 'finance';
+  if (name.includes('human resource') || name.includes('staff') || name.includes('leave') || name.includes('pension')) return 'hr';
+  if (name.includes('legal') || name.includes('law') || name.includes('regulation') || name.includes('act')) return 'legal';
+  if (name.includes('ict') || name.includes('digital') || name.includes('technology') || name.includes('cyber')) return 'ict';
+  if (name.includes('health') || name.includes('medical') || name.includes('nhis')) return 'health';
+  if (name.includes('education') || name.includes('school') || name.includes('university')) return 'education';
+  if (name.includes('governance') || name.includes('assembly') || name.includes('parliament')) return 'governance';
+  return 'general';
+}
+
+function handleBulkDrop(e) {
+  e.preventDefault();
+  e.currentTarget.style.borderColor = 'var(--border-color)';
+  e.currentTarget.style.background = 'var(--bg-tertiary)';
+  var files = Array.from(e.dataTransfer.files);
+  if (files.length > 0) addBulkFiles(files);
+}
+
+function handleBulkFileSelect(fileList) {
+  var files = Array.from(fileList);
+  if (files.length > 0) addBulkFiles(files);
+}
+
+function addBulkFiles(newFiles) {
+  for (var i = 0; i < newFiles.length; i++) {
+    var f = newFiles[i];
+    if (f.name.startsWith('.') || f.name === 'Thumbs.db' || f.name === 'desktop.ini') continue;
+    bulkUploadFiles.push({ file: f, category: detectCategoryFromName(f.name) });
+  }
+  renderBulkFileList();
+}
+
+function clearBulkFiles() {
+  bulkUploadFiles = [];
+  renderBulkFileList();
+  document.getElementById("bulk-file-input").value = "";
+  document.getElementById("bulk-upload-result").innerHTML = "";
+  document.getElementById("bulk-upload-detail").innerHTML = "";
+}
+
+function removeBulkFile(idx) {
+  bulkUploadFiles.splice(idx, 1);
+  renderBulkFileList();
+}
+
+function updateBulkCategory(idx, value) {
+  if (bulkUploadFiles[idx]) bulkUploadFiles[idx].category = value;
+}
+
+function renderBulkFileList() {
+  var listEl = document.getElementById("bulk-file-list");
+  var wrapperEl = document.getElementById("bulk-file-table-wrapper");
+  var btnEl = document.getElementById("btn-bulk-upload");
+
+  if (bulkUploadFiles.length === 0) {
+    listEl.style.display = "none";
+    btnEl.style.display = "none";
+    return;
+  }
+
+  listEl.style.display = "block";
+  btnEl.style.display = "inline-block";
+
+  var totalSize = bulkUploadFiles.reduce(function(s, item) { return s + item.file.size; }, 0);
+  var catOptions = Object.keys(CATEGORY_LABELS).map(function(key) {
+    return '<option value="' + key + '">' + CATEGORY_LABELS[key] + '</option>';
+  }).join('');
+
+  var html = '<div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">' +
+    bulkUploadFiles.length + ' files (' + (totalSize / 1024).toFixed(1) + ' KB total)</div>' +
+    '<table class="admin-table" style="font-size:12px;"><thead><tr>' +
+    '<th>File</th><th>Size</th><th>Detected Category</th><th></th></tr></thead><tbody>';
+
+  for (var i = 0; i < bulkUploadFiles.length; i++) {
+    var item = bulkUploadFiles[i];
+    var selectedCatOptions = catOptions.replace('value="' + item.category + '">', 'value="' + item.category + '" selected>');
+    html += '<tr>' +
+      '<td>' + escapeHtml(item.file.name) + '</td>' +
+      '<td>' + (item.file.size / 1024).toFixed(1) + ' KB</td>' +
+      '<td><select class="inline-select" style="padding:4px 8px;font-size:11px;" onchange="updateBulkCategory(' + i + ',this.value)">' + selectedCatOptions + '</select></td>' +
+      '<td><button class="btn-action" onclick="removeBulkFile(' + i + ')" style="font-size:10px;padding:2px 8px;color:var(--red);">Remove</button></td></tr>';
+  }
+
+  html += '</tbody></table>';
+  wrapperEl.innerHTML = html;
+}
+
+async function executeBulkUpload() {
+  if (bulkUploadFiles.length === 0) return;
+
+  var resultEl = document.getElementById("bulk-upload-result");
+  var detailEl = document.getElementById("bulk-upload-detail");
+  var btnEl = document.getElementById("btn-bulk-upload");
+  btnEl.disabled = true;
+
+  resultEl.innerHTML = '<span style="color:var(--gold);">Uploading ' + bulkUploadFiles.length + ' files...</span>';
+  detailEl.innerHTML = '';
+
+  var formData = new FormData();
+  for (var i = 0; i < bulkUploadFiles.length; i++) {
+    formData.append('files', bulkUploadFiles[i].file);
+    formData.append('category_' + i, bulkUploadFiles[i].category);
+  }
+
+  try {
+    var res = await fetch(API + "/api/admin/knowledge/bulk", {
+      method: "POST",
+      headers: { Authorization: "Bearer " + token },
+      body: formData,
+    });
+    var data = await res.json();
+
+    if (!res.ok) {
+      resultEl.innerHTML = '<span class="msg-error">' + escapeHtml(data.error || "Bulk upload failed") + '</span>';
+      btnEl.disabled = false;
+      return;
+    }
+
+    var succCount = data.uploaded || 0;
+    var errCount = (data.errors || []).length;
+
+    resultEl.innerHTML = '<span class="msg-success">' + succCount + ' of ' + data.total_files + ' documents uploaded!</span>' +
+      (errCount > 0 ? ' <span class="msg-error">(' + errCount + ' errors)</span>' : '') +
+      '<br><span style="font-size:11px;color:var(--text-muted);">~' + (data.chunks_created || 0) + ' chunks will be created</span>';
+
+    if (data.results && data.results.length > 0) {
+      var tableHtml = '<div class="admin-table-wrapper"><table class="admin-table" style="font-size:12px;"><thead><tr>' +
+        '<th>File</th><th>Category</th><th>Est. Chunks</th><th>Status</th></tr></thead><tbody>';
+      for (var j = 0; j < data.results.length; j++) {
+        var r = data.results[j];
+        if (r.status === 'success') {
+          tableHtml += '<tr><td>' + escapeHtml(r.filename) + '</td><td>' + categoryLabel(r.category) + '</td><td>' + (r.chunks || 0) + '</td><td><span style="color:var(--green-light);font-weight:600;">Processing</span></td></tr>';
+        } else {
+          tableHtml += '<tr><td>' + escapeHtml(r.filename) + '</td><td>-</td><td>-</td><td><span style="color:var(--red);font-weight:600;">' + escapeHtml(r.error || 'Failed') + '</span></td></tr>';
+        }
+      }
+      tableHtml += '</tbody></table></div>';
+      detailEl.innerHTML = tableHtml;
+    }
+
+    bulkUploadFiles = [];
+    renderBulkFileList();
+    document.getElementById("bulk-file-input").value = "";
+    loadDtStatsDashboard();
+    loadGogLibrary();
+    loadEnhancedTrainingStatus();
+  } catch (err) {
+    resultEl.innerHTML = '<span class="msg-error">Bulk upload failed: ' + escapeHtml(err.message || "Network error") + '</span>';
+  }
+
+  btnEl.disabled = false;
+}
+
+// ─── Enhanced Training Status (search, filter, pagination, delete) ──
+
+async function loadEnhancedTrainingStatus(page) {
+  var el = document.getElementById("training-status-content");
+  if (!el) return;
+  el.innerHTML = '<div class="admin-loader"><div class="spinner"></div></div>';
+
+  if (page) dtSearchPage = page;
+  var currentPage = dtSearchPage || 1;
+
+  var searchVal = "";
+  var catVal = "";
+  var searchEl = document.getElementById("dt-search");
+  var catEl = document.getElementById("dt-category-filter");
+  if (searchEl) searchVal = searchEl.value.trim();
+  if (catEl) catVal = catEl.value;
+
+  try {
+    var url = "/api/admin/knowledge/documents?page=" + currentPage + "&limit=15";
+    if (catVal) url += "&category=" + encodeURIComponent(catVal);
+    if (searchVal) url += "&search=" + encodeURIComponent(searchVal);
+
+    var docsRes = await apiFetch(url);
+    var docs = await docsRes.json();
+
+    var statusIcons = {
+      ready: '<span style="color:var(--green-light);font-weight:600;">Ready</span>',
+      processing: '<span style="color:var(--gold);font-weight:600;">Processing...</span>',
+      error: '<span style="color:var(--red);font-weight:600;">Error</span>',
+    };
+
+    if ((docs.documents || []).length > 0) {
+      el.innerHTML = '<div class="admin-table-wrapper"><table class="admin-table"><thead><tr>' +
+        '<th>Title</th><th>Source</th><th>Category</th><th>Chunks</th><th>Status</th><th>Date</th><th>Actions</th>' +
+        '</tr></thead><tbody>' +
+        docs.documents.map(function(doc) {
+          return '<tr><td><strong>' + escapeHtml(doc.title) + '</strong></td>' +
+            '<td>' + escapeHtml(doc.source || '-') + '</td>' +
+            '<td><span style="background:var(--bg-primary);padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;">' + categoryLabel(doc.category) + '</span></td>' +
+            '<td>' + (doc.chunk_count || 0) + '</td>' +
+            '<td>' + (statusIcons[doc.status] || doc.status) + '</td>' +
+            '<td>' + formatDateShort(doc.created_at) + '</td>' +
+            '<td><button class="btn-action" onclick="deleteTrainedDoc(\'' + doc.id + '\')" style="font-size:10px;padding:3px 8px;color:var(--red);">Delete</button></td></tr>';
+        }).join("") +
+        '</tbody></table></div>';
+
+      renderPagination("dt-pagination", currentPage, docs.total || 0, 15, "loadEnhancedTrainingStatus");
+    } else {
+      el.innerHTML = '<div class="admin-empty">No documents found' +
+        (searchVal || catVal ? ' matching your filters.' : '. Upload your first document above!') + '</div>';
+      var pagEl = document.getElementById("dt-pagination");
+      if (pagEl) pagEl.innerHTML = "";
+    }
+  } catch (err) {
+    el.innerHTML = '<div class="admin-empty">Failed to load training status</div>';
+  }
+}
+
+async function deleteTrainedDoc(docId) {
+  if (!confirm("Delete this trained document? This will remove all chunks and vector embeddings.")) return;
+  try {
+    var res = await apiFetch("/api/admin/documents/" + docId, { method: "DELETE" });
+    if (res.ok) { loadTrainingStatus(); }
+    else { var d = await res.json(); alert("Delete failed: " + (d.error || "Unknown error")); }
+  } catch (err) { alert("Delete failed: network error"); }
+}
+
+// ─── Single Document Upload & Existing Functions ─────────────────
 
 function updateTrainCharCount() {
   const textarea = document.getElementById("train-doc-content");
@@ -2101,45 +2448,10 @@ async function trainDocument() {
 }
 
 async function loadTrainingStatus() {
-  const el = document.getElementById("training-status-content");
-  if (!el) return;
-  el.innerHTML = '<div class="admin-loader"><div class="spinner"></div></div>';
-
-  try {
-    const [statsRes, docsRes] = await Promise.all([
-      apiFetch("/api/admin/kb/stats"),
-      apiFetch("/api/admin/documents?page=1&limit=10"),
-    ]);
-    const stats = await statsRes.json();
-    const docs = await docsRes.json();
-
-    const statusIcons = {
-      ready: '<span style="color:var(--green-light);font-weight:600;">Ready</span>',
-      processing: '<span style="color:var(--gold);font-weight:600;">Processing...</span>',
-      error: '<span style="color:var(--red);font-weight:600;">Error</span>',
-    };
-
-    el.innerHTML = '<div class="stats-grid" style="margin-bottom:16px;">' +
-      '<div class="stat-card"><div class="stat-value">' + (stats.documents || 0) + '</div><div class="stat-label">Documents</div></div>' +
-      '<div class="stat-card"><div class="stat-value">' + (stats.chunks || 0) + '</div><div class="stat-label">Chunks</div></div>' +
-      '<div class="stat-card green"><div class="stat-value">' + (stats.readyDocs || 0) + '</div><div class="stat-label">Ready</div></div>' +
-      '<div class="stat-card"><div class="stat-value">' + (stats.faqs || 0) + '</div><div class="stat-label">FAQs</div></div>' +
-    '</div>' +
-    ((docs.documents || []).length > 0 ?
-      '<div class="admin-table-wrapper"><table class="admin-table"><thead><tr>' +
-      '<th>Title</th><th>Source</th><th>Category</th><th>Chunks</th><th>Status</th><th>Date</th>' +
-      '</tr></thead><tbody>' +
-      docs.documents.map(function(doc) {
-        return '<tr><td>' + escapeHtml(doc.title) + '</td><td>' + escapeHtml(doc.source || '—') + '</td>' +
-          '<td>' + escapeHtml(doc.category || 'general') + '</td><td>' + (doc.chunk_count || 0) + '</td>' +
-          '<td>' + (statusIcons[doc.status] || doc.status) + '</td><td>' + formatDateShort(doc.created_at) + '</td></tr>';
-      }).join("") +
-      '</tbody></table></div>' :
-      '<div class="admin-empty">No documents trained yet. Upload your first document above!</div>'
-    );
-  } catch {
-    el.innerHTML = '<div class="admin-empty">Failed to load training status</div>';
-  }
+  // Delegate to new enhanced sub-loaders
+  loadDtStatsDashboard();
+  loadGogLibrary();
+  loadEnhancedTrainingStatus();
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -2576,6 +2888,474 @@ async function loadProductivityTab() {
   } catch (err) {
     el.innerHTML = '<div class="admin-empty">Failed to load productivity data</div>';
   }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  TAB: USSD
+// ═══════════════════════════════════════════════════════════════════
+
+let ussdTestHistory = [];
+
+async function loadUSSDTab() {
+  const el = document.getElementById("ussd-content");
+  el.innerHTML = '<div class="admin-loader"><div class="spinner"></div></div>';
+
+  try {
+    // Load config and stats in parallel
+    const [configRes, statsRes] = await Promise.all([
+      apiFetch("/api/admin/ussd/config"),
+      apiFetch("/api/admin/ussd/stats"),
+    ]);
+    const config = await configRes.json();
+    const stats = await statsRes.json();
+
+    const menuLabels = {
+      main: "Main Menu",
+      ask_question: "Ask Question",
+      draft_memo: "Draft Memo",
+      templates: "Templates",
+      template_view: "Template View",
+      account: "My Account",
+      ai_response: "AI Response",
+      memo_response: "Memo Response",
+      error: "Error",
+      end: "Session End",
+    };
+
+    el.innerHTML = `
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">${stats.total_sessions || 0}</div>
+          <div class="stat-label">Total USSD Sessions</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-value">${stats.sessions_today || 0}</div>
+          <div class="stat-label">Sessions Today</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${stats.unique_phones || 0}</div>
+          <div class="stat-label">Unique Phones</div>
+        </div>
+        <div class="stat-card ${config.enabled ? 'green' : ''}">
+          <div class="stat-value">${config.enabled ? 'Active' : 'Disabled'}</div>
+          <div class="stat-label">Service Status</div>
+        </div>
+      </div>
+
+      <div class="admin-row">
+        <!-- USSD Configuration -->
+        <div class="admin-card">
+          <h3>USSD Configuration</h3>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Callback URL</label>
+              <div style="display:flex;gap:8px;">
+                <input type="text" id="ussd-callback-url" value="${escapeHtml(config.callbackUrl || 'https://askozzy.ghwmelite.workers.dev/api/ussd/callback')}" readonly
+                  style="flex:1;padding:10px 14px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:13px;font-family:monospace;outline:none;" />
+                <button class="btn-action" onclick="copyUSSDUrl()" title="Copy URL">Copy</button>
+              </div>
+              <p style="font-size:11px;color:var(--text-muted);margin-top:4px;">Set this URL in your Africa's Talking USSD dashboard</p>
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Service Code</label>
+              <input type="text" id="ussd-service-code" value="${escapeHtml(config.serviceCode || '*713*OZZY#')}"
+                style="width:200px;padding:10px 14px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:14px;outline:none;" />
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-secondary);cursor:pointer;">
+                <input type="checkbox" id="ussd-enabled" ${config.enabled ? 'checked' : ''} style="width:18px;height:18px;cursor:pointer;" />
+                USSD Service Enabled
+              </label>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <button class="btn-action primary" onclick="saveUSSDConfig()">Save Configuration</button>
+              <span id="ussd-config-result" style="font-size:12px;"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Popular Menu Choices -->
+        <div class="admin-card">
+          <h3>Popular Menu Choices</h3>
+          ${(stats.popular_menu_choices || []).length === 0
+            ? '<div class="admin-empty">No USSD sessions yet</div>'
+            : '<div class="admin-table-wrapper"><table class="admin-table"><thead><tr><th>Menu</th><th>Count</th></tr></thead><tbody>' +
+              (stats.popular_menu_choices || []).map(function(m) {
+                return '<tr><td>' + escapeHtml(menuLabels[m.current_menu] || m.current_menu) + '</td><td>' + m.count + '</td></tr>';
+              }).join('') +
+              '</tbody></table></div>'
+          }
+        </div>
+      </div>
+
+      <!-- USSD Test Simulator -->
+      <div class="admin-card" style="margin-top:16px;">
+        <h3>USSD Test Simulator</h3>
+        <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">Test the USSD menu flow without an actual phone. This simulates Africa's Talking callbacks.</p>
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <div style="flex:1;">
+            <div id="ussd-sim-screen" style="background:#1a1a2e;color:#00ff88;font-family:'Courier New',monospace;padding:16px;border-radius:8px;min-height:180px;font-size:13px;line-height:1.6;white-space:pre-wrap;border:2px solid #333;margin-bottom:12px;">Dial to start...</div>
+            <div style="display:flex;gap:8px;">
+              <input type="text" id="ussd-sim-input" placeholder="Enter your response..."
+                style="flex:1;padding:10px 14px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:14px;outline:none;"
+                onkeydown="if(event.key==='Enter')sendUSSDInput()" />
+              <button class="btn-action primary" onclick="sendUSSDInput()">Send</button>
+              <button class="btn-action" onclick="dialUSSD()">Dial</button>
+              <button class="btn-action" onclick="resetUSSDSim()" style="color:var(--error);">End</button>
+            </div>
+          </div>
+          <div style="width:200px;">
+            <div style="font-size:11px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px;">Session Log</div>
+            <div id="ussd-sim-log" style="background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);padding:10px;font-size:11px;color:var(--text-muted);max-height:180px;overflow-y:auto;font-family:monospace;line-height:1.5;">No activity yet</div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    ussdTestHistory = [];
+  } catch (err) {
+    el.innerHTML = '<div class="admin-empty">Failed to load USSD data</div>';
+  }
+}
+
+function copyUSSDUrl() {
+  const input = document.getElementById("ussd-callback-url");
+  if (!input) return;
+  navigator.clipboard.writeText(input.value).then(function() {
+    const btn = input.nextElementSibling;
+    const orig = btn.textContent;
+    btn.textContent = "Copied!";
+    setTimeout(function() { btn.textContent = orig; }, 1500);
+  }).catch(function() {
+    input.select();
+    document.execCommand("copy");
+  });
+}
+
+async function saveUSSDConfig() {
+  const resultEl = document.getElementById("ussd-config-result");
+  resultEl.textContent = "Saving...";
+  resultEl.style.color = "var(--text-muted)";
+
+  try {
+    const serviceCode = document.getElementById("ussd-service-code").value.trim();
+    const enabled = document.getElementById("ussd-enabled").checked;
+
+    const res = await apiFetch("/api/admin/ussd/config", {
+      method: "PUT",
+      body: JSON.stringify({ serviceCode, enabled }),
+    });
+
+    if (res.ok) {
+      resultEl.textContent = "Configuration saved!";
+      resultEl.style.color = "var(--success)";
+    } else {
+      const d = await res.json();
+      resultEl.textContent = d.error || "Failed to save";
+      resultEl.style.color = "var(--error)";
+    }
+  } catch (err) {
+    resultEl.textContent = "Error saving config";
+    resultEl.style.color = "var(--error)";
+  }
+
+  setTimeout(function() { resultEl.textContent = ""; }, 3000);
+}
+
+// ─── USSD Simulator Functions ────────────────────────────────────
+
+async function dialUSSD() {
+  ussdTestHistory = [];
+  updateUSSDLog("Dialing...");
+  await sendUSSDTest("");
+}
+
+async function sendUSSDInput() {
+  const input = document.getElementById("ussd-sim-input");
+  if (!input) return;
+  const value = input.value.trim();
+  if (value === "") return;
+
+  ussdTestHistory.push(value);
+  input.value = "";
+
+  const fullText = ussdTestHistory.join("*");
+  updateUSSDLog("Input: " + value + " (text=" + fullText + ")");
+  await sendUSSDTest(fullText);
+}
+
+async function sendUSSDTest(text) {
+  const screen = document.getElementById("ussd-sim-screen");
+  screen.textContent = "Loading...";
+
+  try {
+    const res = await apiFetch("/api/admin/ussd/test", {
+      method: "POST",
+      body: JSON.stringify({ text }),
+    });
+    const data = await res.json();
+
+    if (data.error) {
+      screen.textContent = "Error: " + data.error;
+      updateUSSDLog("ERROR: " + data.error);
+      return;
+    }
+
+    const responseText = data.response || "";
+    const isEnd = data.isEnd || responseText.startsWith("END");
+
+    // Strip the CON/END prefix for display
+    const display = responseText.replace(/^(CON |END )/, "");
+    screen.textContent = display;
+
+    if (isEnd) {
+      updateUSSDLog("Session ended");
+      ussdTestHistory = [];
+      // Dim the screen slightly to indicate session ended
+      screen.style.color = "#666";
+      setTimeout(function() { screen.style.color = "#00ff88"; }, 2000);
+    } else {
+      updateUSSDLog("Menu displayed");
+    }
+  } catch (err) {
+    screen.textContent = "Connection error. Try again.";
+    updateUSSDLog("ERROR: " + (err.message || "Connection failed"));
+  }
+}
+
+function resetUSSDSim() {
+  ussdTestHistory = [];
+  const screen = document.getElementById("ussd-sim-screen");
+  if (screen) screen.textContent = "Dial to start...";
+  const log = document.getElementById("ussd-sim-log");
+  if (log) log.textContent = "No activity yet";
+  const input = document.getElementById("ussd-sim-input");
+  if (input) input.value = "";
+}
+
+function updateUSSDLog(msg) {
+  const log = document.getElementById("ussd-sim-log");
+  if (!log) return;
+  const time = new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+  if (log.textContent === "No activity yet") {
+    log.textContent = "";
+  }
+  log.textContent += time + " " + msg + "\n";
+  log.scrollTop = log.scrollHeight;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  TAB: Messaging (WhatsApp / SMS)
+// ═══════════════════════════════════════════════════════════════════
+
+async function loadMessagingTab() {
+  await Promise.all([loadMessagingConfig(), loadMessagingStats()]);
+}
+
+async function loadMessagingConfig() {
+  try {
+    const res = await apiFetch("/api/admin/messaging/config");
+    const data = await res.json();
+    const config = data.config || {};
+
+    document.getElementById("msg-whatsapp-enabled").checked = !!config.whatsapp_enabled;
+    document.getElementById("msg-sms-enabled").checked = !!config.sms_enabled;
+    document.getElementById("msg-api-key").value = config.api_key || "";
+    document.getElementById("msg-api-username").value = config.api_username || "";
+    document.getElementById("msg-webhook-secret").value = config.webhook_secret || "";
+    document.getElementById("msg-sender-id").value = config.sender_id || "AskOzzy";
+
+    // Set webhook URLs
+    if (data.webhook_urls) {
+      document.getElementById("msg-wa-webhook-url").value = data.webhook_urls.whatsapp || "";
+      document.getElementById("msg-sms-webhook-url").value = data.webhook_urls.sms || "";
+    }
+  } catch (err) {
+    console.error("Failed to load messaging config:", err);
+  }
+}
+
+async function saveMessagingConfig() {
+  const resultEl = document.getElementById("msg-config-result");
+  resultEl.innerHTML = '<span style="color:var(--text-muted);">Saving...</span>';
+
+  try {
+    const config = {
+      whatsapp_enabled: document.getElementById("msg-whatsapp-enabled").checked,
+      sms_enabled: document.getElementById("msg-sms-enabled").checked,
+      api_key: document.getElementById("msg-api-key").value.trim(),
+      api_username: document.getElementById("msg-api-username").value.trim(),
+      webhook_secret: document.getElementById("msg-webhook-secret").value.trim(),
+      sender_id: document.getElementById("msg-sender-id").value.trim() || "AskOzzy",
+    };
+
+    const res = await apiFetch("/api/admin/messaging/config", {
+      method: "PUT",
+      body: JSON.stringify(config),
+    });
+
+    if (res.ok) {
+      resultEl.innerHTML = '<span style="color:#006B3F;">Configuration saved successfully.</span>';
+    } else {
+      const err = await res.json();
+      resultEl.innerHTML = '<span style="color:#CE1126;">Error: ' + escapeHtml(err.error || "Failed to save") + '</span>';
+    }
+  } catch (err) {
+    resultEl.innerHTML = '<span style="color:#CE1126;">Network error. Please try again.</span>';
+  }
+
+  setTimeout(() => { resultEl.textContent = ""; }, 5000);
+}
+
+async function loadMessagingStats() {
+  try {
+    const res = await apiFetch("/api/admin/messaging/stats");
+    const data = await res.json();
+
+    document.getElementById("msg-stat-sessions").textContent = data.total_sessions || 0;
+    document.getElementById("msg-stat-today").textContent = data.messages_today || 0;
+    document.getElementById("msg-stat-week").textContent = data.messages_this_week || 0;
+    document.getElementById("msg-stat-active").textContent = data.active_sessions || 0;
+
+    // Render sessions table
+    const el = document.getElementById("messaging-sessions-content");
+    const sessions = data.recent_sessions || [];
+
+    if (sessions.length === 0) {
+      el.innerHTML = '<div class="admin-empty">No messaging sessions yet. Use the webhook test above to create one.</div>';
+      return;
+    }
+
+    let html = '<div class="admin-table-wrapper"><table class="admin-table"><thead><tr>' +
+      '<th>Phone Number</th><th>Messages</th><th>Last Message</th><th>Last Response</th><th>Last Active</th><th>Actions</th>' +
+      '</tr></thead><tbody>';
+
+    for (const s of sessions) {
+      const lastMsg = s.last_message ? escapeHtml(s.last_message.substring(0, 60)) + (s.last_message.length > 60 ? '...' : '') : '--';
+      const lastResp = s.last_response ? escapeHtml(s.last_response.substring(0, 60)) + (s.last_response.length > 60 ? '...' : '') : '--';
+
+      html += '<tr>' +
+        '<td><code style="font-size:12px;">' + escapeHtml(s.phone_number) + '</code></td>' +
+        '<td>' + s.message_count + '</td>' +
+        '<td style="font-size:12px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="' + escapeHtml(s.last_message || '') + '">' + lastMsg + '</td>' +
+        '<td style="font-size:12px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="' + escapeHtml(s.last_response || '') + '">' + lastResp + '</td>' +
+        '<td style="font-size:12px;">' + formatDate(s.updated_at) + '</td>' +
+        '<td><button class="btn-action" style="padding:4px 10px;font-size:11px;" onclick="viewSessionMessages(\'' + s.id + '\', \'' + escapeHtml(s.phone_number) + '\')">View</button></td>' +
+        '</tr>';
+    }
+
+    html += '</tbody></table></div>';
+    el.innerHTML = html;
+  } catch (err) {
+    console.error("Failed to load messaging stats:", err);
+    document.getElementById("messaging-sessions-content").innerHTML = '<div class="admin-empty">Failed to load messaging data.</div>';
+  }
+}
+
+async function testMessagingWebhook() {
+  const btn = document.getElementById("btn-msg-test");
+  const resultDiv = document.getElementById("msg-test-result");
+  const responseDiv = document.getElementById("msg-test-response");
+  const message = document.getElementById("msg-test-input").value.trim() || "What is the procurement threshold for goods?";
+  const channel = document.getElementById("msg-test-channel").value;
+
+  btn.disabled = true;
+  btn.textContent = "Sending...";
+  resultDiv.style.display = "none";
+
+  try {
+    const res = await apiFetch("/api/admin/messaging/test", {
+      method: "POST",
+      body: JSON.stringify({ channel, message }),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      resultDiv.style.display = "block";
+      const responses = Array.isArray(data.response) ? data.response : [data.response];
+      responseDiv.textContent = responses.join("\n\n---\n\n");
+
+      // Refresh stats after test
+      setTimeout(loadMessagingStats, 500);
+    } else {
+      resultDiv.style.display = "block";
+      responseDiv.innerHTML = '<span style="color:#CE1126;">Error: ' + escapeHtml(data.error || "Test failed") + '</span>';
+    }
+  } catch (err) {
+    resultDiv.style.display = "block";
+    responseDiv.innerHTML = '<span style="color:#CE1126;">Network error. Please try again.</span>';
+  }
+
+  btn.disabled = false;
+  btn.textContent = "Send Test";
+}
+
+async function viewSessionMessages(sessionId, phoneNumber) {
+  const modal = document.getElementById("wa-message-modal");
+  const titleEl = document.getElementById("wa-modal-title");
+  const subtitleEl = document.getElementById("wa-modal-subtitle");
+  const bodyEl = document.getElementById("wa-modal-body");
+
+  modal.style.display = "flex";
+  titleEl.textContent = "Session Messages";
+  subtitleEl.textContent = phoneNumber;
+  bodyEl.innerHTML = '<div class="admin-loader"><div class="spinner"></div></div>';
+
+  try {
+    const res = await apiFetch("/api/admin/messaging/sessions/" + sessionId + "/messages");
+    const data = await res.json();
+    const messages = data.messages || [];
+
+    if (messages.length === 0) {
+      bodyEl.innerHTML = '<div class="admin-empty">No messages in this session.</div>';
+      return;
+    }
+
+    let html = '';
+    for (const msg of messages) {
+      const isInbound = msg.direction === "inbound";
+      const align = isInbound ? "flex-start" : "flex-end";
+      const bg = isInbound ? "var(--bg-tertiary)" : "var(--gold)";
+      const color = isInbound ? "var(--text-primary)" : "#000";
+      const label = isInbound ? "User" : "Ozzy";
+      const channelBadge = msg.channel === "sms"
+        ? '<span style="font-size:9px;background:var(--bg-primary);color:var(--text-muted);padding:1px 5px;border-radius:3px;margin-left:6px;">SMS</span>'
+        : '<span style="font-size:9px;background:var(--bg-primary);color:var(--text-muted);padding:1px 5px;border-radius:3px;margin-left:6px;">WA</span>';
+
+      html += '<div style="display:flex;justify-content:' + align + ';margin-bottom:12px;">' +
+        '<div style="max-width:80%;background:' + bg + ';color:' + color + ';border-radius:12px;padding:10px 14px;font-size:13px;">' +
+        '<div style="font-size:10px;font-weight:600;margin-bottom:4px;opacity:0.7;">' + label + channelBadge + ' &middot; ' + formatDate(msg.created_at) + '</div>' +
+        '<div style="white-space:pre-wrap;word-wrap:break-word;">' + escapeHtml(msg.content) + '</div>' +
+        '</div></div>';
+    }
+
+    bodyEl.innerHTML = html;
+    bodyEl.scrollTop = bodyEl.scrollHeight;
+  } catch (err) {
+    bodyEl.innerHTML = '<div class="admin-empty">Failed to load messages.</div>';
+  }
+}
+
+function copyToClipboard(text) {
+  if (!text) return;
+  navigator.clipboard.writeText(text).then(() => {
+    // Brief visual feedback — we don't have a toast system, just use a small alert
+    const el = document.activeElement;
+    if (el && el.textContent === "Copy") {
+      const orig = el.textContent;
+      el.textContent = "Copied!";
+      setTimeout(() => { el.textContent = orig; }, 1500);
+    }
+  }).catch(() => {
+    // Fallback for older browsers
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+  });
 }
 
 // ─── Init ───────────────────────────────────────────────────────────
