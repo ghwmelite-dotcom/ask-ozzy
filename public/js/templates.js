@@ -931,6 +931,418 @@ Maintain accuracy while making the content accessible to a non-specialist reader
   },
 ];
 
+// ═══════════════════════════════════════════════════════════════════
+//  STUDENT-ONLY TEMPLATES
+// ═══════════════════════════════════════════════════════════════════
+
+// ─── ESSAY WRITING ─────────────────────────────────────────────────
+TEMPLATES.push(
+  {
+    id: "essay-argumentative",
+    category: "Essay Writing",
+    icon: "✍️",
+    title: "Argumentative Essay",
+    description: "Build a structured argumentative essay with thesis, evidence, and counterarguments",
+    studentOnly: true,
+    prompt: `Help me write an argumentative essay on the following topic:
+
+TOPIC: [Your essay topic]
+POSITION: [For / Against / Nuanced]
+WORD COUNT TARGET: [e.g. 500, 1000, 1500 words]
+LEVEL: [SHS / University undergraduate / University postgraduate]
+
+Please provide:
+1. A strong thesis statement
+2. Essay outline with main arguments and counterarguments
+3. Introduction paragraph with hook, context, and thesis
+4. Body paragraphs with topic sentences, evidence, and analysis
+5. Counterargument paragraph with rebuttal
+6. Conclusion that reinforces the thesis
+7. Tips for improving the essay further`,
+    placeholders: ["Your essay topic", "Your position", "Word count target", "Academic level"],
+  },
+  {
+    id: "essay-expository",
+    category: "Essay Writing",
+    icon: "📖",
+    title: "Expository Essay",
+    description: "Explain a topic clearly with facts, examples, and logical structure",
+    studentOnly: true,
+    prompt: `Help me write an expository essay explaining the following topic:
+
+TOPIC: [What you need to explain]
+PURPOSE: [Inform / Define / Compare / Analyse cause-effect]
+AUDIENCE: [Teacher / Examiner / General reader]
+WORD COUNT: [Target word count]
+
+Please provide:
+1. Clear thesis statement that previews main points
+2. Detailed outline
+3. Introduction with engaging opening
+4. Body paragraphs with facts, examples, and explanations
+5. Transition sentences between paragraphs
+6. Conclusion summarising key points
+7. Checklist for self-review`,
+    placeholders: ["Topic to explain", "Purpose", "Audience", "Word count"],
+  },
+  {
+    id: "essay-narrative",
+    category: "Essay Writing",
+    icon: "📝",
+    title: "Narrative / Creative Writing",
+    description: "Craft a compelling story with plot, characters, and vivid descriptions",
+    studentOnly: true,
+    prompt: `Help me write a narrative/creative piece with the following details:
+
+THEME/PROMPT: [Story theme or writing prompt]
+GENRE: [Personal narrative / Short story / Descriptive essay]
+SETTING: [Where and when the story takes place]
+WORD COUNT: [Target word count]
+
+Please provide:
+1. Story outline (beginning, rising action, climax, falling action, resolution)
+2. Character sketches for main characters
+3. Opening paragraph with a hook
+4. Descriptive passages using sensory details
+5. Dialogue examples (if applicable)
+6. A satisfying conclusion
+7. Literary devices used (metaphor, simile, imagery, etc.)`,
+    placeholders: ["Story theme or prompt", "Genre", "Setting", "Word count"],
+  },
+  {
+    id: "essay-literature",
+    category: "Essay Writing",
+    icon: "📚",
+    title: "Literature Analysis",
+    description: "Analyse literary works — themes, characters, style, and context",
+    studentOnly: true,
+    prompt: `Help me analyse the following literary work:
+
+TITLE: [Book/Play/Poem title]
+AUTHOR: [Author name]
+FOCUS: [Theme / Character / Style / Historical context / Symbolism]
+SPECIFIC QUESTION: [What your teacher/examiner is asking]
+
+Please provide:
+1. Brief summary of the work
+2. Analysis of the chosen focus area
+3. Key quotes with page references and analysis
+4. How the author's techniques support the theme
+5. Comparison with other works (if relevant)
+6. Essay structure for writing up the analysis
+7. Common mistakes to avoid in literature essays`,
+    placeholders: ["Book/Play/Poem title", "Author name", "Focus area", "Specific question"],
+  }
+);
+
+// ─── EXAM PREPARATION ──────────────────────────────────────────────
+TEMPLATES.push(
+  {
+    id: "exam-wassce",
+    category: "Exam Preparation",
+    icon: "🎓",
+    title: "WASSCE Subject Review",
+    description: "Revise any WASSCE subject with key topics, past questions, and exam tips",
+    studentOnly: true,
+    prompt: `Help me revise for WASSCE in the following subject:
+
+SUBJECT: [e.g. Mathematics, English, Biology, Economics]
+SPECIFIC TOPIC: [e.g. Quadratic equations, Organic Chemistry, Supply & Demand]
+AREAS OF DIFFICULTY: [What you struggle with]
+TARGET GRADE: [e.g. A1, B2, B3]
+
+Please provide:
+1. Key concepts and definitions for this topic
+2. Summary notes in bullet point format
+3. 5 practice questions (mix of objectives and theory) with solutions
+4. Common mistakes students make in this topic
+5. WAEC examiner tips for this subject
+6. Memory aids (mnemonics, diagrams, tables)
+7. Recommended study approach for the remaining revision period`,
+    placeholders: ["Subject", "Specific topic", "Areas of difficulty", "Target grade"],
+  },
+  {
+    id: "exam-bece",
+    category: "Exam Preparation",
+    icon: "📝",
+    title: "BECE Revision",
+    description: "Prepare for BECE with topic summaries and practice questions",
+    studentOnly: true,
+    prompt: `Help me prepare for BECE in the following subject:
+
+SUBJECT: [e.g. Mathematics, English, Integrated Science, Social Studies]
+TOPIC: [Specific topic to revise]
+WHAT I FIND DIFFICULT: [Areas of confusion]
+
+Please provide:
+1. Simple explanation of the topic
+2. Key points to remember
+3. Worked examples (step by step)
+4. 5 practice questions with answers
+5. Tips for answering BECE-style questions
+6. A quick revision checklist`,
+    placeholders: ["Subject", "Topic", "What you find difficult"],
+  },
+  {
+    id: "exam-university",
+    category: "Exam Preparation",
+    icon: "🏫",
+    title: "University Exam Prep",
+    description: "Prepare for university-level exams with structured revision",
+    studentOnly: true,
+    prompt: `Help me prepare for my university exam:
+
+COURSE: [Course name and code]
+TOPIC/CHAPTER: [What to revise]
+EXAM FORMAT: [MCQ / Essay / Short answer / Problem-solving / Mixed]
+LECTURER'S FOCUS AREAS: [Topics emphasised in class]
+
+Please provide:
+1. Comprehensive topic summary
+2. Key theories, models, or frameworks
+3. Definitions of important terms
+4. Sample exam questions with model answers
+5. How to structure essay answers for maximum marks
+6. Time management tips for the exam format
+7. Last-minute revision checklist`,
+    placeholders: ["Course name", "Topic/chapter", "Exam format", "Focus areas"],
+  },
+  {
+    id: "exam-quiz",
+    category: "Exam Preparation",
+    icon: "❓",
+    title: "Practice Quiz Generator",
+    description: "Generate practice quizzes on any subject or topic",
+    studentOnly: true,
+    prompt: `Generate a practice quiz for me:
+
+SUBJECT: [Subject area]
+TOPIC: [Specific topic]
+DIFFICULTY: [Easy / Medium / Hard / WASSCE-level / University-level]
+NUMBER OF QUESTIONS: [e.g. 10, 20]
+FORMAT: [Multiple choice / True-False / Short answer / Mixed]
+
+Please:
+1. Generate the requested questions
+2. Include answer options for MCQs (A, B, C, D)
+3. Provide the answer key at the end
+4. Add explanations for each correct answer
+5. Mark difficulty level for each question
+6. Include at least 2 "tricky" questions that test deep understanding`,
+    placeholders: ["Subject", "Topic", "Difficulty level", "Number of questions", "Question format"],
+  }
+);
+
+// ─── STUDY SKILLS ──────────────────────────────────────────────────
+TEMPLATES.push(
+  {
+    id: "study-timetable",
+    category: "Study Skills",
+    icon: "📅",
+    title: "Study Timetable Creator",
+    description: "Create a personalised study timetable based on your subjects and goals",
+    studentOnly: true,
+    prompt: `Help me create a study timetable:
+
+SUBJECTS: [List all subjects you're studying]
+EXAM DATE / DEADLINE: [When you need to be ready]
+AVAILABLE STUDY HOURS PER DAY: [e.g. 4-6 hours]
+WEAK SUBJECTS: [Subjects needing more time]
+PREFERRED STUDY TIMES: [Morning / Afternoon / Evening]
+OTHER COMMITMENTS: [Sports, chores, work, etc.]
+
+Please create:
+1. Weekly study timetable (Monday to Sunday)
+2. Time allocation based on subject difficulty
+3. Built-in breaks (Pomodoro style: 25 min study, 5 min break)
+4. Revision sessions for previously covered topics
+5. Weekend intensive review sessions
+6. Tips for sticking to the timetable
+7. A progress tracking checklist`,
+    placeholders: ["Subjects", "Exam date", "Study hours per day", "Weak subjects", "Preferred study times"],
+  },
+  {
+    id: "study-notes",
+    category: "Study Skills",
+    icon: "📝",
+    title: "Note-Taking Guide",
+    description: "Learn effective note-taking methods and get organised notes on any topic",
+    studentOnly: true,
+    prompt: `Help me take effective notes on the following:
+
+SUBJECT: [Subject]
+TOPIC: [Specific topic or lecture content]
+NOTE-TAKING METHOD: [Cornell / Mind Map / Outline / Summary / Let Ozzy decide]
+SOURCE: [Textbook chapter / Lecture / Video / Article]
+
+Please provide:
+1. Structured notes using the chosen method
+2. Key terms highlighted and defined
+3. Main ideas vs. supporting details clearly separated
+4. Diagrams or visual representations (described)
+5. Summary section (3-5 key takeaways)
+6. Review questions for self-testing
+7. Tips for reviewing these notes effectively`,
+    placeholders: ["Subject", "Topic", "Note-taking method", "Source material"],
+  },
+  {
+    id: "study-summarizer",
+    category: "Study Skills",
+    icon: "📋",
+    title: "Subject Summarizer",
+    description: "Get concise summaries of any topic, chapter, or subject area",
+    studentOnly: true,
+    prompt: `Summarise the following topic for me:
+
+SUBJECT: [Subject]
+TOPIC/CHAPTER: [What to summarise]
+LEVEL OF DETAIL: [Brief overview / Detailed summary / Exam-ready notes]
+MY LEVEL: [JHS / SHS / University]
+
+Please provide:
+1. One-paragraph overview
+2. Detailed bullet-point summary of all key concepts
+3. Important formulas, dates, or facts (if applicable)
+4. Connections to other topics in the subject
+5. Common exam questions on this topic
+6. A "Remember This" box with the most testable points`,
+    placeholders: ["Subject", "Topic/chapter", "Level of detail", "Academic level"],
+  },
+  {
+    id: "study-explainer",
+    category: "Study Skills",
+    icon: "💡",
+    title: "Concept Explainer",
+    description: "Get any difficult concept explained simply with real-world examples",
+    studentOnly: true,
+    prompt: `Explain this concept to me in a way I can understand:
+
+CONCEPT: [What you need explained]
+SUBJECT: [Which subject this is from]
+WHAT I ALREADY KNOW: [Your current understanding]
+WHAT CONFUSES ME: [Specific part that's unclear]
+
+Please:
+1. Explain using simple language first (ELI5 — Explain Like I'm 5)
+2. Then give the proper academic explanation
+3. Use a real-world analogy or Ghana-related example
+4. Provide a diagram or visual description
+5. Show how this connects to other concepts
+6. Give 2-3 practice problems to test understanding
+7. Suggest resources for deeper learning`,
+    placeholders: ["Concept to explain", "Subject", "What you already know", "What confuses you"],
+  }
+);
+
+// ─── ACADEMIC WRITING ──────────────────────────────────────────────
+TEMPLATES.push(
+  {
+    id: "academic-proposal",
+    category: "Academic Writing",
+    icon: "📄",
+    title: "Thesis / Project Proposal",
+    description: "Structure a research proposal for your thesis or final year project",
+    studentOnly: true,
+    prompt: `Help me write a research proposal:
+
+TOPIC AREA: [Your research area]
+PROPOSED TITLE: [Working title]
+DEGREE LEVEL: [Undergraduate / Masters / PhD]
+DEPARTMENT: [Your department]
+UNIVERSITY: [Your university]
+
+Please provide:
+1. Refined research title
+2. Background / Introduction (context and importance)
+3. Problem Statement
+4. Research Objectives (general + specific)
+5. Research Questions or Hypotheses
+6. Brief Literature Review outline
+7. Methodology (research design, population, sampling, data collection, analysis)
+8. Significance of the Study
+9. Scope and Limitations
+10. Tentative Chapter Outline
+11. Preliminary References (APA 7th format)
+12. Timeline / Work Plan`,
+    placeholders: ["Research area", "Proposed title", "Degree level", "Department", "University"],
+  },
+  {
+    id: "academic-litreview",
+    category: "Academic Writing",
+    icon: "📖",
+    title: "Literature Review",
+    description: "Structure and write a literature review for your research",
+    studentOnly: true,
+    prompt: `Help me write a literature review:
+
+RESEARCH TOPIC: [Your research topic]
+KEY THEMES: [Main themes to cover]
+SOURCES FOUND SO FAR: [List any papers/books you've already found]
+CITATION STYLE: [APA 7th / Harvard / Other]
+
+Please provide:
+1. Suggested structure (thematic, chronological, or methodological)
+2. Key themes and sub-themes to organise the review
+3. How to introduce the literature review section
+4. Sample paragraphs showing how to synthesise multiple sources
+5. Transition phrases between themes
+6. How to identify gaps in the literature
+7. Conclusion that links to your research objectives
+8. Tips for avoiding plagiarism in literature reviews`,
+    placeholders: ["Research topic", "Key themes", "Sources found", "Citation style"],
+  },
+  {
+    id: "academic-labreport",
+    category: "Academic Writing",
+    icon: "🧪",
+    title: "Lab Report",
+    description: "Write a structured lab report for science experiments",
+    studentOnly: true,
+    prompt: `Help me write a lab report:
+
+EXPERIMENT TITLE: [Name of the experiment]
+SUBJECT: [Biology / Chemistry / Physics / Other]
+AIM: [What the experiment aimed to achieve]
+MATERIALS USED: [List of materials and equipment]
+PROCEDURE: [Brief description of what you did]
+RESULTS: [Your observations and data]
+
+Please provide:
+1. Formatted Title Page
+2. Abstract (150-200 words)
+3. Introduction with background theory
+4. Materials and Methods (past tense, passive voice)
+5. Results section with suggested tables/graphs
+6. Discussion (explain results, compare with theory, sources of error)
+7. Conclusion
+8. References (APA 7th format)`,
+    placeholders: ["Experiment title", "Subject", "Aim", "Materials", "Procedure", "Results"],
+  },
+  {
+    id: "academic-citation",
+    category: "Academic Writing",
+    icon: "📎",
+    title: "Citation Helper",
+    description: "Format citations and references in APA, Harvard, or other styles",
+    studentOnly: true,
+    prompt: `Help me with citations and referencing:
+
+CITATION STYLE: [APA 7th / Harvard / MLA / Chicago]
+TASK: [Format a reference list / Create in-text citations / Check my references / Explain citation rules]
+
+SOURCES TO CITE:
+[Paste your source details here — title, author, year, publisher, URL, etc.]
+
+Please provide:
+1. Properly formatted references for each source
+2. In-text citation examples for each source
+3. Common mistakes to avoid with this citation style
+4. Rules for citing different source types (book, journal, website, etc.)
+5. How to handle sources with no author, no date, or multiple authors`,
+    placeholders: ["Citation style", "Task", "Source details"],
+  }
+);
+
 // Category definitions for the UI
 const TEMPLATE_CATEGORIES = [
   { id: "Memo Drafting", icon: "📝", color: "#D4AF37" },
@@ -942,4 +1354,9 @@ const TEMPLATE_CATEGORIES = [
   { id: "IT Support", icon: "🔧", color: "#FF8C00" },
   { id: "Web & Development", icon: "🌐", color: "#20B2AA" },
   { id: "General", icon: "📋", color: "#708090" },
+  // Student-only categories
+  { id: "Essay Writing", icon: "✍️", color: "#E91E63", studentOnly: true },
+  { id: "Exam Preparation", icon: "📝", color: "#FF5722", studentOnly: true },
+  { id: "Study Skills", icon: "📅", color: "#9C27B0", studentOnly: true },
+  { id: "Academic Writing", icon: "🎓", color: "#3F51B5", studentOnly: true },
 ];

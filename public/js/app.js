@@ -58,7 +58,77 @@ let state = {
   language: 'en',
   voiceMode: false,
   spacesLoaded: false,
+  userType: null,
 };
+
+// ─── Persona System ─────────────────────────────────────────────────
+let _selectedPersona = 'gog_employee';
+
+function selectPersona(type, btn) {
+  _selectedPersona = type;
+  document.querySelectorAll('.persona-option').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  // Update dept label and placeholder based on persona
+  const deptLabel = document.getElementById('reg-dept-label');
+  const deptInput = document.getElementById('reg-dept');
+  if (type === 'student') {
+    if (deptLabel) deptLabel.textContent = 'School / Institution';
+    if (deptInput) deptInput.placeholder = 'e.g. University of Ghana';
+  } else {
+    if (deptLabel) deptLabel.textContent = 'Department / MDA';
+    if (deptInput) deptInput.placeholder = 'e.g. Ministry of Finance';
+  }
+}
+
+function selectWelcomePersona(type, btn) {
+  _selectedPersona = type;
+  // Update welcome screen buttons
+  document.querySelectorAll('.welcome-persona-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  // Sync the registration form selector too
+  document.querySelectorAll('.persona-option').forEach(b => {
+    b.classList.toggle('active', b.onclick && b.outerHTML.includes(type));
+  });
+  // Apply persona to pre-login state
+  state.userType = type;
+  localStorage.setItem('askozzy_persona', type);
+  applyPersonaUI();
+  renderCategoryTabs();
+  renderTemplateGrid();
+  // Update dept label in registration form
+  selectPersona(type, null);
+}
+
+function isStudent() {
+  return state.userType === 'student';
+}
+
+function getPersonaTemplates() {
+  if (isStudent()) return TEMPLATES.filter(t => t.studentOnly);
+  return TEMPLATES; // GoG employees see ALL templates
+}
+
+function getPersonaCategories() {
+  if (isStudent()) return TEMPLATE_CATEGORIES.filter(c => c.studentOnly);
+  return TEMPLATE_CATEGORIES; // GoG employees see ALL categories
+}
+
+function applyPersonaUI() {
+  const subtitle = document.getElementById('welcome-subtitle');
+  const sidebarSub = document.getElementById('sidebar-subtitle');
+  const welcomeSelector = document.getElementById('welcome-persona-selector');
+  if (isStudent()) {
+    if (subtitle) subtitle.textContent = 'Your AI study companion for academic success. Choose a template below or start a free conversation.';
+    if (sidebarSub) sidebarSub.textContent = 'AI for Ghana Students';
+  } else {
+    if (subtitle) subtitle.textContent = 'Your private AI assistant for GoG operations. Choose a template below or start a free conversation.';
+    if (sidebarSub) sidebarSub.textContent = 'AI for All GoG Staff';
+  }
+  // Hide welcome persona selector when logged in (persona is saved in account)
+  if (welcomeSelector) {
+    welcomeSelector.style.display = isLoggedIn() ? 'none' : '';
+  }
+}
 
 // ─── Adinkra Symbol System ───────────────────────────────────────────
 
@@ -274,7 +344,22 @@ document.addEventListener("DOMContentLoaded", () => {
     if (regRefInput) regRefInput.value = refCode;
   }
 
+  // Restore persona choice for pre-login visitors
+  const savedPersona = localStorage.getItem('askozzy_persona');
+  if (savedPersona) {
+    _selectedPersona = savedPersona;
+    state.userType = savedPersona;
+    applyPersonaUI();
+    renderTemplateGrid();
+    renderCategoryTabs();
+    // Sync welcome selector buttons
+    document.querySelectorAll('.welcome-persona-btn').forEach(b => {
+      b.classList.toggle('active', b.outerHTML.includes(savedPersona));
+    });
+  }
+
   if (state.token && state.user) {
+    state.userType = state.user.userType || 'gog_employee';
     onAuthenticated();
   }
 });
@@ -304,6 +389,9 @@ function isLoggedIn() {
 function openAuthModal() {
   document.getElementById("auth-modal").classList.add("active");
   document.getElementById("auth-error").classList.remove("visible");
+  // Show passkey login button if WebAuthn is supported
+  const passkeyBtn = document.getElementById("passkey-login-btn");
+  if (passkeyBtn) passkeyBtn.style.display = window.PublicKeyCredential ? "" : "none";
   // Focus the first input
   setTimeout(() => {
     const visible = document.getElementById("login-form").classList.contains("hidden")
@@ -313,19 +401,10 @@ function openAuthModal() {
   }, 100);
 }
 
-let _pendingCodeReveal = false;
-
 function closeAuthModal() {
-  if (_pendingCodeReveal) {
-    if (!confirm("You haven't saved your access code yet! Are you sure you want to close? You won't be able to see it again.")) {
-      return;
-    }
-    _pendingCodeReveal = false;
-    onAuthenticated();
-  }
-  // Reset code reveal UI
-  const codeReveal = document.getElementById("code-reveal");
-  if (codeReveal) codeReveal.classList.add("hidden");
+  // Reset TOTP setup step UI
+  const totpSetup = document.getElementById("totp-setup-step");
+  if (totpSetup) totpSetup.classList.add("hidden");
   document.getElementById("login-form").classList.remove("hidden");
   document.getElementById("register-form").classList.add("hidden");
   const authToggle = document.querySelector(".auth-toggle");
@@ -348,17 +427,6 @@ function toggleAuthForm() {
 
   errorEl.classList.remove("visible");
 
-  // Reset code reveal if it's visible
-  const codeReveal = document.getElementById("code-reveal");
-  if (codeReveal && !codeReveal.classList.contains("hidden")) {
-    codeReveal.classList.add("hidden");
-    const authToggle = document.querySelector(".auth-toggle");
-    if (authToggle) authToggle.style.display = "";
-    const privacyBanner = document.querySelector("#auth-modal .privacy-banner");
-    if (privacyBanner) privacyBanner.style.display = "";
-    _pendingCodeReveal = false;
-  }
-
   if (loginForm.classList.contains("hidden")) {
     loginForm.classList.remove("hidden");
     registerForm.classList.add("hidden");
@@ -380,7 +448,13 @@ function showAuthError(msg) {
   el.classList.add("visible");
 }
 
-function showAccessCodeReveal(code) {
+
+// ─── TOTP Setup (New Registration Flow) ─────────────────────────────
+
+let _pendingTOTPEmail = null;
+
+function showTOTPSetup(totpUri, totpSecret, recoveryCode, email) {
+  _pendingTOTPEmail = email;
   document.getElementById("auth-error").classList.remove("visible");
   document.getElementById("login-form").classList.add("hidden");
   document.getElementById("register-form").classList.add("hidden");
@@ -389,43 +463,213 @@ function showAccessCodeReveal(code) {
   const privacyBanner = document.querySelector("#auth-modal .privacy-banner");
   if (privacyBanner) privacyBanner.style.display = "none";
 
-  document.getElementById("code-reveal").classList.remove("hidden");
-  document.getElementById("reveal-code-display").textContent = code;
-  document.getElementById("auth-modal-title").textContent = "Account Created!";
-  _pendingCodeReveal = true;
+  document.getElementById("totp-setup-step").classList.remove("hidden");
+  document.getElementById("totp-qr-img").src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(totpUri)}`;
+  document.getElementById("totp-manual-secret").textContent = totpSecret;
+  document.getElementById("recovery-code-value").textContent = recoveryCode;
+  document.getElementById("totp-setup-error").textContent = "";
+  document.getElementById("totp-setup-code").value = "";
+  document.getElementById("auth-modal-title").textContent = "Set Up Authenticator";
 }
 
-function copyAccessCode() {
-  const code = document.getElementById("reveal-code-display").textContent;
+function copyRecoveryCode() {
+  const code = document.getElementById("recovery-code-value").textContent;
   navigator.clipboard.writeText(code).then(() => {
-    const btn = document.getElementById("btn-copy-code");
+    const btn = document.getElementById("btn-copy-recovery");
     btn.textContent = "Copied!";
-    btn.style.background = "var(--green-light)";
-    setTimeout(() => {
-      btn.textContent = "Copy Code";
-      btn.style.background = "var(--gold)";
-    }, 2000);
+    setTimeout(() => { btn.textContent = "Copy"; }, 2000);
   });
 }
 
-function finishRegistration() {
-  _pendingCodeReveal = false;
-  document.getElementById("code-reveal").classList.add("hidden");
-  // Restore form visibility for next time
-  document.getElementById("login-form").classList.remove("hidden");
-  document.getElementById("register-form").classList.add("hidden");
-  const authToggle = document.querySelector(".auth-toggle");
-  if (authToggle) authToggle.style.display = "";
-  const privacyBanner = document.querySelector("#auth-modal .privacy-banner");
-  if (privacyBanner) privacyBanner.style.display = "";
-  document.getElementById("auth-modal-title").textContent = "Sign in to AskOzzy";
+async function verifyTOTPSetup() {
+  const code = document.getElementById("totp-setup-code").value.trim();
+  const errEl = document.getElementById("totp-setup-error");
+  const btn = document.getElementById("btn-verify-totp-setup");
 
-  document.getElementById("auth-modal").classList.remove("active");
-  onAuthenticated();
+  if (code.length !== 6 || !/^\d{6}$/.test(code)) {
+    errEl.textContent = "Enter a 6-digit code from your authenticator app";
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = "Verifying...";
+  errEl.textContent = "";
+
+  try {
+    const res = await fetch(`${API}/api/auth/register/verify-totp`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: _pendingTOTPEmail, code }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Verification failed");
+
+    state.token = data.token;
+    state.user = data.user;
+    state.userType = data.user.userType || 'gog_employee';
+    localStorage.setItem("askozzy_token", data.token);
+    localStorage.setItem("askozzy_user", JSON.stringify(state.user));
+
+    // Clean up and redirect
+    document.getElementById("totp-setup-step").classList.add("hidden");
+    document.getElementById("login-form").classList.remove("hidden");
+    document.getElementById("register-form").classList.add("hidden");
+    const authToggle = document.querySelector(".auth-toggle");
+    if (authToggle) authToggle.style.display = "";
+    const privacyBanner = document.querySelector("#auth-modal .privacy-banner");
+    if (privacyBanner) privacyBanner.style.display = "";
+    document.getElementById("auth-modal-title").textContent = "Sign in to AskOzzy";
+
+    document.getElementById("auth-modal").classList.remove("active");
+    _pendingTOTPEmail = null;
+    onAuthenticated();
+  } catch (err) {
+    errEl.textContent = err.message;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Verify & Complete Registration";
+  }
+}
+
+
+// ─── Passkey (WebAuthn) Functions ────────────────────────────────────
+
+async function loginWithPasskey() {
+  const email = document.getElementById("login-email").value;
+  if (!email) {
+    showAuthError("Please enter your email first");
+    return;
+  }
+
+  try {
+    // Get login options
+    const optRes = await fetch(`${API}/api/auth/webauthn/login-options`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    const options = await optRes.json();
+    if (!optRes.ok) throw new Error(options.error || "Failed to get passkey options");
+
+    // Convert base64url to ArrayBuffer
+    const challenge = base64urlToBuffer(options.challenge);
+    const allowCredentials = options.allowCredentials.map(c => ({
+      type: c.type,
+      id: base64urlToBuffer(c.id),
+    }));
+
+    // Call WebAuthn API
+    const assertion = await navigator.credentials.get({
+      publicKey: {
+        challenge,
+        rpId: options.rpId,
+        allowCredentials,
+        userVerification: options.userVerification,
+        timeout: options.timeout,
+      },
+    });
+
+    // Send assertion to server
+    const completeRes = await fetch(`${API}/api/auth/webauthn/login-complete`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+        credentialId: bufferToBase64url(assertion.rawId),
+        authenticatorData: bufferToBase64url(assertion.response.authenticatorData),
+        clientDataJSON: bufferToBase64url(assertion.response.clientDataJSON),
+        signature: bufferToBase64url(assertion.response.signature),
+      }),
+    });
+    const data = await completeRes.json();
+    if (!completeRes.ok) throw new Error(data.error || "Passkey login failed");
+
+    state.token = data.token;
+    state.user = data.user;
+    state.userType = data.user.userType || 'gog_employee';
+    localStorage.setItem("askozzy_token", data.token);
+    localStorage.setItem("askozzy_user", JSON.stringify(state.user));
+    closeAuthModal();
+    onAuthenticated();
+  } catch (err) {
+    if (err.name === "NotAllowedError") return; // User cancelled
+    showAuthError(err.message || "Passkey login failed");
+  }
+}
+
+async function addPasskey() {
+  if (!isLoggedIn()) return;
+
+  try {
+    const optRes = await fetch(`${API}/api/auth/webauthn/register-options`, {
+      method: "POST",
+      headers: authHeaders(),
+    });
+    const options = await optRes.json();
+    if (!optRes.ok) throw new Error(options.error || "Failed to get registration options");
+
+    const credential = await navigator.credentials.create({
+      publicKey: {
+        challenge: base64urlToBuffer(options.challenge),
+        rp: options.rp,
+        user: {
+          id: base64urlToBuffer(options.user.id),
+          name: options.user.name,
+          displayName: options.user.displayName,
+        },
+        pubKeyCredParams: options.pubKeyCredParams,
+        authenticatorSelection: options.authenticatorSelection,
+        timeout: options.timeout,
+        excludeCredentials: (options.excludeCredentials || []).map(c => ({
+          type: c.type,
+          id: base64urlToBuffer(c.id),
+        })),
+      },
+    });
+
+    const completeRes = await fetch(`${API}/api/auth/webauthn/register-complete`, {
+      method: "POST",
+      headers: authHeaders(),
+      body: JSON.stringify({
+        credentialId: bufferToBase64url(credential.rawId),
+        attestationObject: bufferToBase64url(credential.response.attestationObject),
+        clientDataJSON: bufferToBase64url(credential.response.clientDataJSON),
+      }),
+    });
+    const data = await completeRes.json();
+    if (!completeRes.ok) throw new Error(data.error || "Failed to register passkey");
+
+    alert("Passkey registered successfully! You can now sign in with your fingerprint or Face ID.");
+  } catch (err) {
+    if (err.name === "NotAllowedError") return;
+    alert("Failed to add passkey: " + (err.message || "Unknown error"));
+  }
+}
+
+// ─── Base64url <-> ArrayBuffer utilities ────────────────────────────
+
+function base64urlToBuffer(base64url) {
+  const base64 = base64url.replace(/-/g, "+").replace(/_/g, "/");
+  const pad = base64.length % 4;
+  const padded = pad ? base64 + "=".repeat(4 - pad) : base64;
+  const binary = atob(padded);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return bytes.buffer;
+}
+
+function bufferToBase64url(buffer) {
+  const bytes = new Uint8Array(buffer);
+  let binary = "";
+  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
 }
 
 // Runs after successful login or register
 function onAuthenticated() {
+  applyPersonaUI();
+  renderTemplateGrid();
+  renderCategoryTabs();
   updateSidebarFooter();
   loadConversations();
   loadUsageStatus();
@@ -451,16 +695,22 @@ function onAuthenticated() {
 document.getElementById("login-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   const email = document.getElementById("login-email").value;
-  const accessCode = document.getElementById("login-access-code").value;
+  const credential = document.getElementById("login-access-code").value;
   const btn = e.target.querySelector(".btn-auth");
   btn.disabled = true;
   btn.textContent = "Signing in...";
 
   try {
+    // Auto-detect: 6-digit numeric = TOTP, otherwise accessCode
+    const isTotp = /^\d{6}$/.test(credential.trim());
+    const body = isTotp
+      ? { email, totpCode: credential.trim() }
+      : { email, accessCode: credential };
+
     const res = await fetch(`${API}/api/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, accessCode }),
+      body: JSON.stringify(body),
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || "Login failed");
@@ -468,10 +718,12 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     state.token = data.token;
     state.user = data.user;
     state.user.trialExpiresAt = data.trialExpiresAt || data.user.trialExpiresAt || null;
+    state.userType = data.user.userType || 'gog_employee';
     localStorage.setItem("askozzy_token", data.token);
     localStorage.setItem("askozzy_user", JSON.stringify(state.user));
     closeAuthModal();
     onAuthenticated();
+
   } catch (err) {
     showAuthError(err.message);
   } finally {
@@ -493,18 +745,12 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
     const res = await fetch(`${API}/api/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, fullName, department, referralCode: document.getElementById("reg-referral").value }),
+      body: JSON.stringify({ email, fullName, department, referralCode: document.getElementById("reg-referral").value, userType: _selectedPersona }),
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || "Registration failed");
 
-    state.token = data.token;
-    state.user = data.user;
-    state.user.trialExpiresAt = data.trialExpiresAt || data.user.trialExpiresAt || null;
-    localStorage.setItem("askozzy_token", data.token);
-    localStorage.setItem("askozzy_user", JSON.stringify(state.user));
-
-    showAccessCodeReveal(data.accessCode);
+    showTOTPSetup(data.totpUri, data.totpSecret, data.recoveryCode, data.email);
   } catch (err) {
     showAuthError(err.message);
   } finally {
@@ -522,6 +768,7 @@ async function logout() {
   } catch {}
   state.token = null;
   state.user = null;
+  state.userType = null;
   state.conversations = [];
   state.activeConversationId = null;
   state.messages = [];
@@ -569,7 +816,7 @@ function updateSidebarFooter() {
         <div class="user-avatar">${initials}</div>
         <div>
           <div class="user-name">${escapeHtml(state.user.fullName)}</div>
-          <div class="user-dept">${escapeHtml(state.user.department || "GoG Operations")}</div>
+          <div class="user-dept">${escapeHtml(state.user.department || (isStudent() ? "Student" : "GoG Operations"))}</div>
         </div>
       </div>
       <div style="display:flex;gap:6px;">
@@ -585,7 +832,7 @@ function updateSidebarFooter() {
         <button class="sidebar-link-btn" onclick="openUserDashboard()">Dashboard</button>
         <button class="sidebar-link-btn" onclick="openProductivityDashboard()">Productivity</button>
         <button class="sidebar-link-btn" onclick="openMemoryModal()">🧠 Memory</button>
-        <button class="sidebar-link-btn" onclick="open2FASetup()">2FA Security</button>
+        <button class="sidebar-link-btn" onclick="openSecuritySettings()">Security</button>
         <button class="sidebar-link-btn" onclick="revokeAllSessions()">Revoke Sessions</button>
         <button class="sidebar-link-btn" onclick="openGuide()">User Guide</button>
         ${state.user.role === 'super_admin' ? '<a class="sidebar-link-btn" href="/admin" style="text-decoration:none;text-align:center;">Admin</a>' : ''}
@@ -1406,7 +1653,8 @@ function toggleSidebar() {
 
 function renderCategoryTabs() {
   const container = document.getElementById("category-tabs");
-  const categories = ["All", ...TEMPLATE_CATEGORIES.map((c) => c.id)];
+  const visibleCategories = getPersonaCategories();
+  const categories = ["All", ...visibleCategories.map((c) => c.id)];
 
   container.innerHTML = categories
     .map(
@@ -1425,10 +1673,11 @@ function filterTemplates(category) {
 
 function renderTemplateGrid() {
   const container = document.getElementById("template-grid");
+  const personaTemplates = getPersonaTemplates();
   const filtered =
     state.activeCategory === "All"
-      ? TEMPLATES
-      : TEMPLATES.filter((t) => t.category === state.activeCategory);
+      ? personaTemplates
+      : personaTemplates.filter((t) => t.category === state.activeCategory);
 
   const guideCta = state.activeCategory === "All" ? `
     <div class="template-card template-card--guide-cta" onclick="openGuide()">
@@ -1469,7 +1718,8 @@ function closeTemplateModal() {
 
 function renderModalCategories() {
   const container = document.getElementById("modal-categories");
-  const categories = ["All", ...TEMPLATE_CATEGORIES.map((c) => c.id)];
+  const visibleCategories = getPersonaCategories();
+  const categories = ["All", ...visibleCategories.map((c) => c.id)];
 
   container.innerHTML = categories
     .map(
@@ -1490,10 +1740,11 @@ function filterModalTemplates(category, btn) {
 
 function renderModalTemplates(category) {
   const container = document.getElementById("modal-template-list");
+  const personaTemplates = getPersonaTemplates();
   const filtered =
     category === "All"
-      ? TEMPLATES
-      : TEMPLATES.filter((t) => t.category === category);
+      ? personaTemplates
+      : personaTemplates.filter((t) => t.category === category);
 
   container.innerHTML = filtered
     .map(
@@ -3930,8 +4181,115 @@ async function revokeAllSessions() {
   }
 }
 
-// ─── 2FA Setup ───────────────────────────────────────────────────────
+// ─── Security Settings ──────────────────────────────────────────────────
 
+async function openSecuritySettings() {
+  if (!isLoggedIn()) return;
+
+  let modal = document.getElementById("security-modal");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.className = "modal-overlay";
+    modal.id = "security-modal";
+    modal.innerHTML = `
+      <div class="modal" style="max-width:500px;">
+        <div class="modal-header">
+          <h3>Security Settings</h3>
+          <button class="modal-close" onclick="document.getElementById('security-modal').classList.remove('active')">&#x2715;</button>
+        </div>
+        <div class="modal-body" id="security-body" style="padding:24px;">
+          <div style="text-align:center;padding:40px;"><div class="spinner"></div></div>
+        </div>
+      </div>`;
+    document.body.appendChild(modal);
+    modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("active"); });
+  }
+
+  modal.classList.add("active");
+  await renderSecuritySettings();
+}
+
+async function renderSecuritySettings() {
+  const body = document.getElementById("security-body");
+  if (!body) return;
+
+  body.innerHTML = '<div style="text-align:center;padding:20px;"><div class="spinner"></div></div>';
+
+  try {
+    // Fetch passkey credentials
+    let passkeys = [];
+    try {
+      const res = await fetch(`${API}/api/auth/webauthn/credentials`, { headers: authHeaders() });
+      const data = await res.json();
+      passkeys = data.credentials || [];
+    } catch {}
+
+    const hasWebAuthn = !!window.PublicKeyCredential;
+
+    body.innerHTML = `
+      <div style="margin-bottom:24px;">
+        <h4 style="font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:8px;">Authenticator App (TOTP)</h4>
+        <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Your primary sign-in method. Use Google Authenticator, Authy, or similar apps.</p>
+        <button class="btn-auth" onclick="open2FASetup()" style="font-size:13px;padding:8px 16px;">Reconfigure Authenticator</button>
+      </div>
+
+      <div style="border-top:1px solid var(--border-color);padding-top:16px;margin-bottom:24px;">
+        <h4 style="font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:8px;">Passkeys</h4>
+        <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">Sign in with fingerprint or Face ID. Works as a backup to your authenticator.</p>
+        ${passkeys.length > 0 ? passkeys.map(pk => `
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--bg-tertiary);border-radius:8px;margin-bottom:6px;">
+            <span style="font-size:12px;color:var(--text-secondary);">Passkey added ${new Date(pk.created_at).toLocaleDateString()}</span>
+            <button onclick="deletePasskey('${pk.id}')" style="background:none;border:none;color:var(--red);font-size:11px;cursor:pointer;">Remove</button>
+          </div>`).join("") : '<p style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">No passkeys registered.</p>'}
+        ${hasWebAuthn ? '<button class="btn-auth" onclick="addPasskey()" style="font-size:13px;padding:8px 16px;">Add Passkey</button>' : '<p style="font-size:11px;color:var(--text-muted);">Your browser does not support passkeys.</p>'}
+      </div>
+
+      <div style="border-top:1px solid var(--border-color);padding-top:16px;">
+        <h4 style="font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:8px;">Recovery Code</h4>
+        <p style="font-size:12px;color:var(--text-secondary);margin-bottom:12px;">One-time use backup code in case you lose your authenticator.</p>
+        <button class="btn-auth" onclick="regenerateRecoveryCode()" style="font-size:13px;padding:8px 16px;background:var(--bg-tertiary);color:var(--text-primary);">Generate New Recovery Code</button>
+        <div id="new-recovery-code" style="display:none;margin-top:12px;"></div>
+      </div>`;
+  } catch (err) {
+    body.innerHTML = `<p style="color:var(--red-error-text);">Failed to load security settings.</p>`;
+  }
+}
+
+async function deletePasskey(id) {
+  if (!confirm("Remove this passkey?")) return;
+  try {
+    await fetch(`${API}/api/auth/webauthn/credentials/${id}`, {
+      method: "DELETE",
+      headers: authHeaders(),
+    });
+    await renderSecuritySettings();
+  } catch {}
+}
+
+async function regenerateRecoveryCode() {
+  try {
+    const res = await fetch(`${API}/api/auth/recovery-code/regenerate`, {
+      method: "POST",
+      headers: authHeaders(),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    const el = document.getElementById("new-recovery-code");
+    if (el) {
+      el.style.display = "block";
+      el.innerHTML = `
+        <div class="recovery-code-display">
+          <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;">NEW RECOVERY CODE</div>
+          <div class="recovery-code-value">${data.recoveryCode}</div>
+          <p style="font-size:11px;color:var(--red-error-text);margin-top:8px;font-weight:600;">Save this code! It won't be shown again.</p>
+        </div>`;
+    }
+  } catch (err) {
+    alert("Failed to generate recovery code: " + (err.message || "Unknown error"));
+  }
+}
+
+// Keep old function name for backward compat
 async function open2FASetup() {
   if (!isLoggedIn()) return;
 
@@ -3943,7 +4301,7 @@ async function open2FASetup() {
     modal.innerHTML = `
       <div class="modal" style="max-width:460px;">
         <div class="modal-header">
-          <h3>Two-Factor Authentication</h3>
+          <h3>Set Up Authenticator</h3>
           <button class="modal-close" onclick="document.getElementById('2fa-modal').classList.remove('active')">&#x2715;</button>
         </div>
         <div class="modal-body" id="2fa-body" style="padding:24px;">
@@ -3974,13 +4332,13 @@ async function open2FASetup() {
         </p>
         <div class="form-group">
           <label>Enter the 6-digit code from your app:</label>
-          <input type="text" id="totp-verify-code" maxlength="6" placeholder="000000" style="text-align:center;font-size:24px;letter-spacing:8px;" />
+          <input type="text" id="totp-verify-code" maxlength="6" placeholder="000000" inputmode="numeric" style="text-align:center;font-size:24px;letter-spacing:8px;" />
         </div>
-        <button class="btn-auth" onclick="verify2FA()">Verify & Enable 2FA</button>
+        <button class="btn-auth" onclick="verify2FA()">Verify & Enable</button>
         <div id="2fa-error" style="color:var(--red-error-text);font-size:12px;margin-top:8px;"></div>
       </div>`;
   } catch {
-    body.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted);">Failed to set up 2FA</div>';
+    body.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted);">Failed to set up authenticator</div>';
   }
 }
 
@@ -4002,7 +4360,7 @@ async function verify2FA() {
     const data = await res.json();
     if (!res.ok) throw new Error(data.error);
 
-    alert("2FA enabled successfully! You'll need your authenticator app code when signing in.");
+    alert("Authenticator enabled successfully! You can now sign in with your 6-digit code.");
     document.getElementById("2fa-modal").classList.remove("active");
   } catch (err) {
     if (errEl) errEl.textContent = err.message;
@@ -5685,7 +6043,7 @@ async function downloadArtifact() {
 
 async function loadAgents() {
   try {
-    const res = await fetch(`${API}/api/agents`);
+    const res = await fetch(`${API}/api/agents?user_type=${state.userType || 'gog_employee'}`);
     const data = await res.json();
     state.agents = data.agents || [];
     renderAgentSelector();
@@ -6448,50 +6806,57 @@ function showTrialActivatedToast() {
 
 // ─── Feature: Enhanced Onboarding Tour (7-step) ─────────────────────
 
-const ENHANCED_ONBOARDING_STEPS = [
-  {
-    target: '.sidebar',
-    title: 'Your Sidebar',
-    text: 'All your conversations, folders, and tools live here. Click the + button to start a new chat.',
-    position: 'right'
-  },
-  {
-    target: '#chat-input',
-    title: 'Chat with AI',
-    text: 'Type your question or paste a document. Ozzy understands memos, reports, and complex queries.',
-    position: 'top'
-  },
-  {
-    target: '#model-selector',
-    title: 'Choose Your AI Model',
-    text: 'Switch between 11 AI models. Each has different strengths — try a few to find your favorite.',
-    position: 'top'
-  },
-  {
-    target: '.template-grid',
-    title: 'GoG Templates',
-    text: '25+ ready-made templates for memos, procurement, HR, and more. Click any to start.',
-    position: 'bottom'
-  },
-  {
-    target: '#voice-btn-large',
-    title: 'Voice Input',
-    text: 'Tap to speak in English, Twi, Ga, Ewe, or Hausa. Ozzy understands your language.',
-    position: 'top'
-  },
-  {
-    target: '.input-tools',
-    title: 'Smart Tools',
-    text: 'Research, Data Analysis, Web Search, Workflows — powerful tools at your fingertips.',
-    position: 'top'
-  },
-  {
-    target: '.guide-fab',
-    title: 'Need Help?',
-    text: 'Click this button anytime to open the full User Guide with 49+ features explained.',
-    position: 'left'
-  }
-];
+function getOnboardingSteps() {
+  const student = isStudent();
+  return [
+    {
+      target: '.sidebar',
+      title: 'Your Sidebar',
+      text: 'All your conversations, folders, and tools live here. Click the + button to start a new chat.',
+      position: 'right'
+    },
+    {
+      target: '#chat-input',
+      title: student ? 'Ask Ozzy Anything' : 'Chat with AI',
+      text: student
+        ? 'Ask study questions, get essay help, or review for exams. Ozzy is your personal tutor.'
+        : 'Type your question or paste a document. Ozzy understands memos, reports, and complex queries.',
+      position: 'top'
+    },
+    {
+      target: '#model-selector',
+      title: 'Choose Your AI Model',
+      text: 'Switch between 11 AI models. Each has different strengths \u2014 try a few to find your favorite.',
+      position: 'top'
+    },
+    {
+      target: '.template-grid',
+      title: student ? 'Study Templates' : 'GoG Templates',
+      text: student
+        ? '40+ templates for essays, exam prep, study plans, research, and more. Click any to start.'
+        : '25+ ready-made templates for memos, procurement, HR, and more. Click any to start.',
+      position: 'bottom'
+    },
+    {
+      target: '#voice-btn-large',
+      title: 'Voice Input',
+      text: 'Tap to speak in English, Twi, Ga, Ewe, or Hausa. Ozzy understands your language.',
+      position: 'top'
+    },
+    {
+      target: '.input-tools',
+      title: 'Smart Tools',
+      text: 'Research, Data Analysis, Web Search, Workflows \u2014 powerful tools at your fingertips.',
+      position: 'top'
+    },
+    {
+      target: '.guide-fab',
+      title: 'Need Help?',
+      text: 'Click this button anytime to open the full User Guide with 49+ features explained.',
+      position: 'left'
+    }
+  ];
+}
 
 function startEnhancedOnboarding() {
   // Don't show if already completed (either version)
@@ -6499,20 +6864,21 @@ function startEnhancedOnboarding() {
   if (localStorage.getItem('askozzy_onboarding_done')) return;
   if (!state.user) return;
   // Delay slightly to let page render
-  setTimeout(() => showEnhancedOnboardingStep(0), 1200);
+  setTimeout(() => showEnhancedOnboardingStep(0, getOnboardingSteps()), 1200);
 }
 
-function showEnhancedOnboardingStep(stepIndex) {
+function showEnhancedOnboardingStep(stepIndex, steps) {
+  if (!steps) steps = getOnboardingSteps();
   // Remove any existing overlay
   const existing = document.getElementById('onboarding-overlay-v2');
   if (existing) existing.remove();
 
-  if (stepIndex >= ENHANCED_ONBOARDING_STEPS.length) {
+  if (stepIndex >= steps.length) {
     localStorage.setItem('ozzy_onboarding_v2_done', '1');
     return;
   }
 
-  const step = ENHANCED_ONBOARDING_STEPS[stepIndex];
+  const step = steps[stepIndex];
   const targetEl = document.querySelector(step.target);
 
   // Create overlay
@@ -6562,18 +6928,18 @@ function showEnhancedOnboardingStep(stepIndex) {
   }
 
   tooltip.innerHTML = `
-    <div class="onboarding-step-count-v2">${stepIndex + 1} of ${ENHANCED_ONBOARDING_STEPS.length}</div>
+    <div class="onboarding-step-count-v2">${stepIndex + 1} of ${steps.length}</div>
     <div class="onboarding-title-v2">${step.title}</div>
     <div class="onboarding-text-v2">${step.text}</div>
     <div class="onboarding-actions-v2">
       <button class="onboarding-skip-v2" onclick="skipEnhancedOnboarding()">Skip tour</button>
-      <button class="onboarding-next-v2" onclick="showEnhancedOnboardingStep(${stepIndex + 1})">
-        ${stepIndex === ENHANCED_ONBOARDING_STEPS.length - 1 ? 'Finish' : 'Next'}
+      <button class="onboarding-next-v2" onclick="showEnhancedOnboardingStep(${stepIndex + 1}, getOnboardingSteps())">
+        ${stepIndex === steps.length - 1 ? 'Finish' : 'Next'}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
     </div>
     <div class="onboarding-dots-v2">
-      ${ENHANCED_ONBOARDING_STEPS.map((_, i) => `<span class="onboarding-dot-v2 ${i === stepIndex ? 'active' : ''} ${i < stepIndex ? 'done' : ''}"></span>`).join('')}
+      ${steps.map((_, i) => `<span class="onboarding-dot-v2 ${i === stepIndex ? 'active' : ''} ${i < stepIndex ? 'done' : ''}"></span>`).join('')}
     </div>
   `;
 
@@ -6582,7 +6948,7 @@ function showEnhancedOnboardingStep(stepIndex) {
 
   // Click overlay background to advance
   overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) showEnhancedOnboardingStep(stepIndex + 1);
+    if (e.target === overlay) showEnhancedOnboardingStep(stepIndex + 1, steps);
   });
 }
 

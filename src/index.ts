@@ -50,6 +50,17 @@ function normalizeAccessCode(input: string): string {
   return input;
 }
 
+function generateRecoveryCode(): string {
+  const chars = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+  const bytes = new Uint8Array(8);
+  crypto.getRandomValues(bytes);
+  let code = "";
+  for (let i = 0; i < 8; i++) {
+    code += chars[bytes[i] % chars.length];
+  }
+  return code.slice(0, 4) + "-" + code.slice(4);
+}
+
 async function createToken(userId: string, env: Env): Promise<string> {
   const token = generateId();
   await env.SESSIONS.put(`session:${token}`, userId, {
@@ -169,7 +180,7 @@ async function deptAdminMiddleware(
 // ─── Auth Routes ────────────────────────────────────────────────────
 
 app.post("/api/auth/register", async (c) => {
-  const { email, fullName, department, referralCode } = await c.req.json();
+  const { email, fullName, department, referralCode, userType } = await c.req.json();
 
   if (!email || !fullName) {
     return c.json({ error: "Email and full name are required" }, 400);
@@ -208,10 +219,25 @@ app.post("/api/auth/register", async (c) => {
     }
   }
 
+  // Auto-generate TOTP secret
+  const secretBytes = new Uint8Array(20);
+  crypto.getRandomValues(secretBytes);
+  const base32Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+  let totpSecret = "";
+  for (let i = 0; i < secretBytes.length; i++) {
+    totpSecret += base32Chars[secretBytes[i] % 32];
+  }
+
+  // Generate one-time recovery code
+  const recoveryCode = generateRecoveryCode();
+  const recoveryCodeHash = await hashPassword(recoveryCode);
+
+  await ensureUserTypeColumn(c.env.DB);
+  await ensureAuthMethodColumns(c.env.DB);
   await c.env.DB.prepare(
-    "INSERT INTO users (id, email, password_hash, full_name, department, referral_code, referred_by) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    "INSERT INTO users (id, email, password_hash, full_name, department, referral_code, referred_by, user_type, totp_secret, auth_method, recovery_code_hash) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'totp', ?)"
   )
-    .bind(userId, email.toLowerCase().trim(), passwordHash, fullName, department || "", userReferralCode, referredBy)
+    .bind(userId, email.toLowerCase().trim(), passwordHash, fullName, department || "", userReferralCode, referredBy, userType || "gog_employee", totpSecret, recoveryCodeHash)
     .run();
 
   // If referred, record the referral, credit welcome bonus, and check milestones
@@ -222,14 +248,12 @@ app.post("/api/auth/register", async (c) => {
       .bind(generateId(), referredBy, userId)
       .run();
 
-    // Update referrer stats (backward compat — no flat earnings credit, commissions come from payments)
     await c.env.DB.prepare(
       "UPDATE users SET total_referrals = total_referrals + 1 WHERE id = ?"
     )
       .bind(referredBy)
       .run();
 
-    // Two-sided reward: GHS 5 welcome bonus for the new user
     c.executionCtx.waitUntil((async () => {
       try {
         await ensureAffiliateTables(c.env.DB);
@@ -237,7 +261,6 @@ app.post("/api/auth/register", async (c) => {
           c.env.DB, userId, 5.00, "bonus",
           "Welcome bonus — signed up with referral code", referredBy, undefined
         );
-        // Check milestone bonuses for the referrer
         await checkMilestones(c.env.DB, referredBy);
       } catch (err) {
         console.error("Referral bonus error:", err);
@@ -245,21 +268,80 @@ app.post("/api/auth/register", async (c) => {
     })());
   }
 
-  const token = await createToken(userId, c.env);
+  const totpUri = `otpauth://totp/AskOzzy:${email.toLowerCase().trim()}?secret=${totpSecret}&issuer=AskOzzy&digits=6&period=30`;
+
+  // Don't create token yet — user must verify TOTP first
+  return c.json({
+    totpUri,
+    totpSecret,
+    recoveryCode,
+    pendingUserId: userId,
+    email: email.toLowerCase().trim(),
+    fullName,
+    department: department || "",
+    referralCode: userReferralCode,
+    userType: userType || "gog_employee",
+  });
+});
+
+// ─── Verify TOTP After Registration ──────────────────────────────────
+
+app.post("/api/auth/register/verify-totp", async (c) => {
+  const { email, code } = await c.req.json();
+
+  if (!email || !code) {
+    return c.json({ error: "Email and verification code are required" }, 400);
+  }
+
+  const user = await c.env.DB.prepare(
+    "SELECT id, email, full_name, department, role, tier, referral_code, totp_secret, totp_enabled, user_type FROM users WHERE email = ?"
+  )
+    .bind(email.toLowerCase().trim())
+    .first<{
+      id: string; email: string; full_name: string; department: string;
+      role: string; tier: string; referral_code: string; totp_secret: string;
+      totp_enabled: number; user_type: string | null;
+    }>();
+
+  if (!user || !user.totp_secret) {
+    return c.json({ error: "User not found or TOTP not configured" }, 400);
+  }
+
+  const valid = await verifyTOTP(user.totp_secret, code);
+  if (!valid) {
+    return c.json({ error: "Invalid verification code. Check your authenticator app and try again." }, 400);
+  }
+
+  // Enable TOTP and set auth_method
+  await ensureAuthMethodColumns(c.env.DB);
+  await c.env.DB.prepare(
+    "UPDATE users SET totp_enabled = 1, auth_method = 'totp' WHERE id = ?"
+  ).bind(user.id).run();
+
+  const token = await createToken(user.id, c.env);
 
   return c.json({
     token,
-    accessCode,
-    user: { id: userId, email: email.toLowerCase().trim(), fullName, department, role: "civil_servant", tier: "free", referralCode: userReferralCode },
+    user: {
+      id: user.id,
+      email: user.email,
+      fullName: user.full_name,
+      department: user.department,
+      role: user.role || "civil_servant",
+      tier: user.tier || "free",
+      effectiveTier: user.tier || "free",
+      referralCode: user.referral_code,
+      userType: user.user_type || "gog_employee",
+    },
   });
 });
 
 app.post("/api/auth/login", async (c) => {
-  const { email, password, accessCode } = await c.req.json();
-  const credential = accessCode || password;
+  const { email, password, accessCode, totpCode } = await c.req.json();
+  const credential = totpCode || accessCode || password;
 
   if (!email || !credential) {
-    return c.json({ error: "Email and access code are required" }, 400);
+    return c.json({ error: "Email and authentication code are required" }, 400);
   }
 
   // Rate limit login attempts
@@ -269,48 +351,88 @@ app.post("/api/auth/login", async (c) => {
     return c.json({ error: "Too many login attempts. Please wait 5 minutes." }, 429);
   }
 
+  await ensureTrialColumn(c.env.DB);
+  await ensureUserTypeColumn(c.env.DB);
+  await ensureAuthMethodColumns(c.env.DB);
   const user = await c.env.DB.prepare(
-    "SELECT id, email, password_hash, full_name, department, role, tier, referral_code, affiliate_tier, total_referrals, affiliate_earnings, trial_expires_at FROM users WHERE email = ?"
+    "SELECT id, email, password_hash, full_name, department, role, tier, referral_code, affiliate_tier, total_referrals, affiliate_earnings, trial_expires_at, user_type, totp_secret, totp_enabled, auth_method, recovery_code_hash FROM users WHERE email = ?"
   )
     .bind(email.toLowerCase().trim())
     .first<{
-      id: string;
-      email: string;
-      password_hash: string;
-      full_name: string;
-      department: string;
-      role: string;
-      tier: string;
-      referral_code: string;
-      affiliate_tier: string;
-      total_referrals: number;
-      affiliate_earnings: number;
-      trial_expires_at: string | null;
+      id: string; email: string; password_hash: string; full_name: string;
+      department: string; role: string; tier: string; referral_code: string;
+      affiliate_tier: string; total_referrals: number; affiliate_earnings: number;
+      trial_expires_at: string | null; user_type: string | null;
+      totp_secret: string | null; totp_enabled: number; auth_method: string | null;
+      recovery_code_hash: string | null;
     }>();
 
   if (!user) {
-    return c.json({ error: "Invalid email or access code" }, 401);
+    return c.json({ error: "Invalid email or authentication code" }, 401);
   }
 
-  const normalized = normalizeAccessCode(credential);
-  const normalizedHash = await hashPassword(normalized);
-  let match = normalizedHash === user.password_hash;
+  const trimmedCred = credential.trim();
+  const isNumericCode = /^\d{6}$/.test(trimmedCred);
+  let authenticated = false;
+  let legacyAuth = false;
+  let recoveryUsed = false;
 
-  // Fallback: try raw credential for legacy password users
-  if (!match && normalized !== credential) {
-    const rawHash = await hashPassword(credential);
-    match = rawHash === user.password_hash;
+  if (isNumericCode && user.totp_secret && user.totp_enabled) {
+    // TOTP login: 6-digit numeric code
+    authenticated = await verifyTOTP(user.totp_secret, trimmedCred);
   }
 
-  if (!match) {
-    return c.json({ error: "Invalid email or access code" }, 401);
+  if (!authenticated) {
+    // Try as access code (legacy)
+    const normalized = normalizeAccessCode(trimmedCred);
+    const normalizedHash = await hashPassword(normalized);
+    if (normalizedHash === user.password_hash) {
+      authenticated = true;
+      legacyAuth = true;
+    }
+
+    // Fallback: try raw credential
+    if (!authenticated && normalized !== trimmedCred) {
+      const rawHash = await hashPassword(trimmedCred);
+      if (rawHash === user.password_hash) {
+        authenticated = true;
+        legacyAuth = true;
+      }
+    }
+
+    // Try as recovery code
+    if (!authenticated && user.recovery_code_hash) {
+      const recoveryNormalized = normalizeAccessCode(trimmedCred);
+      const recoveryHash = await hashPassword(recoveryNormalized);
+      if (recoveryHash === user.recovery_code_hash) {
+        authenticated = true;
+        recoveryUsed = true;
+      }
+      // Also try raw
+      if (!authenticated) {
+        const rawRecoveryHash = await hashPassword(trimmedCred);
+        if (rawRecoveryHash === user.recovery_code_hash) {
+          authenticated = true;
+          recoveryUsed = true;
+        }
+      }
+    }
+  }
+
+  if (!authenticated) {
+    return c.json({ error: "Invalid email or authentication code" }, 401);
+  }
+
+  // If recovery code used, invalidate it (one-time use)
+  if (recoveryUsed) {
+    await c.env.DB.prepare(
+      "UPDATE users SET recovery_code_hash = NULL WHERE id = ?"
+    ).bind(user.id).run();
   }
 
   await c.env.DB.prepare(
     "UPDATE users SET last_login = datetime('now') WHERE id = ?"
-  )
-    .bind(user.id)
-    .run();
+  ).bind(user.id).run();
 
   const token = await createToken(user.id, c.env);
 
@@ -320,6 +442,8 @@ app.post("/api/auth/login", async (c) => {
 
   return c.json({
     token,
+    legacyAuth,
+    recoveryUsed,
     user: {
       id: user.id,
       email: user.email,
@@ -333,6 +457,7 @@ app.post("/api/auth/login", async (c) => {
       totalReferrals: user.total_referrals,
       affiliateEarnings: user.affiliate_earnings,
       trialExpiresAt: user.trial_expires_at || null,
+      userType: user.user_type || "gog_employee",
     },
   });
 });
@@ -498,6 +623,55 @@ async function ensureStreakColumns(db: D1Database) {
   }
 }
 
+// ─── User Type Column Lazy Migration ─────────────────────────────────
+
+async function ensureUserTypeColumn(db: D1Database) {
+  try {
+    await db.prepare("SELECT user_type FROM users LIMIT 1").first();
+  } catch {
+    await db.prepare("ALTER TABLE users ADD COLUMN user_type TEXT DEFAULT 'gog_employee'").run();
+  }
+}
+
+// ─── Agent User Type Column Lazy Migration ───────────────────────────
+
+async function ensureAgentUserTypeColumn(db: D1Database) {
+  try {
+    await db.prepare("SELECT user_type FROM agents LIMIT 1").first();
+  } catch {
+    await db.prepare("ALTER TABLE agents ADD COLUMN user_type TEXT DEFAULT 'all'").run();
+  }
+}
+
+// ─── Auth Method + WebAuthn Lazy Migrations ─────────────────────────
+
+async function ensureAuthMethodColumns(db: D1Database) {
+  try {
+    await db.prepare("SELECT auth_method FROM users LIMIT 1").first();
+  } catch {
+    await db.batch([
+      db.prepare("ALTER TABLE users ADD COLUMN auth_method TEXT DEFAULT 'access_code'"),
+      db.prepare("ALTER TABLE users ADD COLUMN recovery_code_hash TEXT DEFAULT NULL"),
+    ]);
+  }
+}
+
+async function ensureWebAuthnTable(db: D1Database) {
+  try {
+    await db.prepare("SELECT id FROM webauthn_credentials LIMIT 1").first();
+  } catch {
+    await db.prepare(`CREATE TABLE IF NOT EXISTS webauthn_credentials (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      credential_id TEXT NOT NULL UNIQUE,
+      public_key TEXT NOT NULL,
+      sign_count INTEGER DEFAULT 0,
+      created_at TEXT DEFAULT (datetime('now')),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    )`).run();
+  }
+}
+
 // ─── Effective Tier (honors trial) ──────────────────────────────────
 
 async function getEffectiveTier(db: D1Database, userId: string): Promise<string> {
@@ -606,6 +780,49 @@ RESPONSE GUIDELINES:
 - Provide step-by-step guidance for administrative procedures
 - Structure responses with headings, bullet points, and numbered steps
 - For document drafting, follow GoG formatting standards above`;
+
+const STUDENT_SYSTEM_PROMPT = `You are Ozzy, the AI study companion powering AskOzzy — an intelligent academic assistant built for students in Ghana. You help with studying, essay writing, exam preparation, research, and academic growth.
+
+CORE IDENTITY:
+- Use clear, encouraging academic English (British standard, Ghana's official)
+- Prioritise teaching and understanding over giving direct answers
+- When helping with essays, guide structure and argumentation, don't just write it for them
+- Be a patient tutor — explain concepts step by step
+- Sign off naturally as Ozzy when appropriate
+
+GHANA EDUCATION CONTEXT:
+- West African Examinations Council (WAEC) administers WASSCE and BECE
+- WASSCE: West African Senior School Certificate Examination (SHS3)
+- BECE: Basic Education Certificate Examination (JHS3)
+- GES: Ghana Education Service — manages pre-tertiary education
+- NaCCA: National Council for Curriculum and Assessment — sets curriculum
+- Tertiary: Universities (UG, KNUST, UCC, UEW, UDS, etc.), Polytechnics, Colleges of Education
+- Grading: WASSCE uses A1-F9 scale; Universities use CGPA (typically 4.0 scale)
+- Key subjects: Core Maths, English, Integrated Science, Social Studies + electives
+
+ACADEMIC SUPPORT:
+- Help with essay structure (introduction, body paragraphs, conclusion)
+- Explain concepts using real-world Ghana examples where possible
+- For exam prep, use past question patterns and marking schemes
+- Encourage critical thinking: ask "Why do you think that?" before giving answers
+- Study techniques: active recall, spaced repetition, Pomodoro, mind mapping
+- Citation formats: APA 7th edition (most common in Ghana universities), Harvard
+
+SUBJECT EXPERTISE:
+- Sciences: Biology, Chemistry, Physics, Integrated Science
+- Mathematics: Core Maths, Elective Maths, Further Maths
+- Humanities: History, Government, Literature, Economics, Geography
+- Languages: English Language, English Literature
+- Business: Accounting, Business Management, Economics, Cost Accounting
+- Technical: ICT, Technical Drawing, Applied Electricity
+
+RESPONSE GUIDELINES:
+- Break complex topics into digestible chunks
+- Use examples from the Ghana context (history, economy, geography)
+- Provide practice questions when reviewing topics
+- For essay help, always provide a marking rubric or checklist
+- Encourage original thinking — flag when you detect potential plagiarism concerns
+- Structure responses with clear headings, bullet points, and numbered steps`;
 
 // ─── DOCX/PPTX Text Extraction (ZIP-based Office files) ──────────────
 
@@ -1008,10 +1225,11 @@ app.post("/api/chat", authMiddleware, async (c) => {
     return c.json({ error: "conversationId and message are required" }, 400);
   }
 
-  // Get user tier (with trial support)
-  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at FROM users WHERE id = ?")
+  // Get user tier and type (with trial support)
+  await ensureUserTypeColumn(c.env.DB);
+  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at, user_type FROM users WHERE id = ?")
     .bind(userId)
-    .first<{ tier: string; trial_expires_at: string | null }>();
+    .first<{ tier: string; trial_expires_at: string | null; user_type: string | null }>();
   let userTier = user?.tier || "free";
   // Honor trial
   const trialActive = user?.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date();
@@ -1088,8 +1306,9 @@ app.post("/api/chat", authMiddleware, async (c) => {
     }
   } catch {}
 
-  // Determine base system prompt (agent or default)
-  let baseSystemPrompt = systemPrompt || GOG_SYSTEM_PROMPT;
+  // Determine base system prompt (agent or default, persona-aware)
+  const defaultPrompt = (user?.user_type === "student") ? STUDENT_SYSTEM_PROMPT : GOG_SYSTEM_PROMPT;
+  let baseSystemPrompt = systemPrompt || defaultPrompt;
   let agentKnowledgeCategory: string | null = null;
 
   if (agentId) {
@@ -3465,9 +3684,11 @@ app.get("/api/admin/users/:id/memories", adminMiddleware, async (c) => {
 // ─── Custom Agents (public) ──────────────────────────────────────────
 
 app.get("/api/agents", async (c) => {
+  const userType = c.req.query("user_type") || "gog_employee";
+  await ensureAgentUserTypeColumn(c.env.DB);
   const { results } = await c.env.DB.prepare(
-    "SELECT id, name, description, department, icon, knowledge_category FROM agents WHERE active = 1 ORDER BY name"
-  ).all();
+    "SELECT id, name, description, department, icon, knowledge_category, user_type FROM agents WHERE active = 1 AND (user_type = ? OR user_type = 'all') ORDER BY name"
+  ).bind(userType).all();
   return c.json({ agents: results || [] });
 });
 
@@ -3554,6 +3775,93 @@ app.get("/api/admin/agents", adminMiddleware, async (c) => {
     "SELECT * FROM agents ORDER BY created_at DESC"
   ).all();
   return c.json({ agents: results || [] });
+});
+
+// ─── Seed Default Agents ─────────────────────────────────────────────
+
+app.post("/api/admin/seed-agents", adminMiddleware, async (c) => {
+  await ensureAgentUserTypeColumn(c.env.DB);
+  const adminId = c.get("userId");
+
+  const defaultAgents = [
+    {
+      name: "Procurement Specialist",
+      description: "Expert guidance on Ghana Public Procurement Act (Act 663), tendering, and compliance",
+      system_prompt: "You are a Procurement Specialist AI for the Government of Ghana. You are deeply knowledgeable about the Public Procurement Act, 2003 (Act 663) as amended by Act 914 (2016), procurement thresholds, competitive tendering, restricted tendering, single-source procurement, and request for quotations. Guide civil servants through procurement processes step by step, citing specific sections of the Act. Help with bid evaluation, contract management, and PPA compliance. Always reference current threshold values and entity classifications from Schedule 3.",
+      department: "Procurement",
+      icon: "\u{1F4DC}",
+      user_type: "gog_employee",
+      knowledge_category: "procurement"
+    },
+    {
+      name: "IT Helpdesk",
+      description: "Technical support for GIFMIS, email, network, and government IT systems",
+      system_prompt: "You are an IT Helpdesk specialist for Government of Ghana operations. Help civil servants troubleshoot GIFMIS (Ghana Integrated Financial Management Information System), government email systems, network connectivity, VPN access, printer issues, Microsoft Office problems, and general IT support. Provide clear step-by-step troubleshooting instructions. Know common GoG IT infrastructure including GIFMIS, e-payroll, and departmental systems.",
+      department: "IT",
+      icon: "\u{1F527}",
+      user_type: "gog_employee",
+      knowledge_category: "it"
+    },
+    {
+      name: "HR & Admin Officer",
+      description: "Civil Service regulations, promotions, leave, pensions, and HR procedures",
+      system_prompt: "You are an HR & Administrative Officer AI for the Ghana Civil Service. You are expert in the Civil Service Act (PNDCL 327), Labour Act 2003 (Act 651), National Pensions Act 2008 (Act 766), and OHCS regulations. Help with promotion processes, leave applications, disciplinary procedures, pension calculations (3-tier scheme), staff appraisals, transfer requests, and general HR administration. Reference specific Acts and sections.",
+      department: "HR & Admin",
+      icon: "\u{1F465}",
+      user_type: "gog_employee",
+      knowledge_category: "hr"
+    },
+    {
+      name: "Study Coach",
+      description: "Personalised study plans, motivation, and effective learning strategies",
+      system_prompt: "You are a Study Coach AI for Ghanaian students. Help create personalised study timetables, recommend effective study techniques (active recall, spaced repetition, Pomodoro technique, mind mapping), provide motivation and accountability tips, and help manage exam stress. Understand the Ghana academic calendar, WASSCE/BECE schedules, and university semester systems. Be encouraging, practical, and culturally aware.",
+      department: "Academic Support",
+      icon: "\u{1F4DA}",
+      user_type: "student",
+      knowledge_category: ""
+    },
+    {
+      name: "Essay Writing Tutor",
+      description: "Structure, argumentation, and grammar coaching for academic essays",
+      system_prompt: "You are an Essay Writing Tutor AI for Ghanaian students. Help with essay planning, thesis statements, paragraph structure, argumentation, transitions, conclusions, and grammar. Teach the difference between argumentative, expository, narrative, and descriptive essays. Review essay drafts for structure, coherence, and style. Encourage original thinking and proper citation (APA 7th edition). For WASSCE English essays, focus on the marking criteria: content, organisation, expression, and mechanical accuracy.",
+      department: "Academic Support",
+      icon: "\u{270D}\u{FE0F}",
+      user_type: "student",
+      knowledge_category: ""
+    },
+    {
+      name: "WASSCE Prep",
+      description: "Subject revision, past questions, and exam strategies for WASSCE/BECE",
+      system_prompt: "You are a WASSCE/BECE Preparation AI for Ghanaian students. Help revise subjects using past question patterns and WAEC marking schemes. Cover Core subjects (English, Maths, Integrated Science, Social Studies) and popular electives. Provide practice questions, explain solutions step by step, identify common mistakes, and share exam tips. Know the WASSCE grading system (A1-F9) and how aggregates are calculated. Help students target specific grades and universities.",
+      department: "Exam Preparation",
+      icon: "\u{1F393}",
+      user_type: "student",
+      knowledge_category: ""
+    },
+    {
+      name: "Research Assistant",
+      description: "Literature review, citations, methodology guidance, and thesis support",
+      system_prompt: "You are a Research Assistant AI for Ghanaian university students. Help with research proposals, literature reviews, methodology design (qualitative, quantitative, mixed methods), data analysis approaches, APA 7th edition citations, and thesis/project writing. Understand Ghana university thesis formats and requirements. Guide students through research ethics, sampling techniques, questionnaire design, and academic writing conventions. Help structure chapters and maintain academic rigour.",
+      department: "Research",
+      icon: "\u{1F52C}",
+      user_type: "student",
+      knowledge_category: ""
+    }
+  ];
+
+  let seeded = 0;
+  for (const agent of defaultAgents) {
+    const existing = await c.env.DB.prepare("SELECT id FROM agents WHERE name = ?").bind(agent.name).first();
+    if (!existing) {
+      const id = generateId();
+      await c.env.DB.prepare(
+        "INSERT INTO agents (id, name, description, system_prompt, department, knowledge_category, icon, user_type, created_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+      ).bind(id, agent.name, agent.description, agent.system_prompt, agent.department, agent.knowledge_category, agent.icon, agent.user_type, adminId).run();
+      seeded++;
+    }
+  }
+
+  return c.json({ success: true, seeded, total: defaultAgents.length });
 });
 
 // ─── Artifact Detection ──────────────────────────────────────────────
@@ -4311,6 +4619,343 @@ async function generateTOTPCode(secret: string, counter: number): Promise<string
 
   return code.toString().padStart(6, "0");
 }
+
+// ─── CBOR Minimal Decoder (for WebAuthn attestation) ─────────────────
+
+function decodeCBOR(buf: ArrayBuffer): any {
+  const data = new Uint8Array(buf);
+  let pos = 0;
+
+  function read(): any {
+    const initial = data[pos++];
+    const major = initial >> 5;
+    const addl = initial & 0x1f;
+
+    let val: number;
+    if (addl < 24) val = addl;
+    else if (addl === 24) val = data[pos++];
+    else if (addl === 25) { val = (data[pos] << 8) | data[pos + 1]; pos += 2; }
+    else if (addl === 26) { val = (data[pos] << 24) | (data[pos + 1] << 16) | (data[pos + 2] << 8) | data[pos + 3]; pos += 4; }
+    else throw new Error("CBOR: unsupported additional info " + addl);
+
+    switch (major) {
+      case 0: return val; // unsigned int
+      case 1: return -1 - val; // negative int
+      case 2: { // byte string
+        const bytes = data.slice(pos, pos + val);
+        pos += val;
+        return bytes;
+      }
+      case 3: { // text string
+        const text = new TextDecoder().decode(data.slice(pos, pos + val));
+        pos += val;
+        return text;
+      }
+      case 4: { // array
+        const arr = [];
+        for (let i = 0; i < val; i++) arr.push(read());
+        return arr;
+      }
+      case 5: { // map
+        const map: Record<any, any> = {};
+        for (let i = 0; i < val; i++) {
+          const k = read();
+          map[k] = read();
+        }
+        return map;
+      }
+      default: throw new Error("CBOR: unsupported major type " + major);
+    }
+  }
+
+  return read();
+}
+
+function coseToSpki(coseKey: Record<number, Uint8Array>): ArrayBuffer {
+  // COSE key with kty=2 (EC2), crv=1 (P-256)
+  const x = coseKey[-2];
+  const y = coseKey[-3];
+  if (!x || !y || x.length !== 32 || y.length !== 32) {
+    throw new Error("Invalid COSE EC2 key");
+  }
+  // SPKI header for P-256 uncompressed point
+  const spkiHeader = new Uint8Array([
+    0x30, 0x59, 0x30, 0x13, 0x06, 0x07, 0x2a, 0x86,
+    0x48, 0xce, 0x3d, 0x02, 0x01, 0x06, 0x08, 0x2a,
+    0x86, 0x48, 0xce, 0x3d, 0x03, 0x01, 0x07, 0x03,
+    0x42, 0x00, 0x04
+  ]);
+  const spki = new Uint8Array(spkiHeader.length + 64);
+  spki.set(spkiHeader);
+  spki.set(x, spkiHeader.length);
+  spki.set(y, spkiHeader.length + 32);
+  return spki.buffer;
+}
+
+function bufToBase64url(buf: ArrayBuffer | Uint8Array): string {
+  const bytes = buf instanceof Uint8Array ? buf : new Uint8Array(buf);
+  let binary = "";
+  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+
+function base64urlToBuf(str: string): ArrayBuffer {
+  const base64 = str.replace(/-/g, "+").replace(/_/g, "/");
+  const pad = base64.length % 4;
+  const padded = pad ? base64 + "=".repeat(4 - pad) : base64;
+  const binary = atob(padded);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return bytes.buffer;
+}
+
+// ─── WebAuthn Registration ─────────────────────────────────────────────
+
+app.post("/api/auth/webauthn/register-options", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const user = await c.env.DB.prepare("SELECT email, full_name FROM users WHERE id = ?")
+    .bind(userId).first<{ email: string; full_name: string }>();
+  if (!user) return c.json({ error: "User not found" }, 404);
+
+  await ensureWebAuthnTable(c.env.DB);
+
+  // Fetch existing credentials to exclude
+  const { results: existingCreds } = await c.env.DB.prepare(
+    "SELECT credential_id FROM webauthn_credentials WHERE user_id = ?"
+  ).bind(userId).all();
+
+  const challenge = bufToBase64url(crypto.getRandomValues(new Uint8Array(32)));
+  await c.env.SESSIONS.put(`webauthn_challenge:${userId}`, challenge, { expirationTtl: 300 });
+
+  return c.json({
+    challenge,
+    rp: { name: "AskOzzy", id: new URL(c.req.url).hostname },
+    user: {
+      id: bufToBase64url(new TextEncoder().encode(userId)),
+      name: user.email,
+      displayName: user.full_name,
+    },
+    pubKeyCredParams: [
+      { type: "public-key", alg: -7 }, // ES256
+    ],
+    authenticatorSelection: {
+      authenticatorAttachment: "platform",
+      residentKey: "preferred",
+      userVerification: "preferred",
+    },
+    timeout: 60000,
+    excludeCredentials: (existingCreds || []).map((cr: any) => ({
+      type: "public-key",
+      id: cr.credential_id,
+    })),
+  });
+});
+
+app.post("/api/auth/webauthn/register-complete", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const { credentialId, attestationObject, clientDataJSON } = await c.req.json();
+
+  if (!credentialId || !attestationObject || !clientDataJSON) {
+    return c.json({ error: "Missing registration data" }, 400);
+  }
+
+  // Verify challenge
+  const storedChallenge = await c.env.SESSIONS.get(`webauthn_challenge:${userId}`);
+  if (!storedChallenge) return c.json({ error: "Challenge expired" }, 400);
+  await c.env.SESSIONS.delete(`webauthn_challenge:${userId}`);
+
+  const clientData = JSON.parse(new TextDecoder().decode(base64urlToBuf(clientDataJSON)));
+  if (clientData.challenge !== storedChallenge) {
+    return c.json({ error: "Challenge mismatch" }, 400);
+  }
+  if (clientData.type !== "webauthn.create") {
+    return c.json({ error: "Invalid client data type" }, 400);
+  }
+
+  // Parse attestation object (CBOR)
+  const attestation = decodeCBOR(base64urlToBuf(attestationObject));
+  const authData = attestation.authData as Uint8Array;
+
+  // authData structure: rpIdHash(32) + flags(1) + signCount(4) + attestedCredData(variable)
+  // attestedCredData: aaguid(16) + credIdLen(2) + credId(credIdLen) + credentialPublicKey(CBOR)
+  const credIdLen = (authData[53] << 8) | authData[54];
+  const credIdBytes = authData.slice(55, 55 + credIdLen);
+  const coseKeyBytes = authData.slice(55 + credIdLen);
+  const coseKey = decodeCBOR(coseKeyBytes.buffer);
+  const spki = coseToSpki(coseKey);
+  const publicKeyBase64 = bufToBase64url(spki);
+
+  await ensureWebAuthnTable(c.env.DB);
+  await c.env.DB.prepare(
+    "INSERT INTO webauthn_credentials (id, user_id, credential_id, public_key, sign_count) VALUES (?, ?, ?, ?, 0)"
+  ).bind(generateId(), userId, credentialId, publicKeyBase64).run();
+
+  // Update auth_method if first passkey
+  await ensureAuthMethodColumns(c.env.DB);
+  const { results: creds } = await c.env.DB.prepare(
+    "SELECT id FROM webauthn_credentials WHERE user_id = ?"
+  ).bind(userId).all();
+  if (creds && creds.length === 1) {
+    await c.env.DB.prepare("UPDATE users SET auth_method = 'webauthn' WHERE id = ? AND auth_method != 'totp'")
+      .bind(userId).run();
+  }
+
+  return c.json({ success: true, message: "Passkey registered successfully" });
+});
+
+// ─── WebAuthn Login ──────────────────────────────────────────────────────
+
+app.post("/api/auth/webauthn/login-options", async (c) => {
+  const { email } = await c.req.json();
+  if (!email) return c.json({ error: "Email is required" }, 400);
+
+  const user = await c.env.DB.prepare("SELECT id FROM users WHERE email = ?")
+    .bind(email.toLowerCase().trim()).first<{ id: string }>();
+  if (!user) return c.json({ error: "No account found" }, 404);
+
+  await ensureWebAuthnTable(c.env.DB);
+  const { results: creds } = await c.env.DB.prepare(
+    "SELECT credential_id FROM webauthn_credentials WHERE user_id = ?"
+  ).bind(user.id).all();
+
+  if (!creds || creds.length === 0) {
+    return c.json({ error: "No passkeys registered for this account" }, 400);
+  }
+
+  const challenge = bufToBase64url(crypto.getRandomValues(new Uint8Array(32)));
+  await c.env.SESSIONS.put(`webauthn_challenge:${user.id}`, challenge, { expirationTtl: 300 });
+
+  return c.json({
+    challenge,
+    rpId: new URL(c.req.url).hostname,
+    allowCredentials: creds.map((cr: any) => ({
+      type: "public-key",
+      id: cr.credential_id,
+    })),
+    userVerification: "preferred",
+    timeout: 60000,
+    _userId: user.id, // Internal use — client sends back with assertion
+  });
+});
+
+app.post("/api/auth/webauthn/login-complete", async (c) => {
+  const { email, credentialId, authenticatorData, clientDataJSON, signature } = await c.req.json();
+
+  if (!email || !credentialId || !authenticatorData || !clientDataJSON || !signature) {
+    return c.json({ error: "Missing authentication data" }, 400);
+  }
+
+  const user = await c.env.DB.prepare(
+    "SELECT id, email, full_name, department, role, tier, referral_code, affiliate_tier, total_referrals, affiliate_earnings, trial_expires_at, user_type FROM users WHERE email = ?"
+  ).bind(email.toLowerCase().trim()).first<{
+    id: string; email: string; full_name: string; department: string;
+    role: string; tier: string; referral_code: string;
+    affiliate_tier: string; total_referrals: number; affiliate_earnings: number;
+    trial_expires_at: string | null; user_type: string | null;
+  }>();
+  if (!user) return c.json({ error: "User not found" }, 401);
+
+  // Verify challenge
+  const storedChallenge = await c.env.SESSIONS.get(`webauthn_challenge:${user.id}`);
+  if (!storedChallenge) return c.json({ error: "Challenge expired" }, 400);
+  await c.env.SESSIONS.delete(`webauthn_challenge:${user.id}`);
+
+  const clientData = JSON.parse(new TextDecoder().decode(base64urlToBuf(clientDataJSON)));
+  if (clientData.challenge !== storedChallenge) return c.json({ error: "Challenge mismatch" }, 400);
+  if (clientData.type !== "webauthn.get") return c.json({ error: "Invalid client data type" }, 400);
+
+  // Find credential
+  await ensureWebAuthnTable(c.env.DB);
+  const cred = await c.env.DB.prepare(
+    "SELECT id, public_key, sign_count FROM webauthn_credentials WHERE credential_id = ? AND user_id = ?"
+  ).bind(credentialId, user.id).first<{ id: string; public_key: string; sign_count: number }>();
+  if (!cred) return c.json({ error: "Credential not found" }, 401);
+
+  // Verify signature: signature is over (authData + SHA256(clientDataJSON))
+  const authDataBuf = base64urlToBuf(authenticatorData);
+  const clientDataHash = await crypto.subtle.digest("SHA-256", base64urlToBuf(clientDataJSON));
+  const signedData = new Uint8Array(authDataBuf.byteLength + clientDataHash.byteLength);
+  signedData.set(new Uint8Array(authDataBuf), 0);
+  signedData.set(new Uint8Array(clientDataHash), authDataBuf.byteLength);
+
+  const publicKey = await crypto.subtle.importKey(
+    "spki", base64urlToBuf(cred.public_key),
+    { name: "ECDSA", namedCurve: "P-256" }, false, ["verify"]
+  );
+  const valid = await crypto.subtle.verify(
+    { name: "ECDSA", hash: "SHA-256" }, publicKey, base64urlToBuf(signature), signedData
+  );
+
+  if (!valid) return c.json({ error: "Invalid signature" }, 401);
+
+  // Update sign count
+  const authDataArr = new Uint8Array(authDataBuf);
+  const newSignCount = (authDataArr[33] << 24) | (authDataArr[34] << 16) | (authDataArr[35] << 8) | authDataArr[36];
+  if (newSignCount > 0 && newSignCount <= cred.sign_count) {
+    return c.json({ error: "Possible credential cloning detected" }, 401);
+  }
+  await c.env.DB.prepare("UPDATE webauthn_credentials SET sign_count = ? WHERE id = ?")
+    .bind(newSignCount, cred.id).run();
+
+  await c.env.DB.prepare("UPDATE users SET last_login = datetime('now') WHERE id = ?")
+    .bind(user.id).run();
+
+  const token = await createToken(user.id, c.env);
+  const trialActive = user.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date();
+  const effectiveTier = (trialActive && (user.tier || "free") === "free") ? "professional" : (user.tier || "free");
+
+  return c.json({
+    token,
+    user: {
+      id: user.id,
+      email: user.email,
+      fullName: user.full_name,
+      department: user.department,
+      role: user.role || "civil_servant",
+      tier: user.tier,
+      effectiveTier,
+      referralCode: user.referral_code,
+      affiliateTier: user.affiliate_tier,
+      totalReferrals: user.total_referrals,
+      affiliateEarnings: user.affiliate_earnings,
+      trialExpiresAt: user.trial_expires_at || null,
+      userType: user.user_type || "gog_employee",
+    },
+  });
+});
+
+// ─── WebAuthn Credential Management ──────────────────────────────────────
+
+app.get("/api/auth/webauthn/credentials", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  await ensureWebAuthnTable(c.env.DB);
+  const { results } = await c.env.DB.prepare(
+    "SELECT id, credential_id, created_at FROM webauthn_credentials WHERE user_id = ? ORDER BY created_at DESC"
+  ).bind(userId).all();
+  return c.json({ credentials: results || [] });
+});
+
+app.delete("/api/auth/webauthn/credentials/:id", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const credId = c.req.param("id");
+  await ensureWebAuthnTable(c.env.DB);
+  await c.env.DB.prepare(
+    "DELETE FROM webauthn_credentials WHERE id = ? AND user_id = ?"
+  ).bind(credId, userId).run();
+  return c.json({ success: true });
+});
+
+// ─── Recovery Code Regeneration ──────────────────────────────────────────
+
+app.post("/api/auth/recovery-code/regenerate", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const newCode = generateRecoveryCode();
+  const hash = await hashPassword(newCode);
+  await ensureAuthMethodColumns(c.env.DB);
+  await c.env.DB.prepare("UPDATE users SET recovery_code_hash = ? WHERE id = ?")
+    .bind(hash, userId).run();
+  return c.json({ recoveryCode: newCode });
+});
 
 // ─── Organization / Team Billing ──────────────────────────────────────
 

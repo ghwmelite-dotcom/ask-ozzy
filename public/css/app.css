@@ -7613,3 +7613,207 @@ html, body {
   .message-content th, .message-content td { border: 1px solid #999; padding: 6px; }
   .message-content th { background: #eee !important; }
 }
+
+/* ─── Persona Selector (Registration) ───────────────────────────── */
+.persona-selector {
+  margin-bottom: 16px;
+}
+.persona-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.persona-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.persona-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 10px;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  color: var(--text-primary);
+}
+.persona-option:hover {
+  border-color: var(--gold-dim);
+  transform: translateY(-1px);
+  background: var(--bg-hover);
+}
+.persona-option.active {
+  border-color: var(--gold);
+  background: rgba(252, 209, 22, 0.08);
+  box-shadow: 0 0 0 1px var(--gold-dim);
+}
+.persona-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+.persona-text {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ─── Welcome Screen Persona Selector ────────────────────────────── */
+.welcome-persona-selector {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 16px auto 8px;
+  max-width: 380px;
+}
+.welcome-persona-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border: 2px solid var(--border-color);
+  border-radius: 50px;
+  background: var(--bg-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 600;
+}
+.welcome-persona-btn:hover {
+  border-color: var(--gold-dim);
+  transform: translateY(-1px);
+  background: var(--bg-hover);
+}
+.welcome-persona-btn.active {
+  border-color: var(--gold);
+  background: rgba(252, 209, 22, 0.1);
+  box-shadow: 0 0 0 1px var(--gold-dim);
+}
+.welcome-persona-btn .persona-icon {
+  font-size: 20px;
+}
+.welcome-persona-btn .persona-text {
+  font-size: 14px;
+}
+
+/* ─── TOTP Setup Step (Registration) ─────────────────────────── */
+
+.totp-setup-container {
+  text-align: center;
+  padding: 8px 0;
+}
+
+.totp-secret-code {
+  color: var(--gold);
+  font-size: 13px;
+  background: var(--bg-tertiary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  user-select: all;
+  word-break: break-all;
+}
+
+.recovery-code-display {
+  background: var(--bg-tertiary);
+  border: 2px dashed var(--gold-dim);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin: 12px auto;
+  display: inline-block;
+  min-width: 220px;
+  text-align: center;
+}
+
+.recovery-code-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 4px;
+  margin: 4px 0 8px;
+  user-select: all;
+}
+
+.btn-copy-small {
+  background: var(--gold);
+  color: var(--text-on-accent);
+  border: none;
+  border-radius: 6px;
+  padding: 4px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.btn-copy-small:hover { opacity: 0.85; }
+
+.totp-verify-input {
+  text-align: center;
+  font-size: 28px;
+  letter-spacing: 10px;
+  font-weight: 600;
+  padding: 12px 16px;
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto;
+  display: block;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  transition: border-color 0.2s;
+}
+.totp-verify-input:focus {
+  border-color: var(--gold);
+  outline: none;
+}
+
+.totp-login-input {
+  text-align: center;
+  font-size: 20px;
+  letter-spacing: 6px;
+  font-weight: 600;
+  padding: 10px 16px;
+  width: 100%;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: border-color 0.2s;
+}
+.totp-login-input:focus {
+  border-color: var(--gold);
+  outline: none;
+}
+
+/* ─── Passkey Button ───────────────────────────────────────────── */
+
+.passkey-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.passkey-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--gold-dim);
+}
+.passkey-btn svg { stroke: var(--gold); }

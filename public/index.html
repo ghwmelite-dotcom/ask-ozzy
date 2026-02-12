@@ -37,7 +37,7 @@
       <div class="sidebar-header">
         <div class="sidebar-logo">
           <div class="logo-icon"></div>
-          <h1>AskOzzy <span>AI for All GoG Staff</span></h1>
+          <h1>AskOzzy <span id="sidebar-subtitle">AI for All GoG Staff</span></h1>
         </div>
       </div>
 
@@ -109,7 +109,18 @@
       <div id="welcome-screen" class="welcome-screen">
         <div class="welcome-logo">⚡</div>
         <h2>Welcome to AskOzzy</h2>
-        <p>Your private AI assistant for GoG operations. Choose a template below or start a free conversation.</p>
+        <p id="welcome-subtitle">Your private AI assistant for GoG operations. Choose a template below or start a free conversation.</p>
+
+        <div class="welcome-persona-selector" id="welcome-persona-selector">
+          <button type="button" class="welcome-persona-btn active" onclick="selectWelcomePersona('gog_employee', this)">
+            <span class="persona-icon">🏛️</span>
+            <span class="persona-text">GoG Employee</span>
+          </button>
+          <button type="button" class="welcome-persona-btn" onclick="selectWelcomePersona('student', this)">
+            <span class="persona-icon">🎓</span>
+            <span class="persona-text">Student</span>
+          </button>
+        </div>
 
         <div class="sovereignty-badge">
           <div class="sovereignty-icon">
@@ -248,14 +259,31 @@
             <input type="email" id="login-email" placeholder="your.name@gov.gh" required />
           </div>
           <div class="form-group">
-            <label>Access Code</label>
-            <input type="text" id="login-access-code" class="access-code-input" placeholder="e.g. 7K9F-M2XH" required autocomplete="off" spellcheck="false" />
+            <label id="login-code-label">Authenticator Code</label>
+            <input type="text" id="login-access-code" class="totp-login-input" placeholder="6-digit code" required autocomplete="one-time-code" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" spellcheck="false" />
           </div>
           <button type="submit" class="btn-auth">Sign In</button>
+          <button type="button" id="passkey-login-btn" class="passkey-btn" onclick="loginWithPasskey()" style="display:none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Sign in with Passkey
+          </button>
         </form>
 
         <!-- Register Form -->
         <form id="register-form" class="hidden">
+          <div class="persona-selector">
+            <div class="persona-label">I am a...</div>
+            <div class="persona-options">
+              <button type="button" class="persona-option active" onclick="selectPersona('gog_employee', this)">
+                <span class="persona-icon">🏛️</span>
+                <span class="persona-text">GoG Employee</span>
+              </button>
+              <button type="button" class="persona-option" onclick="selectPersona('student', this)">
+                <span class="persona-icon">🎓</span>
+                <span class="persona-text">Student</span>
+              </button>
+            </div>
+          </div>
           <div class="form-group">
             <label>Full Name</label>
             <input type="text" id="reg-name" placeholder="e.g. Kwame Asante" required />
@@ -265,7 +293,7 @@
             <input type="email" id="reg-email" placeholder="your.name@gov.gh" required />
           </div>
           <div class="form-group">
-            <label>Department / MDA</label>
+            <label id="reg-dept-label">Department / MDA</label>
             <input type="text" id="reg-dept" placeholder="e.g. Ministry of Finance" />
           </div>
           <div class="form-group">
@@ -285,20 +313,33 @@
           Unlike ChatGPT and other public tools, your data never leaves this platform. Complete confidentiality for government work.
         </div>
 
-        <!-- Code Reveal (shown after registration) -->
-        <div id="code-reveal" class="hidden">
-          <div style="text-align:center;padding:8px 0;">
-            <div style="font-size:48px;margin-bottom:12px;">🔐</div>
-            <h3 style="font-size:20px;font-weight:700;margin-bottom:8px;color:var(--text-primary);">Your Access Code</h3>
-            <p style="font-size:13px;color:var(--text-secondary);margin-bottom:20px;">Use this code to sign in. Save it somewhere safe!</p>
-            <div id="reveal-code-display" class="access-code-input" style="font-size:32px;letter-spacing:6px;color:var(--gold);background:var(--bg-tertiary);border:2px dashed var(--gold-dim);border-radius:12px;padding:20px;margin:0 auto 16px;display:inline-block;min-width:260px;font-weight:700;"></div>
-            <div style="margin-bottom:16px;">
-              <button type="button" id="btn-copy-code" onclick="copyAccessCode()" style="background:var(--gold);color:var(--text-on-accent);border:none;border-radius:8px;padding:10px 24px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s;">Copy Code</button>
+        <!-- TOTP Setup Step (shown after registration) -->
+        <div id="totp-setup-step" class="hidden">
+          <div class="totp-setup-container">
+            <div style="font-size:40px;margin-bottom:8px;">🔐</div>
+            <h3 style="font-size:18px;font-weight:700;margin-bottom:4px;color:var(--text-primary);">Set Up Your Authenticator</h3>
+            <p style="font-size:12px;color:var(--text-secondary);margin-bottom:16px;">Scan this QR code with Google Authenticator, Authy, or any TOTP app</p>
+            <div id="totp-qr-container" style="background:#fff;padding:12px;border-radius:12px;display:inline-block;margin-bottom:12px;">
+              <img id="totp-qr-img" src="" alt="QR Code" width="180" height="180" />
             </div>
-            <p style="font-size:12px;color:var(--red-error-text);font-weight:600;margin-bottom:20px;">This code will only be shown once!</p>
-            <button type="button" onclick="finishRegistration()" style="width:100%;padding:12px;background:linear-gradient(135deg, var(--green), var(--green-light));color:var(--text-on-green);border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;">I've Saved My Code — Continue →</button>
+            <p style="font-size:11px;color:var(--text-muted);margin-bottom:12px;">
+              Or enter manually: <code id="totp-manual-secret" class="totp-secret-code"></code>
+            </p>
+            <div class="recovery-code-display">
+              <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;">Recovery Code (save this!)</div>
+              <div id="recovery-code-value" class="recovery-code-value"></div>
+              <button type="button" id="btn-copy-recovery" onclick="copyRecoveryCode()" class="btn-copy-small">Copy</button>
+            </div>
+            <p style="font-size:11px;color:var(--red-error-text);font-weight:600;margin:12px 0;">Save your recovery code — it's your only backup if you lose your phone!</p>
+            <div class="form-group" style="margin-bottom:12px;">
+              <label style="font-size:12px;">Enter 6-digit code from your authenticator app:</label>
+              <input type="text" id="totp-setup-code" class="totp-verify-input" placeholder="000000" maxlength="6" inputmode="numeric" pattern="[0-9]{6}" autocomplete="one-time-code" />
+            </div>
+            <div id="totp-setup-error" style="color:var(--red-error-text);font-size:12px;margin-bottom:8px;"></div>
+            <button type="button" id="btn-verify-totp-setup" onclick="verifyTOTPSetup()" class="btn-auth" style="width:100%;">Verify & Complete Registration</button>
           </div>
         </div>
+
       </div>
     </div>
   </div>

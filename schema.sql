@@ -16,11 +16,26 @@ CREATE TABLE IF NOT EXISTS users (
   affiliate_earnings REAL DEFAULT 0.0,
   totp_secret TEXT DEFAULT NULL,
   totp_enabled INTEGER DEFAULT 0,
+  auth_method TEXT DEFAULT 'access_code',
+  recovery_code_hash TEXT DEFAULT NULL,
   org_id TEXT DEFAULT NULL,
   created_at TEXT DEFAULT (datetime('now')),
   last_login TEXT DEFAULT (datetime('now')),
   FOREIGN KEY (referred_by) REFERENCES users(id)
 );
+
+-- WebAuthn (passkey) credentials
+CREATE TABLE IF NOT EXISTS webauthn_credentials (
+  id TEXT PRIMARY KEY,
+  user_id TEXT NOT NULL,
+  credential_id TEXT NOT NULL UNIQUE,
+  public_key TEXT NOT NULL,
+  sign_count INTEGER DEFAULT 0,
+  created_at TEXT DEFAULT (datetime('now')),
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+CREATE INDEX IF NOT EXISTS idx_webauthn_user ON webauthn_credentials(user_id);
+CREATE INDEX IF NOT EXISTS idx_webauthn_credential ON webauthn_credentials(credential_id);
 
 -- Referrals tracking
 CREATE TABLE IF NOT EXISTS referrals (
