@@ -1032,7 +1032,12 @@ app.post("/api/chat", authMiddleware, async (c) => {
   // Language support: instruct AI to respond in target language
   if (language && language !== "en" && SUPPORTED_LANGUAGES[language]) {
     const langName = SUPPORTED_LANGUAGES[language].name;
-    augmentedPrompt += `\n\nIMPORTANT: The user has selected ${langName} as their language. You MUST respond entirely in ${langName}. If you cannot write fluently in ${langName}, do your best to provide a helpful response in ${langName}, mixing with English only when absolutely necessary for technical terms.`;
+    const isGhanaianLang = !SUPPORTED_LANGUAGES[language].m2mCode;
+    if (isGhanaianLang) {
+      augmentedPrompt += `\n\nCRITICAL LANGUAGE REQUIREMENT: You MUST respond ENTIRELY in ${langName}. Write every single word in ${langName} — do NOT use any English words at all. Even technical terms and descriptions must be expressed in ${langName} using native phrasing. Only proper nouns (organization names like SSNIT, GRA, DVLA), URLs, and phone numbers may remain in their original form. Think in ${langName} and write naturally as a fluent native ${langName} speaker from Ghana would. This is non-negotiable.`;
+    } else {
+      augmentedPrompt += `\n\nIMPORTANT: The user has selected ${langName} as their language. You MUST respond entirely in ${langName}.`;
+    }
   }
 
   messages.push({ role: "system", content: augmentedPrompt });
@@ -1628,10 +1633,22 @@ async function translateText(
 
   // LLM fallback for unsupported language pairs (Twi, Ga, Ewe, Dagbani)
   try {
-    const result = await ai.run("@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels, {
+    const result = await ai.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast" as BaseAiTextGenerationModels, {
       messages: [
-        { role: "system", content: `You are a translator. Translate the following text from ${source.name} to ${target.name}. Return ONLY the translated text, nothing else. If you cannot translate accurately, return the original text.` },
-        { role: "user", content: text },
+        {
+          role: "system",
+          content: `You are a professional ${target.name} translator from Ghana. Your ONLY job is to translate text from ${source.name} into ${target.name}.
+
+CRITICAL RULES:
+- Output ONLY the ${target.name} translation. No English at all.
+- Do NOT include the original text, explanations, or notes.
+- Do NOT mix English words into the translation. Translate EVERYTHING including technical terms, place names can stay.
+- If a word has no direct ${target.name} equivalent, use the closest ${target.name} phrase to describe it.
+- URLs, phone numbers, and proper nouns (organization names like SSNIT, GRA, DVLA) can remain as-is.
+- Maintain the same formatting (bullet points, numbering, bold markers).
+- Write naturally as a native ${target.name} speaker would.`,
+        },
+        { role: "user", content: `Translate this to ${target.name}:\n\n${text}` },
       ],
       max_tokens: 2048,
     });
@@ -4684,9 +4701,11 @@ app.post("/api/citizen/chat", async (c) => {
       "SELECT role, content FROM citizen_messages WHERE session_id = ? ORDER BY created_at DESC LIMIT 10"
     ).bind(sid).all<{ role: string; content: string }>();
 
-    const langName = (language && language !== "en" && SUPPORTED_LANGUAGES[language]) ? SUPPORTED_LANGUAGES[language].name : "";
+    const targetLang = (language && language !== "en" && SUPPORTED_LANGUAGES[language]) ? language : "";
+
+    // Always generate in English for accuracy, then translate
     const messages: Array<{ role: string; content: string }> = [
-      { role: "system", content: CITIZEN_SYSTEM_PROMPT + (langName ? `\n\nRespond in ${langName}.` : "") },
+      { role: "system", content: CITIZEN_SYSTEM_PROMPT },
     ];
 
     for (const msg of (history || []).reverse()) {
@@ -4698,7 +4717,12 @@ app.post("/api/citizen/chat", async (c) => {
       max_tokens: 1024,
     });
 
-    const response = (aiResult as any).response || "I apologise, I am unable to respond at the moment. Please try again.";
+    let response = (aiResult as any).response || "I apologise, I am unable to respond at the moment. Please try again.";
+
+    // Translate to target language as a separate step for better quality
+    if (targetLang) {
+      response = await translateText(c.env.AI, response, "en", targetLang);
+    }
 
     // Save bot response
     const botMsgId = generateId();

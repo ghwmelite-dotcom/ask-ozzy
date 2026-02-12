@@ -4182,6 +4182,7 @@ function openCitizenBot() {
           <option value="ha">Hausa</option>
           <option value="ee">Ewe</option>
           <option value="ga">Ga</option>
+          <option value="dag">Dagbani</option>
           <option value="fr">FR</option>
         </select>
         <button class="citizen-close" onclick="document.getElementById('citizen-bot').classList.remove('active')" aria-label="Close">
