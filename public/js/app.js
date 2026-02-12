@@ -60,6 +60,188 @@ let state = {
   spacesLoaded: false,
 };
 
+// ─── User Guide Data ────────────────────────────────────────────────
+
+const GUIDE_SECTION_EMOJIS = {
+  'getting-started': { emoji: '\u{1F680}', gradient: 'linear-gradient(135deg, #ff6b35, #f7c948)' },
+  'chat-ai':         { emoji: '\u{1F4AC}', gradient: 'linear-gradient(135deg, #4a9eff, #6c5ce7)' },
+  'smart-tools':     { emoji: '\u{1F6E0}\uFE0F', gradient: 'linear-gradient(135deg, #00b894, #00cec9)' },
+  'file-media':      { emoji: '\u{1F4C1}', gradient: 'linear-gradient(135deg, #e17055, #fdcb6e)' },
+  'organization':    { emoji: '\u{1F4C2}', gradient: 'linear-gradient(135deg, #a29bfe, #6c5ce7)' },
+  'personalization': { emoji: '\u{2699}\uFE0F', gradient: 'linear-gradient(135deg, #fd79a8, #e84393)' },
+  'languages':       { emoji: '\u{1F30D}', gradient: 'linear-gradient(135deg, #00b894, #55efc4)' },
+  'vision':          { emoji: '\u{1F441}\uFE0F', gradient: 'linear-gradient(135deg, #0984e3, #74b9ff)' },
+  'account-security':{ emoji: '\u{1F512}', gradient: 'linear-gradient(135deg, #636e72, #b2bec3)' },
+  'citizen-bot':     { emoji: '\u{1F465}', gradient: 'linear-gradient(135deg, #006B3F, #00a86b)' },
+  'shortcuts':       { emoji: '\u{2328}\uFE0F', gradient: 'linear-gradient(135deg, #2d3436, #636e72)' },
+  'install-offline': { emoji: '\u{1F4E5}', gradient: 'linear-gradient(135deg, #0984e3, #00cec9)' },
+};
+
+const GUIDE_TRY_IT_ACTIONS = {
+  'st-templates': { label: 'Open Templates \u2192', action: "closeGuide();openTemplateModal();" },
+  'st-research':  { label: 'Try Deep Research \u2192', action: "closeGuide();openDeepResearch();" },
+  'st-analysis':  { label: 'Analyze Data \u2192', action: "closeGuide();openDataAnalysis();" },
+  'st-workflows': { label: 'Open Workflows \u2192', action: "closeGuide();openWorkflows();" },
+  'st-meetings':  { label: 'Start Meeting \u2192', action: "closeGuide();openMeetingAssistant();" },
+  'st-spaces':    { label: 'Open Spaces \u2192', action: "closeGuide();openSpaces();" },
+  'gs-models':    { label: 'View Models \u2192', action: "closeGuide();document.getElementById('model-selector').focus();" },
+  'as-pricing':   { label: 'View Plans \u2192', action: "closeGuide();openPricingModal();" },
+  'ps-memory':    { label: 'Open Memory \u2192', action: "closeGuide();openMemoryModal();" },
+  'fm-upload':    { label: 'Upload a File \u2192', action: "closeGuide();openFileUpload();" },
+};
+
+const GUIDE_TIPS = [
+  'Press <kbd>Ctrl</kbd>+<kbd>K</kbd> to search all your conversations instantly.',
+  'Use <kbd>Shift</kbd>+<kbd>Enter</kbd> for multi-line messages without sending.',
+  'Pin your most important conversations so they always appear at the top of the sidebar.',
+  'Try Deep Research mode for comprehensive reports with citations on any topic.',
+  'Upload a CSV file and ask Ozzy to create charts and find trends in your data.',
+  'Create custom AI agents with specialized instructions for your department.',
+  'Enable Web Search to get AI responses grounded in current, real-time information.',
+  'Press <kbd>Ctrl</kbd>+<kbd>N</kbd> to instantly start a new conversation.',
+  'Use the Citizen Bot (bottom-right) for quick government service queries.',
+  'Switch between AI models to find the best one for your task \u2014 some are faster, others more detailed.',
+];
+
+const GUIDE_SECTIONS = [
+  {
+    id: 'getting-started',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+    title: 'Getting Started',
+    description: 'Registration, sign-in, and model selection',
+    features: [
+      { id: 'gs-register', title: 'Create Your Account', tier: 'free', description: 'Register with your name, email, and GoG department to get your personal access code.', steps: ['Click "Sign In / Create Account" in the sidebar', 'Switch to the "Register" tab', 'Enter your full name, email, and department', 'Save your access code — it\'s shown only once!', 'You\'re now signed in and ready to go'] },
+      { id: 'gs-signin', title: 'Sign In with Access Code', tier: 'free', description: 'Use your email and access code to sign in. No passwords needed — simple and secure.', steps: ['Click "Sign In / Create Account"', 'Enter your email and access code', 'If you have 2FA enabled, enter your 6-digit code', 'You\'re signed in with your conversations restored'] },
+      { id: 'gs-models', title: 'Choose Your AI Model', tier: 'free', description: 'Select from multiple AI models optimized for different tasks. Higher tiers unlock more powerful models.', steps: ['Look for the model selector dropdown near the chat input', 'Free tier includes GPT-OSS 20B and Llama 3.1 8B', 'Starter tier adds DeepSeek R1 and Qwen 2.5 72B', 'Professional tier unlocks Llama 3.3 70B', 'Each model has strengths — experiment to find your favorite'] },
+    ]
+  },
+  {
+    id: 'chat-ai',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+    title: 'Chat & AI',
+    description: 'Messaging, streaming responses, and message actions',
+    features: [
+      { id: 'ca-send', title: 'Send Messages', tier: 'free', description: 'Type your question or task and press Enter (or click send) to get AI-powered responses.', steps: ['Type your message in the input area at the bottom', 'Press Enter or click the send button', 'The AI responds in real-time with streaming text', 'Use Shift+Enter for new lines within your message'] },
+      { id: 'ca-stream', title: 'Streaming Responses', tier: 'free', description: 'Responses stream in word-by-word for a natural feel. You can stop generation anytime.', steps: ['Responses appear progressively as they\'re generated', 'Click the stop button to halt generation early', 'Markdown formatting renders automatically (bold, code, lists)', 'Code blocks include syntax highlighting and copy buttons'] },
+      { id: 'ca-actions', title: 'Message Actions', tier: 'free', description: 'Copy, regenerate, or take actions on any AI response.', steps: ['Hover over any AI message to see action buttons', 'Copy — copies the full response to clipboard', 'Regenerate — asks the AI to try again with a fresh response', 'Messages support full Markdown rendering'] },
+      { id: 'ca-conversations', title: 'Conversation Management', tier: 'free', description: 'Create, rename, pin, and organize your conversations.', steps: ['Click "New Chat" or press Ctrl+N to start fresh', 'Conversations auto-save and appear in the sidebar', 'Click the pencil icon to rename a conversation', 'Right-click or long-press for more options (delete, pin, share)'] },
+    ]
+  },
+  {
+    id: 'smart-tools',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+    title: 'Smart Tools',
+    description: 'Templates, research, workflows, meetings, spaces, and web search',
+    features: [
+      { id: 'st-templates', title: 'GoG Prompt Templates', tier: 'free', description: '25+ pre-built templates for Government of Ghana operations — memos, briefs, reports, and more.', steps: ['Browse templates on the welcome screen or click "Templates"', 'Filter by category: Writing, Analysis, HR, Finance, Legal, etc.', 'Click a template to auto-fill the chat input', 'Customize the template text before sending'] },
+      { id: 'st-research', title: 'Deep Research Mode', tier: 'starter', description: 'AI-powered research that synthesizes information into structured reports with citations.', steps: ['Click the Research tool pill below the input area', 'Enter your research topic or question', 'AI generates a comprehensive report with sections', 'Review findings, sources, and recommendations'] },
+      { id: 'st-analysis', title: 'Data Analysis', tier: 'starter', description: 'Upload spreadsheets or paste data for AI-powered analysis with charts and insights.', steps: ['Upload a CSV/Excel file or paste tabular data', 'Ask the AI to analyze trends, summarize, or visualize', 'Get charts, statistics, and actionable insights', 'Export results or continue the analysis conversation'] },
+      { id: 'st-workflows', title: 'Workflow Wizard', tier: 'professional', description: 'Multi-step guided workflows for complex GoG processes like procurement, HR actions, and policy drafts.', steps: ['Click the Workflow tool pill', 'Select a workflow category (procurement, HR, policy, etc.)', 'Follow the step-by-step wizard with guided inputs', 'AI generates complete documents based on your inputs', 'Review, edit, and export the final output'] },
+      { id: 'st-meetings', title: 'Meeting Assistant', tier: 'starter', description: 'Generate agendas, take notes, and create minutes with AI assistance.', steps: ['Click the Meeting tool pill', 'Choose: create agenda, take notes, or generate minutes', 'Enter meeting details (participants, topics, decisions)', 'AI structures and formats everything professionally'] },
+      { id: 'st-spaces', title: 'Collaborative Spaces', tier: 'professional', description: 'Shared workspaces where team members can collaborate on AI-powered projects together.', steps: ['Click "Spaces" in the sidebar', 'Create a new space with a name and description', 'Invite team members by email', 'All members can chat, share files, and collaborate in real-time'] },
+      { id: 'st-websearch', title: 'Web Search', tier: 'starter', description: 'Enable real-time web search to ground AI responses with current information.', steps: ['Toggle the Web Search pill below the input area', 'Ask a question that needs up-to-date information', 'AI searches the web and cites sources in its response', 'Source links appear below the message for verification'] },
+    ]
+  },
+  {
+    id: 'file-media',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+    title: 'File & Media',
+    description: 'File upload, images, camera, voice input, and voice mode',
+    features: [
+      { id: 'fm-upload', title: 'File Upload & Analysis', tier: 'free', description: 'Upload documents (PDF, TXT, CSV, DOCX, PPTX) for AI analysis. Files are processed and can be queried.', steps: ['Click the paperclip icon or drag files into the chat', 'Supported: PDF, TXT, CSV, DOCX, PPTX (up to 10MB)', 'The AI reads the file content and can answer questions about it', 'Ask for summaries, key points, specific data extraction'] },
+      { id: 'fm-images', title: 'Image Upload', tier: 'free', description: 'Upload images for AI vision analysis — describe, extract text, analyze content.', steps: ['Click the image icon or drag an image into chat', 'Supported: JPG, PNG, GIF, WebP', 'The AI can describe, analyze, or extract text from images', 'Combine with prompts like "What does this show?"'] },
+      { id: 'fm-camera', title: 'Camera Capture', tier: 'free', description: 'Take photos directly from your device camera for instant AI analysis.', steps: ['Click the camera icon in the input area', 'Allow camera access when prompted', 'Frame your subject and click the capture button', 'The photo is sent to AI for analysis — great for documents and receipts'] },
+      { id: 'fm-voice', title: 'Voice Input', tier: 'free', description: 'Speak your messages instead of typing using browser speech recognition.', steps: ['Click the microphone icon in the input area', 'Allow microphone access when prompted', 'Speak clearly — your words appear as text in the input', 'Click the mic icon again or press Enter to send'] },
+      { id: 'fm-voicemode', title: 'Voice Mode', tier: 'starter', description: 'Hands-free voice conversation mode with text-to-speech responses.', steps: ['Click the Voice Mode toggle in the input area', 'Speak your question — AI responds with both text and speech', 'Supports continuous conversation without touching the screen', 'Toggle off to return to text-only mode'] },
+    ]
+  },
+  {
+    id: 'organization',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>',
+    title: 'Organization',
+    description: 'Folders, pinning, search, and sharing conversations',
+    features: [
+      { id: 'org-folders', title: 'Conversation Folders', tier: 'free', description: 'Organize conversations into custom folders for easy access.', steps: ['Click "New Folder" in the sidebar', 'Name your folder (e.g., "Budget Reports", "HR Queries")', 'Drag conversations into folders or use the move option', 'Click folder names to expand/collapse them'] },
+      { id: 'org-pin', title: 'Pin Conversations', tier: 'free', description: 'Pin important conversations to the top of your sidebar for quick access.', steps: ['Right-click or long-press a conversation', 'Select "Pin" from the context menu', 'Pinned conversations appear at the top of the sidebar', 'Unpin by right-clicking and selecting "Unpin"'] },
+      { id: 'org-search', title: 'Search Conversations', tier: 'free', description: 'Search across all your messages and conversations instantly.', steps: ['Press Ctrl+K or click the search icon', 'Type your search query', 'Results show matching messages with conversation context', 'Click a result to jump directly to that conversation'] },
+      { id: 'org-share', title: 'Share Conversations', tier: 'free', description: 'Generate a read-only link to share any conversation with colleagues.', steps: ['Open the conversation you want to share', 'Click the share icon in the conversation header', 'A unique read-only link is generated', 'Copy and send the link — recipients can view without logging in', 'Revoke sharing anytime from the share dialog'] },
+    ]
+  },
+  {
+    id: 'personalization',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
+    title: 'AI Personalization',
+    description: 'Memory, custom agents, and artifacts',
+    features: [
+      { id: 'ps-memory', title: 'AI Memory', tier: 'starter', description: 'Teach AI about your preferences, projects, and context. It remembers across conversations.', steps: ['Click "Memory" in the sidebar footer', 'Add memories like "I work in the Finance department"', 'AI uses memories to personalize all future responses', 'Delete or edit memories anytime from the Memory modal'] },
+      { id: 'ps-agents', title: 'Custom AI Agents', tier: 'professional', description: 'Create specialized AI agents with custom instructions for specific tasks or roles.', steps: ['Click "Agents" in the sidebar or tool area', 'Create a new agent with a name and description', 'Write custom instructions (e.g., "You are a legal advisor for GoG")', 'Select the agent before chatting to activate its persona', 'Switch between agents or use the default assistant'] },
+      { id: 'ps-artifacts', title: 'Artifacts', tier: 'starter', description: 'AI generates rich artifacts — documents, code, diagrams — that render in a side panel.', steps: ['Ask the AI to create a document, report, or code snippet', 'Artifacts appear in a dedicated panel beside the chat', 'Edit artifacts directly in the panel', 'Download or copy artifacts for use in other tools'] },
+    ]
+  },
+  {
+    id: 'languages',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+    title: 'Languages',
+    description: '7 Ghanaian and international languages with text-to-speech',
+    features: [
+      { id: 'lang-multi', title: 'Multilingual Support', tier: 'free', description: 'Chat in English, Twi, Ga, Ewe, Dagbani, Hausa, or French. The interface and AI adapt to your language.', steps: ['Click the language selector (globe icon) in the input area', 'Choose from: English, Twi, Ga, Ewe, Dagbani, Hausa, French', 'The AI responds in your selected language', 'Interface labels also translate where available'] },
+      { id: 'lang-tts', title: 'Text-to-Speech', tier: 'free', description: 'Listen to AI responses read aloud. Useful for accessibility and hands-free use.', steps: ['Click the speaker icon on any AI response', 'The message is read aloud using browser TTS', 'Works best with English; Ghanaian languages use approximation', 'Adjust system volume to control speech volume'] },
+    ]
+  },
+  {
+    id: 'vision',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
+    title: 'Vision & Image AI',
+    description: '4 vision modes: describe, OCR, form data extraction, receipt scanning',
+    features: [
+      { id: 'vis-describe', title: 'Image Description', tier: 'free', description: 'Upload an image and get a detailed AI description of its contents.', steps: ['Upload or capture an image', 'Select "Describe" mode (or just ask "What is this?")', 'AI provides a detailed description of the image contents', 'Useful for accessibility, documentation, and content analysis'] },
+      { id: 'vis-ocr', title: 'OCR Text Extraction', tier: 'free', description: 'Extract printed or handwritten text from images with AI-powered OCR.', steps: ['Upload a photo of a document, sign, or handwritten text', 'Select "Extract Text" mode', 'AI reads and outputs all visible text from the image', 'Copy the extracted text for use in other documents'] },
+      { id: 'vis-form', title: 'Form Data Extraction', tier: 'starter', description: 'Extract structured data from forms — applications, surveys, registration documents.', steps: ['Take a photo or upload a scan of a filled form', 'Select "Form Data" mode', 'AI identifies fields and values in a structured format', 'Results can be used to populate digital records'] },
+      { id: 'vis-receipt', title: 'Receipt Scanning', tier: 'starter', description: 'Scan receipts and invoices to extract amounts, dates, vendors, and line items.', steps: ['Photograph or upload a receipt/invoice', 'Select "Receipt" mode', 'AI extracts: vendor, date, items, amounts, total, tax', 'Great for expense reporting and record-keeping'] },
+    ]
+  },
+  {
+    id: 'account-security',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+    title: 'Account & Security',
+    description: '2FA, sessions, pricing tiers, and affiliate program',
+    features: [
+      { id: 'as-2fa', title: 'Two-Factor Authentication', tier: 'free', description: 'Add an extra layer of security with TOTP-based 2FA using any authenticator app.', steps: ['Click "2FA Security" in the sidebar footer', 'Scan the QR code with Google Authenticator or similar', 'Enter the 6-digit code to verify setup', 'On future logins, you\'ll enter the code after your access code'] },
+      { id: 'as-sessions', title: 'Session Management', tier: 'free', description: 'View and revoke active sessions for security. Revoke all sessions to sign out everywhere.', steps: ['Click "Revoke Sessions" in the sidebar footer', 'Confirm to sign out all devices except your current one', 'Useful if you suspect unauthorized access', 'You\'ll need to sign in again on other devices'] },
+      { id: 'as-pricing', title: 'Subscription Tiers', tier: 'free', description: 'Choose from Free, Starter (GHS 30), Professional (GHS 60), or Enterprise (GHS 100) plans.', steps: ['Click your tier badge in the sidebar footer', 'Compare features across all 4 tiers', 'Click "Upgrade" on your desired plan', 'Pay via Mobile Money (MoMo) or card through Paystack', 'Your tier activates immediately after payment'] },
+      { id: 'as-affiliate', title: 'Affiliate Program', tier: 'free', description: 'Earn GHS by referring colleagues. Share your referral link and earn commissions.', steps: ['Click "Earn GHS" in the sidebar footer', 'Copy your unique referral link', 'Share with colleagues — earn when they subscribe', 'Track your referrals and earnings in the affiliate dashboard'] },
+    ]
+  },
+  {
+    id: 'citizen-bot',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    title: 'Citizen Bot',
+    description: 'Public-facing widget with quick actions and multilingual support',
+    features: [
+      { id: 'cb-widget', title: 'Citizen Bot Widget', tier: 'free', description: 'A floating chat widget for citizens to ask government-related questions without logging in.', steps: ['The Citizen Bot appears as a floating button on the bottom-right', 'Click to open the chat widget', 'Citizens can ask about government services, forms, procedures', 'Responses are AI-powered with GoG knowledge'] },
+      { id: 'cb-quick', title: 'Quick Actions', tier: 'free', description: 'Pre-built quick action buttons for common citizen queries.', steps: ['Open the Citizen Bot widget', 'Quick action buttons appear at the bottom', 'Tap any action to get instant, pre-formatted responses', 'Actions include: find forms, office hours, service requirements'] },
+      { id: 'cb-lang', title: 'Multilingual Citizen Support', tier: 'free', description: 'Citizen Bot supports all 7 languages so citizens can interact in their preferred language.', steps: ['Open the Citizen Bot widget', 'Select your preferred language from the language picker', 'Chat in Twi, Ga, Ewe, Dagbani, Hausa, French, or English', 'Responses come in the selected language'] },
+    ]
+  },
+  {
+    id: 'shortcuts',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="6" y1="8" x2="6" y2="8"/><line x1="10" y1="8" x2="14" y2="8"/><line x1="18" y1="8" x2="18" y2="8"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="6" y1="16" x2="10" y2="16"/><line x1="14" y1="16" x2="18" y2="16"/></svg>',
+    title: 'Keyboard Shortcuts',
+    description: 'Quick keyboard shortcuts for power users',
+    features: [] // Rendered as special table instead
+  },
+  {
+    id: 'install-offline',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>',
+    title: 'Install & Offline',
+    description: 'Install as PWA and use offline',
+    features: [
+      { id: 'io-pwa', title: 'Install as App (PWA)', tier: 'free', description: 'Install AskOzzy on your device for a native app-like experience with faster loading.', steps: ['Look for the "Install" prompt in your browser\'s address bar', 'On Chrome: click the install icon (or Menu > Install App)', 'On Safari iOS: tap Share > Add to Home Screen', 'AskOzzy launches as a standalone app with its own icon'] },
+      { id: 'io-offline', title: 'Offline Mode', tier: 'free', description: 'Continue using AskOzzy even without internet. Messages queue and sync when you\'re back online.', steps: ['Install the PWA for the best offline experience', 'When offline, you can still browse cached conversations', 'New messages queue locally using the service worker', 'When connectivity returns, queued messages send automatically'] },
+    ]
+  },
+];
+
 // ─── Initialization ──────────────────────────────────────────────────
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -374,6 +556,7 @@ function updateSidebarFooter() {
         <button class="sidebar-link-btn" onclick="openMemoryModal()">🧠 Memory</button>
         <button class="sidebar-link-btn" onclick="open2FASetup()">2FA Security</button>
         <button class="sidebar-link-btn" onclick="revokeAllSessions()">Revoke Sessions</button>
+        <button class="sidebar-link-btn" onclick="openGuide()">User Guide</button>
         ${state.user.role === 'super_admin' ? '<a class="sidebar-link-btn" href="/admin" style="text-decoration:none;text-align:center;">Admin</a>' : ''}
       </div>
       <button class="btn-logout" onclick="logout()">Sign Out</button>`;
@@ -384,6 +567,9 @@ function updateSidebarFooter() {
       </button>
       <div class="sidebar-signin-hint">
         Sign in to save conversations and access all features
+      </div>
+      <div class="sidebar-links" style="margin-top:8px;">
+        <button class="sidebar-link-btn" onclick="openGuide()">User Guide</button>
       </div>`;
   }
 }
@@ -1023,7 +1209,15 @@ function renderTemplateGrid() {
       ? TEMPLATES
       : TEMPLATES.filter((t) => t.category === state.activeCategory);
 
-  container.innerHTML = filtered
+  const guideCta = state.activeCategory === "All" ? `
+    <div class="template-card template-card--guide-cta" onclick="openGuide()">
+      <span class="guide-cta-sparkle">NEW</span>
+      <div class="card-icon">\u{1F1EC}\u{1F1ED}</div>
+      <div class="card-title">Explore User Guide</div>
+      <div class="card-desc">Discover 49+ features, shortcuts, and tips to master AskOzzy</div>
+    </div>` : '';
+
+  container.innerHTML = guideCta + filtered
     .map(
       (t) => `
     <div class="template-card" onclick="selectTemplate('${t.id}')">
@@ -1464,11 +1658,510 @@ document.addEventListener("keydown", (e) => {
     toggleTheme();
     return;
   }
+  // Ctrl/Cmd + / — open user guide
+  if ((e.ctrlKey || e.metaKey) && e.key === "/") {
+    e.preventDefault();
+    openGuide();
+    return;
+  }
   // Escape — close any open modal
   if (e.key === "Escape") {
     document.querySelectorAll(".modal-overlay.active").forEach(m => m.classList.remove("active"));
   }
 });
+
+// ─── User Guide ─────────────────────────────────────────────────────
+
+function openGuide(scrollToSection) {
+  let modal = document.getElementById('guide-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.className = 'guide-modal-fullscreen';
+    modal.id = 'guide-modal';
+    modal.innerHTML = buildGuideHTML();
+    document.body.appendChild(modal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeGuide(); });
+    initGuideNavigation();
+  }
+  modal.classList.remove('closing');
+  modal.classList.add('active');
+  updateGuideTierHighlights();
+  updateGuideProgress();
+
+  // Mark FAB as seen (stop pulsing)
+  const fab = document.querySelector('.guide-fab');
+  if (fab) fab.classList.add('seen');
+
+  // Sparkle effect on first-ever open
+  setTimeout(() => playGuideSparkle(), 200);
+
+  if (scrollToSection) {
+    setTimeout(() => scrollGuideToSection(scrollToSection), 150);
+  }
+}
+
+function closeGuide() {
+  const modal = document.getElementById('guide-modal');
+  if (!modal || !modal.classList.contains('active')) return;
+  modal.classList.add('closing');
+  setTimeout(() => {
+    modal.classList.remove('active', 'closing');
+  }, 200);
+}
+
+function buildGuideHTML() {
+  const tierOrder = ['free', 'starter', 'professional', 'enterprise'];
+  const userTier = (state.user && state.user.tier) || 'free';
+  const tierLabel = { free: 'Free', starter: 'Starter', professional: 'Professional', enterprise: 'Enterprise' }[userTier] || 'Free';
+
+  // Build nav items (emoji icons)
+  const navItems = GUIDE_SECTIONS.map(s => {
+    const emojiData = GUIDE_SECTION_EMOJIS[s.id];
+    const icon = emojiData ? emojiData.emoji : '';
+    return `<button class="guide-nav-item" data-section="${s.id}" onclick="scrollGuideToSection('${s.id}')">
+      <span class="guide-nav-icon">${icon}</span>
+      <span>${s.title}</span>
+    </button>`;
+  }).join('');
+
+  // Build mobile pills
+  const mobilePills = GUIDE_SECTIONS.map(s => {
+    const emojiData = GUIDE_SECTION_EMOJIS[s.id];
+    const icon = emojiData ? emojiData.emoji + ' ' : '';
+    return `<button class="guide-mobile-nav-pill" data-section="${s.id}" onclick="scrollGuideToSection('${s.id}')">${icon}${s.title}</button>`;
+  }).join('');
+
+  // Build sections
+  const sections = GUIDE_SECTIONS.map(s => {
+    let content = '';
+    if (s.id === 'shortcuts') {
+      content = buildKeyboardShortcutsTable();
+    } else {
+      content = s.features.map(f => {
+        const tierBadge = `<span class="guide-tier-badge tier-${f.tier}">${f.tier.charAt(0).toUpperCase() + f.tier.slice(1)}</span>`;
+        const steps = f.steps.map(st => `<li>${escapeHtml(st)}</li>`).join('');
+        const tryIt = GUIDE_TRY_IT_ACTIONS[f.id];
+        const tryItBtn = tryIt ? `<button class="guide-try-btn" onclick="${tryIt.action}">${tryIt.label}</button>` : '';
+        return `<div class="guide-feature-card" data-feature-id="${f.id}" data-tier="${f.tier}" data-search="${(f.title + ' ' + f.description + ' ' + f.steps.join(' ')).toLowerCase()}">
+          <button class="guide-feature-head" onclick="toggleGuideFeature('${f.id}')">
+            <svg class="guide-feature-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            <span class="guide-feature-title">${escapeHtml(f.title)}</span>
+            ${tierBadge}
+          </button>
+          <div class="guide-feature-body">
+            <div class="guide-feature-inner">
+              <p class="guide-feature-desc">${escapeHtml(f.description)}</p>
+              <ol class="guide-feature-steps">${steps}</ol>
+              ${tryItBtn}
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    // Emoji icon in gradient circle
+    const emojiData = GUIDE_SECTION_EMOJIS[s.id];
+    const sectionIcon = emojiData
+      ? `<div class="guide-section-icon" style="background:${emojiData.gradient};">${emojiData.emoji}</div>`
+      : `<div class="guide-section-icon">${s.icon}</div>`;
+
+    return `<div class="guide-section" id="guide-section-${s.id}" data-section-id="${s.id}" data-search="${(s.title + ' ' + s.description).toLowerCase()}">
+      <div class="guide-section-header">
+        ${sectionIcon}
+        <div>
+          <h3 class="guide-section-title">${s.title}</h3>
+          <div class="guide-section-desc">${s.description}</div>
+        </div>
+      </div>
+      ${content}
+    </div>`;
+  }).join('');
+
+  // Tip of the day
+  const tip = getRandomTip();
+  const tipBanner = `<div class="guide-tip-banner" id="guide-tip-banner">
+    <span class="guide-tip-icon">\u{1F4A1}</span>
+    <span class="guide-tip-text"><strong>Tip:</strong> ${tip}</span>
+    <button class="guide-tip-dismiss" onclick="document.getElementById('guide-tip-banner').style.display='none'" title="Dismiss">\u2715</button>
+  </div>`;
+
+  // Progress bar
+  const progressBar = `<div class="guide-progress-bar">
+    <div class="guide-progress-track"><div class="guide-progress-fill" id="guide-progress-fill" style="width:0%"></div></div>
+    <div class="guide-progress-text" id="guide-progress-text">0 of 49 features explored (0%)</div>
+  </div>`;
+
+  return `<div class="guide-container">
+    <div class="guide-header">
+      <div class="guide-logo">O</div>
+      <div class="guide-header-text">
+        <h2 class="guide-title">
+          AskOzzy User Guide
+          <span class="guide-tier-badge tier-${userTier}">${tierLabel} Plan</span>
+        </h2>
+        <div class="guide-subtitle">Everything you need to know \u2014 49+ features across 12 categories</div>
+      </div>
+      <button class="guide-close" onclick="closeGuide()" title="Close (Esc)">&#x2715;</button>
+    </div>
+    <div class="guide-search-bar">
+      <svg class="guide-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="guide-search-input" type="text" placeholder="Search features, tools, shortcuts..." oninput="filterGuide()" id="guide-search-input" />
+      <span class="guide-search-count" id="guide-search-count"></span>
+      <button class="guide-search-clear" id="guide-search-clear" onclick="clearGuideSearch()">&#x2715;</button>
+    </div>
+    <div class="guide-mobile-nav" id="guide-mobile-nav">${mobilePills}</div>
+    <div class="guide-body">
+      <nav class="guide-nav" id="guide-nav">${navItems}</nav>
+      <div class="guide-content" id="guide-content">
+        ${tipBanner}
+        ${progressBar}
+        ${sections}
+        <div class="guide-no-results" id="guide-no-results" style="display:none;">
+          <div class="guide-no-results-icon">&#128269;</div>
+          <h3>No matching features</h3>
+          <p>Try a different search term</p>
+        </div>
+        <button class="guide-scroll-top" id="guide-scroll-top" title="Scroll to top">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function buildKeyboardShortcutsTable() {
+  const shortcuts = [
+    ['Ctrl + K', 'Search conversations'],
+    ['Ctrl + N', 'New conversation'],
+    ['Ctrl + B', 'Toggle sidebar'],
+    ['Ctrl + Shift + D', 'Toggle dark/light mode'],
+    ['Ctrl + /', 'Open this User Guide'],
+    ['Enter', 'Send message'],
+    ['Shift + Enter', 'New line in message'],
+    ['Escape', 'Close any open modal/dialog'],
+  ];
+
+  const rows = shortcuts.map(([key, action]) => {
+    const kbds = key.split(' + ').map(k => `<kbd>${k}</kbd>`).join(' + ');
+    return `<tr><td>${kbds}</td><td>${escapeHtml(action)}</td></tr>`;
+  }).join('');
+
+  return `<table class="guide-shortcuts-table">
+    <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
+}
+
+function toggleGuideFeature(id) {
+  const card = document.querySelector(`.guide-feature-card[data-feature-id="${id}"]`);
+  if (!card) return;
+
+  const wasOpen = card.classList.contains('open');
+
+  // Close all sibling cards in the same section
+  const section = card.closest('.guide-section');
+  if (section) {
+    section.querySelectorAll('.guide-feature-card.open').forEach(c => c.classList.remove('open'));
+  }
+
+  // Toggle the clicked card
+  if (!wasOpen) {
+    card.classList.add('open');
+    markFeatureExplored(id);
+  }
+}
+
+function scrollGuideToSection(id) {
+  const section = document.getElementById('guide-section-' + id);
+  const content = document.getElementById('guide-content');
+  if (!section || !content) return;
+
+  content.scrollTo({ top: section.offsetTop - content.offsetTop, behavior: 'smooth' });
+
+  // Update nav active state
+  document.querySelectorAll('.guide-nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.guide-mobile-nav-pill').forEach(n => n.classList.remove('active'));
+  const navItem = document.querySelector(`.guide-nav-item[data-section="${id}"]`);
+  const pillItem = document.querySelector(`.guide-mobile-nav-pill[data-section="${id}"]`);
+  if (navItem) navItem.classList.add('active');
+  if (pillItem) {
+    pillItem.classList.add('active');
+    pillItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+  // Update sliding nav indicator
+  setTimeout(() => updateGuideNavIndicator(), 50);
+}
+
+function filterGuide() {
+  const input = document.getElementById('guide-search-input');
+  const clearBtn = document.getElementById('guide-search-clear');
+  const noResults = document.getElementById('guide-no-results');
+  const searchCount = document.getElementById('guide-search-count');
+  if (!input) return;
+
+  const query = input.value.trim().toLowerCase();
+  clearBtn.classList.toggle('visible', query.length > 0);
+
+  const sections = document.querySelectorAll('.guide-section');
+  let anyVisible = false;
+  let matchCount = 0;
+
+  sections.forEach(section => {
+    const sectionId = section.dataset.sectionId;
+
+    // Keyboard shortcuts section — match on section title/desc
+    if (sectionId === 'shortcuts') {
+      const sectionMatch = !query || section.dataset.search.includes(query) || 'keyboard shortcut ctrl'.includes(query);
+      section.classList.toggle('hidden', !sectionMatch);
+      if (sectionMatch) anyVisible = true;
+      return;
+    }
+
+    const cards = section.querySelectorAll('.guide-feature-card');
+    let sectionHasMatch = false;
+
+    cards.forEach(card => {
+      const match = !query || card.dataset.search.includes(query);
+      card.classList.toggle('hidden', !match);
+      if (match) {
+        sectionHasMatch = true;
+        if (query) matchCount++;
+        // Auto-expand matching cards during search
+        if (query.length >= 2) card.classList.add('open');
+        else card.classList.remove('open');
+      }
+    });
+
+    // Also match on section-level search
+    if (!sectionHasMatch && query && section.dataset.search.includes(query)) {
+      sectionHasMatch = true;
+      cards.forEach(card => { card.classList.remove('hidden'); matchCount++; });
+    }
+
+    section.classList.toggle('hidden', !sectionHasMatch);
+    if (sectionHasMatch) anyVisible = true;
+  });
+
+  if (noResults) noResults.style.display = anyVisible || !query ? 'none' : 'block';
+
+  // Update search results count badge
+  if (searchCount) {
+    if (query) {
+      searchCount.textContent = matchCount + ' result' + (matchCount !== 1 ? 's' : '');
+      searchCount.classList.add('visible');
+    } else {
+      searchCount.classList.remove('visible');
+    }
+  }
+}
+
+function clearGuideSearch() {
+  const input = document.getElementById('guide-search-input');
+  if (input) {
+    input.value = '';
+    filterGuide();
+    input.focus();
+  }
+}
+
+function updateGuideTierHighlights() {
+  const tierOrder = ['free', 'starter', 'professional', 'enterprise'];
+  const userTier = (state.user && state.user.tier) || 'free';
+  const userTierIndex = tierOrder.indexOf(userTier);
+
+  document.querySelectorAll('.guide-feature-card').forEach(card => {
+    const featureTier = card.dataset.tier;
+    const featureTierIndex = tierOrder.indexOf(featureTier);
+    const locked = featureTierIndex > userTierIndex;
+
+    card.classList.toggle('locked', locked);
+
+    // Add/remove locked badge
+    const head = card.querySelector('.guide-feature-head');
+    const existing = head.querySelector('.guide-locked-badge');
+    if (locked && !existing) {
+      const badge = document.createElement('span');
+      badge.className = 'guide-locked-badge';
+      badge.innerHTML = '\u{1F512} Unlock';
+      badge.onclick = (e) => { e.stopPropagation(); closeGuide(); openPricingModal(); };
+      head.appendChild(badge);
+    } else if (!locked && existing) {
+      existing.remove();
+    }
+  });
+
+  // Update header tier badge
+  const headerBadge = document.querySelector('.guide-title .guide-tier-badge');
+  if (headerBadge) {
+    const tierLabel = { free: 'Free', starter: 'Starter', professional: 'Professional', enterprise: 'Enterprise' }[userTier] || 'Free';
+    headerBadge.className = `guide-tier-badge tier-${userTier}`;
+    headerBadge.textContent = `${tierLabel} Plan`;
+  }
+}
+
+function initGuideNavigation() {
+  // Use IntersectionObserver to track active section
+  const content = document.getElementById('guide-content');
+  if (!content) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const sectionId = entry.target.dataset.sectionId;
+        if (!sectionId) return;
+
+        document.querySelectorAll('.guide-nav-item').forEach(n => n.classList.remove('active'));
+        document.querySelectorAll('.guide-mobile-nav-pill').forEach(n => n.classList.remove('active'));
+
+        const navItem = document.querySelector(`.guide-nav-item[data-section="${sectionId}"]`);
+        const pillItem = document.querySelector(`.guide-mobile-nav-pill[data-section="${sectionId}"]`);
+        if (navItem) navItem.classList.add('active');
+        if (pillItem) pillItem.classList.add('active');
+        updateGuideNavIndicator();
+      }
+    });
+  }, {
+    root: content,
+    rootMargin: '-10% 0px -80% 0px',
+    threshold: 0
+  });
+
+  content.querySelectorAll('.guide-section').forEach(section => observer.observe(section));
+
+  // Scroll-to-top button listener
+  const scrollTopBtn = document.getElementById('guide-scroll-top');
+  if (scrollTopBtn) {
+    content.addEventListener('scroll', () => {
+      scrollTopBtn.classList.toggle('visible', content.scrollTop > 300);
+    });
+    scrollTopBtn.addEventListener('click', () => {
+      content.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Nav sliding indicator
+  const nav = document.getElementById('guide-nav');
+  if (nav) {
+    const indicator = document.createElement('div');
+    indicator.className = 'guide-nav-indicator';
+    nav.appendChild(indicator);
+    // Initial positioning
+    setTimeout(() => updateGuideNavIndicator(), 100);
+  }
+}
+
+// ─── Guide Utility Functions ──────────────────────────────────────────
+
+function getExploredFeatures() {
+  try { return JSON.parse(localStorage.getItem('ozzy_guide_explored') || '[]'); } catch { return []; }
+}
+
+function markFeatureExplored(featureId) {
+  const explored = getExploredFeatures();
+  if (!explored.includes(featureId)) {
+    explored.push(featureId);
+    localStorage.setItem('ozzy_guide_explored', JSON.stringify(explored));
+  }
+  updateGuideProgress();
+}
+
+function updateGuideProgress() {
+  const explored = getExploredFeatures();
+  const total = GUIDE_SECTIONS.reduce((sum, s) => sum + s.features.length, 0) || 49;
+  const count = explored.length;
+  const pct = Math.min(Math.round((count / total) * 100), 100);
+
+  const fill = document.getElementById('guide-progress-fill');
+  const text = document.getElementById('guide-progress-text');
+  if (fill) fill.style.width = pct + '%';
+  if (text) text.textContent = `${count} of ${total} features explored (${pct}%)`;
+}
+
+function getRandomTip() {
+  const idx = Math.floor(Math.random() * GUIDE_TIPS.length);
+  return GUIDE_TIPS[idx];
+}
+
+function updateGuideNavIndicator() {
+  const nav = document.getElementById('guide-nav');
+  const indicator = nav && nav.querySelector('.guide-nav-indicator');
+  const activeItem = nav && nav.querySelector('.guide-nav-item.active');
+  if (!indicator || !activeItem) return;
+
+  const navRect = nav.getBoundingClientRect();
+  const itemRect = activeItem.getBoundingClientRect();
+  indicator.style.width = (itemRect.width - 24) + 'px';
+  indicator.style.transform = `translateX(${itemRect.left - navRect.left}px) translateY(${itemRect.bottom - navRect.top - 3}px)`;
+}
+
+function playGuideSparkle() {
+  if (localStorage.getItem('ozzy_guide_sparkled')) return;
+  localStorage.setItem('ozzy_guide_sparkled', '1');
+
+  const container = document.querySelector('.guide-container');
+  if (!container) return;
+
+  const canvas = document.createElement('canvas');
+  canvas.className = 'guide-sparkle-canvas';
+  canvas.width = container.offsetWidth;
+  canvas.height = container.offsetHeight;
+  container.style.position = 'relative';
+  container.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  const colors = ['#CE1126', '#FCD116', '#006B3F', '#FFD700', '#FFFFFF'];
+  const particles = [];
+  const cx = canvas.width / 2, cy = canvas.height / 3;
+
+  for (let i = 0; i < 60; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = 2 + Math.random() * 4;
+    particles.push({
+      x: cx, y: cy,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed - 2,
+      r: 2 + Math.random() * 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      life: 1,
+      star: Math.random() > 0.5
+    });
+  }
+
+  let frame = 0;
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.1;
+      p.life -= 0.015;
+      if (p.life <= 0) return;
+      alive = true;
+      ctx.globalAlpha = p.life;
+      ctx.fillStyle = p.color;
+      if (p.star) {
+        ctx.beginPath();
+        for (let j = 0; j < 5; j++) {
+          const a = (j * 4 * Math.PI) / 5 - Math.PI / 2;
+          const m = j === 0 ? 'moveTo' : 'lineTo';
+          ctx[m](p.x + Math.cos(a) * p.r, p.y + Math.sin(a) * p.r);
+        }
+        ctx.closePath();
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    });
+    ctx.globalAlpha = 1;
+    frame++;
+    if (alive && frame < 90) requestAnimationFrame(animate);
+    else canvas.remove();
+  }
+  requestAnimationFrame(animate);
+}
 
 // ─── Voice Input (Web Speech API) ────────────────────────────────────
 

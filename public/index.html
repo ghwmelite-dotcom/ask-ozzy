@@ -86,6 +86,9 @@
         <div class="lang-selector-wrap" style="position:relative;">
           <button class="lang-selector" id="lang-selector" onclick="openLanguageMenu()" title="Select language">EN</button>
         </div>
+        <button class="header-help-btn" onclick="openGuide()" title="User Guide (Ctrl+/)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </button>
         <div class="privacy-badge">Private & Encrypted</div>
       </header>
 
@@ -308,6 +311,11 @@
   </div>
 
   <!-- ═══ Upgrade Limit Banner (injected by JS when limit reached) ═══ -->
+
+  <!-- Guide Help FAB -->
+  <button class="guide-fab" onclick="openGuide()" title="User Guide" aria-label="Open user guide">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </button>
 
   <!-- Citizen Service Bot Launcher -->
   <button class="citizen-bot-fab" onclick="openCitizenBot()" title="Ask Ozzy — Citizen Services" aria-label="Open citizen services chat">
