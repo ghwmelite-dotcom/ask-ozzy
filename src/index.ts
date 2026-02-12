@@ -186,6 +186,10 @@ app.post("/api/auth/register", async (c) => {
     return c.json({ error: "Email and full name are required" }, 400);
   }
 
+  if (!referralCode || !referralCode.trim()) {
+    return c.json({ error: "Referral code is required" }, 400);
+  }
+
   const existing = await c.env.DB.prepare(
     "SELECT id FROM users WHERE email = ?"
   )
@@ -205,9 +209,12 @@ app.post("/api/auth/register", async (c) => {
   const suffix = Math.random().toString(36).substring(2, 6).toUpperCase();
   const userReferralCode = `OZZY-${firstName}-${suffix}`;
 
-  // Check if referred by someone
+  // Determine referral source: 'affiliate' (real user code) or 'system' (auto-generated)
   let referredBy: string | null = null;
-  if (referralCode && referralCode.trim()) {
+  const isSystemReferral = referralCode.trim().toUpperCase().startsWith("OZZY-SYSTEM-");
+  const referralSource = isSystemReferral ? "system" : "affiliate";
+
+  if (!isSystemReferral && referralCode.trim()) {
     const referrer = await c.env.DB.prepare(
       "SELECT id FROM users WHERE referral_code = ?"
     )
@@ -234,10 +241,11 @@ app.post("/api/auth/register", async (c) => {
 
   await ensureUserTypeColumn(c.env.DB);
   await ensureAuthMethodColumns(c.env.DB);
+  await ensureReferralSourceColumn(c.env.DB);
   await c.env.DB.prepare(
-    "INSERT INTO users (id, email, password_hash, full_name, department, referral_code, referred_by, user_type, totp_secret, auth_method, recovery_code_hash) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'totp', ?)"
+    "INSERT INTO users (id, email, password_hash, full_name, department, referral_code, referred_by, user_type, totp_secret, auth_method, recovery_code_hash, referral_source, submitted_referral_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'totp', ?, ?, ?)"
   )
-    .bind(userId, email.toLowerCase().trim(), passwordHash, fullName, department || "", userReferralCode, referredBy, userType || "gog_employee", totpSecret, recoveryCodeHash)
+    .bind(userId, email.toLowerCase().trim(), passwordHash, fullName, department || "", userReferralCode, referredBy, userType || "gog_employee", totpSecret, recoveryCodeHash, referralSource, referralCode.trim().toUpperCase())
     .run();
 
   // If referred, record the referral, credit welcome bonus, and check milestones
@@ -640,6 +648,23 @@ async function ensureAgentUserTypeColumn(db: D1Database) {
     await db.prepare("SELECT user_type FROM agents LIMIT 1").first();
   } catch {
     await db.prepare("ALTER TABLE agents ADD COLUMN user_type TEXT DEFAULT 'all'").run();
+  }
+}
+
+// ─── Referral Source Lazy Migration ──────────────────────────────────
+
+let referralSourceColExists = false;
+async function ensureReferralSourceColumn(db: D1Database) {
+  if (referralSourceColExists) return;
+  try {
+    await db.prepare("SELECT referral_source FROM users LIMIT 1").first();
+    referralSourceColExists = true;
+  } catch {
+    await db.batch([
+      db.prepare("ALTER TABLE users ADD COLUMN referral_source TEXT DEFAULT 'organic'"),
+      db.prepare("ALTER TABLE users ADD COLUMN submitted_referral_code TEXT DEFAULT NULL"),
+    ]);
+    referralSourceColExists = true;
   }
 }
 
@@ -3157,6 +3182,8 @@ app.get("/api/admin/analytics", adminMiddleware, async (c) => {
 
 // Referrals overview
 app.get("/api/admin/referrals", adminMiddleware, async (c) => {
+  await ensureReferralSourceColumn(c.env.DB);
+
   const totalReferrals = await c.env.DB.prepare(
     "SELECT COUNT(*) as count FROM referrals"
   ).first<{ count: number }>();
@@ -3164,6 +3191,19 @@ app.get("/api/admin/referrals", adminMiddleware, async (c) => {
   const totalEarnings = await c.env.DB.prepare(
     "SELECT COALESCE(SUM(bonus_amount), 0) as total FROM referrals"
   ).first<{ total: number }>();
+
+  // Breakdown by referral source
+  const affiliateSignups = await c.env.DB.prepare(
+    "SELECT COUNT(*) as count FROM users WHERE referral_source = 'affiliate'"
+  ).first<{ count: number }>();
+
+  const systemSignups = await c.env.DB.prepare(
+    "SELECT COUNT(*) as count FROM users WHERE referral_source = 'system'"
+  ).first<{ count: number }>();
+
+  const organicSignups = await c.env.DB.prepare(
+    "SELECT COUNT(*) as count FROM users WHERE referral_source = 'organic' OR referral_source IS NULL"
+  ).first<{ count: number }>();
 
   const { results: topReferrers } = await c.env.DB.prepare(
     `SELECT u.full_name, u.email, u.total_referrals, u.affiliate_earnings, u.affiliate_tier
@@ -3176,7 +3216,8 @@ app.get("/api/admin/referrals", adminMiddleware, async (c) => {
   const { results: recentReferrals } = await c.env.DB.prepare(
     `SELECT r.created_at, r.bonus_amount, r.status,
             referrer.full_name as referrer_name, referrer.email as referrer_email,
-            referred.full_name as referred_name, referred.email as referred_email
+            referred.full_name as referred_name, referred.email as referred_email,
+            referred.referral_source as source
      FROM referrals r
      JOIN users referrer ON referrer.id = r.referrer_id
      JOIN users referred ON referred.id = r.referred_id
@@ -3189,6 +3230,11 @@ app.get("/api/admin/referrals", adminMiddleware, async (c) => {
     totalEarnings: totalEarnings?.total || 0,
     topReferrers: topReferrers || [],
     recentReferrals: recentReferrals || [],
+    sourceBreakdown: {
+      affiliate: affiliateSignups?.count || 0,
+      system: systemSignups?.count || 0,
+      organic: organicSignups?.count || 0,
+    },
   });
 });
 

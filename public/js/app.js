@@ -732,11 +732,52 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
   }
 });
 
+// Auto-generate a system referral code for users who don't have one from a colleague
+function autoGenerateReferralCode() {
+  const input = document.getElementById("reg-referral");
+  const hint = document.getElementById("referral-hint");
+  const btn = document.getElementById("btn-auto-referral");
+  const suffix = Math.random().toString(36).substring(2, 6).toUpperCase();
+  const code = `OZZY-SYSTEM-${suffix}`;
+  input.value = code;
+  input.readOnly = true;
+  input.style.opacity = "0.75";
+  if (hint) {
+    hint.textContent = "Auto-generated code applied. You can still replace it with a colleague's code.";
+    hint.style.color = "var(--flag-green, #006B3F)";
+  }
+  if (btn) {
+    btn.textContent = "Clear";
+    btn.onclick = function () {
+      input.value = "";
+      input.readOnly = false;
+      input.style.opacity = "1";
+      input.focus();
+      if (hint) {
+        hint.textContent = 'Enter a referral code from a colleague, or click "Auto-fill" if you don\'t have one.';
+        hint.style.color = "var(--text-muted)";
+      }
+      btn.textContent = "Don't have one? Auto-fill";
+      btn.onclick = autoGenerateReferralCode;
+    };
+  }
+}
+
 document.getElementById("register-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   const fullName = document.getElementById("reg-name").value;
   const email = document.getElementById("reg-email").value;
   const department = document.getElementById("reg-dept").value;
+  const referralInput = document.getElementById("reg-referral");
+  const referralCode = referralInput.value.trim();
+
+  // Validate referral code is filled
+  if (!referralCode) {
+    referralInput.focus();
+    showAuthError("Referral code is required. Click \"Auto-fill\" if you don't have one from a colleague.");
+    return;
+  }
+
   const btn = e.target.querySelector(".btn-auth");
   btn.disabled = true;
   btn.textContent = "Creating account...";
@@ -745,7 +786,7 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
     const res = await fetch(`${API}/api/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, fullName, department, referralCode: document.getElementById("reg-referral").value, userType: _selectedPersona }),
+      body: JSON.stringify({ email, fullName, department, referralCode, userType: _selectedPersona }),
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error || "Registration failed");

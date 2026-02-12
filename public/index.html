@@ -297,8 +297,12 @@
             <input type="text" id="reg-dept" placeholder="e.g. Ministry of Finance" />
           </div>
           <div class="form-group">
-            <label style="font-size:11px;color:var(--text-muted);text-transform:none;letter-spacing:0;">Referral Code (optional)</label>
-            <input type="text" id="reg-referral" placeholder="e.g. OZZY-KWAME" />
+            <label>Referral Code <span style="color:var(--accent-red,#CE1126);">*</span></label>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <input type="text" id="reg-referral" placeholder="e.g. OZZY-KWAME" required style="flex:1;" />
+              <button type="button" id="btn-auto-referral" onclick="autoGenerateReferralCode()" style="white-space:nowrap;padding:8px 12px;font-size:11px;border-radius:8px;border:1px solid var(--border);background:var(--bg-secondary);color:var(--text-muted);cursor:pointer;transition:all .2s;">Don't have one? Auto-fill</button>
+            </div>
+            <div id="referral-hint" style="font-size:11px;color:var(--text-muted);margin-top:4px;">Enter a referral code from a colleague, or click "Auto-fill" if you don't have one.</div>
           </div>
           <button type="submit" class="btn-auth">Create Account</button>
         </form>

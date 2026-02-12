@@ -579,6 +579,7 @@ async function loadReferrals() {
     const res = await apiFetch("/api/admin/referrals");
     const d = await res.json();
 
+    const sb = d.sourceBreakdown || {};
     el.innerHTML = `
       <div class="stats-grid" style="margin-bottom:24px;">
         <div class="stat-card">
@@ -588,6 +589,18 @@ async function loadReferrals() {
         <div class="stat-card green">
           <div class="stat-value">GHS ${(d.totalEarnings || 0).toFixed(2)}</div>
           <div class="stat-label">Total Paid Out</div>
+        </div>
+        <div class="stat-card" style="border-left:3px solid #2563eb;">
+          <div class="stat-value">${sb.affiliate || 0}</div>
+          <div class="stat-label">Affiliate Signups</div>
+        </div>
+        <div class="stat-card" style="border-left:3px solid #9ca3af;">
+          <div class="stat-value">${sb.system || 0}</div>
+          <div class="stat-label">System-Generated</div>
+        </div>
+        <div class="stat-card" style="border-left:3px solid #f59e0b;">
+          <div class="stat-value">${sb.organic || 0}</div>
+          <div class="stat-label">Organic (Legacy)</div>
         </div>
       </div>
 
@@ -605,10 +618,14 @@ async function loadReferrals() {
         <div class="admin-card">
           <h3>Recent Referrals</h3>
           ${(d.recentReferrals || []).length === 0 ? '<div class="admin-empty">No referrals yet</div>' :
-            '<div class="admin-table-wrapper"><table class="admin-table"><thead><tr><th>Referrer</th><th>Referred</th><th>Bonus</th><th>Date</th></tr></thead><tbody>' +
-            d.recentReferrals.map(r =>
-              '<tr><td>' + escapeHtml(r.referrer_name) + '</td><td>' + escapeHtml(r.referred_name) + '</td><td>GHS ' + (r.bonus_amount || 0).toFixed(2) + '</td><td>' + formatDateShort(r.created_at) + '</td></tr>'
-            ).join("") +
+            '<div class="admin-table-wrapper"><table class="admin-table"><thead><tr><th>Referrer</th><th>Referred</th><th>Source</th><th>Bonus</th><th>Date</th></tr></thead><tbody>' +
+            d.recentReferrals.map(r => {
+              const src = r.source || 'affiliate';
+              const srcBadge = src === 'system'
+                ? '<span class="badge" style="background:#f3f4f6;color:#6b7280;font-size:10px;">System</span>'
+                : '<span class="badge" style="background:#dbeafe;color:#2563eb;font-size:10px;">Affiliate</span>';
+              return '<tr><td>' + escapeHtml(r.referrer_name) + '</td><td>' + escapeHtml(r.referred_name) + '</td><td>' + srcBadge + '</td><td>GHS ' + (r.bonus_amount || 0).toFixed(2) + '</td><td>' + formatDateShort(r.created_at) + '</td></tr>';
+            }).join("") +
             '</tbody></table></div>'
           }
         </div>

@@ -1360,6 +1360,12 @@ html, body {
   color: var(--text-muted);
 }
 
+#btn-auto-referral:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-color: var(--gold-dim);
+}
+
 .btn-auth {
   width: 100%;
   padding: 12px;

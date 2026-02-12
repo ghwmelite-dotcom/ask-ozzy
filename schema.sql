@@ -18,6 +18,8 @@ CREATE TABLE IF NOT EXISTS users (
   totp_enabled INTEGER DEFAULT 0,
   auth_method TEXT DEFAULT 'access_code',
   recovery_code_hash TEXT DEFAULT NULL,
+  referral_source TEXT DEFAULT 'organic',
+  submitted_referral_code TEXT DEFAULT NULL,
   org_id TEXT DEFAULT NULL,
   created_at TEXT DEFAULT (datetime('now')),
   last_login TEXT DEFAULT (datetime('now')),
