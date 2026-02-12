@@ -180,7 +180,8 @@ html, body {
 .app-container {
   display: flex;
   height: 100vh;
-  width: 100vw;
+  height: 100dvh;
+  width: 100%;
 }
 
 /* ─── Sidebar ─────────────────────────────────────────────────────── */
@@ -1207,7 +1208,12 @@ html, body {
   color: var(--text-secondary);
   font-size: 20px;
   cursor: pointer;
-  padding: 4px;
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: color var(--transition);
 }
 
@@ -1277,6 +1283,7 @@ html, body {
 
 .auth-screen {
   height: 100vh;
+  height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1346,7 +1353,7 @@ html, body {
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   color: var(--text-primary);
-  font-size: 14px;
+  font-size: 16px;
   font-family: inherit;
   outline: none;
   transition: border-color var(--transition);
@@ -1466,6 +1473,7 @@ html, body {
     width: 280px;
     min-width: 280px;
     height: 100vh;
+    height: 100dvh;
     box-shadow: var(--shadow);
     z-index: 200;
   }
@@ -7823,3 +7831,311 @@ html, body {
   border-color: var(--gold-dim);
 }
 .passkey-btn svg { stroke: var(--gold); }
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE-FIRST COMPREHENSIVE FIX — Feb 2026
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Global touch & interaction improvements ─────────────────────── */
+
+button, a, [onclick], [role="button"], .tool-pill, .category-tab,
+.conversation-item, .template-card, .input-action-btn, .btn-send {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Active states for touch feedback (supplements hover) */
+.input-action-btn:active,
+.btn-send:active,
+.tool-pill:active,
+.category-tab:active,
+.template-card:active,
+.conversation-item:active,
+.btn-auth:active,
+.passkey-btn:active,
+.citizen-bot-fab:active,
+.guide-fab:active {
+  opacity: 0.8;
+  transform: scale(0.96);
+}
+
+/* Prevent iOS rubber-band on scrollable containers */
+.chat-messages,
+.sidebar,
+.modal-body,
+.citizen-messages {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* iOS input zoom prevention — 16px minimum on all inputs */
+@media (max-width: 768px) {
+  input, textarea, select,
+  #chat-input,
+  .search-input,
+  .citizen-input-area input {
+    font-size: 16px !important;
+  }
+}
+
+/* ─── Safe area insets for notched/pill phones ────────────────────── */
+
+@supports (padding: env(safe-area-inset-bottom)) {
+  .citizen-bot-fab {
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    right: calc(24px + env(safe-area-inset-right, 0px));
+  }
+
+  .guide-fab {
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    left: calc(24px + env(safe-area-inset-left, 0px));
+  }
+
+  .pwa-install-banner {
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Input area safe area in all modes (not just standalone) */
+  .input-area {
+    padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .modal-overlay {
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+/* ─── Hover-only patterns: show on mobile without hover ──────────── */
+
+@media (hover: none), (max-width: 768px) {
+  /* Always show conversation delete button on touch devices */
+  .conversation-item .convo-delete {
+    opacity: 0.6;
+  }
+
+  /* Folder action buttons visible on mobile */
+  .folder-header .folder-actions {
+    opacity: 1;
+  }
+}
+
+/* ─── Tablet portrait (≤ 768px) improvements ─────────────────────── */
+
+@media (max-width: 768px) {
+  .modal-overlay {
+    padding: 12px;
+  }
+
+  .auth-screen {
+    padding: 12px;
+  }
+
+  .auth-form {
+    padding: 20px;
+  }
+
+  .modal {
+    max-height: 85vh;
+    max-height: 85dvh;
+  }
+
+  .chat-messages {
+    padding: 0 12px;
+  }
+
+  /* Touch targets: minimum 44px on mobile */
+  .input-action-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .btn-send {
+    width: 40px;
+    height: 40px;
+  }
+
+  .category-tab {
+    min-height: 36px;
+    padding: 6px 12px;
+  }
+
+  .conversation-item {
+    min-height: 44px;
+  }
+
+  .header-help-btn {
+    min-width: 36px;
+    min-height: 36px;
+  }
+}
+
+/* ─── Mobile phones (≤ 480px) improvements ────────────────────────── */
+
+@media (max-width: 480px) {
+  .modal-overlay {
+    padding: 8px;
+  }
+
+  .modal {
+    max-width: 100%;
+    margin: 0;
+    border-radius: 12px;
+    max-height: 90vh;
+    max-height: 90dvh;
+  }
+
+  .modal-body {
+    padding: 14px;
+  }
+
+  .modal-header {
+    padding: 14px 16px;
+  }
+
+  .auth-screen {
+    padding: 8px;
+  }
+
+  .auth-form {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .auth-header {
+    margin-bottom: 20px;
+  }
+
+  .auth-header .auth-logo {
+    width: 52px;
+    height: 52px;
+    font-size: 26px;
+    margin-bottom: 12px;
+  }
+
+  .auth-header h2 {
+    font-size: 20px;
+  }
+
+  .chat-messages {
+    padding: 0 8px;
+  }
+
+  /* Input action buttons: 44px touch targets */
+  .input-action-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .btn-send {
+    width: 44px;
+    height: 44px;
+  }
+
+  .input-actions-left,
+  .input-actions-right {
+    gap: 2px;
+  }
+
+  /* Citizen bot safe area + full-width */
+  .citizen-bot {
+    right: 4px;
+    left: 4px;
+    width: auto;
+    max-height: 70vh;
+    max-height: 70dvh;
+  }
+
+  /* Sidebar: narrower on small phones */
+  .sidebar {
+    width: 260px;
+    min-width: 260px;
+  }
+
+  /* Category tabs: proper touch targets */
+  .category-tab {
+    min-height: 32px;
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+}
+
+/* ─── Small phones (≤ 360px) improvements ─────────────────────────── */
+
+@media (max-width: 360px) {
+  .modal-overlay {
+    padding: 4px;
+  }
+
+  .modal-body {
+    padding: 12px;
+  }
+
+  .auth-form {
+    padding: 14px;
+  }
+
+  .chat-messages {
+    padding: 0 6px;
+  }
+
+  .sidebar {
+    width: 240px;
+    min-width: 240px;
+  }
+
+  /* Referral code auto-fill button: stack on tiny screens */
+  #btn-auto-referral {
+    font-size: 10px;
+    padding: 6px 8px;
+  }
+}
+
+/* ─── Landscape phones: prevent cramped layout ────────────────────── */
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .modal {
+    max-height: 95vh;
+    max-height: 95dvh;
+  }
+
+  .auth-screen {
+    padding: 8px;
+    overflow-y: auto;
+  }
+
+  .auth-header {
+    margin-bottom: 12px;
+  }
+
+  .auth-header .auth-logo {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .auth-header h2 {
+    font-size: 18px;
+  }
+}
+
+/* ─── PWA standalone: safe areas for all fixed elements ──────────── */
+
+@media (display-mode: standalone) {
+  .sidebar {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  .main-header {
+    padding-top: max(10px, env(safe-area-inset-top, 0px));
+  }
+
+  .citizen-bot-fab {
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .guide-fab {
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  }
+}
