@@ -1018,10 +1018,19 @@ async function sendMessage() {
         if (lastMsgEl) {
           const btn = document.createElement('button');
           btn.className = 'artifact-open-btn';
-          btn.innerHTML = '📄 Open in Canvas';
+          btn.innerHTML = '\uD83D\uDCC4 Open in Canvas';
           btn.onclick = () => openArtifactPanel(artifact);
           lastMsgEl.appendChild(btn);
         }
+      }
+
+      // Cache the completed response for offline use via service worker
+      if (fullText && navigator.serviceWorker && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({
+          type: "CACHE_RESPONSE",
+          prompt: message,
+          response: fullText,
+        });
       }
     }
   } catch (err) {
@@ -2348,10 +2357,48 @@ function playGuideSparkle() {
   requestAnimationFrame(animate);
 }
 
-// ─── Voice Input (Web Speech API) ────────────────────────────────────
+// ─── Voice Input (Web Speech API) — Enhanced with Ghanaian Languages ─
 
 let _recognition = null;
 let _isListening = false;
+let _voiceTimerInterval = null;
+let _voiceTimerSeconds = 0;
+
+// Language code mapping for speech recognition
+const VOICE_LANG_MAP = {
+  en: 'en-GH',     // Ghana English
+  tw: 'ak-GH',     // Akan/Twi
+  ga: 'gaa',        // Ga
+  ee: 'ee-GH',      // Ewe
+  ha: 'ha-GH',      // Hausa
+  fr: 'fr-FR',      // French
+  dag: 'dag',       // Dagbani
+};
+
+// Fallback language codes if browser doesn't support the specific locale
+const VOICE_LANG_FALLBACK = {
+  'en-GH': 'en-US',
+  'ak-GH': 'ak',
+  'ee-GH': 'ee',
+  'ha-GH': 'ha',
+};
+
+// "Listening..." in each language
+const LISTENING_LABELS = {
+  en: 'Listening...',
+  tw: 'Mente tie...',
+  ga: 'Enu mli...',
+  ee: 'Miele to...',
+  ha: 'Ana sauraro...',
+  fr: '\u00C9coute...',
+  dag: 'Di wuhimi...',
+};
+
+function getRecognitionLang() {
+  const lang = state.language || 'en';
+  const mapped = VOICE_LANG_MAP[lang] || 'en-GH';
+  return mapped;
+}
 
 function initVoiceInput() {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -2360,7 +2407,7 @@ function initVoiceInput() {
   _recognition = new SpeechRecognition();
   _recognition.continuous = false;
   _recognition.interimResults = true;
-  _recognition.lang = "en-GH";
+  _recognition.lang = getRecognitionLang();
 
   _recognition.onresult = (event) => {
     const input = document.getElementById("chat-input");
@@ -2377,12 +2424,28 @@ function initVoiceInput() {
 
   _recognition.onend = () => {
     _isListening = false;
-    updateVoiceButton();
+    updateVoiceUI(false);
   };
 
-  _recognition.onerror = () => {
+  _recognition.onerror = (e) => {
     _isListening = false;
-    updateVoiceButton();
+    updateVoiceUI(false);
+    // If language not supported, try fallback
+    if (e.error === 'language-not-supported') {
+      const currentLang = _recognition.lang;
+      const fallback = VOICE_LANG_FALLBACK[currentLang];
+      if (fallback) {
+        _recognition.lang = fallback;
+        // Auto-retry with fallback
+        try {
+          _recognition.start();
+          _isListening = true;
+          updateVoiceUI(true);
+        } catch (retryErr) {
+          // Silently fail
+        }
+      }
+    }
   };
 }
 
@@ -2394,22 +2457,190 @@ function toggleVoice() {
   if (_isListening) {
     _recognition.stop();
     _isListening = false;
+    updateVoiceUI(false);
   } else {
-    _recognition.start();
-    _isListening = true;
+    // Update recognition language before starting
+    _recognition.lang = getRecognitionLang();
+    try {
+      _recognition.start();
+      _isListening = true;
+      updateVoiceUI(true);
+    } catch (err) {
+      // Already started or other error
+      _isListening = false;
+      updateVoiceUI(false);
+    }
   }
-  updateVoiceButton();
 }
 
+function updateVoiceUI(isRecording) {
+  // Update the small voice button
+  const btnSmall = document.getElementById("btn-voice");
+  if (btnSmall) {
+    btnSmall.classList.toggle("listening", isRecording);
+    btnSmall.title = isRecording ? "Stop listening" : "Voice input";
+  }
+
+  // Update the large voice button
+  const btnLarge = document.getElementById("voice-btn-large");
+  if (btnLarge) {
+    btnLarge.classList.toggle("recording", isRecording);
+    btnLarge.title = isRecording ? "Tap to stop" : "Tap to speak";
+  }
+
+  // Update the input wrapper state
+  const wrapper = document.getElementById("input-wrapper");
+  if (wrapper) {
+    wrapper.classList.toggle("recording", isRecording);
+  }
+
+  // Update the recording indicator
+  const indicator = document.getElementById("voice-recording-indicator");
+  if (indicator) {
+    indicator.classList.toggle("active", isRecording);
+  }
+
+  // Update listening label text
+  const label = document.getElementById("voice-listening-label");
+  if (label) {
+    label.textContent = LISTENING_LABELS[state.language] || 'Listening...';
+  }
+
+  // Handle recording timer
+  if (isRecording) {
+    startVoiceTimer();
+  } else {
+    stopVoiceTimer();
+  }
+}
+
+function startVoiceTimer() {
+  _voiceTimerSeconds = 0;
+  updateVoiceTimerDisplay();
+  _voiceTimerInterval = setInterval(() => {
+    _voiceTimerSeconds++;
+    updateVoiceTimerDisplay();
+  }, 1000);
+}
+
+function stopVoiceTimer() {
+  if (_voiceTimerInterval) {
+    clearInterval(_voiceTimerInterval);
+    _voiceTimerInterval = null;
+  }
+  _voiceTimerSeconds = 0;
+  updateVoiceTimerDisplay();
+}
+
+function updateVoiceTimerDisplay() {
+  const timerEl = document.getElementById("voice-timer");
+  if (!timerEl) return;
+  const mins = Math.floor(_voiceTimerSeconds / 60);
+  const secs = _voiceTimerSeconds % 60;
+  timerEl.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+// Keep the old function name for backward compatibility
 function updateVoiceButton() {
-  const btn = document.getElementById("btn-voice");
-  if (!btn) return;
-  btn.classList.toggle("listening", _isListening);
-  btn.title = _isListening ? "Stop listening" : "Voice input";
+  updateVoiceUI(_isListening);
 }
 
-// Init voice on load
-document.addEventListener("DOMContentLoaded", initVoiceInput);
+// ─── Voice-First Welcome Overlay ─────────────────────────────────────
+
+function showVoiceWelcome() {
+  if (localStorage.getItem('ozzy_voice_welcomed')) return;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'voice-welcome-overlay';
+  overlay.id = 'voice-welcome-overlay';
+  overlay.innerHTML = `
+    <div class="voice-welcome-card">
+      <div class="voice-welcome-flag"><span></span><span></span><span></span></div>
+      <h2>Welcome to AskOzzy</h2>
+      <p class="subtitle">Tap the microphone to ask your question in any Ghanaian language</p>
+      <button class="voice-welcome-mic" id="voice-welcome-mic-btn" title="Tap to speak">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+          <line x1="12" y1="19" x2="12" y2="23"/>
+          <line x1="8" y1="23" x2="16" y2="23"/>
+        </svg>
+      </button>
+      <div class="voice-lang-pills" id="voice-welcome-langs"></div>
+      <p class="or-type">Or type your question below</p>
+      <button class="voice-welcome-dismiss" id="voice-welcome-dismiss">Got it</button>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  // Populate language pills
+  const languages = [
+    { code: 'en', name: 'English' },
+    { code: 'tw', name: 'Twi' },
+    { code: 'ga', name: 'Ga' },
+    { code: 'ee', name: 'Ewe' },
+    { code: 'ha', name: 'Hausa' },
+    { code: 'fr', name: 'Fran\u00e7ais' },
+    { code: 'dag', name: 'Dagbani' },
+  ];
+
+  const pillsContainer = document.getElementById('voice-welcome-langs');
+  if (pillsContainer) {
+    pillsContainer.innerHTML = languages.map(l =>
+      `<button class="voice-lang-pill ${l.code === (state.language || 'en') ? 'active' : ''}" data-lang="${l.code}">${l.name}</button>`
+    ).join('');
+
+    // Language pill click handlers
+    pillsContainer.addEventListener('click', (e) => {
+      const pill = e.target.closest('.voice-lang-pill');
+      if (!pill) return;
+      const lang = pill.dataset.lang;
+      // Update active state
+      pillsContainer.querySelectorAll('.voice-lang-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      // Change the app language
+      changeLanguage(lang);
+    });
+  }
+
+  // Mic button in welcome — start voice and dismiss
+  const micBtn = document.getElementById('voice-welcome-mic-btn');
+  if (micBtn) {
+    micBtn.addEventListener('click', () => {
+      dismissVoiceWelcome();
+      setTimeout(() => toggleVoice(), 200);
+    });
+  }
+
+  // Dismiss button
+  const dismissBtn = document.getElementById('voice-welcome-dismiss');
+  if (dismissBtn) {
+    dismissBtn.addEventListener('click', dismissVoiceWelcome);
+  }
+
+  // Click outside card to dismiss
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) dismissVoiceWelcome();
+  });
+}
+
+function dismissVoiceWelcome() {
+  localStorage.setItem('ozzy_voice_welcomed', '1');
+  const overlay = document.getElementById('voice-welcome-overlay');
+  if (overlay) {
+    overlay.style.opacity = '0';
+    overlay.style.transition = 'opacity 0.25s ease';
+    setTimeout(() => overlay.remove(), 260);
+  }
+}
+
+// Init voice on load + show welcome
+document.addEventListener("DOMContentLoaded", () => {
+  initVoiceInput();
+  // Show voice welcome after a brief delay so the page renders first
+  setTimeout(showVoiceWelcome, 600);
+});
 
 // ─── Response Rating ─────────────────────────────────────────────────
 
@@ -3285,20 +3516,160 @@ function dismissInstallBanner() {
 
 function updateOnlineStatus() {
   const existing = document.querySelector(".offline-indicator");
+  const badge = document.getElementById("offline-status-badge");
+  const badgeText = badge ? badge.querySelector(".offline-status-text") : null;
 
   if (!navigator.onLine) {
-    if (existing) return;
-    const indicator = document.createElement("div");
-    indicator.className = "offline-indicator";
-    indicator.innerHTML = '<span class="offline-dot"></span> You are offline — messages will fail until reconnected';
-    document.body.appendChild(indicator);
+    // Show bottom bar indicator
+    if (!existing) {
+      const indicator = document.createElement("div");
+      indicator.className = "offline-indicator";
+      indicator.innerHTML = '<span class="offline-dot"></span> Offline Mode — templates available, other messages will be queued';
+      document.body.appendChild(indicator);
+    }
+
+    // Update header badge
+    if (badge) {
+      badge.classList.remove("online");
+      badge.classList.add("offline");
+      if (badgeText) badgeText.textContent = "Offline";
+    }
+
+    // Request queue status from service worker
+    updateOfflineQueueBadge();
   } else {
+    // Remove bottom bar indicator
     if (existing) existing.remove();
+
+    // Update header badge
+    if (badge) {
+      badge.classList.remove("offline");
+      badge.classList.add("online");
+      if (badgeText) badgeText.textContent = "Online";
+    }
+
+    // Try to process queued messages
+    if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({ type: "PROCESS_QUEUE" });
+    }
+
+    // Hide queue badge after a short delay (let sync complete)
+    setTimeout(updateOfflineQueueBadge, 2000);
   }
 }
 
-window.addEventListener("online", updateOnlineStatus);
+// Initialize the header badge on load
+function initOfflineStatusBadge() {
+  const badge = document.getElementById("offline-status-badge");
+  if (badge) {
+    if (navigator.onLine) {
+      badge.classList.add("online");
+      badge.querySelector(".offline-status-text").textContent = "Online";
+    } else {
+      badge.classList.add("offline");
+      badge.querySelector(".offline-status-text").textContent = "Offline";
+    }
+  }
+}
+
+// Update the sidebar queue badge with pending message count
+function updateOfflineQueueBadge() {
+  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage({ type: "GET_QUEUE_STATUS" });
+  }
+}
+
+// Show/hide the queue badge based on count
+function renderQueueBadge(count) {
+  const queueBadge = document.getElementById("offline-queue-badge");
+  const queueCount = document.getElementById("offline-queue-count");
+
+  if (queueBadge && queueCount) {
+    if (count > 0) {
+      queueBadge.style.display = "flex";
+      queueCount.textContent = count;
+    } else {
+      queueBadge.style.display = "none";
+    }
+  }
+}
+
+// Show a toast when queued messages are synced
+function showSyncToast(message) {
+  // Remove existing toast
+  const existing = document.querySelector(".offline-syncing-toast");
+  if (existing) existing.remove();
+
+  const toast = document.createElement("div");
+  toast.className = "offline-syncing-toast";
+  toast.innerHTML = `<div class="sync-spinner"></div> ${message}`;
+  document.body.appendChild(toast);
+
+  setTimeout(() => {
+    if (toast.parentElement) toast.remove();
+  }, 4000);
+}
+
+// Listen for messages from the service worker
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.addEventListener("message", (event) => {
+    const { data } = event;
+    if (!data || !data.type) return;
+
+    switch (data.type) {
+      case "QUEUE_STATUS":
+        renderQueueBadge(data.count);
+        break;
+
+      case "QUEUE_UPDATED":
+        updateOfflineQueueBadge();
+        break;
+
+      case "OFFLINE_MESSAGE_SENT":
+        showSyncToast("Queued message sent successfully");
+        updateOfflineQueueBadge();
+        // Refresh conversations list
+        if (typeof loadConversations === "function") {
+          loadConversations();
+        }
+        break;
+
+      case "OFFLINE_TEMPLATE_SERVED":
+        // Show a subtle notification that an offline template was used
+        showSyncToast("Serving offline template for: " + (data.templateId || "").replace(/-/g, " "));
+        break;
+
+      case "TEMPLATES_CACHED":
+        console.log("Offline templates cached:", data.count);
+        break;
+    }
+  });
+}
+
+window.addEventListener("online", () => {
+  updateOnlineStatus();
+  // Show sync toast when coming back online
+  showSyncToast("Back online — syncing queued messages...");
+});
 window.addEventListener("offline", updateOnlineStatus);
+
+// Initialize on page load
+document.addEventListener("DOMContentLoaded", () => {
+  initOfflineStatusBadge();
+  updateOnlineStatus();
+
+  // Request template pre-caching from the service worker on first load
+  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage({ type: "PRECACHE_TEMPLATES" });
+  } else if (navigator.serviceWorker) {
+    // Wait for the service worker to be ready
+    navigator.serviceWorker.ready.then(() => {
+      if (navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({ type: "PRECACHE_TEMPLATES" });
+      }
+    });
+  }
+});
 
 // ─── Auto-capture referral code from URL ─────────────────────────────
 
@@ -3416,6 +3787,10 @@ function changeLanguage(lang) {
     input.placeholder = placeholders[lang] || 'Ask Ozzy anything...';
   } else if (input) {
     input.placeholder = 'Ask Ozzy anything... (Shift+Enter for new line)';
+  }
+  // Update speech recognition language when language changes
+  if (_recognition) {
+    _recognition.lang = getRecognitionLang();
   }
 }
 

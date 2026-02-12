@@ -157,7 +157,7 @@ function switchTab(tab) {
     moderation: () => loadModeration("pending"),
     "audit-log": () => loadAuditLog(1),
     knowledge: loadKnowledgeTab,
-    "bulk-import": () => {},  // No auto-load needed
+    "bulk-import": loadDepartmentStats,
     "document-training": loadTrainingStatus,
     "agents": loadAgentsList,
     "productivity": loadProductivityTab,
@@ -311,8 +311,8 @@ async function loadUsers(page) {
             ).join('') +
           '</select></td>' +
           '<td><select class="inline-select" onchange="changeRole(\'' + u.id + '\', this.value)"' + (isSelf ? ' disabled title="Cannot change own role"' : '') + '>' +
-            ['civil_servant','super_admin'].map(r =>
-              '<option value="' + r + '"' + (r === u.role ? ' selected' : '') + '>' + (r === 'super_admin' ? 'Admin' : 'User') + '</option>'
+            ['civil_servant','dept_admin','super_admin'].map(r =>
+              '<option value="' + r + '"' + (r === u.role ? ' selected' : '') + '>' + (r === 'super_admin' ? 'Admin' : r === 'dept_admin' ? 'Dept Admin' : 'User') + '</option>'
             ).join('') +
           '</select></td>' +
           '<td>' + (u.total_referrals || 0) + '</td>' +
@@ -1422,15 +1422,44 @@ async function deleteFaq(id) {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  TAB: Bulk Import
+//  TAB: Bulk Import & Department Onboarding
 // ═══════════════════════════════════════════════════════════════════
 
 let bulkUsers = [];
+let bulkCSVFile = null; // Stores the raw CSV File object for server-side upload
+
+function handleBulkFileDrop(event) {
+  const files = event.dataTransfer.files;
+  if (files.length > 0 && files[0].name.endsWith(".csv")) {
+    const fileInput = document.getElementById("bulk-csv-file");
+    // Create a new DataTransfer to assign to the input
+    const dt = new DataTransfer();
+    dt.items.add(files[0]);
+    fileInput.files = dt.files;
+    parseBulkCSV();
+  } else {
+    alert("Please drop a .csv file");
+  }
+}
 
 function parseBulkCSV() {
   const fileInput = document.getElementById("bulk-csv-file");
   const file = fileInput.files[0];
   if (!file) return;
+
+  // Store the file for potential server-side upload
+  bulkCSVFile = file;
+
+  // Show file name in drop zone
+  const fileNameEl = document.getElementById("bulk-file-name");
+  if (fileNameEl) {
+    fileNameEl.textContent = file.name + " (" + (file.size / 1024).toFixed(1) + " KB)";
+    fileNameEl.style.display = "block";
+  }
+
+  // Show the CSV upload button
+  const csvBtn = document.getElementById("btn-bulk-csv-import");
+  if (csvBtn) csvBtn.style.display = "inline-block";
 
   const reader = new FileReader();
   reader.onload = function(e) {
@@ -1448,6 +1477,7 @@ function parseBulkCSV() {
     const emailIdx = headers.findIndex(h => h.includes("email"));
     const nameIdx = headers.findIndex(h => h.includes("name") || h.includes("full"));
     const deptIdx = headers.findIndex(h => h.includes("dept") || h.includes("department") || h.includes("mda"));
+    const tierIdx = headers.findIndex(h => h === "tier");
 
     if (emailIdx === -1 || nameIdx === -1) {
       alert("CSV must have columns for email and name (full_name or fullName)");
@@ -1462,6 +1492,7 @@ function parseBulkCSV() {
           email: cols[emailIdx],
           fullName: cols[nameIdx],
           department: deptIdx >= 0 ? (cols[deptIdx] || "") : "",
+          tier: tierIdx >= 0 ? (cols[tierIdx] || "") : "",
         });
       }
     }
@@ -1474,6 +1505,10 @@ function parseBulkCSV() {
 function parseBulkPaste() {
   const text = document.getElementById("bulk-paste").value.trim();
   if (!text) return;
+
+  bulkCSVFile = null; // Clear any CSV file reference when pasting
+  const csvBtn = document.getElementById("btn-bulk-csv-import");
+  if (csvBtn) csvBtn.style.display = "none";
 
   bulkUsers = text.split("\n").map(line => {
     const parts = line.split(",").map(p => p.trim());
@@ -1516,13 +1551,19 @@ function showBulkPreview() {
   countEl.textContent = bulkUsers.length;
   btnEl.disabled = false;
 
-  tableEl.innerHTML = '<div class="admin-table-wrapper"><table class="admin-table"><thead><tr><th>#</th><th>Email</th><th>Name</th><th>Department</th></tr></thead><tbody>' +
-    bulkUsers.slice(0, 20).map(function(u, i) {
-      return '<tr><td>' + (i + 1) + '</td><td>' + escapeHtml(u.email) + '</td><td>' + escapeHtml(u.fullName) + '</td><td>' + escapeHtml(u.department || '—') + '</td></tr>';
+  // Show first 5 rows as preview with tier column
+  const previewRows = bulkUsers.slice(0, 5);
+  const remaining = bulkUsers.length - 5;
+
+  tableEl.innerHTML = '<div class="admin-table-wrapper"><table class="admin-table"><thead><tr><th>#</th><th>Email</th><th>Name</th><th>Department</th><th>Tier</th></tr></thead><tbody>' +
+    previewRows.map(function(u, i) {
+      return '<tr><td>' + (i + 1) + '</td><td>' + escapeHtml(u.email) + '</td><td>' + escapeHtml(u.fullName) + '</td><td>' + escapeHtml(u.department || '—') + '</td><td>' + escapeHtml(u.tier || 'default') + '</td></tr>';
     }).join("") +
-    (bulkUsers.length > 20 ? '<tr><td colspan="4" style="text-align:center;color:var(--text-muted);">...and ' + (bulkUsers.length - 20) + ' more</td></tr>' : '') +
+    (remaining > 0 ? '<tr><td colspan="5" style="text-align:center;color:var(--text-muted);font-size:12px;">...and ' + remaining + ' more user' + (remaining > 1 ? 's' : '') + '</td></tr>' : '') +
     '</tbody></table></div>';
 }
+
+// ─── JSON-based Bulk Import (paste or client-parsed CSV) ────────────
 
 async function executeBulkImport() {
   if (bulkUsers.length === 0) return;
@@ -1549,47 +1590,303 @@ async function executeBulkImport() {
 
     resultEl.innerHTML = '<span class="msg-success">Imported ' + d.summary.created + ' of ' + d.summary.total + ' users</span>';
 
-    // Show results table with access codes
-    const resultsEl = document.getElementById("bulk-results-content");
-    resultsEl.style.display = "block";
-    document.getElementById("bulk-results-table").innerHTML =
-      '<div class="admin-table-wrapper"><table class="admin-table"><thead><tr><th>Email</th><th>Status</th><th>Access Code</th></tr></thead><tbody>' +
-      d.results.map(function(r) {
-        const isCreated = r.status === "created";
-        return '<tr>' +
-          '<td>' + escapeHtml(r.email) + '</td>' +
-          '<td><span class="' + (isCreated ? 'msg-success' : 'msg-error') + '">' + escapeHtml(r.status) + '</span></td>' +
-          '<td>' + (r.accessCode ? '<code style="font-size:14px;color:var(--gold);letter-spacing:1px;">' + r.accessCode + '</code>' : '—') + '</td>' +
-        '</tr>';
-      }).join("") +
-      '</tbody></table></div>' +
-      '<div style="margin-top:12px;"><button class="btn-action" onclick="exportBulkResults()">Export Results as CSV</button></div>';
-
-    // Store results for export
-    window._bulkResults = d.results;
+    // Store results and show results panel
+    window._bulkImportResults = d.results;
+    showBulkImportResults(d.results, d.summary);
     btnEl.disabled = false;
+
+    // Refresh department stats
+    loadDepartmentStats();
   } catch {
     resultEl.innerHTML = '<span class="msg-error">Import failed</span>';
     btnEl.disabled = false;
   }
 }
 
-function exportBulkResults() {
-  if (!window._bulkResults) return;
-  const csv = "email,status,access_code\n" +
-    window._bulkResults.map(function(r) {
-      return '"' + r.email + '","' + r.status + '","' + (r.accessCode || '') + '"';
-    }).join("\n");
+// ─── CSV File Upload to Server ──────────────────────────────────────
 
-  const blob = new Blob([csv], { type: "text/csv" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
+async function executeBulkCSVImport() {
+  if (!bulkCSVFile) {
+    alert("No CSV file selected");
+    return;
+  }
+
+  const tier = document.getElementById("bulk-tier").value;
+  const resultEl = document.getElementById("bulk-result");
+  const btnEl = document.getElementById("btn-bulk-csv-import");
+  const btnImport = document.getElementById("btn-bulk-import");
+
+  btnEl.disabled = true;
+  if (btnImport) btnImport.disabled = true;
+  resultEl.innerHTML = '<span style="color:var(--gold);">Uploading CSV to server...</span>';
+
+  try {
+    const formData = new FormData();
+    formData.append("file", bulkCSVFile);
+    formData.append("tier", tier);
+
+    const res = await fetch(API + "/api/admin/bulk-import", {
+      method: "POST",
+      headers: { Authorization: "Bearer " + token },
+      body: formData,
+    });
+    const d = await res.json();
+
+    if (!res.ok) {
+      resultEl.innerHTML = '<span class="msg-error">' + escapeHtml(d.error || "Import failed") + '</span>';
+      btnEl.disabled = false;
+      if (btnImport) btnImport.disabled = false;
+      return;
+    }
+
+    resultEl.innerHTML = '<span class="msg-success">Imported ' + d.imported + ' of ' + d.total + ' users' +
+      (d.skipped > 0 ? ' (' + d.skipped + ' skipped)' : '') +
+      (d.errors.length > 0 ? ' (' + d.errors.length + ' errors)' : '') + '</span>';
+
+    // Convert server response to results format
+    window._bulkImportResults = d.users;
+    showBulkCSVImportResults(d);
+    btnEl.disabled = false;
+    if (btnImport) btnImport.disabled = false;
+
+    // Refresh department stats
+    loadDepartmentStats();
+  } catch {
+    resultEl.innerHTML = '<span class="msg-error">CSV upload failed</span>';
+    btnEl.disabled = false;
+    if (btnImport) btnImport.disabled = false;
+  }
+}
+
+// ─── Display Import Results ─────────────────────────────────────────
+
+function showBulkImportResults(results, summary) {
+  const resultsEl = document.getElementById("bulk-results-content");
+  resultsEl.style.display = "block";
+
+  // Show summary
+  var summaryEl = document.getElementById("bulk-results-summary");
+  summaryEl.innerHTML = '<div class="stats-grid">' +
+    '<div class="stat-card green"><div class="stat-value">' + summary.created + '</div><div class="stat-label">Created</div></div>' +
+    '<div class="stat-card"><div class="stat-value">' + summary.skipped + '</div><div class="stat-label">Skipped</div></div>' +
+    '<div class="stat-card"><div class="stat-value">' + summary.total + '</div><div class="stat-label">Total</div></div>' +
+  '</div>';
+
+  // Show download button
+  var downloadBtn = document.getElementById("btn-download-codes");
+  if (downloadBtn) downloadBtn.style.display = "inline-block";
+
+  document.getElementById("bulk-results-table").innerHTML =
+    '<div class="admin-table-wrapper"><table class="admin-table"><thead><tr><th>Email</th><th>Status</th><th>Access Code</th><th>Actions</th></tr></thead><tbody>' +
+    results.map(function(r) {
+      const isCreated = r.status === "created";
+      const code = r.accessCode || r.access_code || "";
+      return '<tr>' +
+        '<td>' + escapeHtml(r.email) + '</td>' +
+        '<td><span class="' + (isCreated ? 'msg-success' : 'msg-error') + '">' + escapeHtml(r.status) + '</span></td>' +
+        '<td>' + (code ? '<code style="font-size:14px;color:var(--gold);letter-spacing:1px;cursor:pointer;" onclick="copyAccessCode(this)" title="Click to copy">' + escapeHtml(code) + '</code>' : '—') + '</td>' +
+        '<td>' + (code ? '<button class="btn-action" style="font-size:11px;padding:3px 8px;" onclick="copyAccessCode(this.parentElement.previousElementSibling.querySelector(\'code\'))">Copy</button>' : '') + '</td>' +
+      '</tr>';
+    }).join("") +
+    '</tbody></table></div>';
+}
+
+function showBulkCSVImportResults(data) {
+  const resultsEl = document.getElementById("bulk-results-content");
+  resultsEl.style.display = "block";
+
+  // Show summary
+  var summaryEl = document.getElementById("bulk-results-summary");
+  summaryEl.innerHTML = '<div class="stats-grid">' +
+    '<div class="stat-card green"><div class="stat-value">' + data.imported + '</div><div class="stat-label">Created</div></div>' +
+    '<div class="stat-card"><div class="stat-value">' + data.skipped + '</div><div class="stat-label">Skipped</div></div>' +
+    '<div class="stat-card"><div class="stat-value">' + data.total + '</div><div class="stat-label">Total</div></div>' +
+  '</div>';
+
+  // Show download button
+  var downloadBtn = document.getElementById("btn-download-codes");
+  if (downloadBtn) downloadBtn.style.display = "inline-block";
+
+  document.getElementById("bulk-results-table").innerHTML =
+    '<div class="admin-table-wrapper"><table class="admin-table"><thead><tr><th>Name</th><th>Email</th><th>Department</th><th>Tier</th><th>Status</th><th>Access Code</th><th>Actions</th></tr></thead><tbody>' +
+    data.users.map(function(r) {
+      const isCreated = r.status === "created";
+      const code = r.access_code || "";
+      return '<tr>' +
+        '<td>' + escapeHtml(r.name) + '</td>' +
+        '<td>' + escapeHtml(r.email) + '</td>' +
+        '<td>' + escapeHtml(r.department || '—') + '</td>' +
+        '<td><span class="badge badge-' + (r.tier || 'free') + '">' + escapeHtml(r.tier || 'free') + '</span></td>' +
+        '<td><span class="' + (isCreated ? 'msg-success' : 'msg-error') + '">' + escapeHtml(r.status) + '</span></td>' +
+        '<td>' + (code ? '<code style="font-size:14px;color:var(--gold);letter-spacing:1px;cursor:pointer;" onclick="copyAccessCode(this)" title="Click to copy">' + escapeHtml(code) + '</code>' : '—') + '</td>' +
+        '<td>' + (code ? '<button class="btn-action" style="font-size:11px;padding:3px 8px;" onclick="copyAccessCode(this.parentElement.previousElementSibling.querySelector(\'code\'))">Copy</button>' : '') + '</td>' +
+      '</tr>';
+    }).join("") +
+    '</tbody></table></div>';
+}
+
+function copyAccessCode(codeEl) {
+  if (!codeEl) return;
+  const code = codeEl.textContent;
+  navigator.clipboard.writeText(code).then(function() {
+    const original = codeEl.textContent;
+    codeEl.textContent = "Copied!";
+    codeEl.style.color = "var(--green-light)";
+    setTimeout(function() {
+      codeEl.textContent = original;
+      codeEl.style.color = "var(--gold)";
+    }, 1500);
+  }).catch(function() {
+    // Fallback: select text
+    const range = document.createRange();
+    range.selectNodeContents(codeEl);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  });
+}
+
+// ─── Download Access Codes as CSV ───────────────────────────────────
+
+function downloadAccessCodesCSV() {
+  var results = window._bulkImportResults;
+  if (!results || results.length === 0) return;
+
+  var csv = "full_name,email,department,tier,access_code,status\n";
+  for (var i = 0; i < results.length; i++) {
+    var r = results[i];
+    var code = r.accessCode || r.access_code || "";
+    var name = r.name || r.fullName || "";
+    csv += '"' + name.replace(/"/g, '""') + '","' +
+      (r.email || "").replace(/"/g, '""') + '","' +
+      (r.department || "").replace(/"/g, '""') + '","' +
+      (r.tier || "free").replace(/"/g, '""') + '","' +
+      code.replace(/"/g, '""') + '","' +
+      (r.status || "").replace(/"/g, '""') + '"\n';
+  }
+
+  var blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
   a.href = url;
-  a.download = "askozzy-bulk-import-" + new Date().toISOString().split("T")[0] + ".csv";
+  a.download = "askozzy-access-codes-" + new Date().toISOString().split("T")[0] + ".csv";
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+}
+
+function exportBulkResults() {
+  // Legacy compat — redirect to new function
+  downloadAccessCodesCSV();
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  Department Stats Dashboard
+// ═══════════════════════════════════════════════════════════════════
+
+async function loadDepartmentStats() {
+  var el = document.getElementById("dept-stats-content");
+  if (!el) return;
+  el.innerHTML = '<div class="admin-loader"><div class="spinner"></div></div>';
+
+  try {
+    var res = await apiFetch("/api/admin/departments/stats");
+    var data = await res.json();
+    var departments = data.departments || [];
+
+    if (departments.length === 0) {
+      el.innerHTML = '<div class="admin-card"><h3>Department Dashboard</h3><div class="admin-empty">No department data yet. Import users with department fields to see stats here.</div></div>';
+      return;
+    }
+
+    // Summary stats
+    var totalUsers = 0, totalActive = 0, totalConvos = 0, totalMsgs = 0;
+    for (var i = 0; i < departments.length; i++) {
+      totalUsers += departments[i].user_count || 0;
+      totalActive += departments[i].active_users || 0;
+      totalConvos += departments[i].total_conversations || 0;
+      totalMsgs += departments[i].total_messages || 0;
+    }
+
+    var html = '<div class="admin-card" style="margin-bottom:20px;">' +
+      '<h3>Department Dashboard</h3>' +
+      '<div class="stats-grid" style="margin-bottom:20px;">' +
+        '<div class="stat-card"><div class="stat-value">' + departments.length + '</div><div class="stat-label">Departments</div></div>' +
+        '<div class="stat-card"><div class="stat-value">' + totalUsers + '</div><div class="stat-label">Total Users</div></div>' +
+        '<div class="stat-card green"><div class="stat-value">' + totalActive + '</div><div class="stat-label">Active (7d)</div></div>' +
+        '<div class="stat-card"><div class="stat-value">' + totalConvos + '</div><div class="stat-label">Conversations</div></div>' +
+        '<div class="stat-card"><div class="stat-value">' + totalMsgs + '</div><div class="stat-label">Messages</div></div>' +
+      '</div>';
+
+    // Department comparison bar chart — Users
+    var maxUsers = Math.max.apply(null, departments.map(function(d) { return d.user_count; }));
+    if (maxUsers < 1) maxUsers = 1;
+
+    html += '<div class="admin-row">' +
+      '<div class="admin-card">' +
+        '<h3 style="font-size:14px;">Users per Department</h3>' +
+        '<div class="bar-chart">';
+
+    for (var i = 0; i < Math.min(departments.length, 15); i++) {
+      var dept = departments[i];
+      var pct = (dept.user_count / maxUsers) * 100;
+      html += '<div class="bar-row">' +
+        '<span class="bar-label" title="' + escapeHtml(dept.department) + '">' + escapeHtml(dept.department.length > 30 ? dept.department.substring(0, 28) + '...' : dept.department) + '</span>' +
+        '<div class="bar-track"><div class="bar-fill" style="width:' + Math.max(pct, 1) + '%"></div></div>' +
+        '<span class="bar-value">' + dept.user_count + '</span>' +
+      '</div>';
+    }
+
+    html += '</div></div>';
+
+    // Department comparison bar chart — Active Users
+    var maxActive = Math.max.apply(null, departments.map(function(d) { return d.active_users; }));
+    if (maxActive < 1) maxActive = 1;
+
+    html += '<div class="admin-card">' +
+        '<h3 style="font-size:14px;">Active Users (7d)</h3>' +
+        '<div class="bar-chart">';
+
+    for (var i = 0; i < Math.min(departments.length, 15); i++) {
+      var dept = departments[i];
+      var pct = (dept.active_users / maxActive) * 100;
+      html += '<div class="bar-row">' +
+        '<span class="bar-label" title="' + escapeHtml(dept.department) + '">' + escapeHtml(dept.department.length > 30 ? dept.department.substring(0, 28) + '...' : dept.department) + '</span>' +
+        '<div class="bar-track"><div class="bar-fill green" style="width:' + Math.max(pct, 1) + '%"></div></div>' +
+        '<span class="bar-value">' + dept.active_users + '</span>' +
+      '</div>';
+    }
+
+    html += '</div></div></div>';
+
+    // Department details table
+    html += '<div class="admin-table-wrapper" style="margin-top:16px;"><table class="admin-table"><thead><tr>' +
+      '<th>Department</th><th>Users</th><th>Active (7d)</th><th>Conversations</th><th>Messages</th><th>Top Templates</th>' +
+      '</tr></thead><tbody>';
+
+    for (var i = 0; i < departments.length; i++) {
+      var dept = departments[i];
+      var templates = (dept.top_templates || []).slice(0, 3).map(function(t) {
+        return escapeHtml(t.template_id) + ' (' + t.usage_count + ')';
+      }).join(', ') || '—';
+
+      html += '<tr>' +
+        '<td><strong>' + escapeHtml(dept.department) + '</strong></td>' +
+        '<td>' + dept.user_count + '</td>' +
+        '<td>' + dept.active_users + '</td>' +
+        '<td>' + dept.total_conversations + '</td>' +
+        '<td>' + dept.total_messages + '</td>' +
+        '<td style="font-size:11px;color:var(--text-muted);">' + templates + '</td>' +
+      '</tr>';
+    }
+
+    html += '</tbody></table></div></div>';
+
+    el.innerHTML = html;
+  } catch (err) {
+    el.innerHTML = '<div class="admin-card"><h3>Department Dashboard</h3><div class="admin-empty">Failed to load department stats</div></div>';
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════════

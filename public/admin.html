@@ -295,17 +295,44 @@
         </div>
       </div>
 
-      <!-- Bulk Import -->
+      <!-- Bulk Import & Department Onboarding -->
       <div class="admin-tab-panel" id="panel-bulk-import">
+
+        <!-- Department Stats Dashboard -->
+        <div id="dept-stats-section" style="margin-bottom:24px;">
+          <div id="dept-stats-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+        </div>
+
+        <!-- Bulk Import Card -->
         <div class="admin-card" style="margin-bottom:24px;">
           <h3>Bulk Import Users</h3>
           <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;">Upload a CSV file or paste user data to create multiple accounts at once. Maximum 500 users per batch.</p>
 
+          <!-- CSV Format Guide -->
+          <div style="background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:16px;">
+            <div style="font-size:11px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px;">CSV Format Guide</div>
+            <div style="font-size:12px;color:var(--text-muted);line-height:1.6;">
+              <div>Required columns: <code style="background:var(--bg-primary);padding:1px 5px;border-radius:3px;color:var(--gold);">full_name</code>, <code style="background:var(--bg-primary);padding:1px 5px;border-radius:3px;color:var(--gold);">email</code></div>
+              <div>Optional columns: <code style="background:var(--bg-primary);padding:1px 5px;border-radius:3px;color:var(--text-secondary);">department</code>, <code style="background:var(--bg-primary);padding:1px 5px;border-radius:3px;color:var(--text-secondary);">tier</code> (free/starter/professional/enterprise)</div>
+              <div style="margin-top:6px;font-family:monospace;font-size:11px;background:var(--bg-primary);padding:8px 10px;border-radius:4px;overflow-x:auto;">
+                full_name,email,department,tier<br>
+                Kwame Asante,kwame@gov.gh,Ministry of Finance,free<br>
+                Ama Mensah,ama@gov.gh,Ministry of Health,starter
+              </div>
+            </div>
+          </div>
+
+          <!-- Drag & Drop Upload Area -->
           <div style="display:flex;gap:16px;margin-bottom:16px;">
             <div style="flex:1;">
               <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Upload CSV File</label>
-              <input type="file" id="bulk-csv-file" accept=".csv" onchange="parseBulkCSV()" style="padding:8px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:13px;width:100%;box-sizing:border-box;" />
-              <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">CSV columns: email, full_name, department (header row required)</div>
+              <div id="bulk-drop-zone" style="border:2px dashed var(--border-color);border-radius:var(--radius-sm);padding:24px;text-align:center;cursor:pointer;transition:border-color 0.2s, background 0.2s;background:var(--bg-tertiary);" onclick="document.getElementById('bulk-csv-file').click()" ondragover="event.preventDefault();this.style.borderColor='var(--gold)';this.style.background='var(--bg-primary)';" ondragleave="this.style.borderColor='var(--border-color)';this.style.background='var(--bg-tertiary)';" ondrop="event.preventDefault();this.style.borderColor='var(--border-color)';this.style.background='var(--bg-tertiary)';handleBulkFileDrop(event);">
+                <div style="font-size:28px;margin-bottom:8px;opacity:0.5;">&#128196;</div>
+                <div style="font-size:13px;color:var(--text-secondary);font-weight:500;">Drag & drop a CSV file here</div>
+                <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">or click to browse</div>
+                <div id="bulk-file-name" style="font-size:12px;color:var(--gold);margin-top:8px;font-weight:600;display:none;"></div>
+              </div>
+              <input type="file" id="bulk-csv-file" accept=".csv" onchange="parseBulkCSV()" style="display:none;" />
             </div>
             <div style="flex:1;">
               <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Default Tier</label>
@@ -315,6 +342,7 @@
                 <option value="professional">Professional</option>
                 <option value="enterprise">Enterprise</option>
               </select>
+              <div style="font-size:10px;color:var(--text-muted);margin-top:8px;">If the CSV has a <code>tier</code> column, individual rows override this default.</div>
             </div>
           </div>
 
@@ -330,13 +358,18 @@
 
           <div style="display:flex;gap:12px;align-items:center;">
             <button class="btn-action primary" id="btn-bulk-import" onclick="executeBulkImport()" disabled>Import Users</button>
+            <button class="btn-action" id="btn-bulk-csv-import" onclick="executeBulkCSVImport()" style="display:none;">Upload CSV to Server</button>
             <span id="bulk-result" style="font-size:12px;"></span>
           </div>
         </div>
 
         <div id="bulk-results-content" style="display:none;">
           <div class="admin-card">
-            <h3>Import Results</h3>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+              <h3>Import Results</h3>
+              <button class="btn-action" id="btn-download-codes" onclick="downloadAccessCodesCSV()" style="display:none;">Download Access Codes CSV</button>
+            </div>
+            <div id="bulk-results-summary" style="margin-bottom:12px;"></div>
             <div id="bulk-results-table"></div>
           </div>
         </div>

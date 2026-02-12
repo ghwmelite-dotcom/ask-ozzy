@@ -1515,6 +1515,15 @@ html, body {
     display: none;
   }
 
+  .offline-status-badge .offline-status-text {
+    display: none;
+  }
+
+  .offline-status-badge {
+    padding: 3px 6px;
+    min-width: 0;
+  }
+
   .modal {
     max-width: 95vw;
     max-height: 90vh;
@@ -2169,7 +2178,7 @@ html, body {
   color: var(--text-muted);
 }
 
-/* ─── Offline Indicator ──────────────────────────────────────────── */
+/* ─── Offline Indicator (bottom bar) ─────────────────────────────── */
 
 .offline-indicator {
   position: fixed;
@@ -2202,6 +2211,124 @@ html, body {
 @keyframes pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
+}
+
+/* ─── Offline Status Badge (header) ─────────────────────────────── */
+
+.offline-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.offline-status-badge.online {
+  background: rgba(0, 168, 107, 0.12);
+  border: 1px solid rgba(0, 168, 107, 0.3);
+  color: var(--green-light);
+}
+
+.offline-status-badge.offline {
+  background: rgba(255, 165, 0, 0.15);
+  border: 1px solid rgba(255, 165, 0, 0.4);
+  color: #FFA500;
+}
+
+.offline-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.offline-status-badge.online .offline-status-dot {
+  background: var(--green-light);
+}
+
+.offline-status-badge.offline .offline-status-dot {
+  background: #FFA500;
+  animation: offlinePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes offlinePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ─── Offline Queue Badge (sidebar) ─────────────────────────────── */
+
+.offline-queue-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 12px 8px;
+  padding: 6px 12px;
+  background: rgba(255, 165, 0, 0.1);
+  border: 1px solid rgba(255, 165, 0, 0.25);
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #FFA500;
+  animation: fadeIn 0.3s ease;
+}
+
+.offline-queue-badge svg {
+  flex-shrink: 0;
+  stroke: #FFA500;
+}
+
+#offline-queue-count {
+  font-weight: 700;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Offline syncing indicator ─────────────────────────────────── */
+
+.offline-syncing-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--green-light);
+  color: var(--green-light);
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1300;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  animation: slideInRight 0.3s ease;
+}
+
+.offline-syncing-toast .sync-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--green-light);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 /* ─── PWA Standalone Mode ────────────────────────────────────────── */
@@ -5547,6 +5674,366 @@ html, body {
 }
 
 /* ─── Print Styles ──────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   Voice-First Ghanaian Languages Enhancement
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Large Voice Input Button ──────────────────────────────────── */
+
+.voice-btn {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+  border: none;
+  border-radius: 50%;
+  color: var(--text-on-accent);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  margin-left: 4px;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(252, 209, 22, 0.25);
+}
+
+.voice-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 16px rgba(252, 209, 22, 0.35);
+}
+
+.voice-btn:active {
+  transform: scale(0.96);
+}
+
+.voice-btn svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--text-on-accent);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Recording state */
+.voice-btn.recording {
+  background: linear-gradient(135deg, #e8302a, var(--red));
+  animation: voiceBtnPulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(206, 17, 38, 0.5);
+}
+
+.voice-btn.recording svg {
+  stroke: #fff;
+}
+
+@keyframes voiceBtnPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(206, 17, 38, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(206, 17, 38, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(206, 17, 38, 0);
+  }
+}
+
+/* ─── Voice Waveform Visualization ──────────────────────────────── */
+
+.voice-recording-indicator {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  height: 100%;
+  min-height: 48px;
+  flex: 1;
+}
+
+.voice-recording-indicator.active {
+  display: flex;
+}
+
+.voice-waveform {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 28px;
+}
+
+.voice-waveform .bar {
+  width: 4px;
+  height: 8px;
+  background: var(--red);
+  border-radius: 2px;
+  animation: waveBar 0.8s ease-in-out infinite;
+}
+
+.voice-waveform .bar:nth-child(1) { animation-delay: 0s; }
+.voice-waveform .bar:nth-child(2) { animation-delay: 0.1s; }
+.voice-waveform .bar:nth-child(3) { animation-delay: 0.2s; }
+.voice-waveform .bar:nth-child(4) { animation-delay: 0.3s; }
+.voice-waveform .bar:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes waveBar {
+  0%, 100% {
+    height: 6px;
+    opacity: 0.5;
+  }
+  50% {
+    height: 24px;
+    opacity: 1;
+  }
+}
+
+.voice-listening-label {
+  font-size: 14px;
+  color: var(--red);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.voice-timer {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  min-width: 38px;
+  text-align: center;
+}
+
+/* Hide textarea when recording */
+.input-wrapper.recording #chat-input {
+  display: none;
+}
+
+.input-wrapper.recording .voice-recording-indicator {
+  display: flex;
+}
+
+/* ─── Voice Welcome Overlay ──────────────────────────────────────── */
+
+.voice-welcome-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: fadeInOverlay 0.3s ease;
+  padding: 24px;
+}
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.voice-welcome-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 40px 32px 32px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
+  animation: slideUpCard 0.4s ease;
+  position: relative;
+}
+
+@keyframes slideUpCard {
+  from { opacity: 0; transform: translateY(24px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.voice-welcome-flag {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 16px;
+  height: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+  width: 80px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.voice-welcome-flag span {
+  flex: 1;
+}
+
+.voice-welcome-flag span:nth-child(1) { background: var(--flag-red); }
+.voice-welcome-flag span:nth-child(2) { background: var(--flag-gold); }
+.voice-welcome-flag span:nth-child(3) { background: var(--flag-green); }
+
+.voice-welcome-card h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+}
+
+.voice-welcome-card .subtitle {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin: 0 0 28px;
+  line-height: 1.5;
+}
+
+/* Large pulsing mic button in welcome */
+.voice-welcome-mic {
+  width: 88px;
+  height: 88px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+  border: none;
+  border-radius: 50%;
+  color: var(--text-on-accent);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 24px rgba(252, 209, 22, 0.3);
+  animation: welcomeMicPulse 2s ease-in-out infinite;
+  position: relative;
+}
+
+.voice-welcome-mic:hover {
+  transform: scale(1.06);
+  box-shadow: 0 6px 32px rgba(252, 209, 22, 0.45);
+}
+
+.voice-welcome-mic:active {
+  transform: scale(0.95);
+}
+
+.voice-welcome-mic svg {
+  width: 36px;
+  height: 36px;
+}
+
+@keyframes welcomeMicPulse {
+  0% { box-shadow: 0 4px 24px rgba(252, 209, 22, 0.3), 0 0 0 0 rgba(252, 209, 22, 0.25); }
+  50% { box-shadow: 0 4px 24px rgba(252, 209, 22, 0.3), 0 0 0 16px rgba(252, 209, 22, 0); }
+  100% { box-shadow: 0 4px 24px rgba(252, 209, 22, 0.3), 0 0 0 0 rgba(252, 209, 22, 0); }
+}
+
+/* Language pills */
+.voice-lang-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.voice-lang-pill {
+  padding: 8px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.voice-lang-pill:hover {
+  border-color: var(--gold-dim);
+  color: var(--gold);
+  background: rgba(252, 209, 22, 0.08);
+}
+
+.voice-lang-pill.active {
+  border-color: var(--gold);
+  background: rgba(252, 209, 22, 0.12);
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.voice-welcome-card .or-type {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0 0 20px;
+}
+
+.voice-welcome-dismiss {
+  padding: 12px 32px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+  color: var(--text-on-accent);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.voice-welcome-dismiss:hover {
+  transform: scale(1.04);
+  box-shadow: 0 4px 16px rgba(252, 209, 22, 0.3);
+}
+
+/* ─── Mobile Responsive for Voice ───────────────────────────────── */
+
+@media (max-width: 768px) {
+  .voice-btn {
+    width: 48px;
+    height: 48px;
+  }
+
+  .voice-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .voice-welcome-card {
+    padding: 32px 20px 24px;
+    border-radius: 20px;
+  }
+
+  .voice-welcome-card h2 {
+    font-size: 22px;
+  }
+
+  .voice-welcome-mic {
+    width: 96px;
+    height: 96px;
+  }
+
+  .voice-welcome-mic svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .voice-lang-pill {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .voice-recording-indicator {
+    padding: 0 10px;
+  }
+
+  .voice-listening-label {
+    font-size: 13px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+
 @media print {
   .sidebar, .main-header, .input-area, .welcome-screen,
   .flag-stripe, .guide-fab, .citizen-bot-fab,
@@ -5554,7 +6041,8 @@ html, body {
   #announcements-area, .input-tools, .input-disclaimer,
   .tool-pill, .btn-new-chat, .sidebar-footer,
   .usage-badge, .theme-toggle, .lang-selector-wrap,
-  .privacy-badge, .header-help-btn { display: none !important; }
+  .privacy-badge, .header-help-btn, .offline-status-badge,
+  .offline-queue-badge, .offline-indicator, .offline-syncing-toast { display: none !important; }
   body { background: #fff !important; }
   .app-container { display: block !important; }
   .main-content { margin: 0 !important; padding: 0 !important; }

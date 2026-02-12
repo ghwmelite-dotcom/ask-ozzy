@@ -45,6 +45,11 @@
         <span>+</span> New Conversation
       </button>
 
+      <div class="offline-queue-badge" id="offline-queue-badge" style="display:none;" title="Messages queued while offline">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v10l4.5 4.5"/><circle cx="12" cy="12" r="10"/></svg>
+        <span id="offline-queue-count">0</span> queued offline
+      </div>
+
       <div class="conversation-list" id="conversation-list">
         <div class="section-label">Recent Conversations</div>
       </div>
@@ -90,6 +95,10 @@
         <button class="header-help-btn" onclick="openGuide()" title="User Guide (Ctrl+/)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
         </button>
+        <div class="offline-status-badge" id="offline-status-badge">
+          <span class="offline-status-dot"></span>
+          <span class="offline-status-text">Online</span>
+        </div>
         <div class="privacy-badge">Private & Encrypted</div>
       </header>
 
@@ -123,7 +132,7 @@
         </div>
 
         <div class="input-area">
-          <div class="input-wrapper">
+          <div class="input-wrapper" id="input-wrapper">
             <textarea
               id="chat-input"
               rows="1"
@@ -131,6 +140,18 @@
               onkeydown="handleInputKeydown(event)"
               oninput="autoResizeInput()"
             ></textarea>
+            <!-- Voice Recording Indicator (shown when recording) -->
+            <div class="voice-recording-indicator" id="voice-recording-indicator">
+              <div class="voice-waveform" id="voice-waveform">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+              </div>
+              <span class="voice-listening-label" id="voice-listening-label">Listening...</span>
+              <span class="voice-timer" id="voice-timer">0:00</span>
+            </div>
             <div class="input-actions">
               <div class="input-actions-left">
                 <button class="input-action-btn" onclick="openFileUpload()" title="Attach file">
@@ -152,6 +173,10 @@
                 </button>
                 <button class="input-action-btn" id="btn-voice-mode" onclick="toggleVoiceMode()" title="Voice conversation mode">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                </button>
+                <!-- Large Voice Input Button -->
+                <button class="voice-btn" id="voice-btn-large" onclick="toggleVoice()" title="Tap to speak">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
                 </button>
                 <button class="btn-send" id="btn-send" onclick="sendMessage()" disabled title="Send message">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>

@@ -11,6 +11,7 @@ type Env = {
 
 type Variables = {
   userId: string;
+  deptFilter?: string;
 };
 
 const app = new Hono<{ Bindings: Env; Variables: Variables }>();
@@ -132,6 +133,36 @@ async function adminMiddleware(
     return c.json({ error: "Forbidden: admin access required" }, 403);
   }
   c.set("userId", userId);
+  await next();
+}
+
+// ─── Department Admin Middleware ─────────────────────────────────────
+// Allows both super_admin and dept_admin roles.
+// For dept_admin, sets deptFilter so queries are scoped to their department.
+
+async function deptAdminMiddleware(
+  c: any,
+  next: () => Promise<void>
+): Promise<Response | void> {
+  const authHeader = c.req.header("Authorization");
+  if (!authHeader?.startsWith("Bearer ")) {
+    return c.json({ error: "Unauthorized" }, 401);
+  }
+  const token = authHeader.slice(7);
+  const userId = await verifyToken(token, c.env);
+  if (!userId) {
+    return c.json({ error: "Invalid or expired session" }, 401);
+  }
+  const user = await c.env.DB.prepare("SELECT role, department FROM users WHERE id = ?")
+    .bind(userId)
+    .first<{ role: string; department: string }>();
+  if (!user || (user.role !== "super_admin" && user.role !== "dept_admin")) {
+    return c.json({ error: "Forbidden: admin or department admin access required" }, 403);
+  }
+  c.set("userId", userId);
+  if (user.role === "dept_admin") {
+    c.set("deptFilter", user.department);
+  }
   await next();
 }
 
@@ -2200,7 +2231,7 @@ app.patch("/api/admin/users/:id/role", adminMiddleware, async (c) => {
     return c.json({ error: "Cannot change your own role" }, 400);
   }
   const { role } = await c.req.json();
-  const validRoles = ["civil_servant", "super_admin"];
+  const validRoles = ["civil_servant", "dept_admin", "super_admin"];
   if (!validRoles.includes(role)) {
     return c.json({ error: "Invalid role. Must be: " + validRoles.join(", ") }, 400);
   }
@@ -5167,6 +5198,291 @@ app.get("/api/citizen/session/:id", async (c) => {
     "SELECT role, content, created_at FROM citizen_messages WHERE session_id = ? ORDER BY created_at ASC LIMIT 50"
   ).bind(sid).all();
   return c.json({ messages: results || [] });
+});
+
+// ═══════════════════════════════════════════════════════════════════════
+//  DEPARTMENT ONBOARDING KITS — Feature #17
+// ═══════════════════════════════════════════════════════════════════════
+
+// ─── Bulk User Import (CSV file upload via multipart/form-data) ──────
+
+app.post("/api/admin/bulk-import", adminMiddleware, async (c) => {
+  const adminId = c.get("userId");
+
+  try {
+    const formData = await c.req.formData();
+    const file = formData.get("file") as File | null;
+    const defaultTier = (formData.get("tier") as string) || "free";
+
+    if (!file) {
+      return c.json({ error: "CSV file is required" }, 400);
+    }
+
+    const text = await file.text();
+    const lines = text.split("\n").map((l: string) => l.trim()).filter((l: string) => l);
+
+    if (lines.length < 2) {
+      return c.json({ error: "CSV must have a header row and at least one data row" }, 400);
+    }
+
+    // Parse header
+    const headerLine = lines[0].toLowerCase();
+    const headers = headerLine.split(",").map((h: string) => h.trim().replace(/['"]/g, ""));
+    const emailIdx = headers.findIndex((h: string) => h.includes("email"));
+    const nameIdx = headers.findIndex((h: string) => h.includes("name") || h.includes("full"));
+    const deptIdx = headers.findIndex((h: string) => h.includes("dept") || h.includes("department") || h.includes("mda"));
+    const tierIdx = headers.findIndex((h: string) => h === "tier");
+
+    if (emailIdx === -1 || nameIdx === -1) {
+      return c.json({ error: "CSV must have columns for email and full_name" }, 400);
+    }
+
+    // Parse rows
+    const userRows: Array<{ email: string; fullName: string; department: string; tier: string }> = [];
+    for (let i = 1; i < lines.length; i++) {
+      const cols = lines[i].split(",").map((col: string) => col.trim().replace(/^["']|["']$/g, ""));
+      const email = (cols[emailIdx] || "").toLowerCase().trim();
+      const fullName = (cols[nameIdx] || "").trim();
+      if (!email || !fullName) continue;
+
+      const department = deptIdx >= 0 ? (cols[deptIdx] || "").trim() : "";
+      const tier = tierIdx >= 0 && cols[tierIdx] ? cols[tierIdx].trim().toLowerCase() : defaultTier;
+
+      userRows.push({ email, fullName, department, tier });
+    }
+
+    if (userRows.length === 0) {
+      return c.json({ error: "No valid user rows found in CSV" }, 400);
+    }
+    if (userRows.length > 500) {
+      return c.json({ error: "Maximum 500 users per batch" }, 400);
+    }
+
+    let imported = 0;
+    let skipped = 0;
+    const errors: string[] = [];
+    const users: Array<{ name: string; email: string; access_code: string; department: string; tier: string; status: string }> = [];
+
+    for (const row of userRows) {
+      // Check if already exists
+      const existing = await c.env.DB.prepare("SELECT id FROM users WHERE email = ?")
+        .bind(row.email).first();
+      if (existing) {
+        skipped++;
+        users.push({ name: row.fullName, email: row.email, access_code: "", department: row.department, tier: row.tier, status: "skipped — already exists" });
+        continue;
+      }
+
+      const userId = generateId();
+      const accessCode = generateAccessCode();
+      const passwordHash = await hashPassword(accessCode);
+      const firstName = row.fullName.split(" ")[0].toUpperCase();
+      const suffix = Math.random().toString(36).substring(2, 6).toUpperCase();
+      const referralCode = `OZZY-${firstName}-${suffix}`;
+
+      try {
+        await c.env.DB.prepare(
+          "INSERT INTO users (id, email, password_hash, full_name, department, tier, referral_code) VALUES (?, ?, ?, ?, ?, ?, ?)"
+        ).bind(userId, row.email, passwordHash, row.fullName, row.department, row.tier, referralCode).run();
+
+        imported++;
+        users.push({ name: row.fullName, email: row.email, access_code: accessCode, department: row.department, tier: row.tier, status: "created" });
+      } catch (err) {
+        errors.push(`${row.email}: ${(err as Error).message}`);
+        users.push({ name: row.fullName, email: row.email, access_code: "", department: row.department, tier: row.tier, status: "failed" });
+      }
+    }
+
+    await logAudit(c.env.DB, adminId, "bulk_import_csv", "system", undefined, `CSV import: ${imported} created, ${skipped} skipped, ${errors.length} errors out of ${userRows.length} rows`);
+
+    return c.json({
+      imported,
+      skipped,
+      errors,
+      users,
+      total: userRows.length,
+    });
+  } catch (err) {
+    return c.json({ error: "Failed to process CSV: " + (err as Error).message }, 500);
+  }
+});
+
+// ─── Department Stats ──────────────────────────────────────────────────
+
+app.get("/api/admin/departments/stats", deptAdminMiddleware, async (c) => {
+  const deptFilter = c.get("deptFilter") as string | undefined;
+
+  try {
+    // Build base WHERE clause for department filtering
+    const deptWhere = deptFilter ? " WHERE u.department = ?" : "";
+    const deptBindings = deptFilter ? [deptFilter] : [];
+
+    // 1. Per-department user counts
+    let userCountQuery: string;
+    let userCountBindings: string[];
+    if (deptFilter) {
+      userCountQuery = "SELECT department, COUNT(*) as user_count FROM users WHERE department = ? GROUP BY department";
+      userCountBindings = [deptFilter];
+    } else {
+      userCountQuery = "SELECT department, COUNT(*) as user_count FROM users WHERE department != '' GROUP BY department ORDER BY user_count DESC";
+      userCountBindings = [];
+    }
+
+    const { results: deptUsers } = deptFilter
+      ? await c.env.DB.prepare(userCountQuery).bind(...userCountBindings).all<{ department: string; user_count: number }>()
+      : await c.env.DB.prepare(userCountQuery).all<{ department: string; user_count: number }>();
+
+    // 2. Active users per department (last 7 days)
+    let activeQuery: string;
+    if (deptFilter) {
+      activeQuery = `SELECT u.department, COUNT(DISTINCT u.id) as active_users
+        FROM users u
+        INNER JOIN conversations c ON c.user_id = u.id
+        WHERE u.department = ? AND c.updated_at >= datetime('now', '-7 days')
+        GROUP BY u.department`;
+    } else {
+      activeQuery = `SELECT u.department, COUNT(DISTINCT u.id) as active_users
+        FROM users u
+        INNER JOIN conversations c ON c.user_id = u.id
+        WHERE u.department != '' AND c.updated_at >= datetime('now', '-7 days')
+        GROUP BY u.department
+        ORDER BY active_users DESC`;
+    }
+
+    const { results: activeUsers } = deptFilter
+      ? await c.env.DB.prepare(activeQuery).bind(deptFilter).all<{ department: string; active_users: number }>()
+      : await c.env.DB.prepare(activeQuery).all<{ department: string; active_users: number }>();
+
+    // 3. Total conversations per department
+    let convoQuery: string;
+    if (deptFilter) {
+      convoQuery = `SELECT u.department, COUNT(c.id) as total_conversations
+        FROM users u
+        INNER JOIN conversations c ON c.user_id = u.id
+        WHERE u.department = ?
+        GROUP BY u.department`;
+    } else {
+      convoQuery = `SELECT u.department, COUNT(c.id) as total_conversations
+        FROM users u
+        INNER JOIN conversations c ON c.user_id = u.id
+        WHERE u.department != ''
+        GROUP BY u.department
+        ORDER BY total_conversations DESC`;
+    }
+
+    const { results: deptConversations } = deptFilter
+      ? await c.env.DB.prepare(convoQuery).bind(deptFilter).all<{ department: string; total_conversations: number }>()
+      : await c.env.DB.prepare(convoQuery).all<{ department: string; total_conversations: number }>();
+
+    // 4. Total messages per department
+    let msgQuery: string;
+    if (deptFilter) {
+      msgQuery = `SELECT u.department, COUNT(m.id) as total_messages
+        FROM users u
+        INNER JOIN conversations c ON c.user_id = u.id
+        INNER JOIN messages m ON m.conversation_id = c.id
+        WHERE u.department = ?
+        GROUP BY u.department`;
+    } else {
+      msgQuery = `SELECT u.department, COUNT(m.id) as total_messages
+        FROM users u
+        INNER JOIN conversations c ON c.user_id = u.id
+        INNER JOIN messages m ON m.conversation_id = c.id
+        WHERE u.department != ''
+        GROUP BY u.department
+        ORDER BY total_messages DESC`;
+    }
+
+    const { results: deptMessages } = deptFilter
+      ? await c.env.DB.prepare(msgQuery).bind(deptFilter).all<{ department: string; total_messages: number }>()
+      : await c.env.DB.prepare(msgQuery).all<{ department: string; total_messages: number }>();
+
+    // 5. Top templates per department (from conversations with template_id set)
+    let templateQuery: string;
+    if (deptFilter) {
+      templateQuery = `SELECT u.department, c.template_id, COUNT(*) as usage_count
+        FROM users u
+        INNER JOIN conversations c ON c.user_id = u.id
+        WHERE u.department = ? AND c.template_id IS NOT NULL AND c.template_id != ''
+        GROUP BY u.department, c.template_id
+        ORDER BY usage_count DESC
+        LIMIT 20`;
+    } else {
+      templateQuery = `SELECT u.department, c.template_id, COUNT(*) as usage_count
+        FROM users u
+        INNER JOIN conversations c ON c.user_id = u.id
+        WHERE u.department != '' AND c.template_id IS NOT NULL AND c.template_id != ''
+        GROUP BY u.department, c.template_id
+        ORDER BY usage_count DESC
+        LIMIT 50`;
+    }
+
+    const { results: templateUsage } = deptFilter
+      ? await c.env.DB.prepare(templateQuery).bind(deptFilter).all<{ department: string; template_id: string; usage_count: number }>()
+      : await c.env.DB.prepare(templateQuery).all<{ department: string; template_id: string; usage_count: number }>();
+
+    // Merge all data into per-department stats
+    const departmentMap: Record<string, {
+      department: string;
+      user_count: number;
+      active_users: number;
+      total_conversations: number;
+      total_messages: number;
+      top_templates: Array<{ template_id: string; usage_count: number }>;
+    }> = {};
+
+    for (const row of deptUsers || []) {
+      if (!row.department) continue;
+      departmentMap[row.department] = {
+        department: row.department,
+        user_count: row.user_count,
+        active_users: 0,
+        total_conversations: 0,
+        total_messages: 0,
+        top_templates: [],
+      };
+    }
+
+    for (const row of activeUsers || []) {
+      if (!row.department) continue;
+      if (!departmentMap[row.department]) {
+        departmentMap[row.department] = { department: row.department, user_count: 0, active_users: 0, total_conversations: 0, total_messages: 0, top_templates: [] };
+      }
+      departmentMap[row.department].active_users = row.active_users;
+    }
+
+    for (const row of deptConversations || []) {
+      if (!row.department) continue;
+      if (!departmentMap[row.department]) {
+        departmentMap[row.department] = { department: row.department, user_count: 0, active_users: 0, total_conversations: 0, total_messages: 0, top_templates: [] };
+      }
+      departmentMap[row.department].total_conversations = row.total_conversations;
+    }
+
+    for (const row of deptMessages || []) {
+      if (!row.department) continue;
+      if (!departmentMap[row.department]) {
+        departmentMap[row.department] = { department: row.department, user_count: 0, active_users: 0, total_conversations: 0, total_messages: 0, top_templates: [] };
+      }
+      departmentMap[row.department].total_messages = row.total_messages;
+    }
+
+    for (const row of templateUsage || []) {
+      if (!row.department || !departmentMap[row.department]) continue;
+      departmentMap[row.department].top_templates.push({
+        template_id: row.template_id,
+        usage_count: row.usage_count,
+      });
+    }
+
+    // Sort by user count descending
+    const departments = Object.values(departmentMap).sort((a, b) => b.user_count - a.user_count);
+
+    return c.json({ departments });
+  } catch (err) {
+    console.error("Department stats error:", err);
+    return c.json({ error: "Failed to load department stats" }, 500);
+  }
 });
 
 export default app;
