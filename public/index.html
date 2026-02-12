@@ -109,63 +109,76 @@
 
         <div class="input-area">
           <div class="input-wrapper">
-            <div class="input-row">
-              <textarea
-                id="chat-input"
-                rows="1"
-                placeholder="Ask Ozzy anything... (Shift+Enter for new line)"
-                onkeydown="handleInputKeydown(event)"
-                oninput="autoResizeInput()"
-              ></textarea>
-              <button class="btn-image-upload" onclick="openImageUpload()" title="Upload an image">
-                &#x1F5BC;
-              </button>
-              <button class="btn-camera" onclick="openCamera()" title="Take a photo">
-                &#x1F4F7;
-              </button>
-              <button class="btn-file-upload" onclick="openFileUpload()" title="Upload a document">
-                📎
-              </button>
-              <button class="btn-web-search" id="btn-web-search" onclick="toggleWebSearch()" title="Search the web">
-                &#x1F310;
-              </button>
-              <button class="btn-voice" id="btn-voice" onclick="toggleVoice()" title="Voice input">
-                🎤
-              </button>
-              <button class="btn-voice-mode" id="btn-voice-mode" onclick="toggleVoiceMode()" title="Voice conversation mode">
-                &#x1F3A7;
-              </button>
-              <button class="btn-send" id="btn-send" onclick="sendMessage()" disabled title="Send message">
-                ➤
-              </button>
-            </div>
-            <div class="input-footer">
-              <div style="display:flex;align-items:center;gap:8px;">
-                <button class="btn-template-picker" onclick="openTemplateModal()">
-                  &#x1F4CB; Templates
+            <textarea
+              id="chat-input"
+              rows="1"
+              placeholder="Ask Ozzy anything..."
+              onkeydown="handleInputKeydown(event)"
+              oninput="autoResizeInput()"
+            ></textarea>
+            <div class="input-actions">
+              <div class="input-actions-left">
+                <button class="input-action-btn" onclick="openFileUpload()" title="Attach file">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
                 </button>
-                <button class="btn-template-picker btn-deep-research" onclick="openDeepResearch()" title="Multi-step research with web sources">
-                  &#x1F50D; Deep Research
+                <button class="input-action-btn" onclick="openImageUpload()" title="Upload image">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                 </button>
-                <button class="btn-template-picker btn-analyze-data" onclick="openDataAnalysis()" title="Upload CSV/XLSX for AI analysis">
-                  &#x1F4CA; Analyze Data
+                <button class="input-action-btn" onclick="openCamera()" title="Take a photo">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
                 </button>
-                <button class="btn-template-picker btn-workflows" onclick="openWorkflows()" title="Guided document workflows">
-                  &#x2699;&#xFE0F; Workflows
+                <button class="input-action-btn" id="btn-web-search" onclick="toggleWebSearch()" title="Web search">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                 </button>
-                <button class="btn-template-picker btn-meeting" onclick="openMeetingAssistant()" title="Upload and transcribe meetings">
-                  &#x1F3A4; Meetings
-                </button>
-                <button class="btn-template-picker btn-spaces" onclick="openSpaces()" title="Collaborate with your team">
-                  &#x1F465; Spaces
-                </button>
-                <button class="btn-template-picker" onclick="state.activeConversationId && shareConversation(state.activeConversationId)" id="btn-share" style="display:none;">
-                  &#x1F517; Share
-                </button>
-                <span class="shortcut-hint"><kbd>Ctrl</kbd>+<kbd>K</kbd> Search</span>
               </div>
-              <span>AskOzzy may produce inaccurate information. Verify critical details.</span>
+              <div class="input-actions-right">
+                <button class="input-action-btn" id="btn-voice" onclick="toggleVoice()" title="Voice input">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                </button>
+                <button class="input-action-btn" id="btn-voice-mode" onclick="toggleVoiceMode()" title="Voice conversation mode">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                </button>
+                <button class="btn-send" id="btn-send" onclick="sendMessage()" disabled title="Send message">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+                </button>
+              </div>
             </div>
+          </div>
+
+          <div class="input-tools">
+            <button class="tool-pill" onclick="openTemplateModal()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              Templates
+            </button>
+            <button class="tool-pill" onclick="openDeepResearch()" title="Multi-step research with web sources">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              Deep Research
+            </button>
+            <button class="tool-pill" onclick="openDataAnalysis()" title="Upload CSV/XLSX for AI analysis">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              Analyze Data
+            </button>
+            <button class="tool-pill" onclick="openWorkflows()" title="Guided document workflows">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              Workflows
+            </button>
+            <button class="tool-pill" onclick="openMeetingAssistant()" title="Upload and transcribe meetings">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+              Meetings
+            </button>
+            <button class="tool-pill" onclick="openSpaces()" title="Collaborate with your team">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Spaces
+            </button>
+            <button class="tool-pill" onclick="state.activeConversationId && shareConversation(state.activeConversationId)" id="btn-share" style="display:none;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+              Share
+            </button>
+          </div>
+
+          <div class="input-disclaimer">
+            AskOzzy may produce inaccurate information. Verify critical details.
+            <span class="shortcut-hint"><kbd>Ctrl</kbd>+<kbd>K</kbd> Search</span>
           </div>
         </div>
       </div>
@@ -279,7 +292,7 @@
 
   <!-- ═══ Pricing Modal ═══ -->
   <div class="modal-overlay" id="pricing-modal">
-    <div class="modal" style="max-width:800px;">
+    <div class="modal pricing-modal-box">
       <div class="modal-header">
         <div>
           <h3>Choose Your Plan</h3>
