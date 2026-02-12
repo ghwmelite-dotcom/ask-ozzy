@@ -536,8 +536,8 @@ html, body {
   align-items: center;
   gap: 12px;
   min-height: 56px;
-  flex-wrap: wrap;
-  overflow: hidden;
+  flex-wrap: nowrap;
+  overflow: visible;
 }
 
 .btn-toggle-sidebar {
@@ -571,6 +571,9 @@ html, body {
   cursor: pointer;
   outline: none;
   max-width: 320px;
+  flex: 1 1 auto;
+  min-width: 0;
+  text-overflow: ellipsis;
 }
 
 .model-selector optgroup {
@@ -760,7 +763,8 @@ html, body {
   padding: 12px 16px;
   border-radius: var(--radius) var(--radius) var(--radius) 4px;
   display: inline-block;
-  max-width: 100%;
+  max-width: calc(100% - 48px);
+  word-break: break-word;
 }
 
 .message.assistant .message-content {
@@ -1486,7 +1490,7 @@ html, body {
   }
 }
 
-/* Tablets portrait */
+/* Sidebar overlay on mobile (structural — positioning rules) */
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
@@ -1505,170 +1509,24 @@ html, body {
     transform: translateX(-100%);
   }
 
-  /* Enable sidebar backdrop on mobile */
   .sidebar-backdrop {
     display: block;
   }
 
-  .template-grid {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 10px;
-  }
+  .modal { max-width: 95vw; }
+  .auth-modal { max-width: 95vw; }
 
-  .welcome-screen {
-    padding: 24px 16px 60px;
-  }
-
-  .welcome-screen h2 {
-    font-size: 22px;
-  }
-
-  .welcome-screen p {
-    font-size: 13px;
-    margin-bottom: 20px;
-  }
-
-  .welcome-logo {
-    width: 56px;
-    height: 56px;
-    font-size: 28px;
-    margin-bottom: 16px;
-  }
-
-  .category-tabs {
-    gap: 6px;
-    margin-bottom: 16px;
-    padding: 0 8px;
-  }
-
-  .category-tab {
-    padding: 5px 10px;
-    font-size: 11px;
-  }
-
-  .chat-messages {
-    padding: 0 16px;
-  }
-
-  .input-area {
-    padding: 12px 16px 16px;
-  }
-
-  .main-header {
-    padding: 10px 16px;
-  }
-
-  .privacy-badge {
-    display: none;
-  }
-
-  .offline-status-badge .offline-status-text {
-    display: none;
-  }
-
-  .offline-status-badge {
-    padding: 3px 6px;
-    min-width: 0;
-  }
-
-  .modal {
-    max-width: 95vw;
-    max-height: 90vh;
-  }
-
-  .auth-modal {
-    max-width: 95vw;
-  }
-
-  /* Mobile toggle size */
+  /* Theme toggle compact for mobile */
   .theme-toggle-track {
     width: 44px;
     height: 24px;
     border-radius: 12px;
     padding: 0 5px;
   }
-
   .theme-toggle-icon-dark,
-  .theme-toggle-icon-light {
-    font-size: 11px;
-  }
-
-  .theme-toggle-thumb {
-    top: 2px;
-    left: 2px;
-    width: 18px;
-    height: 18px;
-  }
-
-  [data-theme="light"] .theme-toggle-thumb {
-    transform: translateX(20px);
-  }
-}
-
-/* Mobile phones */
-@media (max-width: 480px) {
-  .template-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-
-  .template-card {
-    padding: 12px;
-  }
-
-  .template-card .card-icon {
-    font-size: 20px;
-    margin-bottom: 2px;
-  }
-
-  .template-card .card-title {
-    font-size: 12px;
-  }
-
-  .template-card .card-desc {
-    font-size: 11px;
-  }
-
-  .welcome-screen h2 {
-    font-size: 20px;
-  }
-
-  .category-tabs {
-    gap: 4px;
-    padding: 0 4px;
-  }
-
-  .category-tab {
-    padding: 4px 8px;
-    font-size: 10px;
-  }
-
-  .model-selector {
-    font-size: 11px;
-    padding: 4px 8px;
-    max-width: 180px;
-  }
-
-  .message {
-    gap: 10px;
-  }
-
-  .message-avatar {
-    width: 28px;
-    height: 28px;
-    font-size: 11px;
-  }
-
-  .message-content {
-    font-size: 13px;
-  }
-}
-
-/* Very small phones */
-@media (max-width: 360px) {
-  .template-grid {
-    grid-template-columns: 1fr;
-  }
+  .theme-toggle-icon-light { font-size: 11px; }
+  .theme-toggle-thumb { top: 2px; left: 2px; width: 18px; height: 18px; }
+  [data-theme="light"] .theme-toggle-thumb { transform: translateX(20px); }
 }
 
 /* ─── Loading Spinner ─────────────────────────────────────────────── */
@@ -7948,37 +7806,43 @@ button, a, [onclick], [role="button"], .tool-pill, .category-tab,
   }
 }
 
-/* ─── Tablet portrait (≤ 768px) improvements ─────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE-FIRST RESPONSIVE OVERHAUL
+   Breakpoints: 768px (tablet) → 480px (phone) → 360px (small phone)
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Tablet portrait (≤ 768px) ──────────────────────────────────── */
 
 @media (max-width: 768px) {
+  /* Layout */
   .modal-overlay { padding: 12px; }
+  .modal { max-height: 85vh; max-height: 85dvh; }
   .auth-screen { padding: 12px; }
   .auth-form { padding: 20px; }
-  .modal { max-height: 85vh; max-height: 85dvh; }
-  .chat-messages { padding: 0 12px; }
 
-  /* Header: compact layout on tablets/phones */
+  /* Header: single-row compact layout */
   .main-header {
     padding: 8px 10px;
     gap: 6px;
     min-height: 48px;
+    flex-wrap: nowrap;
+    overflow: visible;
   }
 
-  /* Hide non-essential header elements */
+  /* Hide non-essential header items for space */
   .privacy-badge { display: none !important; }
   .offline-status-badge .offline-status-text { display: none; }
   .offline-status-badge { padding: 3px 6px; min-width: 0; }
 
-  /* Compact model selector */
+  /* Model selector: flex-shrink to fill remaining space */
   .model-selector {
     font-size: 11px;
     padding: 4px 6px;
     max-width: 140px;
-    flex-shrink: 1;
+    flex: 1 1 auto;
     min-width: 0;
   }
 
-  /* Usage badge compact */
   .usage-badge { font-size: 10px; flex-shrink: 0; }
 
   /* Touch targets */
@@ -7987,78 +7851,247 @@ button, a, [onclick], [role="button"], .tool-pill, .category-tab,
   .category-tab { min-height: 36px; padding: 6px 12px; }
   .conversation-item { min-height: 44px; }
   .header-help-btn { min-width: 36px; min-height: 36px; }
+
+  /* Chat area */
+  .chat-area { padding: 16px 0; }
+  .chat-messages { padding: 0 12px; gap: 16px; }
+
+  /* Messages: prevent bubble overflow past avatar */
+  .message { gap: 10px; }
+  .message .message-avatar { width: 28px; height: 28px; min-width: 28px; font-size: 14px; }
+  .message.user .message-content { max-width: calc(100% - 40px); }
+
+  /* Input area */
+  .input-area { padding: 10px 12px 14px; }
+  #chat-input { padding: 14px 16px 6px; font-size: 16px; min-height: 44px; }
+  .input-actions { padding: 6px 10px 10px; }
+
+  /* Tool pills */
+  .input-tools { gap: 6px; padding: 8px 0 0; }
+  .tool-pill { font-size: 11px; padding: 5px 10px; gap: 4px; }
+
+  /* Input disclaimer */
+  .input-disclaimer { font-size: 10px; }
+  .shortcut-hint { display: none; }
+
+  /* Welcome screen */
+  .welcome-screen { padding: 20px 16px 40px; }
+  .welcome-logo { width: 56px; height: 56px; font-size: 28px; margin-bottom: 14px; }
+  .welcome-screen h2 { font-size: 22px; }
+  .welcome-screen p { font-size: 13px; margin-bottom: 16px; max-width: 100%; }
+
+  /* Sovereignty badge */
+  .sovereignty-badge { max-width: 100%; padding: 10px 14px; gap: 10px; }
+
+  /* Welcome persona selector */
+  .welcome-persona-selector { max-width: 100%; gap: 8px; }
+  .welcome-persona-btn { padding: 8px 16px; font-size: 13px; gap: 6px; }
+  .welcome-persona-btn .persona-icon { font-size: 18px; }
+  .welcome-persona-btn .persona-text { font-size: 13px; }
+
+  /* Category tabs */
+  .category-tabs { gap: 6px; margin-bottom: 12px; padding: 0 8px; }
+  .category-tab { padding: 5px 10px; font-size: 11px; }
+
+  /* Template grid */
+  .template-grid { gap: 8px; }
+  .template-card { padding: 12px; }
 }
 
-/* ─── Mobile phones (≤ 480px) improvements ────────────────────────── */
+/* ─── Mobile phones (≤ 480px) ────────────────────────────────────── */
 
 @media (max-width: 480px) {
-  .modal-overlay { padding: 8px; }
-  .modal { max-width: 100%; margin: 0; border-radius: 12px; max-height: 90vh; max-height: 90dvh; }
+  /* Modals */
+  .modal-overlay { padding: 6px; }
+  .modal {
+    max-width: 100%;
+    margin: 0;
+    border-radius: 12px;
+    max-height: 92vh;
+    max-height: 92dvh;
+  }
   .modal-body { padding: 14px; }
-  .modal-header { padding: 14px 16px; }
-  .auth-screen { padding: 8px; }
-  .auth-form { padding: 16px; border-radius: 12px; }
-  .auth-header { margin-bottom: 20px; }
-  .auth-header .auth-logo { width: 52px; height: 52px; font-size: 26px; margin-bottom: 12px; }
-  .auth-header h2 { font-size: 20px; }
-  .chat-messages { padding: 0 8px; }
+  .modal-header { padding: 12px 14px; }
+  .modal-header h3 { font-size: 16px; }
+  .auth-screen { padding: 6px; }
+  .auth-form { padding: 14px; border-radius: 12px; }
+  .auth-header { margin-bottom: 16px; }
+  .auth-header .auth-logo { width: 48px; height: 48px; font-size: 24px; margin-bottom: 10px; }
+  .auth-header h2 { font-size: 18px; }
 
-  /* Header: even more compact on phones */
+  /* Header: ultra-compact single row */
   .main-header {
     padding: 6px 8px;
     gap: 4px;
     min-height: 44px;
   }
 
-  /* Hide help button and lang selector on very small screens */
+  /* Hide secondary header items */
   .header-help-btn { display: none !important; }
   .lang-selector-wrap { display: none !important; }
+  .offline-status-badge { display: none !important; }
 
-  /* Model selector: truncated on phones */
+  /* Model selector: takes remaining space */
   .model-selector {
     font-size: 10px;
-    padding: 4px 6px;
-    max-width: 120px;
+    padding: 3px 4px;
+    max-width: none;
+    flex: 1 1 0;
+    min-width: 0;
   }
 
-  /* Theme toggle compact */
-  .theme-toggle { flex-shrink: 0; }
+  .usage-badge { font-size: 9px; padding: 2px 6px; }
+  .theme-toggle { flex-shrink: 0; transform: scale(0.85); }
 
-  /* Input action buttons: 44px touch targets */
-  .input-action-btn { width: 44px; height: 44px; }
-  .btn-send { width: 44px; height: 44px; }
-  .input-actions-left, .input-actions-right { gap: 2px; }
-
-  /* Citizen bot safe area + full-width */
-  .citizen-bot { right: 4px; left: 4px; width: auto; max-height: 70vh; max-height: 70dvh; }
-
-  /* Sidebar: narrower on phones */
+  /* Sidebar */
   .sidebar { width: 260px; min-width: 260px; }
 
-  /* Category tabs */
-  .category-tab { min-height: 32px; padding: 5px 10px; font-size: 11px; }
+  /* Chat */
+  .chat-area { padding: 10px 0; }
+  .chat-messages { padding: 0 8px; gap: 12px; }
+  .message { gap: 8px; }
+  .message .message-avatar { width: 26px; height: 26px; min-width: 26px; font-size: 13px; }
+  .message.user .message-content { max-width: calc(100% - 36px); }
+  .message-content { font-size: 13.5px; line-height: 1.6; }
+  .message-content h1 { font-size: 16px; }
+  .message-content h2 { font-size: 15px; }
+  .message-content h3 { font-size: 14px; }
+  .message-content pre { padding: 10px; font-size: 11px; }
+  .message-content table { font-size: 11px; }
+  .data-table td { max-width: 120px; padding: 4px 8px; }
 
-  /* Persona selector: ensure it fits on phones */
-  .persona-options { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .persona-option { padding: 10px 8px; }
-  .persona-icon { font-size: 22px; }
-  .persona-text { font-size: 12px; }
+  /* Input area */
+  .input-area { padding: 8px 8px 12px; }
+  #chat-input { padding: 12px 12px 4px; min-height: 42px; }
+  .input-actions { padding: 4px 8px 8px; }
+  .input-action-btn { width: 36px; height: 36px; }
+  .btn-send { width: 40px; height: 40px; }
+  .input-actions-left, .input-actions-right { gap: 1px; }
+
+  /* Hide less essential input actions on small phones */
+  .input-actions-left .input-action-btn:nth-child(n+4) { display: none; }
+
+  /* Tool pills: horizontal scroll instead of wrap */
+  .input-tools {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    padding: 6px 4px 2px;
+    gap: 6px;
+    scrollbar-width: none;
+  }
+  .input-tools::-webkit-scrollbar { display: none; }
+  .tool-pill { font-size: 11px; padding: 5px 10px; flex-shrink: 0; }
+
+  .input-disclaimer { font-size: 9px; padding: 4px 0 0; }
+
+  /* Welcome screen */
+  .welcome-screen { padding: 16px 12px 30px; }
+  .welcome-logo { width: 48px; height: 48px; font-size: 24px; margin-bottom: 10px; border-radius: 14px; }
+  .welcome-screen h2 { font-size: 20px; margin-bottom: 6px; }
+  .welcome-screen p { font-size: 12px; margin-bottom: 12px; }
+
+  /* Sovereignty badge */
+  .sovereignty-badge { padding: 8px 12px; gap: 8px; font-size: 12px; }
+  .sovereignty-badge strong { font-size: 12px; }
+  .sovereignty-badge span { font-size: 10px; }
+  .sovereignty-icon svg { width: 22px; height: 22px; }
+
+  /* Welcome persona */
+  .welcome-persona-selector { gap: 6px; margin: 10px auto 6px; }
+  .welcome-persona-btn { padding: 7px 12px; font-size: 12px; gap: 5px; border-width: 1.5px; }
+  .welcome-persona-btn .persona-icon { font-size: 16px; }
+  .welcome-persona-btn .persona-text { font-size: 12px; }
+
+  /* Category tabs */
+  .category-tabs { gap: 5px; padding: 0 4px; margin-bottom: 10px; }
+  .category-tab { min-height: 30px; padding: 4px 8px; font-size: 10px; }
+
+  /* Template grid: 2 columns */
+  .template-grid { grid-template-columns: 1fr 1fr; gap: 6px; padding-bottom: 16px; }
+  .template-card { padding: 10px; }
+  .template-card .template-icon { font-size: 18px; }
+  .template-card .template-title { font-size: 12px; }
+  .template-card .template-desc { font-size: 10px; -webkit-line-clamp: 2; }
+
+  /* Registration form persona */
+  .persona-options { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .persona-option { padding: 8px 6px; }
+  .persona-icon { font-size: 20px; }
+  .persona-text { font-size: 11px; }
+
+  /* Referral code button */
+  #btn-auto-referral { font-size: 10px; padding: 6px 8px; }
+
+  /* Citizen bot */
+  .citizen-bot { right: 4px; left: 4px; width: auto; max-height: 70vh; max-height: 70dvh; }
+
+  /* PWA install banner */
+  .pwa-install-banner {
+    left: 8px;
+    right: 8px;
+    transform: none;
+    max-width: none;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 14px;
+  }
 }
 
-/* ─── Small phones (≤ 360px) improvements ─────────────────────────── */
+/* ─── Small phones (≤ 360px) ─────────────────────────────────────── */
 
 @media (max-width: 360px) {
   .modal-overlay { padding: 4px; }
-  .modal-body { padding: 12px; }
-  .auth-form { padding: 14px; }
-  .chat-messages { padding: 0 6px; }
+  .modal-body { padding: 10px; }
+  .modal-header { padding: 10px 12px; }
+  .modal-header h3 { font-size: 15px; }
+  .auth-form { padding: 12px; }
+
+  /* Header */
+  .main-header { padding: 4px 6px; gap: 3px; }
+  .model-selector { font-size: 9px; padding: 3px 4px; }
+  .usage-badge { font-size: 8px; padding: 2px 4px; }
+  .theme-toggle { transform: scale(0.8); }
+  .btn-toggle-sidebar { min-width: 36px; min-height: 36px; font-size: 18px; padding: 4px; }
+
+  /* Sidebar */
   .sidebar { width: 240px; min-width: 240px; }
 
-  .main-header { padding: 4px 6px; gap: 3px; }
-  .model-selector { max-width: 100px; font-size: 10px; }
+  /* Chat */
+  .chat-messages { padding: 0 6px; gap: 10px; }
+  .message { gap: 6px; }
+  .message .message-avatar { width: 24px; height: 24px; min-width: 24px; font-size: 12px; }
+  .message.user .message-content { max-width: calc(100% - 32px); }
+  .message-content { font-size: 13px; }
 
-  /* Referral code auto-fill button: smaller text */
-  #btn-auto-referral { font-size: 10px; padding: 6px 8px; }
+  /* Input */
+  .input-area { padding: 6px 6px 10px; }
+  #chat-input { padding: 10px 10px 4px; }
+  .input-actions { padding: 4px 6px 6px; }
+  .input-action-btn { width: 34px; height: 34px; }
+  .btn-send { width: 38px; height: 38px; }
+
+  /* Welcome */
+  .welcome-screen { padding: 12px 8px 24px; }
+  .welcome-logo { width: 40px; height: 40px; font-size: 20px; margin-bottom: 8px; border-radius: 12px; }
+  .welcome-screen h2 { font-size: 18px; }
+  .welcome-screen p { font-size: 11px; margin-bottom: 10px; }
+
+  .sovereignty-badge { padding: 6px 10px; }
+
+  /* Persona selector */
+  .welcome-persona-selector { gap: 5px; }
+  .welcome-persona-btn { padding: 6px 10px; font-size: 11px; }
+
+  /* Template grid: single column on tiny phones */
+  .template-grid { grid-template-columns: 1fr; gap: 6px; }
+
+  /* Referral */
+  #btn-auto-referral { font-size: 9px; padding: 5px 6px; }
+
+  /* Input tools scroll */
+  .tool-pill { font-size: 10px; padding: 4px 8px; }
 }
 
 /* ─── Landscape phones: prevent cramped layout ────────────────────── */
