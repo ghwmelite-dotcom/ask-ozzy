@@ -980,7 +980,7 @@ function onModelChange() {
   const freeModels = ["@cf/openai/gpt-oss-20b", "@cf/google/gemma-3-12b-it", "@cf/meta/llama-3.1-8b-instruct-fast"];
 
   if (userTier === "free" && !freeModels.includes(model)) {
-    alert(`This model requires a paid plan.\n\nUpgrade to Starter (GHS 30/mo) or higher to access all 10 AI models.`);
+    alert(`This model requires a paid plan.\n\nUpgrade to Starter (GHS 30/mo) or higher to access all 11 AI models.`);
     selector.value = state.selectedModel;
     openPricingModal();
     return;
@@ -2057,7 +2057,7 @@ function showOnboardingTour() {
   if (localStorage.getItem("askozzy_onboarding_done")) return;
 
   const steps = [
-    { target: ".model-selector", text: "Choose from 10 AI models. Free plans get 3 models, paid plans unlock all 10.", position: "bottom" },
+    { target: ".model-selector", text: "Choose from 11 AI models. Free plans get 3 models, paid plans unlock all 11.", position: "bottom" },
     { target: ".btn-new-chat", text: "Start conversations here. Try a template for guided prompts!", position: "right" },
     { target: ".theme-toggle", text: "Switch between dark and light modes.", position: "bottom" },
     { target: ".usage-badge", text: "Track your daily usage. Click to see upgrade plans.", position: "bottom" },
