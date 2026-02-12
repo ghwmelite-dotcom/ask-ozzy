@@ -4151,9 +4151,11 @@ async function shareToSpace(spaceId) {
 // ─── Feature 12: Citizen Service Bot ────────────────────────────────
 
 function openCitizenBot() {
+  const fab = document.querySelector('.citizen-bot-fab');
   let widget = document.getElementById('citizen-bot');
   if (widget) {
-    widget.classList.toggle('active');
+    const isOpen = widget.classList.toggle('active');
+    if (fab) fab.classList.toggle('open', isOpen);
     return;
   }
 
@@ -4163,32 +4165,57 @@ function openCitizenBot() {
   widget.innerHTML = `
     <div class="citizen-header">
       <div class="citizen-title">
-        <span style="font-size:20px;">&#x1F1EC;&#x1F1ED;</span>
+        <div class="citizen-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
         <div>
-          <strong>Ghana Citizen Services</strong>
-          <div style="font-size:11px;color:var(--text-muted);">Ask about government services</div>
+          <strong>Ozzy Citizen</strong>
+          <div class="citizen-subtitle">
+            <span class="citizen-status-dot"></span> Online &middot; Government Services
+          </div>
         </div>
       </div>
-      <button class="citizen-close" onclick="document.getElementById('citizen-bot').classList.remove('active')">&#x2715;</button>
+      <div class="citizen-header-actions">
+        <select id="citizen-lang" class="citizen-lang-chip" onchange="citizenState.language = this.value">
+          <option value="en">EN</option>
+          <option value="tw">Twi</option>
+          <option value="ha">Hausa</option>
+          <option value="ee">Ewe</option>
+          <option value="ga">Ga</option>
+          <option value="fr">FR</option>
+        </select>
+        <button class="citizen-close" onclick="document.getElementById('citizen-bot').classList.remove('active')" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
     </div>
     <div class="citizen-messages" id="citizen-messages">
       <div class="citizen-msg bot">
-        <div class="citizen-msg-content">Welcome! I can help you with pensions, taxes, permits, passports, health insurance, and other government services. How can I assist you today?</div>
+        <div class="citizen-avatar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="citizen-msg-content">
+          <div class="citizen-msg-bubble">Hello! I'm <strong>Ozzy</strong>, your digital assistant for government services.</div>
+          <div class="citizen-quick-actions">
+            <button onclick="document.getElementById('citizen-input').value='How do I get a passport?';sendCitizenMessage()">Passports</button>
+            <button onclick="document.getElementById('citizen-input').value='How do I check my SSNIT pension?';sendCitizenMessage()">Pensions</button>
+            <button onclick="document.getElementById('citizen-input').value='How do I file my taxes?';sendCitizenMessage()">Taxes</button>
+            <button onclick="document.getElementById('citizen-input').value='How do I get a Ghana Card?';sendCitizenMessage()">Ghana Card</button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="citizen-input-area">
-      <select id="citizen-lang" class="citizen-lang-select" onchange="citizenState.language = this.value">
-        <option value="en">English</option>
-        <option value="tw">Twi</option>
-        <option value="ha">Hausa</option>
-        <option value="ee">Ewe</option>
-        <option value="ga">Ga</option>
-        <option value="fr">Fran&#xe7;ais</option>
-      </select>
-      <input type="text" id="citizen-input" placeholder="Ask about government services..." onkeydown="if(event.key==='Enter')sendCitizenMessage()" />
-      <button onclick="sendCitizenMessage()">&#x27A4;</button>
-    </div>`;
+      <input type="text" id="citizen-input" placeholder="Type your question..." onkeydown="if(event.key==='Enter')sendCitizenMessage()" />
+      <button class="citizen-send-btn" onclick="sendCitizenMessage()" aria-label="Send">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+      </button>
+    </div>
+    <div class="citizen-footer">Powered by AskOzzy AI</div>`;
   document.body.appendChild(widget);
+
+  // Toggle FAB icon to X when open
+  document.querySelector('.citizen-bot-fab')?.classList.add('open');
 }
 
 const citizenState = { sessionId: null, language: 'en' };
@@ -4204,14 +4231,14 @@ async function sendCitizenMessage() {
   // Add user message
   const userDiv = document.createElement('div');
   userDiv.className = 'citizen-msg user';
-  userDiv.innerHTML = `<div class="citizen-msg-content">${escapeHtml(message)}</div>`;
+  userDiv.innerHTML = `<div class="citizen-msg-content"><div class="citizen-msg-bubble">${escapeHtml(message)}</div></div>`;
   container.appendChild(userDiv);
   container.scrollTop = container.scrollHeight;
 
   // Typing indicator
   const typingDiv = document.createElement('div');
   typingDiv.className = 'citizen-msg bot';
-  typingDiv.innerHTML = '<div class="citizen-msg-content"><div class="typing-indicator"><span></span><span></span><span></span></div></div>';
+  typingDiv.innerHTML = `<div class="citizen-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="citizen-msg-content"><div class="citizen-msg-bubble"><div class="typing-indicator"><span></span><span></span><span></span></div></div></div>`;
   container.appendChild(typingDiv);
   container.scrollTop = container.scrollHeight;
 
@@ -4229,14 +4256,14 @@ async function sendCitizenMessage() {
 
     const botDiv = document.createElement('div');
     botDiv.className = 'citizen-msg bot';
-    botDiv.innerHTML = `<div class="citizen-msg-content">${renderMarkdown(data.response)}</div>`;
+    botDiv.innerHTML = `<div class="citizen-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="citizen-msg-content"><div class="citizen-msg-bubble">${renderMarkdown(data.response)}</div></div>`;
     container.appendChild(botDiv);
     container.scrollTop = container.scrollHeight;
   } catch (err) {
     typingDiv.remove();
     const errDiv = document.createElement('div');
     errDiv.className = 'citizen-msg bot';
-    errDiv.innerHTML = `<div class="citizen-msg-content" style="color:var(--red-error-text);">Sorry, I am temporarily unavailable. Please try again.</div>`;
+    errDiv.innerHTML = `<div class="citizen-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="citizen-msg-content"><div class="citizen-msg-bubble" style="color:var(--red-error-text);">Sorry, I'm temporarily unavailable. Please try again.</div></div>`;
     container.appendChild(errDiv);
   }
 }
