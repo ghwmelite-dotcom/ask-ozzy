@@ -207,6 +207,21 @@ html, body {
   transform: translateX(-280px);
 }
 
+/* Sidebar backdrop overlay for mobile */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 199;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.sidebar-backdrop.active {
+  opacity: 1;
+}
+
 .sidebar-header {
   padding: 16px;
   border-bottom: 1px solid var(--border-color);
@@ -528,10 +543,13 @@ html, body {
   cursor: pointer;
   padding: 8px;
   border-radius: var(--radius-sm);
-  font-size: 18px;
+  font-size: 20px;
   transition: all var(--transition);
   display: flex;
   align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .btn-toggle-sidebar:hover {
@@ -1476,10 +1494,16 @@ html, body {
     height: 100dvh;
     box-shadow: var(--shadow);
     z-index: 200;
+    transform: translateX(0);
   }
 
   .sidebar.collapsed {
     transform: translateX(-100%);
+  }
+
+  /* Enable sidebar backdrop on mobile */
+  .sidebar-backdrop {
+    display: block;
   }
 
   .template-grid {

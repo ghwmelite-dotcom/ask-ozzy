@@ -1013,6 +1013,13 @@ async function createNewChat(templateId) {
     await loadConversations();
     showChatScreen();
 
+    // Auto-close sidebar on mobile
+    if (window.innerWidth <= 768) {
+      document.getElementById("sidebar").classList.add("collapsed");
+      const backdrop = document.getElementById("sidebar-backdrop");
+      if (backdrop) backdrop.classList.remove("active");
+    }
+
     if (template) {
       document.getElementById("chat-input").value = template.prompt;
       autoResizeInput();
@@ -1029,6 +1036,13 @@ async function openConversation(id) {
   state.activeConversationId = id;
   renderConversationList();
   showChatScreen();
+
+  // Auto-close sidebar on mobile after selecting a conversation
+  if (window.innerWidth <= 768) {
+    document.getElementById("sidebar").classList.add("collapsed");
+    const backdrop = document.getElementById("sidebar-backdrop");
+    if (backdrop) backdrop.classList.remove("active");
+  }
 
   // Restore agent selection from conversation data
   const convo = state.conversations.find(c => c.id === id);
@@ -1686,9 +1700,33 @@ function onModelChange() {
 
 // ─── Sidebar ─────────────────────────────────────────────────────────
 
-function toggleSidebar() {
-  document.getElementById("sidebar").classList.toggle("collapsed");
+// Auto-collapse sidebar on mobile on page load
+if (window.innerWidth <= 768) {
+  document.getElementById("sidebar").classList.add("collapsed");
 }
+
+function toggleSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  sidebar.classList.toggle("collapsed");
+  const backdrop = document.getElementById("sidebar-backdrop");
+  if (sidebar.classList.contains("collapsed")) {
+    if (backdrop) backdrop.classList.remove("active");
+  } else if (window.innerWidth <= 768) {
+    if (backdrop) backdrop.classList.add("active");
+  }
+}
+
+// Close sidebar when tapping backdrop on mobile
+document.addEventListener("DOMContentLoaded", () => {
+  const backdrop = document.createElement("div");
+  backdrop.id = "sidebar-backdrop";
+  backdrop.className = "sidebar-backdrop";
+  backdrop.addEventListener("click", () => {
+    document.getElementById("sidebar").classList.add("collapsed");
+    backdrop.classList.remove("active");
+  });
+  document.body.appendChild(backdrop);
+});
 
 // ─── Templates UI ────────────────────────────────────────────────────
 
@@ -4547,9 +4585,20 @@ window.addEventListener("appinstalled", () => {
   if (banner) banner.remove();
 });
 
+// Detect iOS/Safari (no beforeinstallprompt support)
+function isIOSSafari() {
+  const ua = navigator.userAgent;
+  return /iPad|iPhone|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+}
+
+function isInStandaloneMode() {
+  return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+}
+
+// Show install banner: native on Android/Chrome, custom guide on iOS/Safari
 function showInstallBanner() {
-  // Don't show if already dismissed this session
   if (sessionStorage.getItem("askozzy_install_dismissed")) return;
+  if (isInStandaloneMode()) return;
 
   const existing = document.querySelector(".pwa-install-banner");
   if (existing) return;
@@ -4570,6 +4619,34 @@ function showInstallBanner() {
     </div>
   `;
   document.body.appendChild(banner);
+}
+
+// iOS-specific install guide (Safari doesn't fire beforeinstallprompt)
+function showIOSInstallGuide() {
+  if (sessionStorage.getItem("askozzy_install_dismissed")) return;
+  if (isInStandaloneMode()) return;
+  if (document.querySelector(".pwa-install-banner")) return;
+
+  const banner = document.createElement("div");
+  banner.className = "pwa-install-banner";
+  banner.innerHTML = `
+    <div class="pwa-install-content">
+      <div class="pwa-install-icon">&#x26A1;</div>
+      <div class="pwa-install-text">
+        <strong>Install AskOzzy</strong>
+        <span>Tap <strong style="font-size:16px;">&#x2191;</strong> Share then <strong>"Add to Home Screen"</strong></span>
+      </div>
+    </div>
+    <div class="pwa-install-actions">
+      <button class="pwa-install-dismiss" onclick="dismissInstallBanner()">Got it</button>
+    </div>
+  `;
+  document.body.appendChild(banner);
+}
+
+// Trigger iOS banner after a short delay so user has context
+if (isIOSSafari() && !isInStandaloneMode()) {
+  setTimeout(showIOSInstallGuide, 3000);
 }
 
 async function installPWA() {
