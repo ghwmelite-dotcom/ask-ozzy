@@ -68,6 +68,7 @@
       <button class="admin-tab" data-tab="knowledge" onclick="switchTab('knowledge')">Knowledge Base</button>
       <button class="admin-tab" data-tab="bulk-import" onclick="switchTab('bulk-import')">Bulk Import</button>
       <button class="admin-tab" data-tab="document-training" onclick="switchTab('document-training')">Document Training</button>
+      <button class="admin-tab" data-tab="agents" onclick="switchTab('agents')">AI Agents</button>
     </nav>
 
     <!-- Tab Panels -->
@@ -434,6 +435,75 @@
         <div class="admin-card">
           <h3>Training Status</h3>
           <div id="training-status-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+        </div>
+      </div>
+
+      <div class="admin-tab-panel" id="panel-agents">
+        <div class="admin-card" style="margin-bottom:24px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <div>
+              <h3>Custom AI Agents</h3>
+              <p style="font-size:12px;color:var(--text-muted);margin:4px 0 0;">Create specialized AI assistants for different departments and tasks</p>
+            </div>
+            <button class="btn-action primary" onclick="openAgentForm()">+ New Agent</button>
+          </div>
+          <div id="agents-list-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+        </div>
+
+        <!-- Agent Form (hidden by default) -->
+        <div class="admin-card" id="agent-form-card" style="display:none;">
+          <h3 id="agent-form-title">Create New Agent</h3>
+          <input type="hidden" id="agent-form-id" />
+
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:16px;margin-bottom:16px;align-items:start;">
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Icon</label>
+              <input type="text" id="agent-icon" value="🤖" style="width:60px;text-align:center;font-size:24px;padding:8px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);" />
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Agent Name</label>
+              <input type="text" id="agent-name" placeholder="e.g., Procurement Agent" class="admin-search" style="max-width:100%;" />
+            </div>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Description (shown to users)</label>
+            <input type="text" id="agent-description" placeholder="e.g., Specialist in public procurement procedures and regulations" class="admin-search" style="max-width:100%;" />
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Department / MDA</label>
+              <input type="text" id="agent-department" placeholder="e.g., Public Procurement Authority" class="admin-search" style="max-width:100%;" />
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Knowledge Category (optional)</label>
+              <select id="agent-knowledge-cat" class="inline-select" style="padding:8px 12px;width:100%;">
+                <option value="">All categories</option>
+                <option value="procurement">Procurement</option>
+                <option value="finance">Finance & Budget</option>
+                <option value="hr">Human Resources</option>
+                <option value="legal">Legal & Regulations</option>
+                <option value="ict">ICT & Digital</option>
+                <option value="health">Health</option>
+                <option value="education">Education</option>
+                <option value="governance">Governance</option>
+                <option value="general">General</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">System Prompt (instructions for the AI)</label>
+            <textarea id="agent-system-prompt" rows="8" placeholder="You are a specialist procurement assistant for the Government of Ghana. You help civil servants with procurement procedures, tender processes, contract management, and compliance with the Public Procurement Act 2003 (Act 663) as amended. Always cite specific sections of the Act when relevant..." style="width:100%;padding:10px 14px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:13px;font-family:inherit;resize:vertical;outline:none;box-sizing:border-box;"></textarea>
+            <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">This prompt defines the agent's personality, expertise, and behavior. Be specific about the domain knowledge and response style.</div>
+          </div>
+
+          <div style="display:flex;gap:12px;">
+            <button class="btn-action primary" onclick="saveAgent()">Save Agent</button>
+            <button class="btn-action" onclick="cancelAgentForm()">Cancel</button>
+            <span id="agent-form-result" style="font-size:12px;align-self:center;"></span>
+          </div>
         </div>
       </div>
 

@@ -23,6 +23,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/css/app.css" />
   <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js" defer></script>
 </head>
 <body>
 
@@ -81,6 +82,9 @@
             <div class="theme-toggle-thumb"></div>
           </div>
         </button>
+        <div class="lang-selector-wrap" style="position:relative;">
+          <button class="lang-selector" id="lang-selector" onclick="openLanguageMenu()" title="Select language">EN</button>
+        </div>
         <div class="privacy-badge">Private & Encrypted</div>
       </header>
 
@@ -113,11 +117,23 @@
                 onkeydown="handleInputKeydown(event)"
                 oninput="autoResizeInput()"
               ></textarea>
+              <button class="btn-image-upload" onclick="openImageUpload()" title="Upload an image">
+                &#x1F5BC;
+              </button>
+              <button class="btn-camera" onclick="openCamera()" title="Take a photo">
+                &#x1F4F7;
+              </button>
               <button class="btn-file-upload" onclick="openFileUpload()" title="Upload a document">
                 📎
               </button>
+              <button class="btn-web-search" id="btn-web-search" onclick="toggleWebSearch()" title="Search the web">
+                &#x1F310;
+              </button>
               <button class="btn-voice" id="btn-voice" onclick="toggleVoice()" title="Voice input">
                 🎤
+              </button>
+              <button class="btn-voice-mode" id="btn-voice-mode" onclick="toggleVoiceMode()" title="Voice conversation mode">
+                &#x1F3A7;
               </button>
               <button class="btn-send" id="btn-send" onclick="sendMessage()" disabled title="Send message">
                 ➤
@@ -126,10 +142,25 @@
             <div class="input-footer">
               <div style="display:flex;align-items:center;gap:8px;">
                 <button class="btn-template-picker" onclick="openTemplateModal()">
-                  📋 Templates
+                  &#x1F4CB; Templates
+                </button>
+                <button class="btn-template-picker btn-deep-research" onclick="openDeepResearch()" title="Multi-step research with web sources">
+                  &#x1F50D; Deep Research
+                </button>
+                <button class="btn-template-picker btn-analyze-data" onclick="openDataAnalysis()" title="Upload CSV/XLSX for AI analysis">
+                  &#x1F4CA; Analyze Data
+                </button>
+                <button class="btn-template-picker btn-workflows" onclick="openWorkflows()" title="Guided document workflows">
+                  &#x2699;&#xFE0F; Workflows
+                </button>
+                <button class="btn-template-picker btn-meeting" onclick="openMeetingAssistant()" title="Upload and transcribe meetings">
+                  &#x1F3A4; Meetings
+                </button>
+                <button class="btn-template-picker btn-spaces" onclick="openSpaces()" title="Collaborate with your team">
+                  &#x1F465; Spaces
                 </button>
                 <button class="btn-template-picker" onclick="state.activeConversationId && shareConversation(state.activeConversationId)" id="btn-share" style="display:none;">
-                  🔗 Share
+                  &#x1F517; Share
                 </button>
                 <span class="shortcut-hint"><kbd>Ctrl</kbd>+<kbd>K</kbd> Search</span>
               </div>
@@ -263,6 +294,9 @@
   </div>
 
   <!-- ═══ Upgrade Limit Banner (injected by JS when limit reached) ═══ -->
+
+  <!-- Citizen Service Bot Launcher -->
+  <button class="citizen-bot-fab" onclick="openCitizenBot()" title="Ghana Citizen Services">&#x1F1EC;&#x1F1ED;</button>
 
   <script src="/js/templates.js"></script>
   <script src="/js/app.js"></script>

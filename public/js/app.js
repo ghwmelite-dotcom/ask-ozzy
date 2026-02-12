@@ -49,6 +49,15 @@ let state = {
   pendingAction: null,
   folders: [],
   collapsedFolders: {},
+  memories: [],
+  agents: [],
+  selectedAgent: null,
+  currentArtifact: null,
+  webSearchEnabled: false,
+  webSearchSources: [],
+  language: 'en',
+  voiceMode: false,
+  spacesLoaded: false,
 };
 
 // ─── Initialization ──────────────────────────────────────────────────
@@ -216,6 +225,8 @@ function onAuthenticated() {
   loadUsageStatus();
   loadFolders();
   loadAnnouncements();
+  loadMemories();
+  loadAgents();
 
   // Show onboarding tour for new users (after a short delay for UI to settle)
   setTimeout(() => showOnboardingTour(), 800);
@@ -360,6 +371,7 @@ function updateSidebarFooter() {
       </div>
       <div class="sidebar-links">
         <button class="sidebar-link-btn" onclick="openUserDashboard()">Dashboard</button>
+        <button class="sidebar-link-btn" onclick="openMemoryModal()">🧠 Memory</button>
         <button class="sidebar-link-btn" onclick="open2FASetup()">2FA Security</button>
         <button class="sidebar-link-btn" onclick="revokeAllSessions()">Revoke Sessions</button>
         ${state.user.role === 'super_admin' ? '<a class="sidebar-link-btn" href="/admin" style="text-decoration:none;text-align:center;">Admin</a>' : ''}
@@ -484,6 +496,7 @@ async function createNewChat(templateId) {
         title: template ? template.title : "New Conversation",
         templateId: templateId || null,
         model: state.selectedModel,
+        agentId: state.selectedAgent || null,
       }),
     });
     const data = await res.json();
@@ -510,6 +523,13 @@ async function openConversation(id) {
   state.activeConversationId = id;
   renderConversationList();
   showChatScreen();
+
+  // Restore agent selection from conversation data
+  const convo = state.conversations.find(c => c.id === id);
+  if (convo && convo.agent_id) {
+    state.selectedAgent = convo.agent_id;
+    renderAgentSelector();
+  }
 
   try {
     const res = await fetch(`${API}/api/conversations/${id}/messages`, {
@@ -572,8 +592,11 @@ function renderMessages() {
       </div>
       <div class="message-body">
         <div class="message-sender">${msg.role === "user" ? "You" : "AskOzzy"}</div>
-        <div class="message-content">${msg.role === "user" ? escapeHtml(msg.content) : renderMarkdown(msg.content)}</div>
+        ${msg.imageUrl ? `<div class="chat-image"><img src="${msg.imageUrl}" alt="Uploaded image" /></div>` : ""}
+        <div class="message-content">${msg.role === "user" ? escapeHtml(msg.content) : renderMarkdownWithCitations(msg.content, msg.webSources)}</div>
+        ${msg.webSources && msg.webSources.length > 0 ? renderSourcesFooter(msg.webSources) : ""}
         <div class="msg-actions">
+          ${msg.role === "assistant" ? `<button class="msg-action-btn" data-speak="${i}" onclick="speakMessage(${i})" title="Listen to response"><span class="msg-action-icon">&#x1F50A;</span> Speak</button>` : ""}
           <button class="msg-action-btn" onclick="copyMessageText(${i})" title="Copy text">
             <span class="msg-action-icon">&#x2398;</span> Copy
           </button>
@@ -602,6 +625,38 @@ function renderMessages() {
     .join("");
 
   scrollToBottom();
+}
+
+function renderMarkdownWithCitations(content, sources) {
+  let html = renderMarkdown(content);
+  if (sources && sources.length > 0) {
+    // Replace [1], [2] etc with clickable citation links
+    html = html.replace(/\[(\d+)\]/g, (match, num) => {
+      const idx = parseInt(num) - 1;
+      if (idx >= 0 && idx < sources.length) {
+        return `<a href="${escapeHtml(sources[idx].url)}" target="_blank" rel="noopener" class="citation-ref" title="${escapeHtml(sources[idx].title)}">[${num}]</a>`;
+      }
+      return match;
+    });
+  }
+  return html;
+}
+
+function renderSourcesFooter(sources) {
+  if (!sources || sources.length === 0) return "";
+  return `<div class="sources-footer">
+    <div class="sources-label">Sources</div>
+    <div class="sources-list">
+      ${sources.map((s, i) => {
+        const domain = (() => { try { return new URL(s.url).hostname.replace('www.', ''); } catch { return s.url; } })();
+        return `<a href="${escapeHtml(s.url)}" target="_blank" rel="noopener" class="source-card">
+          <img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=16" alt="" class="source-favicon" />
+          <span class="source-title">${escapeHtml(s.title.substring(0, 60))}</span>
+          <span class="source-domain">${escapeHtml(domain)}</span>
+        </a>`;
+      }).join("")}
+    </div>
+  </div>`;
 }
 
 function getUserInitials() {
@@ -635,6 +690,7 @@ async function sendMessage() {
         body: JSON.stringify({
           title: message.length > 60 ? message.substring(0, 57) + "..." : message,
           model: state.selectedModel,
+          agentId: state.selectedAgent || null,
         }),
       });
       const data = await res.json();
@@ -669,8 +725,12 @@ async function sendMessage() {
         conversationId: state.activeConversationId,
         message,
         model: state.selectedModel,
+        agentId: state.selectedAgent,
+        webSearch: state.webSearchEnabled || message.startsWith("@web "),
+        language: state.language,
       }),
     });
+    state.webSearchSources = [];
 
     if (!res.ok) {
       const errData = await res.json();
@@ -697,6 +757,7 @@ async function sendMessage() {
     const reader = res.body.getReader();
     const decoder = new TextDecoder();
     let fullText = "";
+    let currentEvent = "";
 
     while (true) {
       const { done, value } = await reader.read();
@@ -706,8 +767,17 @@ async function sendMessage() {
       const lines = chunk.split("\n");
 
       for (const line of lines) {
+        if (line.startsWith("event: ")) {
+          currentEvent = line.slice(7).trim();
+          continue;
+        }
         if (line.startsWith("data: ") && !line.includes("[DONE]")) {
           try {
+            if (currentEvent === "sources") {
+              state.webSearchSources = JSON.parse(line.slice(6));
+              currentEvent = "";
+              continue;
+            }
             const data = JSON.parse(line.slice(6));
             // Workers AI legacy format
             let token = data.response || null;
@@ -723,13 +793,36 @@ async function sendMessage() {
           } catch {
             // skip malformed
           }
+          currentEvent = "";
         }
       }
     }
 
+    // Attach web search sources to the message
+    if (state.webSearchSources.length > 0) {
+      state.messages[state.messages.length - 1].webSources = state.webSearchSources;
+    }
     renderMessages();
     await loadConversations();
     loadUsageStatus(); // refresh usage counter
+
+    // Check for artifacts
+    const lastMsg = state.messages[state.messages.length - 1];
+    if (lastMsg && lastMsg.role === 'assistant') {
+      const artifact = detectArtifact(lastMsg.content);
+      if (artifact) {
+        // Add "Open in Canvas" button to the message
+        const msgEls = document.querySelectorAll('.message.assistant');
+        const lastMsgEl = msgEls[msgEls.length - 1];
+        if (lastMsgEl) {
+          const btn = document.createElement('button');
+          btn.className = 'artifact-open-btn';
+          btn.innerHTML = '📄 Open in Canvas';
+          btn.onclick = () => openArtifactPanel(artifact);
+          lastMsgEl.appendChild(btn);
+        }
+      }
+    }
   } catch (err) {
     removeTypingIndicator();
     console.error("Chat error:", err);
@@ -2245,6 +2338,813 @@ async function pinConversation(conversationId, pinned) {
   }
 }
 
+// ─── Web Search Toggle ──────────────────────────────────────────────
+
+function toggleWebSearch() {
+  state.webSearchEnabled = !state.webSearchEnabled;
+  const btn = document.getElementById("btn-web-search");
+  if (btn) {
+    btn.classList.toggle("active", state.webSearchEnabled);
+    btn.title = state.webSearchEnabled ? "Web search ON — click to disable" : "Search the web";
+  }
+}
+
+// ─── Language / Translation ─────────────────────────────────────────
+
+function changeLanguage(lang) {
+  state.language = lang;
+  const btn = document.getElementById('lang-selector');
+  const langNames = { en: 'EN', fr: 'FR', ha: 'HA', tw: 'TW', ga: 'GA', ee: 'EW', dag: 'DG' };
+  if (btn) btn.textContent = langNames[lang] || 'EN';
+  // Update placeholder
+  const input = document.getElementById('chat-input');
+  if (input && lang !== 'en') {
+    const placeholders = {
+      tw: 'Bisa Ozzy biribiara... (Twi)',
+      ha: 'Tambayi Ozzy komai... (Hausa)',
+      ga: 'Bi Ozzy nu... (Ga)',
+      ee: 'Bia Ozzy nu... (Ewe)',
+      fr: 'Demandez \u00e0 Ozzy... (Fran\u00e7ais)',
+      dag: 'Bui Ozzy soli... (Dagbani)',
+    };
+    input.placeholder = placeholders[lang] || 'Ask Ozzy anything...';
+  } else if (input) {
+    input.placeholder = 'Ask Ozzy anything... (Shift+Enter for new line)';
+  }
+}
+
+function openLanguageMenu() {
+  const languages = [
+    { code: 'en', name: 'English', flag: '\u{1F1EC}\u{1F1E7}' },
+    { code: 'tw', name: 'Twi (Akan)', flag: '\u{1F1EC}\u{1F1ED}' },
+    { code: 'ga', name: 'Ga', flag: '\u{1F1EC}\u{1F1ED}' },
+    { code: 'ee', name: 'Ewe', flag: '\u{1F1EC}\u{1F1ED}' },
+    { code: 'ha', name: 'Hausa', flag: '\u{1F1EC}\u{1F1ED}' },
+    { code: 'fr', name: 'Fran\u00e7ais', flag: '\u{1F1EB}\u{1F1F7}' },
+    { code: 'dag', name: 'Dagbani', flag: '\u{1F1EC}\u{1F1ED}' },
+  ];
+
+  let menu = document.getElementById('lang-menu');
+  if (menu) {
+    menu.classList.toggle('active');
+    return;
+  }
+
+  menu = document.createElement('div');
+  menu.id = 'lang-menu';
+  menu.className = 'lang-menu active';
+  menu.innerHTML = languages.map(l =>
+    `<button class="lang-option ${state.language === l.code ? 'active' : ''}" onclick="changeLanguage('${l.code}'); document.getElementById('lang-menu').classList.remove('active');">
+      <span>${l.flag}</span> ${l.name}
+    </button>`
+  ).join('');
+
+  const btn = document.getElementById('lang-selector');
+  if (btn) btn.parentElement.appendChild(menu);
+
+  // Close on outside click
+  setTimeout(() => {
+    document.addEventListener('click', function closeLang(e) {
+      if (!menu.contains(e.target) && e.target.id !== 'lang-selector') {
+        menu.classList.remove('active');
+        document.removeEventListener('click', closeLang);
+      }
+    });
+  }, 10);
+}
+
+async function translateMessage(text, targetLang) {
+  if (!state.token || targetLang === 'en') return text;
+  try {
+    const res = await fetch(`${API}/api/translate`, {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify({ text, sourceLang: 'en', targetLang }),
+    });
+    const data = await res.json();
+    return data.translated || text;
+  } catch {
+    return text;
+  }
+}
+
+// ─── Text-to-Speech ─────────────────────────────────────────────────
+
+function speakMessage(index) {
+  const msg = state.messages[index];
+  if (!msg || msg.role !== 'assistant') return;
+
+  // Stop any current speech
+  if (window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    return;
+  }
+
+  const text = msg.content.replace(/\*\*|__|`{1,3}|#{1,6}\s|>\s|\[.*?\]\(.*?\)/g, '').replace(/<[^>]*>/g, '');
+  const utterance = new SpeechSynthesisUtterance(text.substring(0, 5000));
+
+  // Map language codes to speech synthesis lang
+  const langMap = { en: 'en-GB', fr: 'fr-FR', ha: 'ha', tw: 'ak', ga: 'gaa', ee: 'ee', dag: 'dag' };
+  utterance.lang = langMap[state.language] || 'en-GB';
+  utterance.rate = 0.95;
+  utterance.pitch = 1;
+
+  // Update button state
+  const btn = document.querySelector(`[data-speak="${index}"]`);
+  if (btn) btn.classList.add('speaking');
+
+  utterance.onend = () => {
+    if (btn) btn.classList.remove('speaking');
+    // In voice mode, auto-focus input for next question
+    if (state.voiceMode) {
+      setTimeout(() => toggleVoice(), 300);
+    }
+  };
+
+  window.speechSynthesis.speak(utterance);
+}
+
+function toggleVoiceMode() {
+  state.voiceMode = !state.voiceMode;
+  const btn = document.getElementById('btn-voice-mode');
+  if (btn) btn.classList.toggle('active', state.voiceMode);
+
+  if (state.voiceMode) {
+    // Start listening immediately
+    toggleVoice();
+  }
+}
+
+// ─── Image / Vision Upload ──────────────────────────────────────────
+
+function openImageUpload() {
+  requireAuth(() => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/jpeg,image/png,image/gif,image/webp';
+    input.onchange = (e) => {
+      const file = Array.from(e.target.files)[0];
+      if (!file) return;
+      handleImageFile(file);
+    };
+    input.click();
+  });
+}
+
+function openCamera() {
+  requireAuth(async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+      showCameraPreview(stream);
+    } catch (err) {
+      alert('Camera access denied. Please allow camera access and try again.');
+    }
+  });
+}
+
+function showCameraPreview(stream) {
+  let overlay = document.getElementById('camera-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'camera-overlay';
+    overlay.className = 'camera-overlay';
+    overlay.innerHTML = `
+      <div class="camera-container">
+        <video id="camera-video" autoplay playsinline></video>
+        <div class="camera-controls">
+          <button class="camera-btn cancel" onclick="closeCamera()">&#x2715;</button>
+          <button class="camera-btn capture" onclick="capturePhoto()">&#x1F4F7;</button>
+          <button class="camera-btn switch" onclick="switchCamera()">&#x1F504;</button>
+        </div>
+      </div>`;
+    document.body.appendChild(overlay);
+  }
+
+  overlay.classList.add('active');
+  const video = document.getElementById('camera-video');
+  video.srcObject = stream;
+  overlay._stream = stream;
+}
+
+function closeCamera() {
+  const overlay = document.getElementById('camera-overlay');
+  if (overlay) {
+    const video = document.getElementById('camera-video');
+    if (video && video.srcObject) {
+      video.srcObject.getTracks().forEach(t => t.stop());
+      video.srcObject = null;
+    }
+    if (overlay._stream) {
+      overlay._stream.getTracks().forEach(t => t.stop());
+    }
+    overlay.classList.remove('active');
+  }
+}
+
+async function switchCamera() {
+  closeCamera();
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+    showCameraPreview(stream);
+  } catch {}
+}
+
+function capturePhoto() {
+  const video = document.getElementById('camera-video');
+  if (!video) return;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext('2d').drawImage(video, 0, 0);
+
+  canvas.toBlob((blob) => {
+    closeCamera();
+    const file = new File([blob], 'photo.jpg', { type: 'image/jpeg' });
+    handleImageFile(file);
+  }, 'image/jpeg', 0.85);
+}
+
+function handleImageFile(file) {
+  if (file.size > 5 * 1024 * 1024) {
+    alert('Image must be under 5MB');
+    return;
+  }
+
+  // Show preview
+  showImagePreview(file);
+}
+
+function showImagePreview(file) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    let preview = document.getElementById('image-preview');
+    if (!preview) {
+      preview = document.createElement('div');
+      preview.id = 'image-preview';
+      preview.className = 'image-preview';
+      const inputWrapper = document.querySelector('.input-wrapper');
+      if (inputWrapper) inputWrapper.insertBefore(preview, inputWrapper.firstChild);
+    }
+
+    preview.innerHTML = `
+      <div class="image-preview-inner">
+        <img src="${e.target.result}" alt="Preview" />
+        <div class="image-preview-actions">
+          <select id="vision-mode" class="vision-mode-select">
+            <option value="describe">Describe</option>
+            <option value="ocr">Extract Text (OCR)</option>
+            <option value="form">Extract Form Data</option>
+            <option value="receipt">Process Receipt</option>
+          </select>
+          <button onclick="sendImageMessage()" class="btn-send-image">Analyse</button>
+          <button onclick="clearImagePreview()" class="btn-clear-image">&#x2715;</button>
+        </div>
+      </div>`;
+    preview.classList.add('active');
+    preview._file = file;
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearImagePreview() {
+  const preview = document.getElementById('image-preview');
+  if (preview) {
+    preview.classList.remove('active');
+    preview._file = null;
+    preview.innerHTML = '';
+  }
+}
+
+async function sendImageMessage() {
+  const preview = document.getElementById('image-preview');
+  const file = preview?._file;
+  if (!file) return;
+
+  const mode = document.getElementById('vision-mode')?.value || 'describe';
+  const chatInput = document.getElementById('chat-input');
+  const customPrompt = chatInput.value.trim();
+
+  clearImagePreview();
+  chatInput.value = '';
+  showChatScreen();
+
+  // Create conversation if needed
+  if (!state.activeConversationId) {
+    try {
+      const res = await fetch(`${API}/api/conversations`, {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ title: 'Image Analysis', model: state.selectedModel }),
+      });
+      const data = await res.json();
+      state.activeConversationId = data.id;
+      await loadConversations();
+    } catch {
+      alert('Failed to create conversation');
+      return;
+    }
+  }
+
+  // Show user message with image thumbnail
+  const imgUrl = URL.createObjectURL(file);
+  state.messages.push({ role: 'user', content: `[Image: ${file.name}] ${customPrompt || mode}`, imageUrl: imgUrl });
+  renderMessages();
+  addTypingIndicator();
+  state.isStreaming = true;
+  updateSendButton();
+
+  try {
+    const formData = new FormData();
+    formData.append('image', file);
+    formData.append('conversationId', state.activeConversationId);
+    formData.append('mode', mode);
+    if (customPrompt) formData.append('prompt', customPrompt);
+    formData.append('model', state.selectedModel);
+
+    const res = await fetch(`${API}/api/chat/image`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${state.token}` },
+      body: formData,
+    });
+
+    removeTypingIndicator();
+
+    if (!res.ok) {
+      const err = await res.json();
+      if (err.code === 'TIER_REQUIRED') {
+        state.messages.push({ role: 'assistant', content: '**Image understanding requires a Starter plan or above.** Upgrade to unlock image analysis, OCR, and document scanning.' });
+        renderMessages();
+        return;
+      }
+      throw new Error(err.error || 'Image analysis failed');
+    }
+
+    const data = await res.json();
+    state.messages.push({ role: 'assistant', content: data.response });
+    renderMessages();
+    await loadConversations();
+  } catch (err) {
+    removeTypingIndicator();
+    state.messages.push({ role: 'assistant', content: `**Error:** ${err.message}` });
+    renderMessages();
+  } finally {
+    state.isStreaming = false;
+    updateSendButton();
+  }
+}
+
+// ─── Deep Research Mode ─────────────────────────────────────────────
+
+function openDeepResearch() {
+  requireAuth(() => {
+    const input = document.getElementById("chat-input");
+    const query = input.value.trim();
+    if (!query) {
+      input.placeholder = "Type your research question, then click Deep Research...";
+      input.focus();
+      return;
+    }
+    startResearch(query);
+  });
+}
+
+async function startResearch(query) {
+  if (state.isStreaming) return;
+
+  // Create conversation if needed
+  if (!state.activeConversationId) {
+    try {
+      const res = await fetch(`${API}/api/conversations`, {
+        method: "POST",
+        headers: authHeaders(),
+        body: JSON.stringify({
+          title: "Research: " + (query.length > 50 ? query.substring(0, 47) + "..." : query),
+          model: state.selectedModel,
+        }),
+      });
+      const data = await res.json();
+      state.activeConversationId = data.id;
+      showChatScreen();
+      await loadConversations();
+    } catch (err) {
+      alert("Failed to create conversation");
+      return;
+    }
+  }
+
+  const input = document.getElementById("chat-input");
+  input.value = "";
+  autoResizeInput();
+  updateSendButton();
+
+  // Add user message
+  state.messages.push({ role: "user", content: query });
+  renderMessages();
+
+  // Add research progress card
+  const researchCardId = "research-card-" + Date.now();
+  const container = document.getElementById("chat-messages");
+  const card = document.createElement("div");
+  card.id = researchCardId;
+  card.className = "message assistant";
+  card.innerHTML = `
+    <div class="message-avatar">G</div>
+    <div class="message-body">
+      <div class="message-sender">AskOzzy Deep Research</div>
+      <div class="research-card">
+        <div class="research-progress">
+          <div class="research-progress-bar" id="${researchCardId}-bar" style="width:0%"></div>
+        </div>
+        <div class="research-step" id="${researchCardId}-step">Initialising research...</div>
+        <div class="research-sources" id="${researchCardId}-sources">
+          <div class="sources-label">Sources found:</div>
+        </div>
+      </div>
+    </div>`;
+  container.appendChild(card);
+  scrollToBottom();
+
+  state.isStreaming = true;
+  updateSendButton();
+
+  try {
+    const res = await fetch(`${API}/api/research`, {
+      method: "POST",
+      headers: authHeaders(),
+      body: JSON.stringify({
+        query,
+        conversationId: state.activeConversationId,
+      }),
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      if (err.code === "TIER_REQUIRED") {
+        card.querySelector(".research-card").innerHTML = `
+          <div style="text-align:center;padding:20px;">
+            <div style="font-size:32px;margin-bottom:12px;">&#x1F512;</div>
+            <h4>Professional Plan Required</h4>
+            <p style="color:var(--text-secondary);margin:8px 0 16px;">Deep Research is available on Professional and Enterprise plans.</p>
+            <button class="btn-auth" onclick="openPricingModal()" style="padding:10px 24px;">View Plans</button>
+          </div>`;
+        return;
+      }
+      throw new Error(err.error || "Research failed");
+    }
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let currentEvent = "";
+    let allSources = [];
+    let report = "";
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      const chunk = decoder.decode(value);
+      const lines = chunk.split("\n");
+
+      for (const line of lines) {
+        if (line.startsWith("event: ")) {
+          currentEvent = line.slice(7).trim();
+          continue;
+        }
+        if (line.startsWith("data: ")) {
+          try {
+            const data = JSON.parse(line.slice(6));
+
+            if (currentEvent === "research:step") {
+              const pct = (data.step / data.total) * 100;
+              const bar = document.getElementById(`${researchCardId}-bar`);
+              const stepEl = document.getElementById(`${researchCardId}-step`);
+              if (bar) bar.style.width = pct + "%";
+              if (stepEl) stepEl.textContent = `Step ${data.step}/${data.total}: ${data.description}`;
+              scrollToBottom();
+            }
+
+            if (currentEvent === "research:source") {
+              allSources.push(data);
+              const sourcesEl = document.getElementById(`${researchCardId}-sources`);
+              if (sourcesEl) {
+                const sourceItem = document.createElement("a");
+                sourceItem.href = data.url;
+                sourceItem.target = "_blank";
+                sourceItem.rel = "noopener";
+                sourceItem.className = "source-card";
+                const domain = (() => { try { return new URL(data.url).hostname.replace('www.', ''); } catch { return ''; } })();
+                sourceItem.innerHTML = `<img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=16" alt="" class="source-favicon" /><span class="source-title">${escapeHtml(data.title.substring(0, 50))}</span>`;
+                sourcesEl.appendChild(sourceItem);
+                scrollToBottom();
+              }
+            }
+
+            if (currentEvent === "research:complete") {
+              report = data.report;
+              // Replace the research card with the final report
+              state.messages.push({
+                role: "assistant",
+                content: report,
+                webSources: data.sources || allSources,
+                isResearch: true,
+              });
+              card.remove();
+              renderMessages();
+
+              // Auto-open in artifact panel
+              const artifact = { type: "document", title: "Research Report", content: report };
+              openArtifactPanel(artifact);
+            }
+
+            if (currentEvent === "research:error") {
+              card.querySelector(".research-card").innerHTML = `<div style="color:var(--red-error-text);padding:16px;">Research failed: ${escapeHtml(data.error)}</div>`;
+            }
+          } catch {}
+          currentEvent = "";
+        }
+      }
+    }
+
+    await loadConversations();
+  } catch (err) {
+    const cardEl = document.getElementById(researchCardId);
+    if (cardEl) {
+      cardEl.querySelector(".research-card").innerHTML = `<div style="color:var(--red-error-text);padding:16px;">Error: ${escapeHtml(err.message)}</div>`;
+    }
+  } finally {
+    state.isStreaming = false;
+    updateSendButton();
+  }
+}
+
+// ─── Data Analysis Mode ─────────────────────────────────────────────
+
+function openDataAnalysis() {
+  requireAuth(() => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".csv,.xlsx";
+    input.onchange = async (e) => {
+      const file = Array.from(e.target.files)[0];
+      if (!file) return;
+      if (file.size > 10 * 1024 * 1024) {
+        alert("File size must be under 10MB");
+        return;
+      }
+      await analyzeData(file);
+    };
+    input.click();
+  });
+}
+
+function parseCSV(text) {
+  const rows = [];
+  let current = "";
+  let inQuotes = false;
+  const lines = text.split("\n");
+
+  for (const line of lines) {
+    const cells = [];
+    let cell = "";
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') {
+        if (inQuotes && line[i + 1] === '"') { cell += '"'; i++; }
+        else { inQuotes = !inQuotes; }
+      } else if (ch === ',' && !inQuotes) {
+        cells.push(cell.trim());
+        cell = "";
+      } else {
+        cell += ch;
+      }
+    }
+    cells.push(cell.trim());
+    if (cells.some(c => c)) rows.push(cells);
+  }
+  return rows;
+}
+
+async function analyzeData(file, prompt) {
+  showChatScreen();
+
+  // Create conversation if needed
+  if (!state.activeConversationId) {
+    try {
+      const res = await fetch(`${API}/api/conversations`, {
+        method: "POST",
+        headers: authHeaders(),
+        body: JSON.stringify({
+          title: "Analysis: " + file.name,
+          model: state.selectedModel,
+        }),
+      });
+      const data = await res.json();
+      state.activeConversationId = data.id;
+      await loadConversations();
+    } catch {
+      alert("Failed to create conversation");
+      return;
+    }
+  }
+
+  // Show processing indicator
+  state.messages.push({ role: "user", content: `Analyze data: ${file.name}${prompt ? '\n' + prompt : ''}` });
+  renderMessages();
+  addTypingIndicator();
+  state.isStreaming = true;
+  updateSendButton();
+
+  try {
+    const formData = new FormData();
+    formData.append("file", file);
+    if (prompt) formData.append("prompt", prompt);
+
+    const res = await fetch(`${API}/api/analyze`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${state.token}` },
+      body: formData,
+    });
+
+    removeTypingIndicator();
+
+    if (!res.ok) {
+      const err = await res.json();
+      if (err.code === "TIER_REQUIRED") {
+        state.messages.push({
+          role: "assistant",
+          content: "**Data Analysis requires a Starter plan or above.** Upgrade to unlock data analysis, chart generation, and insights.\n\n[View Plans](#)",
+        });
+        renderMessages();
+        return;
+      }
+      throw new Error(err.error || "Analysis failed");
+    }
+
+    const data = await res.json();
+
+    // Build analysis summary message
+    let msgContent = `**Data Analysis: ${file.name}**\n\n`;
+    msgContent += `**Summary:** ${data.summary}\n\n`;
+    if (data.insights && data.insights.length > 0) {
+      msgContent += `**Key Insights:**\n`;
+      data.insights.forEach((ins, i) => { msgContent += `${i + 1}. ${ins}\n`; });
+    }
+    msgContent += `\n*${data.rawData?.totalRows || 0} rows analysed. Open the analysis panel for charts and data table.*`;
+
+    state.messages.push({ role: "assistant", content: msgContent });
+    renderMessages();
+
+    // Open analysis in artifact panel
+    openAnalysisPanel(data, file.name);
+
+  } catch (err) {
+    removeTypingIndicator();
+    state.messages.push({ role: "assistant", content: `**Error:** ${err.message}` });
+    renderMessages();
+  } finally {
+    state.isStreaming = false;
+    updateSendButton();
+  }
+}
+
+function openAnalysisPanel(data, fileName) {
+  let panel = document.getElementById("artifact-panel");
+  if (!panel) {
+    panel = document.createElement("div");
+    panel.id = "artifact-panel";
+    panel.className = "artifact-panel";
+    panel.innerHTML = `
+      <div class="artifact-header">
+        <div class="artifact-title-area">
+          <span class="artifact-type-icon"></span>
+          <span class="artifact-title"></span>
+        </div>
+        <div class="artifact-actions">
+          <button onclick="copyArtifact()" title="Copy">&#x1F4CB;</button>
+          <button onclick="downloadArtifact()" title="Download">&#x1F4BE;</button>
+          <button onclick="closeArtifactPanel()" title="Close">&#x2715;</button>
+        </div>
+      </div>
+      <div class="artifact-content" id="artifact-content"></div>
+    `;
+    document.querySelector(".main-content").appendChild(panel);
+  }
+
+  panel.querySelector(".artifact-type-icon").textContent = "&#x1F4CA;";
+  panel.querySelector(".artifact-title").textContent = "Data Analysis: " + (fileName || "");
+
+  const contentEl = panel.querySelector("#artifact-content");
+
+  // Tabs
+  let html = `<div class="analysis-tabs">
+    <button class="analysis-tab active" onclick="switchAnalysisTab('summary', this)">Summary</button>
+    <button class="analysis-tab" onclick="switchAnalysisTab('charts', this)">Charts</button>
+    <button class="analysis-tab" onclick="switchAnalysisTab('data', this)">Data Table</button>
+  </div>`;
+
+  // Summary tab
+  html += `<div class="analysis-tab-content" id="analysis-tab-summary">
+    <div class="analysis-summary"><p>${escapeHtml(data.summary || '')}</p></div>
+    <h4>Key Insights</h4>
+    <ul class="analysis-insights">
+      ${(data.insights || []).map(ins => `<li>${escapeHtml(ins)}</li>`).join("")}
+    </ul>
+    <button class="btn-template-picker" onclick="downloadAnalysisReport()" style="margin-top:16px;">&#x1F4E5; Download Report</button>
+  </div>`;
+
+  // Charts tab
+  html += `<div class="analysis-tab-content hidden" id="analysis-tab-charts">
+    ${(data.chartConfigs || []).map((cfg, i) => `
+      <div class="chart-container">
+        <h4>${escapeHtml(cfg.title || 'Chart ' + (i + 1))}</h4>
+        <canvas id="analysis-chart-${i}" width="400" height="250"></canvas>
+      </div>
+    `).join("") || '<p style="color:var(--text-muted);padding:20px;">No chart suggestions available for this dataset.</p>'}
+  </div>`;
+
+  // Data Table tab
+  html += `<div class="analysis-tab-content hidden" id="analysis-tab-data">`;
+  if (data.rawData && data.rawData.headers) {
+    html += `<div class="data-table-wrapper"><table class="data-table">
+      <thead><tr>${data.rawData.headers.map(h => `<th>${escapeHtml(h)}</th>`).join("")}</tr></thead>
+      <tbody>${(data.rawData.rows || []).slice(0, 100).map(row =>
+        `<tr>${row.map(c => `<td>${escapeHtml(String(c))}</td>`).join("")}</tr>`
+      ).join("")}</tbody>
+    </table></div>`;
+    if (data.rawData.totalRows > 100) {
+      html += `<p style="color:var(--text-muted);font-size:12px;padding:8px;">Showing first 100 of ${data.rawData.totalRows} rows</p>`;
+    }
+  }
+  html += `</div>`;
+
+  contentEl.innerHTML = html;
+
+  // Store data for export
+  state.currentArtifact = { type: "analysis", title: "Data Analysis: " + fileName, content: JSON.stringify(data, null, 2), analysisData: data };
+  panel.classList.add("open");
+  document.querySelector(".main-content").classList.add("has-artifact");
+
+  // Render charts with Chart.js
+  if (typeof Chart !== "undefined" && data.chartConfigs) {
+    const ghanaColors = ["#CE1126", "#FCD116", "#006B3F", "#1a1d27", "#e8eaed", "#00a86b", "#b89a10", "#ff6b7a"];
+    setTimeout(() => {
+      data.chartConfigs.forEach((cfg, i) => {
+        const canvas = document.getElementById(`analysis-chart-${i}`);
+        if (!canvas) return;
+        try {
+          const datasets = (cfg.datasets || []).map((ds, di) => ({
+            ...ds,
+            backgroundColor: cfg.type === "pie" || cfg.type === "doughnut"
+              ? ghanaColors.slice(0, (ds.data || []).length)
+              : ghanaColors[di % ghanaColors.length] + "CC",
+            borderColor: cfg.type === "line" ? ghanaColors[di % ghanaColors.length] : undefined,
+            borderWidth: cfg.type === "line" ? 2 : 1,
+          }));
+          new Chart(canvas, {
+            type: cfg.type || "bar",
+            data: { labels: cfg.labels || [], datasets },
+            options: {
+              responsive: true,
+              plugins: { legend: { labels: { color: "var(--text-primary)" } } },
+              scales: cfg.type === "pie" || cfg.type === "doughnut" ? {} : {
+                x: { ticks: { color: "var(--text-secondary)" } },
+                y: { ticks: { color: "var(--text-secondary)" } },
+              },
+            },
+          });
+        } catch (e) {
+          console.error("Chart render error:", e);
+        }
+      });
+    }, 100);
+  }
+}
+
+function switchAnalysisTab(tab, btn) {
+  document.querySelectorAll(".analysis-tab-content").forEach(el => el.classList.add("hidden"));
+  document.querySelectorAll(".analysis-tab").forEach(el => el.classList.remove("active"));
+  const tabEl = document.getElementById("analysis-tab-" + tab);
+  if (tabEl) tabEl.classList.remove("hidden");
+  if (btn) btn.classList.add("active");
+}
+
+function downloadAnalysisReport() {
+  if (!state.currentArtifact?.analysisData) return;
+  const data = state.currentArtifact.analysisData;
+  let text = "DATA ANALYSIS REPORT\n" + "=".repeat(50) + "\n\n";
+  text += "SUMMARY\n" + data.summary + "\n\n";
+  text += "KEY INSIGHTS\n";
+  (data.insights || []).forEach((ins, i) => { text += `${i + 1}. ${ins}\n`; });
+  const blob = new Blob([text], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "analysis-report.txt";
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
 // ─── File Upload in Chat ─────────────────────────────────────────────
 
 function openFileUpload() {
@@ -2441,4 +3341,902 @@ function useSuggestion(btn, text) {
   // Remove pills after use
   const pills = document.getElementById("suggestion-pills");
   if (pills) pills.remove();
+}
+
+// ─── AI Memory ──────────────────────────────────────────────────────
+
+async function loadMemories() {
+  if (!isLoggedIn()) return;
+  try {
+    const res = await fetch(`${API}/api/memories`, { headers: authHeaders() });
+    const data = await res.json();
+    state.memories = data.memories || [];
+  } catch {}
+}
+
+function openMemoryModal() {
+  // Create/show a modal listing all user memories with edit/delete
+  // Each memory: key (bold), value, delete button
+  // Add new memory form at bottom: key input, value input, save button
+  // Title: "Ozzy's Memory — What I know about you"
+  // Subtitle: "Ozzy uses these to personalize responses. You can edit or remove any item."
+
+  let html = '<div class="memory-list">';
+  const memories = state.memories || [];
+  if (memories.length === 0) {
+    html += '<div style="text-align:center;padding:20px;color:var(--text-muted);">No memories yet. As you chat, Ozzy will learn about you — or add details manually below.</div>';
+  }
+  for (const m of memories) {
+    html += `<div class="memory-item" id="memory-${m.id}">
+      <div class="memory-content">
+        <span class="memory-key">${escapeHtml(m.key)}</span>
+        <span class="memory-value">${escapeHtml(m.value)}</span>
+      </div>
+      <button class="memory-delete" onclick="deleteMemory('${m.id}')" title="Remove">×</button>
+    </div>`;
+  }
+  html += '</div>';
+  html += `<div class="memory-add">
+    <input type="text" id="memory-new-key" placeholder="e.g., Department" style="flex:1;" />
+    <input type="text" id="memory-new-value" placeholder="e.g., Ministry of Finance" style="flex:2;" />
+    <button onclick="addMemory()">Add</button>
+  </div>`;
+  html += `<div style="font-size:11px;color:var(--text-muted);margin-top:12px;text-align:center;">${memories.length} / 20 memory slots used</div>`;
+
+  // Use a generic modal approach - create overlay if not exists
+  let overlay = document.getElementById('memory-modal');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'memory-modal';
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = `<div class="modal" style="max-width:560px;">
+      <div class="modal-header">
+        <div>
+          <h3>🧠 Ozzy's Memory</h3>
+          <p style="font-size:12px;color:var(--text-muted);margin:4px 0 0;">What Ozzy knows about you — used to personalize responses</p>
+        </div>
+        <button class="modal-close" onclick="closeMemoryModal()">✕</button>
+      </div>
+      <div class="modal-body" id="memory-modal-body" style="padding:16px;"></div>
+    </div>`;
+    document.body.appendChild(overlay);
+  }
+  document.getElementById('memory-modal-body').innerHTML = html;
+  overlay.classList.add('active');
+}
+
+function closeMemoryModal() {
+  const el = document.getElementById('memory-modal');
+  if (el) el.classList.remove('active');
+}
+
+async function addMemory() {
+  const keyEl = document.getElementById('memory-new-key');
+  const valEl = document.getElementById('memory-new-value');
+  const key = keyEl.value.trim();
+  const value = valEl.value.trim();
+  if (!key || !value) return;
+  try {
+    await fetch(`${API}/api/memories`, {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify({ key, value }),
+    });
+    keyEl.value = '';
+    valEl.value = '';
+    await loadMemories();
+    openMemoryModal(); // refresh
+  } catch {}
+}
+
+async function deleteMemory(id) {
+  try {
+    await fetch(`${API}/api/memories/${id}`, { method: 'DELETE', headers: authHeaders() });
+    await loadMemories();
+    // Remove from DOM immediately
+    const el = document.getElementById('memory-' + id);
+    if (el) el.remove();
+  } catch {}
+}
+
+// ─── Artifacts / Canvas ─────────────────────────────────────────────
+
+function detectArtifact(content) {
+  // Client-side heuristic detection (fast, no API call needed)
+  // Returns { type, title } or null
+
+  // Check for code blocks
+  const codeMatch = content.match(/```(\w+)?\n([\s\S]{100,}?)```/);
+  if (codeMatch) {
+    return { type: 'code', title: codeMatch[1] ? `${codeMatch[1]} Code` : 'Code', content: codeMatch[2] };
+  }
+
+  // Check for document markers (memos, letters, reports)
+  const docPatterns = [
+    /(?:MEMORANDUM|MEMO|OFFICE\s+OF|MINISTRY\s+OF|REPUBLIC\s+OF|GOVERNMENT\s+OF)/i,
+    /(?:Dear\s+(?:Sir|Madam|Hon|Dr|Mr|Mrs|Ms))/i,
+    /(?:RE:|REF:|SUBJECT:)/i,
+  ];
+  const isDocument = docPatterns.some(p => p.test(content)) && content.length > 300;
+  if (isDocument) {
+    const titleMatch = content.match(/(?:RE:|SUBJECT:|MEMORANDUM|MEMO)[:\s]*([^\n]+)/i);
+    return { type: 'document', title: titleMatch ? titleMatch[1].trim().slice(0, 60) : 'Document', content };
+  }
+
+  // Check for tables (markdown tables with |)
+  const tableLines = content.split('\n').filter(l => l.includes('|') && l.trim().startsWith('|'));
+  if (tableLines.length >= 3) {
+    return { type: 'table', title: 'Data Table', content };
+  }
+
+  return null;
+}
+
+function openArtifactPanel(artifact) {
+  // Show the artifact in a side panel (or overlay on mobile)
+  let panel = document.getElementById('artifact-panel');
+  if (!panel) {
+    panel = document.createElement('div');
+    panel.id = 'artifact-panel';
+    panel.className = 'artifact-panel';
+    panel.innerHTML = `
+      <div class="artifact-header">
+        <div class="artifact-title-area">
+          <span class="artifact-type-icon"></span>
+          <span class="artifact-title"></span>
+        </div>
+        <div class="artifact-actions">
+          <button onclick="copyArtifact()" title="Copy">📋</button>
+          <button onclick="downloadArtifact()" title="Download">💾</button>
+          <button onclick="closeArtifactPanel()" title="Close">✕</button>
+        </div>
+      </div>
+      <div class="artifact-content" id="artifact-content"></div>
+    `;
+    // Insert next to main content
+    document.querySelector('.main-content').appendChild(panel);
+  }
+
+  const icons = { document: '📄', code: '💻', table: '📊', list: '📋' };
+  panel.querySelector('.artifact-type-icon').textContent = icons[artifact.type] || '📄';
+  panel.querySelector('.artifact-title').textContent = artifact.title;
+
+  const contentEl = panel.querySelector('#artifact-content');
+
+  if (artifact.type === 'code') {
+    contentEl.innerHTML = `<pre class="artifact-code"><code>${escapeHtml(artifact.content)}</code></pre>`;
+  } else if (artifact.type === 'table') {
+    // Render markdown table as HTML table
+    contentEl.innerHTML = renderMarkdownTable(artifact.content);
+  } else {
+    // Document — render as editable rich text
+    contentEl.innerHTML = `<div class="artifact-document" contenteditable="true">${renderMarkdown(artifact.content)}</div>`;
+  }
+
+  state.currentArtifact = artifact;
+  panel.classList.add('open');
+  document.querySelector('.main-content').classList.add('has-artifact');
+}
+
+function renderMarkdownTable(content) {
+  const lines = content.split('\n').filter(l => l.trim().startsWith('|'));
+  if (lines.length < 2) return '<pre>' + escapeHtml(content) + '</pre>';
+
+  let html = '<table class="artifact-table">';
+  lines.forEach((line, i) => {
+    if (line.includes('---')) return; // separator row
+    const cells = line.split('|').filter(c => c.trim());
+    const tag = i === 0 ? 'th' : 'td';
+    html += '<tr>' + cells.map(c => `<${tag}>${escapeHtml(c.trim())}</${tag}>`).join('') + '</tr>';
+  });
+  html += '</table>';
+  return html;
+}
+
+function closeArtifactPanel() {
+  const panel = document.getElementById('artifact-panel');
+  if (panel) panel.classList.remove('open');
+  document.querySelector('.main-content').classList.remove('has-artifact');
+  state.currentArtifact = null;
+}
+
+function copyArtifact() {
+  if (!state.currentArtifact) return;
+  navigator.clipboard.writeText(state.currentArtifact.content).then(() => {
+    const btn = document.querySelector('.artifact-actions button');
+    if (btn) { btn.textContent = '✓'; setTimeout(() => btn.textContent = '📋', 1500); }
+  });
+}
+
+function downloadArtifact() {
+  if (!state.currentArtifact) return;
+  const a = state.currentArtifact;
+  const ext = a.type === 'code' ? '.txt' : a.type === 'table' ? '.csv' : '.md';
+  let content = a.content;
+  if (a.type === 'table') {
+    // Convert to CSV
+    const lines = content.split('\n').filter(l => l.includes('|') && !l.includes('---'));
+    content = lines.map(l => l.split('|').filter(c => c.trim()).map(c => '"' + c.trim() + '"').join(',')).join('\n');
+  }
+  const blob = new Blob([content], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = (a.title || 'artifact').replace(/[^a-zA-Z0-9-_ ]/g, '') + ext;
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
+// ─── Custom Agents ──────────────────────────────────────────────────
+
+async function loadAgents() {
+  try {
+    const res = await fetch(`${API}/api/agents`);
+    const data = await res.json();
+    state.agents = data.agents || [];
+    renderAgentSelector();
+  } catch {}
+}
+
+function renderAgentSelector() {
+  const agents = state.agents || [];
+  if (agents.length === 0) return;
+
+  // Add agent selector button next to model selector in header
+  let agentBtn = document.getElementById('agent-selector-btn');
+  if (!agentBtn) {
+    agentBtn = document.createElement('button');
+    agentBtn.id = 'agent-selector-btn';
+    agentBtn.className = 'agent-selector-btn';
+    agentBtn.onclick = openAgentModal;
+    // Insert after model selector
+    const modelSelector = document.getElementById('model-selector');
+    if (modelSelector) modelSelector.parentNode.insertBefore(agentBtn, modelSelector.nextSibling);
+  }
+
+  const active = state.selectedAgent;
+  if (active) {
+    const agent = agents.find(a => a.id === active);
+    agentBtn.innerHTML = `<span>${agent ? agent.icon : '🤖'}</span> ${agent ? agent.name : 'Agent'}`;
+    agentBtn.classList.add('active');
+  } else {
+    agentBtn.innerHTML = '🤖 Agents';
+    agentBtn.classList.remove('active');
+  }
+}
+
+function openAgentModal() {
+  const agents = state.agents || [];
+  let overlay = document.getElementById('agent-modal');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'agent-modal';
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = `<div class="modal" style="max-width:640px;">
+      <div class="modal-header">
+        <h3>🤖 Choose an AI Agent</h3>
+        <button class="modal-close" onclick="closeAgentModal()">✕</button>
+      </div>
+      <div class="modal-body" id="agent-modal-body" style="padding:16px;"></div>
+    </div>`;
+    document.body.appendChild(overlay);
+  }
+
+  let html = `<p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;">Agents are specialized AI assistants trained for specific government departments and tasks.</p>`;
+
+  // "No agent" option (general Ozzy)
+  html += `<div class="agent-card ${!state.selectedAgent ? 'active' : ''}" onclick="selectAgent(null)">
+    <div class="agent-icon">⚡</div>
+    <div class="agent-info">
+      <div class="agent-name">General Ozzy</div>
+      <div class="agent-desc">Default AI assistant — knows everything, no department focus</div>
+    </div>
+  </div>`;
+
+  for (const agent of agents) {
+    html += `<div class="agent-card ${state.selectedAgent === agent.id ? 'active' : ''}" onclick="selectAgent('${agent.id}')">
+      <div class="agent-icon">${agent.icon || '🤖'}</div>
+      <div class="agent-info">
+        <div class="agent-name">${escapeHtml(agent.name)}</div>
+        <div class="agent-desc">${escapeHtml(agent.description || agent.department || '')}</div>
+      </div>
+    </div>`;
+  }
+
+  document.getElementById('agent-modal-body').innerHTML = html;
+  overlay.classList.add('active');
+}
+
+function closeAgentModal() {
+  const el = document.getElementById('agent-modal');
+  if (el) el.classList.remove('active');
+}
+
+function selectAgent(agentId) {
+  state.selectedAgent = agentId;
+  renderAgentSelector();
+  closeAgentModal();
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// Phase 4: Platform Dominance
+// ═══════════════════════════════════════════════════════════════════
+
+// ─── Feature 9: Workflow Automation ─────────────────────────────────
+
+async function openWorkflows() {
+  requireAuth(async () => {
+    let modal = document.getElementById('workflow-modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'workflow-modal';
+      modal.className = 'modal-overlay';
+      modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+      document.body.appendChild(modal);
+    }
+
+    modal.innerHTML = `<div class="modal" style="max-width:700px;">
+      <div class="modal-header">
+        <h3>&#x2699;&#xFE0F; Workflow Automation</h3>
+        <button class="modal-close" onclick="document.getElementById('workflow-modal').classList.remove('active')">&#x2715;</button>
+      </div>
+      <div class="modal-body" id="workflow-modal-body" style="padding:20px;">
+        <div style="text-align:center;padding:20px;color:var(--text-muted);">Loading...</div>
+      </div>
+    </div>`;
+    modal.classList.add('active');
+
+    try {
+      const [templatesRes, workflowsRes] = await Promise.all([
+        fetch(API + '/api/workflows/templates', { headers: authHeaders() }),
+        fetch(API + '/api/workflows', { headers: authHeaders() }),
+      ]);
+      const { templates } = await templatesRes.json();
+      const { workflows } = await workflowsRes.json();
+
+      let html = '<h4 style="margin:0 0 12px;font-size:14px;color:var(--text-primary);">Start New Workflow</h4>';
+      html += '<div class="workflow-templates">';
+      for (const t of templates) {
+        html += `<button class="workflow-template-card" onclick="startWorkflow('${t.id}', '${escapeHtml(t.name)}')">
+          <div class="wf-name">${escapeHtml(t.name)}</div>
+          <div class="wf-desc">${escapeHtml(t.description)}</div>
+          <div class="wf-steps">${t.steps.length} steps</div>
+        </button>`;
+      }
+      html += '</div>';
+
+      if (workflows.length > 0) {
+        html += '<h4 style="margin:20px 0 12px;font-size:14px;color:var(--text-primary);">Recent Workflows</h4>';
+        html += '<div class="workflow-list">';
+        for (const w of workflows.slice(0, 10)) {
+          const statusIcon = w.status === 'completed' ? '&#x2705;' : w.status === 'in_progress' ? '&#x1F504;' : '&#x1F4DD;';
+          html += `<div class="workflow-item" onclick="openWorkflowDetail('${w.id}')">
+            <span>${statusIcon}</span>
+            <span class="wf-item-name">${escapeHtml(w.name)}</span>
+            <span class="wf-item-status">${w.status}</span>
+          </div>`;
+        }
+        html += '</div>';
+      }
+
+      document.getElementById('workflow-modal-body').innerHTML = html;
+    } catch {
+      document.getElementById('workflow-modal-body').innerHTML = '<p style="color:var(--red-error-text);">Failed to load workflows.</p>';
+    }
+  });
+}
+
+async function startWorkflow(templateId, name) {
+  try {
+    const res = await fetch(API + '/api/workflows', {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify({ templateId, name }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    openWorkflowWizard(data.id, data.steps, data.name, 0);
+  } catch (err) {
+    alert(err.message || 'Failed to start workflow');
+  }
+}
+
+async function openWorkflowDetail(workflowId) {
+  try {
+    const res = await fetch(API + '/api/workflows/' + workflowId, { headers: authHeaders() });
+    const { workflow } = await res.json();
+    const steps = JSON.parse(workflow.steps || '[]');
+
+    if (workflow.status === 'completed' && workflow.output) {
+      // Show in artifact panel
+      const artifact = { type: 'document', title: workflow.name, content: workflow.output };
+      openArtifactPanel(artifact);
+      document.getElementById('workflow-modal').classList.remove('active');
+    } else {
+      openWorkflowWizard(workflowId, steps, workflow.name, workflow.current_step);
+    }
+  } catch {
+    alert('Failed to load workflow');
+  }
+}
+
+function openWorkflowWizard(workflowId, steps, name, currentStep) {
+  const body = document.getElementById('workflow-modal-body');
+  renderWorkflowStep(body, workflowId, steps, name, currentStep);
+}
+
+function renderWorkflowStep(container, workflowId, steps, name, stepIndex) {
+  const step = steps[stepIndex];
+  if (!step) return;
+
+  const progress = ((stepIndex) / steps.length * 100).toFixed(0);
+
+  let html = `<div class="workflow-wizard">
+    <div class="wf-progress"><div class="wf-progress-bar" style="width:${progress}%"></div></div>
+    <div class="wf-step-indicator">Step ${stepIndex + 1} of ${steps.length}: <strong>${escapeHtml(step.name)}</strong></div>
+    <div class="wf-step-dots">${steps.map((s, i) => `<span class="wf-dot ${i < stepIndex ? 'done' : i === stepIndex ? 'current' : ''}">${i + 1}</span>`).join('')}</div>
+    <textarea id="wf-step-input" class="wf-input" rows="6" placeholder="Enter details for: ${escapeHtml(step.name)}...">${escapeHtml(step.input || '')}</textarea>
+    <div id="wf-hint" class="wf-hint"></div>
+    <div class="wf-actions">
+      ${stepIndex > 0 ? `<button class="btn-template-picker" onclick="renderWorkflowStep(document.getElementById('workflow-modal-body'), '${workflowId}', ${JSON.stringify(steps).replace(/'/g, "\\'")},'${escapeHtml(name)}', ${stepIndex - 1})">&#x2190; Back</button>` : '<div></div>'}
+      <button class="btn-auth" id="wf-next-btn" onclick="submitWorkflowStep('${workflowId}', ${stepIndex}, '${escapeHtml(name)}')" style="min-width:120px;">
+        ${stepIndex === steps.length - 1 ? 'Generate &#x2192;' : 'Next &#x2192;'}
+      </button>
+    </div>
+  </div>`;
+
+  container.innerHTML = html;
+}
+
+async function submitWorkflowStep(workflowId, stepIndex, name) {
+  const input = document.getElementById('wf-step-input').value.trim();
+  if (!input) { alert('Please fill in this step before continuing.'); return; }
+
+  const btn = document.getElementById('wf-next-btn');
+  btn.disabled = true;
+  btn.textContent = 'Processing...';
+
+  try {
+    const res = await fetch(API + '/api/workflows/' + workflowId + '/step', {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify({ stepIndex, input }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    if (data.completed) {
+      // Show output in artifact panel
+      document.getElementById('workflow-modal').classList.remove('active');
+      const artifact = { type: 'document', title: name, content: data.output };
+      openArtifactPanel(artifact);
+    } else {
+      // Load next step
+      const wfRes = await fetch(API + '/api/workflows/' + workflowId, { headers: authHeaders() });
+      const { workflow } = await wfRes.json();
+      const steps = JSON.parse(workflow.steps || '[]');
+      const body = document.getElementById('workflow-modal-body');
+      renderWorkflowStep(body, workflowId, steps, name, stepIndex + 1);
+
+      if (data.nextHint) {
+        const hint = document.getElementById('wf-hint');
+        if (hint) hint.innerHTML = '<strong>Tip:</strong> ' + escapeHtml(data.nextHint);
+      }
+    }
+  } catch (err) {
+    alert(err.message || 'Step submission failed');
+    btn.disabled = false;
+    btn.textContent = 'Next &#x2192;';
+  }
+}
+
+// ─── Feature 10: AI Meeting Assistant ───────────────────────────────
+
+function openMeetingAssistant() {
+  requireAuth(async () => {
+    let modal = document.getElementById('meeting-modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'meeting-modal';
+      modal.className = 'modal-overlay';
+      modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+      document.body.appendChild(modal);
+    }
+
+    modal.innerHTML = `<div class="modal" style="max-width:700px;">
+      <div class="modal-header">
+        <h3>&#x1F3A4; Meeting Assistant</h3>
+        <button class="modal-close" onclick="document.getElementById('meeting-modal').classList.remove('active')">&#x2715;</button>
+      </div>
+      <div class="modal-body" id="meeting-modal-body" style="padding:20px;"></div>
+    </div>`;
+
+    // Load meetings
+    let meetingsHtml = `<div class="meeting-upload-area" id="meeting-upload-area">
+      <div style="text-align:center;padding:30px 20px;border:2px dashed var(--border-color);border-radius:var(--radius);cursor:pointer;" onclick="document.getElementById('meeting-audio-input').click()">
+        <div style="font-size:40px;margin-bottom:8px;">&#x1F399;&#xFE0F;</div>
+        <p style="font-size:14px;color:var(--text-primary);font-weight:600;">Upload Meeting Recording</p>
+        <p style="font-size:12px;color:var(--text-muted);">MP3, WAV, M4A, OGG — Max 25MB</p>
+        <input type="file" id="meeting-audio-input" accept="audio/*" style="display:none;" onchange="uploadMeetingAudio(this.files[0])" />
+      </div>
+    </div>`;
+
+    meetingsHtml += '<div id="meeting-list-area" style="margin-top:20px;"></div>';
+    document.getElementById('meeting-modal-body').innerHTML = meetingsHtml;
+    modal.classList.add('active');
+
+    // Load existing meetings
+    try {
+      const res = await fetch(API + '/api/meetings', { headers: authHeaders() });
+      const { meetings } = await res.json();
+      if (meetings.length > 0) {
+        let listHtml = '<h4 style="font-size:14px;margin:0 0 12px;">Previous Meetings</h4>';
+        for (const m of meetings) {
+          const icon = m.status === 'completed' ? '&#x2705;' : m.status === 'transcribed' ? '&#x1F4DD;' : '&#x23F3;';
+          listHtml += `<div class="meeting-item" onclick="openMeetingDetail('${m.id}')">
+            <span>${icon}</span>
+            <span class="meeting-item-title">${escapeHtml(m.title)}</span>
+            <span class="meeting-item-date">${new Date(m.created_at).toLocaleDateString()}</span>
+          </div>`;
+        }
+        document.getElementById('meeting-list-area').innerHTML = listHtml;
+      }
+    } catch {}
+  });
+}
+
+async function uploadMeetingAudio(file) {
+  if (!file) return;
+  if (file.size > 25 * 1024 * 1024) { alert('Audio file must be under 25MB'); return; }
+
+  const area = document.getElementById('meeting-upload-area');
+  area.innerHTML = '<div style="text-align:center;padding:30px;"><div class="typing-indicator"><span></span><span></span><span></span></div><p style="margin-top:12px;color:var(--text-muted);">Transcribing audio... This may take a moment.</p></div>';
+
+  const title = prompt('Meeting title:', file.name.replace(/\.[^.]+$/, '')) || file.name;
+
+  try {
+    const formData = new FormData();
+    formData.append('audio', file);
+    formData.append('title', title);
+
+    const res = await fetch(API + '/api/meetings/upload', {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + state.token },
+      body: formData,
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      if (err.code === 'TIER_REQUIRED') {
+        area.innerHTML = '<div style="text-align:center;padding:20px;"><p style="color:var(--text-secondary);">Meeting Assistant requires a Professional plan.</p><button class="btn-auth" onclick="openPricingModal()" style="margin-top:12px;">View Plans</button></div>';
+        return;
+      }
+      throw new Error(err.error);
+    }
+
+    const data = await res.json();
+    area.innerHTML = `<div style="padding:16px;background:var(--bg-tertiary);border-radius:var(--radius);margin-bottom:12px;">
+      <h4 style="margin:0 0 8px;">&#x2705; Transcription Complete</h4>
+      <div style="max-height:200px;overflow-y:auto;font-size:13px;color:var(--text-secondary);line-height:1.6;padding:12px;background:var(--bg-primary);border-radius:var(--radius-sm);">${escapeHtml(data.transcript.substring(0, 2000))}${data.transcript.length > 2000 ? '...' : ''}</div>
+      <button class="btn-auth" onclick="generateMinutes('${data.meetingId}')" style="margin-top:12px;width:100%;">Generate Meeting Minutes</button>
+    </div>`;
+  } catch (err) {
+    area.innerHTML = `<div style="color:var(--red-error-text);padding:20px;text-align:center;">${escapeHtml(err.message)}</div>`;
+  }
+}
+
+async function generateMinutes(meetingId) {
+  const area = document.getElementById('meeting-upload-area');
+  area.innerHTML = '<div style="text-align:center;padding:30px;"><div class="typing-indicator"><span></span><span></span><span></span></div><p style="margin-top:12px;color:var(--text-muted);">Generating minutes and extracting action items...</p></div>';
+
+  try {
+    const res = await fetch(API + '/api/meetings/' + meetingId + '/minutes', {
+      method: 'POST',
+      headers: authHeaders(),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    // Show in artifact panel
+    document.getElementById('meeting-modal').classList.remove('active');
+    const artifact = { type: 'document', title: 'Meeting Minutes', content: data.minutes };
+    openArtifactPanel(artifact);
+
+    // Show action items as a toast
+    if (data.actionItems && data.actionItems.length > 0) {
+      let msg = '**Meeting Minutes Generated**\n\n**Action Items:**\n';
+      data.actionItems.forEach((a, i) => {
+        msg += `${i + 1}. ${a.action} — *${a.assignee || 'TBD'}* (${a.deadline || 'TBD'})\n`;
+      });
+      if (state.activeConversationId) {
+        state.messages.push({ role: 'assistant', content: msg });
+        renderMessages();
+      }
+    }
+  } catch (err) {
+    area.innerHTML = `<div style="color:var(--red-error-text);padding:20px;">${escapeHtml(err.message)}</div>`;
+  }
+}
+
+async function openMeetingDetail(meetingId) {
+  try {
+    const res = await fetch(API + '/api/meetings/' + meetingId, { headers: authHeaders() });
+    const { meeting } = await res.json();
+
+    if (meeting.minutes) {
+      document.getElementById('meeting-modal').classList.remove('active');
+      const artifact = { type: 'document', title: meeting.title + ' — Minutes', content: meeting.minutes };
+      openArtifactPanel(artifact);
+    } else if (meeting.transcript) {
+      document.getElementById('meeting-upload-area').innerHTML = `
+        <div style="padding:16px;background:var(--bg-tertiary);border-radius:var(--radius);">
+          <h4 style="margin:0 0 8px;">${escapeHtml(meeting.title)}</h4>
+          <div style="max-height:200px;overflow-y:auto;font-size:13px;color:var(--text-secondary);line-height:1.6;padding:12px;background:var(--bg-primary);border-radius:var(--radius-sm);">${escapeHtml(meeting.transcript.substring(0, 2000))}</div>
+          <button class="btn-auth" onclick="generateMinutes('${meetingId}')" style="margin-top:12px;width:100%;">Generate Meeting Minutes</button>
+        </div>`;
+    }
+  } catch {
+    alert('Failed to load meeting');
+  }
+}
+
+// ─── Feature 11: Collaborative Spaces ───────────────────────────────
+
+async function openSpaces() {
+  requireAuth(async () => {
+    let modal = document.getElementById('spaces-modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'spaces-modal';
+      modal.className = 'modal-overlay';
+      modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+      document.body.appendChild(modal);
+    }
+
+    modal.innerHTML = `<div class="modal" style="max-width:700px;">
+      <div class="modal-header">
+        <div><h3>&#x1F465; Collaborative Spaces</h3><p style="font-size:12px;color:var(--text-muted);margin:2px 0 0;">Share conversations and collaborate across departments</p></div>
+        <button class="modal-close" onclick="document.getElementById('spaces-modal').classList.remove('active')">&#x2715;</button>
+      </div>
+      <div class="modal-body" id="spaces-modal-body" style="padding:20px;">
+        <div style="text-align:center;padding:20px;color:var(--text-muted);">Loading...</div>
+      </div>
+    </div>`;
+    modal.classList.add('active');
+
+    try {
+      const res = await fetch(API + '/api/spaces', { headers: authHeaders() });
+      const { spaces } = await res.json();
+
+      let html = `<button class="btn-auth" onclick="createSpaceForm()" style="margin-bottom:16px;">+ Create New Space</button>`;
+      html += '<div id="create-space-area"></div>';
+
+      if (spaces.length === 0) {
+        html += '<div style="text-align:center;padding:30px;color:var(--text-muted);"><p>No spaces yet. Create one to start collaborating!</p></div>';
+      } else {
+        html += '<div class="spaces-list">';
+        for (const s of spaces) {
+          html += `<div class="space-card" onclick="openSpaceDetail('${s.id}')">
+            <div class="space-card-header">
+              <span class="space-name">${escapeHtml(s.name)}</span>
+              <span class="space-role">${s.role}</span>
+            </div>
+            <div class="space-card-meta">${s.member_count} members &middot; ${s.conversation_count} conversations</div>
+            ${s.description ? `<div class="space-desc">${escapeHtml(s.description)}</div>` : ''}
+          </div>`;
+        }
+        html += '</div>';
+      }
+
+      document.getElementById('spaces-modal-body').innerHTML = html;
+    } catch {
+      document.getElementById('spaces-modal-body').innerHTML = '<p style="color:var(--red-error-text);">Failed to load spaces.</p>';
+    }
+  });
+}
+
+function createSpaceForm() {
+  const area = document.getElementById('create-space-area');
+  area.innerHTML = `<div style="padding:16px;background:var(--bg-tertiary);border-radius:var(--radius);margin-bottom:16px;">
+    <div class="form-group"><label>Space Name</label><input type="text" id="new-space-name" placeholder="e.g. Budget Committee 2025" /></div>
+    <div class="form-group"><label>Description</label><input type="text" id="new-space-desc" placeholder="Brief description (optional)" /></div>
+    <div style="display:flex;gap:8px;"><button class="btn-auth" onclick="createSpace()">Create</button><button class="btn-template-picker" onclick="document.getElementById('create-space-area').innerHTML=''">Cancel</button></div>
+  </div>`;
+}
+
+async function createSpace() {
+  const name = document.getElementById('new-space-name').value.trim();
+  const description = document.getElementById('new-space-desc').value.trim();
+  if (!name) { alert('Space name is required'); return; }
+
+  try {
+    const res = await fetch(API + '/api/spaces', {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify({ name, description }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      if (data.code === 'TIER_REQUIRED') { openPricingModal(); return; }
+      throw new Error(data.error);
+    }
+    openSpaces(); // refresh
+  } catch (err) {
+    alert(err.message || 'Failed to create space');
+  }
+}
+
+async function openSpaceDetail(spaceId) {
+  try {
+    const res = await fetch(API + '/api/spaces/' + spaceId, { headers: authHeaders() });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    const body = document.getElementById('spaces-modal-body');
+    let html = `<button class="btn-template-picker" onclick="openSpaces()" style="margin-bottom:16px;">&#x2190; Back to Spaces</button>`;
+    html += `<h3 style="margin:0 0 4px;">${escapeHtml(data.space.name)}</h3>`;
+    if (data.space.description) html += `<p style="font-size:13px;color:var(--text-muted);margin:0 0 16px;">${escapeHtml(data.space.description)}</p>`;
+
+    // Members
+    html += `<h4 style="font-size:14px;margin:16px 0 8px;">Members (${data.members.length})</h4>`;
+    html += '<div class="space-members">';
+    for (const m of data.members) {
+      html += `<div class="space-member"><span class="member-name">${escapeHtml(m.full_name)}</span><span class="member-role">${m.role}</span>${m.department ? `<span class="member-dept">${escapeHtml(m.department)}</span>` : ''}</div>`;
+    }
+    html += '</div>';
+
+    if (data.userRole === 'admin') {
+      html += `<div style="margin-top:12px;display:flex;gap:8px;"><input type="email" id="invite-email" placeholder="Email to invite" style="flex:1;padding:8px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:6px;color:var(--text-primary);font-size:13px;" /><button class="btn-auth" onclick="inviteToSpace('${spaceId}')">Invite</button></div>`;
+    }
+
+    // Shared conversations
+    html += `<h4 style="font-size:14px;margin:20px 0 8px;">Shared Conversations (${data.conversations.length})</h4>`;
+    if (data.conversations.length === 0) {
+      html += '<p style="font-size:13px;color:var(--text-muted);">No conversations shared yet. Use the Share button in chat to add one.</p>';
+    } else {
+      for (const conv of data.conversations) {
+        html += `<div class="space-conversation" onclick="loadConversation('${conv.conversation_id}'); document.getElementById('spaces-modal').classList.remove('active');">
+          <span>${escapeHtml(conv.title || 'Untitled')}</span>
+          <span class="space-conv-meta">by ${escapeHtml(conv.shared_by_name)} &middot; ${new Date(conv.shared_at).toLocaleDateString()}</span>
+        </div>`;
+      }
+    }
+
+    // Share conversation button
+    if (state.activeConversationId) {
+      html += `<button class="btn-template-picker" onclick="shareToSpace('${spaceId}')" style="margin-top:12px;">&#x1F517; Share Current Conversation</button>`;
+    }
+
+    body.innerHTML = html;
+  } catch (err) {
+    alert(err.message || 'Failed to load space');
+  }
+}
+
+async function inviteToSpace(spaceId) {
+  const email = document.getElementById('invite-email').value.trim();
+  if (!email) return;
+  try {
+    const res = await fetch(API + '/api/spaces/' + spaceId + '/invite', {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify({ email, role: 'member' }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    document.getElementById('invite-email').value = '';
+    openSpaceDetail(spaceId); // refresh
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+async function shareToSpace(spaceId) {
+  if (!state.activeConversationId) return;
+  try {
+    const res = await fetch(API + '/api/spaces/' + spaceId + '/share-conversation', {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify({ conversationId: state.activeConversationId }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    alert('Conversation shared to space!');
+    openSpaceDetail(spaceId);
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+// ─── Feature 12: Citizen Service Bot ────────────────────────────────
+
+function openCitizenBot() {
+  let widget = document.getElementById('citizen-bot');
+  if (widget) {
+    widget.classList.toggle('active');
+    return;
+  }
+
+  widget = document.createElement('div');
+  widget.id = 'citizen-bot';
+  widget.className = 'citizen-bot active';
+  widget.innerHTML = `
+    <div class="citizen-header">
+      <div class="citizen-title">
+        <span style="font-size:20px;">&#x1F1EC;&#x1F1ED;</span>
+        <div>
+          <strong>Ghana Citizen Services</strong>
+          <div style="font-size:11px;color:var(--text-muted);">Ask about government services</div>
+        </div>
+      </div>
+      <button class="citizen-close" onclick="document.getElementById('citizen-bot').classList.remove('active')">&#x2715;</button>
+    </div>
+    <div class="citizen-messages" id="citizen-messages">
+      <div class="citizen-msg bot">
+        <div class="citizen-msg-content">Welcome! I can help you with pensions, taxes, permits, passports, health insurance, and other government services. How can I assist you today?</div>
+      </div>
+    </div>
+    <div class="citizen-input-area">
+      <select id="citizen-lang" class="citizen-lang-select" onchange="citizenState.language = this.value">
+        <option value="en">English</option>
+        <option value="tw">Twi</option>
+        <option value="ha">Hausa</option>
+        <option value="ee">Ewe</option>
+        <option value="ga">Ga</option>
+        <option value="fr">Fran&#xe7;ais</option>
+      </select>
+      <input type="text" id="citizen-input" placeholder="Ask about government services..." onkeydown="if(event.key==='Enter')sendCitizenMessage()" />
+      <button onclick="sendCitizenMessage()">&#x27A4;</button>
+    </div>`;
+  document.body.appendChild(widget);
+}
+
+const citizenState = { sessionId: null, language: 'en' };
+
+async function sendCitizenMessage() {
+  const input = document.getElementById('citizen-input');
+  const message = input.value.trim();
+  if (!message) return;
+
+  input.value = '';
+  const container = document.getElementById('citizen-messages');
+
+  // Add user message
+  const userDiv = document.createElement('div');
+  userDiv.className = 'citizen-msg user';
+  userDiv.innerHTML = `<div class="citizen-msg-content">${escapeHtml(message)}</div>`;
+  container.appendChild(userDiv);
+  container.scrollTop = container.scrollHeight;
+
+  // Typing indicator
+  const typingDiv = document.createElement('div');
+  typingDiv.className = 'citizen-msg bot';
+  typingDiv.innerHTML = '<div class="citizen-msg-content"><div class="typing-indicator"><span></span><span></span><span></span></div></div>';
+  container.appendChild(typingDiv);
+  container.scrollTop = container.scrollHeight;
+
+  try {
+    const res = await fetch(API + '/api/citizen/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sessionId: citizenState.sessionId, message, language: citizenState.language }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    citizenState.sessionId = data.sessionId;
+    typingDiv.remove();
+
+    const botDiv = document.createElement('div');
+    botDiv.className = 'citizen-msg bot';
+    botDiv.innerHTML = `<div class="citizen-msg-content">${renderMarkdown(data.response)}</div>`;
+    container.appendChild(botDiv);
+    container.scrollTop = container.scrollHeight;
+  } catch (err) {
+    typingDiv.remove();
+    const errDiv = document.createElement('div');
+    errDiv.className = 'citizen-msg bot';
+    errDiv.innerHTML = `<div class="citizen-msg-content" style="color:var(--red-error-text);">Sorry, I am temporarily unavailable. Please try again.</div>`;
+    container.appendChild(errDiv);
+  }
 }

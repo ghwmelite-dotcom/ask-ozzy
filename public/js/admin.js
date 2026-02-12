@@ -159,6 +159,7 @@ function switchTab(tab) {
     knowledge: loadKnowledgeTab,
     "bulk-import": () => {},  // No auto-load needed
     "document-training": loadTrainingStatus,
+    "agents": loadAgentsList,
   };
   if (loaders[tab]) loaders[tab]();
 }
@@ -1782,6 +1783,133 @@ async function trainFromURLs() {
   } catch (e) {
     resultEl.innerHTML = '<span class="msg-error">Network error: ' + escapeHtml(e.message || "Failed to connect") + '</span>';
   }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  TAB: AI Agents Management
+// ═══════════════════════════════════════════════════════════════════
+
+async function loadAgentsList() {
+  var el = document.getElementById("agents-list-content");
+  if (!el) return;
+  el.innerHTML = '<div class="admin-loader"><div class="spinner"></div></div>';
+
+  try {
+    var res = await apiFetch("/api/admin/agents");
+    var data = await res.json();
+    var agents = data.agents || [];
+
+    if (agents.length === 0) {
+      el.innerHTML = '<div class="admin-empty">No agents created yet. Click "+ New Agent" to create your first department agent.</div>';
+      return;
+    }
+
+    var html = '<div class="admin-table-wrapper"><table class="admin-table"><thead><tr>' +
+      '<th>Icon</th><th>Name</th><th>Department</th><th>Category</th><th>Status</th><th>Created</th><th>Actions</th>' +
+      '</tr></thead><tbody>';
+
+    for (var i = 0; i < agents.length; i++) {
+      var a = agents[i];
+      html += '<tr>' +
+        '<td style="font-size:24px;text-align:center;">' + (a.icon || '🤖') + '</td>' +
+        '<td><strong>' + escapeHtml(a.name) + '</strong><br><span style="font-size:11px;color:var(--text-muted);">' + escapeHtml(a.description || '').substring(0, 60) + '</span></td>' +
+        '<td>' + escapeHtml(a.department || '—') + '</td>' +
+        '<td>' + escapeHtml(a.knowledge_category || 'All') + '</td>' +
+        '<td>' + (a.active ? '<span style="color:var(--green-light);font-weight:600;">Active</span>' : '<span style="color:var(--text-muted);">Inactive</span>') + '</td>' +
+        '<td>' + formatDateShort(a.created_at) + '</td>' +
+        '<td style="white-space:nowrap;">' +
+          '<button class="btn-action" onclick="editAgent(\'' + a.id + '\')" style="font-size:11px;padding:4px 10px;">Edit</button> ' +
+          '<button class="btn-action" onclick="toggleAgentActive(\'' + a.id + '\',' + (a.active ? 'false' : 'true') + ')" style="font-size:11px;padding:4px 10px;">' + (a.active ? 'Disable' : 'Enable') + '</button> ' +
+          '<button class="btn-action" onclick="deleteAgent(\'' + a.id + '\')" style="font-size:11px;padding:4px 10px;color:var(--red);">Delete</button>' +
+        '</td></tr>';
+    }
+
+    html += '</tbody></table></div>';
+    el.innerHTML = html;
+  } catch {
+    el.innerHTML = '<div class="admin-empty">Failed to load agents</div>';
+  }
+}
+
+function openAgentForm(agentData) {
+  document.getElementById("agent-form-card").style.display = "block";
+  document.getElementById("agent-form-title").textContent = agentData ? "Edit Agent" : "Create New Agent";
+  document.getElementById("agent-form-id").value = agentData ? agentData.id : "";
+  document.getElementById("agent-icon").value = agentData ? (agentData.icon || "🤖") : "🤖";
+  document.getElementById("agent-name").value = agentData ? agentData.name : "";
+  document.getElementById("agent-description").value = agentData ? (agentData.description || "") : "";
+  document.getElementById("agent-department").value = agentData ? (agentData.department || "") : "";
+  document.getElementById("agent-knowledge-cat").value = agentData ? (agentData.knowledge_category || "") : "";
+  document.getElementById("agent-system-prompt").value = agentData ? agentData.system_prompt : "";
+  document.getElementById("agent-form-result").textContent = "";
+  document.getElementById("agent-form-card").scrollIntoView({ behavior: "smooth" });
+}
+
+function cancelAgentForm() {
+  document.getElementById("agent-form-card").style.display = "none";
+}
+
+async function saveAgent() {
+  var id = document.getElementById("agent-form-id").value;
+  var body = {
+    icon: document.getElementById("agent-icon").value.trim() || "🤖",
+    name: document.getElementById("agent-name").value.trim(),
+    description: document.getElementById("agent-description").value.trim(),
+    department: document.getElementById("agent-department").value.trim(),
+    knowledge_category: document.getElementById("agent-knowledge-cat").value || null,
+    system_prompt: document.getElementById("agent-system-prompt").value.trim(),
+  };
+
+  var resultEl = document.getElementById("agent-form-result");
+
+  if (!body.name) { resultEl.innerHTML = '<span class="msg-error">Name is required</span>'; return; }
+  if (!body.system_prompt) { resultEl.innerHTML = '<span class="msg-error">System prompt is required</span>'; return; }
+
+  resultEl.innerHTML = '<span style="color:var(--gold);">Saving...</span>';
+
+  try {
+    var url = id ? "/api/admin/agents/" + id : "/api/admin/agents";
+    var method = id ? "PATCH" : "POST";
+    var res = await apiFetch(url, { method: method, body: JSON.stringify(body) });
+    var data = await res.json();
+
+    if (!res.ok) {
+      resultEl.innerHTML = '<span class="msg-error">' + escapeHtml(data.error || "Failed to save") + '</span>';
+    } else {
+      resultEl.innerHTML = '<span class="msg-success">Agent saved!</span>';
+      cancelAgentForm();
+      loadAgentsList();
+    }
+  } catch {
+    resultEl.innerHTML = '<span class="msg-error">Network error</span>';
+  }
+}
+
+async function editAgent(id) {
+  try {
+    var res = await apiFetch("/api/admin/agents");
+    var data = await res.json();
+    var agent = (data.agents || []).find(function(a) { return a.id === id; });
+    if (agent) openAgentForm(agent);
+  } catch {}
+}
+
+async function toggleAgentActive(id, active) {
+  try {
+    await apiFetch("/api/admin/agents/" + id, {
+      method: "PATCH",
+      body: JSON.stringify({ active: active ? 1 : 0 }),
+    });
+    loadAgentsList();
+  } catch {}
+}
+
+async function deleteAgent(id) {
+  if (!confirm("Delete this agent? This cannot be undone.")) return;
+  try {
+    await apiFetch("/api/admin/agents/" + id, { method: "DELETE" });
+    loadAgentsList();
+  } catch {}
 }
 
 // ─── Init ───────────────────────────────────────────────────────────

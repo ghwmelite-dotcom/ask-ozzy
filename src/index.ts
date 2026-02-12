@@ -321,7 +321,7 @@ app.get("/api/conversations", authMiddleware, async (c) => {
   const userId = c.get("userId");
 
   const { results } = await c.env.DB.prepare(
-    "SELECT id, title, template_id, model, folder_id, pinned, created_at, updated_at FROM conversations WHERE user_id = ? ORDER BY pinned DESC, updated_at DESC LIMIT 50"
+    "SELECT id, title, template_id, model, folder_id, pinned, agent_id, created_at, updated_at FROM conversations WHERE user_id = ? ORDER BY pinned DESC, updated_at DESC LIMIT 50"
   )
     .bind(userId)
     .all();
@@ -331,22 +331,23 @@ app.get("/api/conversations", authMiddleware, async (c) => {
 
 app.post("/api/conversations", authMiddleware, async (c) => {
   const userId = c.get("userId");
-  const { title, templateId, model } = await c.req.json();
+  const { title, templateId, model, agentId } = await c.req.json();
   const convoId = generateId();
 
   await c.env.DB.prepare(
-    "INSERT INTO conversations (id, user_id, title, template_id, model) VALUES (?, ?, ?, ?, ?)"
+    "INSERT INTO conversations (id, user_id, title, template_id, model, agent_id) VALUES (?, ?, ?, ?, ?, ?)"
   )
     .bind(
       convoId,
       userId,
       title || "New Conversation",
       templateId || null,
-      model || "@cf/meta/llama-4-scout-17b-16e-instruct"
+      model || "@cf/meta/llama-4-scout-17b-16e-instruct",
+      agentId || null
     )
     .run();
 
-  return c.json({ id: convoId, title: title || "New Conversation" });
+  return c.json({ id: convoId, title: title || "New Conversation", agentId: agentId || null });
 });
 
 app.delete("/api/conversations/:id", authMiddleware, async (c) => {
@@ -781,6 +782,111 @@ function buildAugmentedPrompt(
   return prompt;
 }
 
+// ─── Web Search ─────────────────────────────────────────────────────
+
+async function webSearch(query: string, maxResults = 5): Promise<Array<{ title: string; url: string; snippet: string }>> {
+  try {
+    const encoded = encodeURIComponent(query);
+    const res = await fetch(`https://html.duckduckgo.com/html/?q=${encoded}`, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (compatible; AskOzzy/1.0)",
+      },
+    });
+    const html = await res.text();
+    const results: Array<{ title: string; url: string; snippet: string }> = [];
+
+    // Parse DuckDuckGo HTML results
+    const resultBlocks = html.split('class="result__body"');
+    for (let i = 1; i < resultBlocks.length && results.length < maxResults; i++) {
+      const block = resultBlocks[i];
+
+      // Extract title
+      const titleMatch = block.match(/class="result__a"[^>]*>([\s\S]*?)<\/a>/);
+      const title = titleMatch ? titleMatch[1].replace(/<[^>]*>/g, '').trim() : '';
+
+      // Extract URL
+      const urlMatch = block.match(/href="([^"]*)"/) || block.match(/class="result__url"[^>]*>([\s\S]*?)<\/a>/);
+      let url = '';
+      if (urlMatch) {
+        url = urlMatch[1].replace(/<[^>]*>/g, '').trim();
+        // DuckDuckGo uses redirect URLs, extract actual URL
+        if (url.includes('uddg=')) {
+          const decoded = decodeURIComponent(url.split('uddg=')[1]?.split('&')[0] || '');
+          url = decoded || url;
+        }
+        if (!url.startsWith('http')) url = 'https://' + url;
+      }
+
+      // Extract snippet
+      const snippetMatch = block.match(/class="result__snippet"[^>]*>([\s\S]*?)<\/a>/) ||
+                           block.match(/class="result__snippet"[^>]*>([\s\S]*?)<\//);
+      const snippet = snippetMatch ? snippetMatch[1].replace(/<[^>]*>/g, '').trim() : '';
+
+      if (title && url) {
+        results.push({ title, url, snippet });
+      }
+    }
+
+    return results;
+  } catch (e) {
+    console.error("Web search failed:", e);
+    return [];
+  }
+}
+
+const WEB_SEARCH_LIMITS: Record<string, number> = {
+  free: 3,
+  starter: 10,
+  professional: -1,
+  enterprise: -1,
+};
+
+async function checkWebSearchLimit(env: Env, userId: string, tier: string): Promise<{ allowed: boolean; used: number; limit: number }> {
+  const limit = WEB_SEARCH_LIMITS[tier] ?? WEB_SEARCH_LIMITS.free;
+  if (limit === -1) return { allowed: true, used: 0, limit: -1 };
+
+  const today = new Date().toISOString().split("T")[0];
+  const kvKey = `websearch:${userId}:${today}`;
+  const current = await env.SESSIONS.get(kvKey);
+  const used = current ? parseInt(current) : 0;
+
+  if (used >= limit) return { allowed: false, used, limit };
+  return { allowed: true, used, limit };
+}
+
+async function incrementWebSearchCount(env: Env, userId: string): Promise<void> {
+  const today = new Date().toISOString().split("T")[0];
+  const kvKey = `websearch:${userId}:${today}`;
+  const current = await env.SESSIONS.get(kvKey);
+  const count = current ? parseInt(current) : 0;
+  await env.SESSIONS.put(kvKey, String(count + 1), { expirationTtl: 86400 });
+}
+
+// POST /api/web-search — standalone web search endpoint
+app.post("/api/web-search", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const { query } = await c.req.json();
+
+  if (!query) return c.json({ error: "query is required" }, 400);
+
+  const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
+    .bind(userId).first<{ tier: string }>();
+  const userTier = user?.tier || "free";
+
+  const wsLimit = await checkWebSearchLimit(c.env, userId, userTier);
+  if (!wsLimit.allowed) {
+    return c.json({
+      error: `Web search limit reached (${wsLimit.limit}/day). Upgrade for unlimited searches.`,
+      code: "WEB_SEARCH_LIMIT",
+    }, 429);
+  }
+
+  const results = await webSearch(query);
+  await incrementWebSearchCount(c.env, userId);
+
+  return c.json({ results });
+});
+
 // ─── Chat (Streaming) ──────────────────────────────────────────────
 
 app.post("/api/chat", authMiddleware, async (c) => {
@@ -792,7 +898,7 @@ app.post("/api/chat", authMiddleware, async (c) => {
     return c.json({ error: "Too many requests. Please slow down.", code: "RATE_LIMITED" }, 429);
   }
 
-  const { conversationId, message, model, systemPrompt } = await c.req.json();
+  const { conversationId, message, model, systemPrompt, agentId, webSearch: webSearchEnabled, language } = await c.req.json();
 
   if (!conversationId || !message) {
     return c.json({ error: "conversationId and message are required" }, 400);
@@ -855,9 +961,79 @@ app.post("/api/chat", authMiddleware, async (c) => {
 
   const messages: Array<{ role: string; content: string }> = [];
 
+  // Fetch user memories for personalization
+  let memoryPrefix = "";
+  try {
+    const { results: memories } = await c.env.DB.prepare(
+      "SELECT key, value FROM user_memories WHERE user_id = ? ORDER BY key"
+    ).bind(userId).all<{ key: string; value: string }>();
+    if (memories && memories.length > 0) {
+      memoryPrefix = `## About this user\n${memories.map(m => `- ${m.key}: ${m.value}`).join("\n")}\n\nUse this context to personalize your responses. Reference the user's role, department, and preferences when relevant.\n\n`;
+    }
+  } catch {}
+
+  // Determine base system prompt (agent or default)
+  let baseSystemPrompt = systemPrompt || GOG_SYSTEM_PROMPT;
+  let agentKnowledgeCategory: string | null = null;
+
+  if (agentId) {
+    try {
+      const agent = await c.env.DB.prepare(
+        "SELECT * FROM agents WHERE id = ? AND active = 1"
+      ).bind(agentId).first<{ system_prompt: string; knowledge_category: string | null }>();
+      if (agent) {
+        baseSystemPrompt = agent.system_prompt;
+        if (agent.knowledge_category) {
+          agentKnowledgeCategory = agent.knowledge_category;
+        }
+      }
+    } catch {}
+  }
+
   // RAG: Search knowledge base for relevant context
-  const { ragResults, faqResults } = await searchKnowledge(c.env, message);
-  const augmentedPrompt = buildAugmentedPrompt(systemPrompt || GOG_SYSTEM_PROMPT, ragResults, faqResults);
+  const { ragResults: rawRagResults, faqResults } = await searchKnowledge(c.env, message);
+
+  // If agent has a knowledge_category, filter RAG results to that category
+  let ragResults = rawRagResults;
+  if (agentKnowledgeCategory) {
+    ragResults = rawRagResults.filter(r =>
+      r.source.toLowerCase().includes(agentKnowledgeCategory!.toLowerCase())
+    );
+    // If filtering removed everything, fall back to unfiltered results
+    if (ragResults.length === 0) ragResults = rawRagResults;
+  }
+
+  // Web search: if enabled, search the web and inject results as numbered citations
+  let webSearchResults: Array<{ title: string; url: string; snippet: string }> = [];
+  const actualMessage = message.startsWith("@web ") ? message.slice(5) : message;
+  const shouldWebSearch = webSearchEnabled || message.startsWith("@web ");
+
+  if (shouldWebSearch) {
+    try {
+      const wsLimit = await checkWebSearchLimit(c.env, userId, userTier);
+      if (wsLimit.allowed) {
+        webSearchResults = await webSearch(actualMessage, 5);
+        await incrementWebSearchCount(c.env, userId);
+      }
+    } catch {}
+  }
+
+  let augmentedPrompt = memoryPrefix + buildAugmentedPrompt(baseSystemPrompt, ragResults, faqResults);
+
+  if (webSearchResults.length > 0) {
+    augmentedPrompt += '\n\n--- REAL-TIME WEB SEARCH RESULTS ---\n';
+    augmentedPrompt += 'The following are live search results from the web. Use them to provide up-to-date answers. ALWAYS cite sources using numbered references like [1], [2], etc.\n\n';
+    webSearchResults.forEach((r, i) => {
+      augmentedPrompt += `[${i + 1}] ${r.title}\nURL: ${r.url}\n${r.snippet}\n\n`;
+    });
+    augmentedPrompt += '---\nIMPORTANT: When referencing information from web results, cite the source number (e.g., [1], [2]). At the end of your response, list all cited sources in a "Sources:" section.\n';
+  }
+
+  // Language support: instruct AI to respond in target language
+  if (language && language !== "en" && SUPPORTED_LANGUAGES[language]) {
+    const langName = SUPPORTED_LANGUAGES[language].name;
+    augmentedPrompt += `\n\nIMPORTANT: The user has selected ${langName} as their language. You MUST respond entirely in ${langName}. If you cannot write fluently in ${langName}, do your best to provide a helpful response in ${langName}, mixing with English only when absolutely necessary for technical terms.`;
+  }
 
   messages.push({ role: "system", content: augmentedPrompt });
 
@@ -887,6 +1063,11 @@ app.post("/api/chat", authMiddleware, async (c) => {
       const decoder = new TextDecoder();
 
       try {
+        // Send web search sources as a custom SSE event before AI response
+        if (webSearchResults.length > 0) {
+          await writer.write(encoder.encode(`event: sources\ndata: ${JSON.stringify(webSearchResults)}\n\n`));
+        }
+
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
@@ -966,6 +1147,49 @@ app.post("/api/chat", authMiddleware, async (c) => {
               .bind(conversationId)
               .run();
           }
+
+          // Auto-detect memories from user message
+          try {
+            const memoryCount = await c.env.DB.prepare(
+              "SELECT COUNT(*) as count FROM user_memories WHERE user_id = ?"
+            ).bind(userId).first<{ count: number }>();
+
+            if (memoryCount && memoryCount.count < 20) {
+              const extractResponse = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels, {
+                messages: [
+                  {
+                    role: "system",
+                    content: `Extract any personal/professional facts from this message. Return JSON array of {key, value} pairs or empty array []. Examples: {"key": "department", "value": "Ministry of Finance"}, {"key": "role", "value": "Procurement Officer"}. Only extract clear, explicit facts. Return ONLY the JSON array, nothing else.`,
+                  },
+                  {
+                    role: "user",
+                    content: message.substring(0, 1000),
+                  },
+                ],
+                max_tokens: 300,
+              });
+
+              const extractRaw = (extractResponse as any)?.response || "";
+              try {
+                const arrayMatch = extractRaw.match(/\[[\s\S]*?\]/);
+                if (arrayMatch) {
+                  const facts = JSON.parse(arrayMatch[0]);
+                  if (Array.isArray(facts)) {
+                    for (const fact of facts.slice(0, 5)) {
+                      if (fact.key && fact.value && typeof fact.key === "string" && typeof fact.value === "string") {
+                        const memId = generateId();
+                        await c.env.DB.prepare(
+                          `INSERT INTO user_memories (id, user_id, key, value, type)
+                           VALUES (?, ?, ?, ?, 'auto')
+                           ON CONFLICT(user_id, key) DO UPDATE SET value = ?, type = 'auto', updated_at = datetime('now')`
+                        ).bind(memId, userId, fact.key.substring(0, 100), fact.value.substring(0, 500), fact.value.substring(0, 500)).run();
+                      }
+                    }
+                  }
+                }
+              } catch {}
+            }
+          } catch {}
         }
       }
     })()
@@ -978,6 +1202,586 @@ app.post("/api/chat", authMiddleware, async (c) => {
       Connection: "keep-alive",
     },
   });
+});
+
+// ─── Deep Research Mode ─────────────────────────────────────────────
+
+app.post("/api/research", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const { query, conversationId } = await c.req.json();
+
+  if (!query || !conversationId) {
+    return c.json({ error: "query and conversationId are required" }, 400);
+  }
+
+  // Tier gate: Professional+ only
+  const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
+    .bind(userId).first<{ tier: string }>();
+  const userTier = user?.tier || "free";
+  if (userTier === "free" || userTier === "starter") {
+    return c.json({ error: "Deep Research requires a Professional or Enterprise plan.", code: "TIER_REQUIRED" }, 403);
+  }
+
+  const reportId = generateId();
+
+  // Create report record
+  await c.env.DB.prepare(
+    "INSERT INTO research_reports (id, user_id, conversation_id, query) VALUES (?, ?, ?, ?)"
+  ).bind(reportId, userId, conversationId, query).run();
+
+  // SSE stream for real-time progress
+  const { readable, writable } = new TransformStream();
+  const writer = writable.getWriter();
+  const encoder = new TextEncoder();
+
+  const sendEvent = async (event: string, data: any) => {
+    await writer.write(encoder.encode(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`));
+  };
+
+  c.executionCtx.waitUntil(
+    (async () => {
+      let allSources: Array<{ title: string; url: string; snippet: string }> = [];
+      let report = "";
+
+      try {
+        // ── Step 1: Query Analysis ──
+        await sendEvent("research:step", { step: 1, total: 5, description: "Analysing research question..." });
+
+        const analysisResponse = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels, {
+          messages: [
+            { role: "system", content: "You are a research assistant. Break down the following research question into 3-5 specific sub-queries that would help comprehensively answer it. Return ONLY a JSON array of strings, nothing else. Example: [\"sub-query 1\", \"sub-query 2\", \"sub-query 3\"]" },
+            { role: "user", content: query },
+          ],
+          max_tokens: 512,
+        });
+        const analysisText = (analysisResponse as any).response || JSON.stringify([query]);
+        let subQueries: string[];
+        try {
+          const jsonMatch = analysisText.match(/\[[\s\S]*?\]/);
+          subQueries = jsonMatch ? JSON.parse(jsonMatch[0]) : [query];
+        } catch {
+          subQueries = [query];
+        }
+        subQueries = subQueries.slice(0, 5);
+
+        await c.env.DB.prepare("UPDATE research_reports SET steps_completed = 1 WHERE id = ?").bind(reportId).run();
+
+        // ── Step 2: Knowledge Base Search ──
+        await sendEvent("research:step", { step: 2, total: 5, description: "Searching knowledge base..." });
+
+        let kbContext = "";
+        for (const sq of subQueries) {
+          try {
+            const { ragResults, faqResults } = await searchKnowledge(c.env, sq, 3);
+            for (const r of ragResults) {
+              kbContext += `[KB: ${r.source}] ${r.content}\n\n`;
+            }
+            for (const f of faqResults) {
+              kbContext += `[FAQ] Q: ${f.question}\nA: ${f.answer}\n\n`;
+            }
+          } catch {}
+        }
+
+        await c.env.DB.prepare("UPDATE research_reports SET steps_completed = 2 WHERE id = ?").bind(reportId).run();
+
+        // ── Step 3: Web Search ──
+        await sendEvent("research:step", { step: 3, total: 5, description: "Searching the web..." });
+
+        let webContext = "";
+        for (const sq of subQueries) {
+          try {
+            const results = await webSearch(sq, 3);
+            for (const r of results) {
+              const isDuplicate = allSources.some(s => s.url === r.url);
+              if (!isDuplicate) {
+                allSources.push(r);
+                await sendEvent("research:source", { title: r.title, url: r.url });
+              }
+              webContext += `[${allSources.findIndex(s => s.url === r.url) + 1}] ${r.title}\n${r.snippet}\nURL: ${r.url}\n\n`;
+            }
+          } catch {}
+        }
+
+        await c.env.DB.prepare("UPDATE research_reports SET steps_completed = 3 WHERE id = ?").bind(reportId).run();
+
+        // ── Step 4: Synthesis ──
+        await sendEvent("research:step", { step: 4, total: 5, description: "Synthesising findings..." });
+
+        const synthesisPrompt = `You are a senior research analyst for the Government of Ghana. Compile a comprehensive research report on the following topic.
+
+Research Question: ${query}
+
+Sub-queries investigated: ${subQueries.join(", ")}
+
+${kbContext ? `--- KNOWLEDGE BASE FINDINGS ---\n${kbContext}\n` : ""}
+${webContext ? `--- WEB SEARCH FINDINGS ---\n${webContext}\n` : ""}
+
+Write a well-structured research report with:
+1. **Executive Summary** — 2-3 sentence overview
+2. **Key Findings** — Main discoveries organized by theme
+3. **Detailed Analysis** — In-depth discussion with citations [1], [2], etc.
+4. **Recommendations** — Actionable next steps for GoG context
+5. **Sources** — List all cited sources
+
+Use formal British English. Cite web sources using numbered references [1], [2], etc.`;
+
+        const synthesisResponse = await c.env.AI.run("@cf/openai/gpt-oss-20b" as BaseAiTextGenerationModels, {
+          messages: [
+            { role: "system", content: synthesisPrompt },
+            { role: "user", content: `Generate the comprehensive research report for: ${query}` },
+          ],
+          max_tokens: 4096,
+        });
+
+        report = (synthesisResponse as any).response || "Research report generation failed.";
+
+        await c.env.DB.prepare("UPDATE research_reports SET steps_completed = 4 WHERE id = ?").bind(reportId).run();
+
+        // ── Step 5: Finalize ──
+        await sendEvent("research:step", { step: 5, total: 5, description: "Finalising report..." });
+
+        // Save to database
+        await c.env.DB.prepare(
+          "UPDATE research_reports SET status = 'completed', steps_completed = 5, report = ?, sources = ?, completed_at = datetime('now') WHERE id = ?"
+        ).bind(report, JSON.stringify(allSources), reportId).run();
+
+        // Save report as assistant message in conversation
+        const assistantMsgId = generateId();
+        await c.env.DB.prepare(
+          "INSERT INTO messages (id, conversation_id, role, content) VALUES (?, ?, 'assistant', ?)"
+        ).bind(assistantMsgId, conversationId, report).run();
+
+        await sendEvent("research:complete", { reportId, report, sources: allSources });
+      } catch (e) {
+        await c.env.DB.prepare(
+          "UPDATE research_reports SET status = 'failed' WHERE id = ?"
+        ).bind(reportId).run();
+        await sendEvent("research:error", { error: "Research failed. Please try again." });
+      } finally {
+        await writer.close();
+      }
+    })()
+  );
+
+  return new Response(readable, {
+    headers: {
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+      Connection: "keep-alive",
+    },
+  });
+});
+
+// GET /api/research/:id — retrieve saved research report
+app.get("/api/research/:id", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const reportId = c.req.param("id");
+
+  const report = await c.env.DB.prepare(
+    "SELECT * FROM research_reports WHERE id = ? AND user_id = ?"
+  ).bind(reportId, userId).first();
+
+  if (!report) return c.json({ error: "Report not found" }, 404);
+  return c.json({ report });
+});
+
+// ─── Data Analysis Mode ─────────────────────────────────────────────
+
+app.post("/api/analyze", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+
+  // Tier gate: Starter+ only
+  const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
+    .bind(userId).first<{ tier: string }>();
+  const userTier = user?.tier || "free";
+  if (userTier === "free") {
+    return c.json({ error: "Data Analysis requires a Starter plan or above.", code: "TIER_REQUIRED" }, 403);
+  }
+
+  const formData = await c.req.formData();
+  const file = formData.get("file") as File | null;
+  const prompt = (formData.get("prompt") as string) || "Analyze this data and provide insights.";
+
+  if (!file) {
+    return c.json({ error: "A file (CSV or XLSX) is required" }, 400);
+  }
+
+  const fileName = file.name.toLowerCase();
+  let csvText = "";
+
+  if (fileName.endsWith(".csv")) {
+    csvText = await file.text();
+  } else if (fileName.endsWith(".xlsx")) {
+    // Parse XLSX (ZIP archive with XML sheets)
+    try {
+      const arrayBuffer = await file.arrayBuffer();
+      const blob = new Blob([arrayBuffer]);
+      const ds = new DecompressionStream("raw");
+      // XLSX is a ZIP — we need to find shared strings and sheet data
+      // For Workers environment, use a simplified approach: extract sheet1.xml
+      const bytes = new Uint8Array(arrayBuffer);
+      let sheetXml = "";
+      let stringsXml = "";
+
+      // Find ZIP local file headers and extract relevant XML files
+      for (let i = 0; i < bytes.length - 4; i++) {
+        if (bytes[i] === 0x50 && bytes[i + 1] === 0x4b && bytes[i + 2] === 0x03 && bytes[i + 3] === 0x04) {
+          const nameLen = bytes[i + 26] | (bytes[i + 27] << 8);
+          const extraLen = bytes[i + 28] | (bytes[i + 29] << 8);
+          const compMethod = bytes[i + 8] | (bytes[i + 9] << 8);
+          const compSize = bytes[i + 18] | (bytes[i + 19] << 8) | (bytes[i + 20] << 16) | (bytes[i + 21] << 24);
+          const nameBytes = bytes.slice(i + 30, i + 30 + nameLen);
+          const name = new TextDecoder().decode(nameBytes);
+          const dataStart = i + 30 + nameLen + extraLen;
+
+          if (name.includes("sheet1.xml") || name.includes("sharedStrings.xml")) {
+            const compressedData = bytes.slice(dataStart, dataStart + compSize);
+            let text = "";
+            if (compMethod === 0) {
+              text = new TextDecoder().decode(compressedData);
+            } else {
+              try {
+                const ds = new DecompressionStream("raw");
+                const dsWriter = ds.writable.getWriter();
+                dsWriter.write(compressedData);
+                dsWriter.close();
+                const reader = ds.readable.getReader();
+                const chunks: Uint8Array[] = [];
+                while (true) {
+                  const { done, value } = await reader.read();
+                  if (done) break;
+                  chunks.push(value);
+                }
+                const totalLen = chunks.reduce((a, c) => a + c.length, 0);
+                const merged = new Uint8Array(totalLen);
+                let offset = 0;
+                for (const ch of chunks) { merged.set(ch, offset); offset += ch.length; }
+                text = new TextDecoder().decode(merged);
+              } catch {
+                text = new TextDecoder().decode(compressedData);
+              }
+            }
+            if (name.includes("sheet1.xml")) sheetXml = text;
+            if (name.includes("sharedStrings.xml")) stringsXml = text;
+          }
+        }
+      }
+
+      // Parse shared strings
+      const sharedStrings: string[] = [];
+      const siMatches = stringsXml.matchAll(/<si>([\s\S]*?)<\/si>/g);
+      for (const m of siMatches) {
+        const tMatch = m[1].match(/<t[^>]*>([\s\S]*?)<\/t>/);
+        sharedStrings.push(tMatch ? tMatch[1] : "");
+      }
+
+      // Parse sheet data to CSV
+      const rows: string[][] = [];
+      const rowMatches = sheetXml.matchAll(/<row[^>]*>([\s\S]*?)<\/row>/g);
+      for (const rm of rowMatches) {
+        const cells: string[] = [];
+        const cellMatches = rm[1].matchAll(/<c[^>]*(?:t="s")?[^>]*>([\s\S]*?)<\/c>/g);
+        for (const cm of cellMatches) {
+          const vMatch = cm[1].match(/<v>([\s\S]*?)<\/v>/);
+          const isShared = cm[0].includes('t="s"');
+          if (vMatch) {
+            const val = vMatch[1];
+            cells.push(isShared ? (sharedStrings[parseInt(val)] || val) : val);
+          } else {
+            cells.push("");
+          }
+        }
+        rows.push(cells);
+      }
+
+      csvText = rows.map(r => r.map(c => `"${c.replace(/"/g, '""')}"`).join(",")).join("\n");
+    } catch (e) {
+      return c.json({ error: "Failed to parse XLSX file. Please try converting to CSV first." }, 400);
+    }
+  } else {
+    return c.json({ error: "Unsupported file type. Please upload a CSV or XLSX file." }, 400);
+  }
+
+  // Truncate for AI context
+  const truncatedCsv = csvText.substring(0, 15000);
+  const rowCount = csvText.split("\n").length;
+
+  const analysisPrompt = `You are a data analyst for the Government of Ghana. Analyze the following dataset and provide insights.
+
+User's request: ${prompt}
+
+Dataset (${rowCount} rows, ${fileName}):
+\`\`\`csv
+${truncatedCsv}
+\`\`\`
+
+Provide your analysis in EXACTLY this JSON format (no other text):
+{
+  "summary": "Brief overview of the dataset and key statistics",
+  "insights": ["insight 1", "insight 2", "insight 3", "insight 4", "insight 5"],
+  "chartConfigs": [
+    {
+      "type": "bar",
+      "title": "Chart title",
+      "labels": ["label1", "label2"],
+      "datasets": [{"label": "Series", "data": [10, 20]}]
+    }
+  ]
+}
+
+For chartConfigs, suggest 1-3 Chart.js-compatible chart configurations. Use types: bar, line, pie, or doughnut.
+For budget data, include variance analysis. All monetary values in GHS.
+Keep datasets data arrays to max 20 items. Return ONLY valid JSON.`;
+
+  try {
+    const analysisResponse = await c.env.AI.run("@cf/openai/gpt-oss-20b" as BaseAiTextGenerationModels, {
+      messages: [
+        { role: "system", content: analysisPrompt },
+        { role: "user", content: "Analyze this data and return JSON." },
+      ],
+      max_tokens: 4096,
+    });
+
+    const responseText = (analysisResponse as any).response || "";
+
+    // Try to parse as JSON
+    let analysis;
+    try {
+      const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+      analysis = jsonMatch ? JSON.parse(jsonMatch[0]) : null;
+    } catch {
+      analysis = null;
+    }
+
+    if (!analysis) {
+      // Fallback: return raw text analysis
+      analysis = {
+        summary: responseText.substring(0, 500),
+        insights: [responseText],
+        chartConfigs: [],
+      };
+    }
+
+    // Parse raw data for the data table
+    const lines = csvText.split("\n").filter(l => l.trim());
+    const headers = lines[0] ? lines[0].split(",").map(h => h.replace(/^"|"$/g, "").trim()) : [];
+    const dataRows = lines.slice(1, 101).map(line => {
+      const cells: string[] = [];
+      let current = "";
+      let inQuotes = false;
+      for (const ch of line) {
+        if (ch === '"') { inQuotes = !inQuotes; }
+        else if (ch === ',' && !inQuotes) { cells.push(current.trim()); current = ""; }
+        else { current += ch; }
+      }
+      cells.push(current.trim());
+      return cells;
+    });
+
+    return c.json({
+      summary: analysis.summary,
+      insights: analysis.insights || [],
+      chartConfigs: analysis.chartConfigs || [],
+      rawData: { headers, rows: dataRows, totalRows: rowCount },
+    });
+  } catch (e) {
+    return c.json({ error: "Analysis failed. Please try again with a smaller file." }, 500);
+  }
+});
+
+// ─── Translation / Language Support ──────────────────────────────────
+
+const SUPPORTED_LANGUAGES: Record<string, { name: string; m2mCode: string | null }> = {
+  en: { name: "English", m2mCode: "en" },
+  fr: { name: "French", m2mCode: "fr" },
+  ha: { name: "Hausa", m2mCode: "ha" },
+  tw: { name: "Twi (Akan)", m2mCode: null },      // LLM fallback
+  ga: { name: "Ga", m2mCode: null },               // LLM fallback
+  ee: { name: "Ewe", m2mCode: null },              // LLM fallback
+  dag: { name: "Dagbani", m2mCode: null },          // LLM fallback
+};
+
+async function translateText(
+  ai: Ai,
+  text: string,
+  sourceLang: string,
+  targetLang: string
+): Promise<string> {
+  const source = SUPPORTED_LANGUAGES[sourceLang];
+  const target = SUPPORTED_LANGUAGES[targetLang];
+
+  if (!source || !target || sourceLang === targetLang) return text;
+
+  // Use m2m100 if both languages are supported
+  if (source.m2mCode && target.m2mCode) {
+    try {
+      const result = await ai.run("@cf/meta/m2m100-1.2b" as any, {
+        text,
+        source_lang: source.m2mCode,
+        target_lang: target.m2mCode,
+      });
+      return (result as any).translated_text || text;
+    } catch {
+      // Fall through to LLM fallback
+    }
+  }
+
+  // LLM fallback for unsupported language pairs (Twi, Ga, Ewe, Dagbani)
+  try {
+    const result = await ai.run("@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels, {
+      messages: [
+        { role: "system", content: `You are a translator. Translate the following text from ${source.name} to ${target.name}. Return ONLY the translated text, nothing else. If you cannot translate accurately, return the original text.` },
+        { role: "user", content: text },
+      ],
+      max_tokens: 2048,
+    });
+    return (result as any).response || text;
+  } catch {
+    return text;
+  }
+}
+
+app.post("/api/translate", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const { text, sourceLang, targetLang } = await c.req.json();
+
+  if (!text || !targetLang) {
+    return c.json({ error: "text and targetLang are required" }, 400);
+  }
+
+  const translated = await translateText(c.env.AI, text, sourceLang || "en", targetLang);
+  return c.json({ translated, sourceLang: sourceLang || "en", targetLang });
+});
+
+// ─── Image / Vision Understanding ───────────────────────────────────
+
+app.post("/api/vision", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+
+  // Tier gate: Starter+ only
+  const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
+    .bind(userId).first<{ tier: string }>();
+  const userTier = user?.tier || "free";
+  if (userTier === "free") {
+    return c.json({ error: "Image understanding requires a Starter plan or above.", code: "TIER_REQUIRED" }, 403);
+  }
+
+  const formData = await c.req.formData();
+  const image = formData.get("image") as File | null;
+  const prompt = (formData.get("prompt") as string) || "Describe this image in detail.";
+  const mode = (formData.get("mode") as string) || "describe";
+
+  if (!image) {
+    return c.json({ error: "An image file is required" }, 400);
+  }
+
+  // Validate file type
+  const validTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+  if (!validTypes.includes(image.type)) {
+    return c.json({ error: "Unsupported image type. Use JPEG, PNG, GIF, or WebP." }, 400);
+  }
+
+  // 5MB limit
+  if (image.size > 5 * 1024 * 1024) {
+    return c.json({ error: "Image must be under 5MB" }, 400);
+  }
+
+  const imageBytes = await image.arrayBuffer();
+  const imageArray = [...new Uint8Array(imageBytes)];
+
+  // Build mode-specific prompt
+  let visionPrompt = prompt;
+  if (mode === "ocr") {
+    visionPrompt = "Extract ALL text from this image exactly as written. Preserve formatting, line breaks, and structure. Return only the extracted text.";
+  } else if (mode === "form") {
+    visionPrompt = "This is a form or document. Extract all field labels and their values as structured data. Format as:\nField: Value\nFor each field found.";
+  } else if (mode === "receipt") {
+    visionPrompt = "This is a receipt or invoice. Extract: vendor name, date, all line items (description, quantity, amount), subtotal, tax, and total. Format clearly.";
+  }
+
+  try {
+    const result = await c.env.AI.run("@cf/llava-hf/llava-1.5-7b-hf" as any, {
+      image: imageArray,
+      prompt: visionPrompt,
+      max_tokens: 1024,
+    });
+
+    const description = (result as any).description || (result as any).response || "";
+
+    return c.json({
+      description,
+      mode,
+      imageSize: image.size,
+      imageType: image.type,
+    });
+  } catch (e) {
+    return c.json({ error: "Image analysis failed. Please try a different image." }, 500);
+  }
+});
+
+// POST /api/chat/image — send image with message in chat context
+app.post("/api/chat/image", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+
+  const formData = await c.req.formData();
+  const image = formData.get("image") as File | null;
+  const message = (formData.get("message") as string) || "What's in this image?";
+  const conversationId = formData.get("conversationId") as string;
+  const model = formData.get("model") as string;
+
+  if (!image || !conversationId) {
+    return c.json({ error: "image and conversationId are required" }, 400);
+  }
+
+  // Tier gate
+  const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
+    .bind(userId).first<{ tier: string }>();
+  const userTier = user?.tier || "free";
+  if (userTier === "free") {
+    return c.json({ error: "Image understanding requires a Starter plan or above.", code: "TIER_REQUIRED" }, 403);
+  }
+
+  // Check usage
+  const usage = await checkUsageLimit(c.env.DB, userId, userTier);
+  if (!usage.allowed) {
+    return c.json({ error: `Daily limit reached (${usage.limit} messages).`, code: "LIMIT_REACHED" }, 429);
+  }
+
+  // Verify conversation ownership
+  const convo = await c.env.DB.prepare(
+    "SELECT id FROM conversations WHERE id = ? AND user_id = ?"
+  ).bind(conversationId, userId).first();
+  if (!convo) return c.json({ error: "Conversation not found" }, 404);
+
+  // Analyze image
+  const imageBytes = await image.arrayBuffer();
+  const imageArray = [...new Uint8Array(imageBytes)];
+
+  let imageDescription = "";
+  try {
+    const visionResult = await c.env.AI.run("@cf/llava-hf/llava-1.5-7b-hf" as any, {
+      image: imageArray,
+      prompt: message,
+      max_tokens: 1024,
+    });
+    imageDescription = (visionResult as any).description || (visionResult as any).response || "Unable to analyze image.";
+  } catch {
+    imageDescription = "Image analysis is temporarily unavailable.";
+  }
+
+  // Save user message
+  const userMsgId = generateId();
+  await c.env.DB.prepare(
+    "INSERT INTO messages (id, conversation_id, role, content) VALUES (?, ?, 'user', ?)"
+  ).bind(userMsgId, conversationId, `[Image uploaded] ${message}`).run();
+
+  // Save AI response
+  const assistantMsgId = generateId();
+  await c.env.DB.prepare(
+    "INSERT INTO messages (id, conversation_id, role, content) VALUES (?, ?, 'assistant', ?)"
+  ).bind(assistantMsgId, conversationId, imageDescription).run();
+
+  return c.json({ response: imageDescription, messageId: assistantMsgId });
 });
 
 // ─── User Profile ───────────────────────────────────────────────────
@@ -1680,6 +2484,205 @@ app.get("/api/conversations/search", authMiddleware, async (c) => {
   ).bind(searchTerm, userId, searchTerm, searchTerm).all();
 
   return c.json({ results: results || [] });
+});
+
+// ─── User Memories ────────────────────────────────────────────────────
+
+app.get("/api/memories", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const { results } = await c.env.DB.prepare(
+    "SELECT * FROM user_memories WHERE user_id = ? ORDER BY updated_at DESC"
+  ).bind(userId).all();
+  return c.json({ memories: results || [] });
+});
+
+app.post("/api/memories", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const { key, value, type } = await c.req.json();
+
+  if (!key || !value) {
+    return c.json({ error: "Key and value are required" }, 400);
+  }
+
+  const id = generateId();
+  const memoryType = type || "preference";
+
+  await c.env.DB.prepare(
+    `INSERT INTO user_memories (id, user_id, key, value, type)
+     VALUES (?, ?, ?, ?, ?)
+     ON CONFLICT(user_id, key) DO UPDATE SET value = ?, type = ?, updated_at = datetime('now')`
+  ).bind(id, userId, key, value, memoryType, value, memoryType).run();
+
+  const memory = await c.env.DB.prepare(
+    "SELECT * FROM user_memories WHERE user_id = ? AND key = ?"
+  ).bind(userId, key).first();
+
+  return c.json({ memory });
+});
+
+app.delete("/api/memories/:id", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const memoryId = c.req.param("id");
+
+  const memory = await c.env.DB.prepare(
+    "SELECT id FROM user_memories WHERE id = ? AND user_id = ?"
+  ).bind(memoryId, userId).first();
+
+  if (!memory) {
+    return c.json({ error: "Memory not found" }, 404);
+  }
+
+  await c.env.DB.prepare(
+    "DELETE FROM user_memories WHERE id = ? AND user_id = ?"
+  ).bind(memoryId, userId).run();
+
+  return c.json({ success: true });
+});
+
+app.get("/api/admin/users/:id/memories", adminMiddleware, async (c) => {
+  const targetUserId = c.req.param("id");
+  const { results } = await c.env.DB.prepare(
+    "SELECT * FROM user_memories WHERE user_id = ? ORDER BY updated_at DESC"
+  ).bind(targetUserId).all();
+  return c.json({ memories: results || [] });
+});
+
+// ─── Custom Agents (public) ──────────────────────────────────────────
+
+app.get("/api/agents", async (c) => {
+  const { results } = await c.env.DB.prepare(
+    "SELECT id, name, description, department, icon, knowledge_category FROM agents WHERE active = 1 ORDER BY name"
+  ).all();
+  return c.json({ agents: results || [] });
+});
+
+app.get("/api/agents/:id", async (c) => {
+  const agentId = c.req.param("id");
+  const agent = await c.env.DB.prepare(
+    "SELECT id, name, description, department, icon, knowledge_category FROM agents WHERE id = ? AND active = 1"
+  ).bind(agentId).first();
+
+  if (!agent) {
+    return c.json({ error: "Agent not found" }, 404);
+  }
+
+  return c.json({ agent });
+});
+
+// ─── Custom Agents (admin) ───────────────────────────────────────────
+
+app.post("/api/admin/agents", adminMiddleware, async (c) => {
+  const adminId = c.get("userId");
+  const { name, description, system_prompt, department, knowledge_category, icon } = await c.req.json();
+
+  if (!name || !system_prompt) {
+    return c.json({ error: "Name and system_prompt are required" }, 400);
+  }
+
+  const id = generateId();
+  await c.env.DB.prepare(
+    "INSERT INTO agents (id, name, description, system_prompt, department, knowledge_category, icon, created_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+  ).bind(id, name, description || "", system_prompt, department || "", knowledge_category || "", icon || "\u{1F916}", adminId).run();
+
+  const agent = await c.env.DB.prepare("SELECT * FROM agents WHERE id = ?").bind(id).first();
+  await logAudit(c.env.DB, adminId, "create_agent", "agent", id, name);
+
+  return c.json({ agent });
+});
+
+app.patch("/api/admin/agents/:id", adminMiddleware, async (c) => {
+  const adminId = c.get("userId");
+  const agentId = c.req.param("id");
+  const body = await c.req.json();
+
+  const updates: string[] = [];
+  const params: any[] = [];
+
+  if (body.name !== undefined) { updates.push("name = ?"); params.push(body.name); }
+  if (body.description !== undefined) { updates.push("description = ?"); params.push(body.description); }
+  if (body.system_prompt !== undefined) { updates.push("system_prompt = ?"); params.push(body.system_prompt); }
+  if (body.department !== undefined) { updates.push("department = ?"); params.push(body.department); }
+  if (body.knowledge_category !== undefined) { updates.push("knowledge_category = ?"); params.push(body.knowledge_category); }
+  if (body.icon !== undefined) { updates.push("icon = ?"); params.push(body.icon); }
+  if (body.active !== undefined) { updates.push("active = ?"); params.push(body.active ? 1 : 0); }
+
+  if (updates.length === 0) return c.json({ error: "No fields to update" }, 400);
+
+  updates.push("updated_at = datetime('now')");
+  params.push(agentId);
+
+  await c.env.DB.prepare(
+    `UPDATE agents SET ${updates.join(", ")} WHERE id = ?`
+  ).bind(...params).run();
+
+  const agent = await c.env.DB.prepare("SELECT * FROM agents WHERE id = ?").bind(agentId).first();
+  await logAudit(c.env.DB, adminId, "update_agent", "agent", agentId, body.name || "");
+
+  return c.json({ agent });
+});
+
+app.delete("/api/admin/agents/:id", adminMiddleware, async (c) => {
+  const adminId = c.get("userId");
+  const agentId = c.req.param("id");
+
+  const agent = await c.env.DB.prepare("SELECT name FROM agents WHERE id = ?")
+    .bind(agentId).first<{ name: string }>();
+
+  await c.env.DB.prepare("DELETE FROM agents WHERE id = ?").bind(agentId).run();
+  await logAudit(c.env.DB, adminId, "delete_agent", "agent", agentId, agent?.name || "");
+
+  return c.json({ success: true });
+});
+
+app.get("/api/admin/agents", adminMiddleware, async (c) => {
+  const { results } = await c.env.DB.prepare(
+    "SELECT * FROM agents ORDER BY created_at DESC"
+  ).all();
+  return c.json({ agents: results || [] });
+});
+
+// ─── Artifact Detection ──────────────────────────────────────────────
+
+app.post("/api/chat/detect-artifact", authMiddleware, async (c) => {
+  const { content } = await c.req.json();
+
+  if (!content || content.length < 20) {
+    return c.json({ type: "text", title: "Chat response" });
+  }
+
+  try {
+    const response = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels, {
+      messages: [
+        {
+          role: "system",
+          content: `Classify this content. Is it primarily: (a) a document/memo/letter, (b) a code snippet, (c) a data table, (d) a list/outline, or (e) conversational text? Return JSON only: {"type": "document"|"code"|"table"|"list"|"text", "title": "short title"}. No explanation.`,
+        },
+        {
+          role: "user",
+          content: content.substring(0, 1500),
+        },
+      ],
+      max_tokens: 100,
+    });
+
+    const raw = (response as any)?.response || "";
+    try {
+      // Try to parse JSON from the response
+      const jsonMatch = raw.match(/\{[\s\S]*?\}/);
+      if (jsonMatch) {
+        const parsed = JSON.parse(jsonMatch[0]);
+        const validTypes = ["document", "code", "table", "list", "text"];
+        return c.json({
+          type: validTypes.includes(parsed.type) ? parsed.type : "text",
+          title: (parsed.title || "Chat response").substring(0, 100),
+        });
+      }
+    } catch {}
+
+    return c.json({ type: "text", title: "Chat response" });
+  } catch {
+    return c.json({ type: "text", title: "Chat response" });
+  }
 });
 
 // ─── Folders (CRUD) ───────────────────────────────────────────────────
@@ -3190,6 +4193,532 @@ app.delete("/api/admin/kb/:id", adminMiddleware, async (c) => {
 
   await logAudit(c.env.DB, c.get("userId"), "delete_faq", "knowledge_base", faqId, faq?.question?.substring(0, 100) || '');
   return c.json({ success: true });
+});
+
+// ═══════════════════════════════════════════════════════════════════
+// Phase 4: Platform Dominance
+// ═══════════════════════════════════════════════════════════════════
+
+// ─── Feature 9: Workflow Automation ─────────────────────────────────
+
+const WORKFLOW_TEMPLATES: Record<string, { name: string; type: string; description: string; steps: string[] }> = {
+  memo: {
+    name: "Official Memo",
+    type: "memo",
+    description: "Draft an official government memorandum",
+    steps: ["Recipient & Subject", "Background & Context", "Key Points", "Recommendation", "Review & Generate"],
+  },
+  procurement: {
+    name: "Procurement Process",
+    type: "procurement",
+    description: "Guide through public procurement steps per Act 663",
+    steps: ["Requirement Definition", "Budget Confirmation", "Procurement Method", "Evaluation Criteria", "Generate Documents"],
+  },
+  leave_request: {
+    name: "Leave Request",
+    type: "leave_request",
+    description: "Prepare a leave request letter",
+    steps: ["Leave Type & Dates", "Reason & Handover", "Review & Generate"],
+  },
+  budget: {
+    name: "Budget Preparation",
+    type: "budget",
+    description: "Prepare a departmental budget submission",
+    steps: ["Department & Period", "Revenue Items", "Expenditure Items", "Justification", "Review & Generate"],
+  },
+  report: {
+    name: "Progress Report",
+    type: "report",
+    description: "Generate a structured progress report",
+    steps: ["Report Period & Title", "Achievements", "Challenges", "Next Steps", "Review & Generate"],
+  },
+  cabinet_memo: {
+    name: "Cabinet Memorandum",
+    type: "cabinet_memo",
+    description: "Draft a Cabinet Memorandum (9-section format)",
+    steps: ["Title & Ministry", "Problem Statement", "Background", "Policy Options", "Recommendation", "Fiscal Impact", "Implementation Plan", "Conclusion", "Review & Generate"],
+  },
+};
+
+app.get("/api/workflows/templates", async (c) => {
+  return c.json({ templates: Object.entries(WORKFLOW_TEMPLATES).map(([id, t]) => ({ id, ...t })) });
+});
+
+app.post("/api/workflows", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const { templateId, name } = await c.req.json();
+
+  const template = WORKFLOW_TEMPLATES[templateId];
+  if (!template) return c.json({ error: "Unknown workflow template" }, 400);
+
+  const id = generateId();
+  const steps = template.steps.map((s, i) => ({ index: i, name: s, status: "pending", input: "", output: "" }));
+
+  await c.env.DB.prepare(
+    "INSERT INTO workflows (id, user_id, name, type, steps) VALUES (?, ?, ?, ?, ?)"
+  ).bind(id, userId, name || template.name, template.type, JSON.stringify(steps)).run();
+
+  return c.json({ id, name: name || template.name, type: template.type, steps });
+});
+
+app.get("/api/workflows", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const { results } = await c.env.DB.prepare(
+    "SELECT id, name, type, status, current_step, created_at, completed_at FROM workflows WHERE user_id = ? ORDER BY created_at DESC LIMIT 50"
+  ).bind(userId).all();
+  return c.json({ workflows: results || [] });
+});
+
+app.get("/api/workflows/:id", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const id = c.req.param("id");
+  const workflow = await c.env.DB.prepare(
+    "SELECT * FROM workflows WHERE id = ? AND user_id = ?"
+  ).bind(id, userId).first();
+  if (!workflow) return c.json({ error: "Workflow not found" }, 404);
+  return c.json({ workflow });
+});
+
+app.post("/api/workflows/:id/step", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const id = c.req.param("id");
+  const { stepIndex, input } = await c.req.json();
+
+  const workflow = await c.env.DB.prepare(
+    "SELECT * FROM workflows WHERE id = ? AND user_id = ?"
+  ).bind(id, userId).first<{ steps: string; type: string; name: string; current_step: number }>();
+  if (!workflow) return c.json({ error: "Workflow not found" }, 404);
+
+  const steps = JSON.parse(workflow.steps);
+  if (stepIndex < 0 || stepIndex >= steps.length) return c.json({ error: "Invalid step" }, 400);
+
+  steps[stepIndex].input = input;
+  steps[stepIndex].status = "completed";
+
+  const isLastStep = stepIndex === steps.length - 1;
+
+  if (isLastStep) {
+    // Generate final output using AI
+    const context = steps.map((s: any) => `## ${s.name}\n${s.input}`).join("\n\n");
+    const typePrompts: Record<string, string> = {
+      memo: "Generate a complete official Government of Ghana memorandum based on the following inputs. Use proper memo format with reference number, date, TO, FROM, SUBJECT, and body sections.",
+      procurement: "Generate the required procurement documentation based on these inputs, following the Public Procurement Act 663 requirements.",
+      leave_request: "Generate a formal leave request letter for a Ghana Civil Service employee based on these inputs.",
+      budget: "Generate a structured departmental budget submission based on these inputs. Include tables where appropriate.",
+      report: "Generate a structured progress report based on these inputs, following GoG reporting standards.",
+      cabinet_memo: "Generate a complete Cabinet Memorandum in the standard 9-section format based on these inputs.",
+    };
+
+    try {
+      const aiResult = await c.env.AI.run("@cf/openai/gpt-oss-20b" as BaseAiTextGenerationModels, {
+        messages: [
+          { role: "system", content: `${GOG_SYSTEM_PROMPT}\n\n${typePrompts[workflow.type] || "Generate a professional document based on the following inputs."}` },
+          { role: "user", content: context },
+        ],
+        max_tokens: 4096,
+      });
+
+      const output = (aiResult as any).response || "";
+
+      await c.env.DB.prepare(
+        "UPDATE workflows SET steps = ?, current_step = ?, output = ?, status = 'completed', completed_at = datetime('now') WHERE id = ?"
+      ).bind(JSON.stringify(steps), stepIndex + 1, output, id).run();
+
+      return c.json({ step: steps[stepIndex], output, completed: true });
+    } catch {
+      return c.json({ error: "Document generation failed" }, 500);
+    }
+  } else {
+    // AI assistance for current step
+    let aiHint = "";
+    try {
+      const prevContext = steps.slice(0, stepIndex).filter((s: any) => s.input).map((s: any) => `${s.name}: ${s.input}`).join("; ");
+      const aiResult = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels, {
+        messages: [
+          { role: "system", content: "You are helping a Ghana civil servant complete a workflow. Provide a brief, helpful suggestion for the next step. Keep it under 100 words." },
+          { role: "user", content: `Workflow: ${workflow.name}\nCompleted so far: ${prevContext}\nNext step: ${steps[stepIndex + 1]?.name || "Final review"}\nProvide guidance.` },
+        ],
+        max_tokens: 256,
+      });
+      aiHint = (aiResult as any).response || "";
+    } catch {}
+
+    await c.env.DB.prepare(
+      "UPDATE workflows SET steps = ?, current_step = ?, status = 'in_progress' WHERE id = ?"
+    ).bind(JSON.stringify(steps), stepIndex + 1, id).run();
+
+    return c.json({ step: steps[stepIndex], nextHint: aiHint, completed: false });
+  }
+});
+
+app.delete("/api/workflows/:id", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const id = c.req.param("id");
+  await c.env.DB.prepare("DELETE FROM workflows WHERE id = ? AND user_id = ?").bind(id, userId).run();
+  return c.json({ success: true });
+});
+
+// ─── Feature 10: AI Meeting Assistant ───────────────────────────────
+
+app.post("/api/meetings/upload", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+
+  // Tier gate: Professional+
+  const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
+    .bind(userId).first<{ tier: string }>();
+  if ((user?.tier || "free") === "free" || (user?.tier || "free") === "starter") {
+    return c.json({ error: "Meeting Assistant requires a Professional plan or above.", code: "TIER_REQUIRED" }, 403);
+  }
+
+  const formData = await c.req.formData();
+  const audio = formData.get("audio") as File | null;
+  const title = (formData.get("title") as string) || "Meeting " + new Date().toISOString().split("T")[0];
+
+  if (!audio) return c.json({ error: "Audio file is required" }, 400);
+  if (audio.size > 25 * 1024 * 1024) return c.json({ error: "Audio must be under 25MB" }, 400);
+
+  const meetingId = generateId();
+  await c.env.DB.prepare(
+    "INSERT INTO meetings (id, user_id, title) VALUES (?, ?, ?)"
+  ).bind(meetingId, userId, title).run();
+
+  // Transcribe with Whisper
+  try {
+    const audioBytes = await audio.arrayBuffer();
+    const transcriptResult = await c.env.AI.run("@cf/openai/whisper" as any, {
+      audio: [...new Uint8Array(audioBytes)],
+    });
+    const transcript = (transcriptResult as any).text || "";
+
+    await c.env.DB.prepare(
+      "UPDATE meetings SET transcript = ?, status = 'transcribed' WHERE id = ?"
+    ).bind(transcript, meetingId).run();
+
+    return c.json({ meetingId, transcript, status: "transcribed" });
+  } catch (e) {
+    await c.env.DB.prepare("UPDATE meetings SET status = 'failed' WHERE id = ?").bind(meetingId).run();
+    return c.json({ error: "Transcription failed. Please try a different audio format." }, 500);
+  }
+});
+
+app.post("/api/meetings/:id/minutes", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const meetingId = c.req.param("id");
+
+  const meeting = await c.env.DB.prepare(
+    "SELECT * FROM meetings WHERE id = ? AND user_id = ?"
+  ).bind(meetingId, userId).first<{ transcript: string; title: string }>();
+  if (!meeting) return c.json({ error: "Meeting not found" }, 404);
+  if (!meeting.transcript) return c.json({ error: "No transcript available" }, 400);
+
+  try {
+    const minutesResult = await c.env.AI.run("@cf/openai/gpt-oss-20b" as BaseAiTextGenerationModels, {
+      messages: [
+        { role: "system", content: `You are a professional minutes secretary for the Government of Ghana. Generate formal meeting minutes from the following transcript.
+
+Format the minutes as follows:
+1. MEETING TITLE
+2. DATE AND TIME
+3. ATTENDEES (extract from transcript if mentioned)
+4. AGENDA ITEMS
+5. DISCUSSIONS (summarise key points per agenda item)
+6. DECISIONS MADE
+7. ACTION ITEMS (with responsible person and deadline if mentioned)
+8. NEXT MEETING
+9. ADJOURNMENT
+
+Use formal British English. Be thorough but concise.` },
+        { role: "user", content: `Meeting: ${meeting.title}\n\nTranscript:\n${meeting.transcript.substring(0, 12000)}` },
+      ],
+      max_tokens: 4096,
+    });
+    const minutes = (minutesResult as any).response || "";
+
+    // Extract action items
+    const actionsResult = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels, {
+      messages: [
+        { role: "system", content: 'Extract all action items from these meeting minutes. Return a JSON array: [{"action": "description", "assignee": "person", "deadline": "date or TBD"}]. Return ONLY the JSON array.' },
+        { role: "user", content: minutes },
+      ],
+      max_tokens: 1024,
+    });
+
+    let actionItems: any[] = [];
+    try {
+      const aiText = (actionsResult as any).response || "[]";
+      const match = aiText.match(/\[[\s\S]*\]/);
+      actionItems = match ? JSON.parse(match[0]) : [];
+    } catch {}
+
+    await c.env.DB.prepare(
+      "UPDATE meetings SET minutes = ?, action_items = ?, status = 'completed' WHERE id = ?"
+    ).bind(minutes, JSON.stringify(actionItems), meetingId).run();
+
+    return c.json({ minutes, actionItems, status: "completed" });
+  } catch {
+    return c.json({ error: "Minutes generation failed" }, 500);
+  }
+});
+
+app.get("/api/meetings", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const { results } = await c.env.DB.prepare(
+    "SELECT id, title, status, created_at FROM meetings WHERE user_id = ? ORDER BY created_at DESC LIMIT 50"
+  ).bind(userId).all();
+  return c.json({ meetings: results || [] });
+});
+
+app.get("/api/meetings/:id", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const id = c.req.param("id");
+  const meeting = await c.env.DB.prepare(
+    "SELECT * FROM meetings WHERE id = ? AND user_id = ?"
+  ).bind(id, userId).first();
+  if (!meeting) return c.json({ error: "Meeting not found" }, 404);
+  return c.json({ meeting });
+});
+
+app.delete("/api/meetings/:id", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const id = c.req.param("id");
+  await c.env.DB.prepare("DELETE FROM meetings WHERE id = ? AND user_id = ?").bind(id, userId).run();
+  return c.json({ success: true });
+});
+
+// ─── Feature 11: Collaborative Spaces ───────────────────────────────
+
+app.post("/api/spaces", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const { name, description } = await c.req.json();
+  if (!name) return c.json({ error: "name is required" }, 400);
+
+  // Tier gate: Starter+
+  const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
+    .bind(userId).first<{ tier: string }>();
+  if ((user?.tier || "free") === "free") {
+    return c.json({ error: "Collaborative Spaces requires a Starter plan or above.", code: "TIER_REQUIRED" }, 403);
+  }
+
+  const id = generateId();
+  await c.env.DB.prepare(
+    "INSERT INTO spaces (id, name, description, owner_id) VALUES (?, ?, ?, ?)"
+  ).bind(id, name, description || "", userId).run();
+
+  // Add owner as admin member
+  await c.env.DB.prepare(
+    "INSERT INTO space_members (space_id, user_id, role) VALUES (?, ?, 'admin')"
+  ).bind(id, userId).run();
+
+  return c.json({ id, name, description });
+});
+
+app.get("/api/spaces", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const { results } = await c.env.DB.prepare(
+    `SELECT s.id, s.name, s.description, s.owner_id, s.created_at, sm.role,
+     (SELECT COUNT(*) FROM space_members WHERE space_id = s.id) as member_count,
+     (SELECT COUNT(*) FROM space_conversations WHERE space_id = s.id) as conversation_count
+     FROM spaces s
+     JOIN space_members sm ON sm.space_id = s.id AND sm.user_id = ?
+     ORDER BY s.created_at DESC`
+  ).bind(userId).all();
+  return c.json({ spaces: results || [] });
+});
+
+app.get("/api/spaces/:id", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const spaceId = c.req.param("id");
+
+  // Verify membership
+  const membership = await c.env.DB.prepare(
+    "SELECT role FROM space_members WHERE space_id = ? AND user_id = ?"
+  ).bind(spaceId, userId).first<{ role: string }>();
+  if (!membership) return c.json({ error: "Not a member of this space" }, 403);
+
+  const space = await c.env.DB.prepare("SELECT * FROM spaces WHERE id = ?").bind(spaceId).first();
+  const { results: members } = await c.env.DB.prepare(
+    "SELECT sm.user_id, sm.role, sm.joined_at, u.full_name, u.email, u.department FROM space_members sm JOIN users u ON u.id = sm.user_id WHERE sm.space_id = ?"
+  ).bind(spaceId).all();
+  const { results: conversations } = await c.env.DB.prepare(
+    "SELECT sc.conversation_id, sc.shared_at, sc.shared_by, c.title, u.full_name as shared_by_name FROM space_conversations sc JOIN conversations c ON c.id = sc.conversation_id JOIN users u ON u.id = sc.shared_by WHERE sc.space_id = ? ORDER BY sc.shared_at DESC"
+  ).bind(spaceId).all();
+
+  return c.json({ space, members: members || [], conversations: conversations || [], userRole: membership.role });
+});
+
+app.post("/api/spaces/:id/invite", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const spaceId = c.req.param("id");
+  const { email, role } = await c.req.json();
+
+  // Verify admin
+  const membership = await c.env.DB.prepare(
+    "SELECT role FROM space_members WHERE space_id = ? AND user_id = ?"
+  ).bind(spaceId, userId).first<{ role: string }>();
+  if (!membership || membership.role !== "admin") return c.json({ error: "Only admins can invite members" }, 403);
+
+  const invitee = await c.env.DB.prepare("SELECT id FROM users WHERE email = ?").bind(email.toLowerCase().trim()).first<{ id: string }>();
+  if (!invitee) return c.json({ error: "User not found. They must have an AskOzzy account." }, 404);
+
+  const existing = await c.env.DB.prepare(
+    "SELECT user_id FROM space_members WHERE space_id = ? AND user_id = ?"
+  ).bind(spaceId, invitee.id).first();
+  if (existing) return c.json({ error: "User is already a member" }, 400);
+
+  await c.env.DB.prepare(
+    "INSERT INTO space_members (space_id, user_id, role) VALUES (?, ?, ?)"
+  ).bind(spaceId, invitee.id, role || "member").run();
+
+  return c.json({ success: true });
+});
+
+app.post("/api/spaces/:id/share-conversation", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const spaceId = c.req.param("id");
+  const { conversationId } = await c.req.json();
+
+  // Verify membership
+  const membership = await c.env.DB.prepare(
+    "SELECT role FROM space_members WHERE space_id = ? AND user_id = ?"
+  ).bind(spaceId, userId).first();
+  if (!membership) return c.json({ error: "Not a member of this space" }, 403);
+
+  // Verify conversation ownership
+  const convo = await c.env.DB.prepare(
+    "SELECT id FROM conversations WHERE id = ? AND user_id = ?"
+  ).bind(conversationId, userId).first();
+  if (!convo) return c.json({ error: "Conversation not found" }, 404);
+
+  await c.env.DB.prepare(
+    "INSERT OR IGNORE INTO space_conversations (space_id, conversation_id, shared_by) VALUES (?, ?, ?)"
+  ).bind(spaceId, conversationId, userId).run();
+
+  return c.json({ success: true });
+});
+
+app.delete("/api/spaces/:id/members/:memberId", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const spaceId = c.req.param("id");
+  const memberId = c.req.param("memberId");
+
+  const membership = await c.env.DB.prepare(
+    "SELECT role FROM space_members WHERE space_id = ? AND user_id = ?"
+  ).bind(spaceId, userId).first<{ role: string }>();
+  if (!membership || membership.role !== "admin") return c.json({ error: "Only admins can remove members" }, 403);
+
+  await c.env.DB.prepare(
+    "DELETE FROM space_members WHERE space_id = ? AND user_id = ?"
+  ).bind(spaceId, memberId).run();
+  return c.json({ success: true });
+});
+
+app.delete("/api/spaces/:id", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const spaceId = c.req.param("id");
+
+  const space = await c.env.DB.prepare(
+    "SELECT owner_id FROM spaces WHERE id = ?"
+  ).bind(spaceId).first<{ owner_id: string }>();
+  if (!space || space.owner_id !== userId) return c.json({ error: "Only the owner can delete a space" }, 403);
+
+  await c.env.DB.prepare("DELETE FROM space_conversations WHERE space_id = ?").bind(spaceId).run();
+  await c.env.DB.prepare("DELETE FROM space_members WHERE space_id = ?").bind(spaceId).run();
+  await c.env.DB.prepare("DELETE FROM spaces WHERE id = ?").bind(spaceId).run();
+  return c.json({ success: true });
+});
+
+// ─── Feature 12: Citizen Service Bot ────────────────────────────────
+
+const CITIZEN_SYSTEM_PROMPT = `You are Ozzy, the AI assistant for Ghana's Citizen Service Portal. You help citizens of Ghana with public service enquiries.
+
+You can help with:
+- **Pension queries**: SSNIT pension scheme, eligibility, how to check balances (dial *711#)
+- **Tax information**: GRA tax obligations, TIN registration, filing deadlines
+- **Permits & licences**: Business registration (RGD), building permits, driving licences (DVLA)
+- **Birth & death certificates**: Births and Deaths Registry procedures
+- **Passport services**: Ghana Passport Office locations, requirements, processing times
+- **Health insurance**: NHIS registration, card renewal, covered services
+- **Education**: Scholarship applications, school placement enquiries
+- **Land services**: Lands Commission processes, title registration
+- **National ID**: Ghana Card (NIA) registration and collection
+
+GUIDELINES:
+- Be patient, clear, and helpful — many citizens may not be familiar with bureaucratic processes
+- Provide step-by-step instructions where possible
+- Include phone numbers, website addresses, and office locations when known
+- Use simple English by default. If the user writes in a local language, respond in that language
+- Never ask for sensitive personal information (ID numbers, bank details)
+- If unsure, direct citizens to the relevant government office
+
+Respond concisely and helpfully.`;
+
+app.post("/api/citizen/chat", async (c) => {
+  const { sessionId, message, language } = await c.req.json();
+  if (!message) return c.json({ error: "message is required" }, 400);
+
+  // Rate limit citizen bot
+  const clientIP = c.req.header("CF-Connecting-IP") || "unknown";
+  const rateCheck = await checkRateLimit(c.env, clientIP, "chat");
+  if (!rateCheck.allowed) {
+    return c.json({ error: "Too many requests. Please try again later." }, 429);
+  }
+
+  try {
+    // Get or create session (upsert to handle both new and existing)
+    let sid = sessionId;
+    if (!sid) {
+      sid = generateId();
+    }
+    await c.env.DB.prepare(
+      "INSERT INTO citizen_sessions (id, language) VALUES (?, ?) ON CONFLICT(id) DO UPDATE SET last_active = datetime('now')"
+    ).bind(sid, language || "en").run();
+
+    // Save citizen message
+    const citizenMsgId = generateId();
+    await c.env.DB.prepare(
+      "INSERT INTO citizen_messages (id, session_id, role, content) VALUES (?, ?, 'user', ?)"
+    ).bind(citizenMsgId, sid, message).run();
+
+    // Get recent history
+    const { results: history } = await c.env.DB.prepare(
+      "SELECT role, content FROM citizen_messages WHERE session_id = ? ORDER BY created_at DESC LIMIT 10"
+    ).bind(sid).all<{ role: string; content: string }>();
+
+    const langName = (language && language !== "en" && SUPPORTED_LANGUAGES[language]) ? SUPPORTED_LANGUAGES[language].name : "";
+    const messages: Array<{ role: string; content: string }> = [
+      { role: "system", content: CITIZEN_SYSTEM_PROMPT + (langName ? `\n\nRespond in ${langName}.` : "") },
+    ];
+
+    for (const msg of (history || []).reverse()) {
+      messages.push({ role: msg.role, content: msg.content });
+    }
+
+    const aiResult = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels, {
+      messages: messages as any,
+      max_tokens: 1024,
+    });
+
+    const response = (aiResult as any).response || "I apologise, I am unable to respond at the moment. Please try again.";
+
+    // Save bot response
+    const botMsgId = generateId();
+    await c.env.DB.prepare(
+      "INSERT INTO citizen_messages (id, session_id, role, content) VALUES (?, ?, 'assistant', ?)"
+    ).bind(botMsgId, sid, response).run();
+
+    return c.json({ sessionId: sid, response });
+  } catch (err: any) {
+    console.error("Citizen chat error:", err?.message || err);
+    return c.json({ error: "Service temporarily unavailable. Please try again." }, 500);
+  }
+});
+
+app.get("/api/citizen/session/:id", async (c) => {
+  const sid = c.req.param("id");
+  const { results } = await c.env.DB.prepare(
+    "SELECT role, content, created_at FROM citizen_messages WHERE session_id = ? ORDER BY created_at ASC LIMIT 50"
+  ).bind(sid).all();
+  return c.json({ messages: results || [] });
 });
 
 export default app;

@@ -55,6 +55,9 @@ CREATE TABLE IF NOT EXISTS conversations (
   model TEXT DEFAULT '@cf/meta/llama-4-scout-17b-16e-instruct',
   folder_id TEXT DEFAULT NULL,
   pinned INTEGER DEFAULT 0,
+  agent_id TEXT DEFAULT NULL,
+  share_token TEXT DEFAULT NULL,
+  shared_at TEXT DEFAULT NULL,
   created_at TEXT DEFAULT (datetime('now')),
   updated_at TEXT DEFAULT (datetime('now')),
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
@@ -148,6 +151,35 @@ CREATE TABLE IF NOT EXISTS organizations (
   FOREIGN KEY (owner_id) REFERENCES users(id)
 );
 
+-- User memories (AI personalization)
+CREATE TABLE IF NOT EXISTS user_memories (
+  id TEXT PRIMARY KEY,
+  user_id TEXT NOT NULL,
+  key TEXT NOT NULL,
+  value TEXT NOT NULL,
+  type TEXT DEFAULT 'preference' CHECK (type IN ('preference', 'fact', 'auto')),
+  created_at TEXT DEFAULT (datetime('now')),
+  updated_at TEXT DEFAULT (datetime('now')),
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  UNIQUE(user_id, key)
+);
+
+-- Custom AI agents
+CREATE TABLE IF NOT EXISTS agents (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  description TEXT DEFAULT '',
+  system_prompt TEXT NOT NULL,
+  department TEXT DEFAULT '',
+  knowledge_category TEXT DEFAULT '',
+  icon TEXT DEFAULT '🤖',
+  active INTEGER DEFAULT 1,
+  created_by TEXT NOT NULL,
+  created_at TEXT DEFAULT (datetime('now')),
+  updated_at TEXT DEFAULT (datetime('now')),
+  FOREIGN KEY (created_by) REFERENCES users(id)
+);
+
 -- Indexes
 CREATE INDEX IF NOT EXISTS idx_conversations_user ON conversations(user_id, updated_at DESC);
 CREATE INDEX IF NOT EXISTS idx_conversations_folder ON conversations(folder_id);
@@ -165,3 +197,8 @@ CREATE INDEX IF NOT EXISTS idx_audit_log_admin ON audit_log(admin_id, created_at
 CREATE INDEX IF NOT EXISTS idx_audit_log_target ON audit_log(target_type, target_id);
 CREATE INDEX IF NOT EXISTS idx_moderation_flags_status ON moderation_flags(status, created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_organizations_owner ON organizations(owner_id);
+CREATE INDEX IF NOT EXISTS idx_user_memories_user ON user_memories(user_id, updated_at DESC);
+CREATE INDEX IF NOT EXISTS idx_user_memories_type ON user_memories(user_id, type);
+CREATE INDEX IF NOT EXISTS idx_agents_active ON agents(active, name);
+CREATE INDEX IF NOT EXISTS idx_agents_department ON agents(department);
+CREATE INDEX IF NOT EXISTS idx_conversations_agent ON conversations(agent_id);
