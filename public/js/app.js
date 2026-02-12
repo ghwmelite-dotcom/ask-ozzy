@@ -790,8 +790,8 @@ function renderMessages() {
           <button class="msg-action-btn" onclick="downloadMessageTxt(${i})" title="Download as text file">
             <span class="msg-action-icon">&#x1F4C4;</span> .txt
           </button>
-          <button class="msg-action-btn" onclick="downloadMessageDoc(${i})" title="Download as Word document">
-            <span class="msg-action-icon">&#x1F4DD;</span> .doc
+          <button class="msg-action-btn" onclick="downloadMessageDoc(${i})" title="Download as formatted Word document with GoG letterhead">
+            <span class="msg-action-icon">&#x1F4DD;</span> .docx
           </button>
           <button class="msg-action-btn" onclick="printMessage(${i})" title="Print or save as PDF">
             <span class="msg-action-icon">&#x1F5A8;</span> Print
@@ -1107,12 +1107,178 @@ function downloadMessageTxt(index) {
   _triggerDownload(blob, _getMessageFilename(index, "txt"));
 }
 
-function downloadMessageDoc(index) {
+// ─── DOCX Generation with GoG Templates ─────────────────────────────
+
+const GOG_DOCX_STYLES = {
+  default: {
+    document: {
+      run: { font: "Calibri", size: 24 },
+      paragraph: { spacing: { line: 276 } },
+    },
+    heading1: {
+      run: { font: "Calibri", size: 36, bold: true, color: "006B3F" },
+      paragraph: { spacing: { before: 240, after: 120 } },
+    },
+    heading2: {
+      run: { font: "Calibri", size: 32, bold: true, color: "006B3F" },
+      paragraph: { spacing: { before: 200, after: 100 } },
+    },
+    heading3: {
+      run: { font: "Calibri", size: 28, bold: true, color: "333333" },
+      paragraph: { spacing: { before: 160, after: 80 } },
+    },
+  },
+};
+
+function detectDocumentType(content) {
+  if (/CABINET\s+MEMO/i.test(content)) return 'cabinet_memo';
+  if (/MEMORANDUM|MEMO\b/i.test(content)) return 'memo';
+  if (/BRIEFING\s+NOTE/i.test(content)) return 'brief';
+  if (/MINUTES\s+OF|MEETING\s+MINUTES/i.test(content)) return 'minutes';
+  if (/Dear\s+(?:Sir|Madam|Hon|Dr|Mr|Mrs|Ms)/i.test(content)) return 'letter';
+  if (/(?:ANNUAL|QUARTERLY|PROGRESS)\s+REPORT|REPORT\s+ON/i.test(content)) return 'report';
+  return 'general';
+}
+
+function parseInlineFormatting(text) {
+  const runs = [];
+  const regex = /(\*\*(.+?)\*\*|\*(.+?)\*|`([^`]+)`)/g;
+  let lastIndex = 0;
+  let match;
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) runs.push(new docx.TextRun({ text: text.slice(lastIndex, match.index) }));
+    if (match[2]) runs.push(new docx.TextRun({ text: match[2], bold: true }));
+    else if (match[3]) runs.push(new docx.TextRun({ text: match[3], italics: true }));
+    else if (match[4]) runs.push(new docx.TextRun({ text: match[4], font: "Consolas", size: 20 }));
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < text.length) runs.push(new docx.TextRun({ text: text.slice(lastIndex) }));
+  if (runs.length === 0) runs.push(new docx.TextRun({ text: text }));
+  return runs;
+}
+
+function buildDocxTable(lines) {
+  const maxCols = Math.max(...lines.map(l => l.split('|').filter(c => c.trim()).length));
+  const rows = lines.map((line, rowIdx) => {
+    let cells = line.split('|').filter(c => c.trim());
+    while (cells.length < maxCols) cells.push('');
+    return new docx.TableRow({
+      children: cells.map(c => new docx.TableCell({
+        children: [new docx.Paragraph({ children: parseInlineFormatting(c.trim()) })],
+        shading: rowIdx === 0 ? { fill: "F0F0F0", type: docx.ShadingType.SOLID } : undefined,
+      }))
+    });
+  });
+  return new docx.Table({ rows, width: { size: 100, type: docx.WidthType.PERCENTAGE } });
+}
+
+function markdownToDocxElements(content) {
+  const elements = [];
+  const lines = content.split('\n');
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
+    if (line.trim().startsWith('```')) {
+      let code = ''; i++;
+      while (i < lines.length && !lines[i].trim().startsWith('```')) { code += lines[i] + '\n'; i++; }
+      if (i < lines.length) i++;
+      elements.push(new docx.Paragraph({
+        children: [new docx.TextRun({ text: code.trimEnd(), font: "Consolas", size: 20 })],
+        shading: { fill: "F5F5F5", type: docx.ShadingType.SOLID },
+        spacing: { before: 120, after: 120 },
+      }));
+      continue;
+    }
+    if (line.startsWith('### ')) { elements.push(new docx.Paragraph({ children: parseInlineFormatting(line.slice(4)), heading: docx.HeadingLevel.HEADING_3 })); i++; continue; }
+    if (line.startsWith('## ')) { elements.push(new docx.Paragraph({ children: parseInlineFormatting(line.slice(3)), heading: docx.HeadingLevel.HEADING_2 })); i++; continue; }
+    if (line.startsWith('# ')) { elements.push(new docx.Paragraph({ children: parseInlineFormatting(line.slice(2)), heading: docx.HeadingLevel.HEADING_1 })); i++; continue; }
+    if (line.trim() === '---' || line.trim() === '***') { elements.push(new docx.Paragraph({ children: [], border: { bottom: { style: docx.BorderStyle.SINGLE, size: 6, color: "CCCCCC" } }, spacing: { before: 120, after: 120 } })); i++; continue; }
+    if (/^[\-\*] /.test(line)) { elements.push(new docx.Paragraph({ children: parseInlineFormatting(line.replace(/^[\-\*] /, '')), bullet: { level: 0 }, spacing: { after: 60 } })); i++; continue; }
+    if (/^\s{2,}[\-\*] /.test(line)) { elements.push(new docx.Paragraph({ children: parseInlineFormatting(line.replace(/^\s+[\-\*] /, '')), bullet: { level: 1 }, spacing: { after: 60 } })); i++; continue; }
+    if (/^\d+\.\s/.test(line)) { elements.push(new docx.Paragraph({ children: parseInlineFormatting(line.replace(/^\d+\.\s/, '')), numbering: { reference: "default-numbering", level: 0 }, spacing: { after: 60 } })); i++; continue; }
+    if (line.startsWith('> ')) { elements.push(new docx.Paragraph({ children: parseInlineFormatting(line.slice(2)), indent: { left: 720 }, border: { left: { style: docx.BorderStyle.SINGLE, size: 6, color: "006B3F" } }, spacing: { before: 60, after: 60 } })); i++; continue; }
+    if (line.trim().startsWith('|') && line.trim().endsWith('|')) {
+      const tableLines = [];
+      while (i < lines.length && lines[i].trim().startsWith('|') && lines[i].trim().endsWith('|')) {
+        if (!/^\|[\s\-:|]+\|$/.test(lines[i].trim())) tableLines.push(lines[i]);
+        i++;
+      }
+      if (tableLines.length >= 1) { elements.push(buildDocxTable(tableLines)); elements.push(new docx.Paragraph({ children: [] })); }
+      continue;
+    }
+    if (line.trim() === '') { elements.push(new docx.Paragraph({ children: [], spacing: { after: 60 } })); i++; continue; }
+    elements.push(new docx.Paragraph({ children: parseInlineFormatting(line), spacing: { after: 120 } }));
+    i++;
+  }
+  return elements;
+}
+
+function createGoGHeader(docType) {
+  const department = (state.user && state.user.department) || 'Government of Ghana';
+  const date = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  const children = [
+    new docx.Paragraph({ children: [new docx.TextRun({ text: "REPUBLIC OF GHANA", bold: true, size: 28, font: "Calibri", color: "006B3F" })], alignment: docx.AlignmentType.CENTER, spacing: { after: 60 } }),
+    new docx.Paragraph({ children: [new docx.TextRun({ text: "\u2605", size: 48, color: "D4AF37" })], alignment: docx.AlignmentType.CENTER, spacing: { after: 60 } }),
+    new docx.Paragraph({ children: [new docx.TextRun({ text: department.toUpperCase(), bold: true, size: 22, font: "Calibri" })], alignment: docx.AlignmentType.CENTER, spacing: { after: 120 } }),
+  ];
+  if (['memo', 'cabinet_memo', 'letter', 'brief'].includes(docType)) {
+    children.push(new docx.Paragraph({ children: [new docx.TextRun({ text: "Date: " + date, size: 20, color: "333333" })], alignment: docx.AlignmentType.RIGHT, spacing: { after: 40 } }));
+  }
+  children.push(new docx.Paragraph({ children: [], border: { bottom: { style: docx.BorderStyle.DOUBLE, size: 6, color: "006B3F" } }, spacing: { after: 200 } }));
+  return new docx.Header({ children });
+}
+
+function createGoGFooter() {
+  const date = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  return new docx.Footer({ children: [
+    new docx.Paragraph({ children: [], border: { top: { style: docx.BorderStyle.SINGLE, size: 4, color: "006B3F" } }, spacing: { before: 100 } }),
+    new docx.Paragraph({
+      children: [
+        new docx.TextRun({ text: "Generated by AskOzzy", size: 16, color: "999999", font: "Calibri" }),
+        new docx.TextRun({ text: "    |    ", size: 16, color: "999999" }),
+        new docx.TextRun({ text: date, size: 16, color: "999999", font: "Calibri" }),
+        new docx.TextRun({ text: "    |    Page ", size: 16, color: "999999" }),
+        new docx.TextRun({ children: [docx.PageNumber.CURRENT], size: 16, color: "999999" }),
+        new docx.TextRun({ text: " of ", size: 16, color: "999999" }),
+        new docx.TextRun({ children: [docx.PageNumber.TOTAL_PAGES], size: 16, color: "999999" }),
+      ],
+      alignment: docx.AlignmentType.CENTER,
+    }),
+  ]});
+}
+
+function _buildGoGDocx(content, title) {
+  const docType = detectDocumentType(content);
+  return new docx.Document({
+    creator: "AskOzzy - GoG AI Assistant",
+    title: title || "AskOzzy Document",
+    numbering: { config: [{ reference: "default-numbering", levels: [{ level: 0, format: docx.LevelFormat.DECIMAL, text: "%1.", alignment: docx.AlignmentType.START, style: { paragraph: { indent: { left: 720, hanging: 360 } } } }] }] },
+    styles: GOG_DOCX_STYLES,
+    sections: [{
+      properties: { page: { margin: { top: 1440, right: 1080, bottom: 1440, left: 1080 } } },
+      headers: { default: createGoGHeader(docType) },
+      footers: { default: createGoGFooter() },
+      children: markdownToDocxElements(content),
+    }],
+  });
+}
+
+async function downloadMessageDoc(index) {
   const msg = state.messages[index];
   if (!msg) return;
+
+  if (typeof docx !== 'undefined') {
+    try {
+      const doc = _buildGoGDocx(msg.content, _getMessageFilename(index, '').replace(/\.$/, ''));
+      const blob = await docx.Packer.toBlob(doc);
+      _triggerDownload(blob, _getMessageFilename(index, "docx"));
+      return;
+    } catch (err) { console.error('DOCX generation failed, using fallback:', err); }
+  }
+  // Fallback: HTML-in-Word
   const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
 <head><meta charset="utf-8"><title>AskOzzy Document</title>
-<style>body{font-family:Calibri,Arial,sans-serif;font-size:12pt;line-height:1.6;color:#1a1a1a;max-width:700px;margin:40px auto;padding:0 20px}h1{font-size:18pt;color:#006B3F}h2{font-size:16pt;color:#006B3F}h3{font-size:14pt;color:#333}pre{background:#f5f5f5;padding:12px;border:1px solid #ddd;border-radius:4px;font-family:Consolas,monospace;font-size:10pt;white-space:pre-wrap}code{font-family:Consolas,monospace;font-size:10pt;background:#f5f5f5;padding:2px 4px}blockquote{border-left:3px solid #006B3F;padding-left:12px;color:#555;font-style:italic}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccc;padding:8px;text-align:left}th{background:#f0f0f0;font-weight:bold}</style></head>
+<style>body{font-family:Calibri,Arial,sans-serif;font-size:12pt;line-height:1.6;color:#1a1a1a;max-width:700px;margin:40px auto;padding:0 20px}h1{font-size:18pt;color:#006B3F}h2{font-size:16pt;color:#006B3F}h3{font-size:14pt;color:#333}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccc;padding:8px}th{background:#f0f0f0;font-weight:bold}</style></head>
 <body>${renderMarkdown(msg.content)}</body></html>`;
   const blob = new Blob([html], { type: "application/msword" });
   _triggerDownload(blob, _getMessageFilename(index, "doc"));
@@ -1123,15 +1289,19 @@ function printMessage(index) {
   if (!msg) return;
   const win = window.open("", "_blank");
   if (!win) { alert("Please allow popups to print."); return; }
-  win.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>AskOzzy — Print</title>
-<style>body{font-family:Georgia,'Times New Roman',serif;font-size:12pt;line-height:1.7;color:#1a1a1a;max-width:700px;margin:40px auto;padding:0 20px}h1{font-size:18pt;color:#006B3F;border-bottom:2px solid #006B3F;padding-bottom:4px}h2{font-size:16pt;color:#006B3F}h3{font-size:14pt;color:#333}pre{background:#f5f5f5;padding:12px;border:1px solid #ddd;border-radius:4px;font-family:Consolas,monospace;font-size:10pt;white-space:pre-wrap}code{font-family:Consolas,monospace;font-size:10pt;background:#f5f5f5;padding:2px 4px}blockquote{border-left:3px solid #006B3F;padding-left:12px;color:#555;font-style:italic}table{border-collapse:collapse;width:100%}th,td{border:1px solid #999;padding:8px;text-align:left}th{background:#eee;font-weight:bold}.footer{margin-top:40px;padding-top:12px;border-top:1px solid #ccc;font-size:9pt;color:#999;text-align:center}@media print{body{margin:0;padding:20px}}</style>
+  const department = (state.user && state.user.department) || '';
+  const date = new Date().toLocaleDateString("en-GB", { day:"numeric", month:"long", year:"numeric" });
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>AskOzzy \u2014 Print</title>
+<style>body{font-family:Georgia,'Times New Roman',serif;font-size:12pt;line-height:1.7;color:#1a1a1a;max-width:700px;margin:40px auto;padding:0 20px}h1{font-size:18pt;color:#006B3F;border-bottom:2px solid #006B3F;padding-bottom:4px}h2{font-size:16pt;color:#006B3F}h3{font-size:14pt;color:#333}pre{background:#f5f5f5;padding:12px;border:1px solid #ddd;border-radius:4px;font-family:Consolas,monospace;font-size:10pt;white-space:pre-wrap}code{font-family:Consolas,monospace;font-size:10pt;background:#f5f5f5;padding:2px 4px}blockquote{border-left:3px solid #006B3F;padding-left:12px;color:#555;font-style:italic}table{border-collapse:collapse;width:100%}th,td{border:1px solid #999;padding:8px;text-align:left}th{background:#eee;font-weight:bold}.gog-header{text-align:center;margin-bottom:24px;padding-bottom:12px;border-bottom:3px double #006B3F}.gog-header .republic{font-size:16pt;font-weight:bold;color:#006B3F;letter-spacing:2px;margin-bottom:4px}.gog-header .star{font-size:32pt;color:#D4AF37;line-height:1.2}.gog-header .dept{font-size:11pt;font-weight:bold;color:#333;text-transform:uppercase;letter-spacing:1px}.footer{margin-top:40px;padding-top:12px;border-top:1px solid #006B3F;font-size:9pt;color:#999;text-align:center}@media print{body{margin:0;padding:20px}}</style>
 </head><body>
-<div style="text-align:center;margin-bottom:24px;padding-bottom:12px;border-bottom:3px solid #006B3F;">
-<div style="font-size:20pt;font-weight:bold;">AskOzzy</div>
-<div style="font-size:10pt;color:#666;">AI Assistant for GoG Operations</div>
+<div class="gog-header">
+  <div class="republic">REPUBLIC OF GHANA</div>
+  <div class="star">\u2605</div>
+  ${department ? '<div class="dept">' + escapeHtml(department) + '</div>' : ''}
+  <div style="font-size:10pt;color:#666;margin-top:8px">${date}</div>
 </div>
 ${renderMarkdown(msg.content)}
-<div class="footer">Generated by AskOzzy &mdash; ${new Date().toLocaleDateString("en-GB", { day:"numeric", month:"long", year:"numeric" })}</div>
+<div class="footer">Generated by AskOzzy &mdash; ${date}</div>
 </body></html>`);
   win.document.close();
   setTimeout(() => win.print(), 300);
@@ -4241,13 +4411,25 @@ function copyArtifact() {
   });
 }
 
-function downloadArtifact() {
+async function downloadArtifact() {
   if (!state.currentArtifact) return;
   const a = state.currentArtifact;
+
+  // Use proper DOCX for document-type artifacts
+  if (a.type === 'document' && typeof docx !== 'undefined') {
+    try {
+      const doc = _buildGoGDocx(a.content, a.title || 'Document');
+      const blob = await docx.Packer.toBlob(doc);
+      const filename = (a.title || 'document').replace(/[^a-zA-Z0-9-_ ]/g, '') + '.docx';
+      _triggerDownload(blob, filename);
+      return;
+    } catch (err) { console.error('DOCX artifact generation failed:', err); }
+  }
+
+  // Fallback for code, table, or when docx unavailable
   const ext = a.type === 'code' ? '.txt' : a.type === 'table' ? '.csv' : '.md';
   let content = a.content;
   if (a.type === 'table') {
-    // Convert to CSV
     const lines = content.split('\n').filter(l => l.includes('|') && !l.includes('---'));
     content = lines.map(l => l.split('|').filter(c => c.trim()).map(c => '"' + c.trim() + '"').join(',')).join('\n');
   }

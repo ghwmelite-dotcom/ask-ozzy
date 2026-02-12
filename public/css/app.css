@@ -5460,3 +5460,29 @@ html, body {
     bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   }
 }
+
+/* ─── Print Styles ──────────────────────────────────────────────────── */
+@media print {
+  .sidebar, .main-header, .input-area, .welcome-screen,
+  .flag-stripe, .guide-fab, .citizen-bot-fab,
+  .modal-overlay, .artifact-panel, .msg-actions,
+  #announcements-area, .input-tools, .input-disclaimer,
+  .tool-pill, .btn-new-chat, .sidebar-footer,
+  .usage-badge, .theme-toggle, .lang-selector-wrap,
+  .privacy-badge, .header-help-btn { display: none !important; }
+  body { background: #fff !important; }
+  .app-container { display: block !important; }
+  .main-content { margin: 0 !important; padding: 0 !important; }
+  .chat-area { overflow: visible !important; height: auto !important; }
+  #chat-screen { display: block !important; }
+  .message { break-inside: avoid; padding: 8px 0; border: none !important; background: none !important; }
+  .message.user { display: none; }
+  .message-body { max-width: 100%; }
+  .message-content { font-size: 12pt; line-height: 1.6; color: #000; }
+  .message-content h1 { color: #006B3F; border-bottom: 2px solid #006B3F; padding-bottom: 4px; }
+  .message-content h2 { color: #006B3F; }
+  .message-content pre { border: 1px solid #ccc; background: #f9f9f9 !important; }
+  .message-content table { border-collapse: collapse; width: 100%; }
+  .message-content th, .message-content td { border: 1px solid #999; padding: 6px; }
+  .message-content th { background: #eee !important; }
+}
