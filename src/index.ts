@@ -952,6 +952,12 @@ app.post("/api/chat", authMiddleware, async (c) => {
   // Auto-flag user message for moderation
   c.executionCtx.waitUntil(checkModeration(c.env.DB, conversationId, userMsgId, userId, message));
 
+  // Audit trail: log chat action (non-blocking)
+  c.executionCtx.waitUntil(logUserAudit(c, "chat", message, selectedModel));
+
+  // Track productivity (non-blocking)
+  c.executionCtx.waitUntil(trackProductivity(c, "chat"));
+
   // Get conversation history (last 20 messages for context)
   const { results: history } = await c.env.DB.prepare(
     "SELECT role, content FROM messages WHERE conversation_id = ? ORDER BY created_at DESC LIMIT 20"
@@ -1234,6 +1240,12 @@ app.post("/api/research", authMiddleware, async (c) => {
     "INSERT INTO research_reports (id, user_id, conversation_id, query) VALUES (?, ?, ?, ?)"
   ).bind(reportId, userId, conversationId, query).run();
 
+  // Audit trail: log research action (non-blocking)
+  c.executionCtx.waitUntil(logUserAudit(c, "research", query));
+
+  // Track productivity (non-blocking)
+  c.executionCtx.waitUntil(trackProductivity(c, "research"));
+
   // SSE stream for real-time progress
   const { readable, writable } = new TransformStream();
   const writer = writable.getWriter();
@@ -1411,6 +1423,9 @@ app.post("/api/analyze", authMiddleware, async (c) => {
     return c.json({ error: "A file (CSV or XLSX) is required" }, 400);
   }
 
+  // Audit trail: log analyze action (non-blocking)
+  c.executionCtx.waitUntil(logUserAudit(c, "analyze", prompt));
+
   const fileName = file.name.toLowerCase();
   let csvText = "";
 
@@ -1583,6 +1598,9 @@ Keep datasets data arrays to max 20 items. Return ONLY valid JSON.`;
       return cells;
     });
 
+    // Track productivity (non-blocking)
+    c.executionCtx.waitUntil(trackProductivity(c, "analysis"));
+
     return c.json({
       summary: analysis.summary,
       insights: analysis.insights || [],
@@ -1703,6 +1721,9 @@ app.post("/api/vision", authMiddleware, async (c) => {
     return c.json({ error: "Image must be under 5MB" }, 400);
   }
 
+  // Audit trail: log vision action (non-blocking)
+  c.executionCtx.waitUntil(logUserAudit(c, "vision", prompt, "@cf/llava-hf/llava-1.5-7b-hf"));
+
   const imageBytes = await image.arrayBuffer();
   const imageArray = [...new Uint8Array(imageBytes)];
 
@@ -1724,6 +1745,9 @@ app.post("/api/vision", authMiddleware, async (c) => {
     });
 
     const description = (result as any).description || (result as any).response || "";
+
+    // Track productivity (non-blocking)
+    c.executionCtx.waitUntil(trackProductivity(c, "vision"));
 
     return c.json({
       description,
@@ -1797,6 +1821,9 @@ app.post("/api/chat/image", authMiddleware, async (c) => {
   await c.env.DB.prepare(
     "INSERT INTO messages (id, conversation_id, role, content) VALUES (?, ?, 'assistant', ?)"
   ).bind(assistantMsgId, conversationId, imageDescription).run();
+
+  // Track productivity (non-blocking)
+  c.executionCtx.waitUntil(trackProductivity(c, "vision"));
 
   return c.json({ response: imageDescription, messageId: assistantMsgId });
 });
@@ -2350,6 +2377,248 @@ async function logAudit(db: D1Database, adminId: string, action: string, targetT
     "INSERT INTO audit_log (id, admin_id, action, target_type, target_id, details) VALUES (?, ?, ?, ?, ?, ?)"
   ).bind(generateId(), adminId, action, targetType, targetId || null, details || null).run();
 }
+
+// ─── User Activity Audit Helper (non-blocking) ─────────────────────────
+
+async function logUserAudit(c: any, actionType: string, queryPreview?: string, model?: string) {
+  try {
+    const userId = c.get("userId");
+    const ip = c.req.header("cf-connecting-ip") || c.req.header("x-forwarded-for") || "unknown";
+    const user = await c.env.DB.prepare(
+      "SELECT email, department FROM users WHERE id = ?"
+    ).bind(userId).first<{ email: string; department: string }>();
+
+    await c.env.DB.prepare(
+      "INSERT INTO user_audit_log (user_id, user_email, department, action_type, query_preview, model_used, ip_address) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    ).bind(
+      userId,
+      user?.email || null,
+      user?.department || null,
+      actionType,
+      queryPreview ? queryPreview.substring(0, 200) : null,
+      model || null,
+      ip
+    ).run();
+  } catch {
+    // Audit logging must never break the main request
+  }
+}
+
+// ─── Productivity Tracking ────────────────────────────────────────────
+
+const PRODUCTIVITY_MULTIPLIERS: Record<string, { column: string; minutes: number }> = {
+  chat: { column: "messages_sent", minutes: 2 },
+  research: { column: "research_reports", minutes: 30 },
+  analysis: { column: "analyses_run", minutes: 20 },
+  vision: { column: "messages_sent", minutes: 2 },
+  meeting: { column: "meetings_processed", minutes: 60 },
+  workflow: { column: "workflows_completed", minutes: 45 },
+  document: { column: "documents_generated", minutes: 15 },
+};
+
+async function trackProductivity(c: any, statType: string) {
+  try {
+    const userId = c.get("userId");
+    const today = new Date().toISOString().split("T")[0];
+    const multiplier = PRODUCTIVITY_MULTIPLIERS[statType];
+    if (!multiplier) return;
+
+    await c.env.DB.prepare(
+      `INSERT INTO productivity_stats (user_id, stat_date, ${multiplier.column}, estimated_minutes_saved)
+       VALUES (?, ?, 1, ?)
+       ON CONFLICT(user_id, stat_date) DO UPDATE SET
+         ${multiplier.column} = ${multiplier.column} + 1,
+         estimated_minutes_saved = estimated_minutes_saved + ?`
+    ).bind(userId, today, multiplier.minutes, multiplier.minutes).run();
+  } catch {
+    // Productivity tracking must never break the main request
+  }
+}
+
+// ─── Productivity Dashboard (User) ──────────────────────────────────
+
+app.get("/api/productivity/me", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const today = new Date().toISOString().split("T")[0];
+
+  // This week totals (Monday to today)
+  const dayOfWeek = new Date().getDay();
+  const daysToMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+  const monday = new Date();
+  monday.setDate(monday.getDate() - daysToMonday);
+  const mondayStr = monday.toISOString().split("T")[0];
+
+  const weekTotals = await c.env.DB.prepare(
+    `SELECT
+       COALESCE(SUM(messages_sent), 0) as messages_sent,
+       COALESCE(SUM(documents_generated), 0) as documents_generated,
+       COALESCE(SUM(research_reports), 0) as research_reports,
+       COALESCE(SUM(analyses_run), 0) as analyses_run,
+       COALESCE(SUM(meetings_processed), 0) as meetings_processed,
+       COALESCE(SUM(workflows_completed), 0) as workflows_completed,
+       COALESCE(SUM(estimated_minutes_saved), 0) as estimated_minutes_saved
+     FROM productivity_stats WHERE user_id = ? AND stat_date >= ?`
+  ).bind(userId, mondayStr).first<any>();
+
+  // This month totals
+  const monthStart = today.slice(0, 7) + "-01";
+  const monthTotals = await c.env.DB.prepare(
+    `SELECT
+       COALESCE(SUM(messages_sent), 0) as messages_sent,
+       COALESCE(SUM(documents_generated), 0) as documents_generated,
+       COALESCE(SUM(research_reports), 0) as research_reports,
+       COALESCE(SUM(analyses_run), 0) as analyses_run,
+       COALESCE(SUM(meetings_processed), 0) as meetings_processed,
+       COALESCE(SUM(workflows_completed), 0) as workflows_completed,
+       COALESCE(SUM(estimated_minutes_saved), 0) as estimated_minutes_saved
+     FROM productivity_stats WHERE user_id = ? AND stat_date >= ?`
+  ).bind(userId, monthStart).first<any>();
+
+  // All-time totals
+  const allTimeTotals = await c.env.DB.prepare(
+    `SELECT
+       COALESCE(SUM(messages_sent), 0) as messages_sent,
+       COALESCE(SUM(documents_generated), 0) as documents_generated,
+       COALESCE(SUM(research_reports), 0) as research_reports,
+       COALESCE(SUM(analyses_run), 0) as analyses_run,
+       COALESCE(SUM(meetings_processed), 0) as meetings_processed,
+       COALESCE(SUM(workflows_completed), 0) as workflows_completed,
+       COALESCE(SUM(estimated_minutes_saved), 0) as estimated_minutes_saved
+     FROM productivity_stats WHERE user_id = ?`
+  ).bind(userId).first<any>();
+
+  // Streak: consecutive days with activity working backwards from today
+  const { results: activityDays } = await c.env.DB.prepare(
+    `SELECT stat_date FROM productivity_stats
+     WHERE user_id = ? AND (messages_sent > 0 OR documents_generated > 0 OR research_reports > 0 OR analyses_run > 0 OR meetings_processed > 0 OR workflows_completed > 0)
+     ORDER BY stat_date DESC LIMIT 90`
+  ).bind(userId).all<{ stat_date: string }>();
+
+  let streak = 0;
+  if (activityDays && activityDays.length > 0) {
+    const dateSet = new Set(activityDays.map(d => d.stat_date));
+    // Start from today or yesterday (allow for not-yet-active today)
+    let cur = new Date(today);
+    if (!dateSet.has(today)) {
+      cur.setDate(cur.getDate() - 1);
+      if (!dateSet.has(cur.toISOString().split("T")[0])) {
+        cur = new Date(today); // reset so streak stays 0
+      }
+    }
+    while (dateSet.has(cur.toISOString().split("T")[0])) {
+      streak++;
+      cur.setDate(cur.getDate() - 1);
+    }
+  }
+
+  // Top feature
+  const featureMap: Record<string, number> = {
+    "Chat": allTimeTotals?.messages_sent || 0,
+    "Documents": allTimeTotals?.documents_generated || 0,
+    "Research": allTimeTotals?.research_reports || 0,
+    "Analysis": allTimeTotals?.analyses_run || 0,
+    "Meetings": allTimeTotals?.meetings_processed || 0,
+    "Workflows": allTimeTotals?.workflows_completed || 0,
+  };
+  let topFeature = "Chat";
+  let topCount = 0;
+  for (const [feature, count] of Object.entries(featureMap)) {
+    if (count > topCount) { topFeature = feature; topCount = count; }
+  }
+
+  // Daily usage for last 7 days (for chart)
+  const { results: dailyUsage } = await c.env.DB.prepare(
+    `SELECT stat_date,
+       COALESCE(messages_sent, 0) as messages_sent,
+       COALESCE(documents_generated, 0) as documents_generated,
+       COALESCE(research_reports, 0) as research_reports,
+       COALESCE(analyses_run, 0) as analyses_run,
+       COALESCE(meetings_processed, 0) as meetings_processed,
+       COALESCE(workflows_completed, 0) as workflows_completed,
+       COALESCE(estimated_minutes_saved, 0) as estimated_minutes_saved
+     FROM productivity_stats WHERE user_id = ? AND stat_date >= date('now', '-7 days')
+     ORDER BY stat_date ASC`
+  ).bind(userId).all<any>();
+
+  return c.json({
+    week: weekTotals || {},
+    month: monthTotals || {},
+    allTime: allTimeTotals || {},
+    streak,
+    topFeature,
+    topFeatureCount: topCount,
+    dailyUsage: dailyUsage || [],
+  });
+});
+
+// ─── Productivity Dashboard (Admin) ─────────────────────────────────
+
+app.get("/api/admin/productivity", adminMiddleware, async (c) => {
+  // Per-department aggregates
+  const { results: deptStats } = await c.env.DB.prepare(
+    `SELECT u.department,
+       COUNT(DISTINCT p.user_id) as user_count,
+       COALESCE(SUM(p.messages_sent), 0) as messages_sent,
+       COALESCE(SUM(p.documents_generated), 0) as documents_generated,
+       COALESCE(SUM(p.research_reports), 0) as research_reports,
+       COALESCE(SUM(p.analyses_run), 0) as analyses_run,
+       COALESCE(SUM(p.meetings_processed), 0) as meetings_processed,
+       COALESCE(SUM(p.workflows_completed), 0) as workflows_completed,
+       COALESCE(SUM(p.estimated_minutes_saved), 0) as estimated_minutes_saved
+     FROM productivity_stats p
+     JOIN users u ON u.id = p.user_id
+     GROUP BY u.department
+     ORDER BY estimated_minutes_saved DESC`
+  ).all<any>();
+
+  // Top 10 users by time saved
+  const { results: topUsers } = await c.env.DB.prepare(
+    `SELECT u.full_name, u.department, u.email,
+       COALESCE(SUM(p.messages_sent), 0) as messages_sent,
+       COALESCE(SUM(p.estimated_minutes_saved), 0) as estimated_minutes_saved
+     FROM productivity_stats p
+     JOIN users u ON u.id = p.user_id
+     GROUP BY p.user_id
+     ORDER BY estimated_minutes_saved DESC
+     LIMIT 10`
+  ).all<any>();
+
+  // Daily totals for last 30 days
+  const { results: dailyTotals } = await c.env.DB.prepare(
+    `SELECT stat_date,
+       COALESCE(SUM(messages_sent), 0) as messages_sent,
+       COALESCE(SUM(documents_generated), 0) as documents_generated,
+       COALESCE(SUM(research_reports), 0) as research_reports,
+       COALESCE(SUM(analyses_run), 0) as analyses_run,
+       COALESCE(SUM(meetings_processed), 0) as meetings_processed,
+       COALESCE(SUM(workflows_completed), 0) as workflows_completed,
+       COALESCE(SUM(estimated_minutes_saved), 0) as estimated_minutes_saved
+     FROM productivity_stats
+     WHERE stat_date >= date('now', '-30 days')
+     GROUP BY stat_date
+     ORDER BY stat_date ASC`
+  ).all<any>();
+
+  // Overall totals
+  const overallTotals = await c.env.DB.prepare(
+    `SELECT
+       COALESCE(SUM(messages_sent), 0) as messages_sent,
+       COALESCE(SUM(documents_generated), 0) as documents_generated,
+       COALESCE(SUM(research_reports), 0) as research_reports,
+       COALESCE(SUM(analyses_run), 0) as analyses_run,
+       COALESCE(SUM(meetings_processed), 0) as meetings_processed,
+       COALESCE(SUM(workflows_completed), 0) as workflows_completed,
+       COALESCE(SUM(estimated_minutes_saved), 0) as estimated_minutes_saved
+     FROM productivity_stats`
+  ).first<any>();
+
+  return c.json({
+    departments: deptStats || [],
+    topUsers: topUsers || [],
+    dailyTotals: dailyTotals || [],
+    overall: overallTotals || {},
+  });
+});
 
 // ─── Message Rating ───────────────────────────────────────────────────
 
@@ -3012,7 +3281,7 @@ app.get("/api/admin/export/analytics", adminMiddleware, async (c) => {
   });
 });
 
-// ─── Audit Log (admin view) ──────────────────────────────────────────
+// ─── Audit Log — Admin Actions (legacy view) ─────────────────────────
 
 app.get("/api/admin/audit-log", adminMiddleware, async (c) => {
   const page = parseInt(c.req.query("page") || "1");
@@ -3028,6 +3297,148 @@ app.get("/api/admin/audit-log", adminMiddleware, async (c) => {
   ).bind(limit, offset).all();
 
   return c.json({ logs: results || [], total: total?.count || 0, page, limit });
+});
+
+// ─── User Activity Audit Trail (admin view, filterable + paginated) ────
+
+app.get("/api/admin/audit", adminMiddleware, async (c) => {
+  const page = parseInt(c.req.query("page") || "1");
+  const limit = Math.min(parseInt(c.req.query("limit") || "50"), 100);
+  const offset = (page - 1) * limit;
+  const actionType = c.req.query("action_type") || "";
+  const userId = c.req.query("user_id") || "";
+  const dateFrom = c.req.query("date_from") || "";
+  const dateTo = c.req.query("date_to") || "";
+  const search = c.req.query("search") || "";
+
+  let where = "WHERE 1=1";
+  const params: any[] = [];
+
+  if (actionType) {
+    where += " AND action_type = ?";
+    params.push(actionType);
+  }
+  if (userId) {
+    where += " AND user_id = ?";
+    params.push(userId);
+  }
+  if (dateFrom) {
+    where += " AND created_at >= ?";
+    params.push(dateFrom + " 00:00:00");
+  }
+  if (dateTo) {
+    where += " AND created_at <= ?";
+    params.push(dateTo + " 23:59:59");
+  }
+  if (search) {
+    where += " AND (user_email LIKE ? OR query_preview LIKE ? OR department LIKE ?)";
+    const s = `%${search}%`;
+    params.push(s, s, s);
+  }
+
+  const countResult = await c.env.DB.prepare(
+    `SELECT COUNT(*) as count FROM user_audit_log ${where}`
+  ).bind(...params).first<{ count: number }>();
+
+  const { results } = await c.env.DB.prepare(
+    `SELECT * FROM user_audit_log ${where} ORDER BY created_at DESC LIMIT ? OFFSET ?`
+  ).bind(...params, limit, offset).all();
+
+  return c.json({
+    entries: results || [],
+    total: countResult?.count || 0,
+    page,
+    limit,
+  });
+});
+
+// ─── User Activity Audit: CSV Export ──────────────────────────────────
+
+app.get("/api/admin/audit/export", adminMiddleware, async (c) => {
+  const actionType = c.req.query("action_type") || "";
+  const dateFrom = c.req.query("date_from") || "";
+  const dateTo = c.req.query("date_to") || "";
+  const search = c.req.query("search") || "";
+
+  let where = "WHERE 1=1";
+  const params: any[] = [];
+
+  if (actionType) {
+    where += " AND action_type = ?";
+    params.push(actionType);
+  }
+  if (dateFrom) {
+    where += " AND created_at >= ?";
+    params.push(dateFrom + " 00:00:00");
+  }
+  if (dateTo) {
+    where += " AND created_at <= ?";
+    params.push(dateTo + " 23:59:59");
+  }
+  if (search) {
+    where += " AND (user_email LIKE ? OR query_preview LIKE ? OR department LIKE ?)";
+    const s = `%${search}%`;
+    params.push(s, s, s);
+  }
+
+  const { results } = await c.env.DB.prepare(
+    `SELECT * FROM user_audit_log ${where} ORDER BY created_at DESC LIMIT 10000`
+  ).bind(...params).all();
+
+  const rows = results || [];
+  let csv = "ID,User ID,Email,Department,Action Type,Query Preview,Model Used,IP Address,Timestamp\n";
+  for (const r of rows) {
+    const escape = (v: any) => {
+      if (v === null || v === undefined) return "";
+      const s = String(v).replace(/"/g, '""');
+      return s.includes(",") || s.includes('"') || s.includes("\n") ? `"${s}"` : s;
+    };
+    csv += [
+      r.id, r.user_id, escape(r.user_email), escape(r.department),
+      r.action_type, escape(r.query_preview), escape(r.model_used),
+      r.ip_address, r.created_at,
+    ].join(",") + "\n";
+  }
+
+  return new Response(csv, {
+    headers: {
+      "Content-Type": "text/csv",
+      "Content-Disposition": `attachment; filename="askozzy-audit-${new Date().toISOString().split("T")[0]}.csv"`,
+    },
+  });
+});
+
+// ─── User Activity Audit: Aggregate Stats ─────────────────────────────
+
+app.get("/api/admin/audit/stats", adminMiddleware, async (c) => {
+  const totalResult = await c.env.DB.prepare(
+    "SELECT COUNT(*) as count FROM user_audit_log"
+  ).first<{ count: number }>();
+
+  const todayStr = new Date().toISOString().split("T")[0];
+  const todayResult = await c.env.DB.prepare(
+    "SELECT COUNT(*) as count FROM user_audit_log WHERE date(created_at) = ?"
+  ).bind(todayStr).first<{ count: number }>();
+
+  const { results: byAction } = await c.env.DB.prepare(
+    "SELECT action_type, COUNT(*) as count FROM user_audit_log GROUP BY action_type ORDER BY count DESC"
+  ).all<{ action_type: string; count: number }>();
+
+  const { results: byDepartment } = await c.env.DB.prepare(
+    "SELECT department, COUNT(*) as count FROM user_audit_log WHERE department IS NOT NULL AND department != '' GROUP BY department ORDER BY count DESC LIMIT 15"
+  ).all<{ department: string; count: number }>();
+
+  const { results: dailyCounts } = await c.env.DB.prepare(
+    "SELECT date(created_at) as day, COUNT(*) as count FROM user_audit_log WHERE created_at >= datetime('now', '-30 days') GROUP BY date(created_at) ORDER BY day ASC"
+  ).all<{ day: string; count: number }>();
+
+  return c.json({
+    total: totalResult?.count || 0,
+    today: todayResult?.count || 0,
+    byAction: byAction || [],
+    byDepartment: byDepartment || [],
+    dailyCounts: dailyCounts || [],
+  });
 });
 
 // ─── Content Moderation (admin) ───────────────────────────────────────
@@ -4306,6 +4717,9 @@ app.post("/api/workflows/:id/step", authMiddleware, async (c) => {
   ).bind(id, userId).first<{ steps: string; type: string; name: string; current_step: number }>();
   if (!workflow) return c.json({ error: "Workflow not found" }, 404);
 
+  // Audit trail: log workflow step advance (non-blocking)
+  c.executionCtx.waitUntil(logUserAudit(c, "workflow_step", workflow.name + " (step " + (stepIndex + 1) + ")"));
+
   const steps = JSON.parse(workflow.steps);
   if (stepIndex < 0 || stepIndex >= steps.length) return c.json({ error: "Invalid step" }, 400);
 
@@ -4340,6 +4754,10 @@ app.post("/api/workflows/:id/step", authMiddleware, async (c) => {
       await c.env.DB.prepare(
         "UPDATE workflows SET steps = ?, current_step = ?, output = ?, status = 'completed', completed_at = datetime('now') WHERE id = ?"
       ).bind(JSON.stringify(steps), stepIndex + 1, output, id).run();
+
+      // Track productivity: workflow completed + document generated (non-blocking)
+      c.executionCtx.waitUntil(trackProductivity(c, "workflow"));
+      c.executionCtx.waitUntil(trackProductivity(c, "document"));
 
       return c.json({ step: steps[stepIndex], output, completed: true });
     } catch {
@@ -4399,6 +4817,9 @@ app.post("/api/meetings/upload", authMiddleware, async (c) => {
     "INSERT INTO meetings (id, user_id, title) VALUES (?, ?, ?)"
   ).bind(meetingId, userId, title).run();
 
+  // Audit trail: log meeting transcription (non-blocking)
+  c.executionCtx.waitUntil(logUserAudit(c, "meeting_transcribe", title, "@cf/openai/whisper"));
+
   // Transcribe with Whisper
   try {
     const audioBytes = await audio.arrayBuffer();
@@ -4410,6 +4831,9 @@ app.post("/api/meetings/upload", authMiddleware, async (c) => {
     await c.env.DB.prepare(
       "UPDATE meetings SET transcript = ?, status = 'transcribed' WHERE id = ?"
     ).bind(transcript, meetingId).run();
+
+    // Track productivity (non-blocking)
+    c.executionCtx.waitUntil(trackProductivity(c, "meeting"));
 
     return c.json({ meetingId, transcript, status: "transcribed" });
   } catch (e) {

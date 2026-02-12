@@ -160,6 +160,7 @@ function switchTab(tab) {
     "bulk-import": () => {},  // No auto-load needed
     "document-training": loadTrainingStatus,
     "agents": loadAgentsList,
+    "productivity": loadProductivityTab,
   };
   if (loaders[tab]) loaders[tab]();
 }
@@ -838,40 +839,173 @@ async function reviewFlag(flagId, action) {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  TAB: Audit Log
+//  TAB: Audit Log (User Activity Trail)
 // ═══════════════════════════════════════════════════════════════════
 
 let auditLogPage = 1;
+let auditStatsLoaded = false;
+
+const debouncedAuditSearch = debounce(() => loadAuditLog(1), 400);
+
+function getAuditFilters() {
+  return {
+    action_type: document.getElementById("audit-action-filter").value,
+    date_from: document.getElementById("audit-date-from").value,
+    date_to: document.getElementById("audit-date-to").value,
+    search: document.getElementById("audit-search").value.trim(),
+  };
+}
+
+function buildAuditQueryString(page) {
+  const f = getAuditFilters();
+  const params = new URLSearchParams({ page: page, limit: 50 });
+  if (f.action_type) params.set("action_type", f.action_type);
+  if (f.date_from) params.set("date_from", f.date_from);
+  if (f.date_to) params.set("date_to", f.date_to);
+  if (f.search) params.set("search", f.search);
+  return params.toString();
+}
+
+const ACTION_LABELS = {
+  chat: "Chat",
+  research: "Research",
+  analyze: "Analyze",
+  vision: "Vision",
+  workflow_step: "Workflow",
+  meeting_transcribe: "Meeting",
+};
+
+function actionBadge(type) {
+  var colors = {
+    chat: "#3b82f6",
+    research: "#8b5cf6",
+    analyze: "#f59e0b",
+    vision: "#10b981",
+    workflow_step: "#6366f1",
+    meeting_transcribe: "#ec4899",
+  };
+  var color = colors[type] || "var(--text-muted)";
+  var label = ACTION_LABELS[type] || type;
+  return '<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:' + color + '22;color:' + color + ';border:1px solid ' + color + '44;">' + escapeHtml(label) + '</span>';
+}
+
+async function loadAuditStats() {
+  var el = document.getElementById("audit-stats");
+  try {
+    var res = await apiFetch("/api/admin/audit/stats");
+    var d = await res.json();
+
+    var topDept = (d.byDepartment && d.byDepartment.length > 0) ? d.byDepartment[0].department : "N/A";
+    var topDeptCount = (d.byDepartment && d.byDepartment.length > 0) ? d.byDepartment[0].count : 0;
+
+    el.innerHTML = '<div class="stats-grid">' +
+      '<div class="stat-card">' +
+        '<div class="stat-value">' + (d.total || 0) + '</div>' +
+        '<div class="stat-label">Total Queries</div>' +
+      '</div>' +
+      '<div class="stat-card green">' +
+        '<div class="stat-value">' + (d.today || 0) + '</div>' +
+        '<div class="stat-label">Queries Today</div>' +
+      '</div>' +
+      '<div class="stat-card">' +
+        '<div class="stat-value">' + escapeHtml(topDept) + '</div>' +
+        '<div class="stat-label">Top Department (' + topDeptCount + ')</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="admin-row" style="margin-top:16px;">' +
+      '<div class="admin-card">' +
+        '<h3>Queries by Action Type</h3>' +
+        ((d.byAction || []).length === 0 ? '<div class="admin-empty">No data yet</div>' :
+          '<div class="bar-chart">' +
+          d.byAction.map(function(r) {
+            var maxCount = Math.max.apply(null, d.byAction.map(function(x) { return x.count; }));
+            var pct = maxCount > 0 ? (r.count / maxCount * 100) : 0;
+            return '<div class="bar-row">' +
+              '<span class="bar-label">' + (ACTION_LABELS[r.action_type] || r.action_type) + '</span>' +
+              '<div class="bar-track"><div class="bar-fill" style="width:' + Math.max(pct, 1) + '%"></div></div>' +
+              '<span class="bar-value">' + r.count + '</span>' +
+            '</div>';
+          }).join("") +
+          '</div>'
+        ) +
+      '</div>' +
+      '<div class="admin-card">' +
+        '<h3>Top Departments</h3>' +
+        ((d.byDepartment || []).length === 0 ? '<div class="admin-empty">No data yet</div>' :
+          '<div class="bar-chart">' +
+          d.byDepartment.slice(0, 10).map(function(r) {
+            var maxCount = Math.max.apply(null, d.byDepartment.map(function(x) { return x.count; }));
+            var pct = maxCount > 0 ? (r.count / maxCount * 100) : 0;
+            return '<div class="bar-row">' +
+              '<span class="bar-label">' + escapeHtml(r.department) + '</span>' +
+              '<div class="bar-track"><div class="bar-fill green" style="width:' + Math.max(pct, 1) + '%"></div></div>' +
+              '<span class="bar-value">' + r.count + '</span>' +
+            '</div>';
+          }).join("") +
+          '</div>'
+        ) +
+      '</div>' +
+    '</div>' +
+    '<div class="admin-card" style="margin-top:16px;">' +
+      '<h3>Daily Activity (Last 30 Days)</h3>' +
+      ((d.dailyCounts || []).length === 0 ? '<div class="admin-empty">No data yet</div>' :
+        '<div class="bar-chart">' +
+        d.dailyCounts.map(function(r) {
+          var maxCount = Math.max.apply(null, d.dailyCounts.map(function(x) { return x.count; }));
+          var pct = maxCount > 0 ? (r.count / maxCount * 100) : 0;
+          return '<div class="bar-row">' +
+            '<span class="bar-label">' + formatDateShort(r.day) + '</span>' +
+            '<div class="bar-track"><div class="bar-fill" style="width:' + Math.max(pct, 1) + '%"></div></div>' +
+            '<span class="bar-value">' + r.count + '</span>' +
+          '</div>';
+        }).join("") +
+        '</div>'
+      ) +
+    '</div>';
+    auditStatsLoaded = true;
+  } catch (err) {
+    el.innerHTML = '<div class="admin-empty">Failed to load audit stats</div>';
+  }
+}
 
 async function loadAuditLog(page) {
   auditLogPage = page || 1;
-  const el = document.getElementById("audit-log-content");
+  var el = document.getElementById("audit-log-content");
   el.innerHTML = '<div class="admin-loader"><div class="spinner"></div></div>';
 
-  try {
-    const res = await apiFetch("/api/admin/audit-log?page=" + auditLogPage + "&limit=50");
-    const d = await res.json();
-    const logs = d.logs || d.entries || d || [];
-    const total = d.total || logs.length;
+  // Load stats on first visit
+  if (!auditStatsLoaded) {
+    loadAuditStats();
+  }
 
-    if (logs.length === 0) {
-      el.innerHTML = '<div class="admin-empty">No audit log entries</div>';
+  try {
+    var qs = buildAuditQueryString(auditLogPage);
+    var res = await apiFetch("/api/admin/audit?" + qs);
+    var d = await res.json();
+    var entries = d.entries || [];
+    var total = d.total || 0;
+
+    if (entries.length === 0) {
+      el.innerHTML = '<div class="admin-empty">No audit log entries match your filters</div>';
       document.getElementById("audit-log-pagination").innerHTML = "";
       return;
     }
 
     el.innerHTML = '<div class="admin-table-wrapper"><table class="admin-table"><thead><tr>' +
-      '<th>Admin</th><th>Action</th><th>Target Type</th><th>Target ID</th><th>Details</th><th>Timestamp</th>' +
+      '<th>Timestamp</th><th>User Email</th><th>Department</th><th>Action</th><th>Query Preview</th><th>Model</th><th>IP</th>' +
       '</tr></thead><tbody>' +
-      logs.map(entry => {
-        const details = typeof entry.details === "object" ? JSON.stringify(entry.details) : (entry.details || '—');
+      entries.map(function(entry) {
+        var modelShort = (entry.model_used || "").split("/").pop() || "—";
+        var preview = entry.query_preview || "—";
+        if (preview.length > 80) preview = preview.substring(0, 77) + "...";
         return '<tr>' +
-          '<td>' + escapeHtml(entry.admin_name || entry.admin_email || '—') + '</td>' +
-          '<td><span class="audit-action">' + escapeHtml(entry.action || '—') + '</span></td>' +
-          '<td>' + escapeHtml(entry.target_type || '—') + '</td>' +
-          '<td style="font-size:11px;font-family:monospace;color:var(--text-muted);">' + escapeHtml(entry.target_id || '—') + '</td>' +
-          '<td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;">' + escapeHtml(details) + '</td>' +
-          '<td>' + formatDate(entry.created_at || entry.timestamp) + '</td>' +
+          '<td style="white-space:nowrap;">' + formatDate(entry.created_at) + '</td>' +
+          '<td>' + escapeHtml(entry.user_email || '—') + '</td>' +
+          '<td>' + escapeHtml(entry.department || '—') + '</td>' +
+          '<td>' + actionBadge(entry.action_type) + '</td>' +
+          '<td style="max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;" title="' + escapeHtml(entry.query_preview || '') + '">' + escapeHtml(preview) + '</td>' +
+          '<td style="font-size:11px;color:var(--text-muted);" title="' + escapeHtml(entry.model_used || '') + '">' + escapeHtml(modelShort) + '</td>' +
+          '<td style="font-size:11px;font-family:monospace;color:var(--text-muted);">' + escapeHtml(entry.ip_address || '—') + '</td>' +
         '</tr>';
       }).join("") +
       '</tbody></table></div>';
@@ -879,6 +1013,36 @@ async function loadAuditLog(page) {
     renderPagination("audit-log-pagination", auditLogPage, total, 50, "loadAuditLog");
   } catch (err) {
     el.innerHTML = '<div class="admin-empty">Failed to load audit log</div>';
+  }
+}
+
+async function exportAuditCSV() {
+  try {
+    var f = getAuditFilters();
+    var params = new URLSearchParams();
+    if (f.action_type) params.set("action_type", f.action_type);
+    if (f.date_from) params.set("date_from", f.date_from);
+    if (f.date_to) params.set("date_to", f.date_to);
+    if (f.search) params.set("search", f.search);
+
+    var res = await apiFetch("/api/admin/audit/export?" + params.toString());
+    if (!res.ok) {
+      var d = await res.json().catch(function() { return {}; });
+      alert(d.error || "Export failed");
+      return;
+    }
+
+    var blob = await res.blob();
+    var url = window.URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "askozzy-audit-" + new Date().toISOString().split("T")[0] + ".csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  } catch {
+    alert("Failed to export audit log");
   }
 }
 
@@ -1910,6 +2074,211 @@ async function deleteAgent(id) {
     await apiFetch("/api/admin/agents/" + id, { method: "DELETE" });
     loadAgentsList();
   } catch {}
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  TAB: Productivity Dashboard
+// ═══════════════════════════════════════════════════════════════════
+
+var adminProductivityChart = null;
+
+async function loadProductivityTab() {
+  var el = document.getElementById("productivity-content");
+  if (!el) return;
+  el.innerHTML = '<div class="admin-loader"><div class="spinner"></div></div>';
+
+  try {
+    var res = await apiFetch("/api/admin/productivity");
+    var d = await res.json();
+
+    var overall = d.overall || {};
+    var totalMinutes = overall.estimated_minutes_saved || 0;
+    var totalHours = (totalMinutes / 60).toFixed(1);
+    var roiValue = (totalMinutes / 60 * 25).toFixed(2);
+    var totalMessages = overall.messages_sent || 0;
+    var totalDocs = (overall.documents_generated || 0) + (overall.workflows_completed || 0);
+    var totalResearch = (overall.research_reports || 0) + (overall.analyses_run || 0);
+
+    var html = '';
+
+    // Stats cards
+    html += '<div class="stats-grid">' +
+      '<div class="stat-card"><div class="stat-value">' + totalMessages + '</div><div class="stat-label">Total Messages</div></div>' +
+      '<div class="stat-card green"><div class="stat-value">' + totalHours + 'h</div><div class="stat-label">Hours Saved</div></div>' +
+      '<div class="stat-card"><div class="stat-value">' + totalDocs + '</div><div class="stat-label">Documents Generated</div></div>' +
+      '<div class="stat-card green"><div class="stat-value">GHS ' + roiValue + '</div><div class="stat-label">Estimated ROI Value</div></div>' +
+      '</div>';
+
+    // ROI Calculator card
+    html += '<div class="admin-row">' +
+      '<div class="admin-card">' +
+      '<h3>ROI Calculator</h3>' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;text-align:center;">' +
+      '<div style="background:var(--bg-tertiary);border-radius:8px;padding:16px;">' +
+        '<div style="font-size:24px;font-weight:700;color:var(--gold);">' + totalHours + '</div>' +
+        '<div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Total Hours Saved</div>' +
+      '</div>' +
+      '<div style="background:var(--bg-tertiary);border-radius:8px;padding:16px;">' +
+        '<div style="font-size:24px;font-weight:700;color:var(--text-primary);">GHS 25/hr</div>' +
+        '<div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Avg. Staff Rate</div>' +
+      '</div>' +
+      '<div style="background:var(--bg-tertiary);border-radius:8px;padding:16px;">' +
+        '<div style="font-size:24px;font-weight:700;color:#006B3F;">GHS ' + roiValue + '</div>' +
+        '<div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Total Value Generated</div>' +
+      '</div>' +
+      '</div>' +
+      '<div style="font-size:11px;color:var(--text-muted);margin-top:12px;">Based on estimated time savings across all AI operations: chat (2 min/msg), research (30 min), analysis (20 min), meetings (60 min), workflows (45 min).</div>' +
+      '</div>';
+
+    // Daily usage trend chart
+    html += '<div class="admin-card">' +
+      '<h3>Daily Usage Trend (Last 30 Days)</h3>' +
+      '<div style="position:relative;height:300px;">' +
+      '<canvas id="admin-productivity-chart" width="800" height="300"></canvas>' +
+      '</div>' +
+      '</div>' +
+      '</div>';
+
+    // Department leaderboard
+    html += '<div class="admin-row">' +
+      '<div class="admin-card">' +
+      '<h3>Department Leaderboard</h3>';
+
+    if ((d.departments || []).length === 0) {
+      html += '<div class="admin-empty">No productivity data yet</div>';
+    } else {
+      html += '<div class="admin-table-wrapper"><table class="admin-table"><thead><tr>' +
+        '<th>Department</th><th>Users</th><th>Messages</th><th>Research</th><th>Docs</th><th>Hours Saved</th>' +
+        '</tr></thead><tbody>';
+      (d.departments || []).forEach(function(dept) {
+        var deptHours = (dept.estimated_minutes_saved / 60).toFixed(1);
+        html += '<tr>' +
+          '<td>' + escapeHtml(dept.department || 'Unknown') + '</td>' +
+          '<td>' + dept.user_count + '</td>' +
+          '<td>' + dept.messages_sent + '</td>' +
+          '<td>' + dept.research_reports + '</td>' +
+          '<td>' + ((dept.documents_generated || 0) + (dept.workflows_completed || 0)) + '</td>' +
+          '<td style="font-weight:600;color:var(--gold);">' + deptHours + 'h</td>' +
+          '</tr>';
+      });
+      html += '</tbody></table></div>';
+    }
+    html += '</div>';
+
+    // Top users
+    html += '<div class="admin-card">' +
+      '<h3>Top 10 Users by Time Saved</h3>';
+
+    if ((d.topUsers || []).length === 0) {
+      html += '<div class="admin-empty">No productivity data yet</div>';
+    } else {
+      html += '<div class="admin-table-wrapper"><table class="admin-table"><thead><tr>' +
+        '<th>#</th><th>Name</th><th>Department</th><th>Messages</th><th>Hours Saved</th>' +
+        '</tr></thead><tbody>';
+      (d.topUsers || []).forEach(function(u, i) {
+        var uHours = (u.estimated_minutes_saved / 60).toFixed(1);
+        html += '<tr>' +
+          '<td>' + (i + 1) + '</td>' +
+          '<td>' + escapeHtml(u.full_name) + '</td>' +
+          '<td>' + escapeHtml(u.department || 'Unknown') + '</td>' +
+          '<td>' + u.messages_sent + '</td>' +
+          '<td style="font-weight:600;color:var(--gold);">' + uHours + 'h</td>' +
+          '</tr>';
+      });
+      html += '</tbody></table></div>';
+    }
+    html += '</div></div>';
+
+    el.innerHTML = html;
+
+    // Render line chart
+    if (typeof Chart !== "undefined" && d.dailyTotals && d.dailyTotals.length > 0) {
+      if (adminProductivityChart) {
+        adminProductivityChart.destroy();
+        adminProductivityChart = null;
+      }
+
+      var labels = d.dailyTotals.map(function(day) { return day.stat_date.slice(5); });
+      var msgData = d.dailyTotals.map(function(day) { return day.messages_sent; });
+      var minutesData = d.dailyTotals.map(function(day) { return Math.round(day.estimated_minutes_saved / 60 * 10) / 10; });
+
+      setTimeout(function() {
+        var canvas = document.getElementById("admin-productivity-chart");
+        if (!canvas) return;
+        try {
+          adminProductivityChart = new Chart(canvas, {
+            type: "line",
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: "Messages",
+                  data: msgData,
+                  borderColor: "#CE1126",
+                  backgroundColor: "rgba(206,17,38,0.1)",
+                  fill: true,
+                  tension: 0.3,
+                  borderWidth: 2,
+                  pointRadius: 2,
+                  yAxisID: "y",
+                },
+                {
+                  label: "Hours Saved",
+                  data: minutesData,
+                  borderColor: "#006B3F",
+                  backgroundColor: "rgba(0,107,63,0.1)",
+                  fill: true,
+                  tension: 0.3,
+                  borderWidth: 2,
+                  pointRadius: 2,
+                  yAxisID: "y1",
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              interaction: { mode: "index", intersect: false },
+              plugins: {
+                legend: {
+                  position: "bottom",
+                  labels: { color: "var(--text-secondary)", boxWidth: 12, font: { size: 11 } },
+                },
+              },
+              scales: {
+                x: {
+                  ticks: { color: "var(--text-secondary)", font: { size: 10 }, maxRotation: 45 },
+                  grid: { display: false },
+                },
+                y: {
+                  type: "linear",
+                  display: true,
+                  position: "left",
+                  beginAtZero: true,
+                  title: { display: true, text: "Messages", color: "#CE1126", font: { size: 11 } },
+                  ticks: { color: "#CE1126", font: { size: 10 } },
+                  grid: { color: "rgba(128,128,128,0.1)" },
+                },
+                y1: {
+                  type: "linear",
+                  display: true,
+                  position: "right",
+                  beginAtZero: true,
+                  title: { display: true, text: "Hours Saved", color: "#006B3F", font: { size: 11 } },
+                  ticks: { color: "#006B3F", font: { size: 10 } },
+                  grid: { drawOnChartArea: false },
+                },
+              },
+            },
+          });
+        } catch (e) {
+          console.error("Admin productivity chart error:", e);
+        }
+      }, 100);
+    }
+  } catch (err) {
+    el.innerHTML = '<div class="admin-empty">Failed to load productivity data</div>';
+  }
 }
 
 // ─── Init ───────────────────────────────────────────────────────────

@@ -566,6 +566,7 @@ function updateSidebarFooter() {
       </div>
       <div class="sidebar-links">
         <button class="sidebar-link-btn" onclick="openUserDashboard()">Dashboard</button>
+        <button class="sidebar-link-btn" onclick="openProductivityDashboard()">Productivity</button>
         <button class="sidebar-link-btn" onclick="openMemoryModal()">🧠 Memory</button>
         <button class="sidebar-link-btn" onclick="open2FASetup()">2FA Security</button>
         <button class="sidebar-link-btn" onclick="revokeAllSessions()">Revoke Sessions</button>
@@ -2826,6 +2827,174 @@ async function openUserDashboard() {
       </div>`;
   } catch {
     body.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">Failed to load dashboard</div>';
+  }
+}
+
+// ─── Productivity Dashboard ──────────────────────────────────────────
+
+let productivityChartInstance = null;
+
+async function openProductivityDashboard() {
+  if (!isLoggedIn()) { requireAuth(openProductivityDashboard); return; }
+
+  let modal = document.getElementById("productivity-dashboard-modal");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.className = "modal-overlay";
+    modal.id = "productivity-dashboard-modal";
+    modal.innerHTML = `
+      <div class="modal" style="max-width:700px;">
+        <div class="modal-header">
+          <h3>Productivity Dashboard</h3>
+          <button class="modal-close" onclick="document.getElementById('productivity-dashboard-modal').classList.remove('active')">&#x2715;</button>
+        </div>
+        <div class="modal-body" id="productivity-dashboard-body" style="padding:24px;">
+          <div style="text-align:center;padding:40px;"><div class="spinner"></div></div>
+        </div>
+      </div>`;
+    document.body.appendChild(modal);
+    modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("active"); });
+  }
+
+  modal.classList.add("active");
+  const body = document.getElementById("productivity-dashboard-body");
+
+  try {
+    const res = await fetch(`${API}/api/productivity/me`, { headers: authHeaders() });
+    if (!res.ok) throw new Error("Failed to load");
+    const d = await res.json();
+
+    const monthMsgs = (d.month?.messages_sent || 0);
+    const monthDocs = (d.month?.documents_generated || 0) + (d.month?.workflows_completed || 0);
+    const monthMinutes = d.month?.estimated_minutes_saved || 0;
+    const monthHours = (monthMinutes / 60).toFixed(1);
+    const allTimeHours = ((d.allTime?.estimated_minutes_saved || 0) / 60).toFixed(1);
+
+    body.innerHTML = `
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:20px;">
+        <div style="background:var(--bg-tertiary);border-radius:10px;padding:16px;text-align:center;">
+          <div style="font-size:28px;font-weight:700;color:var(--gold);">${monthMsgs}</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">Messages This Month</div>
+        </div>
+        <div style="background:var(--bg-tertiary);border-radius:10px;padding:16px;text-align:center;">
+          <div style="font-size:28px;font-weight:700;color:var(--green-light);">${monthDocs}</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">Documents Generated</div>
+        </div>
+        <div style="background:var(--bg-tertiary);border-radius:10px;padding:16px;text-align:center;">
+          <div style="font-size:28px;font-weight:700;color:#CE1126;">${monthHours}h</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">Est. Hours Saved</div>
+        </div>
+        <div style="background:var(--bg-tertiary);border-radius:10px;padding:16px;text-align:center;">
+          <div style="font-size:28px;font-weight:700;color:var(--text-strong);">${d.streak}</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">Day Streak</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+        <div style="background:var(--bg-tertiary);border-radius:10px;padding:16px;">
+          <div style="font-size:13px;font-weight:600;margin-bottom:8px;">This Week</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px;">
+            <div><span style="color:var(--text-muted);">Messages:</span> <strong>${d.week?.messages_sent || 0}</strong></div>
+            <div><span style="color:var(--text-muted);">Research:</span> <strong>${d.week?.research_reports || 0}</strong></div>
+            <div><span style="color:var(--text-muted);">Analyses:</span> <strong>${d.week?.analyses_run || 0}</strong></div>
+            <div><span style="color:var(--text-muted);">Workflows:</span> <strong>${d.week?.workflows_completed || 0}</strong></div>
+          </div>
+        </div>
+        <div style="background:var(--bg-tertiary);border-radius:10px;padding:16px;">
+          <div style="font-size:13px;font-weight:600;margin-bottom:8px;">All Time</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px;">
+            <div><span style="color:var(--text-muted);">Total Msgs:</span> <strong>${d.allTime?.messages_sent || 0}</strong></div>
+            <div><span style="color:var(--text-muted);">Hours Saved:</span> <strong>${allTimeHours}h</strong></div>
+            <div><span style="color:var(--text-muted);">Top Feature:</span> <strong>${escapeHtml(d.topFeature)}</strong></div>
+            <div><span style="color:var(--text-muted);">Meetings:</span> <strong>${d.allTime?.meetings_processed || 0}</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--bg-tertiary);border-radius:10px;padding:16px;">
+        <div style="font-size:13px;font-weight:600;margin-bottom:12px;">Daily Activity - Last 7 Days</div>
+        <canvas id="productivity-chart-canvas" width="600" height="220"></canvas>
+      </div>`;
+
+    // Render chart with Chart.js
+    if (typeof Chart !== "undefined") {
+      // Destroy previous instance if it exists
+      if (productivityChartInstance) {
+        productivityChartInstance.destroy();
+        productivityChartInstance = null;
+      }
+
+      const ghanaColors = ["#CE1126", "#FCD116", "#006B3F", "#1a1d27", "#e8eaed", "#00a86b"];
+      const dailyData = d.dailyUsage || [];
+
+      // Fill in missing days in the last 7 days
+      const labels = [];
+      const msgData = [];
+      const docData = [];
+      const researchData = [];
+      const now = new Date();
+      for (let i = 6; i >= 0; i--) {
+        const date = new Date(now);
+        date.setDate(date.getDate() - i);
+        const dateStr = date.toISOString().split("T")[0];
+        labels.push(dateStr.slice(5)); // MM-DD
+        const dayEntry = dailyData.find(dd => dd.stat_date === dateStr);
+        msgData.push(dayEntry ? dayEntry.messages_sent : 0);
+        docData.push(dayEntry ? (dayEntry.documents_generated + dayEntry.workflows_completed) : 0);
+        researchData.push(dayEntry ? (dayEntry.research_reports + dayEntry.analyses_run) : 0);
+      }
+
+      setTimeout(() => {
+        const canvas = document.getElementById("productivity-chart-canvas");
+        if (!canvas) return;
+        try {
+          productivityChartInstance = new Chart(canvas, {
+            type: "bar",
+            data: {
+              labels,
+              datasets: [
+                {
+                  label: "Messages",
+                  data: msgData,
+                  backgroundColor: ghanaColors[0] + "CC",
+                  borderRadius: 3,
+                },
+                {
+                  label: "Documents",
+                  data: docData,
+                  backgroundColor: ghanaColors[2] + "CC",
+                  borderRadius: 3,
+                },
+                {
+                  label: "Research & Analysis",
+                  data: researchData,
+                  backgroundColor: ghanaColors[1] + "CC",
+                  borderRadius: 3,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  position: "bottom",
+                  labels: { color: "var(--text-secondary)", boxWidth: 12, font: { size: 11 } },
+                },
+              },
+              scales: {
+                x: { ticks: { color: "var(--text-secondary)", font: { size: 11 } }, grid: { display: false } },
+                y: { beginAtZero: true, ticks: { color: "var(--text-secondary)", font: { size: 11 }, stepSize: 1 }, grid: { color: "rgba(128,128,128,0.1)" } },
+              },
+            },
+          });
+        } catch (e) {
+          console.error("Productivity chart error:", e);
+        }
+      }, 100);
+    }
+  } catch {
+    body.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">Failed to load productivity data. Please try again.</div>';
   }
 }
 

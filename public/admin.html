@@ -69,6 +69,7 @@
       <button class="admin-tab" data-tab="bulk-import" onclick="switchTab('bulk-import')">Bulk Import</button>
       <button class="admin-tab" data-tab="document-training" onclick="switchTab('document-training')">Document Training</button>
       <button class="admin-tab" data-tab="agents" onclick="switchTab('agents')">AI Agents</button>
+      <button class="admin-tab" data-tab="productivity" onclick="switchTab('productivity')">Productivity</button>
     </nav>
 
     <!-- Tab Panels -->
@@ -192,6 +193,28 @@
 
       <!-- Audit Log -->
       <div class="admin-tab-panel" id="panel-audit-log">
+        <!-- Stats Cards -->
+        <div id="audit-stats" style="margin-bottom:20px;"><div class="admin-loader"><div class="spinner"></div></div></div>
+
+        <!-- Filter Bar -->
+        <div class="admin-toolbar" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px;">
+          <input type="date" id="audit-date-from" class="admin-search" style="max-width:160px;padding:8px 10px;font-size:12px;" title="From date" />
+          <input type="date" id="audit-date-to" class="admin-search" style="max-width:160px;padding:8px 10px;font-size:12px;" title="To date" />
+          <select id="audit-action-filter" class="inline-select" style="padding:8px 12px;font-size:12px;" onchange="loadAuditLog(1)">
+            <option value="">All Actions</option>
+            <option value="chat">Chat</option>
+            <option value="research">Research</option>
+            <option value="analyze">Analyze</option>
+            <option value="vision">Vision</option>
+            <option value="workflow_step">Workflow</option>
+            <option value="meeting_transcribe">Meeting</option>
+          </select>
+          <input type="text" id="audit-search" class="admin-search" placeholder="Search email, query, department..." style="flex:1;min-width:180px;" oninput="debouncedAuditSearch()" />
+          <button class="btn-action" onclick="loadAuditLog(1)">Filter</button>
+          <button class="btn-action" onclick="exportAuditCSV()">Export CSV</button>
+        </div>
+
+        <!-- Table -->
         <div id="audit-log-content"><div class="admin-loader"><div class="spinner"></div></div></div>
         <div id="audit-log-pagination" class="pagination"></div>
       </div>
@@ -507,6 +530,11 @@
         </div>
       </div>
 
+      <!-- Productivity -->
+      <div class="admin-tab-panel" id="panel-productivity">
+        <div id="productivity-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+      </div>
+
     </div>
   </div>
 
@@ -526,6 +554,7 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js" defer></script>
   <script src="/js/admin.js"></script>
 </body>
 </html>
