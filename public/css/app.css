@@ -6148,27 +6148,289 @@ html, body {
   letter-spacing: 0.5px;
 }
 
-/* How it works */
-.affiliate-how-it-works {
+
+/* ─── Passive Income Projector ────────────────────────────────────── */
+.income-projector {
   background: var(--bg-tertiary);
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 20px;
   border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 24px 20px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
 }
-.affiliate-how-title {
-  font-size: 13px;
+.income-projector::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--flag-red), var(--flag-gold), var(--flag-green));
+}
+.income-projector-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.income-projector-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(252, 209, 22, 0.15), rgba(0, 107, 63, 0.12));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.income-projector-title {
+  font-size: 16px;
   font-weight: 700;
-  margin-bottom: 8px;
   color: var(--text-primary);
 }
-.affiliate-how-step {
+.income-projector-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Slider */
+.income-slider-section {
+  margin-bottom: 20px;
+}
+.income-slider-label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+.income-slider-count {
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--gold);
+  padding: 0 2px;
+}
+.income-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--bg-hover), var(--gold-dim));
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+}
+.income-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FCD116, #e6bf14);
+  border: 3px solid var(--bg-secondary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.income-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+.income-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FCD116, #e6bf14);
+  border: 3px solid var(--bg-secondary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+.income-slider-range {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  padding: 0 2px;
+}
+
+/* Income Breakdown Cards */
+.income-cards-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.income-card {
+  flex: 1;
+  background: var(--bg-primary);
+  border-radius: 14px;
+  padding: 16px 14px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.income-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+.income-card-plus {
+  flex: 0 0 28px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-muted);
+  padding: 0;
+  text-align: center;
+}
+.income-card-plus:hover {
+  transform: none;
+  box-shadow: none;
+}
+.income-card-emoji {
+  margin-bottom: 8px;
+  color: var(--text-muted);
+}
+.income-card-l1 .income-card-emoji { color: var(--flag-green); }
+.income-card-l2 .income-card-emoji { color: var(--gold); }
+.income-card-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+.income-card-amount {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.income-card-l1 .income-card-amount { color: var(--flag-green); }
+.income-card-l2 .income-card-amount { color: var(--gold); }
+.income-card-detail {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+/* Total Card */
+.income-total-card {
+  background: linear-gradient(135deg, #006B3F, #004d2e);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.income-total-card::after {
+  content: "";
+  position: absolute;
+  top: -40%;
+  right: -15%;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+.income-total-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+.income-total-period {
+  flex: 1;
+  text-align: center;
+}
+.income-total-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.income-total-amount {
+  font-weight: 800;
+  color: #fff;
+}
+.income-total-amount.monthly {
+  font-size: 28px;
+}
+.income-total-amount.yearly {
+  font-size: 22px;
+  color: #FCD116;
+}
+.income-total-amount span {
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0.65;
+  margin-left: 2px;
+}
+.income-total-divider {
+  width: 1px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 0 16px;
+  flex-shrink: 0;
+}
+.income-total-note {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 12px;
+  font-style: italic;
+}
+
+/* How it works steps */
+.income-how-it-works {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.income-how-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 12px;
   color: var(--text-secondary);
-  padding: 4px 0;
-  padding-left: 12px;
-  border-left: 2px solid var(--gold);
-  margin-bottom: 6px;
+}
+.income-how-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--gold-dim);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.income-how-item strong {
+  color: var(--gold);
+}
+
+/* Mobile responsive */
+@media (max-width: 500px) {
+  .income-cards-row {
+    flex-direction: column;
+  }
+  .income-card-plus {
+    flex: none;
+    font-size: 16px;
+  }
+  .income-total-amount.monthly {
+    font-size: 22px;
+  }
+  .income-total-amount.yearly {
+    font-size: 18px;
+  }
 }
 
 /* Referral Code/Link Sections */

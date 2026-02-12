@@ -1684,11 +1684,46 @@ function renderAffiliateOverview(el) {
         </div>
       </div>
 
-      <!-- How it works -->
-      <div class="affiliate-how-it-works">
-        <div class="affiliate-how-title">How it works</div>
-        <div class="affiliate-how-step">Share your link &rarr; They subscribe &rarr; You earn 30% every month</div>
-        <div class="affiliate-how-step">When they refer someone &rarr; You earn 5% too</div>
+      <!-- Passive Income Projector -->
+      <div class="income-projector">
+        <div class="income-projector-header">
+          <div class="income-projector-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div>
+            <div class="income-projector-title">Your Passive Income Potential</div>
+            <div class="income-projector-sub">See how much you could earn monthly</div>
+          </div>
+        </div>
+
+        <div class="income-slider-section">
+          <label class="income-slider-label">
+            If you refer <span class="income-slider-count" id="income-ref-count">10</span> paying users:
+          </label>
+          <input type="range" min="1" max="100" value="10" class="income-slider" id="income-slider" oninput="updateIncomeProjection()" />
+          <div class="income-slider-range">
+            <span>1</span><span>25</span><span>50</span><span>75</span><span>100</span>
+          </div>
+        </div>
+
+        <div class="income-breakdown" id="income-breakdown">
+          ${buildIncomeBreakdown(10)}
+        </div>
+
+        <div class="income-how-it-works">
+          <div class="income-how-item">
+            <span class="income-how-num">1</span>
+            <span>Share your link &rarr; They subscribe</span>
+          </div>
+          <div class="income-how-item">
+            <span class="income-how-num">2</span>
+            <span>You earn <strong>30%</strong> of every payment, every month</span>
+          </div>
+          <div class="income-how-item">
+            <span class="income-how-num">3</span>
+            <span>When they refer others &rarr; You earn <strong>5%</strong> too</span>
+          </div>
+        </div>
       </div>
 
       <!-- Referral Code -->
@@ -1747,6 +1782,75 @@ function renderAffiliateOverview(el) {
       </div>
     </div>
   `;
+}
+
+function buildIncomeBreakdown(refs) {
+  // Pricing: Professional GHS 60, Enterprise GHS 100
+  // Assume 70% choose Professional, 30% choose Enterprise
+  const proCount = Math.round(refs * 0.7);
+  const entCount = refs - proCount;
+  const proRevenue = proCount * 60;
+  const entRevenue = entCount * 100;
+
+  const l1Pro = proCount * 60 * 0.30;
+  const l1Ent = entCount * 100 * 0.30;
+  const l1Total = l1Pro + l1Ent;
+
+  // Assume each referral brings ~2 of their own (L2)
+  const l2Refs = refs * 2;
+  const l2ProCount = Math.round(l2Refs * 0.7);
+  const l2EntCount = l2Refs - l2ProCount;
+  const l2Total = (l2ProCount * 60 * 0.05) + (l2EntCount * 100 * 0.05);
+
+  const monthlyTotal = l1Total + l2Total;
+  const yearlyTotal = monthlyTotal * 12;
+
+  return `
+    <div class="income-cards-row">
+      <div class="income-card income-card-l1">
+        <div class="income-card-emoji">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+        </div>
+        <div class="income-card-label">Direct (30%)</div>
+        <div class="income-card-amount">GHS ${l1Total.toFixed(0)}</div>
+        <div class="income-card-detail">${proCount} Pro + ${entCount} Ent</div>
+      </div>
+      <div class="income-card income-card-plus">+</div>
+      <div class="income-card income-card-l2">
+        <div class="income-card-emoji">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="income-card-label">Level 2 (5%)</div>
+        <div class="income-card-amount">GHS ${l2Total.toFixed(0)}</div>
+        <div class="income-card-detail">~${l2Refs} sub-referrals</div>
+      </div>
+    </div>
+
+    <div class="income-total-card">
+      <div class="income-total-row">
+        <div class="income-total-period">
+          <div class="income-total-label">Monthly</div>
+          <div class="income-total-amount monthly">GHS ${monthlyTotal.toFixed(0)}<span>/mo</span></div>
+        </div>
+        <div class="income-total-divider"></div>
+        <div class="income-total-period">
+          <div class="income-total-label">Yearly</div>
+          <div class="income-total-amount yearly">GHS ${yearlyTotal.toLocaleString()}<span>/yr</span></div>
+        </div>
+      </div>
+      <div class="income-total-note">${refs >= 20 ? 'That\u2019s a serious side income!' : refs >= 10 ? 'Enough to cover your own subscription and more!' : 'Just a few referrals to start earning!'}</div>
+    </div>
+  `;
+}
+
+function updateIncomeProjection() {
+  const slider = document.getElementById("income-slider");
+  const countEl = document.getElementById("income-ref-count");
+  const breakdownEl = document.getElementById("income-breakdown");
+  if (!slider || !countEl || !breakdownEl) return;
+  const refs = parseInt(slider.value);
+  countEl.textContent = refs;
+  breakdownEl.innerHTML = buildIncomeBreakdown(refs);
 }
 
 async function renderAffiliateEarnings(el) {
