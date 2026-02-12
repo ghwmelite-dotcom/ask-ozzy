@@ -5,7 +5,7 @@
 //  Push notifications, content indexing, background conversation sync
 // ═══════════════════════════════════════════════════════════════════
 
-const CACHE_NAME = "askozzy-v5";
+const CACHE_NAME = "askozzy-v6";
 const OFFLINE_QUEUE_KEY = "askozzy_offline_queue";
 
 // IndexedDB configuration

@@ -193,7 +193,7 @@ html, body {
   border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  transition: transform var(--transition), width var(--transition);
+  transition: transform var(--transition), width var(--transition), visibility 0s linear 0s;
   z-index: 100;
 }
 
@@ -205,6 +205,10 @@ html, body {
   width: 0;
   min-width: 0;
   transform: translateX(-280px);
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform var(--transition), width var(--transition), visibility 0s linear 0.25s;
 }
 
 /* Sidebar backdrop overlay for mobile */
@@ -1503,10 +1507,23 @@ html, body {
     box-shadow: var(--shadow);
     z-index: 200;
     transform: translateX(0);
+    overflow: visible;
+    visibility: visible;
+    pointer-events: auto;
   }
 
   .sidebar.collapsed {
     transform: translateX(-100%);
+    width: 280px;
+    min-width: 280px;
+    overflow: hidden;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .main-content {
+    width: 100% !important;
+    margin-left: 0 !important;
   }
 
   .sidebar-backdrop {
@@ -8237,6 +8254,7 @@ button, a, [onclick], [role="button"], .tool-pill, .category-tab,
 
   /* Sidebar */
   .sidebar { width: 260px; min-width: 260px; }
+  .sidebar.collapsed { width: 260px; min-width: 260px; }
 
   /* Chat */
   .chat-area { padding: 10px 0; }
@@ -8349,6 +8367,7 @@ button, a, [onclick], [role="button"], .tool-pill, .category-tab,
 
   /* Sidebar */
   .sidebar { width: 240px; min-width: 240px; }
+  .sidebar.collapsed { width: 240px; min-width: 240px; }
 
   /* Chat */
   .chat-messages { padding: 0 6px; gap: 10px; }
