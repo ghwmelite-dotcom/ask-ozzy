@@ -60,6 +60,19 @@
       "icons": [{ "src": "/icons/icon.svg", "sizes": "any" }]
     }
   ],
+  "share_target": {
+    "action": "/?action=share",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "handle_links": "preferred",
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
   "screenshots": [],
   "prefer_related_applications": false
 }

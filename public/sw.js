@@ -4,7 +4,7 @@
 //  IndexedDB template cache + response cache for offline-first AI
 // ═══════════════════════════════════════════════════════════════════
 
-const CACHE_NAME = "askozzy-v3";
+const CACHE_NAME = "askozzy-v4";
 const OFFLINE_QUEUE_KEY = "askozzy_offline_queue";
 
 // IndexedDB configuration
@@ -1049,16 +1049,23 @@ async function preCacheTemplates() {
   }
 }
 
-// ─── Activate: clean old caches ─────────────────────────────────────
+// ─── Activate: clean old caches + enable navigation preload ─────────
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
-        keys
-          .filter((key) => key !== CACHE_NAME)
-          .map((key) => caches.delete(key))
-      )
-    )
+    Promise.all([
+      // Clean old caches
+      caches.keys().then((keys) =>
+        Promise.all(
+          keys
+            .filter((key) => key !== CACHE_NAME)
+            .map((key) => caches.delete(key))
+        )
+      ),
+      // Enable navigation preload if supported
+      self.registration.navigationPreload
+        ? self.registration.navigationPreload.enable()
+        : Promise.resolve(),
+    ])
   );
   self.clients.claim();
 });
@@ -1131,6 +1138,36 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
+  // Navigation requests: use preload response if available
+  if (request.mode === "navigate") {
+    event.respondWith(
+      (async () => {
+        try {
+          // Try navigation preload first (faster SW boot)
+          const preloadResponse = event.preloadResponse ? await event.preloadResponse : null;
+          if (preloadResponse) return preloadResponse;
+
+          // Then try network
+          const networkResponse = await fetch(request);
+          if (networkResponse && networkResponse.status === 200) {
+            const clone = networkResponse.clone();
+            const cache = await caches.open(CACHE_NAME);
+            cache.put(request, clone);
+          }
+          return networkResponse;
+        } catch {
+          // Offline: serve cached page or offline.html
+          const cached = await caches.match(request);
+          if (cached) return cached;
+          const offlinePage = await caches.match("/offline.html");
+          if (offlinePage) return offlinePage;
+          return caches.match("/index.html");
+        }
+      })()
+    );
+    return;
+  }
+
   // Static assets: stale-while-revalidate
   event.respondWith(
     caches.match(request).then((cached) => {
@@ -1142,12 +1179,7 @@ self.addEventListener("fetch", (event) => {
           }
           return response;
         })
-        .catch(() => {
-          if (request.mode === "navigate") {
-            return caches.match("/offline.html");
-          }
-          return cached;
-        });
+        .catch(() => cached);
 
       return cached || fetchPromise;
     })
@@ -1498,6 +1530,20 @@ self.addEventListener("message", (event) => {
         }).catch(() => {});
       });
     }
+  }
+});
+
+// ─── Background Sync: process queue when OS signals connectivity ─────
+self.addEventListener("sync", (event) => {
+  if (event.tag === "sync-offline-queue") {
+    event.waitUntil(processOfflineQueue());
+  }
+});
+
+// ─── Periodic Background Sync (if supported): keep templates fresh ───
+self.addEventListener("periodicsync", (event) => {
+  if (event.tag === "refresh-templates") {
+    event.waitUntil(preCacheTemplates());
   }
 });
 

@@ -4752,19 +4752,18 @@ function renderQueueBadge(count) {
 }
 
 // Show a toast when queued messages are synced
-function showSyncToast(message) {
-  // Remove existing toast
-  const existing = document.querySelector(".offline-syncing-toast");
-  if (existing) existing.remove();
-
-  const toast = document.createElement("div");
-  toast.className = "offline-syncing-toast";
-  toast.innerHTML = `<div class="sync-spinner"></div> ${message}`;
-  document.body.appendChild(toast);
-
-  setTimeout(() => {
-    if (toast.parentElement) toast.remove();
-  }, 4000);
+function showSyncToast(message, duration) {
+  duration = duration || 3000;
+  let toast = document.querySelector(".sync-toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.className = "sync-toast";
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.classList.add("visible");
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => toast.classList.remove("visible"), duration);
 }
 
 // Listen for messages from the service worker
@@ -4776,6 +4775,7 @@ if ("serviceWorker" in navigator) {
     switch (data.type) {
       case "QUEUE_STATUS":
         renderQueueBadge(data.count);
+        updateAppBadge(data.count || 0);
         break;
 
       case "QUEUE_UPDATED":
@@ -4783,21 +4783,25 @@ if ("serviceWorker" in navigator) {
         break;
 
       case "OFFLINE_MESSAGE_SENT":
+        hapticFeedback("success");
         showSyncToast("Queued message sent successfully");
         updateOfflineQueueBadge();
-        // Refresh conversations list
+        updateAppBadge(0);
         if (typeof loadConversations === "function") {
           loadConversations();
         }
         break;
 
       case "OFFLINE_TEMPLATE_SERVED":
-        // Show a subtle notification that an offline template was used
         showSyncToast("Serving offline template for: " + (data.templateId || "").replace(/-/g, " "));
         break;
 
       case "TEMPLATES_CACHED":
         console.log("Offline templates cached:", data.count);
+        break;
+
+      case "SW_UPDATE_AVAILABLE":
+        showSyncToast("Update available — pull to refresh", 5000);
         break;
     }
   });
@@ -4805,10 +4809,17 @@ if ("serviceWorker" in navigator) {
 
 window.addEventListener("online", () => {
   updateOnlineStatus();
-  // Show sync toast when coming back online
+  hapticFeedback("success");
   showSyncToast("Back online — syncing queued messages...");
+  // Trigger Background Sync
+  registerBackgroundSync();
+  // Also clear app badge
+  updateAppBadge(0);
 });
-window.addEventListener("offline", updateOnlineStatus);
+window.addEventListener("offline", () => {
+  updateOnlineStatus();
+  hapticFeedback("error");
+});
 
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", () => {
@@ -4826,6 +4837,374 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+});
+
+// ═══════════════════════════════════════════════════════════════════
+//  PWA: Pull-to-Refresh
+// ═══════════════════════════════════════════════════════════════════
+
+(function initPullToRefresh() {
+  const THRESHOLD = 80;
+  const MAX_PULL = 120;
+  let startY = 0;
+  let currentY = 0;
+  let pulling = false;
+  let refreshing = false;
+
+  // Create PTR UI
+  const container = document.createElement("div");
+  container.className = "ptr-container";
+  container.innerHTML = `<div class="ptr-spinner"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-6.2-8.6"/><polyline points="21 3 21 9 15 9"/></svg></div>`;
+  document.body.prepend(container);
+
+  const spinner = container.querySelector(".ptr-spinner svg");
+
+  function isScrolledToTop() {
+    const chatArea = document.getElementById("chat-area");
+    const chatMessages = document.getElementById("chat-messages");
+    const welcomeScreen = document.getElementById("welcome-screen");
+    // Check if the main scrollable area is at top
+    if (chatArea && chatArea.scrollTop <= 0) return true;
+    if (chatMessages && chatMessages.scrollTop <= 0) return true;
+    if (welcomeScreen && !welcomeScreen.classList.contains("hidden")) return true;
+    // Fallback: check document scroll
+    return window.scrollY <= 0;
+  }
+
+  document.addEventListener("touchstart", (e) => {
+    if (refreshing) return;
+    if (!isScrolledToTop()) return;
+    startY = e.touches[0].clientY;
+    pulling = false;
+  }, { passive: true });
+
+  document.addEventListener("touchmove", (e) => {
+    if (refreshing) return;
+    if (startY === 0) return;
+
+    currentY = e.touches[0].clientY;
+    const dy = currentY - startY;
+
+    // Only activate when pulling down and at the top
+    if (dy < 10 || !isScrolledToTop()) {
+      if (pulling) {
+        pulling = false;
+        container.classList.remove("pulling");
+        container.style.transform = "translateY(-60px)";
+      }
+      return;
+    }
+
+    pulling = true;
+    container.classList.add("pulling");
+
+    const progress = Math.min(dy / MAX_PULL, 1);
+    const translateY = Math.min(dy * 0.5, 60) - 60;
+    container.style.transform = `translateY(${translateY}px)`;
+
+    // Rotate arrow based on progress
+    const rotation = progress * 180;
+    spinner.style.transform = `rotate(${rotation}deg)`;
+
+    // Haptic feedback when crossing threshold
+    if (dy >= THRESHOLD && !container.dataset.hapticFired) {
+      container.dataset.hapticFired = "1";
+      hapticFeedback("light");
+    }
+  }, { passive: true });
+
+  document.addEventListener("touchend", () => {
+    if (refreshing) return;
+    delete container.dataset.hapticFired;
+
+    if (!pulling) {
+      startY = 0;
+      return;
+    }
+
+    const dy = currentY - startY;
+    pulling = false;
+    container.classList.remove("pulling");
+
+    if (dy >= THRESHOLD) {
+      // Trigger refresh
+      refreshing = true;
+      container.classList.add("refreshing");
+      container.style.transform = "translateY(0)";
+      hapticFeedback("medium");
+
+      doRefresh().finally(() => {
+        refreshing = false;
+        container.classList.remove("refreshing");
+        container.style.transform = "translateY(-60px)";
+        spinner.style.transform = "";
+      });
+    } else {
+      container.style.transform = "translateY(-60px)";
+      spinner.style.transform = "";
+    }
+
+    startY = 0;
+    currentY = 0;
+  }, { passive: true });
+
+  async function doRefresh() {
+    showSyncToast("Refreshing...");
+    try {
+      // Reload conversations if logged in
+      if (isLoggedIn()) {
+        await loadConversations();
+        await loadUsageStatus();
+      }
+      // Process offline queue via SW
+      if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({ type: "PROCESS_QUEUE" });
+      }
+      // Small delay so the animation feels natural
+      await new Promise((r) => setTimeout(r, 600));
+    } catch {
+      // Ignore refresh errors
+    }
+  }
+})();
+
+// ═══════════════════════════════════════════════════════════════════
+//  PWA: Swipe-from-Left-Edge to Open Sidebar
+// ═══════════════════════════════════════════════════════════════════
+
+(function initSwipeToOpenSidebar() {
+  const EDGE_WIDTH = 24; // px from left edge
+  const SWIPE_THRESHOLD = 60;
+  let startX = 0;
+  let startY = 0;
+  let tracking = false;
+
+  // Edge indicator
+  const indicator = document.createElement("div");
+  indicator.className = "swipe-edge-indicator";
+  document.body.appendChild(indicator);
+
+  document.addEventListener("touchstart", (e) => {
+    const touch = e.touches[0];
+    if (touch.clientX <= EDGE_WIDTH) {
+      const sidebar = document.getElementById("sidebar");
+      if (sidebar && sidebar.classList.contains("collapsed")) {
+        startX = touch.clientX;
+        startY = touch.clientY;
+        tracking = true;
+        indicator.classList.add("active");
+      }
+    }
+  }, { passive: true });
+
+  document.addEventListener("touchmove", (e) => {
+    if (!tracking) return;
+    const dx = e.touches[0].clientX - startX;
+    const dy = Math.abs(e.touches[0].clientY - startY);
+
+    // If vertical movement exceeds horizontal, cancel
+    if (dy > dx) {
+      tracking = false;
+      indicator.classList.remove("active");
+      return;
+    }
+
+    // Visual feedback on edge indicator
+    const progress = Math.min(dx / SWIPE_THRESHOLD, 1);
+    indicator.style.opacity = progress * 0.6;
+    indicator.style.width = `${6 + progress * 4}px`;
+  }, { passive: true });
+
+  document.addEventListener("touchend", (e) => {
+    if (!tracking) return;
+    tracking = false;
+    indicator.classList.remove("active");
+    indicator.style.opacity = "";
+    indicator.style.width = "";
+
+    const dx = (e.changedTouches[0] || {}).clientX - startX;
+    if (dx >= SWIPE_THRESHOLD) {
+      hapticFeedback("light");
+      toggleSidebar();
+    }
+    startX = 0;
+  }, { passive: true });
+})();
+
+// ═══════════════════════════════════════════════════════════════════
+//  PWA: Haptic Feedback Utility
+// ═══════════════════════════════════════════════════════════════════
+
+function hapticFeedback(intensity) {
+  if (!navigator.vibrate) return;
+  switch (intensity) {
+    case "light":
+      navigator.vibrate(10);
+      break;
+    case "medium":
+      navigator.vibrate(25);
+      break;
+    case "heavy":
+      navigator.vibrate([30, 10, 30]);
+      break;
+    case "success":
+      navigator.vibrate([10, 50, 20]);
+      break;
+    case "error":
+      navigator.vibrate([50, 30, 50, 30, 50]);
+      break;
+    default:
+      navigator.vibrate(10);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  PWA: App Badging API — show queued message count on icon
+// ═══════════════════════════════════════════════════════════════════
+
+async function updateAppBadge(count) {
+  if (!("setAppBadge" in navigator)) return;
+  try {
+    if (count > 0) {
+      await navigator.setAppBadge(count);
+    } else {
+      await navigator.clearAppBadge();
+    }
+  } catch {
+    // Badge API not supported or permission denied
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  PWA: Background Sync Registration
+// ═══════════════════════════════════════════════════════════════════
+
+async function registerBackgroundSync() {
+  if (!("serviceWorker" in navigator)) return;
+  try {
+    const reg = await navigator.serviceWorker.ready;
+    if ("sync" in reg) {
+      await reg.sync.register("sync-offline-queue");
+    }
+  } catch {
+    // Background Sync not supported
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  PWA: Skeleton Loading Screens
+// ═══════════════════════════════════════════════════════════════════
+
+function showChatSkeleton() {
+  const chatMessages = document.getElementById("chat-messages");
+  if (!chatMessages || chatMessages.children.length > 0) return;
+
+  const skeleton = document.createElement("div");
+  skeleton.className = "chat-skeleton";
+  skeleton.innerHTML = `
+    <div class="skeleton-message skeleton"><div class="skeleton-line skeleton" style="width:75%"></div><div class="skeleton-line skeleton" style="width:50%"></div><div class="skeleton-line skeleton" style="width:85%"></div></div>
+    <div class="skeleton-message skeleton" style="margin-left:auto;max-width:70%;"><div class="skeleton-line skeleton" style="width:60%"></div><div class="skeleton-line skeleton"></div></div>
+    <div class="skeleton-message skeleton"><div class="skeleton-line skeleton" style="width:90%"></div><div class="skeleton-line skeleton" style="width:40%"></div></div>
+  `;
+  chatMessages.appendChild(skeleton);
+}
+
+function removeChatSkeleton() {
+  const skeleton = document.querySelector(".chat-skeleton");
+  if (skeleton) skeleton.remove();
+}
+
+function showSidebarSkeleton() {
+  const list = document.getElementById("conversations-list");
+  if (!list) return;
+  list.innerHTML = Array.from({ length: 5 }, () =>
+    '<div class="skeleton-sidebar-item skeleton"></div>'
+  ).join("");
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  PWA: Network Information API — connection-aware behavior
+// ═══════════════════════════════════════════════════════════════════
+
+function getConnectionQuality() {
+  const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if (!conn) return "unknown";
+  if (conn.saveData) return "save-data";
+  const ect = conn.effectiveType; // "slow-2g", "2g", "3g", "4g"
+  return ect || "unknown";
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  PWA: Screen Wake Lock — keep screen on during long AI responses
+// ═══════════════════════════════════════════════════════════════════
+
+let _wakeLock = null;
+
+async function requestWakeLock() {
+  if (!("wakeLock" in navigator)) return;
+  try {
+    _wakeLock = await navigator.wakeLock.request("screen");
+    _wakeLock.addEventListener("release", () => { _wakeLock = null; });
+  } catch {
+    // Wake Lock not available (e.g., low battery)
+  }
+}
+
+function releaseWakeLock() {
+  if (_wakeLock) {
+    _wakeLock.release();
+    _wakeLock = null;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  PWA: Share Target Handler
+// ═══════════════════════════════════════════════════════════════════
+
+(function handleShareTarget() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("action") !== "share") return;
+
+  const title = params.get("title") || "";
+  const text = params.get("text") || "";
+  const url = params.get("url") || "";
+  const shared = [title, text, url].filter(Boolean).join("\n");
+
+  if (shared) {
+    // Clean the URL
+    window.history.replaceState({}, "", "/");
+    // Pre-fill chat input after DOM is ready
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        const input = document.getElementById("chat-input");
+        if (input) {
+          input.value = shared;
+          input.focus();
+          if (typeof autoResizeInput === "function") autoResizeInput();
+          showSyncToast("Content shared to AskOzzy");
+        }
+      }, 500);
+    });
+  }
+})();
+
+// ═══════════════════════════════════════════════════════════════════
+//  PWA: Wake Lock + Haptic on Send (late-bind after function hoisting)
+// ═══════════════════════════════════════════════════════════════════
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Add haptic feedback to send button
+  const sendBtn = document.querySelector(".send-btn, #send-btn, [onclick*='sendMessage']");
+  if (sendBtn) {
+    sendBtn.addEventListener("pointerdown", () => hapticFeedback("light"), { passive: true });
+  }
+
+  // Add haptic to all sidebar conversation items on tap
+  document.addEventListener("pointerdown", (e) => {
+    if (e.target.closest(".conversation-item, .template-card, .category-tab")) {
+      hapticFeedback("light");
+    }
+  }, { passive: true });
 });
 
 // ─── Auto-capture referral code from URL ─────────────────────────────
