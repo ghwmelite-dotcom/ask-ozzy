@@ -1571,7 +1571,13 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
-// ─── Affiliate Programme ─────────────────────────────────────────────
+// ─── Affiliate Programme (Enhanced Dashboard) ───────────────────────
+
+// Affiliate state
+let affiliateData = null;
+let affiliateTab = "overview";
+let affiliateTxPage = 1;
+let affiliateEarningsChart = null;
 
 async function openAffiliateModal() {
   const modal = document.getElementById("affiliate-modal");
@@ -1584,121 +1590,626 @@ async function openAffiliateModal() {
     const res = await fetch(`${API}/api/affiliate/dashboard`, { headers: authHeaders() });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error);
+    affiliateData = data;
+    affiliateTab = "overview";
+    affiliateTxPage = 1;
+    renderAffiliateDashboard();
+  } catch (err) {
+    body.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">Failed to load affiliate data. Please try again.</div>';
+  }
+}
 
-    const referralLink = `${window.location.origin}?ref=${data.referralCode}`;
+function renderAffiliateDashboard() {
+  const body = document.getElementById("affiliate-modal-body");
+  body.innerHTML = `
+    <div class="affiliate-tabs">
+      <button class="affiliate-tab ${affiliateTab === 'overview' ? 'active' : ''}" onclick="switchAffiliateTab('overview')">Overview</button>
+      <button class="affiliate-tab ${affiliateTab === 'earnings' ? 'active' : ''}" onclick="switchAffiliateTab('earnings')">Earnings</button>
+      <button class="affiliate-tab ${affiliateTab === 'network' ? 'active' : ''}" onclick="switchAffiliateTab('network')">My Network</button>
+      <button class="affiliate-tab ${affiliateTab === 'withdraw' ? 'active' : ''}" onclick="switchAffiliateTab('withdraw')">Withdraw</button>
+      <button class="affiliate-tab ${affiliateTab === 'leaderboard' ? 'active' : ''}" onclick="switchAffiliateTab('leaderboard')">Leaderboard</button>
+    </div>
+    <div class="affiliate-tab-content" id="affiliate-tab-content"></div>
+  `;
+  renderAffiliateTabContent();
+}
 
-    body.innerHTML = `
-      <div style="padding:4px 0;">
-        <!-- Tier Badge -->
-        <div style="text-align:center;margin-bottom:20px;">
-          <div class="affiliate-tier-badge tier-${data.affiliateTier || 'starter'}">
-            ${data.currentTier.name} Affiliate
-          </div>
+function switchAffiliateTab(tab) {
+  affiliateTab = tab;
+  // Update tab active states
+  document.querySelectorAll(".affiliate-tab").forEach(t => {
+    t.classList.toggle("active", t.textContent.trim().toLowerCase() === tab);
+  });
+  renderAffiliateTabContent();
+}
+
+function renderAffiliateTabContent() {
+  const el = document.getElementById("affiliate-tab-content");
+  if (!el) return;
+  switch (affiliateTab) {
+    case "overview": renderAffiliateOverview(el); break;
+    case "earnings": renderAffiliateEarnings(el); break;
+    case "network": renderAffiliateNetwork(el); break;
+    case "withdraw": renderAffiliateWithdraw(el); break;
+    case "leaderboard": renderAffiliateLeaderboard(el); break;
+  }
+}
+
+function renderAffiliateOverview(el) {
+  const d = affiliateData;
+  const wallet = d.wallet || 0;
+  const stats = d.stats || {};
+  const referralCode = d.referralCode || "";
+  const referralLink = `${window.location.origin}?ref=${referralCode}`;
+  const directCount = stats.directReferrals || d.totalReferrals || 0;
+  const payingCount = stats.payingReferrals || 0;
+  const monthEarnings = stats.thisMonthEarnings || 0;
+  const l2Earnings = stats.secondLevelEarnings || 0;
+
+  const milestones = [
+    { target: 10, reward: "1 month Starter free", bonus: "GHS 30 bonus", icon: "S" },
+    { target: 25, reward: "1 month Professional free", bonus: "GHS 60 bonus", icon: "P" },
+    { target: 50, reward: "Permanent 50% discount", bonus: "GHS 100 bonus", icon: "D" },
+    { target: 100, reward: "Free Enterprise for life", bonus: "GHS 200 bonus", icon: "E" }
+  ];
+
+  const shareMsg = encodeURIComponent(`Try AskOzzy - Ghana's AI Assistant for Government! Use my code ${referralCode} and get GHS 5 bonus. ${referralLink}`);
+
+  el.innerHTML = `
+    <div class="affiliate-overview-wrap">
+      <!-- Wallet Card -->
+      <div class="affiliate-wallet-card">
+        <div class="affiliate-wallet-label">Available Balance</div>
+        <div class="affiliate-wallet-amount">GHS ${(typeof wallet === 'number' ? wallet : 0).toFixed(2)}</div>
+        <div class="affiliate-wallet-sub">Earn 30% on every referral payment</div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="affiliate-stats-grid">
+        <div class="affiliate-stat-card">
+          <div class="affiliate-stat-value">${directCount}</div>
+          <div class="affiliate-stat-label">Direct Referrals</div>
+        </div>
+        <div class="affiliate-stat-card">
+          <div class="affiliate-stat-value">${payingCount}</div>
+          <div class="affiliate-stat-label">Paying Referrals</div>
+        </div>
+        <div class="affiliate-stat-card">
+          <div class="affiliate-stat-value">GHS ${monthEarnings.toFixed(2)}</div>
+          <div class="affiliate-stat-label">This Month</div>
+        </div>
+        <div class="affiliate-stat-card">
+          <div class="affiliate-stat-value">GHS ${l2Earnings.toFixed(2)}</div>
+          <div class="affiliate-stat-label">2nd Level Earnings</div>
+        </div>
+      </div>
+
+      <!-- How it works -->
+      <div class="affiliate-how-it-works">
+        <div class="affiliate-how-title">How it works</div>
+        <div class="affiliate-how-step">Share your link &rarr; They subscribe &rarr; You earn 30% every month</div>
+        <div class="affiliate-how-step">When they refer someone &rarr; You earn 5% too</div>
+      </div>
+
+      <!-- Referral Code -->
+      <div class="affiliate-ref-section">
+        <div class="affiliate-ref-label">Your Referral Code</div>
+        <div class="affiliate-ref-row">
+          <input type="text" value="${escapeHtml(referralCode)}" readonly class="affiliate-ref-code-input" />
+          <button onclick="copyToClipboard('${referralCode}', this)" class="affiliate-copy-btn">Copy</button>
+        </div>
+      </div>
+
+      <!-- Referral Link -->
+      <div class="affiliate-ref-section">
+        <div class="affiliate-ref-label">Your Referral Link</div>
+        <div class="affiliate-ref-row">
+          <input type="text" value="${escapeHtml(referralLink)}" readonly class="affiliate-ref-link-input" />
+          <button onclick="copyToClipboard('${referralLink}', this)" class="affiliate-copy-btn">Copy</button>
+        </div>
+      </div>
+
+      <!-- Share Buttons -->
+      <div class="affiliate-share-row">
+        <a href="https://wa.me/?text=${shareMsg}" target="_blank" rel="noopener" class="affiliate-share-btn whatsapp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <a href="sms:?body=${shareMsg}" class="affiliate-share-btn sms">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          SMS
+        </a>
+        <button onclick="copyToClipboard('${referralLink}', this)" class="affiliate-share-btn copy-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy Link
+        </button>
+      </div>
+
+      <!-- Milestones -->
+      <div class="affiliate-milestones-section">
+        <div class="affiliate-milestones-title">Milestone Rewards</div>
+        ${milestones.map(m => {
+          const achieved = directCount >= m.target;
+          const pct = Math.min(100, (directCount / m.target) * 100);
+          return `
+          <div class="affiliate-milestone ${achieved ? 'achieved' : ''}">
+            <div class="affiliate-milestone-header">
+              <span class="affiliate-milestone-icon">${achieved ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--flag-green)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' : m.icon}</span>
+              <span class="affiliate-milestone-label">${m.target} referrals &mdash; ${m.reward}</span>
+              <span class="affiliate-milestone-bonus">${m.bonus}</span>
+            </div>
+            <div class="affiliate-milestone-bar">
+              <div class="affiliate-milestone-fill" style="width:${pct}%"></div>
+            </div>
+            <div class="affiliate-milestone-count">${Math.min(directCount, m.target)} / ${m.target}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+  `;
+}
+
+async function renderAffiliateEarnings(el) {
+  el.innerHTML = '<div style="text-align:center;padding:30px;"><div class="spinner"></div></div>';
+
+  // Load transactions
+  try {
+    const [txRes, dashRes] = await Promise.all([
+      fetch(`${API}/api/affiliate/transactions?page=${affiliateTxPage}&limit=20`, { headers: authHeaders() }),
+      Promise.resolve(affiliateData) // use cached dashboard data for chart
+    ]);
+    const txData = await txRes.json();
+    if (!txRes.ok) throw new Error(txData.error);
+
+    const transactions = txData.transactions || [];
+    const totalPages = txData.totalPages || 1;
+    const monthlyEarnings = txData.monthlyEarnings || affiliateData.monthlyEarnings || [];
+
+    el.innerHTML = `
+      <div class="affiliate-earnings-wrap">
+        <!-- Chart -->
+        <div class="affiliate-chart-card">
+          <div class="affiliate-chart-title">Monthly Earnings (Last 6 Months)</div>
+          <canvas id="affiliate-earnings-chart" height="220"></canvas>
         </div>
 
-        <!-- Stats Grid -->
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px;">
-          <div style="background:var(--bg-tertiary);border-radius:10px;padding:14px;text-align:center;">
-            <div style="font-size:24px;font-weight:700;color:var(--gold);">${data.totalReferrals}</div>
-            <div style="font-size:11px;color:var(--text-muted);">Referrals</div>
+        <!-- Transaction History -->
+        <div class="affiliate-tx-section">
+          <div class="affiliate-tx-title">Transaction History</div>
+          ${transactions.length === 0 ? '<div style="text-align:center;padding:20px;color:var(--text-muted);font-size:13px;">No transactions yet. Start referring to earn!</div>' : `
+          <div class="affiliate-tx-table-wrap">
+            <table class="affiliate-tx-table">
+              <thead>
+                <tr><th>Date</th><th>Type</th><th>Amount</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                ${transactions.map(tx => {
+                  const typeMap = {
+                    commission_l1: { label: "Direct 30%", cls: "l1" },
+                    commission_l2: { label: "Level 2 5%", cls: "l2" },
+                    bonus: { label: "Bonus", cls: "bonus" },
+                    withdrawal: { label: "Withdrawal", cls: "withdrawal" }
+                  };
+                  const info = typeMap[tx.type] || { label: tx.type, cls: "l1" };
+                  const isNeg = tx.type === "withdrawal";
+                  const dateStr = tx.created_at ? new Date(tx.created_at + "Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : "--";
+                  return `<tr>
+                    <td>${dateStr}</td>
+                    <td><span class="affiliate-tx-badge ${info.cls}">${info.label}</span></td>
+                    <td class="${isNeg ? 'tx-neg' : 'tx-pos'}">${isNeg ? '-' : '+'}GHS ${Math.abs(tx.amount || 0).toFixed(2)}</td>
+                    <td>${escapeHtml(tx.description || '')}</td>
+                  </tr>`;
+                }).join('')}
+              </tbody>
+            </table>
           </div>
-          <div style="background:var(--bg-tertiary);border-radius:10px;padding:14px;text-align:center;">
-            <div style="font-size:24px;font-weight:700;color:var(--green-light);">GHS ${data.totalEarnings.toFixed(2)}</div>
-            <div style="font-size:11px;color:var(--text-muted);">Total Earned</div>
-          </div>
-          <div style="background:var(--bg-tertiary);border-radius:10px;padding:14px;text-align:center;">
-            <div style="font-size:24px;font-weight:700;color:var(--text-strong);">${data.currentTier.recurringPercent}%</div>
-            <div style="font-size:11px;color:var(--text-muted);">Recurring Rate</div>
-          </div>
+          ${totalPages > 1 ? `
+          <div class="affiliate-tx-pagination">
+            <button class="affiliate-page-btn" onclick="affiliateChangeTxPage(${affiliateTxPage - 1})" ${affiliateTxPage <= 1 ? 'disabled' : ''}>Prev</button>
+            <span class="affiliate-page-info">Page ${affiliateTxPage} of ${totalPages}</span>
+            <button class="affiliate-page-btn" onclick="affiliateChangeTxPage(${affiliateTxPage + 1})" ${affiliateTxPage >= totalPages ? 'disabled' : ''}>Next</button>
+          </div>` : ''}
+          `}
+        </div>
+      </div>
+    `;
+
+    // Render chart
+    if (monthlyEarnings.length > 0) {
+      renderAffiliateEarningsChart(monthlyEarnings);
+    }
+  } catch (err) {
+    el.innerHTML = '<div style="text-align:center;padding:30px;color:var(--text-muted);">Failed to load earnings data.</div>';
+  }
+}
+
+function renderAffiliateEarningsChart(monthlyEarnings) {
+  const canvas = document.getElementById("affiliate-earnings-chart");
+  if (!canvas) return;
+
+  // Destroy old chart if exists
+  if (affiliateEarningsChart) {
+    affiliateEarningsChart.destroy();
+    affiliateEarningsChart = null;
+  }
+
+  const labels = monthlyEarnings.map(m => m.month || m.label || "");
+  const l1Data = monthlyEarnings.map(m => m.l1 || m.direct || 0);
+  const l2Data = monthlyEarnings.map(m => m.l2 || m.secondLevel || 0);
+
+  const ctx = canvas.getContext("2d");
+  affiliateEarningsChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [
+        {
+          label: "Direct (30%)",
+          data: l1Data,
+          backgroundColor: "#006B3F",
+          borderRadius: 4,
+          barPercentage: 0.7,
+          categoryPercentage: 0.6
+        },
+        {
+          label: "Level 2 (5%)",
+          data: l2Data,
+          backgroundColor: "#FCD116",
+          borderRadius: 4,
+          barPercentage: 0.7,
+          categoryPercentage: 0.6
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: { color: getComputedStyle(document.documentElement).getPropertyValue("--text-secondary").trim(), font: { size: 11 } }
+        }
+      },
+      scales: {
+        x: {
+          stacked: true,
+          grid: { display: false },
+          ticks: { color: getComputedStyle(document.documentElement).getPropertyValue("--text-muted").trim(), font: { size: 11 } }
+        },
+        y: {
+          stacked: true,
+          grid: { color: getComputedStyle(document.documentElement).getPropertyValue("--border-color").trim() },
+          ticks: {
+            color: getComputedStyle(document.documentElement).getPropertyValue("--text-muted").trim(),
+            font: { size: 11 },
+            callback: v => "GHS " + v
+          }
+        }
+      }
+    }
+  });
+}
+
+function affiliateChangeTxPage(page) {
+  if (page < 1) return;
+  affiliateTxPage = page;
+  const el = document.getElementById("affiliate-tab-content");
+  if (el) renderAffiliateEarnings(el);
+}
+
+async function renderAffiliateNetwork(el) {
+  el.innerHTML = '<div style="text-align:center;padding:30px;"><div class="spinner"></div></div>';
+
+  try {
+    const res = await fetch(`${API}/api/affiliate/dashboard`, { headers: authHeaders() });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    const referrals = data.recentReferrals || data.referrals || [];
+    const networkSize = data.stats ? (data.stats.directReferrals || 0) + (data.stats.secondLevelCount || 0) : referrals.length;
+
+    el.innerHTML = `
+      <div class="affiliate-network-wrap">
+        <div class="affiliate-network-header">
+          <span class="affiliate-network-size">Total Network: <strong>${networkSize}</strong> people</span>
         </div>
 
-        <!-- Commission Table -->
-        <div style="background:var(--bg-tertiary);border-radius:10px;padding:16px;margin-bottom:20px;">
-          <div style="font-size:13px;font-weight:600;margin-bottom:10px;">Commission Tiers</div>
-          <table style="width:100%;font-size:12px;border-collapse:collapse;">
-            <tr style="color:var(--text-muted);border-bottom:1px solid var(--border-color);">
-              <th style="text-align:left;padding:6px 0;">Tier</th>
-              <th style="text-align:center;padding:6px 0;">Referrals</th>
-              <th style="text-align:center;padding:6px 0;">Signup Bonus</th>
-              <th style="text-align:center;padding:6px 0;">Recurring %</th>
-            </tr>
-            <tr ${data.affiliateTier === 'starter' ? 'style="color:var(--gold);font-weight:600;"' : ''}>
-              <td style="padding:6px 0;">Starter</td><td style="text-align:center;">0+</td><td style="text-align:center;">GHS 10</td><td style="text-align:center;">5%</td>
-            </tr>
-            <tr ${data.affiliateTier === 'bronze' ? 'style="color:var(--gold);font-weight:600;"' : ''}>
-              <td style="padding:6px 0;">Bronze</td><td style="text-align:center;">5+</td><td style="text-align:center;">GHS 15</td><td style="text-align:center;">10%</td>
-            </tr>
-            <tr ${data.affiliateTier === 'silver' ? 'style="color:var(--gold);font-weight:600;"' : ''}>
-              <td style="padding:6px 0;">Silver</td><td style="text-align:center;">20+</td><td style="text-align:center;">GHS 20</td><td style="text-align:center;">15%</td>
-            </tr>
-            <tr ${data.affiliateTier === 'gold' ? 'style="color:var(--gold);font-weight:600;"' : ''}>
-              <td style="padding:6px 0;">Gold</td><td style="text-align:center;">50+</td><td style="text-align:center;">GHS 30</td><td style="text-align:center;">20%</td>
-            </tr>
-          </table>
-        </div>
-
-        ${data.nextTier ? `
-        <div style="background:var(--bg-tertiary);border-radius:10px;padding:14px;margin-bottom:20px;text-align:center;">
-          <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px;">Next tier: <strong style="color:var(--text-primary);">${data.nextTier.name}</strong></div>
-          <div style="background:var(--bg-primary);border-radius:6px;height:8px;overflow:hidden;">
-            <div style="background:var(--gold);height:100%;width:${Math.min(100, ((data.totalReferrals) / data.nextTier.requiredReferrals) * 100)}%;border-radius:6px;transition:width 0.5s;"></div>
-          </div>
-          <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">${data.referralsToNextTier} more referrals needed</div>
-        </div>
-        ` : '<div style="background:rgba(252,209,22,0.1);border:1px solid rgba(252,209,22,0.3);border-radius:10px;padding:14px;margin-bottom:20px;text-align:center;font-size:13px;color:var(--gold);font-weight:600;">You\'ve reached the highest tier! Maximum earnings unlocked.</div>'}
-
-        <!-- Referral Link -->
-        <div style="margin-bottom:16px;">
-          <div style="font-size:13px;font-weight:600;margin-bottom:6px;">Your Referral Code</div>
-          <div style="display:flex;gap:8px;">
-            <input type="text" value="${data.referralCode}" readonly style="flex:1;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:8px;padding:10px 14px;color:var(--gold);font-size:15px;font-weight:700;font-family:monospace;letter-spacing:1px;" />
-            <button onclick="copyToClipboard('${data.referralCode}')" style="background:var(--gold);color:var(--text-on-accent);border:none;border-radius:8px;padding:10px 16px;font-weight:600;cursor:pointer;font-size:12px;">Copy</button>
-          </div>
-        </div>
-
-        <div>
-          <div style="font-size:13px;font-weight:600;margin-bottom:6px;">Your Referral Link</div>
-          <div style="display:flex;gap:8px;">
-            <input type="text" value="${referralLink}" readonly style="flex:1;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:8px;padding:10px 14px;color:var(--text-primary);font-size:12px;" />
-            <button onclick="copyToClipboard('${referralLink}')" style="background:var(--gold);color:var(--text-on-accent);border:none;border-radius:8px;padding:10px 16px;font-weight:600;cursor:pointer;font-size:12px;">Copy</button>
-          </div>
-          <div style="font-size:11px;color:var(--text-muted);margin-top:6px;">Share this link — when someone signs up using it, you earn commissions automatically!</div>
-        </div>
-
-        ${data.recentReferrals.length > 0 ? `
-        <div style="margin-top:20px;">
-          <div style="font-size:13px;font-weight:600;margin-bottom:8px;">Recent Referrals</div>
-          ${data.recentReferrals.map(r => `
-            <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border-color);font-size:12px;">
-              <span>${escapeHtml(r.full_name)}</span>
-              <span style="color:var(--green-light);">+GHS ${r.bonus_amount.toFixed(2)}</span>
+        ${referrals.length === 0 ? '<div style="text-align:center;padding:30px;color:var(--text-muted);font-size:13px;">No referrals yet. Share your link to grow your network!</div>' : `
+        <div class="affiliate-network-tree">
+          ${referrals.map(r => `
+            <div class="affiliate-network-node">
+              <div class="affiliate-network-person">
+                <div class="affiliate-network-avatar">${(r.full_name || "?").charAt(0).toUpperCase()}</div>
+                <div class="affiliate-network-info">
+                  <div class="affiliate-network-name">${escapeHtml(r.full_name || "Unknown")}</div>
+                  <div class="affiliate-network-meta">
+                    <span class="affiliate-network-tier tier-${r.tier || 'free'}">${r.tier || 'free'}</span>
+                    <span class="affiliate-network-status ${r.is_paying ? 'active' : 'free-status'}">${r.is_paying ? 'Active' : 'Free'}</span>
+                    <span class="affiliate-network-date">Joined ${r.joined_at ? new Date(r.joined_at + "Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : "--"}</span>
+                  </div>
+                </div>
+              </div>
+              ${(r.sub_referrals && r.sub_referrals.length > 0) ? `
+              <div class="affiliate-network-children">
+                ${r.sub_referrals.map(sr => `
+                  <div class="affiliate-network-child">
+                    <div class="affiliate-network-avatar small">${(sr.full_name || "?").charAt(0).toUpperCase()}</div>
+                    <div class="affiliate-network-info">
+                      <div class="affiliate-network-name">${escapeHtml(sr.full_name || "Unknown")}</div>
+                      <div class="affiliate-network-meta">
+                        <span class="affiliate-network-tier tier-${sr.tier || 'free'}">${sr.tier || 'free'}</span>
+                        <span class="affiliate-network-status ${sr.is_paying ? 'active' : 'free-status'}">${sr.is_paying ? 'Active' : 'Free'}</span>
+                      </div>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>` : ''}
             </div>
           `).join('')}
         </div>
-        ` : ''}
-      </div>`;
+        `}
+      </div>
+    `;
   } catch (err) {
-    body.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-muted);">Failed to load affiliate data. Please try again.</div>`;
+    el.innerHTML = '<div style="text-align:center;padding:30px;color:var(--text-muted);">Failed to load network data.</div>';
+  }
+}
+
+async function renderAffiliateWithdraw(el) {
+  el.innerHTML = '<div style="text-align:center;padding:30px;"><div class="spinner"></div></div>';
+
+  const wallet = affiliateData.wallet || 0;
+
+  try {
+    // Load withdrawal history from transactions
+    const res = await fetch(`${API}/api/affiliate/transactions?page=1&limit=50`, { headers: authHeaders() });
+    const txData = await res.json();
+    const withdrawals = (txData.transactions || []).filter(t => t.type === "withdrawal");
+
+    el.innerHTML = `
+      <div class="affiliate-withdraw-wrap">
+        <!-- Balance Display -->
+        <div class="affiliate-wallet-card" style="margin-bottom:24px;">
+          <div class="affiliate-wallet-label">Available for Withdrawal</div>
+          <div class="affiliate-wallet-amount">GHS ${wallet.toFixed(2)}</div>
+          <div class="affiliate-wallet-sub">Minimum withdrawal: GHS 20.00</div>
+        </div>
+
+        <!-- Withdrawal Form -->
+        <div class="withdraw-form">
+          <div class="withdraw-form-title">Request Withdrawal</div>
+          <div class="withdraw-form-group">
+            <label>Amount (GHS)</label>
+            <div class="withdraw-amount-row">
+              <input type="number" id="withdraw-amount" min="20" max="${wallet}" step="0.01" placeholder="Enter amount" class="withdraw-input" />
+              <button onclick="document.getElementById('withdraw-amount').value='${wallet.toFixed(2)}'" class="withdraw-all-btn">Withdraw All</button>
+            </div>
+          </div>
+          <div class="withdraw-form-group">
+            <label>MoMo Number</label>
+            <div class="withdraw-momo-row">
+              <span class="withdraw-country-code">+233</span>
+              <input type="tel" id="withdraw-momo" placeholder="24XXXXXXX" maxlength="10" class="withdraw-input momo-input" />
+            </div>
+          </div>
+          <div class="withdraw-form-group">
+            <label>Network</label>
+            <select id="withdraw-network" class="withdraw-input">
+              <option value="">Select network</option>
+              <option value="MTN">MTN Mobile Money</option>
+              <option value="Vodafone">Vodafone Cash</option>
+              <option value="AirtelTigo">AirtelTigo Money</option>
+            </select>
+          </div>
+          <div id="withdraw-error" class="withdraw-error" style="display:none;"></div>
+          <button onclick="submitWithdrawal()" class="withdraw-submit-btn" id="withdraw-submit-btn">Request Withdrawal</button>
+        </div>
+
+        <!-- Withdrawal History -->
+        <div class="affiliate-tx-section" style="margin-top:24px;">
+          <div class="affiliate-tx-title">Withdrawal History</div>
+          ${withdrawals.length === 0 ? '<div style="text-align:center;padding:16px;color:var(--text-muted);font-size:13px;">No withdrawals yet.</div>' : `
+          <div class="affiliate-tx-table-wrap">
+            <table class="affiliate-tx-table">
+              <thead>
+                <tr><th>Date</th><th>Amount</th><th>MoMo Number</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                ${withdrawals.map(w => {
+                  const dateStr = w.created_at ? new Date(w.created_at + "Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : "--";
+                  const status = w.status || "pending";
+                  return `<tr>
+                    <td>${dateStr}</td>
+                    <td>GHS ${Math.abs(w.amount || 0).toFixed(2)}</td>
+                    <td>${escapeHtml(w.momo_number || w.description || "--")}</td>
+                    <td><span class="withdraw-status-badge ${status}">${status.charAt(0).toUpperCase() + status.slice(1)}</span></td>
+                  </tr>`;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+          `}
+        </div>
+      </div>
+    `;
+  } catch (err) {
+    el.innerHTML = `
+      <div class="affiliate-withdraw-wrap">
+        <div class="affiliate-wallet-card" style="margin-bottom:24px;">
+          <div class="affiliate-wallet-label">Available for Withdrawal</div>
+          <div class="affiliate-wallet-amount">GHS ${wallet.toFixed(2)}</div>
+        </div>
+        <div class="withdraw-form">
+          <div class="withdraw-form-title">Request Withdrawal</div>
+          <div class="withdraw-form-group">
+            <label>Amount (GHS)</label>
+            <div class="withdraw-amount-row">
+              <input type="number" id="withdraw-amount" min="20" max="${wallet}" step="0.01" placeholder="Enter amount" class="withdraw-input" />
+              <button onclick="document.getElementById('withdraw-amount').value='${wallet.toFixed(2)}'" class="withdraw-all-btn">Withdraw All</button>
+            </div>
+          </div>
+          <div class="withdraw-form-group">
+            <label>MoMo Number</label>
+            <div class="withdraw-momo-row">
+              <span class="withdraw-country-code">+233</span>
+              <input type="tel" id="withdraw-momo" placeholder="24XXXXXXX" maxlength="10" class="withdraw-input momo-input" />
+            </div>
+          </div>
+          <div class="withdraw-form-group">
+            <label>Network</label>
+            <select id="withdraw-network" class="withdraw-input">
+              <option value="">Select network</option>
+              <option value="MTN">MTN Mobile Money</option>
+              <option value="Vodafone">Vodafone Cash</option>
+              <option value="AirtelTigo">AirtelTigo Money</option>
+            </select>
+          </div>
+          <div id="withdraw-error" class="withdraw-error" style="display:none;"></div>
+          <button onclick="submitWithdrawal()" class="withdraw-submit-btn" id="withdraw-submit-btn">Request Withdrawal</button>
+        </div>
+      </div>
+    `;
+  }
+}
+
+async function submitWithdrawal() {
+  const amount = parseFloat(document.getElementById("withdraw-amount").value);
+  const momoNum = document.getElementById("withdraw-momo").value.trim();
+  const network = document.getElementById("withdraw-network").value;
+  const errEl = document.getElementById("withdraw-error");
+  const btn = document.getElementById("withdraw-submit-btn");
+
+  errEl.style.display = "none";
+
+  if (!amount || amount < 20) {
+    errEl.textContent = "Minimum withdrawal is GHS 20.00";
+    errEl.style.display = "block";
+    return;
+  }
+  if (amount > (affiliateData.wallet || 0)) {
+    errEl.textContent = "Amount exceeds your available balance";
+    errEl.style.display = "block";
+    return;
+  }
+  if (!momoNum || momoNum.length < 9) {
+    errEl.textContent = "Please enter a valid MoMo number";
+    errEl.style.display = "block";
+    return;
+  }
+  if (!network) {
+    errEl.textContent = "Please select a mobile money network";
+    errEl.style.display = "block";
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = "Processing...";
+
+  try {
+    const res = await fetch(`${API}/api/affiliate/withdraw`, {
+      method: "POST",
+      headers: authHeaders(),
+      body: JSON.stringify({
+        amount,
+        momo_number: "+233" + momoNum.replace(/^0/, ""),
+        momo_network: network
+      })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Withdrawal failed");
+
+    // Update local wallet
+    affiliateData.wallet = (affiliateData.wallet || 0) - amount;
+
+    // Refresh the withdraw tab
+    const el = document.getElementById("affiliate-tab-content");
+    if (el) renderAffiliateWithdraw(el);
+
+    // Show success message briefly
+    setTimeout(() => {
+      const errEl2 = document.getElementById("withdraw-error");
+      if (errEl2) {
+        errEl2.textContent = "Withdrawal request submitted successfully! You will receive your funds within 24-48 hours.";
+        errEl2.style.display = "block";
+        errEl2.style.color = "var(--green-light)";
+        errEl2.style.background = "rgba(0,168,107,0.1)";
+        errEl2.style.borderColor = "rgba(0,168,107,0.3)";
+      }
+    }, 100);
+
+  } catch (err) {
+    errEl.textContent = err.message || "Withdrawal failed. Please try again.";
+    errEl.style.display = "block";
+    btn.disabled = false;
+    btn.textContent = "Request Withdrawal";
+  }
+}
+
+async function renderAffiliateLeaderboard(el) {
+  el.innerHTML = '<div style="text-align:center;padding:30px;"><div class="spinner"></div></div>';
+
+  try {
+    const res = await fetch(`${API}/api/affiliate/leaderboard`, { headers: authHeaders() });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    const leaders = data.leaderboard || [];
+    const myRank = data.myRank || null;
+
+    el.innerHTML = `
+      <div class="affiliate-leaderboard-wrap">
+        <div class="affiliate-leaderboard-title">Top Affiliates</div>
+        ${myRank ? `
+        <div class="affiliate-leaderboard-myrank">
+          Your rank: <strong>#${myRank.rank}</strong> with ${myRank.referrals || 0} referrals and GHS ${(myRank.earnings || 0).toFixed(2)} earned
+        </div>` : ''}
+        <div class="affiliate-leaderboard-list">
+          ${leaders.length === 0 ? '<div style="text-align:center;padding:20px;color:var(--text-muted);font-size:13px;">No leaderboard data yet.</div>' : leaders.map((l, i) => {
+            const rank = i + 1;
+            const isMe = l.is_current_user || false;
+            const rankCls = rank === 1 ? "gold" : rank === 2 ? "silver" : rank === 3 ? "bronze" : "";
+            return `
+            <div class="affiliate-leaderboard-row ${rankCls} ${isMe ? 'is-me' : ''}">
+              <div class="affiliate-leaderboard-rank">${rank <= 3 ? ['&#x1F947;', '&#x1F948;', '&#x1F949;'][rank - 1] : '#' + rank}</div>
+              <div class="affiliate-leaderboard-name">${escapeHtml(l.name || "Anonymous")}</div>
+              <div class="affiliate-leaderboard-stats">
+                <span>${l.referrals || 0} referrals</span>
+                <span>GHS ${(l.earnings || 0).toFixed(2)}</span>
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  } catch (err) {
+    el.innerHTML = '<div style="text-align:center;padding:30px;color:var(--text-muted);">Failed to load leaderboard.</div>';
   }
 }
 
 function closeAffiliateModal() {
   document.getElementById("affiliate-modal").classList.remove("active");
+  // Clean up chart
+  if (affiliateEarningsChart) {
+    affiliateEarningsChart.destroy();
+    affiliateEarningsChart = null;
+  }
 }
 
 document.getElementById("affiliate-modal").addEventListener("click", (e) => {
   if (e.target === e.currentTarget) closeAffiliateModal();
 });
 
-function copyToClipboard(text) {
+function copyToClipboard(text, btnElement) {
   navigator.clipboard.writeText(text).then(() => {
-    const btn = event.target;
+    const btn = btnElement || event.target;
     const original = btn.textContent;
     btn.textContent = "Copied!";
     btn.style.background = "var(--green-light)";
+    btn.style.color = "#fff";
     setTimeout(() => {
       btn.textContent = original;
-      btn.style.background = "var(--gold)";
+      btn.style.background = "";
+      btn.style.color = "";
     }, 2000);
   });
 }

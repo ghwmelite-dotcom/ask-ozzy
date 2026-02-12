@@ -511,6 +511,81 @@
 
 [data-theme="light"] .badge-enterprise { color: #808080; }
 
+/* ─── Status Badges ──────────────────────────────────────────────── */
+.badge-warning {
+  background: rgba(255, 193, 7, 0.15);
+  color: #FFC107;
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+.badge-info {
+  background: rgba(33, 150, 243, 0.12);
+  color: #2196F3;
+  border: 1px solid rgba(33, 150, 243, 0.3);
+}
+.badge-success {
+  background: rgba(0, 168, 107, 0.12);
+  color: var(--green-light);
+  border: 1px solid rgba(0, 168, 107, 0.3);
+}
+.badge-danger {
+  background: rgba(206, 17, 38, 0.12);
+  color: var(--red-error-text);
+  border: 1px solid rgba(206, 17, 38, 0.3);
+}
+.badge-default {
+  background: var(--bg-tertiary);
+  color: var(--text-muted);
+}
+
+/* ─── Admin Small Buttons ────────────────────────────────────────── */
+.btn-admin-sm {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin: 1px;
+}
+.btn-approve {
+  background: rgba(0, 168, 107, 0.15);
+  color: var(--green-light);
+}
+.btn-approve:hover {
+  background: rgba(0, 168, 107, 0.3);
+}
+.btn-reject {
+  background: rgba(206, 17, 38, 0.12);
+  color: var(--red-error-text);
+}
+.btn-reject:hover {
+  background: rgba(206, 17, 38, 0.25);
+}
+
+/* ─── Admin Filter Buttons ───────────────────────────────────────── */
+.admin-filter-btn {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.admin-filter-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+.admin-filter-btn.active {
+  background: var(--gold);
+  color: var(--text-on-accent);
+  border-color: var(--gold);
+  font-weight: 600;
+}
+
 /* ─── Message Viewer ─────────────────────────────────────────────── */
 
 .message-viewer {

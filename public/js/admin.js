@@ -617,6 +617,203 @@ async function loadReferrals() {
   } catch (err) {
     el.innerHTML = '<div class="admin-empty">Failed to load referrals</div>';
   }
+
+  // Also load affiliate admin stats and withdrawals
+  loadAffiliateAdminStats();
+  loadWithdrawals("all");
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  Affiliate Admin: Stats
+// ═══════════════════════════════════════════════════════════════════
+
+async function loadAffiliateAdminStats() {
+  const el = document.getElementById("affiliate-admin-stats");
+  if (!el) return;
+
+  try {
+    const res = await apiFetch("/api/admin/affiliate/stats");
+    const d = await res.json();
+
+    el.innerHTML = `
+      <div class="stats-grid" style="margin-bottom:16px;">
+        <div class="stat-card">
+          <div class="stat-value">GHS ${(d.totalCommissions || 0).toFixed(2)}</div>
+          <div class="stat-label">Total Commissions</div>
+        </div>
+        <div class="stat-card" style="border-left:3px solid #FFC107;">
+          <div class="stat-value">GHS ${(d.totalPending || 0).toFixed(2)}</div>
+          <div class="stat-label">Pending Withdrawals</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-value">GHS ${(d.totalPaidOut || 0).toFixed(2)}</div>
+          <div class="stat-label">Total Paid Out</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${d.totalAffiliates || 0}</div>
+          <div class="stat-label">Active Affiliates</div>
+        </div>
+      </div>
+
+      ${(d.topAffiliates || []).length > 0 ? `
+      <div class="admin-card" style="margin-bottom:0;">
+        <h3>Top Affiliates by Earnings</h3>
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead><tr><th>Rank</th><th>Name</th><th>Email</th><th>Referrals</th><th>Total Earned</th><th>Wallet Balance</th></tr></thead>
+            <tbody>
+              ${d.topAffiliates.map((a, i) =>
+                '<tr><td>' + (i + 1) + '</td><td>' + escapeHtml(a.full_name) + '</td><td>' + escapeHtml(a.email) + '</td><td>' + (a.total_referrals || 0) + '</td><td>GHS ' + (a.total_earned || 0).toFixed(2) + '</td><td>GHS ' + (a.wallet_balance || 0).toFixed(2) + '</td></tr>'
+              ).join("")}
+            </tbody>
+          </table>
+        </div>
+      </div>` : ''}
+    `;
+  } catch (err) {
+    el.innerHTML = '<div class="admin-empty">Failed to load affiliate stats</div>';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  Affiliate Admin: Withdrawals
+// ═══════════════════════════════════════════════════════════════════
+
+let currentWithdrawalFilter = "all";
+
+async function loadWithdrawals(status) {
+  currentWithdrawalFilter = status || "all";
+  const el = document.getElementById("withdrawals-content");
+  if (!el) return;
+  el.innerHTML = '<div class="admin-loader"><div class="spinner"></div></div>';
+
+  try {
+    const queryParam = status && status !== "all" ? "?status=" + status : "";
+    const res = await apiFetch("/api/admin/affiliate/withdrawals" + queryParam);
+    const d = await res.json();
+    const withdrawals = d.withdrawals || [];
+
+    // Update pending badge
+    const badge = document.getElementById("pending-withdrawals-badge");
+    if (badge) {
+      const pendingCount = d.pendingCount || withdrawals.filter(w => w.status === "pending").length;
+      if (pendingCount > 0) {
+        badge.textContent = pendingCount;
+        badge.style.display = "inline-block";
+      } else {
+        badge.style.display = "none";
+      }
+    }
+
+    if (withdrawals.length === 0) {
+      el.innerHTML = '<div class="admin-empty">No withdrawal requests found for this filter.</div>';
+      return;
+    }
+
+    el.innerHTML = `
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>User</th>
+              <th>Email</th>
+              <th>Amount</th>
+              <th>MoMo Number</th>
+              <th>Network</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${withdrawals.map(w => {
+              const dateStr = w.created_at ? formatDate(w.created_at) : "--";
+              const statusCls = {pending: "warning", approved: "info", paid: "success", rejected: "danger"}[w.status] || "default";
+              const isPending = w.status === "pending";
+              const isApproved = w.status === "approved";
+              return '<tr>' +
+                '<td>' + dateStr + '</td>' +
+                '<td>' + escapeHtml(w.full_name || w.user_name || "--") + '</td>' +
+                '<td>' + escapeHtml(w.email || "--") + '</td>' +
+                '<td><strong>GHS ' + (w.amount || 0).toFixed(2) + '</strong></td>' +
+                '<td>' + escapeHtml(w.momo_number || "--") + '</td>' +
+                '<td>' + escapeHtml(w.momo_network || "--") + '</td>' +
+                '<td><span class="badge badge-' + statusCls + '">' + (w.status || "unknown") + '</span></td>' +
+                '<td>' +
+                  (isPending ? '<button class="btn-admin-sm btn-approve" onclick="approveWithdrawal(\'' + w.id + '\')">Approve</button> <button class="btn-admin-sm btn-reject" onclick="rejectWithdrawal(\'' + w.id + '\')">Reject</button>' :
+                   isApproved ? '<button class="btn-admin-sm btn-approve" onclick="markWithdrawalPaid(\'' + w.id + '\')">Mark Paid</button> <button class="btn-admin-sm btn-reject" onclick="rejectWithdrawal(\'' + w.id + '\')">Reject</button>' :
+                   '<span style="color:var(--text-muted);font-size:11px;">--</span>') +
+                '</td>' +
+              '</tr>';
+            }).join("")}
+          </tbody>
+        </table>
+      </div>
+    `;
+  } catch (err) {
+    el.innerHTML = '<div class="admin-empty">Failed to load withdrawals</div>';
+  }
+}
+
+function filterWithdrawals(status, btnEl) {
+  // Update active filter button
+  document.querySelectorAll("[data-wstatus]").forEach(b => b.classList.remove("active"));
+  if (btnEl) btnEl.classList.add("active");
+  loadWithdrawals(status);
+}
+
+async function approveWithdrawal(id) {
+  if (!confirm("Approve this withdrawal request?")) return;
+
+  try {
+    const res = await apiFetch("/api/admin/affiliate/withdrawals/" + id + "/approve", {
+      method: "POST"
+    });
+    const d = await res.json();
+    if (!res.ok) throw new Error(d.error || "Failed to approve");
+    alert("Withdrawal approved successfully.");
+    loadWithdrawals(currentWithdrawalFilter);
+    loadAffiliateAdminStats();
+  } catch (err) {
+    alert("Error: " + (err.message || "Failed to approve withdrawal"));
+  }
+}
+
+async function rejectWithdrawal(id) {
+  const note = prompt("Enter reason for rejection (optional):");
+  if (note === null) return; // cancelled
+
+  try {
+    const res = await apiFetch("/api/admin/affiliate/withdrawals/" + id + "/reject", {
+      method: "POST",
+      body: JSON.stringify({ admin_note: note || "" })
+    });
+    const d = await res.json();
+    if (!res.ok) throw new Error(d.error || "Failed to reject");
+    alert("Withdrawal rejected.");
+    loadWithdrawals(currentWithdrawalFilter);
+    loadAffiliateAdminStats();
+  } catch (err) {
+    alert("Error: " + (err.message || "Failed to reject withdrawal"));
+  }
+}
+
+async function markWithdrawalPaid(id) {
+  if (!confirm("Mark this withdrawal as paid? This confirms the MoMo transfer has been sent.")) return;
+
+  try {
+    const res = await apiFetch("/api/admin/affiliate/withdrawals/" + id + "/approve", {
+      method: "POST",
+      body: JSON.stringify({ mark_paid: true })
+    });
+    const d = await res.json();
+    if (!res.ok) throw new Error(d.error || "Failed to update");
+    alert("Withdrawal marked as paid.");
+    loadWithdrawals(currentWithdrawalFilter);
+    loadAffiliateAdminStats();
+  } catch (err) {
+    alert("Error: " + (err.message || "Failed to mark as paid"));
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════════

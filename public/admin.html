@@ -106,6 +106,26 @@
       <!-- Referrals -->
       <div class="admin-tab-panel" id="panel-referrals">
         <div id="referrals-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+
+        <!-- Affiliate Stats Summary -->
+        <div id="affiliate-admin-stats" style="margin-top:24px;"></div>
+
+        <!-- Withdrawals Management -->
+        <div style="margin-top:32px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+            <h3 style="margin:0;font-size:18px;">Withdrawal Requests <span class="badge badge-warning" id="pending-withdrawals-badge" style="display:none;margin-left:8px;">0</span></h3>
+          </div>
+          <div class="admin-toolbar" style="margin-bottom:12px;">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <button class="admin-filter-btn active" data-wstatus="all" onclick="filterWithdrawals('all', this)">All</button>
+              <button class="admin-filter-btn" data-wstatus="pending" onclick="filterWithdrawals('pending', this)">Pending</button>
+              <button class="admin-filter-btn" data-wstatus="approved" onclick="filterWithdrawals('approved', this)">Approved</button>
+              <button class="admin-filter-btn" data-wstatus="paid" onclick="filterWithdrawals('paid', this)">Paid</button>
+              <button class="admin-filter-btn" data-wstatus="rejected" onclick="filterWithdrawals('rejected', this)">Rejected</button>
+            </div>
+          </div>
+          <div id="withdrawals-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+        </div>
       </div>
 
       <!-- System -->

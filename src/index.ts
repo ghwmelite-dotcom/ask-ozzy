@@ -214,42 +214,35 @@ app.post("/api/auth/register", async (c) => {
     .bind(userId, email.toLowerCase().trim(), passwordHash, fullName, department || "", userReferralCode, referredBy)
     .run();
 
-  // If referred, record the referral and credit the referrer
+  // If referred, record the referral, credit welcome bonus, and check milestones
   if (referredBy) {
     await c.env.DB.prepare(
-      "INSERT INTO referrals (id, referrer_id, referred_id, status, bonus_amount) VALUES (?, ?, ?, 'completed', 10.00)"
+      "INSERT INTO referrals (id, referrer_id, referred_id, status, bonus_amount) VALUES (?, ?, ?, 'completed', 0.00)"
     )
       .bind(generateId(), referredBy, userId)
       .run();
 
-    // Update referrer stats
+    // Update referrer stats (backward compat — no flat earnings credit, commissions come from payments)
     await c.env.DB.prepare(
-      "UPDATE users SET total_referrals = total_referrals + 1, affiliate_earnings = affiliate_earnings + 10.00 WHERE id = ?"
+      "UPDATE users SET total_referrals = total_referrals + 1 WHERE id = ?"
     )
       .bind(referredBy)
       .run();
 
-    // Check if referrer should be upgraded to a higher tier
-    const referrer = await c.env.DB.prepare(
-      "SELECT total_referrals, affiliate_tier FROM users WHERE id = ?"
-    )
-      .bind(referredBy)
-      .first<{ total_referrals: number; affiliate_tier: string }>();
-
-    if (referrer) {
-      let newTier = referrer.affiliate_tier;
-      if (referrer.total_referrals >= 50) newTier = "gold";
-      else if (referrer.total_referrals >= 20) newTier = "silver";
-      else if (referrer.total_referrals >= 5) newTier = "bronze";
-
-      if (newTier !== referrer.affiliate_tier) {
-        await c.env.DB.prepare(
-          "UPDATE users SET affiliate_tier = ? WHERE id = ?"
-        )
-          .bind(newTier, referredBy)
-          .run();
+    // Two-sided reward: GHS 5 welcome bonus for the new user
+    c.executionCtx.waitUntil((async () => {
+      try {
+        await ensureAffiliateTables(c.env.DB);
+        await creditWallet(
+          c.env.DB, userId, 5.00, "bonus",
+          "Welcome bonus — signed up with referral code", referredBy, undefined
+        );
+        // Check milestone bonuses for the referrer
+        await checkMilestones(c.env.DB, referredBy);
+      } catch (err) {
+        console.error("Referral bonus error:", err);
       }
-    }
+    })());
   }
 
   const token = await createToken(userId, c.env);
@@ -1986,61 +1979,536 @@ app.get("/api/models", authMiddleware, async (c) => {
   });
 });
 
-// ─── Affiliate Programme ────────────────────────────────────────────
+// ─── Affiliate Commission Engine (2-Level) ──────────────────────────
+// Direct referral: 30% | 2nd level: 5% | No tiers — everyone gets 30% from day one
+
+let affiliateTablesCreated = false;
+
+async function ensureAffiliateTables(db: D1Database): Promise<void> {
+  if (affiliateTablesCreated) return;
+  try {
+    await db.prepare(`CREATE TABLE IF NOT EXISTS affiliate_wallets (
+      user_id TEXT PRIMARY KEY,
+      balance REAL DEFAULT 0.0,
+      total_earned REAL DEFAULT 0.0,
+      total_withdrawn REAL DEFAULT 0.0,
+      updated_at TEXT DEFAULT (datetime('now'))
+    )`).run();
+
+    await db.prepare(`CREATE TABLE IF NOT EXISTS affiliate_transactions (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      type TEXT NOT NULL CHECK(type IN ('commission_l1', 'commission_l2', 'withdrawal', 'bonus', 'reward')),
+      amount REAL NOT NULL,
+      description TEXT,
+      source_user_id TEXT,
+      source_payment_id TEXT,
+      created_at TEXT DEFAULT (datetime('now'))
+    )`).run();
+
+    await db.batch([
+      db.prepare(`CREATE INDEX IF NOT EXISTS idx_aff_tx_user ON affiliate_transactions(user_id, created_at DESC)`),
+      db.prepare(`CREATE TABLE IF NOT EXISTS withdrawal_requests (
+        id TEXT PRIMARY KEY,
+        user_id TEXT NOT NULL,
+        amount REAL NOT NULL,
+        momo_number TEXT NOT NULL,
+        momo_network TEXT DEFAULT 'mtn',
+        status TEXT DEFAULT 'pending' CHECK(status IN ('pending', 'approved', 'paid', 'rejected')),
+        admin_note TEXT,
+        processed_at TEXT,
+        created_at TEXT DEFAULT (datetime('now'))
+      )`),
+      db.prepare(`CREATE INDEX IF NOT EXISTS idx_withdraw_status ON withdrawal_requests(status, created_at DESC)`),
+      db.prepare(`CREATE INDEX IF NOT EXISTS idx_withdraw_user ON withdrawal_requests(user_id)`),
+    ]);
+
+    affiliateTablesCreated = true;
+  } catch {
+    // Tables likely already exist
+    affiliateTablesCreated = true;
+  }
+}
+
+// Ensure a wallet row exists for a user, return current balance info
+async function ensureWallet(db: D1Database, userId: string): Promise<{ balance: number; total_earned: number; total_withdrawn: number }> {
+  await ensureAffiliateTables(db);
+  const existing = await db.prepare("SELECT balance, total_earned, total_withdrawn FROM affiliate_wallets WHERE user_id = ?")
+    .bind(userId).first<{ balance: number; total_earned: number; total_withdrawn: number }>();
+  if (existing) return existing;
+  await db.prepare("INSERT OR IGNORE INTO affiliate_wallets (user_id) VALUES (?)").bind(userId).run();
+  return { balance: 0, total_earned: 0, total_withdrawn: 0 };
+}
+
+// Credit a user's affiliate wallet (commission or bonus)
+async function creditWallet(db: D1Database, userId: string, amount: number, type: string, description: string, sourceUserId?: string, sourcePaymentId?: string): Promise<void> {
+  await ensureWallet(db, userId);
+  const txId = generateId();
+  await db.batch([
+    db.prepare("INSERT INTO affiliate_transactions (id, user_id, type, amount, description, source_user_id, source_payment_id) VALUES (?, ?, ?, ?, ?, ?, ?)")
+      .bind(txId, userId, type, amount, description, sourceUserId || null, sourcePaymentId || null),
+    db.prepare("UPDATE affiliate_wallets SET balance = balance + ?, total_earned = total_earned + ?, updated_at = datetime('now') WHERE user_id = ?")
+      .bind(amount, amount, userId),
+  ]);
+  // Backward compat: also update users.affiliate_earnings
+  await db.prepare("UPDATE users SET affiliate_earnings = affiliate_earnings + ? WHERE id = ?").bind(amount, userId).run();
+}
+
+// Process 2-level commissions for a payment
+async function processAffiliateCommissions(db: D1Database, payingUserId: string, paymentAmountGHS: number, paymentReference: string): Promise<void> {
+  await ensureAffiliateTables(db);
+
+  // Level 1: Who referred the paying user?
+  const payingUser = await db.prepare("SELECT referred_by FROM users WHERE id = ?")
+    .bind(payingUserId).first<{ referred_by: string | null }>();
+
+  if (!payingUser?.referred_by) return;
+
+  const l1ReferrerId = payingUser.referred_by;
+  const l1Commission = Math.round(paymentAmountGHS * 0.30 * 100) / 100; // 30%
+
+  await creditWallet(
+    db, l1ReferrerId, l1Commission, "commission_l1",
+    `30% commission from payment by referred user (GHS ${paymentAmountGHS.toFixed(2)})`,
+    payingUserId, paymentReference
+  );
+
+  // Level 2: Who referred the L1 referrer?
+  const l1Referrer = await db.prepare("SELECT referred_by FROM users WHERE id = ?")
+    .bind(l1ReferrerId).first<{ referred_by: string | null }>();
+
+  if (!l1Referrer?.referred_by) return;
+
+  const l2ReferrerId = l1Referrer.referred_by;
+  const l2Commission = Math.round(paymentAmountGHS * 0.05 * 100) / 100; // 5%
+
+  await creditWallet(
+    db, l2ReferrerId, l2Commission, "commission_l2",
+    `5% L2 commission from 2nd-level referral payment (GHS ${paymentAmountGHS.toFixed(2)})`,
+    payingUserId, paymentReference
+  );
+}
+
+// Check and award milestone bonuses
+async function checkMilestones(db: D1Database, userId: string): Promise<void> {
+  await ensureAffiliateTables(db);
+
+  const user = await db.prepare("SELECT total_referrals FROM users WHERE id = ?")
+    .bind(userId).first<{ total_referrals: number }>();
+  if (!user) return;
+
+  const milestones = [
+    { threshold: 10, bonus: 30, label: "10 referrals — 1 month Starter value" },
+    { threshold: 25, bonus: 60, label: "25 referrals — 1 month Professional value" },
+    { threshold: 50, bonus: 100, label: "50 referrals — Enterprise value + permanent discount" },
+    { threshold: 100, bonus: 200, label: "100 referrals — Free Enterprise for life" },
+  ];
+
+  for (const m of milestones) {
+    if (user.total_referrals < m.threshold) continue;
+
+    // Check if already awarded
+    const existing = await db.prepare(
+      "SELECT COUNT(*) as cnt FROM affiliate_transactions WHERE user_id = ? AND type = 'bonus' AND description LIKE ?"
+    ).bind(userId, `Milestone: ${m.threshold}%`).first<{ cnt: number }>();
+
+    if (existing && existing.cnt > 0) continue;
+
+    await creditWallet(db, userId, m.bonus, "bonus", `Milestone: ${m.threshold} referrals — GHS ${m.bonus} bonus`, undefined, undefined);
+  }
+}
+
+// ─── Affiliate Dashboard (Enhanced) ─────────────────────────────────
 
 app.get("/api/affiliate/dashboard", authMiddleware, async (c) => {
   const userId = c.get("userId");
+  await ensureAffiliateTables(c.env.DB);
 
   const user = await c.env.DB.prepare(
     "SELECT referral_code, affiliate_tier, total_referrals, affiliate_earnings FROM users WHERE id = ?"
   )
     .bind(userId)
-    .first<{
-      referral_code: string;
-      affiliate_tier: string;
-      total_referrals: number;
-      affiliate_earnings: number;
-    }>();
+    .first<{ referral_code: string; affiliate_tier: string; total_referrals: number; affiliate_earnings: number }>();
 
-  if (!user) {
-    return c.json({ error: "User not found" }, 404);
+  if (!user) return c.json({ error: "User not found" }, 404);
+
+  // Wallet
+  const wallet = await ensureWallet(c.env.DB, userId);
+
+  // Direct referrals count
+  const directCount = await c.env.DB.prepare(
+    "SELECT COUNT(*) as cnt FROM users WHERE referred_by = ?"
+  ).bind(userId).first<{ cnt: number }>();
+
+  // Active paying direct referrals (tier != 'free')
+  const payingDirect = await c.env.DB.prepare(
+    "SELECT COUNT(*) as cnt FROM users WHERE referred_by = ? AND tier != 'free'"
+  ).bind(userId).first<{ cnt: number }>();
+
+  // Level 2 referrals: people referred by people YOU referred
+  const l2Count = await c.env.DB.prepare(
+    `SELECT COUNT(*) as cnt FROM users u2
+     WHERE u2.referred_by IN (SELECT id FROM users WHERE referred_by = ?)`
+  ).bind(userId).first<{ cnt: number }>();
+
+  // Level 2 paying
+  const l2Paying = await c.env.DB.prepare(
+    `SELECT COUNT(*) as cnt FROM users u2
+     WHERE u2.referred_by IN (SELECT id FROM users WHERE referred_by = ?)
+     AND u2.tier != 'free'`
+  ).bind(userId).first<{ cnt: number }>();
+
+  // This month earnings
+  const thisMonth = new Date();
+  const thisMonthStart = `${thisMonth.getFullYear()}-${String(thisMonth.getMonth() + 1).padStart(2, "0")}-01`;
+  const thisMonthEarnings = await c.env.DB.prepare(
+    "SELECT COALESCE(SUM(amount), 0) as total FROM affiliate_transactions WHERE user_id = ? AND type IN ('commission_l1', 'commission_l2') AND created_at >= ?"
+  ).bind(userId, thisMonthStart).first<{ total: number }>();
+
+  // Last month earnings
+  const lastMonth = new Date(thisMonth.getFullYear(), thisMonth.getMonth() - 1, 1);
+  const lastMonthStart = `${lastMonth.getFullYear()}-${String(lastMonth.getMonth() + 1).padStart(2, "0")}-01`;
+  const lastMonthEnd = thisMonthStart;
+  const lastMonthEarnings = await c.env.DB.prepare(
+    "SELECT COALESCE(SUM(amount), 0) as total FROM affiliate_transactions WHERE user_id = ? AND type IN ('commission_l1', 'commission_l2') AND created_at >= ? AND created_at < ?"
+  ).bind(userId, lastMonthStart, lastMonthEnd).first<{ total: number }>();
+
+  // Milestones
+  const directRefs = directCount?.cnt || 0;
+  const milestonesDef = [
+    { key: "referrals_10", target: 10, reward: "1 month Starter free (GHS 30 bonus)" },
+    { key: "referrals_25", target: 25, reward: "1 month Professional free (GHS 60 bonus)" },
+    { key: "referrals_50", target: 50, reward: "GHS 100 bonus + permanent 50% discount" },
+    { key: "referrals_100", target: 100, reward: "GHS 200 bonus + Free Enterprise for life" },
+  ];
+  const milestones: Record<string, any> = {};
+  for (const m of milestonesDef) {
+    milestones[m.key] = {
+      target: m.target,
+      current: directRefs,
+      achieved: directRefs >= m.target,
+      reward: m.reward,
+    };
   }
 
-  // Get recent referrals
-  const { results: referrals } = await c.env.DB.prepare(
-    `SELECT r.created_at, r.bonus_amount, r.recurring_rate, r.status, u.full_name
-     FROM referrals r
-     JOIN users u ON u.id = r.referred_id
-     WHERE r.referrer_id = ?
-     ORDER BY r.created_at DESC
-     LIMIT 20`
-  )
-    .bind(userId)
-    .all();
+  // Recent transactions
+  const { results: recentTx } = await c.env.DB.prepare(
+    "SELECT id, type, amount, description, created_at FROM affiliate_transactions WHERE user_id = ? ORDER BY created_at DESC LIMIT 10"
+  ).bind(userId).all();
 
-  // Commission rates by tier
-  const tiers = {
-    starter: { name: "Starter", bonusPerSignup: 10, recurringPercent: 5, requiredReferrals: 0 },
-    bronze:  { name: "Bronze",  bonusPerSignup: 15, recurringPercent: 10, requiredReferrals: 5 },
-    silver:  { name: "Silver",  bonusPerSignup: 20, recurringPercent: 15, requiredReferrals: 20 },
-    gold:    { name: "Gold",    bonusPerSignup: 30, recurringPercent: 20, requiredReferrals: 50 },
-  };
+  // Recent referrals
+  const { results: recentRefs } = await c.env.DB.prepare(
+    `SELECT u.full_name, u.tier, u.created_at
+     FROM users u WHERE u.referred_by = ?
+     ORDER BY u.created_at DESC LIMIT 10`
+  ).bind(userId).all();
 
-  const currentTier = tiers[user.affiliate_tier as keyof typeof tiers] || tiers.starter;
-  const nextTierKey = user.affiliate_tier === "starter" ? "bronze" :
-                      user.affiliate_tier === "bronze" ? "silver" :
-                      user.affiliate_tier === "silver" ? "gold" : null;
-  const nextTier = nextTierKey ? tiers[nextTierKey] : null;
+  const baseUrl = new URL(c.req.url).origin;
 
   return c.json({
     referralCode: user.referral_code,
+    referralLink: `${baseUrl}?ref=${user.referral_code}`,
+    wallet: {
+      balance: wallet.balance,
+      totalEarned: wallet.total_earned,
+      totalWithdrawn: wallet.total_withdrawn,
+    },
+    stats: {
+      directReferrals: directRefs,
+      activePayingReferrals: payingDirect?.cnt || 0,
+      level2Referrals: l2Count?.cnt || 0,
+      level2PayingReferrals: l2Paying?.cnt || 0,
+      thisMonthEarnings: thisMonthEarnings?.total || 0,
+      lastMonthEarnings: lastMonthEarnings?.total || 0,
+    },
+    milestones,
+    recentTransactions: recentTx || [],
+    recentReferrals: recentRefs || [],
+    // Backward compat
     affiliateTier: user.affiliate_tier,
     totalReferrals: user.total_referrals,
     totalEarnings: user.affiliate_earnings,
-    currentTier,
-    nextTier,
-    referralsToNextTier: nextTier ? nextTier.requiredReferrals - user.total_referrals : 0,
-    recentReferrals: referrals,
+  });
+});
+
+// ─── Affiliate Transactions (Paginated) ─────────────────────────────
+
+app.get("/api/affiliate/transactions", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  await ensureAffiliateTables(c.env.DB);
+
+  const page = Math.max(1, parseInt(c.req.query("page") || "1"));
+  const limit = Math.min(50, Math.max(1, parseInt(c.req.query("limit") || "20")));
+  const offset = (page - 1) * limit;
+
+  const total = await c.env.DB.prepare(
+    "SELECT COUNT(*) as cnt FROM affiliate_transactions WHERE user_id = ?"
+  ).bind(userId).first<{ cnt: number }>();
+
+  const { results: transactions } = await c.env.DB.prepare(
+    "SELECT id, type, amount, description, source_user_id, source_payment_id, created_at FROM affiliate_transactions WHERE user_id = ? ORDER BY created_at DESC LIMIT ? OFFSET ?"
+  ).bind(userId, limit, offset).all();
+
+  return c.json({
+    transactions: transactions || [],
+    total: total?.cnt || 0,
+    page,
+    limit,
+  });
+});
+
+// ─── Affiliate Withdrawal ───────────────────────────────────────────
+
+app.post("/api/affiliate/withdraw", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  await ensureAffiliateTables(c.env.DB);
+
+  const { amount, momo_number, momo_network } = await c.req.json();
+
+  if (!amount || !momo_number) {
+    return c.json({ error: "Amount and MoMo number are required" }, 400);
+  }
+
+  const withdrawAmount = parseFloat(amount);
+  if (isNaN(withdrawAmount) || withdrawAmount < 20) {
+    return c.json({ error: "Minimum withdrawal is GHS 20" }, 400);
+  }
+
+  const wallet = await ensureWallet(c.env.DB, userId);
+  if (withdrawAmount > wallet.balance) {
+    return c.json({ error: `Insufficient balance. Your wallet balance is GHS ${wallet.balance.toFixed(2)}` }, 400);
+  }
+
+  // Validate MoMo number format (Ghana: 10 digits starting with 0)
+  const cleanNumber = momo_number.replace(/\s/g, "");
+  if (!/^0[2-9]\d{8}$/.test(cleanNumber)) {
+    return c.json({ error: "Invalid MoMo number. Must be 10 digits starting with 0" }, 400);
+  }
+
+  const network = (momo_network || "mtn").toLowerCase();
+  if (!["mtn", "vodafone", "airteltigo"].includes(network)) {
+    return c.json({ error: "Invalid network. Use mtn, vodafone, or airteltigo" }, 400);
+  }
+
+  const requestId = generateId();
+  const txId = generateId();
+
+  // Deduct from wallet and create withdrawal request atomically
+  await c.env.DB.batch([
+    c.env.DB.prepare("UPDATE affiliate_wallets SET balance = balance - ?, total_withdrawn = total_withdrawn + ?, updated_at = datetime('now') WHERE user_id = ?")
+      .bind(withdrawAmount, withdrawAmount, userId),
+    c.env.DB.prepare("INSERT INTO withdrawal_requests (id, user_id, amount, momo_number, momo_network, status) VALUES (?, ?, ?, ?, ?, 'pending')")
+      .bind(requestId, userId, withdrawAmount, cleanNumber, network),
+    c.env.DB.prepare("INSERT INTO affiliate_transactions (id, user_id, type, amount, description) VALUES (?, ?, 'withdrawal', ?, ?)")
+      .bind(txId, userId, -withdrawAmount, `Withdrawal of GHS ${withdrawAmount.toFixed(2)} to ${network.toUpperCase()} ${cleanNumber}`),
+  ]);
+
+  return c.json({
+    request_id: requestId,
+    amount: withdrawAmount,
+    momo_number: cleanNumber,
+    momo_network: network,
+    status: "pending",
+    message: "Withdrawal request submitted. You will be paid within 24-48 hours.",
+  });
+});
+
+// ─── Affiliate Leaderboard ──────────────────────────────────────────
+
+app.get("/api/affiliate/leaderboard", authMiddleware, async (c) => {
+  await ensureAffiliateTables(c.env.DB);
+
+  const { results } = await c.env.DB.prepare(
+    `SELECT w.user_id, w.total_earned, u.full_name, u.total_referrals,
+       (SELECT COUNT(*) FROM users u2 WHERE u2.referred_by IN (SELECT id FROM users WHERE referred_by = w.user_id)) as level2_referrals
+     FROM affiliate_wallets w
+     JOIN users u ON u.id = w.user_id
+     WHERE w.total_earned > 0
+     ORDER BY w.total_earned DESC
+     LIMIT 20`
+  ).all<{ user_id: string; total_earned: number; full_name: string; total_referrals: number; level2_referrals: number }>();
+
+  const leaderboard = (results || []).map((r, idx) => {
+    // Mask name for privacy: "Kofi Asante" -> "Kofi A."
+    const parts = (r.full_name || "").split(" ");
+    const maskedName = parts.length > 1
+      ? `${parts[0]} ${parts[parts.length - 1][0]}.`
+      : parts[0] || "Anonymous";
+
+    return {
+      rank: idx + 1,
+      name: maskedName,
+      referrals: r.total_referrals || 0,
+      earnings: r.total_earned || 0,
+      level2_referrals: r.level2_referrals || 0,
+    };
+  });
+
+  return c.json({ leaderboard });
+});
+
+// ─── Admin: Affiliate Withdrawal Management ─────────────────────────
+
+app.get("/api/admin/affiliate/withdrawals", adminMiddleware, async (c) => {
+  await ensureAffiliateTables(c.env.DB);
+  const status = c.req.query("status") || "pending";
+  const page = Math.max(1, parseInt(c.req.query("page") || "1"));
+  const limit = Math.min(50, Math.max(1, parseInt(c.req.query("limit") || "20")));
+  const offset = (page - 1) * limit;
+
+  const total = await c.env.DB.prepare(
+    "SELECT COUNT(*) as cnt FROM withdrawal_requests WHERE status = ?"
+  ).bind(status).first<{ cnt: number }>();
+
+  const { results } = await c.env.DB.prepare(
+    `SELECT wr.*, u.full_name, u.email
+     FROM withdrawal_requests wr
+     JOIN users u ON u.id = wr.user_id
+     WHERE wr.status = ?
+     ORDER BY wr.created_at DESC
+     LIMIT ? OFFSET ?`
+  ).bind(status, limit, offset).all();
+
+  return c.json({
+    withdrawals: results || [],
+    total: total?.cnt || 0,
+    page,
+    limit,
+  });
+});
+
+app.post("/api/admin/affiliate/withdrawals/:id/approve", adminMiddleware, async (c) => {
+  await ensureAffiliateTables(c.env.DB);
+  const withdrawalId = c.req.param("id");
+
+  const request = await c.env.DB.prepare(
+    "SELECT id, user_id, amount, status FROM withdrawal_requests WHERE id = ?"
+  ).bind(withdrawalId).first<{ id: string; user_id: string; amount: number; status: string }>();
+
+  if (!request) return c.json({ error: "Withdrawal request not found" }, 404);
+  if (request.status !== "pending") return c.json({ error: `Cannot approve — request is already ${request.status}` }, 400);
+
+  await c.env.DB.prepare(
+    "UPDATE withdrawal_requests SET status = 'approved', processed_at = datetime('now') WHERE id = ?"
+  ).bind(withdrawalId).run();
+
+  await logAudit(c.env.DB, c.get("userId"), "approve_withdrawal", "withdrawal", withdrawalId, `GHS ${request.amount} for user ${request.user_id}`);
+
+  return c.json({ success: true, message: `Withdrawal of GHS ${request.amount.toFixed(2)} approved` });
+});
+
+app.post("/api/admin/affiliate/withdrawals/:id/reject", adminMiddleware, async (c) => {
+  await ensureAffiliateTables(c.env.DB);
+  const withdrawalId = c.req.param("id");
+  const { reason } = await c.req.json().catch(() => ({ reason: "" }));
+
+  const request = await c.env.DB.prepare(
+    "SELECT id, user_id, amount, status FROM withdrawal_requests WHERE id = ?"
+  ).bind(withdrawalId).first<{ id: string; user_id: string; amount: number; status: string }>();
+
+  if (!request) return c.json({ error: "Withdrawal request not found" }, 404);
+  if (request.status !== "pending") return c.json({ error: `Cannot reject — request is already ${request.status}` }, 400);
+
+  // Refund balance back to user's wallet
+  const refundTxId = generateId();
+  await c.env.DB.batch([
+    c.env.DB.prepare("UPDATE withdrawal_requests SET status = 'rejected', admin_note = ?, processed_at = datetime('now') WHERE id = ?")
+      .bind(reason || "Rejected by admin", withdrawalId),
+    c.env.DB.prepare("UPDATE affiliate_wallets SET balance = balance + ?, total_withdrawn = total_withdrawn - ?, updated_at = datetime('now') WHERE user_id = ?")
+      .bind(request.amount, request.amount, request.user_id),
+    c.env.DB.prepare("INSERT INTO affiliate_transactions (id, user_id, type, amount, description) VALUES (?, ?, 'reward', ?, ?)")
+      .bind(refundTxId, request.user_id, request.amount, `Refund: Withdrawal request rejected${reason ? " — " + reason : ""}`),
+  ]);
+
+  await logAudit(c.env.DB, c.get("userId"), "reject_withdrawal", "withdrawal", withdrawalId, `GHS ${request.amount} refunded to user ${request.user_id}`);
+
+  return c.json({ success: true, message: `Withdrawal rejected. GHS ${request.amount.toFixed(2)} refunded to user's wallet.` });
+});
+
+// ─── Admin: Affiliate Stats Overview ────────────────────────────────
+
+app.get("/api/admin/affiliate/stats", adminMiddleware, async (c) => {
+  await ensureAffiliateTables(c.env.DB);
+
+  // Total commissions paid
+  const totalCommissions = await c.env.DB.prepare(
+    "SELECT COALESCE(SUM(amount), 0) as total FROM affiliate_transactions WHERE type IN ('commission_l1', 'commission_l2')"
+  ).first<{ total: number }>();
+
+  // L1 vs L2 breakdown
+  const l1Total = await c.env.DB.prepare(
+    "SELECT COALESCE(SUM(amount), 0) as total FROM affiliate_transactions WHERE type = 'commission_l1'"
+  ).first<{ total: number }>();
+
+  const l2Total = await c.env.DB.prepare(
+    "SELECT COALESCE(SUM(amount), 0) as total FROM affiliate_transactions WHERE type = 'commission_l2'"
+  ).first<{ total: number }>();
+
+  // Total pending withdrawals
+  const pendingWithdrawals = await c.env.DB.prepare(
+    "SELECT COUNT(*) as cnt, COALESCE(SUM(amount), 0) as total FROM withdrawal_requests WHERE status = 'pending'"
+  ).first<{ cnt: number; total: number }>();
+
+  // Total withdrawn (paid/approved)
+  const totalWithdrawn = await c.env.DB.prepare(
+    "SELECT COALESCE(SUM(amount), 0) as total FROM withdrawal_requests WHERE status IN ('approved', 'paid')"
+  ).first<{ total: number }>();
+
+  // Total bonuses awarded
+  const totalBonuses = await c.env.DB.prepare(
+    "SELECT COALESCE(SUM(amount), 0) as total FROM affiliate_transactions WHERE type = 'bonus'"
+  ).first<{ total: number }>();
+
+  // Top affiliates by earnings
+  const { results: topAffiliates } = await c.env.DB.prepare(
+    `SELECT w.user_id, w.total_earned, w.balance, u.full_name, u.email, u.total_referrals
+     FROM affiliate_wallets w
+     JOIN users u ON u.id = w.user_id
+     WHERE w.total_earned > 0
+     ORDER BY w.total_earned DESC
+     LIMIT 15`
+  ).all();
+
+  // Monthly trend (last 6 months)
+  const monthlyTrend: Array<{ month: string; l1: number; l2: number; total: number }> = [];
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date();
+    d.setMonth(d.getMonth() - i);
+    const monthStart = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-01`;
+    const nextD = new Date(d.getFullYear(), d.getMonth() + 1, 1);
+    const monthEnd = `${nextD.getFullYear()}-${String(nextD.getMonth() + 1).padStart(2, "0")}-01`;
+    const monthLabel = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+
+    const ml1 = await c.env.DB.prepare(
+      "SELECT COALESCE(SUM(amount), 0) as total FROM affiliate_transactions WHERE type = 'commission_l1' AND created_at >= ? AND created_at < ?"
+    ).bind(monthStart, monthEnd).first<{ total: number }>();
+
+    const ml2 = await c.env.DB.prepare(
+      "SELECT COALESCE(SUM(amount), 0) as total FROM affiliate_transactions WHERE type = 'commission_l2' AND created_at >= ? AND created_at < ?"
+    ).bind(monthStart, monthEnd).first<{ total: number }>();
+
+    monthlyTrend.push({
+      month: monthLabel,
+      l1: ml1?.total || 0,
+      l2: ml2?.total || 0,
+      total: (ml1?.total || 0) + (ml2?.total || 0),
+    });
+  }
+
+  return c.json({
+    totalCommissions: totalCommissions?.total || 0,
+    commissionBreakdown: {
+      level1: l1Total?.total || 0,
+      level2: l2Total?.total || 0,
+    },
+    pendingWithdrawals: {
+      count: pendingWithdrawals?.cnt || 0,
+      amount: pendingWithdrawals?.total || 0,
+    },
+    totalWithdrawn: totalWithdrawn?.total || 0,
+    totalBonuses: totalBonuses?.total || 0,
+    topAffiliates: topAffiliates || [],
+    monthlyTrend,
   });
 });
 
@@ -3863,6 +4331,17 @@ app.post("/api/payments/initialize", authMiddleware, async (c) => {
 
   // Fallback: simulate payment (dev mode)
   await c.env.DB.prepare("UPDATE users SET tier = ? WHERE id = ?").bind(tier, userId).run();
+
+  // Process affiliate commissions even in dev mode
+  const simPaymentGHS = plan.amount / 100; // Convert pesewas to GHS
+  c.executionCtx.waitUntil((async () => {
+    try {
+      await processAffiliateCommissions(c.env.DB, userId, simPaymentGHS, reference);
+    } catch (err) {
+      console.error("Affiliate commission error (dev):", err);
+    }
+  })());
+
   return c.json({
     success: true,
     simulated: true,
@@ -3892,10 +4371,25 @@ app.post("/api/webhooks/paystack", async (c) => {
   const event = JSON.parse(body);
 
   if (event.event === "charge.success") {
-    const { metadata, reference } = event.data;
+    const { metadata, reference, amount: amountPesewas } = event.data;
     if (metadata?.userId && metadata?.tier) {
+      // Upgrade user's tier
       await c.env.DB.prepare("UPDATE users SET tier = ? WHERE id = ?")
         .bind(metadata.tier, metadata.userId).run();
+
+      // Process affiliate commissions (non-blocking)
+      // Paystack amounts are in pesewas (1 GHS = 100 pesewas)
+      const paymentAmountGHS = (amountPesewas || 0) / 100;
+
+      if (paymentAmountGHS > 0) {
+        c.executionCtx.waitUntil((async () => {
+          try {
+            await processAffiliateCommissions(c.env.DB, metadata.userId, paymentAmountGHS, reference || "");
+          } catch (err) {
+            console.error("Affiliate commission error:", err);
+          }
+        })());
+      }
     }
   }
 
