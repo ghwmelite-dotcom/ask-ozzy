@@ -197,6 +197,21 @@ CREATE TABLE IF NOT EXISTS agents (
   FOREIGN KEY (created_by) REFERENCES users(id)
 );
 
+-- Push notification subscriptions
+CREATE TABLE IF NOT EXISTS push_subscriptions (
+  id TEXT PRIMARY KEY,
+  user_id TEXT NOT NULL,
+  endpoint TEXT NOT NULL UNIQUE,
+  p256dh TEXT NOT NULL,
+  auth TEXT NOT NULL,
+  notify_announcements INTEGER DEFAULT 1,
+  notify_queue_sync INTEGER DEFAULT 1,
+  notify_shared_chat INTEGER DEFAULT 1,
+  created_at TEXT DEFAULT (datetime('now')),
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+CREATE INDEX IF NOT EXISTS idx_push_subs_user ON push_subscriptions(user_id);
+
 -- Indexes
 CREATE INDEX IF NOT EXISTS idx_conversations_user ON conversations(user_id, updated_at DESC);
 CREATE INDEX IF NOT EXISTS idx_conversations_folder ON conversations(folder_id);

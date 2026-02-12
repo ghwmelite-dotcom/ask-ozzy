@@ -5207,6 +5207,507 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { passive: true });
 });
 
+// ═══════════════════════════════════════════════════════════════════
+//  PWA: Push Notifications
+// ═══════════════════════════════════════════════════════════════════
+
+const PushManager = {
+  _vapidKey: null,
+
+  async init() {
+    if (!('Notification' in window) || !('PushManager' in window) || !('serviceWorker' in navigator)) return;
+    // Only prompt after 3 successful conversations (not on first visit)
+    const convCount = parseInt(localStorage.getItem('askozzy_conv_count') || '0', 10);
+    if (convCount < 3) return;
+    // Check if already subscribed
+    const status = await this.getStatus();
+    if (status === 'subscribed') return;
+    if (status === 'denied') return;
+    // Show non-intrusive prompt
+    if (Notification.permission === 'default') {
+      this.showPermissionPrompt();
+    }
+  },
+
+  async subscribe() {
+    if (!('Notification' in window) || !('PushManager' in window)) return false;
+    try {
+      const permission = await Notification.requestPermission();
+      if (permission !== 'granted') return false;
+
+      const reg = await navigator.serviceWorker.ready;
+
+      // Fetch VAPID public key from backend
+      if (!this._vapidKey) {
+        try {
+          const res = await fetch(API + '/api/push/vapid-public-key');
+          if (res.ok) {
+            const data = await res.json();
+            this._vapidKey = data.key;
+          }
+        } catch { /* VAPID endpoint not available */ }
+      }
+
+      if (!this._vapidKey) return false;
+
+      // Convert VAPID key to Uint8Array
+      const rawKey = atob(this._vapidKey.replace(/-/g, '+').replace(/_/g, '/'));
+      const keyArray = new Uint8Array(rawKey.length);
+      for (let i = 0; i < rawKey.length; i++) keyArray[i] = rawKey.charCodeAt(i);
+
+      const subscription = await reg.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: keyArray,
+      });
+
+      // Send subscription to backend
+      if (state.token) {
+        await fetch(API + '/api/push/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + state.token },
+          body: JSON.stringify({ subscription: subscription.toJSON() }),
+        });
+      }
+
+      showSyncToast('Push notifications enabled');
+      hapticFeedback('success');
+      this._dismissPrompt();
+      return true;
+    } catch (err) {
+      console.error('Push subscribe failed:', err);
+      return false;
+    }
+  },
+
+  async unsubscribe() {
+    try {
+      const reg = await navigator.serviceWorker.ready;
+      const subscription = await reg.pushManager.getSubscription();
+      if (subscription) {
+        await subscription.unsubscribe();
+        // Notify backend
+        if (state.token) {
+          await fetch(API + '/api/push/unsubscribe', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + state.token },
+            body: JSON.stringify({ endpoint: subscription.endpoint }),
+          });
+        }
+      }
+      showSyncToast('Push notifications disabled');
+      return true;
+    } catch {
+      return false;
+    }
+  },
+
+  async getStatus() {
+    if (!('Notification' in window)) return 'unsupported';
+    if (Notification.permission === 'denied') return 'denied';
+    if (Notification.permission === 'default') return 'prompt';
+    try {
+      const reg = await navigator.serviceWorker.ready;
+      const sub = await reg.pushManager.getSubscription();
+      return sub ? 'subscribed' : 'unsubscribed';
+    } catch {
+      return 'error';
+    }
+  },
+
+  async updatePreferences(prefs) {
+    if (!state.token) return;
+    try {
+      await fetch(API + '/api/push/preferences', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + state.token },
+        body: JSON.stringify(prefs),
+      });
+    } catch { /* silently fail */ }
+  },
+
+  showPermissionPrompt() {
+    // Non-intrusive slide-down bar (not a modal or browser default)
+    if (document.getElementById('push-prompt-bar')) return;
+    const bar = document.createElement('div');
+    bar.id = 'push-prompt-bar';
+    bar.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:10000;transform:translateY(-100%);transition:transform 0.35s ease;background:var(--surface, #1a1a2e);border-bottom:1px solid var(--border, #333);padding:12px 16px;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--text, #eee);';
+    bar.innerHTML = `
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent, #ffd700)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span style="flex:1;">Get notified when your AI tasks complete</span>
+      <button id="push-prompt-yes" style="background:var(--accent, #ffd700);color:#000;border:none;border-radius:6px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;">Enable</button>
+      <button id="push-prompt-no" style="background:transparent;border:1px solid var(--border, #555);color:var(--text-secondary, #aaa);border-radius:6px;padding:6px 10px;font-size:12px;cursor:pointer;">Not now</button>`;
+    document.body.appendChild(bar);
+
+    // Slide in after a brief delay
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => { bar.style.transform = 'translateY(0)'; });
+    });
+
+    document.getElementById('push-prompt-yes').addEventListener('click', () => PushManager.subscribe());
+    document.getElementById('push-prompt-no').addEventListener('click', () => PushManager._dismissPrompt());
+  },
+
+  _dismissPrompt() {
+    const bar = document.getElementById('push-prompt-bar');
+    if (bar) {
+      bar.style.transform = 'translateY(-100%)';
+      setTimeout(() => bar.remove(), 400);
+    }
+  },
+};
+
+// ═══════════════════════════════════════════════════════════════════
+//  Native: View Transitions
+// ═══════════════════════════════════════════════════════════════════
+
+function viewTransition(callback) {
+  if (document.startViewTransition) {
+    document.startViewTransition(callback);
+  } else {
+    callback();
+  }
+}
+
+(function patchViewTransitions() {
+  if (!document.startViewTransition) return;
+
+  // Patch showChatScreen
+  const origShowChat = window.showChatScreen;
+  if (typeof origShowChat === 'function') {
+    window.showChatScreen = function () {
+      document.startViewTransition(() => origShowChat.apply(this, arguments));
+    };
+  }
+
+  // Patch showWelcomeScreen
+  const origShowWelcome = window.showWelcomeScreen;
+  if (typeof origShowWelcome === 'function') {
+    window.showWelcomeScreen = function () {
+      document.startViewTransition(() => origShowWelcome.apply(this, arguments));
+    };
+  }
+
+  // Patch openConversation
+  const origOpenConv = window.openConversation;
+  if (typeof origOpenConv === 'function') {
+    window.openConversation = function () {
+      document.startViewTransition(() => origOpenConv.apply(this, arguments));
+    };
+  }
+})();
+
+// ═══════════════════════════════════════════════════════════════════
+//  Native: Web Share (Outbound)
+// ═══════════════════════════════════════════════════════════════════
+
+async function shareContent(title, text, url) {
+  if (navigator.share) {
+    try {
+      await navigator.share({ title, text, url });
+      hapticFeedback('success');
+    } catch (e) {
+      if (e.name !== 'AbortError') copyToClipboard(text || url);
+    }
+  } else {
+    copyToClipboard(text || url);
+  }
+}
+
+async function shareConversationExcerpt(conversationId) {
+  const convo = state.conversations.find(function (c) { return c.id === conversationId; });
+  if (!convo) return;
+
+  const title = convo.title || 'AskOzzy Conversation';
+  // Get the last few messages as a summary excerpt
+  let excerpt = '';
+  try {
+    const res = await fetch(API + '/api/conversations/' + conversationId + '/messages', { headers: authHeaders() });
+    if (res.ok) {
+      const data = await res.json();
+      const msgs = data.messages || [];
+      const last = msgs.slice(-3);
+      excerpt = last.map(function (m) { return (m.role === 'user' ? 'You: ' : 'Ozzy: ') + m.content.substring(0, 200); }).join('\n\n');
+    }
+  } catch { /* use title only */ }
+
+  const text = excerpt || title;
+  const url = 'https://askozzy.ghwmelite.workers.dev';
+  await shareContent('AskOzzy: ' + title, text, url);
+}
+
+async function shareReferralLink() {
+  const referralCode = (state.user && state.user.referral_code) ? state.user.referral_code : '';
+  const url = 'https://askozzy.ghwmelite.workers.dev' + (referralCode ? '?ref=' + referralCode : '');
+  const text = 'Try AskOzzy — AI-powered productivity for Government of Ghana.' + (referralCode ? ' Use my referral code: ' + referralCode : '');
+  await shareContent('Join AskOzzy', text, url);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  Native: Enhanced Clipboard
+// ═══════════════════════════════════════════════════════════════════
+
+async function copyRichText(html, plaintext) {
+  if (navigator.clipboard && typeof ClipboardItem !== 'undefined') {
+    try {
+      var item = new ClipboardItem({
+        'text/html': new Blob([html], { type: 'text/html' }),
+        'text/plain': new Blob([plaintext], { type: 'text/plain' }),
+      });
+      await navigator.clipboard.write([item]);
+      showSyncToast('Copied to clipboard');
+      hapticFeedback('success');
+    } catch {
+      fallbackCopy(plaintext);
+    }
+  } else {
+    fallbackCopy(plaintext);
+  }
+}
+
+function fallbackCopy(text) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.cssText = 'position:fixed;opacity:0;left:-9999px';
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand('copy'); } catch { /* older browser */ }
+  ta.remove();
+  showSyncToast('Copied to clipboard');
+}
+
+// Paste image handler for chat input
+(function initPasteImageHandler() {
+  document.addEventListener('DOMContentLoaded', function () {
+    var chatInput = document.getElementById('chat-input');
+    if (!chatInput) return;
+
+    chatInput.addEventListener('paste', function (e) {
+      var items = e.clipboardData && e.clipboardData.items;
+      if (!items) return;
+
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image/') === 0) {
+          e.preventDefault();
+          var file = items[i].getAsFile();
+          if (file && typeof handleImageFile === 'function') {
+            handleImageFile(file);
+          }
+          break;
+        }
+      }
+    });
+  });
+})();
+
+// ═══════════════════════════════════════════════════════════════════
+//  Native: File System Access
+// ═══════════════════════════════════════════════════════════════════
+
+async function saveFile(content, suggestedName, types) {
+  if ('showSaveFilePicker' in window) {
+    try {
+      var handle = await window.showSaveFilePicker({
+        suggestedName: suggestedName,
+        types: types || [
+          { description: 'Text Document', accept: { 'text/plain': ['.txt'] } },
+          { description: 'Document', accept: { 'application/octet-stream': ['.docx', '.pdf'] } },
+        ],
+      });
+      var writable = await handle.createWritable();
+      await writable.write(content);
+      await writable.close();
+      showSyncToast('File saved successfully');
+      hapticFeedback('success');
+      return true;
+    } catch (e) {
+      if (e.name === 'AbortError') return false;
+      // Fall through to standard download
+    }
+  }
+  // Fallback: standard download
+  downloadFile(content, suggestedName);
+  return true;
+}
+
+function downloadFile(content, filename) {
+  var blob = content instanceof Blob ? content : new Blob([content]);
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  Native: Media Session (Voice Mode)
+// ═══════════════════════════════════════════════════════════════════
+
+function setMediaSession(isActive) {
+  if (!('mediaSession' in navigator)) return;
+  if (isActive) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: 'AskOzzy Voice',
+      artist: 'AskOzzy AI Assistant',
+      album: 'Government of Ghana',
+      artwork: [
+        { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png' },
+        { src: '/icons/icon-512.png', sizes: '512x512', type: 'image/png' },
+      ],
+    });
+    navigator.mediaSession.setActionHandler('stop', function () {
+      if (typeof toggleVoice === 'function') toggleVoice();
+    });
+    navigator.mediaSession.setActionHandler('pause', function () {
+      if (typeof toggleVoice === 'function') toggleVoice();
+    });
+  } else {
+    navigator.mediaSession.metadata = null;
+    try {
+      navigator.mediaSession.setActionHandler('stop', null);
+      navigator.mediaSession.setActionHandler('pause', null);
+    } catch { /* some browsers throw on null handlers */ }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  Native: Screen Orientation
+// ═══════════════════════════════════════════════════════════════════
+
+async function lockOrientation(orientation) {
+  if (!screen.orientation || !screen.orientation.lock) return;
+  try {
+    await screen.orientation.lock(orientation);
+  } catch { /* orientation lock not supported or not in fullscreen */ }
+}
+
+function unlockOrientation() {
+  if (screen.orientation && screen.orientation.unlock) {
+    try { screen.orientation.unlock(); } catch { /* ignore */ }
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  Native: Idle Detection (Auto-save drafts)
+// ═══════════════════════════════════════════════════════════════════
+
+async function initIdleDetection() {
+  if (!('IdleDetector' in window)) return;
+  try {
+    var permission = await IdleDetector.requestPermission();
+    if (permission !== 'granted') return;
+
+    var detector = new IdleDetector();
+    detector.addEventListener('change', function () {
+      if (detector.userState === 'idle') {
+        // Auto-save draft message
+        var input = document.getElementById('chat-input');
+        if (input && input.value.trim()) {
+          localStorage.setItem('askozzy_draft', JSON.stringify({
+            text: input.value,
+            conversationId: state.activeConversationId,
+            timestamp: Date.now(),
+          }));
+        }
+      }
+    });
+    await detector.start({ threshold: 120000 }); // 2 minutes idle threshold
+  } catch { /* permission denied or unsupported */ }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  Native: Contact Picker (Referrals)
+// ═══════════════════════════════════════════════════════════════════
+
+async function pickContactForReferral() {
+  if (!('contacts' in navigator && 'ContactsManager' in window)) {
+    // Fallback: use Web Share for referral
+    shareReferralLink();
+    return;
+  }
+  try {
+    var contacts = await navigator.contacts.select(['name', 'email', 'tel'], { multiple: false });
+    if (contacts.length > 0) {
+      var contact = contacts[0];
+      var referralCode = (state.user && state.user.referral_code) ? state.user.referral_code : '';
+      var contactName = (contact.name && contact.name[0]) ? contact.name[0] : 'there';
+      var msg = 'Hey ' + contactName + '! Try AskOzzy \u2014 AI for Government of Ghana. Use my code: ' + referralCode + '\nhttps://askozzy.ghwmelite.workers.dev?ref=' + referralCode;
+
+      if (contact.email && contact.email[0]) {
+        window.open('mailto:' + contact.email[0] + '?subject=Try AskOzzy&body=' + encodeURIComponent(msg));
+      } else if (contact.tel && contact.tel[0]) {
+        window.open('sms:' + contact.tel[0] + '?body=' + encodeURIComponent(msg));
+      } else {
+        // No email or phone, share via Web Share
+        await shareContent('Join AskOzzy', msg, 'https://askozzy.ghwmelite.workers.dev?ref=' + referralCode);
+      }
+      hapticFeedback('success');
+    }
+  } catch {
+    shareReferralLink();
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  Native: Draft Restoration
+// ═══════════════════════════════════════════════════════════════════
+
+(function restoreDraft() {
+  document.addEventListener('DOMContentLoaded', function () {
+    var draft = localStorage.getItem('askozzy_draft');
+    if (!draft) return;
+    try {
+      var parsed = JSON.parse(draft);
+      var text = parsed.text;
+      var timestamp = parsed.timestamp;
+      // Only restore if less than 24 hours old
+      if (Date.now() - timestamp > 86400000) {
+        localStorage.removeItem('askozzy_draft');
+        return;
+      }
+      var input = document.getElementById('chat-input');
+      if (input && !input.value) {
+        input.value = text;
+        if (typeof autoResizeInput === 'function') autoResizeInput();
+        showSyncToast('Draft restored');
+      }
+    } catch {
+      localStorage.removeItem('askozzy_draft');
+    }
+  });
+})();
+
+// ═══════════════════════════════════════════════════════════════════
+//  Native: Feature Initialization
+// ═══════════════════════════════════════════════════════════════════
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Push notifications: init after a delay so it doesn't disrupt initial load
+  setTimeout(function () { PushManager.init(); }, 5000);
+
+  // Idle detection for draft auto-save
+  initIdleDetection();
+
+  // Increment conversation count for push notification gating
+  // (triggered when user successfully sends a message — tracked here as a proxy)
+  var convCountKey = 'askozzy_conv_count';
+  var currentCount = parseInt(localStorage.getItem(convCountKey) || '0', 10);
+  if (state.conversations && state.conversations.length > currentCount) {
+    localStorage.setItem(convCountKey, String(state.conversations.length));
+  }
+
+  // Listen for SW navigation messages (e.g., push notification click)
+  if (navigator.serviceWorker) {
+    navigator.serviceWorker.addEventListener('message', function (e) {
+      if (e.data && e.data.type === 'NAVIGATE') {
+        window.location.href = e.data.url;
+      }
+    });
+  }
+});
+
 // ─── Auto-capture referral code from URL ─────────────────────────────
 
 (function captureReferralFromURL() {

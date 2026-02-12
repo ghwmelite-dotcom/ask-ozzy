@@ -1,19 +1,23 @@
 // ═══════════════════════════════════════════════════════════════════
-//  AskOzzy — Enhanced Service Worker v3
+//  AskOzzy — Enhanced Service Worker v5
 //  Cache-first for static, network-first for API, offline queue for messages
-//  IndexedDB template cache + response cache for offline-first AI
+//  IndexedDB template cache + response cache + conversation cache for offline-first AI
+//  Push notifications, content indexing, background conversation sync
 // ═══════════════════════════════════════════════════════════════════
 
-const CACHE_NAME = "askozzy-v4";
+const CACHE_NAME = "askozzy-v5";
 const OFFLINE_QUEUE_KEY = "askozzy_offline_queue";
 
 // IndexedDB configuration
 const IDB_NAME = "ozzy-offline";
-const IDB_VERSION = 1;
+const IDB_VERSION = 2;
 const STORE_TEMPLATE_CACHE = "template_cache";
 const STORE_RESPONSE_CACHE = "response_cache";
+const STORE_CONVERSATIONS = "conversation_cache";
+const STORE_MESSAGES = "message_cache";
 const RESPONSE_CACHE_MAX = 50;
 const RESPONSE_CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
+const CONVERSATION_CACHE_MAX = 200;
 
 const STATIC_ASSETS = [
   "/",
@@ -50,6 +54,14 @@ function openDB() {
       if (!db.objectStoreNames.contains(STORE_RESPONSE_CACHE)) {
         const store = db.createObjectStore(STORE_RESPONSE_CACHE, { keyPath: "hash" });
         store.createIndex("timestamp", "timestamp", { unique: false });
+      }
+      if (!db.objectStoreNames.contains(STORE_CONVERSATIONS)) {
+        const convStore = db.createObjectStore(STORE_CONVERSATIONS, { keyPath: "id" });
+        convStore.createIndex("updated_at", "updated_at", { unique: false });
+      }
+      if (!db.objectStoreNames.contains(STORE_MESSAGES)) {
+        const msgStore = db.createObjectStore(STORE_MESSAGES, { keyPath: "id" });
+        msgStore.createIndex("conversation_id", "conversation_id", { unique: false });
       }
     };
 
@@ -113,6 +125,31 @@ function idbCount(storeName) {
       const store = tx.objectStore(storeName);
       const req = store.count();
       req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  });
+}
+
+function idbGetAllByIndex(storeName, indexName, indexValue) {
+  return openDB().then((db) => {
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(storeName, "readonly");
+      const store = tx.objectStore(storeName);
+      const index = store.index(indexName);
+      const req = index.getAll(indexValue);
+      req.onsuccess = () => resolve(req.result || []);
+      req.onerror = () => reject(req.error);
+    });
+  });
+}
+
+function idbClear(storeName) {
+  return openDB().then((db) => {
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(storeName, "readwrite");
+      const store = tx.objectStore(storeName);
+      const req = store.clear();
+      req.onsuccess = () => resolve();
       req.onerror = () => reject(req.error);
     });
   });
@@ -1029,7 +1066,14 @@ self.addEventListener("install", (event) => {
       }),
       // Initialize IndexedDB and pre-populate template cache
       preCacheTemplates(),
-    ])
+    ]).then(() => {
+      // Notify all clients that a new SW version is available
+      self.clients.matchAll().then((clients) => {
+        clients.forEach((client) => {
+          client.postMessage({ type: "SW_UPDATE_AVAILABLE" });
+        });
+      });
+    })
   );
   self.skipWaiting();
 });
@@ -1070,6 +1114,43 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
+// ─── Push Notification handling ──────────────────────────────────────
+self.addEventListener("push", (event) => {
+  const data = event.data ? event.data.json() : {};
+  const title = data.title || "AskOzzy";
+  const options = {
+    body: data.body || "You have a new notification",
+    icon: "/icons/icon-192.png",
+    badge: "/icons/icon-192.png",
+    tag: data.tag || "default",
+    data: { url: data.url || "/", type: data.type || "general" },
+    actions: data.actions || [],
+    vibrate: [100, 50, 100],
+    renotify: !!data.tag,
+  };
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+// ─── Notification click: focus or open window ────────────────────────
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const url = event.notification.data?.url || "/";
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((clients) => {
+      // Focus existing window if open
+      for (const client of clients) {
+        if (client.url.includes(self.registration.scope) && "focus" in client) {
+          client.focus();
+          client.postMessage({ type: "NAVIGATE", url });
+          return;
+        }
+      }
+      // Open new window
+      return self.clients.openWindow(url);
+    })
+  );
+});
+
 // ─── Fetch strategy ─────────────────────────────────────────────────
 self.addEventListener("fetch", (event) => {
   const { request } = event;
@@ -1089,6 +1170,20 @@ self.addEventListener("fetch", (event) => {
 
   // API GET: network-first with cache fallback for certain endpoints
   if (url.pathname.startsWith("/api/")) {
+    // Intercept conversation list and message GETs for IndexedDB caching
+    const conversationListMatch = url.pathname === "/api/conversations";
+    const messageMatch = url.pathname.match(/^\/api\/conversations\/([^/]+)\/messages$/);
+
+    if (conversationListMatch) {
+      event.respondWith(handleConversationListGet(request));
+      return;
+    }
+
+    if (messageMatch) {
+      event.respondWith(handleConversationMessagesGet(request, messageMatch[1]));
+      return;
+    }
+
     const isCacheable = CACHEABLE_API_PATHS.some((p) => url.pathname.startsWith(p));
 
     if (isCacheable) {
@@ -1393,6 +1488,192 @@ async function enforceResponseCacheLimit() {
   }
 }
 
+// ─── Conversation list: network-first with IndexedDB fallback ────────
+async function handleConversationListGet(request) {
+  try {
+    const response = await fetch(request);
+    if (response && response.status === 200) {
+      // Clone for caching, return original
+      const clone = response.clone();
+      // Also cache in the regular Cache API for CACHEABLE_API_PATHS compat
+      caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+
+      // Cache conversations in IndexedDB
+      const data = await response.clone().json();
+      const conversations = data.conversations || data.data || data || [];
+      if (Array.isArray(conversations)) {
+        cacheConversationsToIDB(conversations).catch(() => {});
+      }
+    }
+    return response;
+  } catch {
+    // Offline: serve from IndexedDB
+    try {
+      const cached = await idbGetAll(STORE_CONVERSATIONS);
+      if (cached && cached.length > 0) {
+        // Sort by updated_at descending (most recent first)
+        cached.sort((a, b) => {
+          const aTime = new Date(b.updated_at || 0).getTime();
+          const bTime = new Date(a.updated_at || 0).getTime();
+          return aTime - bTime;
+        });
+        return new Response(
+          JSON.stringify({ conversations: cached, offline: true }),
+          { status: 200, headers: { "Content-Type": "application/json", "X-Offline-Response": "true" } }
+        );
+      }
+    } catch {
+      // Fall through
+    }
+    // Last resort: try the regular Cache API
+    const cachedResponse = await caches.match(request);
+    if (cachedResponse) return cachedResponse;
+    return new Response(
+      JSON.stringify({ error: "You are offline. Showing cached data.", offline: true }),
+      { status: 503, headers: { "Content-Type": "application/json" } }
+    );
+  }
+}
+
+// ─── Conversation messages: network-first with IndexedDB fallback ────
+async function handleConversationMessagesGet(request, conversationId) {
+  try {
+    const response = await fetch(request);
+    if (response && response.status === 200) {
+      const clone = response.clone();
+      caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+
+      // Cache messages in IndexedDB
+      const data = await response.clone().json();
+      const messages = data.messages || data.data || data || [];
+      if (Array.isArray(messages)) {
+        cacheMessagesToIDB(conversationId, messages).catch(() => {});
+      }
+    }
+    return response;
+  } catch {
+    // Offline: serve from IndexedDB
+    try {
+      const cached = await idbGetAllByIndex(STORE_MESSAGES, "conversation_id", conversationId);
+      if (cached && cached.length > 0) {
+        return new Response(
+          JSON.stringify({ messages: cached, offline: true }),
+          { status: 200, headers: { "Content-Type": "application/json", "X-Offline-Response": "true" } }
+        );
+      }
+    } catch {
+      // Fall through
+    }
+    const cachedResponse = await caches.match(request);
+    if (cachedResponse) return cachedResponse;
+    return new Response(
+      JSON.stringify({ error: "You are offline. Showing cached data.", offline: true }),
+      { status: 503, headers: { "Content-Type": "application/json" } }
+    );
+  }
+}
+
+// ─── Cache conversations array into IndexedDB ───────────────────────
+async function cacheConversationsToIDB(conversations) {
+  try {
+    // Enforce max cache size
+    const currentCount = await idbCount(STORE_CONVERSATIONS);
+    if (currentCount > CONVERSATION_CACHE_MAX) {
+      const all = await idbGetAll(STORE_CONVERSATIONS);
+      all.sort((a, b) => new Date(a.updated_at || 0).getTime() - new Date(b.updated_at || 0).getTime());
+      const toRemove = all.slice(0, currentCount - CONVERSATION_CACHE_MAX + 10);
+      for (const entry of toRemove) {
+        await idbDelete(STORE_CONVERSATIONS, entry.id);
+      }
+    }
+
+    for (const conv of conversations) {
+      if (conv.id) {
+        await idbPut(STORE_CONVERSATIONS, {
+          ...conv,
+          updated_at: conv.updated_at || conv.created_at || new Date().toISOString(),
+          _cached_at: Date.now(),
+        });
+      }
+    }
+
+    // Update the content index after caching
+    updateContentIndex().catch(() => {});
+  } catch (err) {
+    console.log("SW: Failed to cache conversations:", err);
+  }
+}
+
+// ─── Cache messages array into IndexedDB ────────────────────────────
+async function cacheMessagesToIDB(conversationId, messages) {
+  try {
+    // Remove old messages for this conversation first
+    const existing = await idbGetAllByIndex(STORE_MESSAGES, "conversation_id", conversationId);
+    for (const msg of existing) {
+      await idbDelete(STORE_MESSAGES, msg.id);
+    }
+
+    // Insert new messages
+    for (const msg of messages) {
+      if (msg.id) {
+        await idbPut(STORE_MESSAGES, {
+          ...msg,
+          conversation_id: conversationId,
+          _cached_at: Date.now(),
+        });
+      }
+    }
+  } catch (err) {
+    console.log("SW: Failed to cache messages:", err);
+  }
+}
+
+// ─── Sync conversations in background ───────────────────────────────
+async function syncConversationsInBackground() {
+  try {
+    const response = await fetch("/api/conversations");
+    if (response && response.ok) {
+      const data = await response.json();
+      const conversations = data.conversations || data.data || data || [];
+      if (Array.isArray(conversations)) {
+        await cacheConversationsToIDB(conversations);
+      }
+    }
+  } catch (err) {
+    console.log("SW: Background conversation sync failed:", err);
+  }
+}
+
+// ─── Content Index API: register cached conversations for discovery ──
+async function updateContentIndex() {
+  if (!self.registration.index) return;
+  try {
+    const conversations = await idbGetAll(STORE_CONVERSATIONS);
+    // Clear existing entries first
+    const existingEntries = await self.registration.index.getAll();
+    for (const entry of existingEntries) {
+      await self.registration.index.delete(entry.id);
+    }
+    // Register cached conversations
+    for (const conv of conversations) {
+      try {
+        await self.registration.index.add({
+          id: `conv-${conv.id}`,
+          url: `/?conversation=${conv.id}`,
+          title: conv.title || conv.name || "Conversation",
+          description: conv.last_message || conv.title || "Cached conversation",
+          icons: [{ src: "/icons/icon-192.png", sizes: "192x192", type: "image/png" }],
+          category: "article",
+        });
+      } catch {
+        // Some entries may fail — continue with next
+      }
+    }
+  } catch (err) {
+    console.log("SW: Content index update failed:", err);
+  }
+}
+
 // ─── Notify all connected clients ───────────────────────────────────
 async function notifyClients(message) {
   try {
@@ -1540,10 +1821,13 @@ self.addEventListener("sync", (event) => {
   }
 });
 
-// ─── Periodic Background Sync (if supported): keep templates fresh ───
+// ─── Periodic Background Sync (if supported): keep templates + conversations fresh ───
 self.addEventListener("periodicsync", (event) => {
   if (event.tag === "refresh-templates") {
     event.waitUntil(preCacheTemplates());
+  }
+  if (event.tag === "sync-conversations") {
+    event.waitUntil(syncConversationsInBackground());
   }
 });
 

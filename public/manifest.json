@@ -4,6 +4,13 @@
   "description": "Private, AI-powered productivity platform built exclusively for Government of Ghana operations.",
   "start_url": "/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "protocol_handlers": [
+    {
+      "protocol": "web+ozzy",
+      "url": "/?action=protocol&data=%s"
+    }
+  ],
   "orientation": "any",
   "theme_color": "#0f1117",
   "background_color": "#0f1117",
