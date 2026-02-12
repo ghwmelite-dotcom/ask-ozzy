@@ -429,13 +429,6 @@ const PRICING_TIERS: Record<string, {
     models: "basic",
     features: ["10 messages/day", "Basic models (3)", "Standard response speed"],
   },
-  starter: {
-    name: "Starter",
-    price: 30,
-    messagesPerDay: 50,
-    models: "all",
-    features: ["50 messages/day", "All 10 AI models", "Faster responses", "Conversation history"],
-  },
   professional: {
     name: "Professional",
     price: 60,
@@ -862,7 +855,6 @@ async function webSearch(query: string, maxResults = 5): Promise<Array<{ title: 
 
 const WEB_SEARCH_LIMITS: Record<string, number> = {
   free: 3,
-  starter: 10,
   professional: -1,
   enterprise: -1,
 };
@@ -1255,7 +1247,7 @@ app.post("/api/research", authMiddleware, async (c) => {
   const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
     .bind(userId).first<{ tier: string }>();
   const userTier = user?.tier || "free";
-  if (userTier === "free" || userTier === "starter") {
+  if (userTier === "free") {
     return c.json({ error: "Deep Research requires a Professional or Enterprise plan.", code: "TIER_REQUIRED" }, 403);
   }
 
@@ -1433,12 +1425,12 @@ app.get("/api/research/:id", authMiddleware, async (c) => {
 app.post("/api/analyze", authMiddleware, async (c) => {
   const userId = c.get("userId");
 
-  // Tier gate: Starter+ only
+  // Tier gate: Professional+ only
   const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
     .bind(userId).first<{ tier: string }>();
   const userTier = user?.tier || "free";
   if (userTier === "free") {
-    return c.json({ error: "Data Analysis requires a Starter plan or above.", code: "TIER_REQUIRED" }, 403);
+    return c.json({ error: "Data Analysis requires a Professional plan or above.", code: "TIER_REQUIRED" }, 403);
   }
 
   const formData = await c.req.formData();
@@ -1719,12 +1711,12 @@ app.post("/api/translate", authMiddleware, async (c) => {
 app.post("/api/vision", authMiddleware, async (c) => {
   const userId = c.get("userId");
 
-  // Tier gate: Starter+ only
+  // Tier gate: Professional+ only
   const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
     .bind(userId).first<{ tier: string }>();
   const userTier = user?.tier || "free";
   if (userTier === "free") {
-    return c.json({ error: "Image understanding requires a Starter plan or above.", code: "TIER_REQUIRED" }, 403);
+    return c.json({ error: "Image understanding requires a Professional plan or above.", code: "TIER_REQUIRED" }, 403);
   }
 
   const formData = await c.req.formData();
@@ -1800,12 +1792,12 @@ app.post("/api/chat/image", authMiddleware, async (c) => {
     return c.json({ error: "image and conversationId are required" }, 400);
   }
 
-  // Tier gate
+  // Tier gate: Professional+
   const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
     .bind(userId).first<{ tier: string }>();
   const userTier = user?.tier || "free";
   if (userTier === "free") {
-    return c.json({ error: "Image understanding requires a Starter plan or above.", code: "TIER_REQUIRED" }, 403);
+    return c.json({ error: "Image understanding requires a Professional plan or above.", code: "TIER_REQUIRED" }, 403);
   }
 
   // Check usage
@@ -1890,7 +1882,7 @@ app.get("/api/models", authMiddleware, async (c) => {
         name: "GPT-OSS 120B (OpenAI)",
         description: "OpenAI's open-weight model — top-tier reasoning, agentic tasks, and general purpose",
         contextWindow: 131072,
-        requiredTier: "starter",
+        requiredTier: "professional",
         locked: isFree,
         recommended: true,
       },
@@ -1899,7 +1891,7 @@ app.get("/api/models", authMiddleware, async (c) => {
         name: "Llama 4 Scout 17B (Meta)",
         description: "Meta's latest — 16 experts, multimodal, excellent for complex drafting and analysis",
         contextWindow: 131000,
-        requiredTier: "starter",
+        requiredTier: "professional",
         locked: isFree,
         recommended: true,
       },
@@ -1908,7 +1900,7 @@ app.get("/api/models", authMiddleware, async (c) => {
         name: "Llama 3.3 70B (Meta)",
         description: "70 billion parameters — the most powerful Llama for deep reasoning and long documents",
         contextWindow: 131072,
-        requiredTier: "starter",
+        requiredTier: "professional",
         locked: isFree,
         recommended: false,
       },
@@ -1917,7 +1909,7 @@ app.get("/api/models", authMiddleware, async (c) => {
         name: "QwQ 32B (Qwen)",
         description: "Qwen reasoning model — exceptional at thinking through complex problems step-by-step",
         contextWindow: 131072,
-        requiredTier: "starter",
+        requiredTier: "professional",
         locked: isFree,
         recommended: false,
       },
@@ -1926,7 +1918,7 @@ app.get("/api/models", authMiddleware, async (c) => {
         name: "Qwen3 30B (Qwen)",
         description: "Latest Qwen3 — advanced reasoning, multilingual, agent capabilities",
         contextWindow: 131072,
-        requiredTier: "starter",
+        requiredTier: "professional",
         locked: isFree,
         recommended: false,
       },
@@ -1944,7 +1936,7 @@ app.get("/api/models", authMiddleware, async (c) => {
         name: "Mistral Small 3.1 24B",
         description: "Excellent for long documents, vision understanding, and multilingual writing",
         contextWindow: 128000,
-        requiredTier: "starter",
+        requiredTier: "professional",
         locked: isFree,
         recommended: false,
       },
@@ -1962,7 +1954,7 @@ app.get("/api/models", authMiddleware, async (c) => {
         name: "Granite 4.0 Micro (IBM)",
         description: "IBM's enterprise model — small but accurate, great for structured tasks",
         contextWindow: 131072,
-        requiredTier: "starter",
+        requiredTier: "professional",
         locked: isFree,
         recommended: false,
       },
@@ -2098,7 +2090,7 @@ async function checkMilestones(db: D1Database, userId: string): Promise<void> {
   if (!user) return;
 
   const milestones = [
-    { threshold: 10, bonus: 30, label: "10 referrals — 1 month Starter value" },
+    { threshold: 10, bonus: 30, label: "10 referrals — GHS 30 bonus" },
     { threshold: 25, bonus: 60, label: "25 referrals — 1 month Professional value" },
     { threshold: 50, bonus: 100, label: "50 referrals — Enterprise value + permanent discount" },
     { threshold: 100, bonus: 200, label: "100 referrals — Free Enterprise for life" },
@@ -2176,7 +2168,7 @@ app.get("/api/affiliate/dashboard", authMiddleware, async (c) => {
   // Milestones
   const directRefs = directCount?.cnt || 0;
   const milestonesDef = [
-    { key: "referrals_10", target: 10, reward: "1 month Starter free (GHS 30 bonus)" },
+    { key: "referrals_10", target: 10, reward: "GHS 30 bonus" },
     { key: "referrals_25", target: 25, reward: "1 month Professional free (GHS 60 bonus)" },
     { key: "referrals_50", target: 50, reward: "GHS 100 bonus + permanent 50% discount" },
     { key: "referrals_100", target: 100, reward: "GHS 200 bonus + Free Enterprise for life" },
@@ -2685,7 +2677,7 @@ app.get("/api/admin/users", adminMiddleware, async (c) => {
 app.patch("/api/admin/users/:id/tier", adminMiddleware, async (c) => {
   const id = c.req.param("id");
   const { tier } = await c.req.json();
-  const validTiers = ["free", "starter", "professional", "enterprise"];
+  const validTiers = ["free", "professional", "enterprise"];
   if (!validTiers.includes(tier)) {
     return c.json({ error: "Invalid tier. Must be: " + validTiers.join(", ") }, 400);
   }
@@ -4278,7 +4270,6 @@ app.post("/api/organizations/:id/remove", authMiddleware, async (c) => {
 // ─── Paystack Payment Integration ─────────────────────────────────────
 
 const PAYSTACK_PLANS: Record<string, { amount: number; planCode: string }> = {
-  starter: { amount: 3000, planCode: "starter" },       // GHS 30 in pesewas
   professional: { amount: 6000, planCode: "professional" }, // GHS 60
   enterprise: { amount: 10000, planCode: "enterprise" },   // GHS 100
 };
@@ -5329,7 +5320,7 @@ app.post("/api/meetings/upload", authMiddleware, async (c) => {
   // Tier gate: Professional+
   const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
     .bind(userId).first<{ tier: string }>();
-  if ((user?.tier || "free") === "free" || (user?.tier || "free") === "starter") {
+  if ((user?.tier || "free") === "free") {
     return c.json({ error: "Meeting Assistant requires a Professional plan or above.", code: "TIER_REQUIRED" }, 403);
   }
 
@@ -5461,11 +5452,11 @@ app.post("/api/spaces", authMiddleware, async (c) => {
   const { name, description } = await c.req.json();
   if (!name) return c.json({ error: "name is required" }, 400);
 
-  // Tier gate: Starter+
+  // Tier gate: Professional+
   const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
     .bind(userId).first<{ tier: string }>();
   if ((user?.tier || "free") === "free") {
-    return c.json({ error: "Collaborative Spaces requires a Starter plan or above.", code: "TIER_REQUIRED" }, 403);
+    return c.json({ error: "Collaborative Spaces requires a Professional plan or above.", code: "TIER_REQUIRED" }, 403);
   }
 
   const id = generateId();

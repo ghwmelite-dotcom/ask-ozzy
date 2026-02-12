@@ -125,7 +125,7 @@ const GUIDE_SECTIONS = [
     features: [
       { id: 'gs-register', title: 'Create Your Account', tier: 'free', description: 'Register with your name, email, and GoG department to get your personal access code.', steps: ['Click "Sign In / Create Account" in the sidebar', 'Switch to the "Register" tab', 'Enter your full name, email, and department', 'Save your access code — it\'s shown only once!', 'You\'re now signed in and ready to go'] },
       { id: 'gs-signin', title: 'Sign In with Access Code', tier: 'free', description: 'Use your email and access code to sign in. No passwords needed — simple and secure.', steps: ['Click "Sign In / Create Account"', 'Enter your email and access code', 'If you have 2FA enabled, enter your 6-digit code', 'You\'re signed in with your conversations restored'] },
-      { id: 'gs-models', title: 'Choose Your AI Model', tier: 'free', description: 'Select from multiple AI models optimized for different tasks. Higher tiers unlock more powerful models.', steps: ['Look for the model selector dropdown near the chat input', 'Free tier includes GPT-OSS 20B and Llama 3.1 8B', 'Starter tier adds DeepSeek R1 and Qwen 2.5 72B', 'Professional tier unlocks Llama 3.3 70B', 'Each model has strengths — experiment to find your favorite'] },
+      { id: 'gs-models', title: 'Choose Your AI Model', tier: 'free', description: 'Select from multiple AI models optimized for different tasks. Higher tiers unlock more powerful models.', steps: ['Look for the model selector dropdown near the chat input', 'Free tier includes GPT-OSS 20B, Gemma 3, and Llama 3.1 8B', 'Professional tier unlocks all 11 models including Llama 3.3 70B', 'Each model has strengths — experiment to find your favorite'] },
     ]
   },
   {
@@ -147,12 +147,12 @@ const GUIDE_SECTIONS = [
     description: 'Templates, research, workflows, meetings, spaces, and web search',
     features: [
       { id: 'st-templates', title: 'GoG Prompt Templates', tier: 'free', description: '25+ pre-built templates for Government of Ghana operations — memos, briefs, reports, and more.', steps: ['Browse templates on the welcome screen or click "Templates"', 'Filter by category: Writing, Analysis, HR, Finance, Legal, etc.', 'Click a template to auto-fill the chat input', 'Customize the template text before sending'] },
-      { id: 'st-research', title: 'Deep Research Mode', tier: 'starter', description: 'AI-powered research that synthesizes information into structured reports with citations.', steps: ['Click the Research tool pill below the input area', 'Enter your research topic or question', 'AI generates a comprehensive report with sections', 'Review findings, sources, and recommendations'] },
-      { id: 'st-analysis', title: 'Data Analysis', tier: 'starter', description: 'Upload spreadsheets or paste data for AI-powered analysis with charts and insights.', steps: ['Upload a CSV/Excel file or paste tabular data', 'Ask the AI to analyze trends, summarize, or visualize', 'Get charts, statistics, and actionable insights', 'Export results or continue the analysis conversation'] },
+      { id: 'st-research', title: 'Deep Research Mode', tier: 'professional', description: 'AI-powered research that synthesizes information into structured reports with citations.', steps: ['Click the Research tool pill below the input area', 'Enter your research topic or question', 'AI generates a comprehensive report with sections', 'Review findings, sources, and recommendations'] },
+      { id: 'st-analysis', title: 'Data Analysis', tier: 'professional', description: 'Upload spreadsheets or paste data for AI-powered analysis with charts and insights.', steps: ['Upload a CSV/Excel file or paste tabular data', 'Ask the AI to analyze trends, summarize, or visualize', 'Get charts, statistics, and actionable insights', 'Export results or continue the analysis conversation'] },
       { id: 'st-workflows', title: 'Workflow Wizard', tier: 'professional', description: 'Multi-step guided workflows for complex GoG processes like procurement, HR actions, and policy drafts.', steps: ['Click the Workflow tool pill', 'Select a workflow category (procurement, HR, policy, etc.)', 'Follow the step-by-step wizard with guided inputs', 'AI generates complete documents based on your inputs', 'Review, edit, and export the final output'] },
-      { id: 'st-meetings', title: 'Meeting Assistant', tier: 'starter', description: 'Generate agendas, take notes, and create minutes with AI assistance.', steps: ['Click the Meeting tool pill', 'Choose: create agenda, take notes, or generate minutes', 'Enter meeting details (participants, topics, decisions)', 'AI structures and formats everything professionally'] },
+      { id: 'st-meetings', title: 'Meeting Assistant', tier: 'professional', description: 'Generate agendas, take notes, and create minutes with AI assistance.', steps: ['Click the Meeting tool pill', 'Choose: create agenda, take notes, or generate minutes', 'Enter meeting details (participants, topics, decisions)', 'AI structures and formats everything professionally'] },
       { id: 'st-spaces', title: 'Collaborative Spaces', tier: 'professional', description: 'Shared workspaces where team members can collaborate on AI-powered projects together.', steps: ['Click "Spaces" in the sidebar', 'Create a new space with a name and description', 'Invite team members by email', 'All members can chat, share files, and collaborate in real-time'] },
-      { id: 'st-websearch', title: 'Web Search', tier: 'starter', description: 'Enable real-time web search to ground AI responses with current information.', steps: ['Toggle the Web Search pill below the input area', 'Ask a question that needs up-to-date information', 'AI searches the web and cites sources in its response', 'Source links appear below the message for verification'] },
+      { id: 'st-websearch', title: 'Web Search', tier: 'professional', description: 'Enable real-time web search to ground AI responses with current information.', steps: ['Toggle the Web Search pill below the input area', 'Ask a question that needs up-to-date information', 'AI searches the web and cites sources in its response', 'Source links appear below the message for verification'] },
     ]
   },
   {
@@ -165,7 +165,7 @@ const GUIDE_SECTIONS = [
       { id: 'fm-images', title: 'Image Upload', tier: 'free', description: 'Upload images for AI vision analysis — describe, extract text, analyze content.', steps: ['Click the image icon or drag an image into chat', 'Supported: JPG, PNG, GIF, WebP', 'The AI can describe, analyze, or extract text from images', 'Combine with prompts like "What does this show?"'] },
       { id: 'fm-camera', title: 'Camera Capture', tier: 'free', description: 'Take photos directly from your device camera for instant AI analysis.', steps: ['Click the camera icon in the input area', 'Allow camera access when prompted', 'Frame your subject and click the capture button', 'The photo is sent to AI for analysis — great for documents and receipts'] },
       { id: 'fm-voice', title: 'Voice Input', tier: 'free', description: 'Speak your messages instead of typing using browser speech recognition.', steps: ['Click the microphone icon in the input area', 'Allow microphone access when prompted', 'Speak clearly — your words appear as text in the input', 'Click the mic icon again or press Enter to send'] },
-      { id: 'fm-voicemode', title: 'Voice Mode', tier: 'starter', description: 'Hands-free voice conversation mode with text-to-speech responses.', steps: ['Click the Voice Mode toggle in the input area', 'Speak your question — AI responds with both text and speech', 'Supports continuous conversation without touching the screen', 'Toggle off to return to text-only mode'] },
+      { id: 'fm-voicemode', title: 'Voice Mode', tier: 'professional', description: 'Hands-free voice conversation mode with text-to-speech responses.', steps: ['Click the Voice Mode toggle in the input area', 'Speak your question — AI responds with both text and speech', 'Supports continuous conversation without touching the screen', 'Toggle off to return to text-only mode'] },
     ]
   },
   {
@@ -186,9 +186,9 @@ const GUIDE_SECTIONS = [
     title: 'AI Personalization',
     description: 'Memory, custom agents, and artifacts',
     features: [
-      { id: 'ps-memory', title: 'AI Memory', tier: 'starter', description: 'Teach AI about your preferences, projects, and context. It remembers across conversations.', steps: ['Click "Memory" in the sidebar footer', 'Add memories like "I work in the Finance department"', 'AI uses memories to personalize all future responses', 'Delete or edit memories anytime from the Memory modal'] },
+      { id: 'ps-memory', title: 'AI Memory', tier: 'professional', description: 'Teach AI about your preferences, projects, and context. It remembers across conversations.', steps: ['Click "Memory" in the sidebar footer', 'Add memories like "I work in the Finance department"', 'AI uses memories to personalize all future responses', 'Delete or edit memories anytime from the Memory modal'] },
       { id: 'ps-agents', title: 'Custom AI Agents', tier: 'professional', description: 'Create specialized AI agents with custom instructions for specific tasks or roles.', steps: ['Click "Agents" in the sidebar or tool area', 'Create a new agent with a name and description', 'Write custom instructions (e.g., "You are a legal advisor for GoG")', 'Select the agent before chatting to activate its persona', 'Switch between agents or use the default assistant'] },
-      { id: 'ps-artifacts', title: 'Artifacts', tier: 'starter', description: 'AI generates rich artifacts — documents, code, diagrams — that render in a side panel.', steps: ['Ask the AI to create a document, report, or code snippet', 'Artifacts appear in a dedicated panel beside the chat', 'Edit artifacts directly in the panel', 'Download or copy artifacts for use in other tools'] },
+      { id: 'ps-artifacts', title: 'Artifacts', tier: 'professional', description: 'AI generates rich artifacts — documents, code, diagrams — that render in a side panel.', steps: ['Ask the AI to create a document, report, or code snippet', 'Artifacts appear in a dedicated panel beside the chat', 'Edit artifacts directly in the panel', 'Download or copy artifacts for use in other tools'] },
     ]
   },
   {
@@ -209,8 +209,8 @@ const GUIDE_SECTIONS = [
     features: [
       { id: 'vis-describe', title: 'Image Description', tier: 'free', description: 'Upload an image and get a detailed AI description of its contents.', steps: ['Upload or capture an image', 'Select "Describe" mode (or just ask "What is this?")', 'AI provides a detailed description of the image contents', 'Useful for accessibility, documentation, and content analysis'] },
       { id: 'vis-ocr', title: 'OCR Text Extraction', tier: 'free', description: 'Extract printed or handwritten text from images with AI-powered OCR.', steps: ['Upload a photo of a document, sign, or handwritten text', 'Select "Extract Text" mode', 'AI reads and outputs all visible text from the image', 'Copy the extracted text for use in other documents'] },
-      { id: 'vis-form', title: 'Form Data Extraction', tier: 'starter', description: 'Extract structured data from forms — applications, surveys, registration documents.', steps: ['Take a photo or upload a scan of a filled form', 'Select "Form Data" mode', 'AI identifies fields and values in a structured format', 'Results can be used to populate digital records'] },
-      { id: 'vis-receipt', title: 'Receipt Scanning', tier: 'starter', description: 'Scan receipts and invoices to extract amounts, dates, vendors, and line items.', steps: ['Photograph or upload a receipt/invoice', 'Select "Receipt" mode', 'AI extracts: vendor, date, items, amounts, total, tax', 'Great for expense reporting and record-keeping'] },
+      { id: 'vis-form', title: 'Form Data Extraction', tier: 'professional', description: 'Extract structured data from forms — applications, surveys, registration documents.', steps: ['Take a photo or upload a scan of a filled form', 'Select "Form Data" mode', 'AI identifies fields and values in a structured format', 'Results can be used to populate digital records'] },
+      { id: 'vis-receipt', title: 'Receipt Scanning', tier: 'professional', description: 'Scan receipts and invoices to extract amounts, dates, vendors, and line items.', steps: ['Photograph or upload a receipt/invoice', 'Select "Receipt" mode', 'AI extracts: vendor, date, items, amounts, total, tax', 'Great for expense reporting and record-keeping'] },
     ]
   },
   {
@@ -221,7 +221,7 @@ const GUIDE_SECTIONS = [
     features: [
       { id: 'as-2fa', title: 'Two-Factor Authentication', tier: 'free', description: 'Add an extra layer of security with TOTP-based 2FA using any authenticator app.', steps: ['Click "2FA Security" in the sidebar footer', 'Scan the QR code with Google Authenticator or similar', 'Enter the 6-digit code to verify setup', 'On future logins, you\'ll enter the code after your access code'] },
       { id: 'as-sessions', title: 'Session Management', tier: 'free', description: 'View and revoke active sessions for security. Revoke all sessions to sign out everywhere.', steps: ['Click "Revoke Sessions" in the sidebar footer', 'Confirm to sign out all devices except your current one', 'Useful if you suspect unauthorized access', 'You\'ll need to sign in again on other devices'] },
-      { id: 'as-pricing', title: 'Subscription Tiers', tier: 'free', description: 'Choose from Free, Starter (GHS 30), Professional (GHS 60), or Enterprise (GHS 100) plans.', steps: ['Click your tier badge in the sidebar footer', 'Compare features across all 4 tiers', 'Click "Upgrade" on your desired plan', 'Pay via Mobile Money (MoMo) or card through Paystack', 'Your tier activates immediately after payment'] },
+      { id: 'as-pricing', title: 'Subscription Tiers', tier: 'free', description: 'Choose from Free, Professional (GHS 60), or Enterprise (GHS 100) plans.', steps: ['Click your tier badge in the sidebar footer', 'Compare features across all 3 tiers', 'Click "Upgrade" on your desired plan', 'Pay via Mobile Money (MoMo) or card through Paystack', 'Your tier activates immediately after payment'] },
       { id: 'as-affiliate', title: 'Affiliate Program', tier: 'free', description: 'Earn GHS by referring colleagues. Share your referral link and earn commissions.', steps: ['Click "Earn GHS" in the sidebar footer', 'Copy your unique referral link', 'Share with colleagues — earn when they subscribe', 'Track your referrals and earnings in the affiliate dashboard'] },
     ]
   },
@@ -546,7 +546,7 @@ function updateSidebarFooter() {
       .slice(0, 2);
 
     const tier = state.user.tier || "free";
-    const tierName = { free: "Free", starter: "Starter", professional: "Professional", enterprise: "Enterprise" }[tier] || "Free";
+    const tierName = { free: "Free", professional: "Professional", enterprise: "Enterprise" }[tier] || "Free";
 
     footer.innerHTML = `
       <div class="user-info">
@@ -1360,7 +1360,7 @@ function onModelChange() {
   const freeModels = ["@cf/openai/gpt-oss-20b", "@cf/google/gemma-3-12b-it", "@cf/meta/llama-3.1-8b-instruct-fast"];
 
   if (userTier === "free" && !freeModels.includes(model)) {
-    alert(`This model requires a paid plan.\n\nUpgrade to Starter (GHS 30/mo) or higher to access all 11 AI models.`);
+    alert(`This model requires a paid plan.\n\nUpgrade to Professional (GHS 60/mo) or higher to access all 11 AI models.`);
     selector.value = state.selectedModel;
     openPricingModal();
     return;
@@ -1647,7 +1647,7 @@ function renderAffiliateOverview(el) {
   const l2Earnings = stats.secondLevelEarnings || 0;
 
   const milestones = [
-    { target: 10, reward: "1 month Starter free", bonus: "GHS 30 bonus", icon: "S" },
+    { target: 10, reward: "GHS 30 bonus", bonus: "GHS 30 bonus", icon: "$" },
     { target: 25, reward: "1 month Professional free", bonus: "GHS 60 bonus", icon: "P" },
     { target: 50, reward: "Permanent 50% discount", bonus: "GHS 100 bonus", icon: "D" },
     { target: 100, reward: "Free Enterprise for life", bonus: "GHS 200 bonus", icon: "E" }
@@ -2319,7 +2319,7 @@ async function openPricingModal() {
 }
 
 function getPlanOrder(tier) {
-  const order = { free: 0, starter: 1, professional: 2, enterprise: 3 };
+  const order = { free: 0, professional: 1, enterprise: 2 };
   return order[tier] || 0;
 }
 
@@ -2415,9 +2415,9 @@ function closeGuide() {
 }
 
 function buildGuideHTML() {
-  const tierOrder = ['free', 'starter', 'professional', 'enterprise'];
+  const tierOrder = ['free', 'professional', 'enterprise'];
   const userTier = (state.user && state.user.tier) || 'free';
-  const tierLabel = { free: 'Free', starter: 'Starter', professional: 'Professional', enterprise: 'Enterprise' }[userTier] || 'Free';
+  const tierLabel = { free: 'Free', professional: 'Professional', enterprise: 'Enterprise' }[userTier] || 'Free';
 
   // Build nav items (emoji icons)
   const navItems = GUIDE_SECTIONS.map(s => {
@@ -2670,7 +2670,7 @@ function clearGuideSearch() {
 }
 
 function updateGuideTierHighlights() {
-  const tierOrder = ['free', 'starter', 'professional', 'enterprise'];
+  const tierOrder = ['free', 'professional', 'enterprise'];
   const userTier = (state.user && state.user.tier) || 'free';
   const userTierIndex = tierOrder.indexOf(userTier);
 
@@ -2698,7 +2698,7 @@ function updateGuideTierHighlights() {
   // Update header tier badge
   const headerBadge = document.querySelector('.guide-title .guide-tier-badge');
   if (headerBadge) {
-    const tierLabel = { free: 'Free', starter: 'Starter', professional: 'Professional', enterprise: 'Enterprise' }[userTier] || 'Free';
+    const tierLabel = { free: 'Free', professional: 'Professional', enterprise: 'Enterprise' }[userTier] || 'Free';
     headerBadge.className = `guide-tier-badge tier-${userTier}`;
     headerBadge.textContent = `${tierLabel} Plan`;
   }
@@ -4249,7 +4249,7 @@ function showPaymentSuccess(planName) {
 // ─── Folders (Paid Feature Gating) ───────────────────────────────────
 
 function showFolderPremiumPrompt() {
-  const go = confirm("Folders are a premium feature!\n\nUpgrade to Starter (GHS 30/mo) or higher to organize your conversations into folders.\n\nWould you like to view plans?");
+  const go = confirm("Folders are a premium feature!\n\nUpgrade to Professional (GHS 60/mo) or higher to organize your conversations into folders.\n\nWould you like to view plans?");
   if (go) openPricingModal();
 }
 
@@ -4605,7 +4605,7 @@ async function sendImageMessage() {
     if (!res.ok) {
       const err = await res.json();
       if (err.code === 'TIER_REQUIRED') {
-        state.messages.push({ role: 'assistant', content: '**Image understanding requires a Starter plan or above.** Upgrade to unlock image analysis, OCR, and document scanning.' });
+        state.messages.push({ role: 'assistant', content: '**Image understanding requires a Professional plan or above.** Upgrade to unlock image analysis, OCR, and document scanning.' });
         renderMessages();
         return;
       }
@@ -4905,7 +4905,7 @@ async function analyzeData(file, prompt) {
       if (err.code === "TIER_REQUIRED") {
         state.messages.push({
           role: "assistant",
-          content: "**Data Analysis requires a Starter plan or above.** Upgrade to unlock data analysis, chart generation, and insights.\n\n[View Plans](#)",
+          content: "**Data Analysis requires a Professional plan or above.** Upgrade to unlock data analysis, chart generation, and insights.\n\n[View Plans](#)",
         });
         renderMessages();
         return;

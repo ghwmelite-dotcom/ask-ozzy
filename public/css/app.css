@@ -423,10 +423,6 @@ html, body {
   border-color: rgba(107, 114, 128, 0.27);
   color: #6b7280;
 }
-.sidebar-tier-btn.tier-starter {
-  border-color: rgba(252, 209, 22, 0.27);
-  color: var(--gold);
-}
 .sidebar-tier-btn.tier-professional {
   border-color: rgba(0, 168, 107, 0.27);
   color: var(--green-light);
@@ -437,7 +433,6 @@ html, body {
 }
 
 [data-theme="light"] .sidebar-tier-btn.tier-free { color: #6b7280; }
-[data-theme="light"] .sidebar-tier-btn.tier-starter { color: var(--gold); }
 [data-theme="light"] .sidebar-tier-btn.tier-professional { color: var(--green-light); }
 [data-theme="light"] .sidebar-tier-btn.tier-enterprise { color: #808080; }
 
@@ -2915,7 +2910,6 @@ html, body {
   color: var(--gold);
   border: 1px solid var(--gold-dim);
 }
-.sidebar-tier-btn.tier-starter,
 .sidebar-tier-btn.tier-professional,
 .sidebar-tier-btn.tier-enterprise {
   background: linear-gradient(135deg, var(--gold-dim), var(--gold));
@@ -5101,11 +5095,6 @@ html, body {
   background: rgba(107, 114, 128, 0.12);
   color: var(--text-muted);
   border: 1px solid rgba(107, 114, 128, 0.2);
-}
-.guide-tier-badge.tier-starter {
-  background: rgba(252, 209, 22, 0.1);
-  color: var(--gold);
-  border: 1px solid rgba(252, 209, 22, 0.25);
 }
 .guide-tier-badge.tier-professional {
   background: rgba(0, 168, 107, 0.1);

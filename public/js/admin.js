@@ -243,7 +243,7 @@ async function loadDashboard() {
         <div class="admin-card">
           <h3>Tier Distribution</h3>
           <div class="bar-chart">
-            ${["free", "starter", "professional", "enterprise"].map(tier => {
+            ${["free", "professional", "enterprise"].map(tier => {
               const count = tierMap[tier] || 0;
               const pct = totalForTier > 0 ? (count / totalForTier * 100) : 0;
               return '<div class="bar-row">' +
@@ -308,7 +308,7 @@ async function loadUsers(page) {
           '<td>' + escapeHtml(u.email) + '</td>' +
           '<td>' + escapeHtml(u.department || '—') + '</td>' +
           '<td><select class="inline-select" onchange="changeTier(\'' + u.id + '\', this.value)" ' + '>' +
-            ['free','starter','professional','enterprise'].map(t =>
+            ['free','professional','enterprise'].map(t =>
               '<option value="' + t + '"' + (t === u.tier ? ' selected' : '') + '>' + t.charAt(0).toUpperCase() + t.slice(1) + '</option>'
             ).join('') +
           '</select></td>' +

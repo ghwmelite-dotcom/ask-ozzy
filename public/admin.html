@@ -141,7 +141,7 @@
                   <tr><td>AI Provider</td><td>Cloudflare Workers AI</td></tr>
                   <tr><td>Database</td><td>Cloudflare D1 (SQLite)</td></tr>
                   <tr><td>Sessions</td><td>Cloudflare KV</td></tr>
-                  <tr><td>Pricing Tiers</td><td>Free, Starter (GHS 30), Professional (GHS 60), Enterprise (GHS 100)</td></tr>
+                  <tr><td>Pricing Tiers</td><td>Free, Professional (GHS 60), Enterprise (GHS 100)</td></tr>
                   <tr><td>AI Models</td><td>10 models (3 free, 7 premium)</td></tr>
                 </tbody>
               </table>
@@ -335,11 +335,11 @@
             <div style="font-size:11px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px;">CSV Format Guide</div>
             <div style="font-size:12px;color:var(--text-muted);line-height:1.6;">
               <div>Required columns: <code style="background:var(--bg-primary);padding:1px 5px;border-radius:3px;color:var(--gold);">full_name</code>, <code style="background:var(--bg-primary);padding:1px 5px;border-radius:3px;color:var(--gold);">email</code></div>
-              <div>Optional columns: <code style="background:var(--bg-primary);padding:1px 5px;border-radius:3px;color:var(--text-secondary);">department</code>, <code style="background:var(--bg-primary);padding:1px 5px;border-radius:3px;color:var(--text-secondary);">tier</code> (free/starter/professional/enterprise)</div>
+              <div>Optional columns: <code style="background:var(--bg-primary);padding:1px 5px;border-radius:3px;color:var(--text-secondary);">department</code>, <code style="background:var(--bg-primary);padding:1px 5px;border-radius:3px;color:var(--text-secondary);">tier</code> (free/professional/enterprise)</div>
               <div style="margin-top:6px;font-family:monospace;font-size:11px;background:var(--bg-primary);padding:8px 10px;border-radius:4px;overflow-x:auto;">
                 full_name,email,department,tier<br>
                 Kwame Asante,kwame@gov.gh,Ministry of Finance,free<br>
-                Ama Mensah,ama@gov.gh,Ministry of Health,starter
+                Ama Mensah,ama@gov.gh,Ministry of Health,professional
               </div>
             </div>
           </div>
@@ -360,7 +360,6 @@
               <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Default Tier</label>
               <select id="bulk-tier" class="inline-select" style="padding:8px 12px;">
                 <option value="free">Free</option>
-                <option value="starter">Starter</option>
                 <option value="professional">Professional</option>
                 <option value="enterprise">Enterprise</option>
               </select>

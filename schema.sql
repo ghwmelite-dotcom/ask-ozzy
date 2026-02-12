@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS organizations (
   id TEXT PRIMARY KEY,
   name TEXT NOT NULL,
   owner_id TEXT NOT NULL,
-  tier TEXT DEFAULT 'starter',
+  tier TEXT DEFAULT 'free',
   max_seats INTEGER DEFAULT 10,
   created_at TEXT DEFAULT (datetime('now')),
   FOREIGN KEY (owner_id) REFERENCES users(id)
