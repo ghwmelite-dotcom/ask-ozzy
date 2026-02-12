@@ -263,6 +263,17 @@ document.addEventListener("DOMContentLoaded", () => {
   updateSidebarFooter();
   updateUsageBadge(null); // hide until loaded
 
+  // Feature 2: Referral landing overlay for ?ref=CODE visitors
+  checkReferralLanding();
+
+  // Pre-fill referral code if present in URL
+  const refParams = new URLSearchParams(window.location.search);
+  const refCode = refParams.get('ref');
+  if (refCode) {
+    const regRefInput = document.getElementById('reg-referral');
+    if (regRefInput) regRefInput.value = refCode;
+  }
+
   if (state.token && state.user) {
     onAuthenticated();
   }
@@ -423,8 +434,11 @@ function onAuthenticated() {
   loadMemories();
   loadAgents();
 
-  // Show onboarding tour for new users (after a short delay for UI to settle)
-  setTimeout(() => showOnboardingTour(), 800);
+  // Feature 5: Load streak data for sidebar badge
+  loadStreakData();
+
+  // Feature 4: Enhanced onboarding tour for new users
+  startEnhancedOnboarding();
 
   // Run the action the user was trying to do before auth
   if (state.pendingAction) {
@@ -453,8 +467,9 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
 
     state.token = data.token;
     state.user = data.user;
+    state.user.trialExpiresAt = data.trialExpiresAt || data.user.trialExpiresAt || null;
     localStorage.setItem("askozzy_token", data.token);
-    localStorage.setItem("askozzy_user", JSON.stringify(data.user));
+    localStorage.setItem("askozzy_user", JSON.stringify(state.user));
     closeAuthModal();
     onAuthenticated();
   } catch (err) {
@@ -485,8 +500,9 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
 
     state.token = data.token;
     state.user = data.user;
+    state.user.trialExpiresAt = data.trialExpiresAt || data.user.trialExpiresAt || null;
     localStorage.setItem("askozzy_token", data.token);
-    localStorage.setItem("askozzy_user", JSON.stringify(data.user));
+    localStorage.setItem("askozzy_user", JSON.stringify(state.user));
 
     showAccessCodeReveal(data.accessCode);
   } catch (err) {
@@ -564,6 +580,7 @@ function updateSidebarFooter() {
           Earn GHS
         </button>
       </div>
+      <div id="streak-badge-container"></div>
       <div class="sidebar-links">
         <button class="sidebar-link-btn" onclick="openUserDashboard()">Dashboard</button>
         <button class="sidebar-link-btn" onclick="openProductivityDashboard()">Productivity</button>
@@ -979,6 +996,15 @@ async function sendMessage() {
               currentEvent = "";
               continue;
             }
+            // Feature 6: Handle follow-up suggestions from SSE
+            if (currentEvent === "suggestions") {
+              const suggestions = JSON.parse(line.slice(6));
+              if (Array.isArray(suggestions) && suggestions.length > 0) {
+                renderFollowUpSuggestions(suggestions);
+              }
+              currentEvent = "";
+              continue;
+            }
             const data = JSON.parse(line.slice(6));
             // Workers AI legacy format
             let token = data.response || null;
@@ -1006,6 +1032,7 @@ async function sendMessage() {
     renderMessages();
     await loadConversations();
     loadUsageStatus(); // refresh usage counter
+    checkUpgradeNudge(); // Feature 1: Smart upgrade nudge after each message
 
     // Check for artifacts
     const lastMsg = state.messages[state.messages.length - 1];
@@ -2417,6 +2444,45 @@ async function openPricingModal() {
       <div style="text-align:center;margin-top:20px;font-size:12px;color:var(--text-muted);">
         All prices in Ghana Cedis (GHS). Cancel anytime. Payment via Mobile Money or card.
       </div>`;
+
+    // Feature 3: Insert trial banner above pricing grid
+    const trialExpires = state.user && state.user.trialExpiresAt;
+    const trialActive = trialExpires && new Date(trialExpires) > new Date();
+    const canTrial = currentTier === 'free' && !trialExpires;
+
+    if (canTrial) {
+      const pricingGrid = body.querySelector('.pricing-grid');
+      if (pricingGrid) {
+        const trialBanner = document.createElement('div');
+        trialBanner.className = 'trial-banner';
+        trialBanner.innerHTML = `
+          <div class="trial-banner-icon">🎁</div>
+          <div class="trial-banner-text">
+            <div class="trial-banner-title">Try Professional FREE for 3 days</div>
+            <div class="trial-banner-sub">Full access to all 11 AI models, 200 messages/day, and every premium feature. No card needed.</div>
+          </div>
+          <button class="trial-banner-btn" onclick="activateFreeTrial()">Start Free Trial</button>
+        `;
+        pricingGrid.parentNode.insertBefore(trialBanner, pricingGrid);
+      }
+    } else if (trialActive) {
+      const expires = new Date(trialExpires);
+      const hoursLeft = Math.max(0, Math.round((expires - Date.now()) / 3600000));
+      const pricingGrid = body.querySelector('.pricing-grid');
+      if (pricingGrid) {
+        const activeBanner = document.createElement('div');
+        activeBanner.className = 'trial-banner trial-active';
+        activeBanner.innerHTML = `
+          <div class="trial-banner-icon">⚡</div>
+          <div class="trial-banner-text">
+            <div class="trial-banner-title">Professional Trial Active</div>
+            <div class="trial-banner-sub">${hoursLeft} hours remaining — upgrade now to keep all features</div>
+          </div>
+          <button class="trial-banner-btn" onclick="upgradeToPlan('professional','Professional',60)">Upgrade Now</button>
+        `;
+        pricingGrid.parentNode.insertBefore(activeBanner, pricingGrid);
+      }
+    }
   } catch {
     body.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">Failed to load pricing. Please try again.</div>';
   }
@@ -6193,6 +6259,476 @@ async function shareToSpace(spaceId) {
     openSpaceDetail(spaceId);
   } catch (err) {
     alert(err.message);
+  }
+}
+
+// ─── Feature: Smart Upgrade Nudges ───────────────────────────────────
+
+async function checkUpgradeNudge() {
+  if (!state.user || state.user.tier !== 'free') return;
+  try {
+    const res = await fetch(`${API}/api/usage/nudge`, { headers: authHeaders() });
+    const data = await res.json();
+    if (data.nudge) showUpgradeNudge(data.nudge);
+    else hideUpgradeNudge();
+  } catch {}
+}
+
+function showUpgradeNudge(nudge) {
+  let banner = document.getElementById('upgrade-nudge');
+  if (!banner) {
+    banner = document.createElement('div');
+    banner.id = 'upgrade-nudge';
+    banner.className = 'upgrade-nudge';
+    // Insert above the chat input area
+    const inputArea = document.querySelector('.input-area');
+    if (inputArea) inputArea.parentNode.insertBefore(banner, inputArea);
+  }
+
+  const pct = Math.round((nudge.used / nudge.limit) * 100);
+  banner.innerHTML = `
+    <div class="nudge-progress">
+      <div class="nudge-bar" style="width:${pct}%"></div>
+    </div>
+    <div class="nudge-content">
+      <span class="nudge-icon">\u26A1</span>
+      <span class="nudge-text">${escapeHtml(nudge.message)}</span>
+      <button class="nudge-upgrade-btn" onclick="openPricingModal()">Upgrade</button>
+      <button class="nudge-dismiss" onclick="hideUpgradeNudge()">\u00D7</button>
+    </div>
+  `;
+  banner.classList.add('visible');
+}
+
+function hideUpgradeNudge() {
+  const banner = document.getElementById('upgrade-nudge');
+  if (banner) banner.classList.remove('visible');
+}
+
+// ─── Feature: Referral Landing Overlay ──────────────────────────────
+
+async function checkReferralLanding() {
+  const params = new URLSearchParams(window.location.search);
+  const refCode = params.get('ref');
+  if (!refCode) return;
+  if (state.user) return; // Already logged in, skip
+  if (sessionStorage.getItem('ref_landing_shown')) return; // Already shown this session
+
+  try {
+    const res = await fetch(`${API}/api/referral/info?code=${encodeURIComponent(refCode)}`);
+    const data = await res.json();
+    if (!data.valid) return;
+
+    sessionStorage.setItem('ref_landing_shown', '1');
+    showReferralLanding(data, refCode);
+  } catch {}
+}
+
+function showReferralLanding(data, refCode) {
+  const overlay = document.createElement('div');
+  overlay.className = 'referral-landing-overlay';
+  overlay.id = 'referral-landing';
+
+  const firstName = (data.referrerName || '').split(' ')[0] || 'A colleague';
+
+  overlay.innerHTML = `
+    <div class="referral-landing-card">
+      <div class="referral-landing-flag">
+        <div class="referral-flag-stripe" style="background:#CE1126;"></div>
+        <div class="referral-flag-stripe" style="background:#FCD116;"></div>
+        <div class="referral-flag-stripe" style="background:#006B3F;"></div>
+      </div>
+      <div class="referral-landing-body">
+        <div class="referral-landing-badge">INVITED BY ${escapeHtml(firstName.toUpperCase())}</div>
+        <h1 class="referral-landing-title">Welcome to <span>AskOzzy</span></h1>
+        <p class="referral-landing-subtitle">Ghana's AI-Powered Productivity Platform for Government</p>
+
+        <div class="referral-landing-features">
+          <div class="referral-feature-item">
+            <span class="referral-feature-icon">\uD83E\uDD16</span>
+            <span>11 AI Models for every task</span>
+          </div>
+          <div class="referral-feature-item">
+            <span class="referral-feature-icon">\uD83D\uDCDD</span>
+            <span>Generate memos, briefs & reports</span>
+          </div>
+          <div class="referral-feature-item">
+            <span class="referral-feature-icon">\uD83D\uDD0D</span>
+            <span>Deep Research with citations</span>
+          </div>
+          <div class="referral-feature-item">
+            <span class="referral-feature-icon">\uD83D\uDCCA</span>
+            <span>Data analysis with charts</span>
+          </div>
+          <div class="referral-feature-item">
+            <span class="referral-feature-icon">\uD83D\uDDE3\uFE0F</span>
+            <span>Voice input in Twi, Ga, Ewe & more</span>
+          </div>
+          <div class="referral-feature-item">
+            <span class="referral-feature-icon">\uD83C\uDDEC\uD83C\uDDED</span>
+            <span>Built in Ghana, for Ghana</span>
+          </div>
+        </div>
+
+        <div class="referral-landing-cta">
+          <button class="referral-cta-btn" onclick="closeReferralLanding()">
+            Get Started Free
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+          <div class="referral-cta-sub">Free forever \u2022 No credit card needed</div>
+        </div>
+
+        <div class="referral-landing-referrer">
+          <div class="referral-referrer-avatar">${escapeHtml(firstName.charAt(0))}</div>
+          <div>
+            <div class="referral-referrer-name">${escapeHtml(data.referrerName || firstName)}</div>
+            <div class="referral-referrer-dept">${data.referrerDepartment ? escapeHtml(data.referrerDepartment) : 'Government of Ghana'}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+  requestAnimationFrame(() => overlay.classList.add('active'));
+}
+
+function closeReferralLanding() {
+  const overlay = document.getElementById('referral-landing');
+  if (overlay) {
+    overlay.classList.remove('active');
+    setTimeout(() => overlay.remove(), 300);
+  }
+}
+
+// ─── Feature: Free Pro Trial (3 days) ───────────────────────────────
+
+async function activateFreeTrial() {
+  try {
+    const res = await fetch(`${API}/api/trial/activate`, { method: 'POST', headers: authHeaders() });
+    const data = await res.json();
+    if (!res.ok) { alert(data.error || 'Could not activate trial'); return; }
+
+    // Update local state
+    state.user.trialExpiresAt = data.expiresAt;
+    state.user.tier = 'professional'; // Temporarily show as pro
+    localStorage.setItem('askozzy_user', JSON.stringify(state.user));
+
+    // Close pricing modal and show success
+    closePricingModal();
+
+    // Show success toast
+    showTrialActivatedToast();
+
+    // Refresh sidebar to show new tier
+    updateSidebarFooter();
+    loadUsageStatus();
+  } catch {
+    alert('Failed to activate trial. Please try again.');
+  }
+}
+
+function showTrialActivatedToast() {
+  const toast = document.createElement('div');
+  toast.className = 'trial-toast';
+  toast.innerHTML = `
+    <div class="trial-toast-icon">\uD83C\uDF89</div>
+    <div>
+      <div class="trial-toast-title">Professional Trial Activated!</div>
+      <div class="trial-toast-sub">You have 3 days of full access. Enjoy all 11 AI models and premium features.</div>
+    </div>
+  `;
+  document.body.appendChild(toast);
+  requestAnimationFrame(() => toast.classList.add('visible'));
+  setTimeout(() => {
+    toast.classList.remove('visible');
+    setTimeout(() => toast.remove(), 300);
+  }, 5000);
+}
+
+// ─── Feature: Enhanced Onboarding Tour (7-step) ─────────────────────
+
+const ENHANCED_ONBOARDING_STEPS = [
+  {
+    target: '.sidebar',
+    title: 'Your Sidebar',
+    text: 'All your conversations, folders, and tools live here. Click the + button to start a new chat.',
+    position: 'right'
+  },
+  {
+    target: '#chat-input',
+    title: 'Chat with AI',
+    text: 'Type your question or paste a document. Ozzy understands memos, reports, and complex queries.',
+    position: 'top'
+  },
+  {
+    target: '#model-selector',
+    title: 'Choose Your AI Model',
+    text: 'Switch between 11 AI models. Each has different strengths — try a few to find your favorite.',
+    position: 'top'
+  },
+  {
+    target: '.template-grid',
+    title: 'GoG Templates',
+    text: '25+ ready-made templates for memos, procurement, HR, and more. Click any to start.',
+    position: 'bottom'
+  },
+  {
+    target: '#voice-btn-large',
+    title: 'Voice Input',
+    text: 'Tap to speak in English, Twi, Ga, Ewe, or Hausa. Ozzy understands your language.',
+    position: 'top'
+  },
+  {
+    target: '.input-tools',
+    title: 'Smart Tools',
+    text: 'Research, Data Analysis, Web Search, Workflows — powerful tools at your fingertips.',
+    position: 'top'
+  },
+  {
+    target: '.guide-fab',
+    title: 'Need Help?',
+    text: 'Click this button anytime to open the full User Guide with 49+ features explained.',
+    position: 'left'
+  }
+];
+
+function startEnhancedOnboarding() {
+  // Don't show if already completed (either version)
+  if (localStorage.getItem('ozzy_onboarding_v2_done')) return;
+  if (localStorage.getItem('askozzy_onboarding_done')) return;
+  if (!state.user) return;
+  // Delay slightly to let page render
+  setTimeout(() => showEnhancedOnboardingStep(0), 1200);
+}
+
+function showEnhancedOnboardingStep(stepIndex) {
+  // Remove any existing overlay
+  const existing = document.getElementById('onboarding-overlay-v2');
+  if (existing) existing.remove();
+
+  if (stepIndex >= ENHANCED_ONBOARDING_STEPS.length) {
+    localStorage.setItem('ozzy_onboarding_v2_done', '1');
+    return;
+  }
+
+  const step = ENHANCED_ONBOARDING_STEPS[stepIndex];
+  const targetEl = document.querySelector(step.target);
+
+  // Create overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'onboarding-overlay-v2';
+  overlay.id = 'onboarding-overlay-v2';
+
+  // If target exists, spotlight it
+  if (targetEl) {
+    const rect = targetEl.getBoundingClientRect();
+    const spotlight = document.createElement('div');
+    spotlight.className = 'onboarding-spotlight-v2';
+    spotlight.style.cssText = `top:${rect.top - 6}px;left:${rect.left - 6}px;width:${rect.width + 12}px;height:${rect.height + 12}px;`;
+    overlay.appendChild(spotlight);
+  }
+
+  // Create tooltip
+  const tooltip = document.createElement('div');
+  tooltip.className = `onboarding-tooltip-v2 position-${step.position}`;
+
+  // Position tooltip relative to target
+  if (targetEl) {
+    const rect = targetEl.getBoundingClientRect();
+    switch (step.position) {
+      case 'right':
+        tooltip.style.top = Math.max(10, rect.top + rect.height / 2 - 60) + 'px';
+        tooltip.style.left = Math.min(rect.right + 16, window.innerWidth - 300) + 'px';
+        break;
+      case 'left':
+        tooltip.style.top = Math.max(10, rect.top + rect.height / 2 - 60) + 'px';
+        tooltip.style.left = Math.max(10, rect.left - 296) + 'px';
+        break;
+      case 'top':
+        tooltip.style.top = Math.max(10, rect.top - 180) + 'px';
+        tooltip.style.left = Math.max(10, Math.min(rect.left + rect.width / 2 - 140, window.innerWidth - 300)) + 'px';
+        break;
+      case 'bottom':
+        tooltip.style.top = (rect.bottom + 16) + 'px';
+        tooltip.style.left = Math.max(10, Math.min(rect.left + rect.width / 2 - 140, window.innerWidth - 300)) + 'px';
+        break;
+    }
+  } else {
+    // Fallback: center the tooltip
+    tooltip.style.top = '50%';
+    tooltip.style.left = '50%';
+    tooltip.style.transform = 'translate(-50%, -50%)';
+  }
+
+  tooltip.innerHTML = `
+    <div class="onboarding-step-count-v2">${stepIndex + 1} of ${ENHANCED_ONBOARDING_STEPS.length}</div>
+    <div class="onboarding-title-v2">${step.title}</div>
+    <div class="onboarding-text-v2">${step.text}</div>
+    <div class="onboarding-actions-v2">
+      <button class="onboarding-skip-v2" onclick="skipEnhancedOnboarding()">Skip tour</button>
+      <button class="onboarding-next-v2" onclick="showEnhancedOnboardingStep(${stepIndex + 1})">
+        ${stepIndex === ENHANCED_ONBOARDING_STEPS.length - 1 ? 'Finish' : 'Next'}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+    <div class="onboarding-dots-v2">
+      ${ENHANCED_ONBOARDING_STEPS.map((_, i) => `<span class="onboarding-dot-v2 ${i === stepIndex ? 'active' : ''} ${i < stepIndex ? 'done' : ''}"></span>`).join('')}
+    </div>
+  `;
+
+  overlay.appendChild(tooltip);
+  document.body.appendChild(overlay);
+
+  // Click overlay background to advance
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) showEnhancedOnboardingStep(stepIndex + 1);
+  });
+}
+
+function skipEnhancedOnboarding() {
+  localStorage.setItem('ozzy_onboarding_v2_done', '1');
+  const overlay = document.getElementById('onboarding-overlay-v2');
+  if (overlay) overlay.remove();
+}
+
+// ─── Feature: Daily Streaks & Badges ────────────────────────────────
+
+async function loadStreakData() {
+  if (!state.user) return;
+  try {
+    const res = await fetch(`${API}/api/streaks`, { headers: authHeaders() });
+    if (!res.ok) return;
+    const data = await res.json();
+    state.streakData = data;
+    renderStreakBadge();
+  } catch {}
+}
+
+function renderStreakBadge() {
+  const d = state.streakData;
+  if (!d) return;
+
+  // Update or create streak badge in sidebar footer
+  let badge = document.getElementById('streak-badge');
+  const container = document.getElementById('streak-badge-container');
+  if (!badge && container) {
+    badge = document.createElement('button');
+    badge.id = 'streak-badge';
+    badge.className = 'streak-badge';
+    badge.onclick = openStreakModal;
+    container.appendChild(badge);
+  }
+  if (!badge) return;
+
+  const streak = d.currentStreak || 0;
+  const fire = streak >= 3 ? '\uD83D\uDD25' : '\u2728';
+  badge.innerHTML = `<span class="streak-fire">${fire}</span><span class="streak-count">${streak}</span>`;
+  badge.title = `${streak}-day streak! Click to view achievements`;
+  if (streak >= 7) badge.classList.add('hot');
+  else badge.classList.remove('hot');
+}
+
+function openStreakModal() {
+  const d = state.streakData;
+  if (!d) return;
+
+  // Badge definitions
+  const allBadges = [
+    { id: 'streak_3', icon: '\uD83D\uDD25', name: '3-Day Streak', desc: 'Use AskOzzy 3 days in a row' },
+    { id: 'streak_7', icon: '\uD83D\uDCAA', name: '7-Day Streak', desc: 'A full week of productivity' },
+    { id: 'streak_14', icon: '\u26A1', name: '14-Day Streak', desc: 'Two weeks strong!' },
+    { id: 'streak_30', icon: '\uD83C\uDFC6', name: '30-Day Streak', desc: 'An entire month \u2014 you\'re a champion' },
+    { id: 'messages_10', icon: '\uD83D\uDCAC', name: 'Getting Started', desc: 'Send 10 messages' },
+    { id: 'messages_50', icon: '\uD83D\uDCDD', name: 'Active User', desc: 'Send 50 messages' },
+    { id: 'messages_100', icon: '\uD83E\uDDE0', name: 'Power User', desc: 'Send 100 messages' },
+    { id: 'messages_500', icon: '\uD83C\uDF1F', name: 'AskOzzy Expert', desc: 'Send 500 messages' },
+    { id: 'referral_1', icon: '\uD83E\uDD1D', name: 'First Referral', desc: 'Refer your first colleague' },
+    { id: 'referral_5', icon: '\uD83D\uDCE2', name: 'Influencer', desc: 'Refer 5 colleagues' },
+    { id: 'referral_10', icon: '\uD83C\uDFC5', name: 'Ambassador', desc: 'Refer 10 colleagues' },
+  ];
+
+  const earned = d.badges || [];
+
+  let modal = document.getElementById('streak-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.id = 'streak-modal';
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+    document.body.appendChild(modal);
+  }
+
+  modal.innerHTML = `
+    <div class="modal streak-modal-box">
+      <div class="modal-header">
+        <h3>Achievements & Streaks</h3>
+        <button class="modal-close" onclick="document.getElementById('streak-modal').classList.remove('active')">\u2715</button>
+      </div>
+      <div class="modal-body" style="padding:24px;">
+        <!-- Streak Card -->
+        <div class="streak-hero">
+          <div class="streak-hero-fire">${d.currentStreak >= 3 ? '\uD83D\uDD25' : '\u2728'}</div>
+          <div class="streak-hero-count">${d.currentStreak || 0}</div>
+          <div class="streak-hero-label">Day Streak</div>
+          <div class="streak-hero-sub">Longest: ${d.longestStreak || 0} days \u2022 ${d.totalConversations || 0} total conversations</div>
+        </div>
+
+        <!-- Badges Grid -->
+        <div class="streak-badges-title">Badges (${earned.length}/${allBadges.length})</div>
+        <div class="streak-badges-grid">
+          ${allBadges.map(b => {
+            const isEarned = earned.includes(b.id);
+            return `<div class="streak-badge-card ${isEarned ? 'earned' : 'locked'}">
+              <div class="streak-badge-icon">${isEarned ? b.icon : '\uD83D\uDD12'}</div>
+              <div class="streak-badge-name">${b.name}</div>
+              <div class="streak-badge-desc">${b.desc}</div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+  modal.classList.add('active');
+}
+
+// ─── Feature: Follow-up Suggestions (SSE) ───────────────────────────
+
+function renderFollowUpSuggestions(suggestions) {
+  // Remove any existing suggestions
+  const existing = document.querySelector('.followup-suggestions');
+  if (existing) existing.remove();
+
+  const container = document.createElement('div');
+  container.className = 'followup-suggestions';
+  container.innerHTML = `
+    <div class="followup-label">Follow up:</div>
+    <div class="followup-chips">
+      ${suggestions.map(s => `<button class="followup-chip" onclick="sendFollowUp(this)">${escapeHtml(s)}</button>`).join('')}
+    </div>
+  `;
+
+  // Insert at the bottom of the messages area
+  const messagesEl = document.getElementById('chat-messages');
+  if (messagesEl) {
+    messagesEl.appendChild(container);
+    scrollToBottom();
+  }
+}
+
+function sendFollowUp(btn) {
+  const text = btn.textContent;
+  // Remove suggestions
+  const container = btn.closest('.followup-suggestions');
+  if (container) container.remove();
+
+  // Set input and send
+  const input = document.getElementById('chat-input');
+  if (input) {
+    input.value = text;
+    autoResizeInput();
+    updateSendButton();
+    sendMessage();
   }
 }
 

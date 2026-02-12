@@ -270,7 +270,7 @@ app.post("/api/auth/login", async (c) => {
   }
 
   const user = await c.env.DB.prepare(
-    "SELECT id, email, password_hash, full_name, department, role, tier, referral_code, affiliate_tier, total_referrals, affiliate_earnings FROM users WHERE email = ?"
+    "SELECT id, email, password_hash, full_name, department, role, tier, referral_code, affiliate_tier, total_referrals, affiliate_earnings, trial_expires_at FROM users WHERE email = ?"
   )
     .bind(email.toLowerCase().trim())
     .first<{
@@ -285,6 +285,7 @@ app.post("/api/auth/login", async (c) => {
       affiliate_tier: string;
       total_referrals: number;
       affiliate_earnings: number;
+      trial_expires_at: string | null;
     }>();
 
   if (!user) {
@@ -313,6 +314,10 @@ app.post("/api/auth/login", async (c) => {
 
   const token = await createToken(user.id, c.env);
 
+  // Compute effective tier honoring trial
+  const trialActive = user.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date();
+  const effectiveTier = (trialActive && (user.tier || "free") === "free") ? "professional" : (user.tier || "free");
+
   return c.json({
     token,
     user: {
@@ -322,10 +327,12 @@ app.post("/api/auth/login", async (c) => {
       department: user.department,
       role: user.role || "civil_servant",
       tier: user.tier,
+      effectiveTier,
       referralCode: user.referral_code,
       affiliateTier: user.affiliate_tier,
       totalReferrals: user.total_referrals,
       affiliateEarnings: user.affiliate_earnings,
+      trialExpiresAt: user.trial_expires_at || null,
     },
   });
 });
@@ -464,6 +471,85 @@ async function checkUsageLimit(db: D1Database, userId: string, tier: string): Pr
 
   const used = result?.count || 0;
   return { allowed: used < tierConfig.messagesPerDay, used, limit: tierConfig.messagesPerDay };
+}
+
+// ─── Trial Column Lazy Migration ────────────────────────────────────
+
+async function ensureTrialColumn(db: D1Database) {
+  try {
+    await db.prepare("SELECT trial_expires_at FROM users LIMIT 1").first();
+  } catch {
+    await db.prepare("ALTER TABLE users ADD COLUMN trial_expires_at TEXT DEFAULT NULL").run();
+  }
+}
+
+// ─── Streak Columns Lazy Migration ──────────────────────────────────
+
+async function ensureStreakColumns(db: D1Database) {
+  try {
+    await db.prepare("SELECT current_streak FROM users LIMIT 1").first();
+  } catch {
+    await db.batch([
+      db.prepare("ALTER TABLE users ADD COLUMN current_streak INTEGER DEFAULT 0"),
+      db.prepare("ALTER TABLE users ADD COLUMN longest_streak INTEGER DEFAULT 0"),
+      db.prepare("ALTER TABLE users ADD COLUMN last_active_date TEXT DEFAULT NULL"),
+      db.prepare("ALTER TABLE users ADD COLUMN badges TEXT DEFAULT '[]'"),
+    ]);
+  }
+}
+
+// ─── Effective Tier (honors trial) ──────────────────────────────────
+
+async function getEffectiveTier(db: D1Database, userId: string): Promise<string> {
+  const user = await db.prepare(
+    "SELECT tier, trial_expires_at FROM users WHERE id = ?"
+  ).bind(userId).first<{ tier: string; trial_expires_at: string | null }>();
+  if (!user) return "free";
+  if (user.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date()) {
+    return "professional";
+  }
+  return user.tier || "free";
+}
+
+// ─── Daily Streak Updater ───────────────────────────────────────────
+
+async function updateUserStreak(db: D1Database, userId: string) {
+  await ensureStreakColumns(db);
+
+  const today = new Date().toISOString().split("T")[0];
+  const user = await db.prepare(
+    "SELECT current_streak, longest_streak, last_active_date, badges FROM users WHERE id = ?"
+  ).bind(userId).first<{ current_streak: number; longest_streak: number; last_active_date: string | null; badges: string }>();
+
+  if (!user || user.last_active_date === today) return; // Already counted today
+
+  const yesterday = new Date(Date.now() - 86400000).toISOString().split("T")[0];
+  let newStreak = 1;
+  if (user.last_active_date === yesterday) {
+    newStreak = (user.current_streak || 0) + 1;
+  }
+  const newLongest = Math.max(newStreak, user.longest_streak || 0);
+
+  // Check for new badges
+  let badges: string[] = [];
+  try { badges = JSON.parse(user.badges || "[]"); } catch { badges = []; }
+
+  const badgeDefs = [
+    { id: "streak_3", condition: () => newStreak >= 3 },
+    { id: "streak_7", condition: () => newStreak >= 7 },
+    { id: "streak_14", condition: () => newStreak >= 14 },
+    { id: "streak_30", condition: () => newStreak >= 30 },
+  ];
+
+  for (const b of badgeDefs) {
+    if (!badges.includes(b.id) && b.condition()) {
+      badges.push(b.id);
+    }
+  }
+
+  await db.prepare(
+    "UPDATE users SET current_streak = ?, longest_streak = ?, last_active_date = ?, badges = ? WHERE id = ?"
+  ).bind(newStreak, newLongest, today, JSON.stringify(badges), userId).run();
 }
 
 // ─── GoG Enhanced System Prompt ─────────────────────────────────────
@@ -922,11 +1008,14 @@ app.post("/api/chat", authMiddleware, async (c) => {
     return c.json({ error: "conversationId and message are required" }, 400);
   }
 
-  // Get user tier
-  const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
+  // Get user tier (with trial support)
+  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at FROM users WHERE id = ?")
     .bind(userId)
-    .first<{ tier: string }>();
-  const userTier = user?.tier || "free";
+    .first<{ tier: string; trial_expires_at: string | null }>();
+  let userTier = user?.tier || "free";
+  // Honor trial
+  const trialActive = user?.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date();
+  if (trialActive && userTier === "free") userTier = "professional";
 
   // Check daily usage limit
   const usage = await checkUsageLimit(c.env.DB, userId, userTier);
@@ -975,6 +1064,9 @@ app.post("/api/chat", authMiddleware, async (c) => {
 
   // Track productivity (non-blocking)
   c.executionCtx.waitUntil(trackProductivity(c, "chat"));
+
+  // Update daily streak (non-blocking)
+  c.executionCtx.waitUntil(updateUserStreak(c.env.DB, userId));
 
   // Get conversation history (last 20 messages for context)
   const { results: history } = await c.env.DB.prepare(
@@ -1124,6 +1216,29 @@ app.post("/api/chat", authMiddleware, async (c) => {
             }
           }
         }
+
+        // Generate follow-up suggestions before closing stream
+        try {
+          if (fullResponse.length > 20) {
+            const suggestionResp = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels, {
+              messages: [
+                { role: "system", content: "Generate exactly 3 short follow-up questions the user might ask next based on this conversation. Return ONLY a JSON array of 3 strings, nothing else. Each question should be under 60 characters." },
+                { role: "user", content: message.substring(0, 300) },
+                { role: "assistant", content: fullResponse.substring(0, 500) }
+              ],
+              max_tokens: 200,
+            });
+
+            const suggText = (suggestionResp as any)?.response || "";
+            const suggMatch = suggText.match(/\[[\s\S]*?\]/);
+            if (suggMatch) {
+              const suggestions = JSON.parse(suggMatch[0]);
+              if (Array.isArray(suggestions) && suggestions.length > 0) {
+                await writer.write(encoder.encode(`event: suggestions\ndata: ${JSON.stringify(suggestions.slice(0, 3))}\n\n`));
+              }
+            }
+          }
+        } catch { /* ignore suggestion errors */ }
       } finally {
         await writer.close();
 
@@ -1243,10 +1358,13 @@ app.post("/api/research", authMiddleware, async (c) => {
     return c.json({ error: "query and conversationId are required" }, 400);
   }
 
-  // Tier gate: Professional+ only
-  const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
-    .bind(userId).first<{ tier: string }>();
-  const userTier = user?.tier || "free";
+  // Tier gate: Professional+ only (honors trial)
+  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at FROM users WHERE id = ?")
+    .bind(userId).first<{ tier: string; trial_expires_at: string | null }>();
+  let userTier = user?.tier || "free";
+  if (userTier === "free" && user?.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date()) {
+    userTier = "professional";
+  }
   if (userTier === "free") {
     return c.json({ error: "Deep Research requires a Professional or Enterprise plan.", code: "TIER_REQUIRED" }, 403);
   }
@@ -1425,10 +1543,13 @@ app.get("/api/research/:id", authMiddleware, async (c) => {
 app.post("/api/analyze", authMiddleware, async (c) => {
   const userId = c.get("userId");
 
-  // Tier gate: Professional+ only
-  const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
-    .bind(userId).first<{ tier: string }>();
-  const userTier = user?.tier || "free";
+  // Tier gate: Professional+ only (honors trial)
+  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at FROM users WHERE id = ?")
+    .bind(userId).first<{ tier: string; trial_expires_at: string | null }>();
+  let userTier = user?.tier || "free";
+  if (userTier === "free" && user?.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date()) {
+    userTier = "professional";
+  }
   if (userTier === "free") {
     return c.json({ error: "Data Analysis requires a Professional plan or above.", code: "TIER_REQUIRED" }, 403);
   }
@@ -1711,10 +1832,13 @@ app.post("/api/translate", authMiddleware, async (c) => {
 app.post("/api/vision", authMiddleware, async (c) => {
   const userId = c.get("userId");
 
-  // Tier gate: Professional+ only
-  const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
-    .bind(userId).first<{ tier: string }>();
-  const userTier = user?.tier || "free";
+  // Tier gate: Professional+ only (honors trial)
+  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at FROM users WHERE id = ?")
+    .bind(userId).first<{ tier: string; trial_expires_at: string | null }>();
+  let userTier = user?.tier || "free";
+  if (userTier === "free" && user?.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date()) {
+    userTier = "professional";
+  }
   if (userTier === "free") {
     return c.json({ error: "Image understanding requires a Professional plan or above.", code: "TIER_REQUIRED" }, 403);
   }
@@ -1792,10 +1916,13 @@ app.post("/api/chat/image", authMiddleware, async (c) => {
     return c.json({ error: "image and conversationId are required" }, 400);
   }
 
-  // Tier gate: Professional+
-  const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
-    .bind(userId).first<{ tier: string }>();
-  const userTier = user?.tier || "free";
+  // Tier gate: Professional+ (honors trial)
+  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at FROM users WHERE id = ?")
+    .bind(userId).first<{ tier: string; trial_expires_at: string | null }>();
+  let userTier = user?.tier || "free";
+  if (userTier === "free" && user?.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date()) {
+    userTier = "professional";
+  }
   if (userTier === "free") {
     return c.json({ error: "Image understanding requires a Professional plan or above.", code: "TIER_REQUIRED" }, 403);
   }
@@ -1868,10 +1995,14 @@ app.get("/api/user/profile", authMiddleware, async (c) => {
 
 app.get("/api/models", authMiddleware, async (c) => {
   const userId = c.get("userId");
-  const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
+  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at FROM users WHERE id = ?")
     .bind(userId)
-    .first<{ tier: string }>();
-  const userTier = user?.tier || "free";
+    .first<{ tier: string; trial_expires_at: string | null }>();
+  let userTier = user?.tier || "free";
+  // Honor trial
+  if (userTier === "free" && user?.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date()) {
+    userTier = "professional";
+  }
   const isFree = userTier === "free";
 
   return c.json({
@@ -2520,11 +2651,14 @@ app.get("/api/pricing", async (c) => {
 
 app.get("/api/usage/status", authMiddleware, async (c) => {
   const userId = c.get("userId");
-  const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
+  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at FROM users WHERE id = ?")
     .bind(userId)
-    .first<{ tier: string }>();
+    .first<{ tier: string; trial_expires_at: string | null }>();
 
-  const userTier = user?.tier || "free";
+  let userTier = user?.tier || "free";
+  const trialActive = user?.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date();
+  if (trialActive && userTier === "free") userTier = "professional";
+
   const usage = await checkUsageLimit(c.env.DB, userId, userTier);
   const tierConfig = PRICING_TIERS[userTier] || PRICING_TIERS.free;
 
@@ -2536,6 +2670,8 @@ app.get("/api/usage/status", authMiddleware, async (c) => {
     limit: usage.limit,
     remaining: usage.limit === -1 ? -1 : Math.max(0, usage.limit - usage.used),
     models: tierConfig.models,
+    trialActive: !!trialActive,
+    trialExpiresAt: user?.trial_expires_at || null,
   });
 });
 
@@ -5317,10 +5453,14 @@ app.delete("/api/workflows/:id", authMiddleware, async (c) => {
 app.post("/api/meetings/upload", authMiddleware, async (c) => {
   const userId = c.get("userId");
 
-  // Tier gate: Professional+
-  const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
-    .bind(userId).first<{ tier: string }>();
-  if ((user?.tier || "free") === "free") {
+  // Tier gate: Professional+ (honors trial)
+  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at FROM users WHERE id = ?")
+    .bind(userId).first<{ tier: string; trial_expires_at: string | null }>();
+  let meetingTier = user?.tier || "free";
+  if (meetingTier === "free" && user?.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date()) {
+    meetingTier = "professional";
+  }
+  if (meetingTier === "free") {
     return c.json({ error: "Meeting Assistant requires a Professional plan or above.", code: "TIER_REQUIRED" }, 403);
   }
 
@@ -5452,10 +5592,14 @@ app.post("/api/spaces", authMiddleware, async (c) => {
   const { name, description } = await c.req.json();
   if (!name) return c.json({ error: "name is required" }, 400);
 
-  // Tier gate: Professional+
-  const user = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?")
-    .bind(userId).first<{ tier: string }>();
-  if ((user?.tier || "free") === "free") {
+  // Tier gate: Professional+ (honors trial)
+  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at FROM users WHERE id = ?")
+    .bind(userId).first<{ tier: string; trial_expires_at: string | null }>();
+  let spaceTier = user?.tier || "free";
+  if (spaceTier === "free" && user?.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date()) {
+    spaceTier = "professional";
+  }
+  if (spaceTier === "free") {
     return c.json({ error: "Collaborative Spaces requires a Professional plan or above.", code: "TIER_REQUIRED" }, 403);
   }
 
@@ -7429,6 +7573,171 @@ app.get("/api/admin/messaging/sessions/:sessionId/messages", adminMiddleware, as
   } catch (err) {
     return c.json({ error: "Failed to load messages" }, 500);
   }
+});
+
+// ─── Smart Upgrade Nudges ────────────────────────────────────────────
+
+app.get("/api/usage/nudge", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at FROM users WHERE id = ?")
+    .bind(userId).first<{ tier: string; trial_expires_at: string | null }>();
+  const userTier = user?.tier || "free";
+
+  // Check if trial is active
+  const trialActive = user?.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date();
+  const effectiveTier = (trialActive && userTier === "free") ? "professional" : userTier;
+
+  if (effectiveTier !== "free") return c.json({ nudge: null, effectiveTier });
+
+  const usage = await checkUsageLimit(c.env.DB, userId, effectiveTier);
+  if (usage.limit <= 0) return c.json({ nudge: null, effectiveTier });
+
+  const remaining = usage.limit - usage.used;
+  const pct = usage.used / usage.limit;
+
+  let nudge = null;
+  if (remaining <= 0) {
+    nudge = { type: "limit_reached", used: usage.used, limit: usage.limit, remaining: 0, message: "You've reached your daily limit. Upgrade to Professional for 200 messages/day." };
+  } else if (pct >= 0.8) {
+    nudge = { type: "almost_there", used: usage.used, limit: usage.limit, remaining, message: `Only ${remaining} message${remaining === 1 ? '' : 's'} left today. Upgrade to Professional for 200/day.` };
+  } else if (pct >= 0.5) {
+    nudge = { type: "halfway", used: usage.used, limit: usage.limit, remaining, message: `${remaining} messages remaining today. Professional plan gives you 200/day.` };
+  }
+
+  return c.json({ nudge, effectiveTier });
+});
+
+// ─── Referral Landing Info ──────────────────────────────────────────
+
+app.get("/api/referral/info", async (c) => {
+  const code = c.req.query("code") || "";
+  if (!code) return c.json({ valid: false });
+
+  const referrer = await c.env.DB.prepare(
+    "SELECT full_name, department FROM users WHERE referral_code = ?"
+  ).bind(code.trim().toUpperCase()).first<{ full_name: string; department: string }>();
+
+  if (!referrer) return c.json({ valid: false });
+
+  return c.json({
+    valid: true,
+    referrerName: referrer.full_name,
+    referrerDepartment: referrer.department || "",
+    code: code.trim().toUpperCase(),
+  });
+});
+
+// ─── Free Pro Trial (3 days) ────────────────────────────────────────
+
+app.post("/api/trial/activate", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  await ensureTrialColumn(c.env.DB);
+
+  const user = await c.env.DB.prepare(
+    "SELECT tier, trial_expires_at FROM users WHERE id = ?"
+  ).bind(userId).first<{ tier: string; trial_expires_at: string | null }>();
+
+  if (!user) return c.json({ error: "User not found" }, 404);
+  if (user.tier !== "free") return c.json({ error: "Already on a paid plan" }, 400);
+  if (user.trial_expires_at) return c.json({ error: "Trial already used" }, 400);
+
+  const expiresAt = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().replace("T", " ").split(".")[0];
+
+  await c.env.DB.prepare(
+    "UPDATE users SET trial_expires_at = ? WHERE id = ?"
+  ).bind(expiresAt, userId).run();
+
+  return c.json({ success: true, expiresAt });
+});
+
+app.get("/api/trial/status", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  await ensureTrialColumn(c.env.DB);
+
+  const user = await c.env.DB.prepare(
+    "SELECT tier, trial_expires_at FROM users WHERE id = ?"
+  ).bind(userId).first<{ tier: string; trial_expires_at: string | null }>();
+
+  if (!user) return c.json({ error: "User not found" }, 404);
+
+  const trialActive = user.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date();
+  const effectiveTier = (trialActive && user.tier === "free") ? "professional" : user.tier;
+
+  return c.json({
+    tier: user.tier,
+    effectiveTier,
+    trialExpiresAt: user.trial_expires_at || null,
+    trialActive: !!trialActive,
+    trialUsed: !!user.trial_expires_at,
+  });
+});
+
+// ─── Daily Streaks & Badges ─────────────────────────────────────────
+
+app.get("/api/streaks", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  await ensureStreakColumns(c.env.DB);
+
+  const user = await c.env.DB.prepare(
+    "SELECT current_streak, longest_streak, last_active_date, badges, total_referrals FROM users WHERE id = ?"
+  ).bind(userId).first<{ current_streak: number; longest_streak: number; last_active_date: string | null; badges: string; total_referrals: number }>();
+
+  if (!user) return c.json({ error: "User not found" }, 404);
+
+  let badges: string[] = [];
+  try { badges = JSON.parse(user.badges || "[]"); } catch { badges = []; }
+
+  // Count total messages for message-based badges
+  const msgCount = await c.env.DB.prepare(
+    "SELECT COUNT(*) as cnt FROM conversations WHERE user_id = ?"
+  ).bind(userId).first<{ cnt: number }>();
+
+  // Check message badges
+  const msgBadges = [
+    { id: "messages_10", threshold: 10 },
+    { id: "messages_50", threshold: 50 },
+    { id: "messages_100", threshold: 100 },
+    { id: "messages_500", threshold: 500 },
+  ];
+
+  let updated = false;
+  for (const b of msgBadges) {
+    if (!badges.includes(b.id) && (msgCount?.cnt || 0) >= b.threshold) {
+      badges.push(b.id);
+      updated = true;
+    }
+  }
+
+  // Referral badges
+  const refBadges = [
+    { id: "referral_1", threshold: 1 },
+    { id: "referral_5", threshold: 5 },
+    { id: "referral_10", threshold: 10 },
+  ];
+  for (const b of refBadges) {
+    if (!badges.includes(b.id) && (user.total_referrals || 0) >= b.threshold) {
+      badges.push(b.id);
+      updated = true;
+    }
+  }
+
+  if (updated) {
+    await c.env.DB.prepare("UPDATE users SET badges = ? WHERE id = ?")
+      .bind(JSON.stringify(badges), userId).run();
+  }
+
+  // Calculate today check
+  const today = new Date().toISOString().split("T")[0];
+  const activeToday = user.last_active_date === today;
+
+  return c.json({
+    currentStreak: user.current_streak || 0,
+    longestStreak: user.longest_streak || 0,
+    lastActiveDate: user.last_active_date,
+    activeToday,
+    badges,
+    totalConversations: msgCount?.cnt || 0,
+  });
 });
 
 export default app;
