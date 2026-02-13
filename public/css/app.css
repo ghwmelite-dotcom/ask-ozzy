@@ -2449,6 +2449,18 @@ html, body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ─── Input area offline hint ──────────────────────────────────── */
+
+.input-offline-hint {
+  text-align: center;
+  font-size: 11px;
+  color: #FFA500;
+  padding: 4px 12px;
+  background: rgba(255, 165, 0, 0.08);
+  border-radius: 8px 8px 0 0;
+  animation: fadeIn 0.3s ease;
+}
+
 /* ─── Offline syncing indicator ─────────────────────────────────── */
 
 .offline-syncing-toast {

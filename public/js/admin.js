@@ -3210,8 +3210,9 @@ async function loadUSSDTab() {
         </div>
       </div>
 
-      <!-- USSD Test Simulator -->
-      <div class="admin-card" style="margin-top:16px;">
+      <!-- USSD Test Simulator (collapsed by default when not enabled) -->
+      ${!config.enabled ? '<div class="admin-card" style="margin-top:16px;background:var(--bg-tertiary);border:1px dashed var(--border-color);"><p style="text-align:center;padding:24px;color:var(--text-muted);font-size:13px;">Enable the USSD service and connect Africa\'s Talking to use the test simulator.</p></div>' : ''}
+      <div class="admin-card" style="margin-top:16px;${!config.enabled ? 'display:none;' : ''}">
         <h3>USSD Test Simulator</h3>
         <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">Test the USSD menu flow without an actual phone. This simulates Africa's Talking callbacks.</p>
         <div style="display:flex;gap:12px;align-items:flex-start;">

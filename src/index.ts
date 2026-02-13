@@ -1,23 +1,17 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+import type { Env, Variables, AppType } from "./types";
+import {
+  generateId, hashPassword, verifyPassword,
+  generateAccessCode, normalizeAccessCode,
+  generateRecoveryCode, generateReferralSuffix,
+  createToken, verifyToken,
+} from "./lib/utils";
+import {
+  checkRateLimit, authMiddleware, adminMiddleware, deptAdminMiddleware,
+} from "./lib/middleware";
 
-type Env = {
-  AI: Ai;
-  DB: D1Database;
-  SESSIONS: KVNamespace;
-  VECTORIZE: VectorizeIndex;
-  JWT_SECRET: string;
-  VAPID_PUBLIC_KEY: string;
-  PAYSTACK_SECRET: string;
-  BOOTSTRAP_SECRET?: string;
-};
-
-type Variables = {
-  userId: string;
-  deptFilter?: string;
-};
-
-const app = new Hono<{ Bindings: Env; Variables: Variables }>();
+const app = new Hono<AppType>();
 
 app.use("/api/*", cors({
   origin: (origin) => {
@@ -36,7 +30,7 @@ app.use("*", async (c, next) => {
   c.header("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
   c.header("Referrer-Policy", "strict-origin-when-cross-origin");
   c.header("Permissions-Policy", "camera=(self), microphone=(self), geolocation=()");
-  c.header("Content-Security-Policy", "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';");
+  c.header("Content-Security-Policy", "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://cdn.jsdelivr.net; frame-ancestors 'none'; base-uri 'self'; form-action 'self';");
 });
 
 // ─── Request Body Size Limit ─────────────────────────────────────────
@@ -48,205 +42,7 @@ app.use("/api/*", async (c, next) => {
   await next();
 });
 
-// ─── Utility Functions ──────────────────────────────────────────────
-
-function generateId(): string {
-  return crypto.randomUUID();
-}
-
-async function hashPassword(password: string, existingSalt?: string): Promise<string> {
-  const encoder = new TextEncoder();
-  let salt: Uint8Array;
-  if (existingSalt) {
-    salt = Uint8Array.from(atob(existingSalt), c => c.charCodeAt(0));
-  } else {
-    salt = new Uint8Array(16);
-    crypto.getRandomValues(salt);
-  }
-  const keyMaterial = await crypto.subtle.importKey("raw", encoder.encode(password), "PBKDF2", false, ["deriveBits"]);
-  const hash = await crypto.subtle.deriveBits({ name: "PBKDF2", salt, iterations: 100000, hash: "SHA-256" }, keyMaterial, 256);
-  const saltB64 = btoa(String.fromCharCode(...salt));
-  const hashB64 = btoa(String.fromCharCode(...new Uint8Array(hash)));
-  return `pbkdf2:${saltB64}:${hashB64}`;
-}
-
-async function verifyPassword(password: string, stored: string): Promise<boolean> {
-  if (stored.startsWith("pbkdf2:")) {
-    const parts = stored.split(":");
-    const salt = parts[1];
-    const rehash = await hashPassword(password, salt);
-    return rehash === stored;
-  }
-  // Legacy SHA-256 fallback for existing credentials
-  const encoder = new TextEncoder();
-  const data = encoder.encode(password);
-  const hash = await crypto.subtle.digest("SHA-256", data);
-  const legacyHash = btoa(String.fromCharCode(...new Uint8Array(hash)));
-  return legacyHash === stored;
-}
-
-function generateAccessCode(): string {
-  const chars = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
-  const maxValid = 256 - (256 % chars.length); // reject biased bytes
-  let code = "";
-  while (code.length < 8) {
-    const bytes = new Uint8Array(1);
-    crypto.getRandomValues(bytes);
-    if (bytes[0] < maxValid) code += chars[bytes[0] % chars.length];
-  }
-  return code.slice(0, 4) + "-" + code.slice(4);
-}
-
-function normalizeAccessCode(input: string): string {
-  const stripped = input.toUpperCase().replace(/[^A-Z0-9]/g, "");
-  if (stripped.length === 8) {
-    return stripped.slice(0, 4) + "-" + stripped.slice(4);
-  }
-  return input;
-}
-
-function generateRecoveryCode(): string {
-  const chars = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
-  const maxValid = 256 - (256 % chars.length);
-  let code = "";
-  while (code.length < 8) {
-    const bytes = new Uint8Array(1);
-    crypto.getRandomValues(bytes);
-    if (bytes[0] < maxValid) code += chars[bytes[0] % chars.length];
-  }
-  return code.slice(0, 4) + "-" + code.slice(4);
-}
-
-function generateReferralSuffix(length = 4): string {
-  const chars = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
-  const maxValid = 256 - (256 % chars.length);
-  let result = "";
-  while (result.length < length) {
-    const bytes = new Uint8Array(1);
-    crypto.getRandomValues(bytes);
-    if (bytes[0] < maxValid) result += chars[bytes[0] % chars.length];
-  }
-  return result;
-}
-
-async function createToken(userId: string, env: Env): Promise<string> {
-  const token = generateId();
-  await env.SESSIONS.put(`session:${token}`, userId, {
-    expirationTtl: 60 * 60 * 24 * 7, // 7 days
-  });
-  return token;
-}
-
-async function verifyToken(
-  token: string,
-  env: Env
-): Promise<string | null> {
-  return await env.SESSIONS.get(`session:${token}`);
-}
-
-// ─── Rate Limiting (in-memory + KV backed) ─────────────────────────────
-
-const RATE_LIMITS: Record<string, { maxRequests: number; windowSeconds: number }> = {
-  "auth": { maxRequests: 10, windowSeconds: 300 },     // 10 auth attempts per 5 min
-  "chat": { maxRequests: 30, windowSeconds: 60 },       // 30 chat requests per minute
-  "api": { maxRequests: 100, windowSeconds: 60 },       // 100 API requests per minute
-  "share": { maxRequests: 10, windowSeconds: 300 },     // 10 share links per 5 min
-};
-
-async function checkRateLimit(env: Env, key: string, category: string): Promise<{ allowed: boolean; remaining: number }> {
-  const config = RATE_LIMITS[category] || RATE_LIMITS.api;
-  const kvKey = `ratelimit:${category}:${key}`;
-
-  try {
-    const current = await env.SESSIONS.get(kvKey);
-    const count = current ? parseInt(current) : 0;
-
-    if (count >= config.maxRequests) {
-      return { allowed: false, remaining: 0 };
-    }
-
-    await env.SESSIONS.put(kvKey, String(count + 1), { expirationTtl: config.windowSeconds });
-    return { allowed: true, remaining: config.maxRequests - count - 1 };
-  } catch {
-    // Fail closed for auth to prevent brute force; fail open for non-critical
-    if (category === "auth") return { allowed: false, remaining: 0 };
-    return { allowed: true, remaining: config.maxRequests };
-  }
-}
-
-// ─── Auth Middleware ─────────────────────────────────────────────────
-
-async function authMiddleware(
-  c: any,
-  next: () => Promise<void>
-): Promise<Response | void> {
-  const authHeader = c.req.header("Authorization");
-  if (!authHeader?.startsWith("Bearer ")) {
-    return c.json({ error: "Unauthorized" }, 401);
-  }
-  const token = authHeader.slice(7);
-  const userId = await verifyToken(token, c.env);
-  if (!userId) {
-    return c.json({ error: "Invalid or expired session" }, 401);
-  }
-  c.set("userId", userId);
-  await next();
-}
-
-// ─── Admin Middleware ────────────────────────────────────────────────
-
-async function adminMiddleware(
-  c: any,
-  next: () => Promise<void>
-): Promise<Response | void> {
-  const authHeader = c.req.header("Authorization");
-  if (!authHeader?.startsWith("Bearer ")) {
-    return c.json({ error: "Unauthorized" }, 401);
-  }
-  const token = authHeader.slice(7);
-  const userId = await verifyToken(token, c.env);
-  if (!userId) {
-    return c.json({ error: "Invalid or expired session" }, 401);
-  }
-  const user = (await c.env.DB.prepare("SELECT role FROM users WHERE id = ?")
-    .bind(userId)
-    .first()) as { role: string } | null;
-  if (!user || user.role !== "super_admin") {
-    return c.json({ error: "Forbidden: admin access required" }, 403);
-  }
-  c.set("userId", userId);
-  await next();
-}
-
-// ─── Department Admin Middleware ─────────────────────────────────────
-// Allows both super_admin and dept_admin roles.
-// For dept_admin, sets deptFilter so queries are scoped to their department.
-
-async function deptAdminMiddleware(
-  c: any,
-  next: () => Promise<void>
-): Promise<Response | void> {
-  const authHeader = c.req.header("Authorization");
-  if (!authHeader?.startsWith("Bearer ")) {
-    return c.json({ error: "Unauthorized" }, 401);
-  }
-  const token = authHeader.slice(7);
-  const userId = await verifyToken(token, c.env);
-  if (!userId) {
-    return c.json({ error: "Invalid or expired session" }, 401);
-  }
-  const user = (await c.env.DB.prepare("SELECT role, department FROM users WHERE id = ?")
-    .bind(userId)
-    .first()) as { role: string; department: string } | null;
-  if (!user || (user.role !== "super_admin" && user.role !== "dept_admin")) {
-    return c.json({ error: "Forbidden: admin or department admin access required" }, 403);
-  }
-  c.set("userId", userId);
-  if (user.role === "dept_admin") {
-    c.set("deptFilter", user.department);
-  }
-  await next();
-}
+// Utilities and middleware imported from ./lib/utils and ./lib/middleware
 
 // ─── Auth Routes ────────────────────────────────────────────────────
 

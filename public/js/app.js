@@ -1951,7 +1951,7 @@ document.getElementById("template-modal").addEventListener("click", (e) => {
 
 function renderMarkdown(text) {
   if (!text) return "";
-
+  try {
   // Phase 1: Extract code blocks into placeholders (they handle their own escaping)
   const codeBlocks = [];
   let html = text.replace(/```(\w+)?\n([\s\S]*?)```/g, (_, lang, code) => {
@@ -2017,6 +2017,10 @@ function renderMarkdown(text) {
   html = html.replace(/(<table>[\s\S]*?<\/table>)/g, '<div class="smart-card table-card">$1</div>');
 
   return html;
+  } catch (e) {
+    // Fallback: return safely escaped text if markdown parsing fails
+    return escapeHtml(text).replace(/\n/g, "<br>");
+  }
 }
 
 function escapeHtml(text) {
@@ -4620,23 +4624,15 @@ async function initPaystackPayment(planId, planName, price) {
     if (!res.ok) throw new Error(data.error);
 
     if (data.authorization_url && data.authorization_url.startsWith('https://checkout.paystack.com/')) {
-      // Real Paystack — redirect to payment page (validated domain)
       window.location.href = data.authorization_url;
     } else if (data.authorization_url) {
       showToast("Invalid payment URL", "error");
-    } else if (data.simulated) {
-      // Dev mode — instant upgrade
-      state.user.tier = planId;
-      localStorage.setItem("askozzy_user", JSON.stringify(state.user));
+    } else {
+      showToast("Payment system is being set up. Contact your administrator to upgrade.", "error");
       closePricingModal();
-      loadUsageStatus();
-      updateSidebarFooter();
-      const banner = document.querySelector(".limit-banner");
-      if (banner) banner.remove();
-      alert(`Welcome to ${planName}! ${data.message}`);
     }
   } catch (err) {
-    alert("Payment failed: " + err.message);
+    showToast("Payment unavailable. Please try again later or contact your administrator.", "error");
   }
 }
 
@@ -4783,13 +4779,14 @@ function updateOnlineStatus() {
   const existing = document.querySelector(".offline-indicator");
   const badge = document.getElementById("offline-status-badge");
   const badgeText = badge ? badge.querySelector(".offline-status-text") : null;
+  const inputHint = document.querySelector(".input-offline-hint");
 
   if (!navigator.onLine) {
     // Show bottom bar indicator
     if (!existing) {
       const indicator = document.createElement("div");
       indicator.className = "offline-indicator";
-      indicator.innerHTML = '<span class="offline-dot"></span> Offline Mode — templates available, other messages will be queued';
+      indicator.innerHTML = '<span class="offline-dot"></span> Offline Mode';
       document.body.appendChild(indicator);
     }
 
@@ -4800,11 +4797,25 @@ function updateOnlineStatus() {
       if (badgeText) badgeText.textContent = "Offline";
     }
 
+    // Show input area hint
+    if (!inputHint) {
+      const inputArea = document.querySelector(".input-area");
+      if (inputArea) {
+        const hint = document.createElement("div");
+        hint.className = "input-offline-hint";
+        hint.textContent = "Messages will be queued and sent when you reconnect";
+        inputArea.insertBefore(hint, inputArea.firstChild);
+      }
+    }
+
     // Request queue status from service worker
     updateOfflineQueueBadge();
   } else {
     // Remove bottom bar indicator
     if (existing) existing.remove();
+
+    // Remove input hint
+    if (inputHint) inputHint.remove();
 
     // Update header badge
     if (badge) {
@@ -4917,15 +4928,21 @@ if ("serviceWorker" in navigator) {
 window.addEventListener("online", () => {
   updateOnlineStatus();
   hapticFeedback("success");
-  showSyncToast("Back online — syncing queued messages...");
-  // Trigger Background Sync
+  // Show queued count if any
+  var queueCount = document.getElementById("offline-queue-count");
+  var pending = queueCount ? parseInt(queueCount.textContent) || 0 : 0;
+  if (pending > 0) {
+    showSyncToast("Back online — syncing " + pending + " queued message" + (pending > 1 ? "s" : "") + "...", 4000);
+  } else {
+    showSyncToast("Back online", 2000);
+  }
   registerBackgroundSync();
-  // Also clear app badge
   updateAppBadge(0);
 });
 window.addEventListener("offline", () => {
   updateOnlineStatus();
   hapticFeedback("error");
+  showSyncToast("You're offline — templates still work, other messages will be queued", 5000);
 });
 
 // Initialize on page load
@@ -8362,19 +8379,7 @@ const CELEBRATIONS = [
 // ─── Feature 1: Value Moment Cards ──────────────────────────────────
 
 function shouldShowValueCard(trigger) {
-  // Max 1 per session
-  const sessionShown = sessionStorage.getItem('ozzy_growth_card_shown');
-  if (sessionShown) { return false; }
-  // Pause after 3 consecutive dismissals
-  const dismissCount = parseInt(localStorage.getItem('ozzy_growth_card_dismiss_count') || '0', 10);
-  if (dismissCount >= 3) { return false; }
-  // Max 3 per week
-  let history = [];
-  try { history = JSON.parse(localStorage.getItem('ozzy_growth_card_history') || '[]'); } catch {}
-  const weekAgo = Date.now() - 7 * 24 * 3600000;
-  history = history.filter(t => t > weekAgo);
-  if (history.length >= 3) { return false; }
-  return true;
+  return !sessionStorage.getItem('ozzy_growth_card_shown');
 }
 
 function showValueMomentCard(trigger) {
@@ -8391,10 +8396,6 @@ function showValueMomentCard(trigger) {
 
   // Mark shown only after confirming we can display
   sessionStorage.setItem('ozzy_growth_card_shown', '1');
-  let history = [];
-  try { history = JSON.parse(localStorage.getItem('ozzy_growth_card_history') || '[]'); } catch {}
-  history.push(Date.now());
-  localStorage.setItem('ozzy_growth_card_history', JSON.stringify(history));
 
   const card = document.createElement('div');
   card.className = 'value-moment-card';
@@ -8430,8 +8431,6 @@ function shareValueMoment() {
 }
 
 function dismissValueMoment(btn) {
-  const count = parseInt(localStorage.getItem('ozzy_growth_card_dismiss_count') || '0', 10);
-  localStorage.setItem('ozzy_growth_card_dismiss_count', String(count + 1));
   const card = btn.closest('.value-moment-card');
   if (card) { card.classList.remove('vmc-visible'); setTimeout(() => card.remove(), 300); }
 }
