@@ -138,9 +138,9 @@ async function adminMiddleware(
   if (!userId) {
     return c.json({ error: "Invalid or expired session" }, 401);
   }
-  const user = await c.env.DB.prepare("SELECT role FROM users WHERE id = ?")
+  const user = (await c.env.DB.prepare("SELECT role FROM users WHERE id = ?")
     .bind(userId)
-    .first<{ role: string }>();
+    .first()) as { role: string } | null;
   if (!user || user.role !== "super_admin") {
     return c.json({ error: "Forbidden: admin access required" }, 403);
   }
@@ -165,9 +165,9 @@ async function deptAdminMiddleware(
   if (!userId) {
     return c.json({ error: "Invalid or expired session" }, 401);
   }
-  const user = await c.env.DB.prepare("SELECT role, department FROM users WHERE id = ?")
+  const user = (await c.env.DB.prepare("SELECT role, department FROM users WHERE id = ?")
     .bind(userId)
-    .first<{ role: string; department: string }>();
+    .first()) as { role: string; department: string } | null;
   if (!user || (user.role !== "super_admin" && user.role !== "dept_admin")) {
     return c.json({ error: "Forbidden: admin or department admin access required" }, 403);
   }
@@ -1442,7 +1442,7 @@ app.post("/api/chat", authMiddleware, async (c) => {
   }
 
   // Stream response from Workers AI
-  const stream = await c.env.AI.run(selectedModel as BaseAiTextGenerationModels, {
+  const stream = await c.env.AI.run(selectedModel as any, {
     messages: messages as any,
     stream: true,
     max_tokens: 4096,
@@ -1497,7 +1497,7 @@ app.post("/api/chat", authMiddleware, async (c) => {
         // Generate follow-up suggestions before closing stream
         try {
           if (fullResponse.length > 20) {
-            const suggestionResp = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels, {
+            const suggestionResp = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as any, {
               messages: [
                 { role: "system", content: "Generate exactly 3 short follow-up questions the user might ask next based on this conversation. Return ONLY a JSON array of 3 strings, nothing else. Each question should be under 60 characters." },
                 { role: "user", content: message.substring(0, 300) },
@@ -1541,7 +1541,7 @@ app.post("/api/chat", authMiddleware, async (c) => {
           if (msgCount && msgCount.count <= 2) {
             // AI-generated title from first exchange
             try {
-              const titleResponse = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels, {
+              const titleResponse = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as any, {
                 messages: [
                   { role: "system", content: "Generate a short title (max 50 chars) for this conversation. Return ONLY the title, nothing else." },
                   { role: "user", content: message.substring(0, 500) },
@@ -1576,7 +1576,7 @@ app.post("/api/chat", authMiddleware, async (c) => {
             ).bind(userId).first<{ count: number }>();
 
             if (memoryCount && memoryCount.count < 20) {
-              const extractResponse = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels, {
+              const extractResponse = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as any, {
                 messages: [
                   {
                     role: "system",
@@ -1677,7 +1677,7 @@ app.post("/api/research", authMiddleware, async (c) => {
         // ── Step 1: Query Analysis ──
         await sendEvent("research:step", { step: 1, total: 5, description: "Analysing research question..." });
 
-        const analysisResponse = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels, {
+        const analysisResponse = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as any, {
           messages: [
             { role: "system", content: "You are a research assistant. Break down the following research question into 3-5 specific sub-queries that would help comprehensively answer it. Return ONLY a JSON array of strings, nothing else. Example: [\"sub-query 1\", \"sub-query 2\", \"sub-query 3\"]" },
             { role: "user", content: query },
@@ -1755,7 +1755,7 @@ Write a well-structured research report with:
 
 Use formal British English. Cite web sources using numbered references [1], [2], etc.`;
 
-        const synthesisResponse = await c.env.AI.run("@cf/openai/gpt-oss-20b" as BaseAiTextGenerationModels, {
+        const synthesisResponse = await c.env.AI.run("@cf/openai/gpt-oss-20b" as any, {
           messages: [
             { role: "system", content: synthesisPrompt },
             { role: "user", content: `Generate the comprehensive research report for: ${query}` },
@@ -1852,7 +1852,7 @@ app.post("/api/analyze", authMiddleware, async (c) => {
     try {
       const arrayBuffer = await file.arrayBuffer();
       const blob = new Blob([arrayBuffer]);
-      const ds = new DecompressionStream("raw");
+      const ds = new DecompressionStream("raw" as any);
       // XLSX is a ZIP — we need to find shared strings and sheet data
       // For Workers environment, use a simplified approach: extract sheet1.xml
       const bytes = new Uint8Array(arrayBuffer);
@@ -1877,7 +1877,7 @@ app.post("/api/analyze", authMiddleware, async (c) => {
               text = new TextDecoder().decode(compressedData);
             } else {
               try {
-                const ds = new DecompressionStream("raw");
+                const ds = new DecompressionStream("raw" as any);
                 const dsWriter = ds.writable.getWriter();
                 dsWriter.write(compressedData);
                 dsWriter.close();
@@ -1970,7 +1970,7 @@ For budget data, include variance analysis. All monetary values in GHS.
 Keep datasets data arrays to max 20 items. Return ONLY valid JSON.`;
 
   try {
-    const analysisResponse = await c.env.AI.run("@cf/openai/gpt-oss-20b" as BaseAiTextGenerationModels, {
+    const analysisResponse = await c.env.AI.run("@cf/openai/gpt-oss-20b" as any, {
       messages: [
         { role: "system", content: analysisPrompt },
         { role: "user", content: "Analyze this data and return JSON." },
@@ -2067,7 +2067,7 @@ async function translateText(
 
   // LLM fallback for unsupported language pairs (Twi, Ga, Ewe, Dagbani)
   try {
-    const result = await ai.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast" as BaseAiTextGenerationModels, {
+    const result = await ai.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast" as any, {
       messages: [
         {
           role: "system",
@@ -3327,9 +3327,9 @@ async function logUserAudit(c: any, actionType: string, queryPreview?: string, m
   try {
     const userId = c.get("userId");
     const ip = c.req.header("cf-connecting-ip") || c.req.header("x-forwarded-for") || "unknown";
-    const user = await c.env.DB.prepare(
+    const user = (await c.env.DB.prepare(
       "SELECT email, department FROM users WHERE id = ?"
-    ).bind(userId).first<{ email: string; department: string }>();
+    ).bind(userId).first()) as { email: string; department: string } | null;
 
     await c.env.DB.prepare(
       "INSERT INTO user_audit_log (user_id, user_email, department, action_type, query_preview, model_used, ip_address) VALUES (?, ?, ?, ?, ?, ?, ?)"
@@ -3641,7 +3641,7 @@ app.post("/api/messages/:id/regenerate", authMiddleware, async (c) => {
   }
 
   // Stream new response
-  const stream = await c.env.AI.run(selectedModel as BaseAiTextGenerationModels, {
+  const stream = await c.env.AI.run(selectedModel as any, {
     messages: messages as any,
     stream: true,
     max_tokens: 4096,
@@ -3969,7 +3969,7 @@ app.post("/api/chat/detect-artifact", authMiddleware, async (c) => {
   }
 
   try {
-    const response = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels, {
+    const response = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as any, {
       messages: [
         {
           role: "system",
@@ -4190,7 +4190,7 @@ app.get("/api/chat/suggestions/:conversationId", authMiddleware, async (c) => {
 
   // Generate context-aware suggestions using a fast model
   try {
-    const response = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels, {
+    const response = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as any, {
       messages: [
         {
           role: "system",
@@ -6138,7 +6138,7 @@ app.post("/api/workflows/:id/step", authMiddleware, async (c) => {
     };
 
     try {
-      const aiResult = await c.env.AI.run("@cf/openai/gpt-oss-20b" as BaseAiTextGenerationModels, {
+      const aiResult = await c.env.AI.run("@cf/openai/gpt-oss-20b" as any, {
         messages: [
           { role: "system", content: `${GOG_SYSTEM_PROMPT}\n\n${typePrompts[workflow.type] || "Generate a professional document based on the following inputs."}` },
           { role: "user", content: context },
@@ -6165,7 +6165,7 @@ app.post("/api/workflows/:id/step", authMiddleware, async (c) => {
     let aiHint = "";
     try {
       const prevContext = steps.slice(0, stepIndex).filter((s: any) => s.input).map((s: any) => `${s.name}: ${s.input}`).join("; ");
-      const aiResult = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels, {
+      const aiResult = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as any, {
         messages: [
           { role: "system", content: "You are helping a Ghana civil servant complete a workflow. Provide a brief, helpful suggestion for the next step. Keep it under 100 words." },
           { role: "user", content: `Workflow: ${workflow.name}\nCompleted so far: ${prevContext}\nNext step: ${steps[stepIndex + 1]?.name || "Final review"}\nProvide guidance.` },
@@ -6254,7 +6254,7 @@ app.post("/api/meetings/:id/minutes", authMiddleware, async (c) => {
   if (!meeting.transcript) return c.json({ error: "No transcript available" }, 400);
 
   try {
-    const minutesResult = await c.env.AI.run("@cf/openai/gpt-oss-20b" as BaseAiTextGenerationModels, {
+    const minutesResult = await c.env.AI.run("@cf/openai/gpt-oss-20b" as any, {
       messages: [
         { role: "system", content: `You are a professional minutes secretary for the Government of Ghana. Generate formal meeting minutes from the following transcript.
 
@@ -6277,7 +6277,7 @@ Use formal British English. Be thorough but concise.` },
     const minutes = (minutesResult as any).response || "";
 
     // Extract action items
-    const actionsResult = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels, {
+    const actionsResult = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as any, {
       messages: [
         { role: "system", content: 'Extract all action items from these meeting minutes. Return a JSON array: [{"action": "description", "assignee": "person", "deadline": "date or TBD"}]. Return ONLY the JSON array.' },
         { role: "user", content: minutes },
@@ -6541,7 +6541,7 @@ app.post("/api/citizen/chat", async (c) => {
       messages.push({ role: msg.role, content: msg.content });
     }
 
-    const aiResult = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels, {
+    const aiResult = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as any, {
       messages: messages as any,
       max_tokens: 1024,
     });
@@ -7249,7 +7249,7 @@ function truncateForUSSD(text: string, maxLen: number = 182): string {
 async function getUSSDResponse(ai: Ai, prompt: string): Promise<string> {
   try {
     const result = await ai.run(
-      "@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels,
+      "@cf/meta/llama-3.1-8b-instruct-fast" as any,
       {
         messages: [
           {
@@ -7272,7 +7272,7 @@ async function getUSSDResponse(ai: Ai, prompt: string): Promise<string> {
 async function getUSSDMemoResponse(ai: Ai, topic: string): Promise<string> {
   try {
     const result = await ai.run(
-      "@cf/meta/llama-3.1-8b-instruct-fast" as BaseAiTextGenerationModels,
+      "@cf/meta/llama-3.1-8b-instruct-fast" as any,
       {
         messages: [
           {
@@ -7779,7 +7779,7 @@ async function getMessagingAIResponse(
   messages.push({ role: "user", content: userMessage });
 
   try {
-    const result = await env.AI.run("@cf/meta/llama-4-scout-17b-16e-instruct" as BaseAiTextGenerationModels, {
+    const result = await env.AI.run("@cf/meta/llama-4-scout-17b-16e-instruct" as any, {
       messages: messages as any,
       max_tokens: 1024,
     });
