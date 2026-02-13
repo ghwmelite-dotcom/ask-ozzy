@@ -87,6 +87,15 @@ let state = {
   userType: null,
 };
 
+// ─── Growth System State ────────────────────────────────────────────
+let _growthState = {
+  affiliateFetched: false,
+  referralCode: '',
+  wallet: 0,
+  totalReferrals: 0,
+  sessionMsgCount: 0,
+};
+
 // ─── Persona System ─────────────────────────────────────────────────
 let _selectedPersona = 'gog_employee';
 
@@ -743,6 +752,10 @@ function onAuthenticated() {
   // Feature 5: Load streak data for sidebar badge
   loadStreakData();
 
+  // Growth system: prefetch affiliate data for sidebar widget + trial card
+  prefetchAffiliateData();
+  checkTrialConversion();
+
   // Feature 4: Enhanced onboarding tour for new users
   startEnhancedOnboarding();
 
@@ -926,9 +939,7 @@ function updateSidebarFooter() {
         <button class="sidebar-tier-btn tier-${tier}" onclick="openPricingModal()">
           ${tierName} Plan ${tier === 'free' ? '— Upgrade' : ''}
         </button>
-        <button class="sidebar-earn-btn" onclick="openAffiliateModal()">
-          Earn GHS
-        </button>
+        <div class="sidebar-earn-widget-wrap"></div>
       </div>
       <div id="streak-badge-container"></div>
       <div class="sidebar-links">
@@ -954,6 +965,11 @@ function updateSidebarFooter() {
       </div>`;
   }
   footer.innerHTML += `<div class="ghana-pride-badge"><div class="ghana-pride-flag"></div><span>Made with pride in Ghana</span></div>`;
+  // Growth: render dynamic earn widget + restore streak badge
+  if (isLoggedIn()) {
+    renderSidebarEarnWidget();
+    if (state.streakData) renderStreakBadge();
+  }
 }
 
 // ─── Conversations ───────────────────────────────────────────────────
@@ -1398,6 +1414,9 @@ async function sendMessage() {
     loadUsageStatus(); // refresh usage counter
     checkUpgradeNudge(); // Feature 1: Smart upgrade nudge after each message
 
+    // Growth system: track message + trigger value cards/celebrations
+    _growthAfterMessage(fullText || '');
+
     // Check for artifacts
     const lastMsg = state.messages[state.messages.length - 1];
     if (lastMsg && lastMsg.role === 'assistant') {
@@ -1520,6 +1539,7 @@ function downloadMessageTxt(index) {
   if (!msg) return;
   const blob = new Blob([msg.content], { type: "text/plain;charset=utf-8" });
   _triggerDownload(blob, _getMessageFilename(index, "txt"));
+  _growthAfterDownload();
 }
 
 // ─── DOCX Generation with GoG Templates ─────────────────────────────
@@ -1687,6 +1707,7 @@ async function downloadMessageDoc(index) {
     const doc = _buildGoGDocx(msg.content, _getMessageFilename(index, '').replace(/\.$/, ''));
     const blob = await docx.Packer.toBlob(doc);
     _triggerDownload(blob, _getMessageFilename(index, "docx"));
+    _growthAfterDownload();
     return;
   } catch (err) { console.error('DOCX generation failed, using fallback:', err); }
   // Fallback: HTML-in-Word
@@ -1696,6 +1717,7 @@ async function downloadMessageDoc(index) {
 <body>${renderMarkdown(msg.content)}</body></html>`;
   const blob = new Blob([html], { type: "application/msword" });
   _triggerDownload(blob, _getMessageFilename(index, "doc"));
+  _growthAfterDownload();
 }
 
 function printMessage(index) {
@@ -1841,6 +1863,8 @@ function renderTemplateGrid() {
 }
 
 function selectTemplate(templateId) {
+  // Growth: flag template use for value moment card
+  sessionStorage.setItem('ozzy_pending_template_trigger', '1');
   // Gate behind auth — pass templateId to createNewChat after login
   requireAuth(createNewChat, templateId);
 }
@@ -7938,6 +7962,7 @@ function showEnhancedOnboardingStep(stepIndex, steps) {
 
   if (stepIndex >= steps.length) {
     localStorage.setItem('ozzy_onboarding_v2_done', '1');
+    showPostOnboardingCard();
     return;
   }
 
@@ -8031,6 +8056,7 @@ async function loadStreakData() {
     const data = await res.json();
     state.streakData = data;
     renderStreakBadge();
+    _growthAfterStreakLoad();
   } catch {}
 }
 
@@ -8279,5 +8305,345 @@ async function sendCitizenMessage() {
     errDiv.className = 'citizen-msg bot';
     errDiv.innerHTML = `<div class="citizen-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="citizen-msg-content"><div class="citizen-msg-bubble" style="color:var(--red-error-text);">Sorry, I'm temporarily unavailable. Please try again.</div></div>`;
     container.appendChild(errDiv);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  GROWTH SYSTEM — "Use. Share. Earn."
+// ═══════════════════════════════════════════════════════════════════
+
+const VALUE_MOMENT_MESSAGES = {
+  first_template: {
+    gog: "That took seconds instead of an hour. Know a colleague who needs this?",
+    student: "That took 20 seconds. Tell your coursemates about AskOzzy."
+  },
+  first_download: {
+    gog: "Document ready — imagine your whole department using this.",
+    student: "Document downloaded instantly. Share AskOzzy with your study group."
+  },
+  fifth_message: {
+    gog: "5 tasks done already. A colleague would thank you for sharing this.",
+    student: "5 questions answered. Your coursemates need this too."
+  },
+  long_response: {
+    gog: "That detailed response would take hours to research manually. Share the shortcut.",
+    student: "That essay outline took 20 seconds. Tell your coursemates."
+  }
+};
+
+const CELEBRATIONS = [
+  { key: 'msg10', threshold: 10, type: 'messages', title: '10 Messages!', desc: "You're getting things done with AskOzzy.", cta: 'Share & Earn 30%', action: 'share' },
+  { key: 'msg50', threshold: 50, type: 'messages', title: '50 Messages!', desc: "You're a power user now.", cta: 'Invite Colleagues', action: 'share' },
+  { key: 'doc1', threshold: 1, type: 'documents', title: 'First Document!', desc: 'Your first AI-generated document is ready.', cta: 'Share AskOzzy', action: 'share' },
+  { key: 'ref1', threshold: 1, type: 'referrals', title: 'First Referral!', desc: "Someone joined through your link — you're earning.", cta: 'View Earnings', action: 'affiliate' },
+  { key: 'streak7', threshold: 7, type: 'streak', title: '7-Day Streak!', desc: "A full week of productivity.", cta: 'Share Your Streak', action: 'share' }
+];
+
+// ─── Feature 1: Value Moment Cards ──────────────────────────────────
+
+function shouldShowValueCard(trigger) {
+  // Max 1 per session
+  if (sessionStorage.getItem('ozzy_growth_card_shown')) return false;
+  // Pause after 3 consecutive dismissals
+  const dismissCount = parseInt(localStorage.getItem('ozzy_growth_card_dismiss_count') || '0', 10);
+  if (dismissCount >= 3) return false;
+  // Max 3 per week
+  let history = [];
+  try { history = JSON.parse(localStorage.getItem('ozzy_growth_card_history') || '[]'); } catch {}
+  const weekAgo = Date.now() - 7 * 24 * 3600000;
+  history = history.filter(t => t > weekAgo);
+  if (history.length >= 3) return false;
+  return true;
+}
+
+function showValueMomentCard(trigger) {
+  if (!shouldShowValueCard(trigger)) return;
+  const persona = isStudent() ? 'student' : 'gog';
+  const msgs = VALUE_MOMENT_MESSAGES[trigger];
+  if (!msgs) return;
+  const text = msgs[persona];
+
+  // Mark shown
+  sessionStorage.setItem('ozzy_growth_card_shown', '1');
+  let history = [];
+  try { history = JSON.parse(localStorage.getItem('ozzy_growth_card_history') || '[]'); } catch {}
+  history.push(Date.now());
+  localStorage.setItem('ozzy_growth_card_history', JSON.stringify(history));
+
+  // Find last assistant message in DOM
+  const msgEls = document.querySelectorAll('.message.assistant');
+  const anchor = msgEls[msgEls.length - 1];
+  if (!anchor) return;
+
+  const card = document.createElement('div');
+  card.className = 'value-moment-card';
+  card.innerHTML = `
+    <div class="vmc-accent"></div>
+    <div class="vmc-body">
+      <p class="vmc-text">${escapeHtml(text)}</p>
+      <div class="vmc-actions">
+        <button class="vmc-cta" onclick="shareValueMoment()">Share & Earn 30%</button>
+        <button class="vmc-dismiss" onclick="dismissValueMoment(this)" aria-label="Dismiss">&times;</button>
+      </div>
+    </div>`;
+  anchor.after(card);
+  requestAnimationFrame(() => card.classList.add('vmc-visible'));
+}
+
+function shareValueMoment() {
+  // Reset dismissal counter on share
+  localStorage.setItem('ozzy_growth_card_dismiss_count', '0');
+  const card = document.querySelector('.value-moment-card');
+  if (card) { card.classList.remove('vmc-visible'); setTimeout(() => card.remove(), 300); }
+  openAffiliateModal();
+}
+
+function dismissValueMoment(btn) {
+  const count = parseInt(localStorage.getItem('ozzy_growth_card_dismiss_count') || '0', 10);
+  localStorage.setItem('ozzy_growth_card_dismiss_count', String(count + 1));
+  const card = btn.closest('.value-moment-card');
+  if (card) { card.classList.remove('vmc-visible'); setTimeout(() => card.remove(), 300); }
+}
+
+// ─── Feature 2: Dynamic Sidebar Earnings Widget ─────────────────────
+
+async function prefetchAffiliateData() {
+  if (!state.user || _growthState.affiliateFetched) return;
+  try {
+    const res = await fetch(`${API}/api/affiliate/dashboard`, { headers: authHeaders() });
+    if (!res.ok) return;
+    const data = await res.json();
+    _growthState.affiliateFetched = true;
+    _growthState.referralCode = data.referralCode || '';
+    _growthState.wallet = data.wallet || 0;
+    _growthState.totalReferrals = (data.stats && data.stats.directReferrals) || data.totalReferrals || 0;
+    // Update sidebar widget now that data is available
+    renderSidebarEarnWidget();
+    // Check first referral celebration
+    if (_growthState.totalReferrals >= 1) {
+      showCelebration('ref1', _growthState.totalReferrals);
+    }
+  } catch {}
+}
+
+function renderSidebarEarnWidget() {
+  const container = document.querySelector('.sidebar-earn-widget-wrap');
+  if (!container) return;
+
+  let html = '';
+  if (_growthState.wallet > 0) {
+    // Active earner
+    html = `<button class="sidebar-earn-widget earn-active" onclick="openAffiliateModal()">
+      <span class="sew-amount">GHS ${_growthState.wallet.toFixed(2)}</span>
+      <span class="sew-label">Earnings</span>
+    </button>`;
+  } else if (_growthState.totalReferrals > 0) {
+    // Growing
+    html = `<button class="sidebar-earn-widget earn-growing" onclick="openAffiliateModal()">
+      <span class="sew-count">${_growthState.totalReferrals} referral${_growthState.totalReferrals === 1 ? '' : 's'}</span>
+      <span class="sew-label">Keep sharing!</span>
+    </button>`;
+  } else {
+    // New user
+    const sub = isStudent() ? 'Share with classmates, earn real money' : 'Share with colleagues, earn 30%';
+    html = `<button class="sidebar-earn-widget earn-new" onclick="openAffiliateModal()">
+      <span class="sew-headline">Use. Share. Earn.</span>
+      <span class="sew-label">${escapeHtml(sub)}</span>
+    </button>`;
+  }
+  container.innerHTML = html;
+}
+
+// ─── Feature 3: Post-Trial Conversion Card ──────────────────────────
+
+async function checkTrialConversion() {
+  if (!state.user || !state.user.trialExpiresAt) return;
+  const expires = new Date(state.user.trialExpiresAt);
+  const hoursLeft = (expires - Date.now()) / 3600000;
+  // Only show if trial is active and <=48 hours left
+  if (hoursLeft <= 0 || hoursLeft > 48) return;
+  // Max 1 per day
+  const lastDate = localStorage.getItem('ozzy_trial_card_date');
+  const today = new Date().toDateString();
+  if (lastDate === today) return;
+  localStorage.setItem('ozzy_trial_card_date', today);
+
+  // Fetch productivity stats
+  let msgCount = 0, hoursSaved = 0;
+  try {
+    const res = await fetch(`${API}/api/productivity/me`, { headers: authHeaders() });
+    if (res.ok) {
+      const d = await res.json();
+      msgCount = (d.month && d.month.messages_sent) || 0;
+      hoursSaved = Math.round(msgCount * 2.5 / 60 * 10) / 10; // ~2.5 min per task
+    }
+  } catch {}
+
+  const container = document.getElementById('announcements-area');
+  if (!container) return;
+
+  const persona = isStudent() ? 'student' : 'gog';
+  const price = isStudent() ? 25 : 60;
+  const pct = Math.max(0, Math.min(100, ((48 - hoursLeft) / 48) * 100));
+  const hoursDisp = Math.round(hoursLeft);
+  const msg = persona === 'student'
+    ? `You've sent ${msgCount} messages. Keep going for just GHS ${price}/month — less than a week of Waakye.`
+    : `You've sent ${msgCount} messages and saved ~${hoursSaved} hours. Continue for GHS ${price}/month.`;
+
+  const card = document.createElement('div');
+  card.className = 'trial-conversion-card';
+  card.innerHTML = `
+    <button class="tcc-dismiss" onclick="this.parentElement.remove()" aria-label="Dismiss">&times;</button>
+    <div class="tcc-header">
+      <span class="tcc-clock">&#9201;</span>
+      <span class="tcc-title">Your Professional Trial ends in ${hoursDisp} hours</span>
+    </div>
+    <p class="tcc-message">${escapeHtml(msg)}</p>
+    <div class="tcc-timer-bar"><div class="tcc-timer-fill" style="width:${pct}%"></div></div>
+    <button class="tcc-cta" onclick="this.closest('.trial-conversion-card').remove();openPricingModal()">Upgrade Now</button>`;
+  container.prepend(card);
+}
+
+// ─── Feature 4: Achievement Celebrations ────────────────────────────
+
+function _getMessageTotal() {
+  return parseInt(localStorage.getItem('ozzy_total_msgs') || '0', 10);
+}
+function _incrementMessageTotal() {
+  const n = _getMessageTotal() + 1;
+  localStorage.setItem('ozzy_total_msgs', String(n));
+  return n;
+}
+
+function showCelebration(key, value) {
+  const cele = CELEBRATIONS.find(c => c.key === key);
+  if (!cele) return;
+  // Each celebration fires once ever
+  if (localStorage.getItem('ozzy_cele_' + key)) return;
+  // Check threshold
+  if (typeof value === 'number' && value < cele.threshold) return;
+  localStorage.setItem('ozzy_cele_' + key, '1');
+
+  const toast = document.createElement('div');
+  toast.className = 'growth-celebration';
+  toast.innerHTML = `
+    <div class="gc-content">
+      <div class="gc-icon">&#127881;</div>
+      <div class="gc-text">
+        <strong class="gc-title">${escapeHtml(cele.title)}</strong>
+        <span class="gc-desc">${escapeHtml(cele.desc)}</span>
+      </div>
+      <button class="gc-cta" onclick="handleCelebrationCTA('${cele.action}')">${escapeHtml(cele.cta)}</button>
+      <button class="gc-close" onclick="this.closest('.growth-celebration').remove()" aria-label="Close">&times;</button>
+    </div>`;
+  document.body.appendChild(toast);
+  requestAnimationFrame(() => toast.classList.add('gc-visible'));
+  // Auto-dismiss after 8 seconds
+  setTimeout(() => {
+    if (toast.parentElement) {
+      toast.classList.remove('gc-visible');
+      setTimeout(() => toast.remove(), 400);
+    }
+  }, 8000);
+}
+
+function handleCelebrationCTA(action) {
+  const toast = document.querySelector('.growth-celebration');
+  if (toast) toast.remove();
+  if (action === 'share') openAffiliateModal();
+  else if (action === 'affiliate') openAffiliateModal();
+}
+
+function checkMessageCelebrations() {
+  const total = _getMessageTotal();
+  if (total >= 10) showCelebration('msg10', total);
+  if (total >= 50) showCelebration('msg50', total);
+}
+
+// ─── Feature 5: Post-Onboarding Value Card ──────────────────────────
+
+function showPostOnboardingCard() {
+  const persona = isStudent() ? 'student' : 'gog';
+  const referralCode = _growthState.referralCode || (state.user && state.user.referral_code) || '';
+  const msg = persona === 'student'
+    ? 'Ask study questions, generate essays, and prep for exams. Share your code with classmates to earn real money.'
+    : 'Draft memos, analyze data, and generate reports. Share your code with colleagues to earn 30%.';
+
+  const overlay = document.createElement('div');
+  overlay.className = 'post-onboarding-overlay';
+  overlay.id = 'post-onboarding-overlay';
+  overlay.innerHTML = `
+    <div class="poc-card">
+      <div class="poc-flag-stripe"></div>
+      <h2 class="poc-heading">You're All Set!</h2>
+      <p class="poc-subtext">${escapeHtml(msg)}</p>
+      <div class="poc-loop">
+        <div class="poc-step">
+          <div class="poc-step-icon">&#128172;</div>
+          <span>Use</span>
+        </div>
+        <div class="poc-arrow">&#8594;</div>
+        <div class="poc-step">
+          <div class="poc-step-icon">&#128228;</div>
+          <span>Share</span>
+        </div>
+        <div class="poc-arrow">&#8594;</div>
+        <div class="poc-step">
+          <div class="poc-step-icon">&#128176;</div>
+          <span>Earn</span>
+        </div>
+      </div>
+      ${referralCode ? `<div class="poc-referral">
+        <span class="poc-ref-label">Your Referral Code</span>
+        <div class="poc-ref-row">
+          <input type="text" value="${escapeHtml(referralCode)}" readonly class="poc-ref-input" />
+          <button class="poc-ref-copy" onclick="copyToClipboard('${escapeHtml(referralCode)}', this)">Copy</button>
+        </div>
+      </div>` : ''}
+      <div class="poc-actions">
+        <button class="poc-primary" onclick="closePostOnboarding()">Start Chatting</button>
+        <button class="poc-secondary" onclick="closePostOnboarding();openAffiliateModal()">Share Now</button>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+  requestAnimationFrame(() => overlay.classList.add('poc-visible'));
+}
+
+function closePostOnboarding() {
+  const overlay = document.getElementById('post-onboarding-overlay');
+  if (overlay) {
+    overlay.classList.remove('poc-visible');
+    setTimeout(() => overlay.remove(), 300);
+  }
+}
+
+// ─── Growth: Integration Hooks ──────────────────────────────────────
+
+function _growthAfterMessage(responseText) {
+  _growthState.sessionMsgCount++;
+  const total = _incrementMessageTotal();
+  checkMessageCelebrations();
+
+  // Value moment card triggers (priority order, first match wins)
+  if (sessionStorage.getItem('ozzy_pending_template_trigger')) {
+    sessionStorage.removeItem('ozzy_pending_template_trigger');
+    setTimeout(() => showValueMomentCard('first_template'), 600);
+  } else if (_growthState.sessionMsgCount === 5) {
+    setTimeout(() => showValueMomentCard('fifth_message'), 600);
+  } else if (responseText && responseText.length > 2000) {
+    setTimeout(() => showValueMomentCard('long_response'), 600);
+  }
+}
+
+function _growthAfterDownload() {
+  // First doc celebration
+  showCelebration('doc1', 1);
+  // Value moment card
+  setTimeout(() => showValueMomentCard('first_download'), 600);
+}
+
+function _growthAfterStreakLoad() {
+  if (state.streakData && state.streakData.currentStreak >= 7) {
+    showCelebration('streak7', state.streakData.currentStreak);
   }
 }
