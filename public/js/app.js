@@ -1865,6 +1865,7 @@ function renderTemplateGrid() {
 function selectTemplate(templateId) {
   // Growth: flag template use for value moment card
   sessionStorage.setItem('ozzy_pending_template_trigger', '1');
+  console.log('[Growth] Template selected, flag set');
   // Gate behind auth — pass templateId to createNewChat after login
   requireAuth(createNewChat, templateId);
 }
@@ -8343,30 +8344,35 @@ const CELEBRATIONS = [
 
 function shouldShowValueCard(trigger) {
   // Max 1 per session
-  if (sessionStorage.getItem('ozzy_growth_card_shown')) return false;
+  const sessionShown = sessionStorage.getItem('ozzy_growth_card_shown');
+  if (sessionShown) { console.log('[Growth] shouldShow BLOCKED: already shown this session'); return false; }
   // Pause after 3 consecutive dismissals
   const dismissCount = parseInt(localStorage.getItem('ozzy_growth_card_dismiss_count') || '0', 10);
-  if (dismissCount >= 3) return false;
+  if (dismissCount >= 3) { console.log('[Growth] shouldShow BLOCKED: 3+ dismissals'); return false; }
   // Max 3 per week
   let history = [];
   try { history = JSON.parse(localStorage.getItem('ozzy_growth_card_history') || '[]'); } catch {}
   const weekAgo = Date.now() - 7 * 24 * 3600000;
   history = history.filter(t => t > weekAgo);
-  if (history.length >= 3) return false;
+  if (history.length >= 3) { console.log('[Growth] shouldShow BLOCKED: 3+ this week'); return false; }
+  console.log('[Growth] shouldShow PASSED for trigger:', trigger);
   return true;
 }
 
 function showValueMomentCard(trigger) {
+  console.log('[Growth] showValueMomentCard called with trigger:', trigger);
   if (!shouldShowValueCard(trigger)) return;
   const persona = isStudent() ? 'student' : 'gog';
   const msgs = VALUE_MOMENT_MESSAGES[trigger];
-  if (!msgs) return;
+  if (!msgs) { console.log('[Growth] No messages for trigger:', trigger); return; }
   const text = msgs[persona];
+  console.log('[Growth] Persona:', persona, 'Text:', text);
 
   // Find last assistant message in DOM FIRST before marking shown
   const msgEls = document.querySelectorAll('.message.assistant');
+  console.log('[Growth] Found', msgEls.length, '.message.assistant elements');
   const anchor = msgEls[msgEls.length - 1];
-  if (!anchor) return;
+  if (!anchor) { console.log('[Growth] No anchor element found!'); return; }
 
   // Mark shown only after confirming we can display
   sessionStorage.setItem('ozzy_growth_card_shown', '1');
@@ -8632,11 +8638,15 @@ function closePostOnboarding() {
 function _growthAfterMessage(responseText) {
   _growthState.sessionMsgCount++;
   const total = _incrementMessageTotal();
+  console.log('[Growth] _growthAfterMessage called. sessionMsgCount:', _growthState.sessionMsgCount, 'totalMsgs:', total, 'responseLen:', (responseText || '').length);
   checkMessageCelebrations();
 
   // Value moment card triggers (priority order, first match wins)
-  if (sessionStorage.getItem('ozzy_pending_template_trigger')) {
+  const hasTplFlag = sessionStorage.getItem('ozzy_pending_template_trigger');
+  console.log('[Growth] Trigger check — template flag:', hasTplFlag, 'sessionCount:', _growthState.sessionMsgCount, 'longResponse:', (responseText || '').length > 2000);
+  if (hasTplFlag) {
     sessionStorage.removeItem('ozzy_pending_template_trigger');
+    console.log('[Growth] Template trigger fired, calling showValueMomentCard in 600ms');
     setTimeout(() => showValueMomentCard('first_template'), 600);
   } else if (_growthState.sessionMsgCount === 5) {
     setTimeout(() => showValueMomentCard('fifth_message'), 600);
