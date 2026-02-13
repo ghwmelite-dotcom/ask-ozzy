@@ -36,6 +36,32 @@ window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", (e
   }
 });
 
+// ─── Lazy Script Loaders (Chart.js + docx.js) ────────────────────────
+function _loadScript(src) {
+  let p = _loadScript._cache?.[src];
+  if (p) return p;
+  if (!_loadScript._cache) _loadScript._cache = {};
+  p = new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = src;
+    s.onload = resolve;
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+  _loadScript._cache[src] = p;
+  return p;
+}
+
+async function loadChartJs() {
+  if (typeof Chart !== 'undefined') return;
+  await _loadScript('https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js');
+}
+
+async function loadDocxJs() {
+  if (typeof docx !== 'undefined') return;
+  await _loadScript('https://cdn.jsdelivr.net/npm/docx@9/build/index.umd.min.js');
+}
+
 const API = "";
 let state = {
   token: localStorage.getItem("askozzy_token") || null,
@@ -1656,14 +1682,13 @@ async function downloadMessageDoc(index) {
   const msg = state.messages[index];
   if (!msg) return;
 
-  if (typeof docx !== 'undefined') {
-    try {
-      const doc = _buildGoGDocx(msg.content, _getMessageFilename(index, '').replace(/\.$/, ''));
-      const blob = await docx.Packer.toBlob(doc);
-      _triggerDownload(blob, _getMessageFilename(index, "docx"));
-      return;
-    } catch (err) { console.error('DOCX generation failed, using fallback:', err); }
-  }
+  try {
+    await loadDocxJs();
+    const doc = _buildGoGDocx(msg.content, _getMessageFilename(index, '').replace(/\.$/, ''));
+    const blob = await docx.Packer.toBlob(doc);
+    _triggerDownload(blob, _getMessageFilename(index, "docx"));
+    return;
+  } catch (err) { console.error('DOCX generation failed, using fallback:', err); }
   // Fallback: HTML-in-Word
   const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
 <head><meta charset="utf-8"><title>AskOzzy Document</title>
@@ -2321,9 +2346,10 @@ async function renderAffiliateEarnings(el) {
   }
 }
 
-function renderAffiliateEarningsChart(monthlyEarnings) {
+async function renderAffiliateEarningsChart(monthlyEarnings) {
   const canvas = document.getElementById("affiliate-earnings-chart");
   if (!canvas) return;
+  await loadChartJs();
 
   // Destroy old chart if exists
   if (affiliateEarningsChart) {
@@ -4202,8 +4228,8 @@ async function openProductivityDashboard() {
         <canvas id="productivity-chart-canvas" width="600" height="220"></canvas>
       </div>`;
 
-    // Render chart with Chart.js
-    if (typeof Chart !== "undefined") {
+    // Render chart with Chart.js (lazy-loaded)
+    loadChartJs().then(() => {
       // Destroy previous instance if it exists
       if (productivityChartInstance) {
         productivityChartInstance.destroy();
@@ -4278,7 +4304,7 @@ async function openProductivityDashboard() {
           console.error("Productivity chart error:", e);
         }
       }, 100);
-    }
+    });
   } catch {
     body.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">Failed to load productivity data. Please try again.</div>';
   }
@@ -6588,39 +6614,41 @@ function openAnalysisPanel(data, fileName) {
   panel.classList.add("open");
   document.querySelector(".main-content").classList.add("has-artifact");
 
-  // Render charts with Chart.js
-  if (typeof Chart !== "undefined" && data.chartConfigs) {
-    const ghanaColors = ["#CE1126", "#FCD116", "#006B3F", "#1a1d27", "#e8eaed", "#00a86b", "#b89a10", "#ff6b7a"];
-    setTimeout(() => {
-      data.chartConfigs.forEach((cfg, i) => {
-        const canvas = document.getElementById(`analysis-chart-${i}`);
-        if (!canvas) return;
-        try {
-          const datasets = (cfg.datasets || []).map((ds, di) => ({
-            ...ds,
-            backgroundColor: cfg.type === "pie" || cfg.type === "doughnut"
-              ? ghanaColors.slice(0, (ds.data || []).length)
-              : ghanaColors[di % ghanaColors.length] + "CC",
-            borderColor: cfg.type === "line" ? ghanaColors[di % ghanaColors.length] : undefined,
-            borderWidth: cfg.type === "line" ? 2 : 1,
-          }));
-          new Chart(canvas, {
-            type: cfg.type || "bar",
-            data: { labels: cfg.labels || [], datasets },
-            options: {
-              responsive: true,
-              plugins: { legend: { labels: { color: "var(--text-primary)" } } },
-              scales: cfg.type === "pie" || cfg.type === "doughnut" ? {} : {
-                x: { ticks: { color: "var(--text-secondary)" } },
-                y: { ticks: { color: "var(--text-secondary)" } },
+  // Render charts with Chart.js (lazy-loaded)
+  if (data.chartConfigs) {
+    loadChartJs().then(() => {
+      const ghanaColors = ["#CE1126", "#FCD116", "#006B3F", "#1a1d27", "#e8eaed", "#00a86b", "#b89a10", "#ff6b7a"];
+      setTimeout(() => {
+        data.chartConfigs.forEach((cfg, i) => {
+          const canvas = document.getElementById(`analysis-chart-${i}`);
+          if (!canvas) return;
+          try {
+            const datasets = (cfg.datasets || []).map((ds, di) => ({
+              ...ds,
+              backgroundColor: cfg.type === "pie" || cfg.type === "doughnut"
+                ? ghanaColors.slice(0, (ds.data || []).length)
+                : ghanaColors[di % ghanaColors.length] + "CC",
+              borderColor: cfg.type === "line" ? ghanaColors[di % ghanaColors.length] : undefined,
+              borderWidth: cfg.type === "line" ? 2 : 1,
+            }));
+            new Chart(canvas, {
+              type: cfg.type || "bar",
+              data: { labels: cfg.labels || [], datasets },
+              options: {
+                responsive: true,
+                plugins: { legend: { labels: { color: "var(--text-primary)" } } },
+                scales: cfg.type === "pie" || cfg.type === "doughnut" ? {} : {
+                  x: { ticks: { color: "var(--text-secondary)" } },
+                  y: { ticks: { color: "var(--text-secondary)" } },
+                },
               },
-            },
-          });
-        } catch (e) {
-          console.error("Chart render error:", e);
-        }
-      });
-    }, 100);
+            });
+          } catch (e) {
+            console.error("Chart render error:", e);
+          }
+        });
+      }, 100);
+    });
   }
 }
 
@@ -7056,8 +7084,9 @@ async function downloadArtifact() {
   const a = state.currentArtifact;
 
   // Use proper DOCX for document-type artifacts
-  if (a.type === 'document' && typeof docx !== 'undefined') {
+  if (a.type === 'document') {
     try {
+      await loadDocxJs();
       const doc = _buildGoGDocx(a.content, a.title || 'Document');
       const blob = await docx.Packer.toBlob(doc);
       const filename = (a.title || 'document').replace(/[^a-zA-Z0-9-_ ]/g, '') + '.docx';

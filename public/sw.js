@@ -5,7 +5,7 @@
 //  Push notifications, content indexing, background conversation sync
 // ═══════════════════════════════════════════════════════════════════
 
-const CACHE_NAME = "askozzy-v6";
+const CACHE_NAME = "askozzy-v7";
 const OFFLINE_QUEUE_KEY = "askozzy_offline_queue";
 
 // IndexedDB configuration
@@ -23,8 +23,8 @@ const STATIC_ASSETS = [
   "/",
   "/index.html",
   "/offline.html",
-  "/css/app.css",
-  "/js/app.js",
+  "/css/app.min.css",
+  "/js/app.min.js",
   "/js/templates.js",
   "/icons/icon.svg",
   "/icons/icon-192.png",

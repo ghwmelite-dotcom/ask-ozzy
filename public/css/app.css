@@ -19,7 +19,7 @@
   /* ── Text ── */
   --text-primary: #e8eaed;
   --text-secondary: #9aa0a6;
-  --text-muted: #6b7280;
+  --text-muted: #8b919d;
   --text-on-accent: #000;
   --text-on-green: #fff;
   --text-strong: #fff;
@@ -93,7 +93,7 @@
 
   --text-primary: #1a1a1a;
   --text-secondary: #5a5a5a;
-  --text-muted: #8a8a8a;
+  --text-muted: #6e6e6e;
   --text-on-accent: #000;
   --text-on-green: #fff;
   --text-strong: #1a1a1a;
@@ -969,7 +969,7 @@ html, body {
 
 .template-card .card-desc {
   font-size: 12px;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   line-height: 1.4;
 }
 
@@ -2022,7 +2022,7 @@ html, body {
 
 .pwa-install-text span {
   font-size: 12px;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 .pwa-install-actions {
@@ -2053,7 +2053,7 @@ html, body {
   background: none;
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-size: 12px;
   cursor: pointer;
   transition: all 0.2s;
@@ -2124,7 +2124,7 @@ html, body {
 
 .pwa-update-banner button.dismiss {
   background: var(--bg-tertiary);
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 /* ─── Offline Indicator (bottom bar) ─────────────────────────────── */
@@ -5543,12 +5543,12 @@ html, body {
 .sovereignty-badge strong {
   display: block;
   font-size: 13px;
-  color: var(--green-light);
+  color: #2ecc71;
   font-weight: 700;
 }
 .sovereignty-badge span {
   font-size: 11px;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   letter-spacing: 1px;
   text-transform: uppercase;
 }
@@ -5904,13 +5904,13 @@ html, body {
 .voice-lang-pill.active {
   border-color: var(--gold);
   background: rgba(252, 209, 22, 0.12);
-  color: var(--gold);
+  color: #ffe066;
   font-weight: 600;
 }
 
 .voice-welcome-card .or-type {
   font-size: 13px;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   margin: 0 0 20px;
 }
 
