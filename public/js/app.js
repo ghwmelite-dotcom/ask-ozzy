@@ -168,6 +168,7 @@ const GUIDE_SECTION_EMOJIS = {
   'citizen-bot':     { emoji: '\u{1F465}', gradient: 'linear-gradient(135deg, #006B3F, #00a86b)' },
   'shortcuts':       { emoji: '\u{2328}\uFE0F', gradient: 'linear-gradient(135deg, #2d3436, #636e72)' },
   'install-offline': { emoji: '\u{1F4E5}', gradient: 'linear-gradient(135deg, #0984e3, #00cec9)' },
+  'native-app':      { emoji: '\u{1F4F1}', gradient: 'linear-gradient(135deg, #6c5ce7, #a29bfe)' },
 };
 
 const GUIDE_TRY_IT_ACTIONS = {
@@ -194,6 +195,12 @@ const GUIDE_TIPS = [
   'Press <kbd>Ctrl</kbd>+<kbd>N</kbd> to instantly start a new conversation.',
   'Use the Citizen Bot (bottom-right) for quick government service queries.',
   'Switch between AI models to find the best one for your task \u2014 some are faster, others more detailed.',
+  'Pull down from the top of the chat to refresh your conversations list.',
+  'Swipe from the left edge of the screen to open the sidebar on mobile.',
+  'Enable push notifications to stay updated when AskOzzy has important alerts.',
+  'Student users get up to 58% off on all paid plans \u2014 register as a Student to save!',
+  'Your drafts are auto-saved. Close the app and your unsent message will be waiting when you return.',
+  'Install AskOzzy as an app for the best experience \u2014 it works offline too!',
 ];
 
 const GUIDE_SECTIONS = [
@@ -203,9 +210,10 @@ const GUIDE_SECTIONS = [
     title: 'Getting Started',
     description: 'Registration, sign-in, and model selection',
     features: [
-      { id: 'gs-register', title: 'Create Your Account', tier: 'free', description: 'Register with your name, email, and GoG department to get your personal access code.', steps: ['Click "Sign In / Create Account" in the sidebar', 'Switch to the "Register" tab', 'Enter your full name, email, and department', 'Save your access code — it\'s shown only once!', 'You\'re now signed in and ready to go'] },
-      { id: 'gs-signin', title: 'Sign In with Access Code', tier: 'free', description: 'Use your email and access code to sign in. No passwords needed — simple and secure.', steps: ['Click "Sign In / Create Account"', 'Enter your email and access code', 'If you have 2FA enabled, enter your 6-digit code', 'You\'re signed in with your conversations restored'] },
-      { id: 'gs-models', title: 'Choose Your AI Model', tier: 'free', description: 'Select from multiple AI models optimized for different tasks. Higher tiers unlock more powerful models.', steps: ['Look for the model selector dropdown near the chat input', 'Free tier includes GPT-OSS 20B, Gemma 3, and Llama 3.1 8B', 'Professional tier unlocks all 11 models including Llama 3.3 70B', 'Each model has strengths — experiment to find your favorite'] },
+      { id: 'gs-register', title: 'Create Your Account', tier: 'free', description: 'Register with your name, email, GoG department, and a referral code. You\'ll receive a personal access code and set up 2FA security.', steps: ['Click "Sign In / Create Account" in the sidebar', 'Switch to the "Register" tab', 'Choose your persona: GoG Employee or Student', 'Enter your full name, email, department, and referral code', 'A referral code is required — get one from a colleague or click "Generate" for a system code', 'Set up 2FA by scanning the QR code with an authenticator app', 'Save your access code and recovery code — shown only once!'] },
+      { id: 'gs-signin', title: 'Sign In with Access Code', tier: 'free', description: 'Use your email and access code to sign in. No passwords needed — simple and secure.', steps: ['Click "Sign In / Create Account"', 'Enter your email and access code', 'Enter your 6-digit 2FA code from your authenticator app', 'You\'re signed in with a personalized "Welcome to AskOzzy, [Name]!" greeting', 'Your conversations, preferences, and settings are all restored'] },
+      { id: 'gs-models', title: 'Choose Your AI Model', tier: 'free', description: 'Select from multiple AI models optimized for different tasks. Higher tiers unlock more powerful models.', steps: ['Look for the model selector dropdown in the header', 'Free tier includes GPT-OSS 20B, Gemma 3, and Llama 3.1 8B', 'Professional tier unlocks all 11 models including Llama 3.3 70B and DeepSeek R1', 'Each model has strengths — experiment to find your favorite'] },
+      { id: 'gs-persona', title: 'GoG Employee vs Student Mode', tier: 'free', description: 'AskOzzy adapts its interface, templates, and pricing based on whether you\'re a GoG employee or student.', steps: ['Select your persona during registration (GoG Employee or Student)', 'GoG Employees see government-focused templates (memos, briefs, procurement)', 'Students see academic templates (essays, research, study aids)', 'Students get discounted subscription pricing — up to 58% off!', 'Your persona is saved to your account and persists across devices'] },
     ]
   },
   {
@@ -216,8 +224,9 @@ const GUIDE_SECTIONS = [
     features: [
       { id: 'ca-send', title: 'Send Messages', tier: 'free', description: 'Type your question or task and press Enter (or click send) to get AI-powered responses.', steps: ['Type your message in the input area at the bottom', 'Press Enter or click the send button', 'The AI responds in real-time with streaming text', 'Use Shift+Enter for new lines within your message'] },
       { id: 'ca-stream', title: 'Streaming Responses', tier: 'free', description: 'Responses stream in word-by-word for a natural feel. You can stop generation anytime.', steps: ['Responses appear progressively as they\'re generated', 'Click the stop button to halt generation early', 'Markdown formatting renders automatically (bold, code, lists)', 'Code blocks include syntax highlighting and copy buttons'] },
-      { id: 'ca-actions', title: 'Message Actions', tier: 'free', description: 'Copy, regenerate, or take actions on any AI response.', steps: ['Hover over any AI message to see action buttons', 'Copy — copies the full response to clipboard', 'Regenerate — asks the AI to try again with a fresh response', 'Messages support full Markdown rendering'] },
+      { id: 'ca-actions', title: 'Message Actions', tier: 'free', description: 'Copy, regenerate, share, or take actions on any AI response.', steps: ['Hover over any AI message to see action buttons', 'Copy — copies the full response as rich text to clipboard', 'Regenerate — asks the AI to try again with a fresh response', 'Share — share a conversation excerpt using your device\'s native share sheet', 'Messages support full Markdown rendering with tables and code'] },
       { id: 'ca-conversations', title: 'Conversation Management', tier: 'free', description: 'Create, rename, pin, and organize your conversations.', steps: ['Click "New Chat" or press Ctrl+N to start fresh', 'Conversations auto-save and appear in the sidebar', 'Click the pencil icon to rename a conversation', 'Right-click or long-press for more options (delete, pin, share)'] },
+      { id: 'ca-drafts', title: 'Auto-Save Drafts', tier: 'free', description: 'Your unsent messages are automatically saved and restored when you return to AskOzzy.', steps: ['Start typing a message in the input area', 'Close the app or navigate away — your draft saves automatically', 'When you return, AskOzzy restores your unsent message', 'Drafts also save when your device goes idle for 2+ minutes', 'Works across sessions and even after restarting the app'] },
     ]
   },
   {
@@ -246,6 +255,7 @@ const GUIDE_SECTIONS = [
       { id: 'fm-camera', title: 'Camera Capture', tier: 'free', description: 'Take photos directly from your device camera for instant AI analysis.', steps: ['Click the camera icon in the input area', 'Allow camera access when prompted', 'Frame your subject and click the capture button', 'The photo is sent to AI for analysis — great for documents and receipts'] },
       { id: 'fm-voice', title: 'Voice Input', tier: 'free', description: 'Speak your messages instead of typing using browser speech recognition.', steps: ['Click the microphone icon in the input area', 'Allow microphone access when prompted', 'Speak clearly — your words appear as text in the input', 'Click the mic icon again or press Enter to send'] },
       { id: 'fm-voicemode', title: 'Voice Mode', tier: 'professional', description: 'Hands-free voice conversation mode with text-to-speech responses.', steps: ['Click the Voice Mode toggle in the input area', 'Speak your question — AI responds with both text and speech', 'Supports continuous conversation without touching the screen', 'Toggle off to return to text-only mode'] },
+      { id: 'fm-savefile', title: 'Save to Device', tier: 'free', description: 'Save AI-generated content directly to your device using the native file picker (on supported browsers).', steps: ['When the AI generates a report, document, or code snippet', 'Click the download/save button on the message', 'On supported browsers, a native "Save As" dialog appears', 'Choose where to save the file on your device', 'On older browsers, the file downloads to your default folder'] },
     ]
   },
   {
@@ -257,7 +267,7 @@ const GUIDE_SECTIONS = [
       { id: 'org-folders', title: 'Conversation Folders', tier: 'free', description: 'Organize conversations into custom folders for easy access.', steps: ['Click "New Folder" in the sidebar', 'Name your folder (e.g., "Budget Reports", "HR Queries")', 'Drag conversations into folders or use the move option', 'Click folder names to expand/collapse them'] },
       { id: 'org-pin', title: 'Pin Conversations', tier: 'free', description: 'Pin important conversations to the top of your sidebar for quick access.', steps: ['Right-click or long-press a conversation', 'Select "Pin" from the context menu', 'Pinned conversations appear at the top of the sidebar', 'Unpin by right-clicking and selecting "Unpin"'] },
       { id: 'org-search', title: 'Search Conversations', tier: 'free', description: 'Search across all your messages and conversations instantly.', steps: ['Press Ctrl+K or click the search icon', 'Type your search query', 'Results show matching messages with conversation context', 'Click a result to jump directly to that conversation'] },
-      { id: 'org-share', title: 'Share Conversations', tier: 'free', description: 'Generate a read-only link to share any conversation with colleagues.', steps: ['Open the conversation you want to share', 'Click the share icon in the conversation header', 'A unique read-only link is generated', 'Copy and send the link — recipients can view without logging in', 'Revoke sharing anytime from the share dialog'] },
+      { id: 'org-share', title: 'Share Conversations', tier: 'free', description: 'Share conversations via your device\'s native share sheet, or generate a read-only link for colleagues.', steps: ['Open the conversation you want to share', 'Click the share icon — on mobile, your device\'s native share sheet opens', 'Share directly to WhatsApp, email, or any other app', 'Alternatively, generate a unique read-only link', 'Revoke sharing anytime from the share dialog'] },
     ]
   },
   {
@@ -301,8 +311,9 @@ const GUIDE_SECTIONS = [
     features: [
       { id: 'as-2fa', title: 'Two-Factor Authentication', tier: 'free', description: 'Add an extra layer of security with TOTP-based 2FA using any authenticator app.', steps: ['Click "2FA Security" in the sidebar footer', 'Scan the QR code with Google Authenticator or similar', 'Enter the 6-digit code to verify setup', 'On future logins, you\'ll enter the code after your access code'] },
       { id: 'as-sessions', title: 'Session Management', tier: 'free', description: 'View and revoke active sessions for security. Revoke all sessions to sign out everywhere.', steps: ['Click "Revoke Sessions" in the sidebar footer', 'Confirm to sign out all devices except your current one', 'Useful if you suspect unauthorized access', 'You\'ll need to sign in again on other devices'] },
-      { id: 'as-pricing', title: 'Subscription Tiers', tier: 'free', description: 'Choose from Free, Professional (GHS 60), or Enterprise (GHS 100) plans.', steps: ['Click your tier badge in the sidebar footer', 'Compare features across all 3 tiers', 'Click "Upgrade" on your desired plan', 'Pay via Mobile Money (MoMo) or card through Paystack', 'Your tier activates immediately after payment'] },
-      { id: 'as-affiliate', title: 'Affiliate Program', tier: 'free', description: 'Earn GHS by referring colleagues. Share your referral link and earn commissions.', steps: ['Click "Earn GHS" in the sidebar footer', 'Copy your unique referral link', 'Share with colleagues — earn when they subscribe', 'Track your referrals and earnings in the affiliate dashboard'] },
+      { id: 'as-pricing', title: 'Subscription Tiers', tier: 'free', description: 'Choose from Free, Professional, or Enterprise plans. Students get discounted pricing on all paid tiers.', steps: ['Click your tier badge in the sidebar footer', 'Compare features across all 3 tiers', 'Standard pricing: Professional GHS 60/mo, Enterprise GHS 100/mo', 'Student pricing: Professional GHS 25/mo, Enterprise GHS 45/mo (up to 58% off!)', 'Pay via Mobile Money (MoMo) or card through Paystack', 'Try Professional free for 3 days before committing'] },
+      { id: 'as-affiliate', title: 'Referral & Affiliate Program', tier: 'free', description: 'Earn GHS by referring colleagues. Every new user needs a referral code to register.', steps: ['Click "Earn GHS" in the sidebar footer', 'Copy your unique referral link or referral code', 'Share with colleagues — they\'ll enter your code during registration', 'On supported devices, use the Contact Picker to invite contacts directly', 'Earn commissions when your referrals subscribe to paid plans', 'Track your referrals, earnings, and milestones in the affiliate dashboard'] },
+      { id: 'as-notifications', title: 'Push Notifications', tier: 'free', description: 'Enable push notifications to receive alerts about new features, subscription updates, and more.', steps: ['After a few conversations, AskOzzy will ask to enable notifications', 'Click "Allow" when prompted by your browser', 'Manage notification preferences in the sidebar (Settings)', 'Toggle categories: product updates, billing alerts, tips', 'Notifications work even when AskOzzy is closed'] },
     ]
   },
   {
@@ -327,10 +338,25 @@ const GUIDE_SECTIONS = [
     id: 'install-offline',
     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>',
     title: 'Install & Offline',
-    description: 'Install as PWA and use offline',
+    description: 'Install as PWA, offline mode, background sync',
     features: [
-      { id: 'io-pwa', title: 'Install as App (PWA)', tier: 'free', description: 'Install AskOzzy on your device for a native app-like experience with faster loading.', steps: ['Look for the "Install" prompt in your browser\'s address bar', 'On Chrome: click the install icon (or Menu > Install App)', 'On Safari iOS: tap Share > Add to Home Screen', 'AskOzzy launches as a standalone app with its own icon'] },
-      { id: 'io-offline', title: 'Offline Mode', tier: 'free', description: 'Continue using AskOzzy even without internet. Messages queue and sync when you\'re back online.', steps: ['Install the PWA for the best offline experience', 'When offline, you can still browse cached conversations', 'New messages queue locally using the service worker', 'When connectivity returns, queued messages send automatically'] },
+      { id: 'io-pwa', title: 'Install as App (PWA)', tier: 'free', description: 'Install AskOzzy on your device for a native app-like experience. It appears as "AskOzzy" on your home screen with its own icon.', steps: ['Look for the "Install" prompt in your browser or the install banner', 'On Chrome: click the install icon (or Menu > Install App)', 'On Safari iOS: tap Share > Add to Home Screen', 'AskOzzy launches as a standalone app — no browser chrome', 'The app name displays as "AskOzzy" on your device'] },
+      { id: 'io-offline', title: 'Offline Mode & Background Sync', tier: 'free', description: 'Continue using AskOzzy without internet. Messages queue offline and sync automatically when connectivity returns.', steps: ['Install the PWA for the best offline experience', 'When offline, browse your cached conversations and messages', 'New messages queue locally in the background', 'A badge shows how many messages are queued', 'When connectivity returns, Background Sync sends them automatically', 'A toast notification confirms when offline messages have synced'] },
+    ]
+  },
+  {
+    id: 'native-app',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>',
+    title: 'Native App Features',
+    description: 'Gestures, haptics, transitions, and device integration',
+    features: [
+      { id: 'na-pull', title: 'Pull to Refresh', tier: 'free', description: 'Pull down from the top of the chat area to refresh your conversations, just like a native app.', steps: ['Touch and drag down from the top of the screen', 'A spinner appears when you pull past the threshold', 'Release to refresh your conversations and sync data', 'Haptic feedback confirms the refresh on supported devices'] },
+      { id: 'na-swipe', title: 'Swipe to Open Sidebar', tier: 'free', description: 'Swipe from the left edge of the screen to open the sidebar on mobile devices.', steps: ['Place your finger on the left edge of the screen', 'Swipe right to slide the sidebar open', 'Tap the dark backdrop or swipe left to close it', 'Works just like a native navigation drawer'] },
+      { id: 'na-haptics', title: 'Haptic Feedback', tier: 'free', description: 'Feel subtle vibrations when you perform actions — sending messages, refreshing, toggling features.', steps: ['Haptic feedback activates automatically on supported devices', 'Light vibration on button taps and toggles', 'Medium vibration on pull-to-refresh and swipe gestures', 'Success pattern when messages send or operations complete', 'Works on Android and supported iOS devices'] },
+      { id: 'na-transitions', title: 'View Transitions', tier: 'free', description: 'Smooth animated transitions between the welcome screen, chat view, and conversations.', steps: ['Navigate between welcome screen and chat to see crossfade transitions', 'Switching conversations uses slide animations', 'Transitions use the View Transitions API on supported browsers', 'Falls back gracefully to instant switching on older browsers'] },
+      { id: 'na-wakelock', title: 'Screen Wake Lock', tier: 'free', description: 'Your screen stays awake while AI is streaming a response, so you never miss content.', steps: ['The screen wake lock activates automatically during AI streaming', 'Your display won\'t dim or lock while a response is being generated', 'The lock releases automatically when the response completes', 'Also activates during voice mode for hands-free use'] },
+      { id: 'na-mediasession', title: 'Media Session (Voice Mode)', tier: 'professional', description: 'Control voice mode from your lock screen or notification shade using media session controls.', steps: ['Enter Voice Mode to activate media session integration', 'Your device shows AskOzzy in the media/notification controls', 'Use play/pause buttons to control voice interaction', 'Works with Bluetooth headsets and car audio systems'] },
+      { id: 'na-idle', title: 'Idle Detection', tier: 'free', description: 'AskOzzy detects when you\'re idle and auto-saves your work to prevent data loss.', steps: ['After 2 minutes of inactivity, AskOzzy auto-saves your draft', 'Your unsent message is preserved in local storage', 'When you return, your draft is restored automatically', 'Works even if you lock your phone or switch apps'] },
     ]
   },
 ];
