@@ -148,7 +148,7 @@ function applyPersonaUI() {
   // Personalized greeting when logged in
   if (isLoggedIn() && state.user && state.user.fullName) {
     const firstName = state.user.fullName.split(' ')[0];
-    if (welcomeHeading) welcomeHeading.textContent = `Welcome to AskOzzy, ${firstName}!`;
+    if (welcomeHeading) welcomeHeading.textContent = `Welcome to AskOzzy, ${firstName}! 👋`;
   } else {
     if (welcomeHeading) welcomeHeading.textContent = 'Welcome to AskOzzy';
   }
@@ -2963,9 +2963,6 @@ function openGuide(scrollToSection) {
   updateGuideTierHighlights();
   updateGuideProgress();
 
-  // Mark FAB as seen (stop pulsing)
-  const fab = document.querySelector('.guide-fab');
-  if (fab) fab.classList.add('seen');
 
   // Sparkle effect on first-ever open
   setTimeout(() => playGuideSparkle(), 200);
@@ -7921,12 +7918,6 @@ function getOnboardingSteps() {
       text: 'Research, Data Analysis, Web Search, Workflows \u2014 powerful tools at your fingertips.',
       position: 'top'
     },
-    {
-      target: '.guide-fab',
-      title: 'Need Help?',
-      text: 'Click this button anytime to open the full User Guide with 49+ features explained.',
-      position: 'left'
-    }
   ];
 }
 

@@ -5237,44 +5237,6 @@ html, body {
   font-weight: 700;
 }
 
-/* ─── Guide Floating Help FAB ────────────────────────────────────── */
-.guide-fab {
-  position: fixed;
-  bottom: 24px;
-  left: 24px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--flag-gold), var(--gold-dim));
-  border: none;
-  color: #000;
-  font-size: 22px;
-  font-weight: 700;
-  cursor: pointer;
-  z-index: 900;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 16px rgba(252,209,22,0.3);
-  transition: transform 0.2s, box-shadow 0.2s;
-  animation: guide-fab-pulse 3s ease-in-out infinite;
-}
-.guide-fab:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 24px rgba(252,209,22,0.45);
-  animation: none;
-}
-.guide-fab.seen {
-  animation: none;
-}
-@keyframes guide-fab-pulse {
-  0%, 100% { box-shadow: 0 4px 16px rgba(252,209,22,0.3); }
-  50% { box-shadow: 0 4px 20px rgba(252,209,22,0.5), 0 0 0 8px rgba(252,209,22,0); }
-}
-.guide-fab svg {
-  width: 22px;
-  height: 22px;
-}
 
 /* ─── Header Help Button ─────────────────────────────────────────── */
 .header-help-btn {
@@ -5503,13 +5465,10 @@ html, body {
 
 /* ─── Guide Responsive Additions ─────────────────────────────────── */
 @media (max-width: 768px) {
-  .guide-fab { width: 42px; height: 42px; bottom: 20px; left: 20px; font-size: 18px; }
-  .guide-fab svg { width: 18px; height: 18px; }
   .header-help-btn { width: 28px; height: 28px; }
   .header-help-btn svg { width: 14px; height: 14px; }
 }
 @media (max-width: 480px) {
-  .guide-fab { width: 38px; height: 38px; bottom: 16px; left: 16px; }
   .header-help-btn { width: 26px; height: 26px; }
 }
 
@@ -7534,7 +7493,7 @@ html, body {
 
 @media print {
   .sidebar, .main-header, .input-area, .welcome-screen,
-  .flag-stripe, .guide-fab, .citizen-bot-fab,
+  .flag-stripe, .citizen-bot-fab,
   .modal-overlay, .artifact-panel, .msg-actions,
   #announcements-area, .input-tools, .input-disclaimer,
   .tool-pill, .btn-new-chat, .sidebar-footer,
@@ -7783,8 +7742,7 @@ button, a, [onclick], [role="button"], .tool-pill, .category-tab,
 .conversation-item:active,
 .btn-auth:active,
 .passkey-btn:active,
-.citizen-bot-fab:active,
-.guide-fab:active {
+.citizen-bot-fab:active {
   opacity: 0.8;
   transform: scale(0.96);
 }
@@ -7814,11 +7772,6 @@ button, a, [onclick], [role="button"], .tool-pill, .category-tab,
   .citizen-bot-fab {
     bottom: calc(24px + env(safe-area-inset-bottom, 0px));
     right: calc(24px + env(safe-area-inset-right, 0px));
-  }
-
-  .guide-fab {
-    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
-    left: calc(24px + env(safe-area-inset-left, 0px));
   }
 
   .pwa-install-banner {
@@ -8615,10 +8568,6 @@ button, a, [onclick], [role="button"], .tool-pill, .category-tab,
   }
 
   .citizen-bot-fab {
-    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
-  }
-
-  .guide-fab {
     bottom: calc(24px + env(safe-area-inset-bottom, 0px));
   }
 }
