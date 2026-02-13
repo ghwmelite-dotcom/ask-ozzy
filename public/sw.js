@@ -1698,10 +1698,15 @@ async function queueOfflineMessage(path, body, headers) {
     } catch {}
   }
 
+  // Strip auth headers before persisting to cache storage
+  const safeHeaders = { ...headers };
+  delete safeHeaders['Authorization'];
+  delete safeHeaders['authorization'];
+
   queue.push({
     path,
     body,
-    headers,
+    headers: safeHeaders,
     timestamp: Date.now(),
   });
 
@@ -1811,6 +1816,17 @@ self.addEventListener("message", (event) => {
         }).catch(() => {});
       });
     }
+  }
+
+  // Clear offline queue and cached data on logout
+  if (event.data && event.data.type === 'LOGOUT') {
+    caches.open(CACHE_NAME).then(async (cache) => {
+      // Clear offline queue
+      await cache.delete(OFFLINE_QUEUE_KEY).catch(() => {});
+      // Clear all cached responses from IndexedDB
+      idbClear(STORE_RESPONSE_CACHE).catch(() => {});
+      notifyClients({ type: "QUEUE_UPDATED" });
+    });
   }
 });
 

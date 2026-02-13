@@ -5,7 +5,7 @@
 -- User activity audit log (tracks all user AI operations)
 CREATE TABLE IF NOT EXISTS user_audit_log (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  user_id TEXT,
+  user_id TEXT NOT NULL,
   user_email TEXT,
   department TEXT,
   action_type TEXT NOT NULL,
@@ -26,7 +26,7 @@ CREATE INDEX IF NOT EXISTS idx_user_audit_department ON user_audit_log(departmen
 
 CREATE TABLE IF NOT EXISTS productivity_stats (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  user_id INTEGER NOT NULL,
+  user_id TEXT NOT NULL,
   stat_date TEXT NOT NULL,
   messages_sent INTEGER DEFAULT 0,
   documents_generated INTEGER DEFAULT 0,

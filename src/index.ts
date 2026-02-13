@@ -8,6 +8,8 @@ type Env = {
   VECTORIZE: VectorizeIndex;
   JWT_SECRET: string;
   VAPID_PUBLIC_KEY: string;
+  PAYSTACK_SECRET: string;
+  BOOTSTRAP_SECRET?: string;
 };
 
 type Variables = {
@@ -17,7 +19,34 @@ type Variables = {
 
 const app = new Hono<{ Bindings: Env; Variables: Variables }>();
 
-app.use("/api/*", cors());
+app.use("/api/*", cors({
+  origin: (origin) => {
+    const allowed = ["https://askozzy.ghwmelite.workers.dev"];
+    return allowed.includes(origin) ? origin : allowed[0];
+  },
+  allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowHeaders: ["Authorization", "Content-Type"],
+}));
+
+// ─── Security Headers ─────────────────────────────────────────────────
+app.use("*", async (c, next) => {
+  await next();
+  c.header("X-Content-Type-Options", "nosniff");
+  c.header("X-Frame-Options", "DENY");
+  c.header("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+  c.header("Referrer-Policy", "strict-origin-when-cross-origin");
+  c.header("Permissions-Policy", "camera=(self), microphone=(self), geolocation=()");
+  c.header("Content-Security-Policy", "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';");
+});
+
+// ─── Request Body Size Limit ─────────────────────────────────────────
+app.use("/api/*", async (c, next) => {
+  const contentLength = c.req.header("content-length");
+  if (contentLength && parseInt(contentLength) > 1048576) {
+    return c.json({ error: "Request too large" }, 413);
+  }
+  await next();
+});
 
 // ─── Utility Functions ──────────────────────────────────────────────
 
@@ -25,20 +54,45 @@ function generateId(): string {
   return crypto.randomUUID();
 }
 
-async function hashPassword(password: string): Promise<string> {
+async function hashPassword(password: string, existingSalt?: string): Promise<string> {
+  const encoder = new TextEncoder();
+  let salt: Uint8Array;
+  if (existingSalt) {
+    salt = Uint8Array.from(atob(existingSalt), c => c.charCodeAt(0));
+  } else {
+    salt = new Uint8Array(16);
+    crypto.getRandomValues(salt);
+  }
+  const keyMaterial = await crypto.subtle.importKey("raw", encoder.encode(password), "PBKDF2", false, ["deriveBits"]);
+  const hash = await crypto.subtle.deriveBits({ name: "PBKDF2", salt, iterations: 100000, hash: "SHA-256" }, keyMaterial, 256);
+  const saltB64 = btoa(String.fromCharCode(...salt));
+  const hashB64 = btoa(String.fromCharCode(...new Uint8Array(hash)));
+  return `pbkdf2:${saltB64}:${hashB64}`;
+}
+
+async function verifyPassword(password: string, stored: string): Promise<boolean> {
+  if (stored.startsWith("pbkdf2:")) {
+    const parts = stored.split(":");
+    const salt = parts[1];
+    const rehash = await hashPassword(password, salt);
+    return rehash === stored;
+  }
+  // Legacy SHA-256 fallback for existing credentials
   const encoder = new TextEncoder();
   const data = encoder.encode(password);
   const hash = await crypto.subtle.digest("SHA-256", data);
-  return btoa(String.fromCharCode(...new Uint8Array(hash)));
+  const legacyHash = btoa(String.fromCharCode(...new Uint8Array(hash)));
+  return legacyHash === stored;
 }
 
 function generateAccessCode(): string {
   const chars = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
-  const bytes = new Uint8Array(8);
-  crypto.getRandomValues(bytes);
+  const maxValid = 256 - (256 % chars.length); // reject biased bytes
   let code = "";
-  for (let i = 0; i < 8; i++) {
-    code += chars[bytes[i] % chars.length];
+  while (code.length < 8) {
+    const bytes = new Uint8Array(1);
+    crypto.getRandomValues(bytes);
+    if (bytes[0] < maxValid) code += chars[bytes[0] % chars.length];
   }
   return code.slice(0, 4) + "-" + code.slice(4);
 }
@@ -53,13 +107,26 @@ function normalizeAccessCode(input: string): string {
 
 function generateRecoveryCode(): string {
   const chars = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
-  const bytes = new Uint8Array(8);
-  crypto.getRandomValues(bytes);
+  const maxValid = 256 - (256 % chars.length);
   let code = "";
-  for (let i = 0; i < 8; i++) {
-    code += chars[bytes[i] % chars.length];
+  while (code.length < 8) {
+    const bytes = new Uint8Array(1);
+    crypto.getRandomValues(bytes);
+    if (bytes[0] < maxValid) code += chars[bytes[0] % chars.length];
   }
   return code.slice(0, 4) + "-" + code.slice(4);
+}
+
+function generateReferralSuffix(length = 4): string {
+  const chars = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+  const maxValid = 256 - (256 % chars.length);
+  let result = "";
+  while (result.length < length) {
+    const bytes = new Uint8Array(1);
+    crypto.getRandomValues(bytes);
+    if (bytes[0] < maxValid) result += chars[bytes[0] % chars.length];
+  }
+  return result;
 }
 
 async function createToken(userId: string, env: Env): Promise<string> {
@@ -83,6 +150,7 @@ const RATE_LIMITS: Record<string, { maxRequests: number; windowSeconds: number }
   "auth": { maxRequests: 10, windowSeconds: 300 },     // 10 auth attempts per 5 min
   "chat": { maxRequests: 30, windowSeconds: 60 },       // 30 chat requests per minute
   "api": { maxRequests: 100, windowSeconds: 60 },       // 100 API requests per minute
+  "share": { maxRequests: 10, windowSeconds: 300 },     // 10 share links per 5 min
 };
 
 async function checkRateLimit(env: Env, key: string, category: string): Promise<{ allowed: boolean; remaining: number }> {
@@ -100,7 +168,9 @@ async function checkRateLimit(env: Env, key: string, category: string): Promise<
     await env.SESSIONS.put(kvKey, String(count + 1), { expirationTtl: config.windowSeconds });
     return { allowed: true, remaining: config.maxRequests - count - 1 };
   } catch {
-    return { allowed: true, remaining: config.maxRequests }; // fail open
+    // Fail closed for auth to prevent brute force; fail open for non-critical
+    if (category === "auth") return { allowed: false, remaining: 0 };
+    return { allowed: true, remaining: config.maxRequests };
   }
 }
 
@@ -181,6 +251,10 @@ async function deptAdminMiddleware(
 // ─── Auth Routes ────────────────────────────────────────────────────
 
 app.post("/api/auth/register", async (c) => {
+  const ip = c.req.header("cf-connecting-ip") || "unknown";
+  const rl = await checkRateLimit(c.env, ip, "auth");
+  if (!rl.allowed) return c.json({ error: "Too many registration attempts. Try again later." }, 429);
+
   const { email, fullName, department, referralCode, userType } = await c.req.json();
 
   if (!email || !fullName) {
@@ -207,7 +281,7 @@ app.post("/api/auth/register", async (c) => {
 
   // Generate unique referral code for this user: OZZY-FIRSTNAME-XXXX
   const firstName = fullName.split(" ")[0].toUpperCase();
-  const suffix = Math.random().toString(36).substring(2, 6).toUpperCase();
+  const suffix = generateReferralSuffix();
   const userReferralCode = `OZZY-${firstName}-${suffix}`;
 
   // Determine referral source: 'affiliate' (real user code) or 'system' (auto-generated)
@@ -280,11 +354,10 @@ app.post("/api/auth/register", async (c) => {
   const totpUri = `otpauth://totp/AskOzzy:${email.toLowerCase().trim()}?secret=${totpSecret}&issuer=AskOzzy&digits=6&period=30`;
 
   // Don't create token yet — user must verify TOTP first
+  // Note: totpSecret removed from response (totpUri contains it for QR scanning)
+  // Recovery code shown after TOTP verification succeeds for security
   return c.json({
     totpUri,
-    totpSecret,
-    recoveryCode,
-    pendingUserId: userId,
     email: email.toLowerCase().trim(),
     fullName,
     department: department || "",
@@ -296,6 +369,10 @@ app.post("/api/auth/register", async (c) => {
 // ─── Verify TOTP After Registration ──────────────────────────────────
 
 app.post("/api/auth/register/verify-totp", async (c) => {
+  const ip = c.req.header("cf-connecting-ip") || "unknown";
+  const rl = await checkRateLimit(c.env, `${ip}:totp`, "auth");
+  if (!rl.allowed) return c.json({ error: "Too many verification attempts. Try again later." }, 429);
+
   const { email, code } = await c.req.json();
 
   if (!email || !code) {
@@ -329,8 +406,15 @@ app.post("/api/auth/register/verify-totp", async (c) => {
 
   const token = await createToken(user.id, c.env);
 
+  // Regenerate recovery code to return it here (only time it's shown)
+  const newRecoveryCode = generateRecoveryCode();
+  const newRecoveryHash = await hashPassword(newRecoveryCode);
+  await c.env.DB.prepare("UPDATE users SET recovery_code_hash = ? WHERE id = ?")
+    .bind(newRecoveryHash, user.id).run();
+
   return c.json({
     token,
+    recoveryCode: newRecoveryCode,
     user: {
       id: user.id,
       email: user.email,
@@ -392,18 +476,16 @@ app.post("/api/auth/login", async (c) => {
   }
 
   if (!authenticated) {
-    // Try as access code (legacy)
+    // Try as access code
     const normalized = normalizeAccessCode(trimmedCred);
-    const normalizedHash = await hashPassword(normalized);
-    if (normalizedHash === user.password_hash) {
+    if (await verifyPassword(normalized, user.password_hash)) {
       authenticated = true;
       legacyAuth = true;
     }
 
     // Fallback: try raw credential
     if (!authenticated && normalized !== trimmedCred) {
-      const rawHash = await hashPassword(trimmedCred);
-      if (rawHash === user.password_hash) {
+      if (await verifyPassword(trimmedCred, user.password_hash)) {
         authenticated = true;
         legacyAuth = true;
       }
@@ -412,15 +494,12 @@ app.post("/api/auth/login", async (c) => {
     // Try as recovery code
     if (!authenticated && user.recovery_code_hash) {
       const recoveryNormalized = normalizeAccessCode(trimmedCred);
-      const recoveryHash = await hashPassword(recoveryNormalized);
-      if (recoveryHash === user.recovery_code_hash) {
+      if (await verifyPassword(recoveryNormalized, user.recovery_code_hash)) {
         authenticated = true;
         recoveryUsed = true;
       }
-      // Also try raw
       if (!authenticated) {
-        const rawRecoveryHash = await hashPassword(trimmedCred);
-        if (rawRecoveryHash === user.recovery_code_hash) {
+        if (await verifyPassword(trimmedCred, user.recovery_code_hash)) {
           authenticated = true;
           recoveryUsed = true;
         }
@@ -430,6 +509,13 @@ app.post("/api/auth/login", async (c) => {
 
   if (!authenticated) {
     return c.json({ error: "Invalid email or authentication code" }, 401);
+  }
+
+  // Re-hash legacy SHA-256 credentials to PBKDF2 on successful login
+  if (authenticated && legacyAuth && !user.password_hash.startsWith("pbkdf2:")) {
+    const credential = normalizeAccessCode(trimmedCred);
+    const newHash = await hashPassword(await verifyPassword(credential, user.password_hash) ? credential : trimmedCred);
+    await c.env.DB.prepare("UPDATE users SET password_hash = ? WHERE id = ?").bind(newHash, user.id).run();
   }
 
   // If recovery code used, invalidate it (one-time use)
@@ -1085,7 +1171,7 @@ async function searchKnowledge(env: Env, query: string, topK = 5): Promise<{
   ragResults: Array<{ content: string; score: number; source: string; title: string; category: string }>;
   faqResults: Array<{ question: string; answer: string; category: string }>;
 }> {
-  let ragResults: Array<{ content: string; score: number; source: string; title: string; category: string }> = [];
+  const ragResults: Array<{ content: string; score: number; source: string; title: string; category: string }> = [];
   let faqResults: Array<{ question: string; answer: string; category: string }> = [];
 
   // RAG: Embed query and search Vectorize
@@ -1281,6 +1367,10 @@ app.post("/api/chat", authMiddleware, async (c) => {
 
   if (!conversationId || !message) {
     return c.json({ error: "conversationId and message are required" }, 400);
+  }
+
+  if (message && message.length > 50000) {
+    return c.json({ error: "Message too long (max 50,000 characters)" }, 400);
   }
 
   // Get user tier and type (with trial support)
@@ -1670,7 +1760,7 @@ app.post("/api/research", authMiddleware, async (c) => {
 
   c.executionCtx.waitUntil(
     (async () => {
-      let allSources: Array<{ title: string; url: string; snippet: string }> = [];
+      const allSources: Array<{ title: string; url: string; snippet: string }> = [];
       let report = "";
 
       try {
@@ -2458,6 +2548,14 @@ async function creditWallet(db: D1Database, userId: string, amount: number, type
 async function processAffiliateCommissions(db: D1Database, payingUserId: string, paymentAmountGHS: number, paymentReference: string): Promise<void> {
   await ensureAffiliateTables(db);
 
+  // Deduplication: skip if commissions already credited for this payment
+  if (paymentReference) {
+    const existing = await db.prepare(
+      "SELECT id FROM affiliate_transactions WHERE source_payment_id = ? LIMIT 1"
+    ).bind(paymentReference).first();
+    if (existing) return; // Already processed
+  }
+
   // Level 1: Who referred the paying user?
   const payingUser = await db.prepare("SELECT referred_by FROM users WHERE id = ?")
     .bind(payingUserId).first<{ referred_by: string | null }>();
@@ -2674,10 +2772,7 @@ app.post("/api/affiliate/withdraw", authMiddleware, async (c) => {
     return c.json({ error: "Minimum withdrawal is GHS 20" }, 400);
   }
 
-  const wallet = await ensureWallet(c.env.DB, userId);
-  if (withdrawAmount > wallet.balance) {
-    return c.json({ error: `Insufficient balance. Your wallet balance is GHS ${wallet.balance.toFixed(2)}` }, 400);
-  }
+  await ensureWallet(c.env.DB, userId);
 
   // Validate MoMo number format (Ghana: 10 digits starting with 0)
   const cleanNumber = momo_number.replace(/\s/g, "");
@@ -2693,10 +2788,17 @@ app.post("/api/affiliate/withdraw", authMiddleware, async (c) => {
   const requestId = generateId();
   const txId = generateId();
 
-  // Deduct from wallet and create withdrawal request atomically
+  // Atomic conditional deduction — prevents race condition where concurrent requests both pass balance check
+  const deductResult = await c.env.DB.prepare(
+    "UPDATE affiliate_wallets SET balance = balance - ?, total_withdrawn = total_withdrawn + ?, updated_at = datetime('now') WHERE user_id = ? AND balance >= ?"
+  ).bind(withdrawAmount, withdrawAmount, userId, withdrawAmount).run();
+
+  if (!deductResult.meta.changes || deductResult.meta.changes === 0) {
+    return c.json({ error: "Insufficient balance" }, 400);
+  }
+
+  // Balance already deducted — now create the withdrawal request and transaction record
   await c.env.DB.batch([
-    c.env.DB.prepare("UPDATE affiliate_wallets SET balance = balance - ?, total_withdrawn = total_withdrawn + ?, updated_at = datetime('now') WHERE user_id = ?")
-      .bind(withdrawAmount, withdrawAmount, userId),
     c.env.DB.prepare("INSERT INTO withdrawal_requests (id, user_id, amount, momo_number, momo_network, status) VALUES (?, ?, ?, ?, ?, 'pending')")
       .bind(requestId, userId, withdrawAmount, cleanNumber, network),
     c.env.DB.prepare("INSERT INTO affiliate_transactions (id, user_id, type, amount, description) VALUES (?, ?, 'withdrawal', ?, ?)")
@@ -2968,16 +3070,14 @@ app.get("/api/usage/status", authMiddleware, async (c) => {
   });
 });
 
-app.post("/api/upgrade", authMiddleware, async (c) => {
-  const userId = c.get("userId");
-  const { tier } = await c.req.json();
+// Admin-only manual tier upgrade (payment upgrades go through Paystack webhooks)
+app.post("/api/upgrade", adminMiddleware, async (c) => {
+  const { userId, tier } = await c.req.json();
 
-  if (!PRICING_TIERS[tier] || tier === "free") {
-    return c.json({ error: "Invalid plan selected" }, 400);
+  if (!userId || !PRICING_TIERS[tier] || tier === "free") {
+    return c.json({ error: "Valid userId and tier required" }, 400);
   }
 
-  // In production, this would integrate with a payment gateway (Paystack, MTN MoMo, etc.)
-  // For now, we update the tier directly (simulating successful payment)
   await c.env.DB.prepare("UPDATE users SET tier = ? WHERE id = ?")
     .bind(tier, userId)
     .run();
@@ -2987,8 +3087,7 @@ app.post("/api/upgrade", authMiddleware, async (c) => {
     success: true,
     tier,
     name: tierConfig.name,
-    price: tierConfig.price,
-    message: `Successfully upgraded to ${tierConfig.name} plan!`,
+    message: `Admin upgraded user to ${tierConfig.name} plan`,
   });
 });
 
@@ -2996,8 +3095,12 @@ app.post("/api/upgrade", authMiddleware, async (c) => {
 
 // Bootstrap: self-disabling — only works when zero admins exist
 app.post("/api/admin/bootstrap", async (c) => {
-  const { email } = await c.req.json();
+  const { email, secret } = await c.req.json();
   if (!email) return c.json({ error: "Email is required" }, 400);
+
+  if (c.env.BOOTSTRAP_SECRET && secret !== c.env.BOOTSTRAP_SECRET) {
+    return c.json({ error: "Invalid bootstrap secret" }, 403);
+  }
 
   const existing = await c.env.DB.prepare(
     "SELECT COUNT(*) as count FROM users WHERE role = 'super_admin'"
@@ -3080,8 +3183,8 @@ app.get("/api/admin/users", adminMiddleware, async (c) => {
   const search = c.req.query("search") || "";
   const offset = (page - 1) * limit;
 
-  let countQuery = "SELECT COUNT(*) as count FROM users";
-  let dataQuery = "SELECT id, email, full_name, department, role, tier, affiliate_tier, total_referrals, affiliate_earnings, created_at, last_login FROM users";
+  const countQuery = "SELECT COUNT(*) as count FROM users";
+  const dataQuery = "SELECT id, email, full_name, department, role, tier, affiliate_tier, total_referrals, affiliate_earnings, created_at, last_login FROM users";
 
   if (search) {
     const where = " WHERE email LIKE ? OR full_name LIKE ?";
@@ -4106,6 +4209,10 @@ app.patch("/api/conversations/:id", authMiddleware, async (c) => {
 // ─── Conversation Sharing ──────────────────────────────────────────────
 
 app.post("/api/conversations/:id/share", authMiddleware, async (c) => {
+  const ip = c.req.header("cf-connecting-ip") || "unknown";
+  const rl = await checkRateLimit(c.env, `${ip}:share`, "share");
+  if (!rl.allowed) return c.json({ error: "Too many share requests. Please wait." }, 429);
+
   const userId = c.get("userId");
   const convoId = c.req.param("id");
 
@@ -4126,7 +4233,7 @@ app.post("/api/conversations/:id/share", authMiddleware, async (c) => {
   }
 
   // Generate share token
-  const shareToken = crypto.randomUUID().replace(/-/g, "").slice(0, 16);
+  const shareToken = crypto.randomUUID().replace(/-/g, "") + crypto.randomUUID().replace(/-/g, "").slice(0, 8);
   await c.env.DB.prepare(
     "UPDATE conversations SET share_token = ?, shared_at = datetime('now') WHERE id = ?"
   ).bind(shareToken, convoId).run();
@@ -4147,14 +4254,32 @@ app.delete("/api/conversations/:id/share", authMiddleware, async (c) => {
 
 app.get("/api/shared/:token", async (c) => {
   const token = c.req.param("token");
+  const ip = c.req.header("cf-connecting-ip") || "unknown";
+  const rl = await checkRateLimit(c.env, ip, "api");
+  if (!rl.allowed) return c.json({ error: "Rate limited" }, 429);
 
   const convo = await c.env.DB.prepare(
     `SELECT c.id, c.title, c.shared_at, u.full_name as author_name, u.department as author_dept
      FROM conversations c JOIN users u ON u.id = c.user_id
      WHERE c.share_token = ?`
-  ).bind(token).first();
+  ).bind(token).first<any>();
 
   if (!convo) return c.json({ error: "Shared conversation not found or link expired" }, 404);
+
+  // Enforce 30-day expiration on shared links
+  if (convo.shared_at) {
+    const sharedDate = new Date(convo.shared_at + "Z");
+    const thirtyDaysMs = 30 * 24 * 60 * 60 * 1000;
+    if (Date.now() - sharedDate.getTime() > thirtyDaysMs) {
+      return c.json({ error: "This shared link has expired" }, 410);
+    }
+  }
+
+  // Anonymize author name (e.g. "Kofi Asante" -> "K. A.")
+  if (convo.author_name) {
+    const parts = convo.author_name.split(" ");
+    convo.author_name = parts.map((p: string) => p[0] + ".").join(" ");
+  }
 
   const { results: messages } = await c.env.DB.prepare(
     "SELECT role, content, model, created_at FROM messages WHERE conversation_id = ? ORDER BY created_at ASC"
@@ -4211,7 +4336,7 @@ app.get("/api/chat/suggestions/:conversationId", authMiddleware, async (c) => {
       if (Array.isArray(parsed)) suggestions = parsed.slice(0, 3).map((s: any) => String(s).slice(0, 80));
     } catch {
       // Fallback: extract lines
-      suggestions = raw.split("\n").filter((l: string) => l.trim().length > 5).slice(0, 3).map((l: string) => l.replace(/^\d+[\.\)]\s*/, "").replace(/^["']|["']$/g, "").trim());
+      suggestions = raw.split("\n").filter((l: string) => l.trim().length > 5).slice(0, 3).map((l: string) => l.replace(/^\d+[.)]\s*/, "").replace(/^["']|["']$/g, "").trim());
     }
 
     return c.json({ suggestions });
@@ -4630,6 +4755,10 @@ app.post("/api/user/2fa/setup", authMiddleware, async (c) => {
 });
 
 app.post("/api/user/2fa/verify", authMiddleware, async (c) => {
+  const ip = c.req.header("cf-connecting-ip") || "unknown";
+  const rl = await checkRateLimit(c.env, `${ip}:2fa`, "auth");
+  if (!rl.allowed) return c.json({ error: "Too many attempts. Try again later." }, 429);
+
   const userId = c.get("userId");
   const { code } = await c.req.json();
 
@@ -4650,6 +4779,10 @@ app.post("/api/user/2fa/verify", authMiddleware, async (c) => {
 });
 
 app.post("/api/user/2fa/disable", authMiddleware, async (c) => {
+  const ip = c.req.header("cf-connecting-ip") || "unknown";
+  const rl = await checkRateLimit(c.env, `${ip}:2fa`, "auth");
+  if (!rl.allowed) return c.json({ error: "Too many attempts. Try again later." }, 429);
+
   const userId = c.get("userId");
   const { code } = await c.req.json();
 
@@ -4866,6 +4999,10 @@ app.post("/api/auth/webauthn/register-complete", authMiddleware, async (c) => {
   if (clientData.type !== "webauthn.create") {
     return c.json({ error: "Invalid client data type" }, 400);
   }
+  const expectedOrigin = `https://${new URL(c.req.url).hostname}`;
+  if (clientData.origin !== expectedOrigin) {
+    return c.json({ error: "Origin mismatch" }, 400);
+  }
 
   // Parse attestation object (CBOR)
   const attestation = decodeCBOR(base64urlToBuf(attestationObject));
@@ -4929,7 +5066,6 @@ app.post("/api/auth/webauthn/login-options", async (c) => {
     })),
     userVerification: "preferred",
     timeout: 60000,
-    _userId: user.id, // Internal use — client sends back with assertion
   });
 });
 
@@ -4958,6 +5094,10 @@ app.post("/api/auth/webauthn/login-complete", async (c) => {
   const clientData = JSON.parse(new TextDecoder().decode(base64urlToBuf(clientDataJSON)));
   if (clientData.challenge !== storedChallenge) return c.json({ error: "Challenge mismatch" }, 400);
   if (clientData.type !== "webauthn.get") return c.json({ error: "Invalid client data type" }, 400);
+  const expectedOrigin = `https://${new URL(c.req.url).hostname}`;
+  if (clientData.origin !== expectedOrigin) {
+    return c.json({ error: "Origin mismatch" }, 400);
+  }
 
   // Find credential
   await ensureWebAuthnTable(c.env.DB);
@@ -5170,7 +5310,7 @@ app.post("/api/payments/initialize", authMiddleware, async (c) => {
   const reference = `askozzy_${userId}_${tier}_${Date.now()}`;
 
   // If PAYSTACK_SECRET is configured, use real Paystack
-  const paystackSecret = (c.env as any).PAYSTACK_SECRET;
+  const paystackSecret = c.env.PAYSTACK_SECRET;
   if (paystackSecret) {
     try {
       const res = await fetch("https://api.paystack.co/transaction/initialize", {
@@ -5198,30 +5338,13 @@ app.post("/api/payments/initialize", authMiddleware, async (c) => {
     }
   }
 
-  // Fallback: simulate payment (dev mode)
-  await c.env.DB.prepare("UPDATE users SET tier = ? WHERE id = ?").bind(tier, userId).run();
-
-  // Process affiliate commissions even in dev mode
-  const simPaymentGHS = plan.amount / 100; // Convert pesewas to GHS
-  c.executionCtx.waitUntil((async () => {
-    try {
-      await processAffiliateCommissions(c.env.DB, userId, simPaymentGHS, reference);
-    } catch (err) {
-      console.error("Affiliate commission error (dev):", err);
-    }
-  })());
-
-  return c.json({
-    success: true,
-    simulated: true,
-    reference,
-    message: `Plan upgraded to ${tier} (payment integration pending — Paystack secret not configured)`,
-  });
+  // No dev fallback — Paystack secret must be configured for payments
+  return c.json({ error: "Payment system not configured. Contact administrator." }, 503);
 });
 
 // Paystack webhook
 app.post("/api/webhooks/paystack", async (c) => {
-  const paystackSecret = (c.env as any).PAYSTACK_SECRET;
+  const paystackSecret = c.env.PAYSTACK_SECRET;
   if (!paystackSecret) return c.json({ error: "Not configured" }, 500);
 
   // Verify webhook signature
@@ -5233,22 +5356,44 @@ app.post("/api/webhooks/paystack", async (c) => {
   const sig = await crypto.subtle.sign("HMAC", key, encoder.encode(body));
   const expectedSig = Array.from(new Uint8Array(sig)).map(b => b.toString(16).padStart(2, "0")).join("");
 
-  if (expectedSig !== signature) {
+  // Constant-time comparison to prevent timing attacks
+  if (expectedSig.length !== signature.length) {
+    return c.json({ error: "Invalid signature" }, 401);
+  }
+  const a = encoder.encode(expectedSig);
+  const b2 = encoder.encode(signature);
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a[i] ^ b2[i];
+  if (diff !== 0) {
     return c.json({ error: "Invalid signature" }, 401);
   }
 
   const event = JSON.parse(body);
 
   if (event.event === "charge.success") {
-    const { metadata, reference, amount: amountPesewas } = event.data;
+    const { metadata, reference, amount: amountPesewas, customer } = event.data;
     if (metadata?.userId && metadata?.tier) {
+      // Validate tier exists in our plans
+      const plan = PAYSTACK_PLANS[metadata.tier];
+      if (!plan) {
+        console.error("Webhook: unknown tier", metadata.tier);
+        return c.json({ error: "Unknown tier" }, 400);
+      }
+
+      // Validate payment amount matches expected price (allow student pricing)
+      const paidAmount = Number(amountPesewas) || 0;
+      if (paidAmount < plan.studentAmount) {
+        console.error("Webhook: amount mismatch", { expected: plan.studentAmount, received: paidAmount, tier: metadata.tier });
+        return c.json({ error: "Payment amount mismatch" }, 400);
+      }
+
       // Upgrade user's tier
       await c.env.DB.prepare("UPDATE users SET tier = ? WHERE id = ?")
         .bind(metadata.tier, metadata.userId).run();
 
       // Process affiliate commissions (non-blocking)
       // Paystack amounts are in pesewas (1 GHS = 100 pesewas)
-      const paymentAmountGHS = (amountPesewas || 0) / 100;
+      const paymentAmountGHS = paidAmount / 100;
 
       if (paymentAmountGHS > 0) {
         c.executionCtx.waitUntil((async () => {
@@ -5363,7 +5508,7 @@ app.post("/api/admin/users/bulk", adminMiddleware, async (c) => {
     const accessCode = generateAccessCode();
     const passwordHash = await hashPassword(accessCode);
     const firstName = fullName.split(" ")[0].toUpperCase();
-    const suffix = Math.random().toString(36).substring(2, 6).toUpperCase();
+    const suffix = generateReferralSuffix();
     const referralCode = `OZZY-${firstName}-${suffix}`;
 
     try {
@@ -5373,7 +5518,8 @@ app.post("/api/admin/users/bulk", adminMiddleware, async (c) => {
 
       results.push({ email, status: "created", accessCode });
     } catch (err) {
-      results.push({ email, status: "failed — " + (err as Error).message });
+      console.error("Bulk user import error:", email, (err as Error).message);
+      results.push({ email, status: "failed" });
     }
   }
 
@@ -5628,13 +5774,15 @@ app.post("/api/admin/documents/upload-file", adminMiddleware, async (c) => {
       try {
         content = await extractDocxText(file);
       } catch (err) {
-        return c.json({ error: "Failed to extract text from DOCX: " + (err as Error).message }, 400);
+        console.error("DOCX extraction error:", (err as Error).message);
+        return c.json({ error: "Failed to extract text from DOCX. The file may be corrupted or in an unsupported format." }, 400);
       }
     } else if (fileName.endsWith(".pptx")) {
       try {
         content = await extractPptxText(file);
       } catch (err) {
-        return c.json({ error: "Failed to extract text from PPTX: " + (err as Error).message }, 400);
+        console.error("PPTX extraction error:", (err as Error).message);
+        return c.json({ error: "Failed to extract text from PPTX. The file may be corrupted or in an unsupported format." }, 400);
       }
     } else if (fileName.endsWith(".doc")) {
       try {
@@ -5643,7 +5791,8 @@ app.post("/api/admin/documents/upload-file", adminMiddleware, async (c) => {
           return c.json({ error: "Could not extract enough readable text from this .doc file. Try converting it to .docx first." }, 400);
         }
       } catch (err) {
-        return c.json({ error: "Failed to extract text from DOC: " + (err as Error).message + ". Try converting to .docx." }, 400);
+        console.error("DOC extraction error:", (err as Error).message);
+        return c.json({ error: "Failed to extract text from DOC. Try converting to .docx first." }, 400);
       }
     } else if (fileName.endsWith(".ppt")) {
       return c.json({ error: "Old .ppt format is not supported. Please convert to .pptx first (open in PowerPoint and Save As .pptx)." }, 400);
@@ -5702,7 +5851,8 @@ app.post("/api/admin/documents/upload-file", adminMiddleware, async (c) => {
       message: "File uploaded and processing started",
     });
   } catch (err) {
-    return c.json({ error: "File upload failed: " + (err as Error).message }, 500);
+    console.error("File upload failed:", (err as Error).message);
+    return c.json({ error: "File upload failed" }, 500);
   }
 });
 
@@ -5726,6 +5876,16 @@ app.post("/api/admin/documents/scrape-url", adminMiddleware, async (c) => {
     for (const u of urlList) {
       try { new URL(u); } catch {
         return c.json({ error: `Invalid URL: ${u}` }, 400);
+      }
+    }
+
+    // SSRF protection: block private/internal addresses
+    for (const u of urlList) {
+      const urlObj = new URL(u);
+      const blockedHosts = ["localhost", "127.0.0.1", "0.0.0.0", "[::1]"];
+      const blockedPatterns = [/^10\./, /^172\.(1[6-9]|2\d|3[01])\./, /^192\.168\./, /^169\.254\./, /^fc00:/, /^fe80:/];
+      if (blockedHosts.includes(urlObj.hostname) || blockedPatterns.some(p => p.test(urlObj.hostname))) {
+        return c.json({ error: "URL not allowed: private/internal addresses blocked" }, 400);
       }
     }
 
@@ -5795,8 +5955,12 @@ app.post("/api/admin/documents/scrape-url", adminMiddleware, async (c) => {
             }
 
             // Scrape child pages and append content
+            const blockedHostsChild = ["localhost", "127.0.0.1", "0.0.0.0", "[::1]"];
+            const blockedPatternsChild = [/^10\./, /^172\.(1[6-9]|2\d|3[01])\./, /^192\.168\./, /^169\.254\./, /^fc00:/, /^fe80:/];
             for (const childUrl of foundLinks) {
               try {
+                const childHost = new URL(childUrl).hostname;
+                if (blockedHostsChild.includes(childHost) || blockedPatternsChild.some(p => p.test(childHost))) continue;
                 const childRes = await fetch(childUrl, {
                   headers: { "User-Agent": "AskOzzy-Bot/1.0 (Government of Ghana AI Training)", "Accept": "text/html" },
                   redirect: "follow",
@@ -5858,7 +6022,8 @@ app.post("/api/admin/documents/scrape-url", adminMiddleware, async (c) => {
 
         results.push({ url, status: "success", docId, charCount: content.length, title: pageTitle });
       } catch (err) {
-        results.push({ url, status: "failed", error: (err as Error).message });
+        console.error("Scrape error for", url, (err as Error).message);
+        results.push({ url, status: "failed", error: "Failed to scrape this URL" });
       }
     }
 
@@ -5868,7 +6033,8 @@ app.post("/api/admin/documents/scrape-url", adminMiddleware, async (c) => {
       summary: { total: urlList.length, succeeded, failed: urlList.length - succeeded },
     });
   } catch (err) {
-    return c.json({ error: "URL scraping failed: " + (err as Error).message }, 500);
+    console.error("URL scraping failed:", (err as Error).message);
+    return c.json({ error: "URL scraping failed" }, 500);
   }
 });
 
@@ -6651,7 +6817,7 @@ app.post("/api/admin/bulk-import", adminMiddleware, async (c) => {
       const accessCode = generateAccessCode();
       const passwordHash = await hashPassword(accessCode);
       const firstName = row.fullName.split(" ")[0].toUpperCase();
-      const suffix = Math.random().toString(36).substring(2, 6).toUpperCase();
+      const suffix = generateReferralSuffix();
       const referralCode = `OZZY-${firstName}-${suffix}`;
 
       try {
@@ -6662,7 +6828,8 @@ app.post("/api/admin/bulk-import", adminMiddleware, async (c) => {
         imported++;
         users.push({ name: row.fullName, email: row.email, access_code: accessCode, department: row.department, tier: row.tier, status: "created" });
       } catch (err) {
-        errors.push(`${row.email}: ${(err as Error).message}`);
+        console.error("CSV import error:", row.email, (err as Error).message);
+        errors.push(`${row.email}: import failed`);
         users.push({ name: row.fullName, email: row.email, access_code: "", department: row.department, tier: row.tier, status: "failed" });
       }
     }
@@ -6677,7 +6844,8 @@ app.post("/api/admin/bulk-import", adminMiddleware, async (c) => {
       total: userRows.length,
     });
   } catch (err) {
-    return c.json({ error: "Failed to process CSV: " + (err as Error).message }, 500);
+    console.error("CSV processing error:", (err as Error).message);
+    return c.json({ error: "Failed to process CSV. Check the file format and try again." }, 500);
   }
 });
 
@@ -6969,14 +7137,16 @@ app.post("/api/admin/knowledge/bulk", adminMiddleware, async (c) => {
           try {
             content = await extractDocxText(file);
           } catch (err) {
-            results.push({ filename: file.name, status: 'error', error: 'Failed to extract DOCX text: ' + (err as Error).message });
+            console.error("Bulk DOCX error:", file.name, (err as Error).message);
+            results.push({ filename: file.name, status: 'error', error: 'Failed to extract DOCX text. File may be corrupted.' });
             continue;
           }
         } else if (fileName.endsWith('.pptx')) {
           try {
             content = await extractPptxText(file);
           } catch (err) {
-            results.push({ filename: file.name, status: 'error', error: 'Failed to extract PPTX text: ' + (err as Error).message });
+            console.error("Bulk PPTX error:", file.name, (err as Error).message);
+            results.push({ filename: file.name, status: 'error', error: 'Failed to extract PPTX text. File may be corrupted.' });
             continue;
           }
         } else if (fileName.endsWith('.doc')) {
@@ -7048,7 +7218,8 @@ app.post("/api/admin/knowledge/bulk", adminMiddleware, async (c) => {
         await logAudit(c.env.DB, adminId, "bulk_upload_document", "document", docId, `${title} (${file.name}, ${content.length} chars)`);
 
       } catch (err) {
-        results.push({ filename: file.name, status: 'error', error: (err as Error).message });
+        console.error("Bulk upload error:", file.name, (err as Error).message);
+        results.push({ filename: file.name, status: 'error', error: 'Failed to process file' });
       }
     }
 
@@ -7061,7 +7232,8 @@ app.post("/api/admin/knowledge/bulk", adminMiddleware, async (c) => {
     });
 
   } catch (err) {
-    return c.json({ error: "Bulk upload failed: " + (err as Error).message }, 500);
+    console.error("Bulk upload failed:", (err as Error).message);
+    return c.json({ error: "Bulk upload failed" }, 500);
   }
 });
 
@@ -7143,7 +7315,8 @@ app.get("/api/admin/knowledge/stats", adminMiddleware, async (c) => {
       gog_library: gogStatus,
     });
   } catch (err) {
-    return c.json({ error: "Failed to load knowledge stats: " + (err as Error).message }, 500);
+    console.error("Failed to load knowledge stats:", (err as Error).message);
+    return c.json({ error: "Failed to load knowledge stats" }, 500);
   }
 });
 
@@ -7700,7 +7873,7 @@ app.post("/api/admin/ussd/test", adminMiddleware, async (c) => {
   } catch (err: any) {
     console.error("USSD test error:", err);
     return c.json(
-      { error: "Test failed: " + (err.message || "Unknown error") },
+      { error: "USSD test failed. Check server logs for details." },
       500
     );
   }
@@ -7857,16 +8030,22 @@ function formatForSMS(text: string): string[] {
 async function validateWebhookSecret(env: Env, request: Request): Promise<boolean> {
   try {
     const configStr = await env.SESSIONS.get("messaging_config");
-    if (!configStr) return true;
+    if (!configStr) return false;
     const config = JSON.parse(configStr);
-    if (!config.webhook_secret) return true;
+    if (!config.webhook_secret) return false;
 
     const signature = request.headers.get("X-AT-Signature") ||
                       request.headers.get("X-Webhook-Secret") ||
                       request.headers.get("x-webhook-secret");
-    return signature === config.webhook_secret;
+    if (!signature || signature.length !== config.webhook_secret.length) return false;
+    const encoder = new TextEncoder();
+    const a = encoder.encode(signature);
+    const b = encoder.encode(config.webhook_secret);
+    let diff = 0;
+    for (let i = 0; i < a.length; i++) diff |= a[i] ^ b[i];
+    return diff === 0;
   } catch {
-    return true;
+    return false;
   }
 }
 
@@ -8293,7 +8472,7 @@ app.post("/api/admin/messaging/test", adminMiddleware, async (c) => {
     });
   } catch (err) {
     console.error("Messaging test error:", err);
-    return c.json({ error: "Test failed: " + (err instanceof Error ? err.message : "Unknown error") }, 500);
+    return c.json({ error: "Messaging test failed. Check server logs for details." }, 500);
   }
 });
 
@@ -8523,7 +8702,8 @@ app.post("/api/push/subscribe", authMiddleware, async (c) => {
 
     return c.json({ success: true });
   } catch (err: any) {
-    return c.json({ error: err.message || "Failed to save push subscription" }, 500);
+    console.error("Push subscribe error:", err.message);
+    return c.json({ error: "Failed to save push subscription" }, 500);
   }
 });
 
@@ -8547,7 +8727,8 @@ app.delete("/api/push/unsubscribe", authMiddleware, async (c) => {
 
     return c.json({ success: true });
   } catch (err: any) {
-    return c.json({ error: err.message || "Failed to remove push subscription" }, 500);
+    console.error("Push unsubscribe error:", err.message);
+    return c.json({ error: "Failed to remove push subscription" }, 500);
   }
 });
 
@@ -8577,7 +8758,8 @@ app.get("/api/push/status", authMiddleware, async (c) => {
       },
     });
   } catch (err: any) {
-    return c.json({ error: err.message || "Failed to check push status" }, 500);
+    console.error("Push status error:", err.message);
+    return c.json({ error: "Failed to check push status" }, 500);
   }
 });
 
@@ -8613,7 +8795,8 @@ app.put("/api/push/preferences", authMiddleware, async (c) => {
 
     return c.json({ success: true });
   } catch (err: any) {
-    return c.json({ error: err.message || "Failed to update preferences" }, 500);
+    console.error("Push preferences error:", err.message);
+    return c.json({ error: "Failed to update preferences" }, 500);
   }
 });
 

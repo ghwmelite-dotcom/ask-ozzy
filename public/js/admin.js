@@ -27,7 +27,7 @@ function toggleTheme() {
 // ─── State ──────────────────────────────────────────────────────────
 
 const API = "";
-let token = localStorage.getItem("askozzy_token");
+const token = localStorage.getItem("askozzy_token");
 let adminUser = null;
 let currentTab = "dashboard";
 let usersPage = 1;
@@ -86,11 +86,19 @@ async function apiFetch(path, options = {}) {
 
 function renderMarkdown(text) {
   if (!text) return "";
-  let html = text;
-  html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, (_, lang, code) => {
-    return "<pre><code>" + escapeHtml(code.trim()) + "</code></pre>";
+  const codeBlocks = [];
+  let html = text.replace(/```(\w+)?\n([\s\S]*?)```/g, (_, lang, code) => {
+    const idx = codeBlocks.length;
+    codeBlocks.push("<pre><code>" + escapeHtml(code.trim()) + "</code></pre>");
+    return "\x00CODEBLOCK_" + idx + "\x00";
   });
-  html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
+  html = html.replace(/`([^`]+)`/g, (_, code) => {
+    const idx = codeBlocks.length;
+    codeBlocks.push("<code>" + escapeHtml(code) + "</code>");
+    return "\x00CODEBLOCK_" + idx + "\x00";
+  });
+  html = escapeHtml(html);
+  html = html.replace(/\x00CODEBLOCK_(\d+)\x00/g, (_, idx) => codeBlocks[+idx]);
   html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
   html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
   html = html.replace(/^### (.+)$/gm, "<h3>$1</h3>");
@@ -99,7 +107,7 @@ function renderMarkdown(text) {
   html = html.replace(/^[\-\*] (.+)$/gm, "<li>$1</li>");
   html = html.replace(/((?:<li>.*<\/li>\n?)+)/g, "<ul>$1</ul>");
   html = html.replace(/^\d+\. (.+)$/gm, "<li>$1</li>");
-  html = html.replace(/^> (.+)$/gm, "<blockquote>$1</blockquote>");
+  html = html.replace(/^&gt; (.+)$/gm, "<blockquote>$1</blockquote>");
   html = html.replace(/\n\n/g, "</p><p>");
   html = html.replace(/(?<!<\/?\w+[^>]*)\n(?!<)/g, "<br>");
   if (!html.startsWith("<")) html = "<p>" + html + "</p>";
@@ -753,7 +761,7 @@ async function loadWithdrawals(status) {
                 '<td>' + escapeHtml(w.full_name || w.user_name || "--") + '</td>' +
                 '<td>' + escapeHtml(w.email || "--") + '</td>' +
                 '<td><strong>GHS ' + (w.amount || 0).toFixed(2) + '</strong></td>' +
-                '<td>' + escapeHtml(w.momo_number || "--") + '</td>' +
+                '<td>' + escapeHtml(w.momo_number ? '****' + w.momo_number.slice(-4) : "--") + '</td>' +
                 '<td>' + escapeHtml(w.momo_network || "--") + '</td>' +
                 '<td><span class="badge badge-' + statusCls + '">' + (w.status || "unknown") + '</span></td>' +
                 '<td>' +
@@ -1221,7 +1229,7 @@ async function loadAuditLog(page) {
           '<td>' + actionBadge(entry.action_type) + '</td>' +
           '<td style="max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;" title="' + escapeHtml(entry.query_preview || '') + '">' + escapeHtml(preview) + '</td>' +
           '<td style="font-size:11px;color:var(--text-muted);" title="' + escapeHtml(entry.model_used || '') + '">' + escapeHtml(modelShort) + '</td>' +
-          '<td style="font-size:11px;font-family:monospace;color:var(--text-muted);">' + escapeHtml(entry.ip_address || '—') + '</td>' +
+          '<td style="font-size:11px;font-family:monospace;color:var(--text-muted);">' + escapeHtml(entry.ip_address ? entry.ip_address.replace(/(\d+)\.(\d+)\.(\d+)\.(\d+)/, '$1.$2.***.$4') : '—') + '</td>' +
         '</tr>';
       }).join("") +
       '</tbody></table></div>';

@@ -2,6 +2,7 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="X-Frame-Options" content="DENY">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AskOzzy — Super Admin Portal</title>
 
@@ -700,17 +701,17 @@
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
             <div>
               <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">API Key (Africa's Talking)</label>
-              <input type="password" id="msg-api-key" placeholder="Enter API key..." class="admin-search" style="max-width:100%;" />
+              <input type="password" id="msg-api-key" autocomplete="off" placeholder="Enter API key..." class="admin-search" style="max-width:100%;" />
             </div>
             <div>
               <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">API Username</label>
-              <input type="text" id="msg-api-username" placeholder="sandbox or your username" class="admin-search" style="max-width:100%;" />
+              <input type="text" id="msg-api-username" autocomplete="off" placeholder="sandbox or your username" class="admin-search" style="max-width:100%;" />
             </div>
           </div>
 
           <div style="margin-bottom:16px;">
             <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Webhook Secret</label>
-            <input type="text" id="msg-webhook-secret" placeholder="Shared secret for webhook validation (optional)" class="admin-search" style="max-width:100%;" />
+            <input type="password" id="msg-webhook-secret" autocomplete="off" placeholder="Shared secret for webhook validation (optional)" class="admin-search" style="max-width:100%;" />
             <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">If set, incoming webhooks must include this value in the X-Webhook-Secret or X-AT-Signature header.</div>
           </div>
 
@@ -813,7 +814,7 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" crossorigin="anonymous" defer></script>
   <script src="/js/admin.js"></script>
 </body>
 </html>

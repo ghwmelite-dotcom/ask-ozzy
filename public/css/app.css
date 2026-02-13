@@ -693,6 +693,7 @@ html, body {
   padding: 24px 0;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .chat-messages {
@@ -703,18 +704,50 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Adinkra Gye Nyame watermark */
+.chat-area::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 6a24 24 0 0 0-24 24c0 8.5 4.5 16 11 20.5l4-6.5A15 15 0 0 1 15 30c0-8.3 6.7-15 15-15s15 6.7 15 15a15 15 0 0 1-6 12l4 6.5c6.5-4.5 11-12 11-20.5A24 24 0 0 0 30 6z' fill='%23FCD116'/%3E%3Ccircle cx='30' cy='30' r='6' fill='%23FCD116'/%3E%3C/svg%3E");
+  background-size: 80px 80px;
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 0;
+}
+[data-theme="light"] .chat-area::before {
+  opacity: 0.04;
 }
 
 .message {
   display: flex;
   gap: 16px;
   align-items: flex-start;
-  animation: fadeIn 0.3s ease;
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  transition: box-shadow 0.2s;
+}
+.message.user {
+  animation: msgSlideRight 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.message.assistant {
+  animation: msgSlideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.message:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
+@keyframes msgSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
+}
+@keyframes msgSlideRight {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 .message-avatar {
@@ -772,7 +805,26 @@ html, body {
 }
 
 .message.assistant .message-content {
-  padding: 4px 0;
+  padding: 4px 0 4px 12px;
+  border-left: 3px solid;
+  border-image: linear-gradient(180deg, var(--flag-red) 30%, var(--flag-gold) 60%, var(--flag-green) 100%) 1;
+  position: relative;
+}
+.message.assistant .message-content::before {
+  content: '';
+  position: absolute;
+  left: -3px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, transparent, rgba(252, 209, 22, 0.6), transparent);
+  background-size: 100% 200%;
+  animation: kenteShimmer 3s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes kenteShimmer {
+  0%, 100% { background-position: 0 0; }
+  50% { background-position: 0 100%; }
 }
 
 .message-content p { margin-bottom: 12px; }
@@ -849,6 +901,162 @@ html, body {
 }
 
 .message-content strong { color: var(--text-strong); font-weight: 600; }
+
+/* ─── Smart Cards ────────────────────────────────────────────────── */
+
+.smart-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 12px 0;
+  overflow: hidden;
+  animation: cardSlideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes cardSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Code card */
+.smart-card.code-card {
+  border-left: 4px solid var(--flag-gold);
+  position: relative;
+}
+.smart-card.code-card pre {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+.code-card-label {
+  display: inline-block;
+  background: var(--flag-gold);
+  color: #000;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 0 0 var(--radius-sm) 0;
+}
+
+/* Table card */
+.smart-card.table-card {
+  border-left: 4px solid var(--flag-green);
+}
+.smart-card.table-card table {
+  margin: 0;
+}
+.smart-card.table-card th {
+  background: linear-gradient(135deg, var(--bg-tertiary), rgba(252, 209, 22, 0.08));
+}
+
+/* Quote card */
+.smart-card.quote-card {
+  border-left: 4px solid;
+  border-image: linear-gradient(180deg, var(--flag-red), var(--flag-gold), var(--flag-green)) 1;
+  padding: 16px 16px 16px 20px;
+  position: relative;
+}
+.smart-card.quote-card::before {
+  content: '\201C';
+  position: absolute;
+  top: 4px;
+  left: 8px;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--flag-gold);
+  opacity: 0.3;
+  font-family: Georgia, serif;
+}
+.smart-card.quote-card blockquote {
+  border-left: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+/* List card — timeline style */
+.smart-card.list-card {
+  padding: 12px 16px;
+  position: relative;
+}
+.smart-card.list-card ul,
+.smart-card.list-card ol {
+  padding-left: 20px;
+  margin: 0;
+  list-style: none;
+  position: relative;
+}
+.smart-card.list-card ul::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--flag-red), var(--flag-gold), var(--flag-green));
+  border-radius: 1px;
+}
+.smart-card.list-card li {
+  position: relative;
+  padding-left: 4px;
+  margin-bottom: 6px;
+}
+.smart-card.list-card li::before {
+  content: '';
+  position: absolute;
+  left: -14px;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  background: var(--flag-gold);
+  border-radius: 50%;
+  border: 2px solid var(--bg-secondary);
+  box-shadow: 0 0 0 1px var(--flag-gold);
+}
+
+/* ─── Streaming Gradient Mask ────────────────────────────────────── */
+
+.message.assistant.streaming .message-content {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%);
+}
+
+/* ─── Gold Dust Particle Burst ───────────────────────────────────── */
+
+.message.assistant.completed {
+  position: relative;
+}
+.message.assistant.completed::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  box-shadow:
+    -20px -30px 0 var(--flag-gold),
+    30px -20px 0 var(--flag-gold),
+    -40px 10px 0 var(--flag-gold),
+    20px 25px 0 var(--flag-gold),
+    -10px -40px 0 rgba(252, 209, 22, 0.7),
+    40px 5px 0 rgba(252, 209, 22, 0.7),
+    -30px 30px 0 rgba(252, 209, 22, 0.7),
+    15px -15px 0 rgba(252, 209, 22, 0.5),
+    -25px -10px 0 rgba(252, 209, 22, 0.5),
+    35px 15px 0 rgba(252, 209, 22, 0.5),
+    -5px 35px 0 rgba(252, 209, 22, 0.4),
+    25px -35px 0 rgba(252, 209, 22, 0.4);
+  animation: goldDustBurst 1s ease-out forwards;
+  pointer-events: none;
+  z-index: 10;
+}
+@keyframes goldDustBurst {
+  0% { transform: scale(0.3); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
 
 /* Typing indicator */
 .typing-indicator {
@@ -3406,31 +3614,15 @@ html, body {
   border-color: var(--gold);
 }
 
-/* ─── Agent Selector ─────────────────────────────────────────────── */
-.agent-selector-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.2s;
-  white-space: nowrap;
-}
-.agent-selector-btn:hover {
-  border-color: var(--gold-dim);
-  color: var(--text-primary);
-}
-.agent-selector-btn.active {
-  background: rgba(252, 209, 22, 0.1);
+/* ─── Agent Pill (in tool-pill row) ──────────────────────────────── */
+.tool-pill.agent-pill.active {
+  background: rgba(252, 209, 22, 0.08);
   border-color: var(--gold);
   color: var(--gold);
   font-weight: 600;
+}
+.tool-pill.agent-pill.active svg {
+  opacity: 1;
 }
 
 /* Agent selection cards in modal */
@@ -5535,10 +5727,29 @@ html, body {
   padding: 8px 0;
   animation: adinkra-pulse 1.5s ease-in-out infinite;
   color: var(--gold);
+  position: relative;
+}
+.typing-adinkra::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--flag-red);
+  border-right-color: var(--flag-gold);
+  border-bottom-color: var(--flag-green);
+  animation: adinkra-orbit 1s linear infinite;
 }
 @keyframes adinkra-pulse {
   0%, 100% { opacity: 0.3; transform: scale(0.9); }
   50% { opacity: 1; transform: scale(1.1); }
+}
+@keyframes adinkra-orbit {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 /* Ghana Pride Footer Badge */
@@ -7938,6 +8149,9 @@ html, body {
   .message-content pre { border: 1px solid #ccc; background: #f9f9f9 !important; }
   .message-content table { border-collapse: collapse; width: 100%; }
   .message-content th, .message-content td { border: 1px solid #999; padding: 6px; }
+  .chat-area::before, .message.assistant.completed::after { display: none !important; }
+  .smart-card { box-shadow: none !important; border: 1px solid #ccc !important; }
+  .message.assistant .message-content::before { display: none !important; }
   .message-content th { background: #eee !important; }
 }
 
@@ -8252,6 +8466,18 @@ button, a, [onclick], [role="button"], .tool-pill, .category-tab,
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation: none;
+  }
+  .message, .message.user, .message.assistant,
+  .smart-card,
+  .message.assistant .message-content::before,
+  .typing-adinkra,
+  .typing-adinkra::before,
+  .message.assistant.completed::after {
+    animation: none !important;
+  }
+  .message.assistant.streaming .message-content {
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 }
 
