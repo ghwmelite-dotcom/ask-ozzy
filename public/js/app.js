@@ -122,7 +122,7 @@ function applyPersonaUI() {
   // Personalized greeting when logged in
   if (isLoggedIn() && state.user && state.user.fullName) {
     const firstName = state.user.fullName.split(' ')[0];
-    if (welcomeHeading) welcomeHeading.textContent = `Welcome to AskOzzy, ${firstName}`;
+    if (welcomeHeading) welcomeHeading.textContent = `Welcome to AskOzzy, ${firstName}!`;
   } else {
     if (welcomeHeading) welcomeHeading.textContent = 'Welcome to AskOzzy';
   }
