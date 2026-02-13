@@ -8363,17 +8363,17 @@ function showValueMomentCard(trigger) {
   if (!msgs) return;
   const text = msgs[persona];
 
-  // Mark shown
+  // Find last assistant message in DOM FIRST before marking shown
+  const msgEls = document.querySelectorAll('.message.assistant');
+  const anchor = msgEls[msgEls.length - 1];
+  if (!anchor) return;
+
+  // Mark shown only after confirming we can display
   sessionStorage.setItem('ozzy_growth_card_shown', '1');
   let history = [];
   try { history = JSON.parse(localStorage.getItem('ozzy_growth_card_history') || '[]'); } catch {}
   history.push(Date.now());
   localStorage.setItem('ozzy_growth_card_history', JSON.stringify(history));
-
-  // Find last assistant message in DOM
-  const msgEls = document.querySelectorAll('.message.assistant');
-  const anchor = msgEls[msgEls.length - 1];
-  if (!anchor) return;
 
   const card = document.createElement('div');
   card.className = 'value-moment-card';
@@ -8386,8 +8386,18 @@ function showValueMomentCard(trigger) {
         <button class="vmc-dismiss" onclick="dismissValueMoment(this)" aria-label="Dismiss">&times;</button>
       </div>
     </div>`;
-  anchor.after(card);
-  requestAnimationFrame(() => card.classList.add('vmc-visible'));
+
+  // Insert inside the last message's body so it stays in the scroll container
+  const msgBody = anchor.querySelector('.message-body');
+  if (msgBody) {
+    msgBody.appendChild(card);
+  } else {
+    anchor.appendChild(card);
+  }
+  requestAnimationFrame(() => {
+    card.classList.add('vmc-visible');
+    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
 }
 
 function shareValueMoment() {
