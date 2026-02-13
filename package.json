@@ -7,15 +7,21 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "db:init": "wrangler d1 execute ghana-civil-ai-db --local --file=schema.sql",
-    "db:init:remote": "wrangler d1 execute ghana-civil-ai-db --remote --file=schema.sql"
+    "db:init:remote": "wrangler d1 execute ghana-civil-ai-db --remote --file=schema.sql",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "hono": "^4.6.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20241218.0",
+    "@eslint/js": "^9.39.2",
+    "eslint": "^9.39.2",
+    "globals": "^17.3.0",
     "sharp": "^0.34.5",
     "typescript": "^5.7.0",
+    "typescript-eslint": "^8.55.0",
     "wrangler": "^3.99.0"
   }
 }
