@@ -935,12 +935,10 @@ function updateSidebarFooter() {
           <div class="user-dept">${escapeHtml(state.user.department || (isStudent() ? "Student" : "GoG Operations"))}</div>
         </div>
       </div>
-      <div style="display:flex;gap:6px;">
-        <button class="sidebar-tier-btn tier-${tier}" onclick="openPricingModal()">
-          ${tierName} Plan ${tier === 'free' ? '— Upgrade' : ''}
-        </button>
-        <div class="sidebar-earn-widget-wrap"></div>
-      </div>
+      <button class="sidebar-tier-btn tier-${tier}" onclick="openPricingModal()">
+        ${tierName} Plan ${tier === 'free' ? '— Upgrade' : ''}
+      </button>
+      <div class="sidebar-earn-widget-wrap"></div>
       <div id="streak-badge-container"></div>
       <div class="sidebar-links">
         <button class="sidebar-link-btn" onclick="openUserDashboard()">Dashboard</button>

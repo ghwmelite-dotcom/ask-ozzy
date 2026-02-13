@@ -7560,52 +7560,48 @@ html, body {
 .vmc-dismiss:hover { color: var(--text-primary); }
 
 /* ─── Sidebar Earn Widget ────────────────────────────────────────── */
-.sidebar-earn-widget-wrap { flex: 1; min-width: 0; }
+.sidebar-earn-widget-wrap { margin-top: 6px; }
 .sidebar-earn-widget {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 8px 10px;
+  padding: 8px 12px;
   border-radius: 8px;
-  border: 1.5px solid var(--border-color);
-  background: var(--bg-secondary);
+  border: 1px dashed rgba(212,160,23,0.5);
+  background: transparent;
   cursor: pointer;
-  transition: transform 0.15s, border-color 0.2s, box-shadow 0.2s;
-  gap: 2px;
+  transition: border-color 0.2s, background 0.2s;
+  gap: 8px;
 }
 .sidebar-earn-widget:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-.sidebar-earn-widget.earn-new {
   border-color: #D4A017;
-  background: linear-gradient(135deg, rgba(212,160,23,0.06), rgba(252,209,22,0.06));
+  background: rgba(212,160,23,0.06);
 }
-.sidebar-earn-widget.earn-new:hover {
-  border-color: #FCD116;
-  box-shadow: 0 4px 14px rgba(212,160,23,0.2);
-}
+.sidebar-earn-widget.earn-new .sew-headline { margin-right: 2px; }
 .sidebar-earn-widget.earn-growing {
+  border-style: solid;
   border-color: var(--border-color);
 }
+.sidebar-earn-widget.earn-growing:hover { border-color: #D4A017; }
 .sidebar-earn-widget.earn-active {
-  border-color: #006B3F;
-  background: linear-gradient(135deg, rgba(0,107,63,0.06), rgba(0,107,63,0.03));
+  border-style: solid;
+  border-color: rgba(0,107,63,0.4);
+  background: rgba(0,107,63,0.04);
 }
 .sidebar-earn-widget.earn-active:hover {
-  box-shadow: 0 4px 14px rgba(0,107,63,0.18);
+  border-color: #006B3F;
+  background: rgba(0,107,63,0.08);
 }
 .sew-headline {
   font-weight: 700;
-  font-size: 12px;
+  font-size: 11px;
   color: #D4A017;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
 }
 .sew-amount {
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   color: #006B3F;
 }
 .sew-count {
@@ -7616,10 +7612,6 @@ html, body {
 .sew-label {
   font-size: 10px;
   color: var(--text-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
 }
 
 /* ─── Trial Conversion Card ──────────────────────────────────────── */
