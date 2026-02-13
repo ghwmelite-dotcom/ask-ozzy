@@ -117,6 +117,16 @@ function applyPersonaUI() {
   const subtitle = document.getElementById('welcome-subtitle');
   const sidebarSub = document.getElementById('sidebar-subtitle');
   const welcomeSelector = document.getElementById('welcome-persona-selector');
+  const welcomeHeading = document.querySelector('#welcome-screen h2');
+
+  // Personalized greeting when logged in
+  if (isLoggedIn() && state.user && state.user.fullName) {
+    const firstName = state.user.fullName.split(' ')[0];
+    if (welcomeHeading) welcomeHeading.textContent = `Welcome to AskOzzy, ${firstName}`;
+  } else {
+    if (welcomeHeading) welcomeHeading.textContent = 'Welcome to AskOzzy';
+  }
+
   if (isStudent()) {
     if (subtitle) subtitle.textContent = 'Your AI study companion for academic success. Choose a template below or start a free conversation.';
     if (sidebarSub) sidebarSub.textContent = 'AI for Ghana Students';
@@ -1689,7 +1699,8 @@ function onModelChange() {
   const freeModels = ["@cf/openai/gpt-oss-20b", "@cf/google/gemma-3-12b-it", "@cf/meta/llama-3.1-8b-instruct-fast"];
 
   if (userTier === "free" && !freeModels.includes(model)) {
-    alert(`This model requires a paid plan.\n\nUpgrade to Professional (GHS 60/mo) or higher to access all 11 AI models.`);
+    const proPrice = isStudent() ? 25 : 60;
+    alert(`This model requires a paid plan.\n\nUpgrade to Professional (GHS ${proPrice}/mo) or higher to access all 11 AI models.`);
     selector.value = state.selectedModel;
     openPricingModal();
     return;
@@ -2743,15 +2754,21 @@ async function openPricingModal() {
   modal.classList.add("active");
 
   try {
-    const res = await fetch(`${API}/api/pricing`);
+    const headers = {};
+    if (state.token) headers["Authorization"] = `Bearer ${state.token}`;
+    const res = await fetch(`${API}/api/pricing`, { headers });
     const data = await res.json();
     const currentTier = (state.user && state.user.tier) || "free";
 
+    const studentPricing = data.isStudentPricing;
+
     body.innerHTML = `
+      ${studentPricing ? '<div class="student-discount-banner"><span>🎓</span> Student pricing applied — save up to 58%!</div>' : ''}
       <div class="pricing-grid">
         ${data.plans.map(plan => {
           const isCurrent = plan.id === currentTier;
           const isDowngrade = getPlanOrder(plan.id) < getPlanOrder(currentTier);
+          const showDiscount = studentPricing && plan.standardPrice > 0 && plan.price < plan.standardPrice;
           return `
           <div class="pricing-card ${plan.popular && !isCurrent ? 'popular' : ''} ${isCurrent ? 'current' : ''}">
             <div class="pricing-name">${plan.name}</div>
@@ -2759,6 +2776,7 @@ async function openPricingModal() {
               ${plan.price === 0 ? 'Free' : `GHS ${plan.price}`}
               ${plan.price > 0 ? '<span>/month</span>' : ''}
             </div>
+            ${showDiscount ? `<div class="pricing-original-price">was GHS ${plan.standardPrice}/month</div>` : ''}
             <ul class="pricing-features">
               ${plan.features.map(f => `<li>${f}</li>`).join('')}
             </ul>
@@ -2808,7 +2826,7 @@ async function openPricingModal() {
             <div class="trial-banner-title">Professional Trial Active</div>
             <div class="trial-banner-sub">${hoursLeft} hours remaining — upgrade now to keep all features</div>
           </div>
-          <button class="trial-banner-btn" onclick="upgradeToPlan('professional','Professional',60)">Upgrade Now</button>
+          <button class="trial-banner-btn" onclick="upgradeToPlan('professional','Professional',${studentPricing ? 25 : 60})">Upgrade Now</button>
         `;
         pricingGrid.parentNode.insertBefore(activeBanner, pricingGrid);
       }
@@ -5775,7 +5793,8 @@ function showPaymentSuccess(planName) {
 // ─── Folders (Paid Feature Gating) ───────────────────────────────────
 
 function showFolderPremiumPrompt() {
-  const go = confirm("Folders are a premium feature!\n\nUpgrade to Professional (GHS 60/mo) or higher to organize your conversations into folders.\n\nWould you like to view plans?");
+  const proPrice = isStudent() ? 25 : 60;
+  const go = confirm(`Folders are a premium feature!\n\nUpgrade to Professional (GHS ${proPrice}/mo) or higher to organize your conversations into folders.\n\nWould you like to view plans?`);
   if (go) openPricingModal();
 }
 

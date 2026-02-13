@@ -1845,6 +1845,33 @@ html, body {
   box-shadow: var(--gold-glow-soft);
 }
 
+/* Student discount banner */
+.student-discount-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.12), rgba(252, 209, 22, 0.12));
+  border: 1px solid var(--green-light);
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--green-light);
+}
+
+.student-discount-banner span {
+  font-size: 18px;
+}
+
+.pricing-original-price {
+  text-decoration: line-through;
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-top: -4px;
+  margin-bottom: 8px;
+}
+
 /* ─── Responsive pricing ─────────────────────────────────────────── */
 
 @media (max-width: 768px) {

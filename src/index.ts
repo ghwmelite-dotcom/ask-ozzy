@@ -559,6 +559,7 @@ app.get("/api/conversations/:id/messages", authMiddleware, async (c) => {
 const PRICING_TIERS: Record<string, {
   name: string;
   price: number;
+  studentPrice: number;
   messagesPerDay: number;
   models: string;
   features: string[];
@@ -566,6 +567,7 @@ const PRICING_TIERS: Record<string, {
   free: {
     name: "Free",
     price: 0,
+    studentPrice: 0,
     messagesPerDay: 10,
     models: "basic",
     features: ["10 messages/day", "Basic models (3)", "Standard response speed"],
@@ -573,6 +575,7 @@ const PRICING_TIERS: Record<string, {
   professional: {
     name: "Professional",
     price: 60,
+    studentPrice: 25,
     messagesPerDay: 200,
     models: "all",
     features: ["200 messages/day", "All 10 AI models", "Priority speed", "Unlimited history", "Template customisation"],
@@ -580,6 +583,7 @@ const PRICING_TIERS: Record<string, {
   enterprise: {
     name: "Enterprise",
     price: 100,
+    studentPrice: 45,
     messagesPerDay: -1, // unlimited
     models: "all",
     features: ["Unlimited messages", "All 10 AI models", "Fastest priority", "Unlimited history", "Custom templates", "Dedicated support"],
@@ -2911,15 +2915,31 @@ app.get("/api/admin/affiliate/stats", adminMiddleware, async (c) => {
 // ─── Pricing & Plans ─────────────────────────────────────────────────
 
 app.get("/api/pricing", async (c) => {
+  // Check if the user is a student to return discounted pricing
+  let isStudent = false;
+  const authHeader = c.req.header("Authorization");
+  if (authHeader) {
+    const token = authHeader.replace("Bearer ", "");
+    const userId = await c.env.SESSIONS.get(`session:${token}`);
+    if (userId) {
+      const user = await c.env.DB.prepare("SELECT user_type FROM users WHERE id = ?")
+        .bind(userId).first<{ user_type: string }>();
+      if (user?.user_type === "student") isStudent = true;
+    }
+  }
+
   const plans = Object.entries(PRICING_TIERS).map(([id, tier]) => ({
     id,
     name: tier.name,
-    price: tier.price,
+    price: isStudent ? tier.studentPrice : tier.price,
+    standardPrice: tier.price,
+    studentPrice: tier.studentPrice,
+    isStudentPricing: isStudent,
     messagesPerDay: tier.messagesPerDay,
     features: tier.features,
     popular: id === "professional",
   }));
-  return c.json({ plans });
+  return c.json({ plans, isStudentPricing: isStudent });
 });
 
 app.get("/api/usage/status", authMiddleware, async (c) => {
@@ -5125,9 +5145,9 @@ app.post("/api/organizations/:id/remove", authMiddleware, async (c) => {
 
 // ─── Paystack Payment Integration ─────────────────────────────────────
 
-const PAYSTACK_PLANS: Record<string, { amount: number; planCode: string }> = {
-  professional: { amount: 6000, planCode: "professional" }, // GHS 60
-  enterprise: { amount: 10000, planCode: "enterprise" },   // GHS 100
+const PAYSTACK_PLANS: Record<string, { amount: number; studentAmount: number; planCode: string }> = {
+  professional: { amount: 6000, studentAmount: 2500, planCode: "professional" }, // GHS 60 / GHS 25 students
+  enterprise: { amount: 10000, studentAmount: 4500, planCode: "enterprise" },   // GHS 100 / GHS 45 students
 };
 
 app.post("/api/payments/initialize", authMiddleware, async (c) => {
@@ -5138,13 +5158,15 @@ app.post("/api/payments/initialize", authMiddleware, async (c) => {
     return c.json({ error: "Invalid plan" }, 400);
   }
 
-  const user = await c.env.DB.prepare("SELECT email, tier FROM users WHERE id = ?")
-    .bind(userId).first<{ email: string; tier: string }>();
+  const user = await c.env.DB.prepare("SELECT email, tier, user_type FROM users WHERE id = ?")
+    .bind(userId).first<{ email: string; tier: string; user_type: string }>();
 
   if (!user) return c.json({ error: "User not found" }, 404);
   if (user.tier === tier) return c.json({ error: "Already on this plan" }, 400);
 
   const plan = PAYSTACK_PLANS[tier];
+  const isStudent = user.user_type === "student";
+  const chargeAmount = isStudent ? plan.studentAmount : plan.amount;
   const reference = `askozzy_${userId}_${tier}_${Date.now()}`;
 
   // If PAYSTACK_SECRET is configured, use real Paystack
@@ -5159,7 +5181,7 @@ app.post("/api/payments/initialize", authMiddleware, async (c) => {
         },
         body: JSON.stringify({
           email: user.email,
-          amount: plan.amount,
+          amount: chargeAmount,
           currency: "GHS",
           reference,
           callback_url: `${c.req.url.split("/api")[0]}/?payment=success`,
