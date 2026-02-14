@@ -218,7 +218,7 @@ app.post("/api/auth/register/verify-totp", async (c) => {
       department: user.department,
       role: user.role || "civil_servant",
       tier: user.tier || "free",
-      effectiveTier: user.tier || "free",
+      effectiveTier: getEffectiveTier({ tier: user.tier, subscription_expires_at: null, trial_expires_at: null }),
       referralCode: user.referral_code,
       userType: user.user_type || "gog_employee",
     },
@@ -243,8 +243,9 @@ app.post("/api/auth/login", async (c) => {
   await ensureTrialColumn(c.env.DB);
   await ensureUserTypeColumn(c.env.DB);
   await ensureAuthMethodColumns(c.env.DB);
+  await ensureSubscriptionColumns(c.env.DB);
   const user = await c.env.DB.prepare(
-    "SELECT id, email, password_hash, full_name, department, role, tier, referral_code, affiliate_tier, total_referrals, affiliate_earnings, trial_expires_at, user_type, totp_secret, totp_enabled, auth_method, recovery_code_hash FROM users WHERE email = ?"
+    "SELECT id, email, password_hash, full_name, department, role, tier, referral_code, affiliate_tier, total_referrals, affiliate_earnings, trial_expires_at, user_type, totp_secret, totp_enabled, auth_method, recovery_code_hash, subscription_expires_at, billing_cycle FROM users WHERE email = ?"
   )
     .bind(email.toLowerCase().trim())
     .first<{
@@ -254,6 +255,7 @@ app.post("/api/auth/login", async (c) => {
       trial_expires_at: string | null; user_type: string | null;
       totp_secret: string | null; totp_enabled: number; auth_method: string | null;
       recovery_code_hash: string | null;
+      subscription_expires_at: string | null; billing_cycle: string | null;
     }>();
 
   if (!user) {
@@ -327,9 +329,15 @@ app.post("/api/auth/login", async (c) => {
 
   const token = await createToken(user.id, c.env);
 
-  // Compute effective tier honoring trial
-  const trialActive = user.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date();
-  const effectiveTier = (trialActive && (user.tier || "free") === "free") ? "professional" : (user.tier || "free");
+  // Compute effective tier honoring trial + subscription expiry
+  const effectiveTier = getEffectiveTier(user);
+
+  // Grace period detection for frontend
+  let inGracePeriod = false;
+  if (user.tier && user.tier !== "free" && user.subscription_expires_at) {
+    const expiresAt = new Date(user.subscription_expires_at + "Z");
+    inGracePeriod = new Date() > expiresAt && effectiveTier !== "free";
+  }
 
   return c.json({
     token,
@@ -348,6 +356,9 @@ app.post("/api/auth/login", async (c) => {
       totalReferrals: user.total_referrals,
       affiliateEarnings: user.affiliate_earnings,
       trialExpiresAt: user.trial_expires_at || null,
+      subscriptionExpiresAt: user.subscription_expires_at || null,
+      billingCycle: user.billing_cycle || "monthly",
+      inGracePeriod,
       userType: user.user_type || "gog_employee",
     },
   });
@@ -493,6 +504,27 @@ async function checkUsageLimit(db: D1Database, userId: string, tier: string): Pr
   return { allowed: used < tierConfig.messagesPerDay, used, limit: tierConfig.messagesPerDay };
 }
 
+// ─── Effective Tier (trial + subscription expiry + grace period) ────
+
+function getEffectiveTier(user: {
+  tier: string;
+  subscription_expires_at: string | null;
+  trial_expires_at: string | null;
+}): string {
+  const now = new Date();
+  // Trial: free users with active trial get professional
+  if (user.trial_expires_at && new Date(user.trial_expires_at + "Z") > now
+      && (!user.tier || user.tier === "free")) return "professional";
+  // Paid tier with expiry set: check grace period (7 days)
+  if (user.tier && user.tier !== "free" && user.subscription_expires_at) {
+    const expiresAt = new Date(user.subscription_expires_at + "Z");
+    const graceEnd = new Date(expiresAt.getTime() + 7 * 86400000);
+    return now <= graceEnd ? user.tier : "free";
+  }
+  // Legacy paid users (no subscription_expires_at) keep access indefinitely
+  return user.tier || "free";
+}
+
 // ─── Trial Column Lazy Migration ────────────────────────────────────
 
 async function ensureTrialColumn(db: D1Database) {
@@ -525,6 +557,19 @@ async function ensureUserTypeColumn(db: D1Database) {
     await db.prepare("SELECT user_type FROM users LIMIT 1").first();
   } catch {
     await db.prepare("ALTER TABLE users ADD COLUMN user_type TEXT DEFAULT 'gog_employee'").run();
+  }
+}
+
+// ─── Subscription Columns Lazy Migration ─────────────────────────────
+
+async function ensureSubscriptionColumns(db: D1Database) {
+  try {
+    await db.prepare("SELECT subscription_expires_at FROM users LIMIT 1").first();
+  } catch {
+    await db.batch([
+      db.prepare("ALTER TABLE users ADD COLUMN subscription_expires_at TEXT DEFAULT NULL"),
+      db.prepare("ALTER TABLE users ADD COLUMN billing_cycle TEXT DEFAULT 'monthly'"),
+    ]);
   }
 }
 
@@ -610,19 +655,6 @@ async function ensurePushSubscriptionsTable(db: D1Database) {
     ]);
     pushSubsTableExists = true;
   }
-}
-
-// ─── Effective Tier (honors trial) ──────────────────────────────────
-
-async function getEffectiveTier(db: D1Database, userId: string): Promise<string> {
-  const user = await db.prepare(
-    "SELECT tier, trial_expires_at FROM users WHERE id = ?"
-  ).bind(userId).first<{ tier: string; trial_expires_at: string | null }>();
-  if (!user) return "free";
-  if (user.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date()) {
-    return "professional";
-  }
-  return user.tier || "free";
 }
 
 // ─── Daily Streak Updater ───────────────────────────────────────────
@@ -1169,15 +1201,13 @@ app.post("/api/chat", authMiddleware, async (c) => {
     return c.json({ error: "Message too long (max 50,000 characters)" }, 400);
   }
 
-  // Get user tier and type (with trial support)
+  // Get user tier and type (with trial + subscription expiry support)
   await ensureUserTypeColumn(c.env.DB);
-  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at, user_type FROM users WHERE id = ?")
+  await ensureSubscriptionColumns(c.env.DB);
+  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at, user_type, subscription_expires_at FROM users WHERE id = ?")
     .bind(userId)
-    .first<{ tier: string; trial_expires_at: string | null; user_type: string | null }>();
-  let userTier = user?.tier || "free";
-  // Honor trial
-  const trialActive = user?.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date();
-  if (trialActive && userTier === "free") userTier = "professional";
+    .first<{ tier: string; trial_expires_at: string | null; user_type: string | null; subscription_expires_at: string | null }>();
+  let userTier = getEffectiveTier({ tier: user?.tier || "free", trial_expires_at: user?.trial_expires_at || null, subscription_expires_at: user?.subscription_expires_at || null });
 
   // Check daily usage limit
   const usage = await checkUsageLimit(c.env.DB, userId, userTier);
@@ -2158,14 +2188,11 @@ app.get("/api/user/profile", authMiddleware, async (c) => {
 
 app.get("/api/models", authMiddleware, async (c) => {
   const userId = c.get("userId");
-  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at FROM users WHERE id = ?")
+  await ensureSubscriptionColumns(c.env.DB);
+  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at, subscription_expires_at FROM users WHERE id = ?")
     .bind(userId)
-    .first<{ tier: string; trial_expires_at: string | null }>();
-  let userTier = user?.tier || "free";
-  // Honor trial
-  if (userTier === "free" && user?.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date()) {
-    userTier = "professional";
-  }
+    .first<{ tier: string; trial_expires_at: string | null; subscription_expires_at: string | null }>();
+  let userTier = getEffectiveTier({ tier: user?.tier || "free", trial_expires_at: user?.trial_expires_at || null, subscription_expires_at: user?.subscription_expires_at || null });
   const isFree = userTier === "free";
 
   return c.json({
@@ -2826,29 +2853,44 @@ app.get("/api/pricing", async (c) => {
     }
   }
 
-  const plans = Object.entries(PRICING_TIERS).map(([id, tier]) => ({
-    id,
-    name: tier.name,
-    price: isStudent ? tier.studentPrice : tier.price,
-    standardPrice: tier.price,
-    studentPrice: tier.studentPrice,
-    isStudentPricing: isStudent,
-    messagesPerDay: tier.messagesPerDay,
-    features: tier.features,
-    popular: id === "professional",
-  }));
+  const plans = Object.entries(PRICING_TIERS).map(([id, tier]) => {
+    // Yearly = 10 months (2 months free discount)
+    const yearlyPrice = tier.price * 10;
+    const studentYearlyPrice = tier.studentPrice * 10;
+    return {
+      id,
+      name: tier.name,
+      price: isStudent ? tier.studentPrice : tier.price,
+      standardPrice: tier.price,
+      studentPrice: tier.studentPrice,
+      yearlyPrice: isStudent ? studentYearlyPrice : yearlyPrice,
+      standardYearlyPrice: yearlyPrice,
+      studentYearlyPrice,
+      isStudentPricing: isStudent,
+      messagesPerDay: tier.messagesPerDay,
+      features: tier.features,
+      popular: id === "professional",
+    };
+  });
   return c.json({ plans, isStudentPricing: isStudent });
 });
 
 app.get("/api/usage/status", authMiddleware, async (c) => {
   const userId = c.get("userId");
-  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at FROM users WHERE id = ?")
+  await ensureSubscriptionColumns(c.env.DB);
+  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at, subscription_expires_at, billing_cycle FROM users WHERE id = ?")
     .bind(userId)
-    .first<{ tier: string; trial_expires_at: string | null }>();
+    .first<{ tier: string; trial_expires_at: string | null; subscription_expires_at: string | null; billing_cycle: string | null }>();
 
-  let userTier = user?.tier || "free";
-  const trialActive = user?.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date();
-  if (trialActive && userTier === "free") userTier = "professional";
+  const userTier = getEffectiveTier({ tier: user?.tier || "free", trial_expires_at: user?.trial_expires_at || null, subscription_expires_at: user?.subscription_expires_at || null });
+  const trialActive = !!(user?.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date() && (user.tier || "free") === "free");
+
+  // Grace period detection
+  let inGracePeriod = false;
+  if (user?.tier && user.tier !== "free" && user.subscription_expires_at) {
+    const expiresAt = new Date(user.subscription_expires_at + "Z");
+    inGracePeriod = new Date() > expiresAt && userTier !== "free";
+  }
 
   const usage = await checkUsageLimit(c.env.DB, userId, userTier);
   const tierConfig = PRICING_TIERS[userTier] || PRICING_TIERS.free;
@@ -2861,21 +2903,30 @@ app.get("/api/usage/status", authMiddleware, async (c) => {
     limit: usage.limit,
     remaining: usage.limit === -1 ? -1 : Math.max(0, usage.limit - usage.used),
     models: tierConfig.models,
-    trialActive: !!trialActive,
+    trialActive,
     trialExpiresAt: user?.trial_expires_at || null,
+    subscriptionExpiresAt: user?.subscription_expires_at || null,
+    billingCycle: user?.billing_cycle || "monthly",
+    inGracePeriod,
   });
 });
 
 // Admin-only manual tier upgrade (payment upgrades go through Paystack webhooks)
 app.post("/api/upgrade", adminMiddleware, async (c) => {
-  const { userId, tier } = await c.req.json();
+  const { userId, tier, billingCycle: rawCycle } = await c.req.json();
+  const billingCycle = rawCycle === "yearly" ? "yearly" : "monthly";
 
   if (!userId || !PRICING_TIERS[tier] || tier === "free") {
     return c.json({ error: "Valid userId and tier required" }, 400);
   }
 
-  await c.env.DB.prepare("UPDATE users SET tier = ? WHERE id = ?")
-    .bind(tier, userId)
+  const daysToAdd = billingCycle === "yearly" ? 365 : 30;
+  const expiresAt = new Date(Date.now() + daysToAdd * 86400000)
+    .toISOString().replace("T", " ").split(".")[0];
+
+  await ensureSubscriptionColumns(c.env.DB);
+  await c.env.DB.prepare("UPDATE users SET tier = ?, subscription_expires_at = ?, billing_cycle = ? WHERE id = ?")
+    .bind(tier, expiresAt, billingCycle, userId)
     .run();
 
   const tierConfig = PRICING_TIERS[tier];
@@ -2883,7 +2934,9 @@ app.post("/api/upgrade", adminMiddleware, async (c) => {
     success: true,
     tier,
     name: tierConfig.name,
-    message: `Admin upgraded user to ${tierConfig.name} plan`,
+    billingCycle,
+    subscriptionExpiresAt: expiresAt,
+    message: `Admin upgraded user to ${tierConfig.name} plan (${billingCycle})`,
   });
 });
 
@@ -4872,13 +4925,15 @@ app.post("/api/auth/webauthn/login-complete", async (c) => {
     return c.json({ error: "Missing authentication data" }, 400);
   }
 
+  await ensureSubscriptionColumns(c.env.DB);
   const user = await c.env.DB.prepare(
-    "SELECT id, email, full_name, department, role, tier, referral_code, affiliate_tier, total_referrals, affiliate_earnings, trial_expires_at, user_type FROM users WHERE email = ?"
+    "SELECT id, email, full_name, department, role, tier, referral_code, affiliate_tier, total_referrals, affiliate_earnings, trial_expires_at, user_type, subscription_expires_at, billing_cycle FROM users WHERE email = ?"
   ).bind(email.toLowerCase().trim()).first<{
     id: string; email: string; full_name: string; department: string;
     role: string; tier: string; referral_code: string;
     affiliate_tier: string; total_referrals: number; affiliate_earnings: number;
     trial_expires_at: string | null; user_type: string | null;
+    subscription_expires_at: string | null; billing_cycle: string | null;
   }>();
   if (!user) return c.json({ error: "User not found" }, 401);
 
@@ -4932,8 +4987,14 @@ app.post("/api/auth/webauthn/login-complete", async (c) => {
     .bind(user.id).run();
 
   const token = await createToken(user.id, c.env);
-  const trialActive = user.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date();
-  const effectiveTier = (trialActive && (user.tier || "free") === "free") ? "professional" : (user.tier || "free");
+  const effectiveTier = getEffectiveTier(user);
+
+  // Grace period detection
+  let inGracePeriod = false;
+  if (user.tier && user.tier !== "free" && user.subscription_expires_at) {
+    const expiresAt = new Date(user.subscription_expires_at + "Z");
+    inGracePeriod = new Date() > expiresAt && effectiveTier !== "free";
+  }
 
   return c.json({
     token,
@@ -4950,6 +5011,9 @@ app.post("/api/auth/webauthn/login-complete", async (c) => {
       totalReferrals: user.total_referrals,
       affiliateEarnings: user.affiliate_earnings,
       trialExpiresAt: user.trial_expires_at || null,
+      subscriptionExpiresAt: user.subscription_expires_at || null,
+      billingCycle: user.billing_cycle || "monthly",
+      inGracePeriod,
       userType: user.user_type || "gog_employee",
     },
   });
@@ -5081,14 +5145,27 @@ app.post("/api/organizations/:id/remove", authMiddleware, async (c) => {
 
 // ─── Paystack Payment Integration ─────────────────────────────────────
 
-const PAYSTACK_PLANS: Record<string, { amount: number; studentAmount: number; planCode: string }> = {
-  professional: { amount: 6000, studentAmount: 2500, planCode: "professional" }, // GHS 60 / GHS 25 students
-  enterprise: { amount: 10000, studentAmount: 4500, planCode: "enterprise" },   // GHS 100 / GHS 45 students
+const PAYSTACK_PLANS: Record<string, {
+  monthly: number; yearly: number;
+  studentMonthly: number; studentYearly: number;
+  planCode: string;
+}> = {
+  professional: {
+    monthly: 6000, yearly: 60000,         // GHS 60/mo or GHS 600/yr (2 months free)
+    studentMonthly: 2500, studentYearly: 25000, // GHS 25/mo or GHS 250/yr
+    planCode: "professional",
+  },
+  enterprise: {
+    monthly: 10000, yearly: 100000,       // GHS 100/mo or GHS 1,000/yr (2 months free)
+    studentMonthly: 4500, studentYearly: 45000, // GHS 45/mo or GHS 450/yr
+    planCode: "enterprise",
+  },
 };
 
 app.post("/api/payments/initialize", authMiddleware, async (c) => {
   const userId = c.get("userId");
-  const { tier } = await c.req.json();
+  const { tier, billingCycle: rawCycle } = await c.req.json();
+  const billingCycle = rawCycle === "yearly" ? "yearly" : "monthly";
 
   if (!PAYSTACK_PLANS[tier]) {
     return c.json({ error: "Invalid plan" }, 400);
@@ -5102,8 +5179,10 @@ app.post("/api/payments/initialize", authMiddleware, async (c) => {
 
   const plan = PAYSTACK_PLANS[tier];
   const isStudent = user.user_type === "student";
-  const chargeAmount = isStudent ? plan.studentAmount : plan.amount;
-  const reference = `askozzy_${userId}_${tier}_${Date.now()}`;
+  const chargeAmount = billingCycle === "yearly"
+    ? (isStudent ? plan.studentYearly : plan.yearly)
+    : (isStudent ? plan.studentMonthly : plan.monthly);
+  const reference = `askozzy_${userId}_${tier}_${billingCycle}_${Date.now()}`;
 
   // If PAYSTACK_SECRET is configured, use real Paystack
   const paystackSecret = c.env.PAYSTACK_SECRET;
@@ -5121,7 +5200,7 @@ app.post("/api/payments/initialize", authMiddleware, async (c) => {
           currency: "GHS",
           reference,
           callback_url: `${c.req.url.split("/api")[0]}/?payment=success`,
-          metadata: { userId, tier, custom_fields: [{ display_name: "Plan", variable_name: "plan", value: tier }] },
+          metadata: { userId, tier, billingCycle, custom_fields: [{ display_name: "Plan", variable_name: "plan", value: `${tier} (${billingCycle})` }] },
         }),
       });
       const data: any = await res.json();
@@ -5176,16 +5255,28 @@ app.post("/api/webhooks/paystack", async (c) => {
         return c.json({ error: "Unknown tier" }, 400);
       }
 
-      // Validate payment amount matches expected price (allow student pricing)
+      // Determine billing cycle and minimum expected amount
+      const cycle: string = metadata.billingCycle === "yearly" ? "yearly" : "monthly";
+      const minAmount = cycle === "yearly" ? plan.studentYearly : plan.studentMonthly;
+
+      // Validate payment amount matches expected price (allow student pricing as minimum)
       const paidAmount = Number(amountPesewas) || 0;
-      if (paidAmount < plan.studentAmount) {
-        console.error("Webhook: amount mismatch", { expected: plan.studentAmount, received: paidAmount, tier: metadata.tier });
+      if (paidAmount < minAmount) {
+        console.error("Webhook: amount mismatch", { expected: minAmount, received: paidAmount, tier: metadata.tier, cycle });
         return c.json({ error: "Payment amount mismatch" }, 400);
       }
 
-      // Upgrade user's tier
-      await c.env.DB.prepare("UPDATE users SET tier = ? WHERE id = ?")
-        .bind(metadata.tier, metadata.userId).run();
+      // Calculate subscription expiry
+      const now = new Date();
+      const daysToAdd = cycle === "yearly" ? 365 : 30;
+      const expiresAt = new Date(now.getTime() + daysToAdd * 86400000)
+        .toISOString().replace("T", " ").split(".")[0];
+
+      // Upgrade user's tier with subscription expiry
+      await ensureSubscriptionColumns(c.env.DB);
+      await c.env.DB.prepare(
+        "UPDATE users SET tier = ?, subscription_expires_at = ?, billing_cycle = ? WHERE id = ?"
+      ).bind(metadata.tier, expiresAt, cycle, metadata.userId).run();
 
       // Process affiliate commissions (non-blocking)
       // Paystack amounts are in pesewas (1 GHS = 100 pesewas)
@@ -8296,13 +8387,11 @@ app.get("/api/admin/messaging/sessions/:sessionId/messages", adminMiddleware, as
 
 app.get("/api/usage/nudge", authMiddleware, async (c) => {
   const userId = c.get("userId");
-  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at FROM users WHERE id = ?")
-    .bind(userId).first<{ tier: string; trial_expires_at: string | null }>();
-  const userTier = user?.tier || "free";
+  await ensureSubscriptionColumns(c.env.DB);
+  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at, subscription_expires_at FROM users WHERE id = ?")
+    .bind(userId).first<{ tier: string; trial_expires_at: string | null; subscription_expires_at: string | null }>();
 
-  // Check if trial is active
-  const trialActive = user?.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date();
-  const effectiveTier = (trialActive && userTier === "free") ? "professional" : userTier;
+  const effectiveTier = getEffectiveTier({ tier: user?.tier || "free", trial_expires_at: user?.trial_expires_at || null, subscription_expires_at: user?.subscription_expires_at || null });
 
   if (effectiveTier !== "free") return c.json({ nudge: null, effectiveTier });
 
@@ -8370,22 +8459,25 @@ app.post("/api/trial/activate", authMiddleware, async (c) => {
 app.get("/api/trial/status", authMiddleware, async (c) => {
   const userId = c.get("userId");
   await ensureTrialColumn(c.env.DB);
+  await ensureSubscriptionColumns(c.env.DB);
 
   const user = await c.env.DB.prepare(
-    "SELECT tier, trial_expires_at FROM users WHERE id = ?"
-  ).bind(userId).first<{ tier: string; trial_expires_at: string | null }>();
+    "SELECT tier, trial_expires_at, subscription_expires_at, billing_cycle FROM users WHERE id = ?"
+  ).bind(userId).first<{ tier: string; trial_expires_at: string | null; subscription_expires_at: string | null; billing_cycle: string | null }>();
 
   if (!user) return c.json({ error: "User not found" }, 404);
 
-  const trialActive = user.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date();
-  const effectiveTier = (trialActive && user.tier === "free") ? "professional" : user.tier;
+  const effectiveTier = getEffectiveTier(user);
+  const trialActive = !!(user.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date() && user.tier === "free");
 
   return c.json({
     tier: user.tier,
     effectiveTier,
     trialExpiresAt: user.trial_expires_at || null,
-    trialActive: !!trialActive,
+    trialActive,
     trialUsed: !!user.trial_expires_at,
+    subscriptionExpiresAt: user.subscription_expires_at || null,
+    billingCycle: user.billing_cycle || "monthly",
   });
 });
 
@@ -8596,4 +8688,14 @@ app.put("/api/push/preferences", authMiddleware, async (c) => {
   }
 });
 
-export default app;
+export default {
+  fetch: app.fetch,
+  async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext) {
+    // Downgrade users whose subscription expired more than 7 days ago (grace period over)
+    const graceCutoff = new Date(Date.now() - 7 * 86400000)
+      .toISOString().replace("T", " ").split(".")[0];
+    await env.DB.prepare(
+      "UPDATE users SET tier = 'free' WHERE tier != 'free' AND subscription_expires_at IS NOT NULL AND subscription_expires_at < ?"
+    ).bind(graceCutoff).run();
+  },
+};

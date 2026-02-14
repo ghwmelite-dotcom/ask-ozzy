@@ -27,5 +27,8 @@
       "binding": "VECTORIZE",
       "index_name": "askozzy-knowledge"
     }
-  ]
+  ],
+  "triggers": {
+    "crons": ["0 2 * * *"]
+  }
 }

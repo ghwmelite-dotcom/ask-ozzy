@@ -26,3 +26,11 @@ CREATE TABLE IF NOT EXISTS whatsapp_messages (
   FOREIGN KEY (session_id) REFERENCES whatsapp_sessions(id)
 );
 CREATE INDEX IF NOT EXISTS idx_wa_msg_session ON whatsapp_messages(session_id, created_at);
+
+-- ═══════════════════════════════════════════════════════════════════
+--  Subscription Expiration & Billing Cycle
+-- ═══════════════════════════════════════════════════════════════════
+-- NULL subscription_expires_at = legacy paid (no expiry, keeps access)
+-- billing_cycle: 'monthly' or 'yearly'
+ALTER TABLE users ADD COLUMN subscription_expires_at TEXT DEFAULT NULL;
+ALTER TABLE users ADD COLUMN billing_cycle TEXT DEFAULT 'monthly';

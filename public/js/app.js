@@ -926,8 +926,20 @@ function updateSidebarFooter() {
       .toUpperCase()
       .slice(0, 2);
 
-    const tier = state.user.tier || "free";
+    const tier = state.user.effectiveTier || state.user.tier || "free";
     const tierName = { free: "Free", professional: "Professional", enterprise: "Enterprise" }[tier] || "Free";
+
+    // Subscription expiry indicator
+    let subStatusHtml = '';
+    if (state.user.subscriptionExpiresAt && tier !== 'free') {
+      const expDate = new Date(state.user.subscriptionExpiresAt);
+      const daysLeft = Math.ceil((expDate - Date.now()) / 86400000);
+      if (state.user.inGracePeriod) {
+        subStatusHtml = '<div style="font-size:10px;color:var(--error);margin-top:2px;">Expired — renew now</div>';
+      } else if (daysLeft <= 7 && daysLeft > 0) {
+        subStatusHtml = '<div style="font-size:10px;color:var(--warning, #f59e0b);margin-top:2px;">' + daysLeft + ' day' + (daysLeft === 1 ? '' : 's') + ' remaining</div>';
+      }
+    }
 
     footer.innerHTML = `
       <div class="user-info">
@@ -940,6 +952,7 @@ function updateSidebarFooter() {
       <button class="sidebar-tier-btn tier-${tier}" onclick="openPricingModal()">
         ${tierName} Plan ${tier === 'free' ? '— Upgrade' : ''}
       </button>
+      ${subStatusHtml}
       <div class="sidebar-earn-widget-wrap"></div>
       <div id="streak-badge-container"></div>
       <div class="sidebar-links">
@@ -2849,53 +2862,91 @@ async function openPricingModal() {
     if (state.token) headers["Authorization"] = `Bearer ${state.token}`;
     const res = await fetch(`${API}/api/pricing`, { headers });
     const data = await res.json();
-    const currentTier = (state.user && state.user.tier) || "free";
-
+    const currentTier = (state.user && state.user.effectiveTier) || (state.user && state.user.tier) || "free";
     const studentPricing = data.isStudentPricing;
 
-    body.innerHTML = `
-      ${studentPricing ? '<div class="student-discount-banner"><span>🎓</span> Student pricing applied — save up to 58%!</div>' : ''}
+    // Store plans data for toggle
+    window._pricingPlans = data.plans;
+    window._pricingStudentPricing = studentPricing;
+
+    function renderPricingCards(cycle) {
+      const isYearly = cycle === 'yearly';
+      const subExpiry = state.user && state.user.subscriptionExpiresAt;
+      const inGrace = state.user && state.user.inGracePeriod;
+
+      return `
+      ${studentPricing ? '<div class="student-discount-banner"><span>&#127891;</span> Student pricing applied — save up to 58%!</div>' : ''}
+      <div class="billing-toggle" style="display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:20px;">
+        <span style="font-size:14px;font-weight:${!isYearly ? '600' : '400'};color:var(--text-${!isYearly ? 'primary' : 'secondary'});">Monthly</span>
+        <label class="toggle-switch" style="position:relative;display:inline-block;width:48px;height:26px;cursor:pointer;">
+          <input type="checkbox" id="billing-cycle-toggle" ${isYearly ? 'checked' : ''} onchange="toggleBillingCycle(this.checked)" style="opacity:0;width:0;height:0;">
+          <span style="position:absolute;inset:0;background:${isYearly ? 'var(--accent)' : 'var(--border)'};border-radius:13px;transition:background 0.2s;"></span>
+          <span style="position:absolute;top:3px;left:${isYearly ? '25px' : '3px'};width:20px;height:20px;background:white;border-radius:50%;transition:left 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.2);"></span>
+        </label>
+        <span style="font-size:14px;font-weight:${isYearly ? '600' : '400'};color:var(--text-${isYearly ? 'primary' : 'secondary'});">Yearly</span>
+        ${isYearly ? '<span style="font-size:11px;background:var(--accent);color:white;padding:2px 8px;border-radius:10px;font-weight:600;">Save 17%</span>' : ''}
+      </div>
       <div class="pricing-grid">
         ${data.plans.map(plan => {
           const isCurrent = plan.id === currentTier;
           const isDowngrade = getPlanOrder(plan.id) < getPlanOrder(currentTier);
+          const displayPrice = isYearly ? plan.yearlyPrice : plan.price;
           const showDiscount = studentPricing && plan.standardPrice > 0 && plan.price < plan.standardPrice;
-          return `
-          <div class="pricing-card ${plan.popular && !isCurrent ? 'popular' : ''} ${isCurrent ? 'current' : ''}">
-            <div class="pricing-name">${plan.name}</div>
-            <div class="pricing-price">
-              ${plan.price === 0 ? 'Free' : `GHS ${plan.price}`}
-              ${plan.price > 0 ? '<span>/month</span>' : ''}
-            </div>
-            ${showDiscount ? `<div class="pricing-original-price">was GHS ${plan.standardPrice}/month</div>` : ''}
-            <ul class="pricing-features">
-              ${plan.features.map(f => `<li>${f}</li>`).join('')}
-            </ul>
-            ${isCurrent
+          const perMonthEquiv = isYearly && plan.yearlyPrice > 0 ? Math.round(plan.yearlyPrice / 12) : null;
+
+          let statusLine = '';
+          if (isCurrent && subExpiry) {
+            const expDate = new Date(subExpiry);
+            const now = new Date();
+            if (inGrace) {
+              statusLine = '<div style="color:var(--error);font-size:12px;margin-top:8px;font-weight:600;">Expired — renew to keep access</div>';
+            } else if (expDate > now) {
+              const daysLeft = Math.ceil((expDate - now) / 86400000);
+              statusLine = '<div style="color:var(--text-secondary);font-size:12px;margin-top:8px;">Renews by ' + expDate.toLocaleDateString() + (daysLeft <= 7 ? ' (' + daysLeft + ' days left)' : '') + '</div>';
+            }
+          }
+
+          return '<div class="pricing-card ' + (plan.popular && !isCurrent ? 'popular' : '') + ' ' + (isCurrent ? 'current' : '') + '">'
+            + '<div class="pricing-name">' + plan.name + '</div>'
+            + '<div class="pricing-price">'
+            + (displayPrice === 0 ? 'Free' : 'GHS ' + displayPrice)
+            + (displayPrice > 0 ? '<span>/' + (isYearly ? 'year' : 'month') + '</span>' : '')
+            + '</div>'
+            + (perMonthEquiv ? '<div style="font-size:12px;color:var(--text-secondary);margin-top:-4px;">GHS ' + perMonthEquiv + '/month equivalent</div>' : '')
+            + (showDiscount && !isYearly ? '<div class="pricing-original-price">was GHS ' + plan.standardPrice + '/month</div>' : '')
+            + statusLine
+            + '<ul class="pricing-features">' + plan.features.map(function(f) { return '<li>' + f + '</li>'; }).join('') + '</ul>'
+            + (isCurrent
               ? '<button class="btn-pricing current-btn">Current Plan</button>'
               : isDowngrade
                 ? ''
-                : `<button class="btn-pricing ${plan.popular ? 'primary' : 'secondary'}" onclick="upgradeToPlan('${plan.id}', '${plan.name}', ${plan.price})">${plan.price === 0 ? 'Get Started' : 'Upgrade to ' + plan.name}</button>`
-            }
-          </div>`;
+                : '<button class="btn-pricing ' + (plan.popular ? 'primary' : 'secondary') + '" onclick="upgradeToPlan(\'' + plan.id + '\', \'' + plan.name + '\', ' + displayPrice + ', \'' + cycle + '\')">' + (displayPrice === 0 ? 'Get Started' : 'Upgrade to ' + plan.name) + '</button>')
+            + '</div>';
         }).join('')}
       </div>
       <div style="text-align:center;margin-top:20px;font-size:12px;color:var(--text-muted);">
         All prices in Ghana Cedis (GHS). Cancel anytime. Payment via Mobile Money or card.
       </div>`;
+    }
 
-    // Feature 3: Insert trial banner above pricing grid
-    const trialExpires = state.user && state.user.trialExpiresAt;
-    const trialActive = trialExpires && new Date(trialExpires) > new Date();
-    const canTrial = currentTier === 'free' && !trialExpires;
+    window.toggleBillingCycle = function(isYearly) {
+      const cycle = isYearly ? 'yearly' : 'monthly';
+      body.innerHTML = renderPricingCards(cycle);
+      insertTrialBanner(cycle);
+    };
 
-    if (canTrial) {
+    function insertTrialBanner(cycle) {
+      const trialExpires = state.user && state.user.trialExpiresAt;
+      const trialActive = trialExpires && new Date(trialExpires) > new Date();
+      const canTrial = currentTier === 'free' && !trialExpires;
       const pricingGrid = body.querySelector('.pricing-grid');
-      if (pricingGrid) {
+      if (!pricingGrid) return;
+
+      if (canTrial) {
         const trialBanner = document.createElement('div');
         trialBanner.className = 'trial-banner';
         trialBanner.innerHTML = `
-          <div class="trial-banner-icon">🎁</div>
+          <div class="trial-banner-icon">&#127873;</div>
           <div class="trial-banner-text">
             <div class="trial-banner-title">Try Professional FREE for 3 days</div>
             <div class="trial-banner-sub">Full access to all 11 AI models, 200 messages/day, and every premium feature. No card needed.</div>
@@ -2903,25 +2954,26 @@ async function openPricingModal() {
           <button class="trial-banner-btn" onclick="activateFreeTrial()">Start Free Trial</button>
         `;
         pricingGrid.parentNode.insertBefore(trialBanner, pricingGrid);
-      }
-    } else if (trialActive) {
-      const expires = new Date(trialExpires);
-      const hoursLeft = Math.max(0, Math.round((expires - Date.now()) / 3600000));
-      const pricingGrid = body.querySelector('.pricing-grid');
-      if (pricingGrid) {
+      } else if (trialActive) {
+        const expires = new Date(trialExpires);
+        const hoursLeft = Math.max(0, Math.round((expires - Date.now()) / 3600000));
+        const price = cycle === 'yearly' ? (studentPricing ? 250 : 600) : (studentPricing ? 25 : 60);
         const activeBanner = document.createElement('div');
         activeBanner.className = 'trial-banner trial-active';
         activeBanner.innerHTML = `
-          <div class="trial-banner-icon">⚡</div>
+          <div class="trial-banner-icon">&#9889;</div>
           <div class="trial-banner-text">
             <div class="trial-banner-title">Professional Trial Active</div>
             <div class="trial-banner-sub">${hoursLeft} hours remaining — upgrade now to keep all features</div>
           </div>
-          <button class="trial-banner-btn" onclick="upgradeToPlan('professional','Professional',${studentPricing ? 25 : 60})">Upgrade Now</button>
+          <button class="trial-banner-btn" onclick="upgradeToPlan('professional','Professional',${price},'${cycle}')">Upgrade Now</button>
         `;
         pricingGrid.parentNode.insertBefore(activeBanner, pricingGrid);
       }
     }
+
+    body.innerHTML = renderPricingCards('monthly');
+    insertTrialBanner('monthly');
   } catch {
     body.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">Failed to load pricing. Please try again.</div>';
   }
@@ -2940,9 +2992,9 @@ document.getElementById("pricing-modal").addEventListener("click", (e) => {
   if (e.target === e.currentTarget) closePricingModal();
 });
 
-async function upgradeToPlan(planId, planName, price) {
+async function upgradeToPlan(planId, planName, price, billingCycle) {
   // Route through Paystack payment system
-  await initPaystackPayment(planId, planName, price);
+  await initPaystackPayment(planId, planName, price, billingCycle || 'monthly');
 }
 
 // ─── Keyboard Shortcuts ──────────────────────────────────────────────
@@ -4606,7 +4658,7 @@ function showOnboardingTour() {
 
 // ─── Paystack Payment ────────────────────────────────────────────────
 
-async function initPaystackPayment(planId, planName, price) {
+async function initPaystackPayment(planId, planName, price, billingCycle) {
   if (!isLoggedIn()) {
     closePricingModal();
     state.pendingAction = () => openPricingModal();
@@ -4618,7 +4670,7 @@ async function initPaystackPayment(planId, planName, price) {
     const res = await fetch(`${API}/api/payments/initialize`, {
       method: "POST",
       headers: authHeaders(),
-      body: JSON.stringify({ tier: planId }),
+      body: JSON.stringify({ tier: planId, billingCycle: billingCycle || 'monthly' }),
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error);
