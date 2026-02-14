@@ -801,6 +801,11 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     closeAuthModal();
     onAuthenticated();
 
+    // Logged in with access code → prompt TOTP setup for easier future logins
+    if (data.legacyAuth) {
+      setTimeout(() => open2FASetup(), 500);
+    }
+
   } catch (err) {
     showAuthError(err.message);
   } finally {
@@ -4566,7 +4571,8 @@ async function open2FASetup() {
           Scan this code with your authenticator app (Google Authenticator, Authy, etc.):
         </p>
         <div style="background:#fff;padding:16px;border-radius:12px;display:inline-block;margin-bottom:16px;">
-          <p style="font-size:11px;color:var(--text-muted);margin:16px 0;">Scan QR not available. Enter the secret code manually in your authenticator app.</p>
+          <canvas id="2fa-qr-canvas"></canvas>
+          <p id="2fa-qr-fallback" style="font-size:11px;color:#666;margin:8px 0 0;display:none;">QR code unavailable. Enter the secret manually below.</p>
         </div>
         <p style="font-size:11px;color:var(--text-muted);margin-bottom:16px;">
           Or enter this secret manually: <code style="color:var(--gold);font-size:13px;">${data.secret}</code>
@@ -4578,6 +4584,21 @@ async function open2FASetup() {
         <button class="btn-auth" onclick="verify2FA()">Verify & Enable</button>
         <div id="2fa-error" style="color:var(--red-error-text);font-size:12px;margin-top:8px;"></div>
       </div>`;
+
+    // Render QR code if library is available
+    const qrCanvas = document.getElementById("2fa-qr-canvas");
+    if (typeof QRCode !== "undefined" && qrCanvas) {
+      try {
+        QRCode.toCanvas(qrCanvas, data.uri, { width: 200, margin: 1 });
+      } catch {
+        document.getElementById("2fa-qr-fallback").style.display = "block";
+        qrCanvas.style.display = "none";
+      }
+    } else {
+      if (qrCanvas) qrCanvas.style.display = "none";
+      const fallback = document.getElementById("2fa-qr-fallback");
+      if (fallback) fallback.style.display = "block";
+    }
   } catch {
     body.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted);">Failed to set up authenticator</div>';
   }
