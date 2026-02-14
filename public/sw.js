@@ -1716,8 +1716,26 @@ async function queueOfflineMessage(path, body, headers) {
   );
 }
 
+// ─── Request auth token from a connected client ─────────────────────
+async function getAuthTokenFromClient() {
+  const clients = await self.clients.matchAll({ type: "window" });
+  for (const client of clients) {
+    try {
+      const mc = new MessageChannel();
+      const tokenPromise = new Promise((resolve) => {
+        mc.port1.onmessage = (e) => resolve(e.data?.token || null);
+        setTimeout(() => resolve(null), 2000);
+      });
+      client.postMessage({ type: "REQUEST_AUTH_TOKEN" }, [mc.port2]);
+      const token = await tokenPromise;
+      if (token) return token;
+    } catch {}
+  }
+  return null;
+}
+
 // ─── Process offline queue when back online ──────────────────────────
-async function processOfflineQueue() {
+async function processOfflineQueue(authToken) {
   const cache = await caches.open(CACHE_NAME);
   const queueResponse = await cache.match(OFFLINE_QUEUE_KEY);
 
@@ -1732,13 +1750,20 @@ async function processOfflineQueue() {
 
   if (queue.length === 0) return;
 
+  // Get auth token: prefer passed token, then request from client
+  const token = authToken || await getAuthTokenFromClient();
+
   const remaining = [];
 
   for (const item of queue) {
     try {
+      const headers = { ...item.headers };
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
       const response = await fetch(item.path, {
         method: "POST",
-        headers: item.headers,
+        headers,
         body: JSON.stringify(item.body),
       });
 
@@ -1777,7 +1802,7 @@ self.addEventListener("message", (event) => {
   }
 
   if (event.data && event.data.type === "PROCESS_QUEUE") {
-    processOfflineQueue();
+    processOfflineQueue(event.data.token);
   }
 
   if (event.data && event.data.type === "GET_QUEUE_STATUS") {

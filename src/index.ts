@@ -2447,14 +2447,15 @@ async function checkMilestones(db: D1Database, userId: string): Promise<void> {
   for (const m of milestones) {
     if (user.total_referrals < m.threshold) continue;
 
-    // Check if already awarded
+    // Check if already awarded (exact description match to avoid 10% matching 100)
+    const milestoneDesc = `Milestone: ${m.threshold} referrals — GHS ${m.bonus} bonus`;
     const existing = await db.prepare(
-      "SELECT COUNT(*) as cnt FROM affiliate_transactions WHERE user_id = ? AND type = 'bonus' AND description LIKE ?"
-    ).bind(userId, `Milestone: ${m.threshold}%`).first<{ cnt: number }>();
+      "SELECT COUNT(*) as cnt FROM affiliate_transactions WHERE user_id = ? AND type = 'bonus' AND description = ?"
+    ).bind(userId, milestoneDesc).first<{ cnt: number }>();
 
     if (existing && existing.cnt > 0) continue;
 
-    await creditWallet(db, userId, m.bonus, "bonus", `Milestone: ${m.threshold} referrals — GHS ${m.bonus} bonus`, undefined, undefined);
+    await creditWallet(db, userId, m.bonus, "bonus", milestoneDesc, undefined, undefined);
   }
 }
 
@@ -3160,7 +3161,10 @@ app.post("/api/admin/bootstrap", async (c) => {
   const { email, secret } = await c.req.json();
   if (!email) return c.json({ error: "Email is required" }, 400);
 
-  if (c.env.BOOTSTRAP_SECRET && secret !== c.env.BOOTSTRAP_SECRET) {
+  if (!c.env.BOOTSTRAP_SECRET) {
+    return c.json({ error: "BOOTSTRAP_SECRET not configured" }, 500);
+  }
+  if (secret !== c.env.BOOTSTRAP_SECRET) {
     return c.json({ error: "Invalid bootstrap secret" }, 403);
   }
 
@@ -3295,23 +3299,56 @@ app.patch("/api/admin/users/:id/role", adminMiddleware, async (c) => {
   return c.json({ success: true });
 });
 
-// Delete user + all data
+// Delete user + all data (comprehensive cascade)
 app.delete("/api/admin/users/:id", adminMiddleware, async (c) => {
   const id = c.req.param("id");
   const adminId = c.get("userId");
   if (id === adminId) {
     return c.json({ error: "Cannot delete your own account" }, 400);
   }
+  const db = c.env.DB;
   // Delete messages in user's conversations
-  await c.env.DB.prepare(
+  await db.prepare(
     "DELETE FROM messages WHERE conversation_id IN (SELECT id FROM conversations WHERE user_id = ?)"
   ).bind(id).run();
+  // Delete message ratings
+  await db.prepare("DELETE FROM message_ratings WHERE user_id = ?").bind(id).run();
   // Delete conversations
-  await c.env.DB.prepare("DELETE FROM conversations WHERE user_id = ?").bind(id).run();
+  await db.prepare("DELETE FROM conversations WHERE user_id = ?").bind(id).run();
+  // Delete folders
+  await db.prepare("DELETE FROM folders WHERE user_id = ?").bind(id).run();
+  // Delete user memories
+  await db.prepare("DELETE FROM user_memories WHERE user_id = ?").bind(id).run();
+  // Delete usage log
+  await db.prepare("DELETE FROM usage_log WHERE user_id = ?").bind(id).run();
   // Delete referrals
-  await c.env.DB.prepare("DELETE FROM referrals WHERE referrer_id = ? OR referred_id = ?").bind(id, id).run();
+  await db.prepare("DELETE FROM referrals WHERE referrer_id = ? OR referred_id = ?").bind(id, id).run();
+  // Delete push subscriptions
+  await db.prepare("DELETE FROM push_subscriptions WHERE user_id = ?").bind(id).run();
+  // Delete webauthn credentials
+  await db.prepare("DELETE FROM webauthn_credentials WHERE user_id = ?").bind(id).run();
+  // Delete moderation flags
+  await db.prepare("DELETE FROM moderation_flags WHERE user_id = ?").bind(id).run();
+  // Delete research reports
+  await db.prepare("DELETE FROM research_reports WHERE user_id = ?").bind(id).run();
+  // Delete workflows
+  await db.prepare("DELETE FROM workflows WHERE user_id = ?").bind(id).run();
+  // Delete meetings
+  await db.prepare("DELETE FROM meetings WHERE user_id = ?").bind(id).run();
+  // Delete space memberships
+  await db.prepare("DELETE FROM space_members WHERE user_id = ?").bind(id).run();
+  // Delete affiliate data
+  await db.prepare("DELETE FROM affiliate_transactions WHERE user_id = ?").bind(id).run();
+  await db.prepare("DELETE FROM withdrawal_requests WHERE user_id = ?").bind(id).run();
+  await db.prepare("DELETE FROM affiliate_wallets WHERE user_id = ?").bind(id).run();
+  // Delete productivity stats
+  await db.prepare("DELETE FROM productivity_stats WHERE user_id = ?").bind(id).run();
+  // Delete audit log entries (keep for compliance? — delete since user requested full removal)
+  await db.prepare("DELETE FROM user_audit_log WHERE user_id = ?").bind(id).run();
+  // Delete USSD sessions
+  await db.prepare("DELETE FROM ussd_sessions WHERE user_id = ?").bind(id).run();
   // Delete user
-  await c.env.DB.prepare("DELETE FROM users WHERE id = ?").bind(id).run();
+  await db.prepare("DELETE FROM users WHERE id = ?").bind(id).run();
   return c.json({ success: true });
 });
 
@@ -4973,7 +5010,15 @@ async function verifyTOTP(secret: string, code: string): Promise<boolean> {
   for (const offset of [-1, 0, 1]) {
     const counter = Math.floor((now / timeStep) + offset);
     const expected = await generateTOTPCode(secret, counter);
-    if (expected === code) return true;
+    // Constant-time comparison to prevent timing attacks
+    if (expected.length === code.length) {
+      const enc = new TextEncoder();
+      const a = enc.encode(expected);
+      const b = enc.encode(code);
+      let diff = 0;
+      for (let i = 0; i < a.length; i++) diff |= a[i] ^ b[i];
+      if (diff === 0) return true;
+    }
   }
   return false;
 }

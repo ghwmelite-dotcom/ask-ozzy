@@ -36,6 +36,37 @@ window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", (e
   }
 });
 
+// ─── Focus Trap for Modals (Accessibility) ───────────────────────────
+const _focusTrapStack = [];
+function trapFocus(modalEl) {
+  const focusable = modalEl.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  );
+  if (focusable.length === 0) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  function handler(e) {
+    if (e.key !== "Tab") return;
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  }
+  modalEl.addEventListener("keydown", handler);
+  _focusTrapStack.push({ el: modalEl, handler, previousFocus: document.activeElement });
+  first.focus();
+}
+function releaseFocus(modalEl) {
+  const idx = _focusTrapStack.findIndex(t => t.el === modalEl);
+  if (idx === -1) return;
+  const trap = _focusTrapStack.splice(idx, 1)[0];
+  modalEl.removeEventListener("keydown", trap.handler);
+  if (trap.previousFocus && typeof trap.previousFocus.focus === "function") {
+    trap.previousFocus.focus();
+  }
+}
+
 // ─── Lazy Script Loaders (Chart.js + docx.js) ────────────────────────
 function _loadScript(src) {
   let p = _loadScript._cache?.[src];
@@ -458,13 +489,15 @@ function isLoggedIn() {
 // ─── Auth Modal ──────────────────────────────────────────────────────
 
 function openAuthModal() {
-  document.getElementById("auth-modal").classList.add("active");
+  const modal = document.getElementById("auth-modal");
+  modal.classList.add("active");
   document.getElementById("auth-error").classList.remove("visible");
   // Show passkey login button if WebAuthn is supported
   const passkeyBtn = document.getElementById("passkey-login-btn");
   if (passkeyBtn) passkeyBtn.style.display = window.PublicKeyCredential ? "" : "none";
-  // Focus the first input
+  // Focus trap + focus first input
   setTimeout(() => {
+    trapFocus(modal);
     const visible = document.getElementById("login-form").classList.contains("hidden")
       ? document.getElementById("reg-name")
       : document.getElementById("login-email");
@@ -484,7 +517,9 @@ function closeAuthModal() {
   if (privacyBanner) privacyBanner.style.display = "";
   document.getElementById("auth-modal-title").textContent = "Sign in to AskOzzy";
 
-  document.getElementById("auth-modal").classList.remove("active");
+  const authModalEl = document.getElementById("auth-modal");
+  releaseFocus(authModalEl);
+  authModalEl.classList.remove("active");
   state.pendingAction = null;
 }
 
@@ -1971,10 +2006,13 @@ function openTemplateModal() {
   modal.classList.add("active");
   renderModalCategories();
   renderModalTemplates("All");
+  setTimeout(() => trapFocus(modal), 100);
 }
 
 function closeTemplateModal() {
-  document.getElementById("template-modal").classList.remove("active");
+  const modal = document.getElementById("template-modal");
+  releaseFocus(modal);
+  modal.classList.remove("active");
 }
 
 function renderModalCategories() {
@@ -2123,6 +2161,7 @@ async function openAffiliateModal() {
 
   body.innerHTML = '<div style="text-align:center;padding:40px;"><div class="spinner"></div><p style="margin-top:12px;color:var(--text-muted);font-size:13px;">Loading your affiliate dashboard...</p></div>';
   modal.classList.add("active");
+  setTimeout(() => trapFocus(modal), 100);
 
   try {
     const res = await fetch(`${API}/api/affiliate/dashboard`, { headers: authHeaders() });
@@ -2860,7 +2899,9 @@ async function renderAffiliateLeaderboard(el) {
 }
 
 function closeAffiliateModal() {
-  document.getElementById("affiliate-modal").classList.remove("active");
+  const modal = document.getElementById("affiliate-modal");
+  releaseFocus(modal);
+  modal.classList.remove("active");
   // Clean up chart
   if (affiliateEarningsChart) {
     affiliateEarningsChart.destroy();
@@ -2957,6 +2998,7 @@ async function openPricingModal() {
 
   body.innerHTML = '<div style="text-align:center;padding:40px;"><div class="spinner"></div></div>';
   modal.classList.add("active");
+  setTimeout(() => trapFocus(modal), 100);
 
   try {
     const headers = {};
@@ -3086,7 +3128,9 @@ function getPlanOrder(tier) {
 }
 
 function closePricingModal() {
-  document.getElementById("pricing-modal").classList.remove("active");
+  const modal = document.getElementById("pricing-modal");
+  releaseFocus(modal);
+  modal.classList.remove("active");
 }
 
 document.getElementById("pricing-modal").addEventListener("click", (e) => {
@@ -3133,7 +3177,10 @@ document.addEventListener("keydown", (e) => {
   }
   // Escape — close any open modal
   if (e.key === "Escape") {
-    document.querySelectorAll(".modal-overlay.active").forEach(m => m.classList.remove("active"));
+    document.querySelectorAll(".modal-overlay.active").forEach(m => {
+      releaseFocus(m);
+      m.classList.remove("active");
+    });
   }
 });
 
@@ -4995,7 +5042,7 @@ function updateOnlineStatus() {
 
     // Try to process queued messages
     if (navigator.serviceWorker && navigator.serviceWorker.controller) {
-      navigator.serviceWorker.controller.postMessage({ type: "PROCESS_QUEUE" });
+      navigator.serviceWorker.controller.postMessage({ type: "PROCESS_QUEUE", token: state.token || null });
     }
 
     // Hide queue badge after a short delay (let sync complete)
@@ -5089,6 +5136,13 @@ if ("serviceWorker" in navigator) {
 
       case "SW_UPDATE_AVAILABLE":
         showSyncToast("Update available — pull to refresh", 5000);
+        break;
+
+      case "REQUEST_AUTH_TOKEN":
+        // SW requesting auth token for offline queue replay
+        if (event.ports && event.ports[0]) {
+          event.ports[0].postMessage({ token: state.token || null });
+        }
         break;
     }
   });
@@ -5251,7 +5305,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       // Process offline queue via SW
       if (navigator.serviceWorker && navigator.serviceWorker.controller) {
-        navigator.serviceWorker.controller.postMessage({ type: "PROCESS_QUEUE" });
+        navigator.serviceWorker.controller.postMessage({ type: "PROCESS_QUEUE", token: state.token || null });
       }
       // Small delay so the animation feels natural
       await new Promise((r) => setTimeout(r, 600));
