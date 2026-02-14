@@ -2127,7 +2127,7 @@ function renderAffiliateTabContent() {
 
 function renderAffiliateOverview(el) {
   const d = affiliateData;
-  const wallet = d.wallet || 0;
+  const wallet = (typeof d.wallet === 'object' && d.wallet !== null) ? (d.wallet.balance || 0) : (d.wallet || 0);
   const stats = d.stats || {};
   const referralCode = d.referralCode || "";
   const referralLink = `${window.location.origin}?ref=${referralCode}`;
@@ -2150,7 +2150,7 @@ function renderAffiliateOverview(el) {
       <!-- Wallet Card -->
       <div class="affiliate-wallet-card">
         <div class="affiliate-wallet-label">Available Balance</div>
-        <div class="affiliate-wallet-amount">GHS ${(typeof wallet === 'number' ? wallet : 0).toFixed(2)}</div>
+        <div class="affiliate-wallet-amount">GHS ${wallet.toFixed(2)}</div>
         <div class="affiliate-wallet-sub">Earn 30% on every referral payment</div>
       </div>
 
@@ -2553,7 +2553,8 @@ async function renderAffiliateNetwork(el) {
 async function renderAffiliateWithdraw(el) {
   el.innerHTML = '<div style="text-align:center;padding:30px;"><div class="spinner"></div></div>';
 
-  const wallet = affiliateData.wallet || 0;
+  const walletObj = affiliateData.wallet;
+  const wallet = (typeof walletObj === 'object' && walletObj !== null) ? (walletObj.balance || 0) : (walletObj || 0);
 
   try {
     // Load withdrawal history from transactions
@@ -2681,7 +2682,8 @@ async function submitWithdrawal() {
     errEl.style.display = "block";
     return;
   }
-  if (amount > (affiliateData.wallet || 0)) {
+  const walletBalance = (typeof affiliateData.wallet === 'object' && affiliateData.wallet !== null) ? (affiliateData.wallet.balance || 0) : (affiliateData.wallet || 0);
+  if (amount > walletBalance) {
     errEl.textContent = "Amount exceeds your available balance";
     errEl.style.display = "block";
     return;
@@ -2714,7 +2716,11 @@ async function submitWithdrawal() {
     if (!res.ok) throw new Error(data.error || "Withdrawal failed");
 
     // Update local wallet
-    affiliateData.wallet = (affiliateData.wallet || 0) - amount;
+    if (typeof affiliateData.wallet === 'object' && affiliateData.wallet !== null) {
+      affiliateData.wallet.balance = (affiliateData.wallet.balance || 0) - amount;
+    } else {
+      affiliateData.wallet = (affiliateData.wallet || 0) - amount;
+    }
 
     // Refresh the withdraw tab
     const el = document.getElementById("affiliate-tab-content");
@@ -2822,6 +2828,9 @@ async function loadUsageStatus() {
     if (!res.ok) return;
     const data = await res.json();
     state.user.tier = data.tier;
+    state.user.effectiveTier = data.tier;
+    if (data.subscriptionExpiresAt) state.user.subscriptionExpiresAt = data.subscriptionExpiresAt;
+    if (data.billingCycle) state.user.billingCycle = data.billingCycle;
     localStorage.setItem("askozzy_user", JSON.stringify(state.user));
     updateUsageBadge(data);
   } catch {}
@@ -5974,15 +5983,52 @@ function showPaymentSuccess(planName) {
 (function checkPaymentCallback() {
   const params = new URLSearchParams(window.location.search);
   if (params.get("payment") === "success") {
+    // Extract plan name from Paystack reference (format: askozzy_userId_tier_cycle_timestamp)
+    const ref = params.get("reference") || params.get("trxref") || "";
+    const refParts = ref.split("_");
+    const tierFromRef = refParts[2] || "";
+    const planName = tierFromRef.charAt(0).toUpperCase() + tierFromRef.slice(1) || "your new plan";
+
     // Clean URL
     window.history.replaceState({}, "", "/");
-    // Refresh user data
-    setTimeout(() => {
-      if (isLoggedIn()) {
-        loadUsageStatus();
-        showPaymentSuccess("your new plan");
+
+    // Poll usage status with retries (webhook may still be processing)
+    if (isLoggedIn()) {
+      const oldTier = state.user?.tier || "free";
+      let attempts = 0;
+      const maxAttempts = 5;
+
+      async function pollForUpgrade() {
+        attempts++;
+        try {
+          const res = await fetch(`${API}/api/usage/status`, { headers: authHeaders() });
+          if (res.ok) {
+            const data = await res.json();
+            state.user.tier = data.tier;
+            state.user.effectiveTier = data.tier;
+            state.user.subscriptionExpiresAt = data.subscriptionExpiresAt;
+            state.user.billingCycle = data.billingCycle;
+            localStorage.setItem("askozzy_user", JSON.stringify(state.user));
+            updateUsageBadge(data);
+
+            if (data.tier !== oldTier || data.tier !== "free") {
+              showPaymentSuccess(data.tierName || planName);
+              return;
+            }
+          }
+        } catch {}
+
+        // Tier hasn't updated yet — retry with increasing delay
+        if (attempts < maxAttempts) {
+          setTimeout(pollForUpgrade, attempts * 1500);
+        } else {
+          // Webhook likely processed but tier was already correct, or max retries
+          showPaymentSuccess(planName);
+        }
       }
-    }, 500);
+
+      setTimeout(pollForUpgrade, 1000);
+    }
   }
 })();
 
