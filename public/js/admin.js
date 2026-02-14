@@ -403,6 +403,7 @@ function toggleAddUserForm() {
     document.getElementById("add-user-email").value = "";
     document.getElementById("add-user-dept").value = "";
     document.getElementById("add-user-tier").value = "free";
+    document.getElementById("add-user-type").value = "gog_employee";
     document.getElementById("add-user-result").innerHTML = "";
     document.getElementById("add-user-code").style.display = "none";
     form.style.display = "block";
@@ -415,6 +416,7 @@ async function submitAddUser() {
   const email = document.getElementById("add-user-email").value.trim();
   const department = document.getElementById("add-user-dept").value.trim();
   const tier = document.getElementById("add-user-tier").value;
+  const userType = document.getElementById("add-user-type").value;
   const resultEl = document.getElementById("add-user-result");
 
   if (!fullName || !email) {
@@ -430,6 +432,7 @@ async function submitAddUser() {
       body: JSON.stringify({
         users: [{ fullName: fullName, email: email, department: department }],
         defaultTier: tier,
+        defaultUserType: userType,
       }),
     });
     const d = await res.json();

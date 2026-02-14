@@ -5545,7 +5545,7 @@ app.post("/api/admin/users/:userId/reset-code", adminMiddleware, async (c) => {
 
 app.post("/api/admin/users/bulk", adminMiddleware, async (c) => {
   const adminId = c.get("userId");
-  const { users: userList, defaultTier } = await c.req.json();
+  const { users: userList, defaultTier, defaultUserType } = await c.req.json();
 
   if (!Array.isArray(userList) || userList.length === 0) {
     return c.json({ error: "Users array is required" }, 400);
@@ -5555,6 +5555,7 @@ app.post("/api/admin/users/bulk", adminMiddleware, async (c) => {
   }
 
   const tier = defaultTier || "free";
+  const userType = defaultUserType || "gog_employee";
   const results: Array<{ email: string; status: string; accessCode?: string }> = [];
 
   for (const u of userList) {
@@ -5584,8 +5585,8 @@ app.post("/api/admin/users/bulk", adminMiddleware, async (c) => {
 
     try {
       await c.env.DB.prepare(
-        "INSERT INTO users (id, email, password_hash, full_name, department, tier, referral_code) VALUES (?, ?, ?, ?, ?, ?, ?)"
-      ).bind(userId, email, passwordHash, fullName, department, tier, referralCode).run();
+        "INSERT INTO users (id, email, password_hash, full_name, department, tier, referral_code, user_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+      ).bind(userId, email, passwordHash, fullName, department, tier, referralCode, userType).run();
 
       results.push({ email, status: "created", accessCode });
     } catch (err) {

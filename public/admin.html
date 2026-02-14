@@ -118,6 +118,15 @@
               </select>
             </div>
           </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;">User Category</label>
+              <select id="add-user-type" class="inline-select" style="padding:8px 12px;width:100%;">
+                <option value="gog_employee">GoG Employee</option>
+                <option value="student">Student</option>
+              </select>
+            </div>
+          </div>
           <div style="display:flex;gap:12px;align-items:center;">
             <button class="btn-action primary" onclick="submitAddUser()">Create User</button>
             <button class="btn-action" onclick="toggleAddUserForm()">Cancel</button>
