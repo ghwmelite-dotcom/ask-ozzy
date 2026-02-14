@@ -57,6 +57,7 @@ The admin portal provides **16 management tabs** organized in a sidebar navigati
 - **User Details**: View email, department, tier, role, referral code, `created_at`, and `last_login`.
 - **Change Tier**: Reassign a user to `free`, `starter`, `professional`, or `enterprise`.
 - **Change Role**: Reassign a user to `civil_servant`, `dept_admin`, or `super_admin`.
+- **Reset Account**: Full credential reset for a user — generates new access code, TOTP secret, and recovery code. A modal displays all three credentials with individual **Copy** buttons so you can securely share them with the user. The user will need to set up their authenticator app again. This action is logged to the audit trail.
 - **Delete User**: Permanently remove a user account.
 - **View Memories**: Inspect stored user memories (AI personalization data).
 - **Promote to Admin**: One-click promotion to admin role.

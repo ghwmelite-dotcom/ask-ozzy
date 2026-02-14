@@ -39,8 +39,28 @@
 ### 4. Recovery Codes
 - Single-use backup code for account recovery
 - Format: XXXX-XXXX (same as access code format)
-- Hashed with SHA-256, stored as `recovery_code_hash`
+- Hashed with PBKDF2, stored as `recovery_code_hash`
 - Regenerate: POST /api/auth/recovery-code/regenerate
+
+### 5. Self-Service Account Reset
+- Users who lose their access code **and** authenticator app can reset from the login page
+- Flow: Click "Trouble signing in?" → enter email + recovery code → verify identity → receive new credentials
+- Endpoint: `POST /api/auth/reset-account` (public, no auth required)
+- On successful recovery code verification:
+  - New access code, TOTP secret, and recovery code are generated
+  - Old credentials are immediately invalidated
+  - User must scan a new QR code and verify a 6-digit TOTP code before a session is created
+- Security measures:
+  - Recovery code verified via PBKDF2 hash comparison (same strength as access code)
+  - Rate limited: 10 attempts per 5 minutes per IP+email combination
+  - Recovery code is invalidated after use (one-time)
+  - No session token issued until TOTP verification succeeds
+  - Credentials displayed once and never stored in plaintext
+- Admin-initiated reset: `POST /api/admin/users/:userId/reset-account`
+  - Available via "Reset" button in admin Users table
+  - Requires `super_admin` role
+  - Generates same new credentials; admin shares them with the user securely
+  - Action logged to audit trail as `reset_account`
 
 ## Session Management
 

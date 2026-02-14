@@ -27,11 +27,27 @@ Welcome to AskOzzy. This chapter walks you through creating your account, signin
 ### Signing In
 
 1. Visit the app at **https://askozzy.ghwmelite.workers.dev**.
-2. You will see the sign-in screen with a single input field labeled **Access Code**.
-3. Enter your access code (e.g., `A3K9-M2X7`). The code is case-insensitive.
-4. If you have two-factor authentication (2FA) enabled, a second field appears prompting you for your **6-digit authenticator code**. Open your authenticator app (e.g., Google Authenticator, Authy) and enter the current code.
-5. Click **Sign In**.
-6. You are taken to the chat interface with your conversation history intact.
+2. You will see the sign-in screen with fields for your **Email** and **Access Code or Authenticator Code**.
+3. Enter your email address and your access code (e.g., `A3K9-M2X7`) or 6-digit authenticator code. The access code is case-insensitive.
+4. Click **Sign In**.
+5. You are taken to the chat interface with your conversation history intact.
+
+### Trouble Signing In?
+
+If you have lost your access code or authenticator app, you can reset your account yourself:
+
+1. On the sign-in screen, click the **"Trouble signing in?"** link below the Sign In button.
+2. Enter your **email address** and your **recovery code** (the `XXXX-XXXX` code you saved when you first registered).
+3. Click **Reset My Account**.
+4. If your recovery code is valid, you will see:
+   - Your **new access code** — copy and save this securely.
+   - A **QR code** to set up your authenticator app again.
+   - Your **new recovery code** — copy and save this securely for future use.
+5. Scan the QR code with your authenticator app (e.g., Google Authenticator, Authy).
+6. Enter the **6-digit code** from your authenticator app to verify.
+7. You are now signed in with your new credentials.
+
+**Important:** Your old access code and authenticator setup stop working immediately after the reset. Make sure to save your new access code and recovery code — they are shown only once.
 
 ### Your First Conversation
 
@@ -491,10 +507,13 @@ Passkeys let you sign in using biometrics (fingerprint, face recognition) or a s
 If you lose access to your 2FA device, a recovery code allows you to regain access to your account.
 
 1. Go to **Settings** then **Security** then **Recovery Code**.
-2. Your recovery code is displayed. It is a long alphanumeric string.
+2. Your recovery code is displayed. It is in the format `XXXX-XXXX`.
 3. **Save this code securely** — write it down and store it in a safe place, or save it to a secure password manager.
-4. If you are locked out of your account due to 2FA, enter the recovery code on the login screen instead of the 6-digit authenticator code.
-5. After using the recovery code, you will be prompted to set up 2FA again.
+4. If you are locked out of your account, click **"Trouble signing in?"** on the login page and enter your email and recovery code.
+5. You will receive a new access code, a new QR code for your authenticator app, and a new recovery code.
+6. After scanning the QR code and verifying a 6-digit code, you are signed in.
+
+**Tip:** Your recovery code can only be used once. Each time you reset your account, a new recovery code is generated. Always save the latest one.
 
 ---
 
@@ -729,7 +748,7 @@ If you encounter issues, consult this section before reaching out for support.
 - Verify that you are entering the code in the correct format: `XXXX-XXXX` (eight characters with a hyphen in the middle).
 - Access codes are **case-insensitive** — `a3k9-m2x7` and `A3K9-M2X7` are treated the same.
 - Remove any extra spaces before or after the code.
-- If you have forgotten your access code, contact the administrator for your department.
+- If you have forgotten your access code, click **"Trouble signing in?"** on the login page to reset your account using your recovery code. If you don't have your recovery code either, contact the administrator for your department — they can reset your account from the admin portal.
 
 ### "Rate limit exceeded"
 
@@ -772,7 +791,8 @@ If you encounter issues, consult this section before reaching out for support.
 
 - Authenticator codes change every 30 seconds. Ensure you are entering the **current** code, not an expired one.
 - Check that the clock on your authenticator device is accurate. Time-based codes require synchronized clocks. On Android, go to your authenticator app's settings and select "Time correction for codes." On iOS, ensure automatic time is enabled in Settings then General then Date and Time.
-- If you are completely locked out, use your **recovery code** to sign in and reset 2FA.
+- If you are completely locked out, click **"Trouble signing in?"** on the login page and use your **recovery code** to reset your account. This will generate a new authenticator setup and a new access code.
+- If you have also lost your recovery code, contact your department administrator — they can perform a full account reset from the admin portal.
 
 ### Cannot see all AI models
 

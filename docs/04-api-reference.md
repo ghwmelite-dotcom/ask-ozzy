@@ -382,6 +382,92 @@ Regenerate the user's account recovery code.
 
 ---
 
+### POST /api/auth/reset-account
+
+Self-service account reset using a recovery code. Generates new access code, TOTP secret, and recovery code. No session is created — the user must verify TOTP via `POST /api/auth/register/verify-totp` before signing in.
+
+**Auth:** None (public endpoint)
+
+**Rate Limit:** `auth` category (10 attempts / 5 minutes per IP+email)
+
+**Request Body:**
+
+```json
+{
+  "email": "kwame@gov.gh",
+  "recoveryCode": "R3K9-M2X7"
+}
+```
+
+**Response (200):**
+
+```json
+{
+  "totpUri": "otpauth://totp/AskOzzy:kwame@gov.gh?secret=JBSWY3DPEHPK3PXP&issuer=AskOzzy&digits=6&period=30",
+  "totpSecret": "JBSWY3DPEHPK3PXP",
+  "accessCode": "N7F2-K4PB",
+  "recoveryCode": "W5H8-J3QL",
+  "email": "kwame@gov.gh"
+}
+```
+
+**Errors:**
+
+| Status | Error |
+|--------|-------|
+| 400 | Email and recovery code are required |
+| 401 | Invalid email or recovery code |
+| 429 | Too many attempts. Please wait 5 minutes. |
+
+**Notes:**
+- The recovery code is verified against the stored PBKDF2 hash.
+- On success, the old access code, TOTP secret, and recovery code are all invalidated.
+- The user must scan the new QR code (from `totpUri`) with their authenticator app and verify a 6-digit code via `POST /api/auth/register/verify-totp` to complete the reset and receive a session token.
+- The new access code and recovery code are shown only once and should be saved securely.
+
+---
+
+### POST /api/admin/users/:userId/reset-account
+
+Admin-initiated full account reset. Generates new access code, TOTP secret, and recovery code for the specified user.
+
+**Auth:** Admin required (`super_admin` role)
+
+**Path Parameters:**
+
+| Parameter | Description |
+|-----------|-------------|
+| userId | ID of the user to reset |
+
+**Request Body:** None
+
+**Response (200):**
+
+```json
+{
+  "success": true,
+  "accessCode": "N7F2-K4PB",
+  "recoveryCode": "W5H8-J3QL",
+  "totpUri": "otpauth://totp/AskOzzy:kwame@gov.gh?secret=JBSWY3DPEHPK3PXP&issuer=AskOzzy&digits=6&period=30",
+  "totpSecret": "JBSWY3DPEHPK3PXP",
+  "email": "kwame@gov.gh",
+  "fullName": "Kwame Asante"
+}
+```
+
+**Errors:**
+
+| Status | Error |
+|--------|-------|
+| 404 | User not found |
+
+**Notes:**
+- The admin shares the new access code with the user. The user signs in with it and is guided through TOTP re-enrollment.
+- The action is logged to the audit trail as `reset_account`.
+- Old access code, authenticator setup, and recovery code are all invalidated immediately.
+
+---
+
 ## Conversations
 
 ### GET /api/conversations

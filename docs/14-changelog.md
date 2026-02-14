@@ -121,6 +121,15 @@ AskOzzy — AI-powered productivity platform for Government of Ghana operations.
 - Student pricing for all tiers
 - Comprehensive documentation suite (15 files)
 
+### Week 3 (Feb 14)
+
+- **Self-service account reset** — "Trouble signing in?" flow on login page: users verify identity with recovery code, then receive new access code + QR code for authenticator re-enrollment + new recovery code
+- **Admin full account reset** — "Reset" button per user in admin Users table with copyable credentials modal (access code, recovery code, TOTP secret each with Copy button)
+- New endpoint: `POST /api/auth/reset-account` (public, rate-limited)
+- New endpoint: `POST /api/admin/users/:userId/reset-account` (admin-only, audit logged)
+- Hardened `POST /api/auth/register/verify-totp` to skip recovery code regeneration when hash already exists
+- Updated documentation: API reference, admin portal guide, security & auth, user guide, changelog
+
 ---
 
 ## Known Limitations
@@ -128,7 +137,7 @@ AskOzzy — AI-powered productivity platform for Government of Ghana operations.
 | # | Limitation | Details |
 |---|-----------|---------|
 | 1 | Single Worker | Entire backend in one file (8,600+ lines) — could benefit from modularization |
-| 2 | No email sending | Access codes displayed on-screen only (no email delivery) |
+| 2 | No email sending | Access codes displayed on-screen only (no email delivery). Users can self-reset via recovery code. |
 | 3 | Manual MoMo payouts | Affiliate withdrawals require manual admin processing |
 | 4 | D1 limitations | SQLite at edge — no stored procedures, limited concurrent writes |
 | 5 | No real-time collaboration | Spaces are share-only (no live co-editing) |
