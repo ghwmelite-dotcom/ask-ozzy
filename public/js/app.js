@@ -758,6 +758,7 @@ function onAuthenticated() {
   renderTemplateGrid();
   renderCategoryTabs();
   updateSidebarFooter();
+  updateModelSelector();
   loadConversations();
   loadUsageStatus();
   loadFolders();
@@ -1816,18 +1817,65 @@ function updateSendButton() {
 function onModelChange() {
   const selector = document.getElementById("model-selector");
   const model = selector.value;
+  const selectedOpt = selector.options[selector.selectedIndex];
+  const modelTier = selectedOpt?.getAttribute("data-tier") || "free";
   const userTier = (state.user && state.user.tier) || "free";
-  const freeModels = ["@cf/openai/gpt-oss-20b", "@cf/google/gemma-3-12b-it", "@cf/meta/llama-3.1-8b-instruct-fast"];
+  const tierRank = { free: 0, professional: 1, enterprise: 2 };
 
-  if (userTier === "free" && !freeModels.includes(model)) {
-    const proPrice = isStudent() ? 25 : 60;
-    alert(`This model requires a paid plan.\n\nUpgrade to Professional (GHS ${proPrice}/mo) or higher to access all 11 AI models.`);
+  if ((tierRank[userTier] || 0) < (tierRank[modelTier] || 0)) {
+    const requiredPlan = modelTier.charAt(0).toUpperCase() + modelTier.slice(1);
+    const prices = { professional: isStudent() ? 25 : 60, enterprise: isStudent() ? 45 : 100 };
+    const price = prices[modelTier] || prices.professional;
+    alert(`This model requires the ${requiredPlan} plan (GHS ${price}/mo).\n\nUpgrade to access this model.`);
     selector.value = state.selectedModel;
     openPricingModal();
     return;
   }
 
   state.selectedModel = model;
+}
+
+// Update model selector labels based on user's tier
+function updateModelSelector() {
+  const selector = document.getElementById("model-selector");
+  if (!selector) return;
+
+  const userTier = (state.user && state.user.tier) || "free";
+  const tierRank = { free: 0, professional: 1, enterprise: 2 };
+  const userRank = tierRank[userTier] || 0;
+
+  Array.from(selector.options).forEach(opt => {
+    const modelTier = opt.getAttribute("data-tier") || "free";
+    const modelRank = tierRank[modelTier] || 0;
+    const accessible = userRank >= modelRank;
+
+    // Strip any existing prefix icons
+    const cleanLabel = opt.textContent.replace(/^[\u{1F512}\u{1F513}\u2705\u2728]\s*/u, "");
+
+    if (accessible) {
+      opt.textContent = "\u2705 " + cleanLabel;
+      opt.disabled = false;
+    } else {
+      const requiredPlan = modelTier.charAt(0).toUpperCase() + modelTier.slice(1);
+      opt.textContent = "\uD83D\uDD12 " + cleanLabel + " [" + requiredPlan + "]";
+      opt.disabled = false; // Keep selectable so onModelChange shows upgrade prompt
+    }
+  });
+
+  // Update optgroup labels
+  const ogEnterprise = document.getElementById("optgroup-enterprise");
+  const ogPro = document.getElementById("optgroup-professional");
+  const ogFree = document.getElementById("optgroup-free");
+
+  if (ogEnterprise) {
+    ogEnterprise.label = userRank >= 2 ? "Enterprise Models (\u2705 Unlocked)" : "Enterprise Models (\uD83D\uDD12 Upgrade Required)";
+  }
+  if (ogPro) {
+    ogPro.label = userRank >= 1 ? "Professional Models (\u2705 Unlocked)" : "Professional Models (\uD83D\uDD12 Upgrade Required)";
+  }
+  if (ogFree) {
+    ogFree.label = "Free Models (\u2705 Included)";
+  }
 }
 
 // ─── Sidebar ─────────────────────────────────────────────────────────
@@ -2833,6 +2881,7 @@ async function loadUsageStatus() {
     if (data.billingCycle) state.user.billingCycle = data.billingCycle;
     localStorage.setItem("askozzy_user", JSON.stringify(state.user));
     updateUsageBadge(data);
+    updateModelSelector();
   } catch {}
 }
 

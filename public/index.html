@@ -77,20 +77,22 @@
       <header class="main-header">
         <button class="btn-toggle-sidebar" onclick="toggleSidebar()" title="Toggle sidebar">☰</button>
         <select class="model-selector" id="model-selector" onchange="onModelChange()" aria-label="Select AI model">
-          <optgroup label="Premium Models (Paid Plans)">
-            <option value="@cf/openai/gpt-oss-120b">🔒 GPT-OSS 120B — OpenAI (Best)</option>
-            <option value="@cf/meta/llama-4-scout-17b-16e-instruct">🔒 Llama 4 Scout 17B — Meta</option>
-            <option value="@cf/meta/llama-3.3-70b-instruct-fp8-fast">🔒 Llama 3.3 70B — Meta</option>
-            <option value="@cf/deepseek-ai/deepseek-r1-distill-qwen-32b">🔒 DeepSeek R1 32B — Reasoning</option>
-            <option value="@cf/qwen/qwq-32b">🔒 QwQ 32B — Qwen (Deep Thinking)</option>
-            <option value="@cf/qwen/qwen3-30b-a3b-fp8">🔒 Qwen3 30B — Qwen (Latest)</option>
-            <option value="@cf/mistralai/mistral-small-3.1-24b-instruct">🔒 Mistral Small 3.1 24B</option>
-            <option value="@cf/ibm-granite/granite-4.0-h-micro">🔒 Granite 4.0 — IBM</option>
+          <optgroup label="Enterprise Models" id="optgroup-enterprise">
+            <option value="@cf/openai/gpt-oss-120b" data-tier="enterprise">GPT-OSS 120B — OpenAI (Best)</option>
+            <option value="@cf/meta/llama-3.3-70b-instruct-fp8-fast" data-tier="enterprise">Llama 3.3 70B — Meta</option>
+            <option value="@cf/deepseek-ai/deepseek-r1-distill-qwen-32b" data-tier="enterprise">DeepSeek R1 32B — Reasoning</option>
+            <option value="@cf/qwen/qwen3-30b-a3b-fp8" data-tier="enterprise">Qwen3 30B — Qwen (Latest)</option>
+            <option value="@cf/ibm-granite/granite-4.0-h-micro" data-tier="enterprise">Granite 4.0 — IBM</option>
           </optgroup>
-          <optgroup label="Free Models">
-            <option value="@cf/openai/gpt-oss-20b" selected>GPT-OSS 20B — OpenAI (Fast)</option>
-            <option value="@cf/google/gemma-3-12b-it">Gemma 3 12B — Google</option>
-            <option value="@cf/meta/llama-3.1-8b-instruct-fast">Llama 3.1 8B Fast — Instant</option>
+          <optgroup label="Professional Models" id="optgroup-professional">
+            <option value="@cf/meta/llama-4-scout-17b-16e-instruct" data-tier="professional">Llama 4 Scout 17B — Meta</option>
+            <option value="@cf/qwen/qwq-32b" data-tier="professional">QwQ 32B — Qwen (Deep Thinking)</option>
+            <option value="@cf/mistralai/mistral-small-3.1-24b-instruct" data-tier="professional">Mistral Small 3.1 24B</option>
+          </optgroup>
+          <optgroup label="Free Models" id="optgroup-free">
+            <option value="@cf/openai/gpt-oss-20b" data-tier="free" selected>GPT-OSS 20B — OpenAI (Fast)</option>
+            <option value="@cf/google/gemma-3-12b-it" data-tier="free">Gemma 3 12B — Google</option>
+            <option value="@cf/meta/llama-3.1-8b-instruct-fast" data-tier="free">Llama 3.1 8B Fast — Instant</option>
           </optgroup>
         </select>
         <div class="usage-badge" id="usage-badge" onclick="openPricingModal()" title="Click to view plans"></div>

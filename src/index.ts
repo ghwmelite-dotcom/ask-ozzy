@@ -2352,6 +2352,9 @@ async function ensureAffiliateTables(db: D1Database): Promise<void> {
       db.prepare(`CREATE INDEX IF NOT EXISTS idx_withdraw_user ON withdrawal_requests(user_id)`),
     ]);
 
+    // Lazy migration: add payment_reference column if missing
+    await db.prepare(`ALTER TABLE withdrawal_requests ADD COLUMN payment_reference TEXT`).run().catch(() => {});
+
     affiliateTablesCreated = true;
   } catch {
     // Tables likely already exist
@@ -2692,27 +2695,41 @@ app.get("/api/affiliate/leaderboard", authMiddleware, async (c) => {
 
 app.get("/api/admin/affiliate/withdrawals", adminMiddleware, async (c) => {
   await ensureAffiliateTables(c.env.DB);
-  const status = c.req.query("status") || "pending";
+  const status = c.req.query("status");
+  const showAll = !status || status === "all";
   const page = Math.max(1, parseInt(c.req.query("page") || "1"));
   const limit = Math.min(50, Math.max(1, parseInt(c.req.query("limit") || "20")));
   const offset = (page - 1) * limit;
 
-  const total = await c.env.DB.prepare(
-    "SELECT COUNT(*) as cnt FROM withdrawal_requests WHERE status = ?"
-  ).bind(status).first<{ cnt: number }>();
+  const total = showAll
+    ? await c.env.DB.prepare("SELECT COUNT(*) as cnt FROM withdrawal_requests").first<{ cnt: number }>()
+    : await c.env.DB.prepare("SELECT COUNT(*) as cnt FROM withdrawal_requests WHERE status = ?").bind(status).first<{ cnt: number }>();
 
-  const { results } = await c.env.DB.prepare(
-    `SELECT wr.*, u.full_name, u.email
-     FROM withdrawal_requests wr
-     JOIN users u ON u.id = wr.user_id
-     WHERE wr.status = ?
-     ORDER BY wr.created_at DESC
-     LIMIT ? OFFSET ?`
-  ).bind(status, limit, offset).all();
+  const { results } = showAll
+    ? await c.env.DB.prepare(
+        `SELECT wr.*, u.full_name, u.email
+         FROM withdrawal_requests wr
+         JOIN users u ON u.id = wr.user_id
+         ORDER BY wr.created_at DESC
+         LIMIT ? OFFSET ?`
+      ).bind(limit, offset).all()
+    : await c.env.DB.prepare(
+        `SELECT wr.*, u.full_name, u.email
+         FROM withdrawal_requests wr
+         JOIN users u ON u.id = wr.user_id
+         WHERE wr.status = ?
+         ORDER BY wr.created_at DESC
+         LIMIT ? OFFSET ?`
+      ).bind(status, limit, offset).all();
+
+  const pendingCount = await c.env.DB.prepare(
+    "SELECT COUNT(*) as cnt FROM withdrawal_requests WHERE status = 'pending'"
+  ).first<{ cnt: number }>();
 
   return c.json({
     withdrawals: results || [],
     total: total?.cnt || 0,
+    pendingCount: pendingCount?.cnt || 0,
     page,
     limit,
   });
@@ -2736,6 +2753,30 @@ app.post("/api/admin/affiliate/withdrawals/:id/approve", adminMiddleware, async 
   await logAudit(c.env.DB, c.get("userId"), "approve_withdrawal", "withdrawal", withdrawalId, `GHS ${request.amount} for user ${request.user_id}`);
 
   return c.json({ success: true, message: `Withdrawal of GHS ${request.amount.toFixed(2)} approved` });
+});
+
+app.post("/api/admin/affiliate/withdrawals/:id/mark-paid", adminMiddleware, async (c) => {
+  await ensureAffiliateTables(c.env.DB);
+  const withdrawalId = c.req.param("id");
+  const { payment_reference, admin_note } = await c.req.json().catch(() => ({ payment_reference: "", admin_note: "" }));
+
+  const request = await c.env.DB.prepare(
+    "SELECT id, user_id, amount, status FROM withdrawal_requests WHERE id = ?"
+  ).bind(withdrawalId).first<{ id: string; user_id: string; amount: number; status: string }>();
+
+  if (!request) return c.json({ error: "Withdrawal request not found" }, 404);
+  if (request.status !== "approved" && request.status !== "pending") {
+    return c.json({ error: `Cannot mark as paid — request is ${request.status}` }, 400);
+  }
+
+  await c.env.DB.prepare(
+    "UPDATE withdrawal_requests SET status = 'paid', payment_reference = ?, admin_note = COALESCE(?, admin_note), processed_at = datetime('now') WHERE id = ?"
+  ).bind(payment_reference || null, admin_note || null, withdrawalId).run();
+
+  await logAudit(c.env.DB, c.get("userId"), "mark_withdrawal_paid", "withdrawal", withdrawalId,
+    `GHS ${request.amount} paid to user ${request.user_id}${payment_reference ? " — Ref: " + payment_reference : ""}`);
+
+  return c.json({ success: true, message: `Withdrawal of GHS ${request.amount.toFixed(2)} marked as paid.` });
 });
 
 app.post("/api/admin/affiliate/withdrawals/:id/reject", adminMiddleware, async (c) => {

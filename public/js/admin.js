@@ -861,6 +861,7 @@ async function loadWithdrawals(status) {
               <th>MoMo Number</th>
               <th>Network</th>
               <th>Status</th>
+              <th>Ref / Note</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -878,6 +879,9 @@ async function loadWithdrawals(status) {
                 '<td>' + escapeHtml(w.momo_number ? '****' + w.momo_number.slice(-4) : "--") + '</td>' +
                 '<td>' + escapeHtml(w.momo_network || "--") + '</td>' +
                 '<td><span class="badge badge-' + statusCls + '">' + (w.status || "unknown") + '</span></td>' +
+                '<td style="font-size:11px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="' + escapeHtml(w.payment_reference || w.admin_note || '') + '">' +
+                  (w.payment_reference ? escapeHtml(w.payment_reference) : w.admin_note ? escapeHtml(w.admin_note) : '--') +
+                '</td>' +
                 '<td>' +
                   (isPending ? '<button class="btn-admin-sm btn-approve" onclick="approveWithdrawal(\'' + w.id + '\')">Approve</button> <button class="btn-admin-sm btn-reject" onclick="rejectWithdrawal(\'' + w.id + '\')">Reject</button>' :
                    isApproved ? '<button class="btn-admin-sm btn-approve" onclick="markWithdrawalPaid(\'' + w.id + '\')">Mark Paid</button> <button class="btn-admin-sm btn-reject" onclick="rejectWithdrawal(\'' + w.id + '\')">Reject</button>' :
@@ -938,16 +942,19 @@ async function rejectWithdrawal(id) {
 }
 
 async function markWithdrawalPaid(id) {
+  const ref = prompt("Enter MoMo transaction reference / receipt ID (optional but recommended):");
+  if (ref === null) return; // cancelled
+
   if (!confirm("Mark this withdrawal as paid? This confirms the MoMo transfer has been sent.")) return;
 
   try {
-    const res = await apiFetch("/api/admin/affiliate/withdrawals/" + id + "/approve", {
+    const res = await apiFetch("/api/admin/affiliate/withdrawals/" + id + "/mark-paid", {
       method: "POST",
-      body: JSON.stringify({ mark_paid: true })
+      body: JSON.stringify({ payment_reference: ref || "" })
     });
     const d = await res.json();
     if (!res.ok) throw new Error(d.error || "Failed to update");
-    alert("Withdrawal marked as paid.");
+    alert("Withdrawal marked as paid." + (ref ? " Ref: " + ref : ""));
     loadWithdrawals(currentWithdrawalFilter);
     loadAffiliateAdminStats();
   } catch (err) {
