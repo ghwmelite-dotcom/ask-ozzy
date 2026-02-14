@@ -171,6 +171,7 @@ function switchTab(tab) {
     "productivity": loadProductivityTab,
     "ussd": loadUSSDTab,
     "messaging": loadMessagingTab,
+    "exam-prep": loadExamPrepTab,
   };
   if (loaders[tab]) loaders[tab]();
 }
@@ -3917,6 +3918,129 @@ function copyResetCred(elementId, btn) {
     btn.textContent = "Copied!";
     setTimeout(() => { btn.textContent = "Copy"; }, 2000);
   });
+}
+
+// ─── Phase 6: Exam Prep Admin ───────────────────────────────────────
+
+async function loadExamPrepTab() {
+  const statsEl = document.getElementById("exam-prep-stats");
+  try {
+    const res = await fetch(API + "/api/admin/exam-prep/stats", { headers: authHeaders() });
+    const data = await res.json();
+
+    statsEl.innerHTML = `
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+        <div class="stat-card">
+          <div class="stat-value">${data.totalQuestions}</div>
+          <div class="stat-label">Total Questions</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${data.totalAttempts}</div>
+          <div class="stat-label">Total Attempts</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">${data.avgScore}/40</div>
+          <div class="stat-label">Average Score</div>
+        </div>
+      </div>`;
+
+    // Seasons
+    const seasonsList = document.getElementById("exam-seasons-list");
+    if (data.seasons && data.seasons.length > 0) {
+      seasonsList.innerHTML = `<table class="admin-table" style="width:100%;font-size:13px;">
+        <thead><tr><th>Type</th><th>Year</th><th>Start</th><th>End</th><th>Status</th></tr></thead>
+        <tbody>${data.seasons.map(s => `<tr>
+          <td>${escapeHtml(s.exam_type.toUpperCase())}</td>
+          <td>${s.year}</td>
+          <td>${s.start_date}</td>
+          <td>${s.end_date}</td>
+          <td><span class="badge ${s.active ? 'badge-green' : 'badge-gray'}">${s.active ? 'Active' : 'Inactive'}</span></td>
+        </tr>`).join('')}</tbody>
+      </table>`;
+    } else {
+      seasonsList.innerHTML = '<p style="color:var(--text-muted);font-size:13px;">No exam seasons configured yet.</p>';
+    }
+
+    // Popular subjects
+    const popularEl = document.getElementById("exam-popular-subjects");
+    if (data.popularSubjects && data.popularSubjects.length > 0) {
+      popularEl.innerHTML = data.popularSubjects.map(s =>
+        `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);">
+          <span>${escapeHtml(s.subject)}</span>
+          <span style="color:var(--text-muted);">${s.attempts} attempts</span>
+        </div>`
+      ).join('');
+    } else {
+      popularEl.innerHTML = '<p style="color:var(--text-muted);font-size:13px;">No attempt data yet.</p>';
+    }
+  } catch (err) {
+    statsEl.innerHTML = '<p style="color:var(--error);">Failed to load exam prep stats</p>';
+  }
+}
+
+function toggleExamQuestionImport() {
+  const form = document.getElementById("exam-import-form");
+  form.style.display = form.style.display === "none" ? "block" : "none";
+}
+
+async function importExamQuestions() {
+  const raw = document.getElementById("exam-import-data").value.trim();
+  const resultEl = document.getElementById("exam-import-result");
+
+  if (!raw) { resultEl.innerHTML = '<span style="color:var(--error);">Please paste question data</span>'; return; }
+
+  let questions;
+  try {
+    questions = JSON.parse(raw);
+    if (!Array.isArray(questions)) questions = [questions];
+  } catch {
+    resultEl.innerHTML = '<span style="color:var(--error);">Invalid JSON format</span>';
+    return;
+  }
+
+  resultEl.innerHTML = 'Importing...';
+
+  try {
+    const res = await fetch(API + "/api/admin/exam-prep/questions", {
+      method: "POST",
+      headers: authHeaders(),
+      body: JSON.stringify({ questions }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      resultEl.innerHTML = `<span style="color:var(--green-light);">Imported ${data.imported} questions, ${data.skipped} skipped</span>`;
+      loadExamPrepTab();
+    } else {
+      resultEl.innerHTML = `<span style="color:var(--error);">${escapeHtml(data.error || 'Import failed')}</span>`;
+    }
+  } catch {
+    resultEl.innerHTML = '<span style="color:var(--error);">Import request failed</span>';
+  }
+}
+
+async function createExamSeason() {
+  const examType = document.getElementById("season-exam-type").value;
+  const year = document.getElementById("season-year").value;
+  const startDate = document.getElementById("season-start").value;
+  const endDate = document.getElementById("season-end").value;
+
+  if (!startDate || !endDate) { alert("Start and end dates are required"); return; }
+
+  try {
+    const res = await fetch(API + "/api/admin/exam-prep/season", {
+      method: "POST",
+      headers: authHeaders(),
+      body: JSON.stringify({ examType, year: parseInt(year), startDate, endDate, active: true }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      loadExamPrepTab();
+    } else {
+      alert(data.error || "Failed to create season");
+    }
+  } catch {
+    alert("Failed to create season");
+  }
 }
 
 // ─── Init ───────────────────────────────────────────────────────────

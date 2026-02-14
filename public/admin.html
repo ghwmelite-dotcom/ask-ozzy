@@ -73,6 +73,7 @@
       <button class="admin-tab" data-tab="productivity" onclick="switchTab('productivity')">Productivity</button>
       <button class="admin-tab" data-tab="ussd" onclick="switchTab('ussd')">USSD</button>
       <button class="admin-tab" data-tab="messaging" onclick="switchTab('messaging')">Messaging</button>
+      <button class="admin-tab" data-tab="exam-prep" onclick="switchTab('exam-prep')">Exam Prep</button>
     </nav>
 
     <!-- Tab Panels -->
@@ -875,6 +876,62 @@
               <div class="admin-loader"><div class="spinner"></div></div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Exam Prep -->
+      <div class="admin-tab-panel" id="panel-exam-prep">
+        <div class="admin-toolbar">
+          <h3 style="margin:0;">Exam Prep Management</h3>
+          <button class="btn-action primary" onclick="toggleExamQuestionImport()">Import Questions</button>
+        </div>
+
+        <!-- Stats -->
+        <div id="exam-prep-stats" class="admin-card" style="margin-bottom:16px;">
+          <div class="admin-loader"><div class="spinner"></div></div>
+        </div>
+
+        <!-- Import Form (hidden) -->
+        <div id="exam-import-form" class="admin-card" style="display:none;margin-bottom:16px;">
+          <h3>Bulk Import Questions</h3>
+          <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;">Upload a CSV or paste JSON. Required fields: examType (wassce/bece), subject, year, questionNumber, questionText. Optional: markingScheme, marks, difficulty, topic, paper.</p>
+          <textarea id="exam-import-data" rows="8" style="width:100%;font-family:monospace;font-size:12px;padding:10px;border-radius:8px;border:1px solid var(--border);background:var(--bg-secondary);color:var(--text-primary);box-sizing:border-box;" placeholder='[{"examType":"wassce","subject":"Mathematics","year":2023,"questionNumber":1,"questionText":"Solve...","marks":10,"difficulty":"medium"}]'></textarea>
+          <button class="btn-action primary" onclick="importExamQuestions()" style="margin-top:8px;">Import</button>
+          <div id="exam-import-result" style="margin-top:8px;font-size:13px;"></div>
+        </div>
+
+        <!-- Season Management -->
+        <div class="admin-card" style="margin-bottom:16px;">
+          <h3>Exam Seasons</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:8px;align-items:end;margin-bottom:12px;">
+            <div>
+              <label style="display:block;font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:4px;">Type</label>
+              <select id="season-exam-type" class="admin-search" style="max-width:100%;">
+                <option value="wassce">WASSCE</option>
+                <option value="bece">BECE</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block;font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:4px;">Year</label>
+              <input type="number" id="season-year" class="admin-search" style="max-width:100%;" value="2026" />
+            </div>
+            <div>
+              <label style="display:block;font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:4px;">Start Date</label>
+              <input type="date" id="season-start" class="admin-search" style="max-width:100%;" />
+            </div>
+            <div>
+              <label style="display:block;font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:4px;">End Date</label>
+              <input type="date" id="season-end" class="admin-search" style="max-width:100%;" />
+            </div>
+            <button class="btn-action primary" onclick="createExamSeason()">Create</button>
+          </div>
+          <div id="exam-seasons-list"></div>
+        </div>
+
+        <!-- Popular Subjects -->
+        <div class="admin-card">
+          <h3>Popular Subjects</h3>
+          <div id="exam-popular-subjects"></div>
         </div>
       </div>
 

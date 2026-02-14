@@ -116,6 +116,8 @@ const state = {
   voiceMode: false,
   spacesLoaded: false,
   userType: null,
+  docCredits: null,
+  userProfile: null,
 };
 
 // ─── Growth System State ────────────────────────────────────────────
@@ -126,6 +128,77 @@ const _growthState = {
   totalReferrals: 0,
   sessionMsgCount: 0,
 };
+
+// ─── Inline Subscription Tips ───────────────────────────────────────
+let _inlineTipCounter = 0;
+let _inlineTipIndex = 0;
+
+const _employeeTips = [
+  "Your subscription keeps AskOzzy running for all GoG staff across every ministry.",
+  "Earn passive income \u2014 paid users get commissions when they refer colleagues.",
+  "Upgrade for specialist agents: procurement, legal drafting, budget analysis.",
+  "Starter plan is just GHS 30/month \u2014 less than a single taxi ride to the office.",
+  "Pro users can generate official memos with GoG letterheads directly from chat.",
+  "Every subscription helps keep AskOzzy free for new government employees.",
+  "Refer a colleague, earn real money. Check your affiliate dashboard.",
+  "Upgrade for 200 messages/day, all 11 AI models, and Deep Research mode.",
+  "Join thousands of GoG staff already using Ozzy Pro across departments.",
+  "Unlock meeting transcription, workflow automation, and priority response speeds."
+];
+
+const _studentTips = [
+  "Your subscription keeps AskOzzy free for students across Ghana.",
+  "Earn passive income \u2014 paid users get commissions when they refer classmates.",
+  "Upgrade for specialist agents: research writing, essay support, exam prep.",
+  "Student plans start at just GHS 12/month \u2014 less than a textbook printout.",
+  "Pro students get unlimited conversations \u2014 no daily caps during exam season.",
+  "Every subscription helps keep AskOzzy available for all students.",
+  "Refer a classmate, earn real money. Check your affiliate dashboard.",
+  "Upgrade for 200 messages/day, all 11 AI models, and Deep Research mode.",
+  "Join hundreds of students already using Ozzy Pro for better grades.",
+  "Unlock AI memory \u2014 Ozzy remembers your courses and research topics."
+];
+
+function shouldShowInlineTip() {
+  const tier = (state.user && (state.user.effectiveTier || state.user.tier)) || 'free';
+  if (tier !== 'free') return false;
+  _inlineTipCounter++;
+  return _inlineTipCounter % 5 === 0;
+}
+
+function renderInlineTip() {
+  const existing = document.querySelector('.inline-sub-tip');
+  if (existing) existing.remove();
+
+  const tips = isStudent() ? _studentTips : _employeeTips;
+  const tip = tips[_inlineTipIndex % tips.length];
+  _inlineTipIndex++;
+
+  const el = document.createElement('div');
+  el.className = 'inline-sub-tip';
+  el.innerHTML = `<div class="inline-tip-accent"></div>
+    <div class="inline-tip-content">
+      <span class="inline-tip-icon">\u2728</span>
+      <span class="inline-tip-text">${escapeHtml(tip)}</span>
+      <a class="inline-tip-upgrade" href="#" onclick="event.preventDefault();openPricingModal()">Upgrade</a>
+      <button class="inline-tip-dismiss" onclick="dismissInlineTip(this)" aria-label="Dismiss">\u00d7</button>
+    </div>`;
+
+  const container = document.getElementById('chat-messages');
+  if (container) {
+    container.appendChild(el);
+    scrollToBottom();
+  }
+}
+
+function dismissInlineTip(btn) {
+  const tip = btn.closest('.inline-sub-tip');
+  if (tip) {
+    tip.style.opacity = '0';
+    tip.style.transition = 'opacity 0.3s ease';
+    setTimeout(() => tip.remove(), 300);
+  }
+}
 
 // ─── Persona System ─────────────────────────────────────────────────
 let _selectedPersona = 'gog_employee';
@@ -849,8 +922,16 @@ function onAuthenticated() {
   prefetchAffiliateData();
   checkTrialConversion();
 
-  // Feature 4: Enhanced onboarding tour for new users
-  startEnhancedOnboarding();
+  // Phase 6: Load doc credits for free users
+  loadDocCredits();
+
+  // Phase 6: Check onboarding quiz before enhanced onboarding
+  if (!localStorage.getItem('askozzy_quiz_done')) {
+    checkOnboardingQuiz();
+  } else {
+    // Feature 4: Enhanced onboarding tour for new users
+    startEnhancedOnboarding();
+  }
 
   // Run the action the user was trying to do before auth
   if (state.pendingAction) {
@@ -1107,6 +1188,8 @@ function updateSidebarFooter() {
         <button class="sidebar-link-btn" onclick="openUserDashboard()">Dashboard</button>
         <button class="sidebar-link-btn" onclick="openProductivityDashboard()">Productivity</button>
         <button class="sidebar-link-btn" onclick="openMemoryModal()">🧠 Memory</button>
+        <button class="sidebar-link-btn" onclick="openProfileModal()">👤 Profile</button>
+        ${isStudent() ? '<button class="sidebar-link-btn exam-prep-btn" onclick="openExamPrepDashboard()">📝 Exam Prep</button>' : ''}
         <button class="sidebar-link-btn" onclick="openSecuritySettings()">Security</button>
         <button class="sidebar-link-btn" onclick="revokeAllSessions()">Revoke Sessions</button>
         <button class="sidebar-link-btn" onclick="openGuide()">User Guide</button>
@@ -1251,6 +1334,7 @@ async function createNewChat(templateId) {
 
     state.activeConversationId = data.id;
     state.messages = [];
+    _inlineTipCounter = 0;
     await loadConversations();
     showChatScreen();
 
@@ -1275,6 +1359,7 @@ async function createNewChat(templateId) {
 
 async function openConversation(id) {
   state.activeConversationId = id;
+  _inlineTipCounter = 0;
   renderConversationList();
   showChatScreen();
 
@@ -1602,6 +1687,7 @@ async function sendMessage() {
     await loadConversations();
     loadUsageStatus(); // refresh usage counter
     checkUpgradeNudge(); // Feature 1: Smart upgrade nudge after each message
+    if (shouldShowInlineTip()) renderInlineTip();
 
     // Growth system: track message + trigger value cards/celebrations
     _growthAfterMessage(fullText || '');
@@ -1890,6 +1976,30 @@ function _buildGoGDocx(content, title) {
 async function downloadMessageDoc(index) {
   const msg = state.messages[index];
   if (!msg) return;
+
+  // Phase 6: Credit gate for free users
+  const tier = (state.user && (state.user.effectiveTier || state.user.tier)) || 'free';
+  if (tier === 'free' || tier === 'starter') {
+    try {
+      const res = await apiFetch(`${API}/api/documents/use-credit`, {
+        method: 'POST',
+        headers: authHeaders(),
+        body: JSON.stringify({ messageId: msg.id || '' }),
+      });
+      const data = await res.json();
+      if (!data.allowed) {
+        openDocCreditModal();
+        return;
+      }
+      if (data.creditUsed) {
+        state.docCredits = data.remainingCredits;
+        updateDocCreditBadges();
+      }
+    } catch (err) {
+      console.error('Credit check failed:', err);
+      // Allow download on error to avoid blocking
+    }
+  }
 
   try {
     await loadDocxJs();
@@ -7334,7 +7444,7 @@ function openMemoryModal() {
     <input type="text" id="memory-new-value" placeholder="e.g., Ministry of Finance" style="flex:2;" />
     <button onclick="addMemory()">Add</button>
   </div>`;
-  html += `<div style="font-size:11px;color:var(--text-muted);margin-top:12px;text-align:center;">${memories.length} / 20 memory slots used</div>`;
+  html += `<div style="font-size:11px;color:var(--text-muted);margin-top:12px;text-align:center;">${memories.length} / 50 memory slots used</div>`;
 
   // Use a generic modal approach - create overlay if not exists
   let overlay = document.getElementById('memory-modal');
@@ -9043,5 +9153,804 @@ function _growthAfterDownload() {
 function _growthAfterStreakLoad() {
   if (state.streakData && state.streakData.currentStreak >= 7) {
     showCelebration('streak7', state.streakData.currentStreak);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// PHASE 6: Revenue & Engagement Features
+// ═══════════════════════════════════════════════════════════════════════
+
+// ─── Phase 6: Onboarding Quiz ────────────────────────────────────────
+
+async function checkOnboardingQuiz() {
+  if (!isLoggedIn()) return;
+  try {
+    const res = await apiFetch(`${API}/api/onboarding/status`, { headers: authHeaders() });
+    const data = await res.json();
+    if (data.quizCompleted) {
+      localStorage.setItem('askozzy_quiz_done', '1');
+      startEnhancedOnboarding();
+    } else {
+      showOnboardingQuiz();
+    }
+  } catch {
+    startEnhancedOnboarding();
+  }
+}
+
+let _quizStep = 0;
+let _quizAnswers = { experienceLevel: '', primaryUseCase: '', additionalInfo: '' };
+
+function showOnboardingQuiz() {
+  _quizStep = 0;
+  _quizAnswers = { experienceLevel: '', primaryUseCase: '', additionalInfo: '' };
+
+  const existing = document.getElementById('onboarding-quiz-overlay');
+  if (existing) existing.remove();
+
+  const overlay = document.createElement('div');
+  overlay.id = 'onboarding-quiz-overlay';
+  overlay.className = 'quiz-overlay';
+  overlay.innerHTML = `
+    <div class="quiz-card">
+      <div class="quiz-flag-stripe"></div>
+      <div class="quiz-progress">
+        <div class="quiz-progress-bar" id="quiz-progress-bar" style="width:33%"></div>
+      </div>
+      <div class="quiz-step-dots">
+        <span class="quiz-dot active" id="quiz-dot-0"></span>
+        <span class="quiz-dot" id="quiz-dot-1"></span>
+        <span class="quiz-dot" id="quiz-dot-2"></span>
+      </div>
+      <div id="quiz-step-content"></div>
+      <div class="quiz-actions">
+        <button class="quiz-skip" onclick="skipOnboardingQuiz()">Skip for now</button>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+  requestAnimationFrame(() => overlay.classList.add('quiz-visible'));
+  renderQuizStep(0);
+}
+
+function renderQuizStep(step) {
+  _quizStep = step;
+  const container = document.getElementById('quiz-step-content');
+  if (!container) return;
+
+  // Update dots
+  for (let i = 0; i < 3; i++) {
+    const dot = document.getElementById('quiz-dot-' + i);
+    if (dot) dot.className = 'quiz-dot' + (i === step ? ' active' : (i < step ? ' done' : ''));
+  }
+  const bar = document.getElementById('quiz-progress-bar');
+  if (bar) bar.style.width = ((step + 1) * 33.3) + '%';
+
+  const persona = isStudent() ? 'student' : 'gog';
+
+  if (step === 0) {
+    const options = persona === 'student' ? [
+      { value: 'shs_bece', label: 'SHS / BECE Level', icon: '📚' },
+      { value: 'university_undergrad', label: 'University Undergrad', icon: '🎓' },
+      { value: 'postgraduate', label: 'Postgraduate', icon: '🏆' },
+    ] : [
+      { value: 'new_civil_servant', label: 'New to civil service (<2yr)', icon: '🌱' },
+      { value: 'experienced_officer', label: 'Experienced officer (2-10yr)', icon: '💼' },
+      { value: 'senior_management', label: 'Senior management (10+yr)', icon: '🏛️' },
+    ];
+
+    container.innerHTML = `
+      <h3 class="quiz-heading">What describes you?</h3>
+      <p class="quiz-subtext">Help Ozzy understand your experience level</p>
+      <div class="quiz-options">
+        ${options.map(o => `
+          <button class="quiz-option-card ${_quizAnswers.experienceLevel === o.value ? 'selected' : ''}"
+                  onclick="selectQuizOption(0, 'experienceLevel', '${o.value}', this)">
+            <span class="quiz-option-icon">${o.icon}</span>
+            <span class="quiz-option-label">${o.label}</span>
+          </button>`).join('')}
+      </div>`;
+  } else if (step === 1) {
+    const options = persona === 'student' ? [
+      { value: 'exam_prep', label: 'WASSCE/BECE Exam Prep', icon: '📝' },
+      { value: 'essay_writing', label: 'Essay Writing', icon: '✍️' },
+      { value: 'research_projects', label: 'Research Projects', icon: '🔬' },
+      { value: 'general_study', label: 'General Study', icon: '📖' },
+    ] : [
+      { value: 'memos_correspondence', label: 'Memos & Correspondence', icon: '📋' },
+      { value: 'data_analysis', label: 'Data Analysis & Reports', icon: '📊' },
+      { value: 'research_policy', label: 'Research & Policy', icon: '🔍' },
+      { value: 'general_productivity', label: 'General Productivity', icon: '⚡' },
+    ];
+
+    container.innerHTML = `
+      <h3 class="quiz-heading">What will you use Ozzy for most?</h3>
+      <p class="quiz-subtext">This helps us show you the most relevant templates</p>
+      <div class="quiz-options">
+        ${options.map(o => `
+          <button class="quiz-option-card ${_quizAnswers.primaryUseCase === o.value ? 'selected' : ''}"
+                  onclick="selectQuizOption(1, 'primaryUseCase', '${o.value}', this)">
+            <span class="quiz-option-icon">${o.icon}</span>
+            <span class="quiz-option-label">${o.label}</span>
+          </button>`).join('')}
+      </div>`;
+  } else if (step === 2) {
+    const placeholder = persona === 'student'
+      ? 'e.g., I study Economics at UG, preparing for WASSCE 2026...'
+      : 'e.g., I\'m a Procurement Officer at Ghana Health Service...';
+
+    container.innerHTML = `
+      <h3 class="quiz-heading">Tell Ozzy about yourself</h3>
+      <p class="quiz-subtext">Optional — helps Ozzy personalize your experience</p>
+      <textarea class="quiz-textarea" id="quiz-additional-info" rows="4"
+                placeholder="${placeholder}">${escapeHtml(_quizAnswers.additionalInfo)}</textarea>
+      <button class="quiz-submit-btn" onclick="submitOnboardingQuiz()">Get Started</button>`;
+  }
+}
+
+function selectQuizOption(step, field, value, btn) {
+  _quizAnswers[field] = value;
+  // Visual feedback
+  const parent = btn.parentElement;
+  Array.from(parent.querySelectorAll('.quiz-option-card')).forEach(c => c.classList.remove('selected'));
+  btn.classList.add('selected');
+  // Auto-advance after brief delay
+  setTimeout(() => renderQuizStep(step + 1), 300);
+}
+
+async function submitOnboardingQuiz() {
+  const textEl = document.getElementById('quiz-additional-info');
+  if (textEl) _quizAnswers.additionalInfo = textEl.value.trim();
+
+  if (!_quizAnswers.experienceLevel) _quizAnswers.experienceLevel = isStudent() ? 'university_undergrad' : 'experienced_officer';
+  if (!_quizAnswers.primaryUseCase) _quizAnswers.primaryUseCase = isStudent() ? 'general_study' : 'general_productivity';
+
+  try {
+    await apiFetch(`${API}/api/onboarding/quiz`, {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify(_quizAnswers),
+    });
+  } catch {}
+
+  localStorage.setItem('askozzy_quiz_done', '1');
+  closeOnboardingQuiz();
+
+  // Reorder welcome screen based on quiz answers
+  reorderWelcomeTemplates();
+
+  // Reload memories since quiz creates new ones
+  await loadMemories();
+
+  startEnhancedOnboarding();
+}
+
+function skipOnboardingQuiz() {
+  localStorage.setItem('askozzy_quiz_done', '1');
+  closeOnboardingQuiz();
+  startEnhancedOnboarding();
+}
+
+function closeOnboardingQuiz() {
+  const overlay = document.getElementById('onboarding-quiz-overlay');
+  if (overlay) {
+    overlay.classList.remove('quiz-visible');
+    setTimeout(() => overlay.remove(), 300);
+  }
+}
+
+function reorderWelcomeTemplates() {
+  // Reorder template categories based on quiz use case
+  const useCase = _quizAnswers.primaryUseCase || localStorage.getItem('askozzy_primary_use_case') || '';
+  if (!useCase) return;
+
+  const categoryOrder = {
+    exam_prep: ['Exam Prep', 'Study', 'Writing', 'Research'],
+    essay_writing: ['Writing', 'Study', 'Research'],
+    memos_correspondence: ['Memos', 'Writing', 'Letters', 'Correspondence'],
+    data_analysis: ['Analysis', 'Data', 'Reports'],
+    research_policy: ['Research', 'Policy', 'Analysis'],
+  };
+
+  const preferred = categoryOrder[useCase];
+  if (!preferred) return;
+
+  // Store for future sessions
+  localStorage.setItem('askozzy_primary_use_case', useCase);
+
+  // Re-render with preferred category active
+  const tabs = document.getElementById('category-tabs');
+  if (tabs) {
+    const firstPreferred = preferred[0];
+    const tabBtns = tabs.querySelectorAll('.category-tab');
+    for (const btn of Array.from(tabBtns)) {
+      if (btn.textContent.includes(firstPreferred)) {
+        btn.click();
+        break;
+      }
+    }
+  }
+}
+
+// ─── Phase 6: User Profile Modal ────────────────────────────────────
+
+async function openProfileModal() {
+  if (!isLoggedIn()) return;
+
+  try {
+    const res = await apiFetch(`${API}/api/profile`, { headers: authHeaders() });
+    const data = await res.json();
+    state.userProfile = data.profile || {};
+  } catch {
+    state.userProfile = {};
+  }
+
+  const p = state.userProfile || {};
+  let courses = [];
+  try { courses = JSON.parse(p.courses || '[]'); } catch {}
+
+  let html = `
+    <div class="profile-section">
+      <label class="profile-label">Writing Style</label>
+      <select id="profile-writing-style" class="profile-select">
+        ${['formal', 'casual', 'academic', 'creative', 'technical'].map(s =>
+          `<option value="${s}" ${p.writing_style === s ? 'selected' : ''}>${s.charAt(0).toUpperCase() + s.slice(1)}</option>`
+        ).join('')}
+      </select>
+    </div>
+    <div class="profile-section">
+      <label class="profile-label">Experience Level</label>
+      <select id="profile-experience" class="profile-select">
+        ${['beginner', 'intermediate', 'advanced', 'expert'].map(s =>
+          `<option value="${s}" ${p.experience_level === s ? 'selected' : ''}>${s.charAt(0).toUpperCase() + s.slice(1)}</option>`
+        ).join('')}
+      </select>
+    </div>
+    <div class="profile-section">
+      <label class="profile-label">Organization / Context</label>
+      <input type="text" id="profile-org" class="profile-input" value="${escapeHtml(p.organization_context || '')}" placeholder="e.g., Ghana Health Service, Procurement Unit" />
+    </div>
+    ${isStudent() ? `
+    <div class="profile-section">
+      <label class="profile-label">Courses (comma-separated)</label>
+      <input type="text" id="profile-courses" class="profile-input" value="${escapeHtml(courses.join(', '))}" placeholder="e.g., Mathematics, Economics, English" />
+    </div>
+    <div class="profile-section">
+      <label class="profile-label">Exam Target</label>
+      <input type="text" id="profile-exam-target" class="profile-input" value="${escapeHtml(p.exam_target || '')}" placeholder="e.g., WASSCE 2026, BECE 2026" />
+    </div>` : ''}
+    <button class="profile-save-btn" onclick="saveProfile()">Save Profile</button>
+    <div class="profile-summary" id="profile-summary">
+      <div class="profile-summary-title">What Ozzy knows about you</div>
+      <div class="profile-summary-content">${generateProfileSummary(p)}</div>
+    </div>`;
+
+  let overlay = document.getElementById('profile-modal');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'profile-modal';
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = `<div class="modal" style="max-width:560px;">
+      <div class="modal-header">
+        <div>
+          <h3>👤 Your Profile</h3>
+          <p style="font-size:12px;color:var(--text-muted);margin:4px 0 0;">Ozzy uses your profile to personalize AI responses</p>
+        </div>
+        <button class="modal-close" onclick="closeProfileModal()">✕</button>
+      </div>
+      <div class="modal-body" id="profile-modal-body" style="padding:16px;"></div>
+    </div>`;
+    document.body.appendChild(overlay);
+  }
+  document.getElementById('profile-modal-body').innerHTML = html;
+  overlay.classList.add('active');
+}
+
+function closeProfileModal() {
+  const el = document.getElementById('profile-modal');
+  if (el) el.classList.remove('active');
+}
+
+function generateProfileSummary(p) {
+  if (!p) return 'Complete your profile above to help Ozzy personalize responses.';
+  const parts = [];
+  if (p.writing_style) parts.push(`Writes in <strong>${p.writing_style}</strong> style`);
+  if (p.experience_level) parts.push(`<strong>${p.experience_level}</strong> level`);
+  if (p.organization_context) parts.push(`Works at <strong>${escapeHtml(p.organization_context)}</strong>`);
+  if (p.exam_target) parts.push(`Preparing for <strong>${escapeHtml(p.exam_target)}</strong>`);
+  try {
+    const courses = JSON.parse(p.courses || '[]');
+    if (courses.length > 0) parts.push(`Studies: <strong>${escapeHtml(courses.join(', '))}</strong>`);
+  } catch {}
+  return parts.length ? parts.join(' · ') : 'Profile not yet configured.';
+}
+
+async function saveProfile() {
+  const body = {
+    writingStyle: document.getElementById('profile-writing-style')?.value,
+    experienceLevel: document.getElementById('profile-experience')?.value,
+    organizationContext: document.getElementById('profile-org')?.value || '',
+  };
+
+  if (isStudent()) {
+    const coursesRaw = document.getElementById('profile-courses')?.value || '';
+    body.courses = coursesRaw.split(',').map(s => s.trim()).filter(Boolean);
+    body.examTarget = document.getElementById('profile-exam-target')?.value || '';
+  }
+
+  try {
+    const res = await apiFetch(`${API}/api/profile`, {
+      method: 'PUT',
+      headers: authHeaders(),
+      body: JSON.stringify(body),
+    });
+    const data = await res.json();
+    if (data.profile) {
+      state.userProfile = data.profile;
+      const summary = document.getElementById('profile-summary');
+      if (summary) {
+        summary.querySelector('.profile-summary-content').innerHTML = generateProfileSummary(data.profile);
+      }
+      showToast('Profile saved!', 'success');
+    }
+  } catch {
+    showToast('Failed to save profile', 'error');
+  }
+}
+
+// ─── Phase 6: Document Credits ──────────────────────────────────────
+
+async function loadDocCredits() {
+  if (!isLoggedIn()) return;
+  const tier = (state.user && (state.user.effectiveTier || state.user.tier)) || 'free';
+  if (tier === 'professional' || tier === 'enterprise') return;
+
+  try {
+    const res = await apiFetch(`${API}/api/documents/credits`, { headers: authHeaders() });
+    const data = await res.json();
+    state.docCredits = data.balance || 0;
+    updateDocCreditBadges();
+  } catch {}
+}
+
+function updateDocCreditBadges() {
+  // Update any .docx buttons with credit count for free users
+  const tier = (state.user && (state.user.effectiveTier || state.user.tier)) || 'free';
+  if (tier === 'professional' || tier === 'enterprise') return;
+
+  document.querySelectorAll('.btn-download-docx').forEach(btn => {
+    const badge = btn.querySelector('.doc-credit-badge');
+    if (state.docCredits !== null && state.docCredits >= 0) {
+      if (badge) {
+        badge.textContent = `(${state.docCredits})`;
+      } else {
+        const span = document.createElement('span');
+        span.className = 'doc-credit-badge';
+        span.textContent = ` (${state.docCredits})`;
+        btn.appendChild(span);
+      }
+    }
+  });
+}
+
+function openDocCreditModal() {
+  const packs = [
+    { id: 'pack_5', credits: 5, price: 10, label: '5 Documents', subtext: 'GHS 2 each' },
+    { id: 'pack_10', credits: 10, price: 18, label: '10 Documents', subtext: 'GHS 1.80 each (10% off)' },
+    { id: 'pack_25', credits: 25, price: 40, label: '25 Documents', subtext: 'GHS 1.60 each (20% off)' },
+  ];
+
+  let html = `
+    <div class="doc-credit-header">
+      <div class="doc-credit-balance">
+        <span class="doc-credit-number">${state.docCredits || 0}</span>
+        <span class="doc-credit-label">credits remaining</span>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--text-muted);font-size:13px;margin:8px 0 16px;">Purchase document credits to download .docx files</p>
+    <div class="doc-credit-packs">
+      ${packs.map(p => `
+        <div class="doc-credit-pack" onclick="purchaseDocCredits('${p.id}')">
+          <div class="doc-pack-credits">${p.credits}</div>
+          <div class="doc-pack-label">${p.label}</div>
+          <div class="doc-pack-price">GHS ${p.price}</div>
+          <div class="doc-pack-subtext">${p.subtext}</div>
+        </div>`).join('')}
+    </div>
+    <div class="doc-credit-upsell">
+      Or <a onclick="closeDocCreditModal();openPricingModal();">upgrade to Professional</a> for unlimited documents
+    </div>`;
+
+  let overlay = document.getElementById('doc-credit-modal');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'doc-credit-modal';
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = `<div class="modal" style="max-width:480px;">
+      <div class="modal-header">
+        <h3>📄 Document Credits</h3>
+        <button class="modal-close" onclick="closeDocCreditModal()">✕</button>
+      </div>
+      <div class="modal-body" id="doc-credit-modal-body" style="padding:16px;"></div>
+    </div>`;
+    document.body.appendChild(overlay);
+  }
+  document.getElementById('doc-credit-modal-body').innerHTML = html;
+  overlay.classList.add('active');
+}
+
+function closeDocCreditModal() {
+  const el = document.getElementById('doc-credit-modal');
+  if (el) el.classList.remove('active');
+}
+
+async function purchaseDocCredits(packId) {
+  if (!isLoggedIn()) return;
+  try {
+    const res = await apiFetch(`${API}/api/documents/credits/initialize`, {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify({ packId }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    if (data.authorization_url && data.authorization_url.startsWith('https://checkout.paystack.com/')) {
+      window.location.href = data.authorization_url;
+    } else if (data.authorization_url) {
+      showToast('Invalid payment URL', 'error');
+    } else {
+      showToast('Payment system is being set up. Contact administrator.', 'error');
+    }
+  } catch (err) {
+    showToast('Payment unavailable. Please try again later.', 'error');
+  }
+}
+
+// ─── Phase 6: Exam Prep Dashboard ──────────────────────────────────
+
+async function openExamPrepDashboard() {
+  if (!isLoggedIn()) return;
+
+  // Hide welcome/chat, show exam prep
+  document.getElementById('welcome-screen').style.display = 'none';
+  document.getElementById('chat-screen').classList.add('hidden');
+
+  let epContainer = document.getElementById('exam-prep-container');
+  if (!epContainer) {
+    epContainer = document.createElement('div');
+    epContainer.id = 'exam-prep-container';
+    epContainer.className = 'exam-prep-container';
+    document.querySelector('.main-content').appendChild(epContainer);
+  }
+  epContainer.style.display = 'flex';
+  epContainer.innerHTML = '<div class="exam-prep-loading"><div class="spinner"></div><p>Loading Exam Prep...</p></div>';
+
+  try {
+    // Load subjects and progress in parallel
+    const [subjectsRes, progressRes, seasonRes] = await Promise.all([
+      apiFetch(`${API}/api/exam-prep/subjects?examType=wassce`, { headers: authHeaders() }),
+      apiFetch(`${API}/api/exam-prep/progress`, { headers: authHeaders() }),
+      apiFetch(`${API}/api/exam-prep/season`),
+    ]);
+
+    const subjectsData = await subjectsRes.json();
+    const progressData = await progressRes.json();
+    const seasonData = await seasonRes.json();
+
+    renderExamPrepDashboard(epContainer, subjectsData, progressData, seasonData);
+  } catch (err) {
+    const tier = (state.user && (state.user.effectiveTier || state.user.tier)) || 'free';
+    if (tier === 'free') {
+      epContainer.innerHTML = `
+        <div class="exam-prep-paywall">
+          <h2>📝 Exam Prep Mode</h2>
+          <p>Practice with real WASSCE and BECE past questions, get AI-graded feedback, and track your progress.</p>
+          <div class="exam-prep-price">GHS 20<span>/month</span></div>
+          <button class="exam-prep-subscribe-btn" onclick="openPricingModal()">Subscribe Now</button>
+          <p style="font-size:12px;color:var(--text-muted);margin-top:8px;">Also included in Professional and Enterprise plans</p>
+        </div>`;
+    } else {
+      epContainer.innerHTML = '<div style="padding:40px;text-align:center;color:var(--text-muted);">Failed to load Exam Prep. Please try again.</div>';
+    }
+  }
+}
+
+function renderExamPrepDashboard(container, subjectsData, progressData, seasonData) {
+  const subjects = subjectsData.subjects || [];
+  const progress = progressData.subjectProgress || [];
+  const recent = progressData.recentAttempts || [];
+
+  container.innerHTML = `
+    <div class="exam-prep-header">
+      <button class="exam-prep-back" onclick="closeExamPrep()">← Back</button>
+      <h2>📝 Exam Prep</h2>
+      <div class="exam-prep-toggle">
+        <button class="ep-mode-btn active" onclick="setExamMode('past', this)">Past Questions</button>
+        <button class="ep-mode-btn" onclick="setExamMode('practice', this)">Practice Test</button>
+        <button class="ep-mode-btn" onclick="setExamMode('essay', this)">Essay Practice</button>
+      </div>
+    </div>
+
+    <div class="exam-prep-body">
+      <div class="ep-subjects-grid" id="ep-subjects-grid">
+        ${subjects.length > 0 ? subjects.map(s => `
+          <div class="ep-subject-card" onclick="openExamSubject('${escapeHtml(s.subject)}')">
+            <div class="ep-subject-name">${escapeHtml(s.subject)}</div>
+            <div class="ep-subject-meta">${s.question_count} questions · ${s.earliest_year}-${s.latest_year}</div>
+            ${getSubjectProgress(s.subject, progress)}
+          </div>`).join('') : '<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:40px;">No questions available yet. Check back soon!</div>'}
+      </div>
+
+      ${recent.length > 0 ? `
+      <div class="ep-recent-section">
+        <h3>Recent Attempts</h3>
+        <div class="ep-recent-list">
+          ${recent.map(a => `
+            <div class="ep-recent-item">
+              <div class="ep-recent-subject">${escapeHtml(a.subject)}</div>
+              <div class="ep-recent-score ${getGradeClass(a.total_score, a.max_score)}">${a.total_score}/${a.max_score}</div>
+              <div class="ep-recent-date">${new Date(a.created_at).toLocaleDateString()}</div>
+            </div>`).join('')}
+        </div>
+      </div>` : ''}
+
+      ${progress.length > 0 ? `
+      <div class="ep-progress-section">
+        <h3>Your Progress</h3>
+        <div class="ep-progress-grid">
+          ${progress.map(p => `
+            <div class="ep-progress-card">
+              <div class="ep-progress-subject">${escapeHtml(p.subject)}</div>
+              <div class="ep-progress-stats">
+                <span>Avg: ${Math.round(p.avg_score || 0)}/40</span>
+                <span>Best: ${p.best_score || 0}/40</span>
+                <span>${p.total_attempts} attempts</span>
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>` : ''}
+    </div>`;
+}
+
+function getSubjectProgress(subject, progressList) {
+  const p = progressList.find(x => x.subject === subject);
+  if (!p) return '<div class="ep-subject-progress-empty">No attempts yet</div>';
+  const pct = Math.round(((p.avg_score || 0) / 40) * 100);
+  return `<div class="ep-subject-progress">
+    <div class="ep-progress-bar-wrap"><div class="ep-progress-bar-fill" style="width:${pct}%"></div></div>
+    <span class="ep-progress-pct">${pct}%</span>
+  </div>`;
+}
+
+function getGradeClass(score, max) {
+  const pct = max > 0 ? (score / max) * 100 : 0;
+  if (pct >= 75) return 'grade-a';
+  if (pct >= 60) return 'grade-b';
+  if (pct >= 50) return 'grade-c';
+  return 'grade-d';
+}
+
+function setExamMode(mode, btn) {
+  document.querySelectorAll('.ep-mode-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  // TODO: Switch exam prep view mode
+}
+
+function closeExamPrep() {
+  const ep = document.getElementById('exam-prep-container');
+  if (ep) ep.style.display = 'none';
+  document.getElementById('welcome-screen').style.display = '';
+}
+
+let _epCurrentSubject = '';
+let _epCurrentQuestion = null;
+
+async function openExamSubject(subject) {
+  _epCurrentSubject = subject;
+  const grid = document.getElementById('ep-subjects-grid');
+  if (!grid) return;
+
+  grid.innerHTML = '<div style="text-align:center;padding:20px;"><div class="spinner"></div></div>';
+
+  try {
+    const res = await apiFetch(`${API}/api/exam-prep/questions?examType=wassce&subject=${encodeURIComponent(subject)}`, { headers: authHeaders() });
+    const data = await res.json();
+
+    if (data.error) {
+      grid.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-muted);">${escapeHtml(data.error)}</div>`;
+      return;
+    }
+
+    const questions = data.questions || [];
+
+    grid.innerHTML = `
+      <div class="ep-question-list-header">
+        <button class="ep-back-btn" onclick="openExamPrepDashboard()">← Subjects</button>
+        <h3>${escapeHtml(subject)}</h3>
+        <span class="ep-question-count">${data.total} questions</span>
+      </div>
+      <div class="ep-question-list">
+        ${questions.map(q => `
+          <div class="ep-question-item" onclick="openExamQuestion('${q.id}')">
+            <div class="ep-q-year">${q.year}</div>
+            <div class="ep-q-text">${escapeHtml(q.question_text.substring(0, 120))}${q.question_text.length > 120 ? '...' : ''}</div>
+            <div class="ep-q-meta">Paper ${q.paper} · Q${q.question_number} · ${q.marks} marks · ${q.difficulty}</div>
+          </div>`).join('')}
+      </div>
+      <button class="ep-practice-btn" onclick="generatePracticeQuestion('${escapeHtml(subject)}')">Generate Practice Question</button>`;
+  } catch {
+    grid.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">Failed to load questions</div>';
+  }
+}
+
+async function openExamQuestion(questionId) {
+  const container = document.getElementById('ep-subjects-grid');
+  if (!container) return;
+
+  container.innerHTML = '<div style="text-align:center;padding:20px;"><div class="spinner"></div></div>';
+
+  try {
+    const res = await apiFetch(`${API}/api/exam-prep/questions?examType=wassce&subject=${encodeURIComponent(_epCurrentSubject)}`, { headers: authHeaders() });
+    const data = await res.json();
+    const question = (data.questions || []).find(q => q.id === questionId);
+
+    if (!question) {
+      container.innerHTML = '<div style="padding:40px;text-align:center;">Question not found</div>';
+      return;
+    }
+
+    _epCurrentQuestion = question;
+    renderExamQuestionView(container, question);
+  } catch {
+    container.innerHTML = '<div style="padding:40px;text-align:center;">Failed to load question</div>';
+  }
+}
+
+function renderExamQuestionView(container, question) {
+  container.innerHTML = `
+    <div class="ep-question-view">
+      <div class="ep-question-header">
+        <button class="ep-back-btn" onclick="openExamSubject('${escapeHtml(_epCurrentSubject)}')">← Questions</button>
+        <span class="ep-q-badge">${question.year} ${question.exam_type.toUpperCase()} · Paper ${question.paper}</span>
+      </div>
+      <div class="ep-question-card">
+        <div class="ep-question-number">Question ${question.question_number} <span>(${question.marks} marks)</span></div>
+        <div class="ep-question-text">${escapeHtml(question.question_text)}</div>
+      </div>
+      <div class="ep-timer-toggle">
+        <label><input type="checkbox" id="ep-timer-on" onchange="toggleExamTimer(this.checked)"> Enable timer</label>
+        <span id="ep-timer-display" style="display:none;">00:00</span>
+      </div>
+      <textarea class="ep-answer-textarea" id="ep-student-answer" rows="10" placeholder="Write your answer here..."></textarea>
+      <button class="ep-submit-btn" id="ep-submit-btn" onclick="submitExamAnswer('${question.id}')">Submit for Grading</button>
+      <div id="ep-grading-result"></div>
+    </div>`;
+}
+
+let _examTimerInterval = null;
+let _examTimerSeconds = 0;
+
+function toggleExamTimer(on) {
+  const display = document.getElementById('ep-timer-display');
+  if (on) {
+    _examTimerSeconds = 0;
+    display.style.display = 'inline';
+    _examTimerInterval = setInterval(() => {
+      _examTimerSeconds++;
+      const min = Math.floor(_examTimerSeconds / 60);
+      const sec = _examTimerSeconds % 60;
+      display.textContent = `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+    }, 1000);
+  } else {
+    if (_examTimerInterval) clearInterval(_examTimerInterval);
+    _examTimerInterval = null;
+    display.style.display = 'none';
+  }
+}
+
+async function submitExamAnswer(questionId) {
+  const answer = document.getElementById('ep-student-answer')?.value?.trim();
+  if (!answer || answer.length < 10) {
+    showToast('Please write a more detailed answer (at least 10 characters)', 'error');
+    return;
+  }
+
+  if (_examTimerInterval) clearInterval(_examTimerInterval);
+
+  const btn = document.getElementById('ep-submit-btn');
+  const resultDiv = document.getElementById('ep-grading-result');
+  btn.disabled = true;
+  btn.textContent = 'Grading...';
+  resultDiv.innerHTML = '<div class="ep-grading-spinner"><div class="spinner"></div><p>AI examiner is reviewing your answer...</p></div>';
+
+  try {
+    const res = await apiFetch(`${API}/api/exam-prep/submit`, {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify({
+        questionId,
+        studentAnswer: answer,
+        timeSpentSeconds: _examTimerSeconds,
+      }),
+    });
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(data.error);
+
+    resultDiv.innerHTML = `
+      <div class="ep-score-card">
+        <div class="ep-total-score ${getGradeClass(data.totalScore, data.maxScore)}">
+          <div class="ep-total-number">${data.totalScore}</div>
+          <div class="ep-total-max">/ ${data.maxScore}</div>
+        </div>
+        <div class="ep-grade-badge">${escapeHtml(data.grade)}</div>
+        <div class="ep-score-breakdown">
+          <div class="ep-score-axis">
+            <span>Content</span>
+            <div class="ep-score-bar"><div class="ep-score-bar-fill" style="width:${data.scores.content * 10}%"></div></div>
+            <span>${data.scores.content}/10</span>
+          </div>
+          <div class="ep-score-axis">
+            <span>Organization</span>
+            <div class="ep-score-bar"><div class="ep-score-bar-fill" style="width:${data.scores.organization * 10}%"></div></div>
+            <span>${data.scores.organization}/10</span>
+          </div>
+          <div class="ep-score-axis">
+            <span>Expression</span>
+            <div class="ep-score-bar"><div class="ep-score-bar-fill" style="width:${data.scores.expression * 10}%"></div></div>
+            <span>${data.scores.expression}/10</span>
+          </div>
+          <div class="ep-score-axis">
+            <span>Accuracy</span>
+            <div class="ep-score-bar"><div class="ep-score-bar-fill" style="width:${data.scores.accuracy * 10}%"></div></div>
+            <span>${data.scores.accuracy}/10</span>
+          </div>
+        </div>
+        <div class="ep-feedback">
+          <h4>Examiner Feedback</h4>
+          <p>${escapeHtml(data.feedback)}</p>
+        </div>
+      </div>`;
+
+    btn.textContent = 'Try Another Question';
+    btn.disabled = false;
+    btn.onclick = () => openExamSubject(_epCurrentSubject);
+  } catch (err) {
+    resultDiv.innerHTML = `<div style="color:var(--error);padding:12px;">Grading failed: ${escapeHtml(err.message || 'Please try again')}</div>`;
+    btn.textContent = 'Retry Grading';
+    btn.disabled = false;
+  }
+}
+
+async function generatePracticeQuestion(subject) {
+  const container = document.getElementById('ep-subjects-grid');
+  if (!container) return;
+
+  container.innerHTML = '<div style="text-align:center;padding:40px;"><div class="spinner"></div><p>Generating practice question...</p></div>';
+
+  try {
+    const res = await apiFetch(`${API}/api/exam-prep/practice`, {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify({ subject, examType: 'wassce', difficulty: 'medium' }),
+    });
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(data.error);
+
+    _epCurrentQuestion = {
+      id: 'practice_' + Date.now(),
+      exam_type: 'wassce',
+      subject,
+      question_text: data.question,
+      marks: data.marks,
+      year: 'Practice',
+      paper: '1',
+      question_number: 'P',
+    };
+
+    renderExamQuestionView(container, _epCurrentQuestion);
+  } catch (err) {
+    container.innerHTML = `<div style="padding:40px;text-align:center;color:var(--text-muted);">${escapeHtml(err.message || 'Failed to generate question')}</div>`;
   }
 }

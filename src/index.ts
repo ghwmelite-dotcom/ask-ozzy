@@ -747,6 +747,145 @@ async function ensurePushSubscriptionsTable(db: D1Database) {
   }
 }
 
+// ─── Phase 6: Onboarding Quiz Columns Lazy Migration ────────────────
+
+let quizColsExist = false;
+async function ensureQuizColumns(db: D1Database) {
+  if (quizColsExist) return;
+  try {
+    await db.prepare("SELECT experience_level FROM users LIMIT 1").first();
+    quizColsExist = true;
+  } catch {
+    await db.batch([
+      db.prepare("ALTER TABLE users ADD COLUMN experience_level TEXT DEFAULT NULL"),
+      db.prepare("ALTER TABLE users ADD COLUMN primary_use_case TEXT DEFAULT NULL"),
+      db.prepare("ALTER TABLE users ADD COLUMN onboarding_quiz_completed INTEGER DEFAULT 0"),
+    ]);
+    quizColsExist = true;
+  }
+}
+
+// ─── Phase 6: User Profiles Table Lazy Migration ────────────────────
+
+let profileTableExists = false;
+async function ensureUserProfilesTable(db: D1Database) {
+  if (profileTableExists) return;
+  try {
+    await db.prepare("SELECT user_id FROM user_profiles LIMIT 1").first();
+    profileTableExists = true;
+  } catch {
+    await db.prepare(`CREATE TABLE IF NOT EXISTS user_profiles (
+      user_id TEXT PRIMARY KEY,
+      writing_style TEXT DEFAULT 'formal',
+      experience_level TEXT DEFAULT 'intermediate',
+      preferred_language TEXT DEFAULT 'en',
+      courses TEXT DEFAULT '[]',
+      subjects_of_interest TEXT DEFAULT '[]',
+      organization_context TEXT DEFAULT '',
+      exam_target TEXT DEFAULT '',
+      updated_at TEXT DEFAULT (datetime('now')),
+      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    )`).run();
+    profileTableExists = true;
+  }
+}
+
+// ─── Phase 6: Document Credits Tables Lazy Migration ────────────────
+
+let docCreditTablesExist = false;
+async function ensureDocCreditTables(db: D1Database) {
+  if (docCreditTablesExist) return;
+  try {
+    await db.prepare("SELECT user_id FROM document_credits LIMIT 1").first();
+    docCreditTablesExist = true;
+  } catch {
+    await db.batch([
+      db.prepare(`CREATE TABLE IF NOT EXISTS document_credits (
+        user_id TEXT PRIMARY KEY,
+        balance INTEGER DEFAULT 0,
+        total_purchased INTEGER DEFAULT 0,
+        total_used INTEGER DEFAULT 0,
+        updated_at TEXT DEFAULT (datetime('now')),
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+      )`),
+      db.prepare(`CREATE TABLE IF NOT EXISTS document_credit_transactions (
+        id TEXT PRIMARY KEY,
+        user_id TEXT NOT NULL,
+        type TEXT NOT NULL CHECK(type IN ('purchase', 'use', 'bonus', 'refund')),
+        amount INTEGER NOT NULL,
+        description TEXT,
+        payment_reference TEXT,
+        created_at TEXT DEFAULT (datetime('now')),
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+      )`),
+      db.prepare("CREATE INDEX IF NOT EXISTS idx_doc_credit_tx_user ON document_credit_transactions(user_id, created_at DESC)"),
+    ]);
+    docCreditTablesExist = true;
+  }
+}
+
+// ─── Phase 6: Exam Prep Tables Lazy Migration ───────────────────────
+
+let examTablesExist = false;
+async function ensureExamTables(db: D1Database) {
+  if (examTablesExist) return;
+  try {
+    await db.prepare("SELECT id FROM exam_questions LIMIT 1").first();
+    examTablesExist = true;
+  } catch {
+    await db.batch([
+      db.prepare(`CREATE TABLE IF NOT EXISTS exam_questions (
+        id TEXT PRIMARY KEY,
+        exam_type TEXT NOT NULL CHECK(exam_type IN ('wassce', 'bece')),
+        subject TEXT NOT NULL,
+        year INTEGER NOT NULL,
+        paper TEXT DEFAULT '1',
+        question_number INTEGER NOT NULL,
+        question_text TEXT NOT NULL,
+        marking_scheme TEXT DEFAULT '',
+        marks INTEGER DEFAULT 0,
+        difficulty TEXT DEFAULT 'medium' CHECK(difficulty IN ('easy', 'medium', 'hard')),
+        topic TEXT DEFAULT '',
+        vector_id TEXT DEFAULT NULL,
+        created_at TEXT DEFAULT (datetime('now')),
+        UNIQUE(exam_type, subject, year, paper, question_number)
+      )`),
+      db.prepare("CREATE INDEX IF NOT EXISTS idx_exam_q_subject ON exam_questions(exam_type, subject, year)"),
+      db.prepare(`CREATE TABLE IF NOT EXISTS exam_attempts (
+        id TEXT PRIMARY KEY,
+        user_id TEXT NOT NULL,
+        question_id TEXT,
+        exam_type TEXT NOT NULL,
+        subject TEXT NOT NULL,
+        question_text TEXT NOT NULL,
+        student_answer TEXT NOT NULL,
+        ai_feedback TEXT DEFAULT '',
+        score_content INTEGER DEFAULT 0,
+        score_organization INTEGER DEFAULT 0,
+        score_expression INTEGER DEFAULT 0,
+        score_accuracy INTEGER DEFAULT 0,
+        total_score INTEGER DEFAULT 0,
+        max_score INTEGER DEFAULT 0,
+        time_spent_seconds INTEGER DEFAULT 0,
+        created_at TEXT DEFAULT (datetime('now')),
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+      )`),
+      db.prepare("CREATE INDEX IF NOT EXISTS idx_exam_attempts_user ON exam_attempts(user_id, subject, created_at DESC)"),
+      db.prepare(`CREATE TABLE IF NOT EXISTS exam_seasons (
+        id TEXT PRIMARY KEY,
+        exam_type TEXT NOT NULL,
+        year INTEGER NOT NULL,
+        start_date TEXT NOT NULL,
+        end_date TEXT NOT NULL,
+        active INTEGER DEFAULT 1,
+        created_at TEXT DEFAULT (datetime('now')),
+        UNIQUE(exam_type, year)
+      )`),
+    ]);
+    examTablesExist = true;
+  }
+}
+
 // ─── Daily Streak Updater ───────────────────────────────────────────
 
 async function updateUserStreak(db: D1Database, userId: string) {
@@ -1366,14 +1505,35 @@ app.post("/api/chat", authMiddleware, async (c) => {
 
   const messages: Array<{ role: string; content: string }> = [];
 
-  // Fetch user memories for personalization
+  // Fetch user memories + structured profile for personalization
   let memoryPrefix = "";
   try {
+    // Structured profile
+    let profileSection = "";
+    try {
+      await ensureUserProfilesTable(c.env.DB);
+      const profile = await c.env.DB.prepare(
+        "SELECT * FROM user_profiles WHERE user_id = ?"
+      ).bind(userId).first<{ writing_style: string; experience_level: string; courses: string; organization_context: string; exam_target: string }>();
+      if (profile) {
+        const parts: string[] = [];
+        if (profile.writing_style && profile.writing_style !== "formal") parts.push(`- Writing style: ${profile.writing_style}`);
+        if (profile.experience_level && profile.experience_level !== "intermediate") parts.push(`- Experience: ${profile.experience_level}`);
+        if (profile.organization_context) parts.push(`- Organization: ${profile.organization_context}`);
+        if (profile.exam_target) parts.push(`- Exam target: ${profile.exam_target}`);
+        try {
+          const courses = JSON.parse(profile.courses || "[]");
+          if (Array.isArray(courses) && courses.length > 0) parts.push(`- Courses: ${courses.join(", ")}`);
+        } catch {}
+        if (parts.length > 0) profileSection = parts.join("\n") + "\n";
+      }
+    } catch {}
+
     const { results: memories } = await c.env.DB.prepare(
       "SELECT key, value FROM user_memories WHERE user_id = ? ORDER BY key"
     ).bind(userId).all<{ key: string; value: string }>();
-    if (memories && memories.length > 0) {
-      memoryPrefix = `## About this user\n${memories.map(m => `- ${m.key}: ${m.value}`).join("\n")}\n\nUse this context to personalize your responses. Reference the user's role, department, and preferences when relevant.\n\n`;
+    if ((memories && memories.length > 0) || profileSection) {
+      memoryPrefix = `## About this user\n${profileSection}${memories ? memories.map(m => `- ${m.key}: ${m.value}`).join("\n") : ""}\n\nUse this context to personalize your responses. Reference the user's role, department, and preferences when relevant.\n\n`;
     }
   } catch (e: any) { console.error("Memory lookup failed:", e?.message); }
 
@@ -1597,12 +1757,12 @@ app.post("/api/chat", authMiddleware, async (c) => {
               "SELECT COUNT(*) as count FROM user_memories WHERE user_id = ?"
             ).bind(userId).first<{ count: number }>();
 
-            if (memoryCount && memoryCount.count < 20) {
+            if (memoryCount && memoryCount.count < 50) {
               const extractResponse = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as any, {
                 messages: [
                   {
                     role: "system",
-                    content: `Extract any personal/professional facts from this message. Return JSON array of {key, value} pairs or empty array []. Examples: {"key": "department", "value": "Ministry of Finance"}, {"key": "role", "value": "Procurement Officer"}. Only extract clear, explicit facts. Return ONLY the JSON array, nothing else.`,
+                    content: `Extract any personal/professional facts from this message. Return JSON array of {key, value} pairs or empty array []. Examples: {"key": "department", "value": "Ministry of Finance"}, {"key": "role", "value": "Procurement Officer"}, {"key": "writing_style", "value": "formal"}, {"key": "course", "value": "Economics"}, {"key": "expertise", "value": "public procurement"}, {"key": "topic_interest", "value": "data analysis"}. Only extract clear, explicit facts. Return ONLY the JSON array, nothing else.`,
                   },
                   {
                     role: "user",
@@ -3445,6 +3605,11 @@ app.delete("/api/admin/users/:id", adminMiddleware, async (c) => {
   await db.prepare("DELETE FROM user_audit_log WHERE user_id = ?").bind(id).run();
   // Delete USSD sessions
   await db.prepare("DELETE FROM ussd_sessions WHERE user_id = ?").bind(id).run();
+  // Phase 6: Delete user profiles, document credits, exam attempts
+  try { await db.prepare("DELETE FROM user_profiles WHERE user_id = ?").bind(id).run(); } catch {}
+  try { await db.prepare("DELETE FROM document_credits WHERE user_id = ?").bind(id).run(); } catch {}
+  try { await db.prepare("DELETE FROM document_credit_transactions WHERE user_id = ?").bind(id).run(); } catch {}
+  try { await db.prepare("DELETE FROM exam_attempts WHERE user_id = ?").bind(id).run(); } catch {}
   // Delete user
   await db.prepare("DELETE FROM users WHERE id = ?").bind(id).run();
   return c.json({ success: true });
@@ -3657,6 +3822,7 @@ const PRODUCTIVITY_MULTIPLIERS: Record<string, { column: string; minutes: number
   meeting: { column: "meetings_processed", minutes: 60 },
   workflow: { column: "workflows_completed", minutes: 45 },
   document: { column: "documents_generated", minutes: 15 },
+  exam_attempt: { column: "messages_sent", minutes: 10 },
 };
 
 async function trackProductivity(c: any, statType: string) {
@@ -4022,6 +4188,17 @@ app.get("/api/memories", authMiddleware, async (c) => {
   const { results } = await c.env.DB.prepare(
     "SELECT * FROM user_memories WHERE user_id = ? ORDER BY updated_at DESC"
   ).bind(userId).all();
+
+  const includeProfile = c.req.query("includeProfile") === "true";
+  if (includeProfile) {
+    try {
+      await ensureUserProfilesTable(c.env.DB);
+      const profile = await c.env.DB.prepare(
+        "SELECT * FROM user_profiles WHERE user_id = ?"
+      ).bind(userId).first();
+      return c.json({ memories: results || [], profile: profile || null });
+    } catch {}
+  }
   return c.json({ memories: results || [] });
 });
 
@@ -4074,6 +4251,623 @@ app.get("/api/admin/users/:id/memories", adminMiddleware, async (c) => {
     "SELECT * FROM user_memories WHERE user_id = ? ORDER BY updated_at DESC"
   ).bind(targetUserId).all();
   return c.json({ memories: results || [] });
+});
+
+// ─── Phase 6: Onboarding Quiz ────────────────────────────────────────
+
+app.get("/api/onboarding/status", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  await ensureQuizColumns(c.env.DB);
+  const user = await c.env.DB.prepare(
+    "SELECT onboarding_quiz_completed FROM users WHERE id = ?"
+  ).bind(userId).first<{ onboarding_quiz_completed: number }>();
+  return c.json({ quizCompleted: !!(user?.onboarding_quiz_completed) });
+});
+
+app.post("/api/onboarding/quiz", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const { experienceLevel, primaryUseCase, additionalInfo } = await c.req.json();
+
+  if (!experienceLevel || !primaryUseCase) {
+    return c.json({ error: "Experience level and primary use case are required" }, 400);
+  }
+
+  const validLevels = ["new_civil_servant", "experienced_officer", "senior_management", "shs_bece", "university_undergrad", "postgraduate"];
+  const validUseCases = ["memos_correspondence", "data_analysis", "research_policy", "general_productivity", "exam_prep", "essay_writing", "research_projects", "general_study"];
+  if (!validLevels.includes(experienceLevel)) return c.json({ error: "Invalid experience level" }, 400);
+  if (!validUseCases.includes(primaryUseCase)) return c.json({ error: "Invalid use case" }, 400);
+
+  await ensureQuizColumns(c.env.DB);
+
+  // Update user columns
+  await c.env.DB.prepare(
+    "UPDATE users SET experience_level = ?, primary_use_case = ?, onboarding_quiz_completed = 1 WHERE id = ?"
+  ).bind(experienceLevel, primaryUseCase, userId).run();
+
+  // Store as memories for AI personalization
+  let memoriesCreated = 0;
+  const memPairs: Array<{ key: string; value: string }> = [
+    { key: "experience_level", value: experienceLevel.replace(/_/g, " ") },
+    { key: "primary_use_case", value: primaryUseCase.replace(/_/g, " ") },
+  ];
+
+  for (const { key, value } of memPairs) {
+    const memId = generateId();
+    await c.env.DB.prepare(
+      `INSERT INTO user_memories (id, user_id, key, value, type)
+       VALUES (?, ?, ?, ?, 'preference')
+       ON CONFLICT(user_id, key) DO UPDATE SET value = ?, type = 'preference', updated_at = datetime('now')`
+    ).bind(memId, userId, key, value, value).run();
+    memoriesCreated++;
+  }
+
+  // Extract additional facts from freeform text using AI
+  if (additionalInfo && typeof additionalInfo === "string" && additionalInfo.trim().length > 10) {
+    try {
+      const extractResponse = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as any, {
+        messages: [
+          {
+            role: "system",
+            content: `Extract personal/professional facts from this message. Return JSON array of {key, value} pairs or empty array []. Examples: {"key": "department", "value": "Ministry of Finance"}, {"key": "role", "value": "Procurement Officer"}, {"key": "school", "value": "University of Ghana"}, {"key": "course", "value": "Economics"}, {"key": "exam_target", "value": "WASSCE 2026"}. Only extract clear, explicit facts. Return ONLY the JSON array, nothing else.`,
+          },
+          { role: "user", content: additionalInfo.substring(0, 1000) },
+        ],
+        max_tokens: 300,
+      });
+
+      const extractRaw = (extractResponse as any)?.response || "";
+      try {
+        const arrayMatch = extractRaw.match(/\[[\s\S]*?\]/);
+        if (arrayMatch) {
+          const facts = JSON.parse(arrayMatch[0]);
+          if (Array.isArray(facts)) {
+            for (const fact of facts.slice(0, 5)) {
+              if (fact.key && fact.value && typeof fact.key === "string" && typeof fact.value === "string") {
+                const memId = generateId();
+                await c.env.DB.prepare(
+                  `INSERT INTO user_memories (id, user_id, key, value, type)
+                   VALUES (?, ?, ?, ?, 'auto')
+                   ON CONFLICT(user_id, key) DO UPDATE SET value = ?, type = 'auto', updated_at = datetime('now')`
+                ).bind(memId, userId, fact.key.substring(0, 100), fact.value.substring(0, 500), fact.value.substring(0, 500)).run();
+                memoriesCreated++;
+              }
+            }
+          }
+        }
+      } catch {}
+    } catch {}
+  }
+
+  return c.json({ success: true, memoriesCreated });
+});
+
+// ─── Phase 6: User Profile (structured memory) ──────────────────────
+
+app.get("/api/profile", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  await ensureUserProfilesTable(c.env.DB);
+
+  let profile = await c.env.DB.prepare(
+    "SELECT * FROM user_profiles WHERE user_id = ?"
+  ).bind(userId).first();
+
+  if (!profile) {
+    await c.env.DB.prepare(
+      "INSERT INTO user_profiles (user_id) VALUES (?)"
+    ).bind(userId).run();
+    profile = await c.env.DB.prepare(
+      "SELECT * FROM user_profiles WHERE user_id = ?"
+    ).bind(userId).first();
+  }
+
+  return c.json({ profile });
+});
+
+app.put("/api/profile", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const body = await c.req.json();
+  await ensureUserProfilesTable(c.env.DB);
+
+  const validStyles = ["formal", "casual", "academic", "creative", "technical"];
+  const validLevels = ["beginner", "intermediate", "advanced", "expert"];
+
+  const updates: string[] = [];
+  const values: any[] = [];
+
+  if (body.writingStyle && validStyles.includes(body.writingStyle)) {
+    updates.push("writing_style = ?"); values.push(body.writingStyle);
+  }
+  if (body.experienceLevel && validLevels.includes(body.experienceLevel)) {
+    updates.push("experience_level = ?"); values.push(body.experienceLevel);
+  }
+  if (body.preferredLanguage && typeof body.preferredLanguage === "string") {
+    updates.push("preferred_language = ?"); values.push(body.preferredLanguage.substring(0, 10));
+  }
+  if (body.courses !== undefined) {
+    try {
+      const arr = typeof body.courses === "string" ? JSON.parse(body.courses) : body.courses;
+      if (Array.isArray(arr) && arr.length <= 20) {
+        updates.push("courses = ?"); values.push(JSON.stringify(arr.map((s: string) => String(s).substring(0, 100))));
+      }
+    } catch {}
+  }
+  if (body.subjectsOfInterest !== undefined) {
+    try {
+      const arr = typeof body.subjectsOfInterest === "string" ? JSON.parse(body.subjectsOfInterest) : body.subjectsOfInterest;
+      if (Array.isArray(arr) && arr.length <= 20) {
+        updates.push("subjects_of_interest = ?"); values.push(JSON.stringify(arr.map((s: string) => String(s).substring(0, 100))));
+      }
+    } catch {}
+  }
+  if (body.organizationContext !== undefined) {
+    updates.push("organization_context = ?"); values.push(String(body.organizationContext).substring(0, 500));
+  }
+  if (body.examTarget !== undefined) {
+    updates.push("exam_target = ?"); values.push(String(body.examTarget).substring(0, 200));
+  }
+
+  if (updates.length === 0) return c.json({ error: "No valid fields to update" }, 400);
+
+  updates.push("updated_at = datetime('now')");
+
+  // Ensure row exists
+  await c.env.DB.prepare(
+    "INSERT OR IGNORE INTO user_profiles (user_id) VALUES (?)"
+  ).bind(userId).run();
+
+  await c.env.DB.prepare(
+    `UPDATE user_profiles SET ${updates.join(", ")} WHERE user_id = ?`
+  ).bind(...values, userId).run();
+
+  const profile = await c.env.DB.prepare(
+    "SELECT * FROM user_profiles WHERE user_id = ?"
+  ).bind(userId).first();
+
+  return c.json({ profile });
+});
+
+// ─── Phase 6: Document Credits ──────────────────────────────────────
+
+const DOC_CREDIT_PACKS: Record<string, { credits: number; priceGHS: number; pricePesewas: number; label: string }> = {
+  pack_5:  { credits: 5,  priceGHS: 10, pricePesewas: 1000, label: "5 Documents — GHS 10" },
+  pack_10: { credits: 10, priceGHS: 18, pricePesewas: 1800, label: "10 Documents — GHS 18 (10% off)" },
+  pack_25: { credits: 25, priceGHS: 40, pricePesewas: 4000, label: "25 Documents — GHS 40 (20% off)" },
+};
+
+app.get("/api/documents/credits", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  await ensureDocCreditTables(c.env.DB);
+
+  let credits = await c.env.DB.prepare(
+    "SELECT balance, total_purchased, total_used FROM document_credits WHERE user_id = ?"
+  ).bind(userId).first<{ balance: number; total_purchased: number; total_used: number }>();
+
+  if (!credits) {
+    credits = { balance: 0, total_purchased: 0, total_used: 0 };
+  }
+
+  return c.json(credits);
+});
+
+app.post("/api/documents/credits/initialize", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const { packId } = await c.req.json();
+
+  const pack = DOC_CREDIT_PACKS[packId];
+  if (!pack) return c.json({ error: "Invalid credit pack" }, 400);
+
+  const user = await c.env.DB.prepare("SELECT email FROM users WHERE id = ?")
+    .bind(userId).first<{ email: string }>();
+  if (!user) return c.json({ error: "User not found" }, 404);
+
+  const now = new Date();
+  const yearMonth = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}`;
+  const reference = `askozzy_doccredit_${userId}_${packId}_${yearMonth}`;
+
+  const paystackSecret = c.env.PAYSTACK_SECRET;
+  if (!paystackSecret) return c.json({ error: "Payment system not configured. Contact administrator." }, 503);
+
+  try {
+    const res = await fetch("https://api.paystack.co/transaction/initialize", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${paystackSecret}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: user.email,
+        amount: pack.pricePesewas,
+        currency: "GHS",
+        reference,
+        callback_url: `${c.req.url.split("/api")[0]}/?payment=doc_credits`,
+        metadata: { userId, packId, type: "doc_credits", custom_fields: [{ display_name: "Pack", variable_name: "pack", value: pack.label }] },
+      }),
+    });
+    const data: any = await res.json();
+    if (data.status) {
+      return c.json({ authorization_url: data.data.authorization_url, reference: data.data.reference });
+    }
+    return c.json({ error: "Payment initialization failed" }, 500);
+  } catch {
+    return c.json({ error: "Payment service unavailable" }, 503);
+  }
+});
+
+app.post("/api/documents/use-credit", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const { messageId } = await c.req.json();
+  await ensureDocCreditTables(c.env.DB);
+
+  // Check user tier — paid tiers get unlimited docs
+  const user = await c.env.DB.prepare(
+    "SELECT tier, subscription_expires_at, trial_expires_at FROM users WHERE id = ?"
+  ).bind(userId).first<{ tier: string; subscription_expires_at: string | null; trial_expires_at: string | null }>();
+
+  if (!user) return c.json({ error: "User not found" }, 404);
+
+  const effectiveTier = getEffectiveTier(user);
+  if (effectiveTier === "professional" || effectiveTier === "enterprise") {
+    return c.json({ allowed: true, creditUsed: false, remainingCredits: -1 });
+  }
+
+  // Free/starter tier: check credit balance
+  let credits = await c.env.DB.prepare(
+    "SELECT balance FROM document_credits WHERE user_id = ?"
+  ).bind(userId).first<{ balance: number }>();
+
+  if (!credits || credits.balance < 1) {
+    return c.json({ allowed: false, creditUsed: false, remainingCredits: credits?.balance || 0 });
+  }
+
+  // Deduct 1 credit
+  await c.env.DB.prepare(
+    "UPDATE document_credits SET balance = balance - 1, total_used = total_used + 1, updated_at = datetime('now') WHERE user_id = ?"
+  ).bind(userId).run();
+
+  // Log transaction
+  const txId = generateId();
+  await c.env.DB.prepare(
+    "INSERT INTO document_credit_transactions (id, user_id, type, amount, description) VALUES (?, ?, 'use', -1, ?)"
+  ).bind(txId, userId, `Document download${messageId ? ` (msg: ${String(messageId).substring(0, 20)})` : ""}`).run();
+
+  const updated = await c.env.DB.prepare(
+    "SELECT balance FROM document_credits WHERE user_id = ?"
+  ).bind(userId).first<{ balance: number }>();
+
+  return c.json({ allowed: true, creditUsed: true, remainingCredits: updated?.balance || 0 });
+});
+
+// ─── Phase 6: Exam Prep ─────────────────────────────────────────────
+
+app.get("/api/exam-prep/season", async (c) => {
+  try {
+    await ensureExamTables(c.env.DB);
+    const now = new Date().toISOString().split("T")[0];
+    const season = await c.env.DB.prepare(
+      "SELECT * FROM exam_seasons WHERE active = 1 AND start_date <= ? AND end_date >= ? ORDER BY start_date DESC LIMIT 1"
+    ).bind(now, now).first();
+    return c.json({ season: season || null, active: !!season });
+  } catch {
+    return c.json({ season: null, active: false });
+  }
+});
+
+app.get("/api/exam-prep/subjects", authMiddleware, async (c) => {
+  await ensureExamTables(c.env.DB);
+  const examType = c.req.query("examType") || "wassce";
+
+  const { results } = await c.env.DB.prepare(
+    `SELECT subject, COUNT(*) as question_count, MIN(year) as earliest_year, MAX(year) as latest_year
+     FROM exam_questions WHERE exam_type = ?
+     GROUP BY subject ORDER BY subject`
+  ).bind(examType).all();
+
+  return c.json({ subjects: results || [] });
+});
+
+app.get("/api/exam-prep/questions", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  await ensureExamTables(c.env.DB);
+
+  // Check tier access
+  const user = await c.env.DB.prepare(
+    "SELECT tier, subscription_expires_at, trial_expires_at FROM users WHERE id = ?"
+  ).bind(userId).first<{ tier: string; subscription_expires_at: string | null; trial_expires_at: string | null }>();
+  if (!user) return c.json({ error: "User not found" }, 404);
+
+  const effectiveTier = getEffectiveTier(user);
+  if (effectiveTier === "free") {
+    return c.json({ error: "Exam Prep requires a paid plan or exam prep subscription" }, 403);
+  }
+
+  const examType = c.req.query("examType") || "wassce";
+  const subject = c.req.query("subject") || "";
+  const year = c.req.query("year") || "";
+  const page = Math.max(1, parseInt(c.req.query("page") || "1"));
+  const limit = 20;
+  const offset = (page - 1) * limit;
+
+  let whereClause = "WHERE exam_type = ?";
+  const params: any[] = [examType];
+
+  if (subject) { whereClause += " AND subject = ?"; params.push(subject); }
+  if (year) { whereClause += " AND year = ?"; params.push(parseInt(year)); }
+
+  const countResult = await c.env.DB.prepare(
+    `SELECT COUNT(*) as total FROM exam_questions ${whereClause}`
+  ).bind(...params).first<{ total: number }>();
+
+  const { results } = await c.env.DB.prepare(
+    `SELECT * FROM exam_questions ${whereClause} ORDER BY year DESC, question_number ASC LIMIT ? OFFSET ?`
+  ).bind(...params, limit, offset).all();
+
+  return c.json({ questions: results || [], total: countResult?.total || 0, page, totalPages: Math.ceil((countResult?.total || 0) / limit) });
+});
+
+app.post("/api/exam-prep/submit", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const { questionId, studentAnswer, timeSpentSeconds } = await c.req.json();
+
+  if (!studentAnswer || studentAnswer.trim().length < 10) {
+    return c.json({ error: "Please provide a more detailed answer (at least 10 characters)" }, 400);
+  }
+
+  await ensureExamTables(c.env.DB);
+
+  // Check tier access
+  const user = await c.env.DB.prepare(
+    "SELECT tier, subscription_expires_at, trial_expires_at FROM users WHERE id = ?"
+  ).bind(userId).first<{ tier: string; subscription_expires_at: string | null; trial_expires_at: string | null }>();
+  if (!user) return c.json({ error: "User not found" }, 404);
+  const effectiveTier = getEffectiveTier(user);
+  if (effectiveTier === "free") return c.json({ error: "Exam Prep requires a paid plan" }, 403);
+
+  // Fetch question
+  const question = await c.env.DB.prepare(
+    "SELECT * FROM exam_questions WHERE id = ?"
+  ).bind(questionId).first<{
+    id: string; exam_type: string; subject: string; question_text: string;
+    marking_scheme: string; marks: number; year: number;
+  }>();
+
+  if (!question) return c.json({ error: "Question not found" }, 404);
+
+  // AI grading with WAEC examiner prompt
+  const gradingPrompt = `You are an experienced WAEC ${question.exam_type.toUpperCase()} examiner for ${question.subject}. Grade this student's answer strictly but fairly.
+
+QUESTION (${question.year} ${question.exam_type.toUpperCase()}, ${question.marks} marks):
+${question.question_text}
+
+${question.marking_scheme ? `MARKING SCHEME:\n${question.marking_scheme}\n` : ""}
+STUDENT'S ANSWER:
+${studentAnswer.substring(0, 3000)}
+
+Score on these 4 axes (each out of 10):
+1. Content (accuracy and completeness of subject matter)
+2. Organization (logical structure and coherence)
+3. Expression (clarity, grammar, vocabulary)
+4. Accuracy (factual correctness, proper use of terminology)
+
+Return ONLY a JSON object:
+{"content": N, "organization": N, "expression": N, "accuracy": N, "feedback": "Detailed feedback with specific improvements...", "grade": "A1/B2/B3/C4/C5/C6/D7/E8/F9"}`;
+
+  try {
+    const aiResponse = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as any, {
+      messages: [
+        { role: "system", content: "You are a strict but fair WAEC examiner. Return ONLY valid JSON." },
+        { role: "user", content: gradingPrompt },
+      ],
+      max_tokens: 600,
+    });
+
+    const raw = (aiResponse as any)?.response || "";
+    let scores = { content: 5, organization: 5, expression: 5, accuracy: 5, feedback: "Grading completed.", grade: "C4" };
+
+    try {
+      const jsonMatch = raw.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        const parsed = JSON.parse(jsonMatch[0]);
+        scores.content = Math.min(10, Math.max(0, parseInt(parsed.content) || 5));
+        scores.organization = Math.min(10, Math.max(0, parseInt(parsed.organization) || 5));
+        scores.expression = Math.min(10, Math.max(0, parseInt(parsed.expression) || 5));
+        scores.accuracy = Math.min(10, Math.max(0, parseInt(parsed.accuracy) || 5));
+        scores.feedback = String(parsed.feedback || "").substring(0, 2000) || "Grading completed.";
+        scores.grade = parsed.grade || "C4";
+      }
+    } catch {}
+
+    const totalScore = scores.content + scores.organization + scores.expression + scores.accuracy;
+    const attemptId = generateId();
+
+    await c.env.DB.prepare(
+      `INSERT INTO exam_attempts (id, user_id, question_id, exam_type, subject, question_text, student_answer, ai_feedback, score_content, score_organization, score_expression, score_accuracy, total_score, max_score, time_spent_seconds)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 40, ?)`
+    ).bind(
+      attemptId, userId, questionId, question.exam_type, question.subject,
+      question.question_text.substring(0, 2000), studentAnswer.substring(0, 5000),
+      scores.feedback, scores.content, scores.organization, scores.expression, scores.accuracy,
+      totalScore, timeSpentSeconds || 0
+    ).run();
+
+    // Track productivity
+    c.executionCtx.waitUntil(trackProductivity(c, "exam_attempt"));
+
+    return c.json({
+      attemptId,
+      scores: { content: scores.content, organization: scores.organization, expression: scores.expression, accuracy: scores.accuracy },
+      totalScore,
+      maxScore: 40,
+      grade: scores.grade,
+      feedback: scores.feedback,
+    });
+  } catch (err: any) {
+    console.error("Exam grading error:", err?.message);
+    return c.json({ error: "Grading failed. Please try again." }, 500);
+  }
+});
+
+app.post("/api/exam-prep/practice", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const { subject, topic, difficulty, examType } = await c.req.json();
+
+  if (!subject) return c.json({ error: "Subject is required" }, 400);
+
+  // Check tier
+  const user = await c.env.DB.prepare(
+    "SELECT tier, subscription_expires_at, trial_expires_at FROM users WHERE id = ?"
+  ).bind(userId).first<{ tier: string; subscription_expires_at: string | null; trial_expires_at: string | null }>();
+  if (!user) return c.json({ error: "User not found" }, 404);
+  const effectiveTier = getEffectiveTier(user);
+  if (effectiveTier === "free") return c.json({ error: "Exam Prep requires a paid plan" }, 403);
+
+  const et = examType === "bece" ? "BECE" : "WASSCE";
+  const diff = difficulty === "easy" ? "easy" : difficulty === "hard" ? "hard" : "medium";
+
+  // Check KV cache
+  const cacheKey = `exam_practice:${subject}:${topic || "general"}:${diff}:${Date.now() % 86400000}`;
+  const cached = await c.env.SESSIONS.get(cacheKey);
+  if (cached) {
+    try { return c.json(JSON.parse(cached)); } catch {}
+  }
+
+  try {
+    const aiResponse = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as any, {
+      messages: [
+        { role: "system", content: `You are a ${et} question setter for Ghana. Generate exam-style questions.` },
+        { role: "user", content: `Generate a ${diff} difficulty ${et} ${subject}${topic ? ` (topic: ${topic})` : ""} exam question. Return JSON: {"question": "...", "marks": N, "marking_scheme": "...", "topic": "..."}` },
+      ],
+      max_tokens: 500,
+    });
+
+    const raw = (aiResponse as any)?.response || "";
+    let result = { question: `Practice ${subject} question`, marks: 10, marking_scheme: "", topic: topic || subject };
+
+    try {
+      const jsonMatch = raw.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        const parsed = JSON.parse(jsonMatch[0]);
+        result.question = String(parsed.question || "").substring(0, 2000) || result.question;
+        result.marks = Math.min(50, Math.max(1, parseInt(parsed.marks) || 10));
+        result.marking_scheme = String(parsed.marking_scheme || "").substring(0, 2000);
+        result.topic = String(parsed.topic || topic || subject).substring(0, 200);
+      }
+    } catch {}
+
+    const response = { ...result, examType: et, subject, difficulty: diff };
+    c.executionCtx.waitUntil(c.env.SESSIONS.put(cacheKey, JSON.stringify(response), { expirationTtl: 86400 }));
+    return c.json(response);
+  } catch {
+    return c.json({ error: "Failed to generate practice question" }, 500);
+  }
+});
+
+app.get("/api/exam-prep/progress", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  await ensureExamTables(c.env.DB);
+
+  const { results } = await c.env.DB.prepare(
+    `SELECT subject,
+       COUNT(*) as total_attempts,
+       AVG(total_score) as avg_score,
+       MAX(total_score) as best_score,
+       SUM(time_spent_seconds) as total_time
+     FROM exam_attempts WHERE user_id = ?
+     GROUP BY subject ORDER BY total_attempts DESC`
+  ).bind(userId).all();
+
+  // Recent attempts
+  const { results: recent } = await c.env.DB.prepare(
+    "SELECT id, subject, total_score, max_score, ai_feedback, created_at FROM exam_attempts WHERE user_id = ? ORDER BY created_at DESC LIMIT 5"
+  ).bind(userId).all();
+
+  return c.json({ subjectProgress: results || [], recentAttempts: recent || [] });
+});
+
+// ─── Phase 6: Exam Prep Admin ───────────────────────────────────────
+
+app.post("/api/admin/exam-prep/questions", adminMiddleware, async (c) => {
+  await ensureExamTables(c.env.DB);
+  const { questions } = await c.req.json();
+
+  if (!Array.isArray(questions) || questions.length === 0) {
+    return c.json({ error: "Questions array is required" }, 400);
+  }
+
+  let imported = 0;
+  let skipped = 0;
+
+  for (const q of questions.slice(0, 500)) {
+    if (!q.examType || !q.subject || !q.year || !q.questionNumber || !q.questionText) {
+      skipped++;
+      continue;
+    }
+    try {
+      const id = generateId();
+      await c.env.DB.prepare(
+        `INSERT OR IGNORE INTO exam_questions (id, exam_type, subject, year, paper, question_number, question_text, marking_scheme, marks, difficulty, topic)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+      ).bind(
+        id,
+        q.examType === "bece" ? "bece" : "wassce",
+        String(q.subject).substring(0, 200),
+        parseInt(q.year),
+        String(q.paper || "1").substring(0, 10),
+        parseInt(q.questionNumber),
+        String(q.questionText).substring(0, 5000),
+        String(q.markingScheme || "").substring(0, 5000),
+        parseInt(q.marks) || 0,
+        ["easy", "medium", "hard"].includes(q.difficulty) ? q.difficulty : "medium",
+        String(q.topic || "").substring(0, 200),
+      ).run();
+      imported++;
+    } catch {
+      skipped++;
+    }
+  }
+
+  return c.json({ success: true, imported, skipped });
+});
+
+app.get("/api/admin/exam-prep/stats", adminMiddleware, async (c) => {
+  await ensureExamTables(c.env.DB);
+
+  const totalQuestions = await c.env.DB.prepare("SELECT COUNT(*) as count FROM exam_questions").first<{ count: number }>();
+  const totalAttempts = await c.env.DB.prepare("SELECT COUNT(*) as count FROM exam_attempts").first<{ count: number }>();
+  const avgScore = await c.env.DB.prepare("SELECT AVG(total_score) as avg FROM exam_attempts").first<{ avg: number }>();
+
+  const { results: popular } = await c.env.DB.prepare(
+    "SELECT subject, COUNT(*) as attempts FROM exam_attempts GROUP BY subject ORDER BY attempts DESC LIMIT 10"
+  ).all();
+
+  const { results: seasons } = await c.env.DB.prepare(
+    "SELECT * FROM exam_seasons ORDER BY year DESC LIMIT 5"
+  ).all();
+
+  return c.json({
+    totalQuestions: totalQuestions?.count || 0,
+    totalAttempts: totalAttempts?.count || 0,
+    avgScore: Math.round((avgScore?.avg || 0) * 10) / 10,
+    popularSubjects: popular || [],
+    seasons: seasons || [],
+  });
+});
+
+app.post("/api/admin/exam-prep/season", adminMiddleware, async (c) => {
+  await ensureExamTables(c.env.DB);
+  const { examType, year, startDate, endDate, active } = await c.req.json();
+
+  if (!examType || !year || !startDate || !endDate) {
+    return c.json({ error: "All fields are required" }, 400);
+  }
+
+  const id = generateId();
+  await c.env.DB.prepare(
+    `INSERT INTO exam_seasons (id, exam_type, year, start_date, end_date, active)
+     VALUES (?, ?, ?, ?, ?, ?)
+     ON CONFLICT(exam_type, year) DO UPDATE SET start_date = ?, end_date = ?, active = ?`
+  ).bind(id, examType, parseInt(year), startDate, endDate, active ? 1 : 0, startDate, endDate, active ? 1 : 0).run();
+
+  return c.json({ success: true });
 });
 
 // ─── Custom Agents (public) ──────────────────────────────────────────
@@ -5719,6 +6513,51 @@ app.post("/api/webhooks/paystack", async (c) => {
 
   if (event.event === "charge.success") {
     const { metadata, reference, amount: amountPesewas, customer } = event.data;
+
+    // Handle document credit purchases
+    if (metadata?.type === "doc_credits" && metadata?.userId && metadata?.packId) {
+      const pack = DOC_CREDIT_PACKS[metadata.packId];
+      if (!pack) {
+        console.error("Webhook: unknown doc credit pack", metadata.packId);
+        return c.json({ received: true, flagged: "unknown_pack" }, 200);
+      }
+
+      const paidAmount = Number(amountPesewas) || 0;
+      if (paidAmount < pack.pricePesewas) {
+        console.error("Webhook: doc credit amount mismatch", { expected: pack.pricePesewas, received: paidAmount, reference });
+        return c.json({ received: true, flagged: "amount_mismatch" }, 200);
+      }
+
+      await ensureDocCreditTables(c.env.DB);
+
+      // Upsert credits
+      await c.env.DB.prepare(
+        `INSERT INTO document_credits (user_id, balance, total_purchased)
+         VALUES (?, ?, ?)
+         ON CONFLICT(user_id) DO UPDATE SET balance = balance + ?, total_purchased = total_purchased + ?, updated_at = datetime('now')`
+      ).bind(metadata.userId, pack.credits, pack.credits, pack.credits, pack.credits).run();
+
+      // Log transaction
+      const txId = generateId();
+      await c.env.DB.prepare(
+        "INSERT INTO document_credit_transactions (id, user_id, type, amount, description, payment_reference) VALUES (?, ?, 'purchase', ?, ?, ?)"
+      ).bind(txId, metadata.userId, pack.credits, pack.label, reference || "").run();
+
+      // Process affiliate commissions on doc credit purchase
+      const paymentAmountGHS = paidAmount / 100;
+      if (paymentAmountGHS > 0) {
+        c.executionCtx.waitUntil((async () => {
+          try {
+            await processAffiliateCommissions(c.env.DB, metadata.userId, paymentAmountGHS, reference || "");
+          } catch (err) {
+            console.error("Affiliate commission error:", err);
+          }
+        })());
+      }
+
+      return c.json({ received: true });
+    }
+
     if (metadata?.userId && metadata?.tier) {
       // Validate tier exists in our plans
       const plan = PAYSTACK_PLANS[metadata.tier];
@@ -9272,5 +10111,14 @@ export default {
     await env.DB.prepare(
       "UPDATE users SET tier = 'free' WHERE tier != 'free' AND subscription_expires_at IS NOT NULL AND subscription_expires_at < ?"
     ).bind(graceCutoff).run();
+
+    // Phase 6: Auto-toggle exam_seasons.active based on date range
+    try {
+      await ensureExamTables(env.DB);
+      const today = new Date().toISOString().split("T")[0];
+      await env.DB.prepare(
+        "UPDATE exam_seasons SET active = CASE WHEN start_date <= ? AND end_date >= ? THEN 1 ELSE 0 END"
+      ).bind(today, today).run();
+    } catch {}
   },
 };
