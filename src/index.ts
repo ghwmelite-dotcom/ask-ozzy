@@ -470,8 +470,8 @@ const PRICING_TIERS: Record<string, {
     price: 60,
     studentPrice: 25,
     messagesPerDay: 200,
-    models: "all",
-    features: ["200 messages/day", "All 10 AI models", "Priority speed", "Unlimited history", "Template customisation"],
+    models: "pro",
+    features: ["200 messages/day", "6 AI models", "Priority speed", "Unlimited history", "Template customisation"],
   },
   enterprise: {
     name: "Enterprise",
@@ -487,6 +487,13 @@ const FREE_TIER_MODELS = [
   "@cf/openai/gpt-oss-20b",
   "@cf/google/gemma-3-12b-it",
   "@cf/meta/llama-3.1-8b-instruct-fast",
+];
+
+const PRO_TIER_MODELS = [
+  ...FREE_TIER_MODELS,
+  "@cf/meta/llama-4-scout-17b-16e-instruct",
+  "@cf/qwen/qwq-32b",
+  "@cf/mistralai/mistral-small-3.1-24b-instruct",
 ];
 
 async function checkUsageLimit(db: D1Database, userId: string, tier: string): Promise<{ allowed: boolean; used: number; limit: number }> {
@@ -1238,6 +1245,10 @@ app.post("/api/chat", authMiddleware, async (c) => {
   // Free tier: restrict to basic models
   if (userTier === "free" && !FREE_TIER_MODELS.includes(selectedModel)) {
     selectedModel = "@cf/openai/gpt-oss-20b"; // fallback to best free model
+  }
+  // Professional tier: restrict to pro + free models (6 total)
+  if (userTier === "professional" && !PRO_TIER_MODELS.includes(selectedModel)) {
+    selectedModel = "@cf/meta/llama-4-scout-17b-16e-instruct"; // fallback to best pro model
   }
 
   // Save user message
@@ -2194,17 +2205,20 @@ app.get("/api/models", authMiddleware, async (c) => {
     .first<{ tier: string; trial_expires_at: string | null; subscription_expires_at: string | null }>();
   let userTier = getEffectiveTier({ tier: user?.tier || "free", trial_expires_at: user?.trial_expires_at || null, subscription_expires_at: user?.subscription_expires_at || null });
   const isFree = userTier === "free";
+  const isPro = userTier === "professional";
+  const isEnterprise = userTier === "enterprise";
 
   return c.json({
     userTier,
     models: [
+      // ── Enterprise-only (4 best models) ──────────────────────────
       {
         id: "@cf/openai/gpt-oss-120b",
         name: "GPT-OSS 120B (OpenAI)",
         description: "OpenAI's open-weight model — top-tier reasoning, agentic tasks, and general purpose",
         contextWindow: 131072,
-        requiredTier: "professional",
-        locked: isFree,
+        requiredTier: "enterprise",
+        locked: !isEnterprise,
         recommended: true,
       },
       {
@@ -2221,17 +2235,8 @@ app.get("/api/models", authMiddleware, async (c) => {
         name: "Llama 3.3 70B (Meta)",
         description: "70 billion parameters — the most powerful Llama for deep reasoning and long documents",
         contextWindow: 131072,
-        requiredTier: "professional",
-        locked: isFree,
-        recommended: false,
-      },
-      {
-        id: "@cf/qwen/qwq-32b",
-        name: "QwQ 32B (Qwen)",
-        description: "Qwen reasoning model — exceptional at thinking through complex problems step-by-step",
-        contextWindow: 131072,
-        requiredTier: "professional",
-        locked: isFree,
+        requiredTier: "enterprise",
+        locked: !isEnterprise,
         recommended: false,
       },
       {
@@ -2239,17 +2244,18 @@ app.get("/api/models", authMiddleware, async (c) => {
         name: "Qwen3 30B (Qwen)",
         description: "Latest Qwen3 — advanced reasoning, multilingual, agent capabilities",
         contextWindow: 131072,
-        requiredTier: "professional",
-        locked: isFree,
+        requiredTier: "enterprise",
+        locked: !isEnterprise,
         recommended: false,
       },
+      // ── Professional (3 pro-exclusive + 3 free = 6 total) ────────
       {
-        id: "@cf/openai/gpt-oss-20b",
-        name: "GPT-OSS 20B (OpenAI)",
-        description: "OpenAI's smaller open-weight model — fast with strong reasoning",
+        id: "@cf/qwen/qwq-32b",
+        name: "QwQ 32B (Qwen)",
+        description: "Qwen reasoning model — exceptional at thinking through complex problems step-by-step",
         contextWindow: 131072,
-        requiredTier: "free",
-        locked: false,
+        requiredTier: "professional",
+        locked: isFree,
         recommended: false,
       },
       {
@@ -2262,21 +2268,31 @@ app.get("/api/models", authMiddleware, async (c) => {
         recommended: false,
       },
       {
+        id: "@cf/ibm-granite/granite-4.0-h-micro",
+        name: "Granite 4.0 Micro (IBM)",
+        description: "IBM's enterprise model — small but accurate, great for structured tasks",
+        contextWindow: 131072,
+        requiredTier: "enterprise",
+        locked: !isEnterprise,
+        recommended: false,
+      },
+      // ── Free (3 models) ──────────────────────────────────────────
+      {
+        id: "@cf/openai/gpt-oss-20b",
+        name: "GPT-OSS 20B (OpenAI)",
+        description: "OpenAI's smaller open-weight model — fast with strong reasoning",
+        contextWindow: 131072,
+        requiredTier: "free",
+        locked: false,
+        recommended: false,
+      },
+      {
         id: "@cf/google/gemma-3-12b-it",
         name: "Gemma 3 12B (Google)",
         description: "Google's model — 128K context, 140+ languages, strong at summarisation",
         contextWindow: 128000,
         requiredTier: "free",
         locked: false,
-        recommended: false,
-      },
-      {
-        id: "@cf/ibm-granite/granite-4.0-h-micro",
-        name: "Granite 4.0 Micro (IBM)",
-        description: "IBM's enterprise model — small but accurate, great for structured tasks",
-        contextWindow: 131072,
-        requiredTier: "professional",
-        locked: isFree,
         recommended: false,
       },
       {
