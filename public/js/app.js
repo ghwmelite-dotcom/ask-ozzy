@@ -7354,7 +7354,9 @@ async function downloadArtifact() {
 
 async function loadAgents() {
   try {
-    const res = await fetch(`${API}/api/agents?user_type=${state.userType || 'gog_employee'}`);
+    const res = await fetch(`${API}/api/agents`, {
+      headers: { Authorization: `Bearer ${state.token}` }
+    });
     const data = await res.json();
     state.agents = data.agents || [];
     renderAgentSelector();

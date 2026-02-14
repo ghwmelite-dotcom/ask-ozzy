@@ -3937,12 +3937,37 @@ app.get("/api/admin/users/:id/memories", adminMiddleware, async (c) => {
 
 // ─── Custom Agents (public) ──────────────────────────────────────────
 
-app.get("/api/agents", async (c) => {
-  const userType = c.req.query("user_type") || "gog_employee";
+app.get("/api/agents", authMiddleware, async (c) => {
+  const userId = c.get("userId");
   await ensureAgentUserTypeColumn(c.env.DB);
-  const { results } = await c.env.DB.prepare(
-    "SELECT id, name, description, department, icon, knowledge_category, user_type FROM agents WHERE active = 1 AND (user_type = ? OR user_type = 'all') ORDER BY name"
-  ).bind(userType).all();
+
+  // Look up user's tier and user_type
+  const user = await c.env.DB.prepare("SELECT tier, user_type FROM users WHERE id = ?")
+    .bind(userId).first<{ tier: string; user_type: string }>();
+  const tier = user?.tier || "free";
+  const userType = user?.user_type || "gog_employee";
+  const isPaid = tier !== "free";
+
+  // Employees see all agents; students see only student + all
+  let query: string;
+  const params: any[] = [];
+
+  if (userType === "student") {
+    if (isPaid) {
+      query = "SELECT id, name, description, department, icon, knowledge_category, user_type, requires_paid FROM agents WHERE active = 1 AND (user_type = 'student' OR user_type = 'all') ORDER BY name";
+    } else {
+      query = "SELECT id, name, description, department, icon, knowledge_category, user_type, requires_paid FROM agents WHERE active = 1 AND (user_type = 'student' OR user_type = 'all') AND requires_paid = 0 ORDER BY name";
+    }
+  } else {
+    // gog_employee sees all agent types
+    if (isPaid) {
+      query = "SELECT id, name, description, department, icon, knowledge_category, user_type, requires_paid FROM agents WHERE active = 1 ORDER BY name";
+    } else {
+      query = "SELECT id, name, description, department, icon, knowledge_category, user_type, requires_paid FROM agents WHERE active = 1 AND requires_paid = 0 ORDER BY name";
+    }
+  }
+
+  const { results } = await c.env.DB.prepare(query).all();
   return c.json({ agents: results || [] });
 });
 
@@ -4045,7 +4070,8 @@ app.post("/api/admin/seed-agents", adminMiddleware, async (c) => {
       department: "Procurement",
       icon: "\u{1F4DC}",
       user_type: "gog_employee",
-      knowledge_category: "procurement"
+      knowledge_category: "procurement",
+      requires_paid: 0
     },
     {
       name: "IT Helpdesk",
@@ -4054,7 +4080,8 @@ app.post("/api/admin/seed-agents", adminMiddleware, async (c) => {
       department: "IT",
       icon: "\u{1F527}",
       user_type: "gog_employee",
-      knowledge_category: "it"
+      knowledge_category: "it",
+      requires_paid: 0
     },
     {
       name: "HR & Admin Officer",
@@ -4063,7 +4090,8 @@ app.post("/api/admin/seed-agents", adminMiddleware, async (c) => {
       department: "HR & Admin",
       icon: "\u{1F465}",
       user_type: "gog_employee",
-      knowledge_category: "hr"
+      knowledge_category: "hr",
+      requires_paid: 0
     },
     {
       name: "Study Coach",
@@ -4072,7 +4100,8 @@ app.post("/api/admin/seed-agents", adminMiddleware, async (c) => {
       department: "Academic Support",
       icon: "\u{1F4DA}",
       user_type: "student",
-      knowledge_category: ""
+      knowledge_category: "",
+      requires_paid: 0
     },
     {
       name: "Essay Writing Tutor",
@@ -4081,7 +4110,8 @@ app.post("/api/admin/seed-agents", adminMiddleware, async (c) => {
       department: "Academic Support",
       icon: "\u{270D}\u{FE0F}",
       user_type: "student",
-      knowledge_category: ""
+      knowledge_category: "",
+      requires_paid: 0
     },
     {
       name: "WASSCE Prep",
@@ -4090,7 +4120,8 @@ app.post("/api/admin/seed-agents", adminMiddleware, async (c) => {
       department: "Exam Preparation",
       icon: "\u{1F393}",
       user_type: "student",
-      knowledge_category: ""
+      knowledge_category: "",
+      requires_paid: 0
     },
     {
       name: "Research Assistant",
@@ -4099,7 +4130,78 @@ app.post("/api/admin/seed-agents", adminMiddleware, async (c) => {
       department: "Research",
       icon: "\u{1F52C}",
       user_type: "student",
-      knowledge_category: ""
+      knowledge_category: "",
+      requires_paid: 0
+    },
+    {
+      name: "Memo & Correspondence Officer",
+      description: "Draft official memos, letters, circulars, and inter-departmental correspondence following GoG standards",
+      system_prompt: "You are a Memo & Correspondence Officer AI for the Government of Ghana. You are an expert in drafting official government communications including internal memos, official letters, circulars, directives, and inter-departmental correspondence. Follow the Ghana Civil Service house style and formatting conventions: proper reference numbering, salutations, subject lines, and sign-off protocols. Know the hierarchy of government communications (from Head of Civil Service, Chief Directors, Directors, etc.). Ensure all correspondence adheres to the Official Secrets Act and proper classification markings (Confidential, Restricted, Unclassified). Help civil servants write clear, concise, and professionally formatted documents suitable for official use.",
+      department: "Administration",
+      icon: "\u2709\uFE0F",
+      user_type: "gog_employee",
+      knowledge_category: "governance",
+      requires_paid: 1
+    },
+    {
+      name: "Budget & Finance Analyst",
+      description: "Budget preparation, expenditure tracking, GIFMIS support, and financial compliance guidance",
+      system_prompt: "You are a Budget & Finance Analyst AI for the Government of Ghana. You are deeply knowledgeable about the Public Financial Management Act, 2016 (Act 921), the Financial Administration Act, 2003 (Act 654), and the Internal Audit Agency Act, 2003 (Act 658). Help civil servants with budget preparation and justification using the programme-based budgeting (PBB) format, expenditure tracking, revenue analysis, GIFMIS operations, financial reporting, and compliance with Controller and Accountant-General's Department (CAGD) directives. Guide users through mid-year budget reviews, supplementary estimates, commitment controls, and Appropriation Act requirements. Reference current fiscal year ceilings, Chart of Accounts classifications, and Treasury Single Account (TSA) procedures.",
+      department: "Finance",
+      icon: "\u{1F4B0}",
+      user_type: "gog_employee",
+      knowledge_category: "finance",
+      requires_paid: 1
+    },
+    {
+      name: "Legal Compliance Advisor",
+      description: "Legal opinions, regulatory compliance, contract review, and interpretation of Ghana statutes",
+      system_prompt: "You are a Legal Compliance Advisor AI for the Government of Ghana. You are an expert in Ghanaian statutory law including the 1992 Constitution, the Interpretation Act (Act 792), the Contracts Act (Act 25), the Evidence Act (Act 323), the Labour Act (Act 651), and key regulatory frameworks governing public institutions. Help civil servants with legal opinions on administrative matters, contract review and drafting, compliance with regulatory requirements, interpretation of statutes and legislative instruments (LIs), and understanding Attorney-General's circulars and directives. Guide users on conflict of interest declarations, anti-corruption compliance (Office of the Special Prosecutor Act, Act 959), Freedom of Information requests (Right to Information Act, Act 989), and data protection compliance (Data Protection Act, Act 843). Always recommend seeking formal legal counsel from the Attorney-General's Department for binding legal matters.",
+      department: "Legal",
+      icon: "\u2696\uFE0F",
+      user_type: "gog_employee",
+      knowledge_category: "legal",
+      requires_paid: 1
+    },
+    {
+      name: "Meeting Minutes Secretary",
+      description: "Record, format, and distribute professional meeting minutes with action items and follow-ups",
+      system_prompt: "You are a Meeting Minutes Secretary AI for the Government of Ghana. You are an expert in recording, formatting, and producing professional meeting minutes for government meetings including departmental meetings, management committee meetings, board meetings, inter-agency coordination meetings, and cabinet sub-committee meetings. Help civil servants structure minutes with proper headings: attendance/apologies, confirmation of previous minutes, matters arising, agenda items, decisions taken, action items with responsible persons and deadlines, and date of next meeting. Follow the GoG Civil Service house style for minutes formatting. Help summarise discussions concisely while capturing key decisions and dissenting views. Generate clear action-item trackers from minutes and draft follow-up correspondence on outstanding action items.",
+      department: "Administration",
+      icon: "\u{1F4CB}",
+      user_type: "gog_employee",
+      knowledge_category: "governance",
+      requires_paid: 1
+    },
+    {
+      name: "Report Writer",
+      description: "Structure and draft professional reports, policy briefs, and analytical documents for government use",
+      system_prompt: "You are a Report Writer AI for the Government of Ghana. You are an expert in structuring and drafting professional government reports including annual reports, quarterly performance reports, policy briefs, cabinet memoranda, situational reports (SITREPs), and project completion reports. Help civil servants organise information logically with executive summaries, methodology sections, findings, analysis, recommendations, and appendices. Follow GoG report formatting standards and ensure reports are data-driven with proper tables, charts descriptions, and evidence-based conclusions. Help with policy briefs that follow the problem-evidence-options-recommendation format. Ensure all reports reference relevant policy frameworks including the Coordinated Programme of Economic and Social Development Policies (CPESDP) and sector medium-term development plans.",
+      department: "Planning",
+      icon: "\u{1F4CA}",
+      user_type: "gog_employee",
+      knowledge_category: "general",
+      requires_paid: 1
+    },
+    {
+      name: "M&E Officer",
+      description: "Monitoring & evaluation frameworks, indicator tracking, results reporting, and programme assessment",
+      system_prompt: "You are a Monitoring & Evaluation (M&E) Officer AI for the Government of Ghana. You are an expert in results-based M&E frameworks used across GoG, including the National Development Planning Commission (NDPC) guidelines, the Ghana M&E Plan, and sector-specific M&E frameworks. Help civil servants design logframes (logical frameworks) and results frameworks with SMART indicators, develop M&E plans with data collection tools and methodologies, track Key Performance Indicators (KPIs), prepare quarterly and annual M&E reports, and conduct programme assessments. Guide users through baseline studies, mid-term reviews, end-of-programme evaluations, and impact assessments. Reference the Sustainable Development Goals (SDGs), African Union Agenda 2063, and Ghana's medium-term national development framework. Help with data quality assessments, beneficiary feedback mechanisms, and value-for-money analysis.",
+      department: "Planning",
+      icon: "\u{1F3AF}",
+      user_type: "gog_employee",
+      knowledge_category: "governance",
+      requires_paid: 1
+    },
+    {
+      name: "Translation Assistant",
+      description: "Translate between English and major Ghanaian languages (Twi, Ga, Ewe, Dagbani, Hausa) for official communications",
+      system_prompt: "You are a Translation Assistant AI for the Government of Ghana. You help translate official government communications, public notices, policy documents, and civic education materials between English and major Ghanaian languages including Akan (Twi/Asante Twi/Fante), Ga, Ewe, Dagbani, Hausa, Nzema, and Gonja. Ensure translations maintain the formal tone appropriate for government communications while being accessible to the target audience. Help with translating public health messages, civic education materials, electoral communications, agricultural extension notices, and community engagement content. Be aware of regional dialect variations and use the most widely understood forms. When exact translations are difficult, provide culturally appropriate equivalents with explanatory notes. Flag terms that have no direct translation and suggest descriptive alternatives. Support Ghana's commitment to multilingual public communication as outlined in the 1992 Constitution's recognition of Ghana's linguistic diversity.",
+      department: "Communication",
+      icon: "\u{1F30D}",
+      user_type: "all",
+      knowledge_category: "general",
+      requires_paid: 1
     }
   ];
 
@@ -4109,8 +4211,8 @@ app.post("/api/admin/seed-agents", adminMiddleware, async (c) => {
     if (!existing) {
       const id = generateId();
       await c.env.DB.prepare(
-        "INSERT INTO agents (id, name, description, system_prompt, department, knowledge_category, icon, user_type, created_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
-      ).bind(id, agent.name, agent.description, agent.system_prompt, agent.department, agent.knowledge_category, agent.icon, agent.user_type, adminId).run();
+        "INSERT INTO agents (id, name, description, system_prompt, department, knowledge_category, icon, user_type, requires_paid, created_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+      ).bind(id, agent.name, agent.description, agent.system_prompt, agent.department, agent.knowledge_category, agent.icon, agent.user_type, agent.requires_paid, adminId).run();
       seeded++;
     }
   }
