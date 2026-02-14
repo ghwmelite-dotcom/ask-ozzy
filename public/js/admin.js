@@ -390,6 +390,76 @@ async function deleteUser(userId, email) {
   }
 }
 
+// ─── Single User Creation ──────────────────────────────────────────
+
+function toggleAddUserForm() {
+  const form = document.getElementById("add-user-form");
+  const isVisible = form.style.display !== "none";
+  if (isVisible) {
+    form.style.display = "none";
+  } else {
+    // Reset form
+    document.getElementById("add-user-name").value = "";
+    document.getElementById("add-user-email").value = "";
+    document.getElementById("add-user-dept").value = "";
+    document.getElementById("add-user-tier").value = "free";
+    document.getElementById("add-user-result").innerHTML = "";
+    document.getElementById("add-user-code").style.display = "none";
+    form.style.display = "block";
+    document.getElementById("add-user-name").focus();
+  }
+}
+
+async function submitAddUser() {
+  const fullName = document.getElementById("add-user-name").value.trim();
+  const email = document.getElementById("add-user-email").value.trim();
+  const department = document.getElementById("add-user-dept").value.trim();
+  const tier = document.getElementById("add-user-tier").value;
+  const resultEl = document.getElementById("add-user-result");
+
+  if (!fullName || !email) {
+    resultEl.innerHTML = '<span class="msg-error">Name and email are required</span>';
+    return;
+  }
+
+  resultEl.innerHTML = '<span style="color:var(--gold);">Creating user...</span>';
+
+  try {
+    const res = await apiFetch("/api/admin/users/bulk", {
+      method: "POST",
+      body: JSON.stringify({
+        users: [{ fullName: fullName, email: email, department: department }],
+        defaultTier: tier,
+      }),
+    });
+    const d = await res.json();
+
+    if (!res.ok) {
+      resultEl.innerHTML = '<span class="msg-error">' + escapeHtml(d.error || "Failed to create user") + '</span>';
+      return;
+    }
+
+    const result = d.results && d.results[0];
+    if (!result) {
+      resultEl.innerHTML = '<span class="msg-error">Unexpected response</span>';
+      return;
+    }
+
+    if (result.status === "created") {
+      resultEl.innerHTML = '<span class="msg-success">User created successfully!</span>';
+      // Show access code
+      var codeEl = document.getElementById("add-user-code");
+      document.getElementById("add-user-code-value").textContent = result.accessCode || "";
+      codeEl.style.display = "block";
+      loadUsers(usersPage);
+    } else {
+      resultEl.innerHTML = '<span class="msg-error">' + escapeHtml(result.status) + '</span>';
+    }
+  } catch {
+    resultEl.innerHTML = '<span class="msg-error">Failed to create user</span>';
+  }
+}
+
 // ═══════════════════════════════════════════════════════════════════
 //  TAB: Conversations
 // ═══════════════════════════════════════════════════════════════════
@@ -643,8 +713,9 @@ async function loadReferrals() {
     el.innerHTML = '<div class="admin-empty">Failed to load referrals</div>';
   }
 
-  // Also load affiliate admin stats and withdrawals
+  // Also load affiliate admin stats, payable report, and withdrawals
   loadAffiliateAdminStats();
+  loadPayableAffiliates("all");
   loadWithdrawals("all");
 }
 
@@ -688,16 +759,56 @@ async function loadAffiliateAdminStats() {
             <thead><tr><th>Rank</th><th>Name</th><th>Email</th><th>Referrals</th><th>Total Earned</th><th>Wallet Balance</th></tr></thead>
             <tbody>
               ${d.topAffiliates.map((a, i) =>
-                '<tr><td>' + (i + 1) + '</td><td>' + escapeHtml(a.full_name) + '</td><td>' + escapeHtml(a.email) + '</td><td>' + (a.total_referrals || 0) + '</td><td>GHS ' + (a.total_earned || 0).toFixed(2) + '</td><td>GHS ' + (a.wallet_balance || 0).toFixed(2) + '</td></tr>'
+                '<tr style="cursor:pointer;" onclick="loadAffiliateLedger(\'' + a.user_id + '\', \'' + escapeHtml(a.full_name).replace(/'/g, "\\'") + '\', 1)"><td>' + (i + 1) + '</td><td style="color:var(--gold);text-decoration:underline;">' + escapeHtml(a.full_name) + '</td><td>' + escapeHtml(a.email) + '</td><td>' + (a.total_referrals || 0) + '</td><td>GHS ' + (a.total_earned || 0).toFixed(2) + '</td><td>GHS ' + (a.wallet_balance || a.balance || 0).toFixed(2) + '</td></tr>'
               ).join("")}
             </tbody>
           </table>
         </div>
       </div>` : ''}
     `;
+
+    // Render monthly trend chart (B2)
+    renderMonthlyTrendChart(d.monthlyTrend || []);
   } catch (err) {
     el.innerHTML = '<div class="admin-empty">Failed to load affiliate stats</div>';
   }
+}
+
+// ─── Monthly Trend Chart (Pure CSS bars) ──────────────────────────
+
+function renderMonthlyTrendChart(monthlyTrend) {
+  const chartEl = document.getElementById("affiliate-monthly-chart");
+  if (!chartEl || !monthlyTrend || monthlyTrend.length === 0) {
+    if (chartEl) chartEl.innerHTML = "";
+    return;
+  }
+
+  const maxTotal = Math.max(...monthlyTrend.map(m => m.total), 1);
+
+  var barsHtml = monthlyTrend.map(function(m) {
+    var l1Height = Math.max((m.l1 / maxTotal) * 140, m.l1 > 0 ? 4 : 0);
+    var l2Height = Math.max((m.l2 / maxTotal) * 140, m.l2 > 0 ? 4 : 0);
+    var monthLabel = m.month.split("-")[1] + "/" + m.month.split("-")[0].slice(2);
+    return '<div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;min-width:60px;">' +
+      '<div style="font-size:10px;font-weight:600;color:var(--text-primary);">GHS ' + m.total.toFixed(0) + '</div>' +
+      '<div style="display:flex;gap:3px;align-items:flex-end;height:140px;">' +
+        '<div style="width:18px;background:linear-gradient(180deg, #DAA520, #B8860B);border-radius:3px 3px 0 0;height:' + l1Height + 'px;transition:height 0.3s;" title="L1: GHS ' + m.l1.toFixed(2) + '"></div>' +
+        '<div style="width:18px;background:linear-gradient(180deg, #3B82F6, #2563EB);border-radius:3px 3px 0 0;height:' + l2Height + 'px;transition:height 0.3s;" title="L2: GHS ' + m.l2.toFixed(2) + '"></div>' +
+      '</div>' +
+      '<div style="font-size:10px;color:var(--text-muted);">' + monthLabel + '</div>' +
+    '</div>';
+  }).join("");
+
+  chartEl.innerHTML = '<div class="admin-card">' +
+    '<h3>Commission Trend (6 Months)</h3>' +
+    '<div style="display:flex;gap:4px;align-items:center;margin-bottom:12px;">' +
+      '<div style="width:12px;height:12px;background:#DAA520;border-radius:2px;"></div><span style="font-size:11px;color:var(--text-secondary);margin-right:12px;">Level 1</span>' +
+      '<div style="width:12px;height:12px;background:#3B82F6;border-radius:2px;"></div><span style="font-size:11px;color:var(--text-secondary);">Level 2</span>' +
+    '</div>' +
+    '<div style="display:flex;justify-content:space-around;align-items:flex-end;padding:8px 0;border-bottom:1px solid var(--border-color);">' +
+      barsHtml +
+    '</div>' +
+  '</div>';
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -839,6 +950,193 @@ async function markWithdrawalPaid(id) {
   } catch (err) {
     alert("Error: " + (err.message || "Failed to mark as paid"));
   }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  Affiliate: Payable Affiliates Report
+// ═══════════════════════════════════════════════════════════════════
+
+let payableAffiliatesData = [];
+let currentPayablePeriod = "all";
+
+function filterPayable(period, btnEl) {
+  document.querySelectorAll("[data-payperiod]").forEach(function(b) { b.classList.remove("active"); });
+  if (btnEl) btnEl.classList.add("active");
+  currentPayablePeriod = period;
+  loadPayableAffiliates(period);
+}
+
+async function loadPayableAffiliates(period) {
+  period = period || currentPayablePeriod || "all";
+  currentPayablePeriod = period;
+  var el = document.getElementById("payable-content");
+  if (!el) return;
+  el.innerHTML = '<div class="admin-loader"><div class="spinner"></div></div>';
+
+  try {
+    var res = await apiFetch("/api/admin/affiliate/payable?period=" + period);
+    var d = await res.json();
+    payableAffiliatesData = d.payable || [];
+
+    // Show/hide export button
+    var exportBtn = document.getElementById("btn-export-payable");
+    if (exportBtn) exportBtn.style.display = payableAffiliatesData.length > 0 ? "inline-block" : "none";
+
+    if (payableAffiliatesData.length === 0) {
+      el.innerHTML = '<div class="admin-empty">No affiliates with outstanding balance.</div>';
+      return;
+    }
+
+    el.innerHTML = '<div class="admin-table-wrapper"><table class="admin-table"><thead><tr>' +
+      '<th>Name</th><th>Email</th><th>Balance</th><th>Period Earnings</th><th>Total Earned</th><th>Last Commission</th><th>MoMo</th>' +
+      '</tr></thead><tbody>' +
+      payableAffiliatesData.map(function(a) {
+        var momoStr = a.momo_number ? (a.momo_network || "").toUpperCase() + " ****" + a.momo_number.slice(-4) : "--";
+        return '<tr style="cursor:pointer;" onclick="loadAffiliateLedger(\'' + a.user_id + '\', \'' + escapeHtml(a.full_name).replace(/'/g, "\\'") + '\', 1)">' +
+          '<td style="color:var(--gold);text-decoration:underline;">' + escapeHtml(a.full_name) + '</td>' +
+          '<td>' + escapeHtml(a.email) + '</td>' +
+          '<td><strong>GHS ' + (a.balance || 0).toFixed(2) + '</strong></td>' +
+          '<td>GHS ' + (a.period_earnings || 0).toFixed(2) + '</td>' +
+          '<td>GHS ' + (a.total_earned || 0).toFixed(2) + '</td>' +
+          '<td>' + (a.last_commission ? formatDateShort(a.last_commission) : '--') + '</td>' +
+          '<td style="font-size:11px;">' + escapeHtml(momoStr) + '</td>' +
+        '</tr>';
+      }).join("") +
+      '</tbody></table></div>';
+  } catch (err) {
+    el.innerHTML = '<div class="admin-empty">Failed to load payable affiliates</div>';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  Affiliate: Per-Affiliate Transaction Ledger
+// ═══════════════════════════════════════════════════════════════════
+
+let currentLedgerUserId = null;
+let currentLedgerUserName = "";
+
+async function loadAffiliateLedger(userId, userName, page) {
+  currentLedgerUserId = userId;
+  currentLedgerUserName = userName || "";
+  page = page || 1;
+
+  var section = document.getElementById("affiliate-ledger-section");
+  section.style.display = "block";
+
+  document.getElementById("ledger-title").textContent = "Ledger: " + (userName || "Affiliate");
+  document.getElementById("ledger-content").innerHTML = '<div class="admin-loader"><div class="spinner"></div></div>';
+  document.getElementById("ledger-summary").innerHTML = "";
+  document.getElementById("ledger-pagination").innerHTML = "";
+
+  // Scroll into view
+  section.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  try {
+    var res = await apiFetch("/api/admin/affiliate/transactions/" + userId + "?page=" + page + "&limit=20");
+    var d = await res.json();
+
+    // Summary cards
+    var w = d.wallet || {};
+    document.getElementById("ledger-summary").innerHTML =
+      '<div class="stats-grid" style="margin-bottom:16px;">' +
+        '<div class="stat-card"><div class="stat-value">GHS ' + (w.balance || 0).toFixed(2) + '</div><div class="stat-label">Balance</div></div>' +
+        '<div class="stat-card green"><div class="stat-value">GHS ' + (w.total_earned || 0).toFixed(2) + '</div><div class="stat-label">Total Earned</div></div>' +
+        '<div class="stat-card"><div class="stat-value">GHS ' + (w.total_withdrawn || 0).toFixed(2) + '</div><div class="stat-label">Withdrawn</div></div>' +
+        '<div class="stat-card" style="border-left:3px solid #DAA520;"><div class="stat-value">GHS ' + (w.l1_total || 0).toFixed(2) + '</div><div class="stat-label">L1 Commissions</div></div>' +
+        '<div class="stat-card" style="border-left:3px solid #3B82F6;"><div class="stat-value">GHS ' + (w.l2_total || 0).toFixed(2) + '</div><div class="stat-label">L2 Commissions</div></div>' +
+        '<div class="stat-card" style="border-left:3px solid #10B981;"><div class="stat-value">GHS ' + (w.bonus_total || 0).toFixed(2) + '</div><div class="stat-label">Bonuses</div></div>' +
+      '</div>';
+
+    // Transactions table
+    var transactions = d.transactions || [];
+    if (transactions.length === 0) {
+      document.getElementById("ledger-content").innerHTML = '<div class="admin-empty">No transactions found for this affiliate.</div>';
+      return;
+    }
+
+    var typeBadge = function(type) {
+      var colors = {
+        commission_l1: "background:#FEF3C7;color:#92400E;",
+        commission_l2: "background:#DBEAFE;color:#1E40AF;",
+        bonus: "background:#D1FAE5;color:#065F46;",
+        withdrawal: "background:#FEE2E2;color:#991B1B;",
+        reward: "background:#E0E7FF;color:#3730A3;",
+      };
+      var labels = {
+        commission_l1: "L1",
+        commission_l2: "L2",
+        bonus: "Bonus",
+        withdrawal: "Withdraw",
+        reward: "Reward",
+      };
+      var style = colors[type] || "background:#F3F4F6;color:#6B7280;";
+      return '<span style="display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;' + style + '">' + (labels[type] || type) + '</span>';
+    };
+
+    document.getElementById("ledger-content").innerHTML =
+      '<div class="admin-table-wrapper"><table class="admin-table"><thead><tr>' +
+        '<th>Date</th><th>Type</th><th>Amount</th><th>Description</th><th>Source User</th>' +
+      '</tr></thead><tbody>' +
+      transactions.map(function(t) {
+        var amtStr = t.amount >= 0
+          ? '<span style="color:#10B981;font-weight:600;">+GHS ' + t.amount.toFixed(2) + '</span>'
+          : '<span style="color:#EF4444;font-weight:600;">-GHS ' + Math.abs(t.amount).toFixed(2) + '</span>';
+        return '<tr>' +
+          '<td>' + formatDateShort(t.created_at) + '</td>' +
+          '<td>' + typeBadge(t.type) + '</td>' +
+          '<td>' + amtStr + '</td>' +
+          '<td style="font-size:11px;max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + escapeHtml(t.description || '--') + '</td>' +
+          '<td style="font-size:11px;">' + escapeHtml(t.source_user_name || '--') + '</td>' +
+        '</tr>';
+      }).join("") +
+      '</tbody></table></div>';
+
+    // Pagination
+    renderPagination("ledger-pagination", page, d.total, 20, "loadAffiliateLedgerPage");
+  } catch (err) {
+    document.getElementById("ledger-content").innerHTML = '<div class="admin-empty">Failed to load ledger</div>';
+  }
+}
+
+function loadAffiliateLedgerPage(page) {
+  loadAffiliateLedger(currentLedgerUserId, currentLedgerUserName, page);
+}
+
+function closeAffiliateLedger() {
+  document.getElementById("affiliate-ledger-section").style.display = "none";
+  currentLedgerUserId = null;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  Affiliate: CSV Export (Payable)
+// ═══════════════════════════════════════════════════════════════════
+
+function exportPayableCSV() {
+  if (!payableAffiliatesData || payableAffiliatesData.length === 0) return;
+
+  var csv = "Name,Email,Balance,Total Earned,Total Withdrawn,Period Earnings,Last Commission,MoMo Number,Network\n";
+  for (var i = 0; i < payableAffiliatesData.length; i++) {
+    var a = payableAffiliatesData[i];
+    csv += '"' + (a.full_name || "").replace(/"/g, '""') + '","' +
+      (a.email || "").replace(/"/g, '""') + '",' +
+      (a.balance || 0).toFixed(2) + ',' +
+      (a.total_earned || 0).toFixed(2) + ',' +
+      (a.total_withdrawn || 0).toFixed(2) + ',' +
+      (a.period_earnings || 0).toFixed(2) + ',' +
+      (a.last_commission || "") + ',' +
+      (a.momo_number || "") + ',' +
+      (a.momo_network || "") + '\n';
+  }
+
+  var blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  var url = URL.createObjectURL(blob);
+  var link = document.createElement("a");
+  link.href = url;
+  link.download = "askozzy-payable-affiliates-" + new Date().toISOString().split("T")[0] + ".csv";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 }
 
 // ═══════════════════════════════════════════════════════════════════

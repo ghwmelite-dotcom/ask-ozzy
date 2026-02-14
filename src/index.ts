@@ -2800,6 +2800,11 @@ app.get("/api/admin/affiliate/stats", adminMiddleware, async (c) => {
     "SELECT COALESCE(SUM(amount), 0) as total FROM affiliate_transactions WHERE type = 'bonus'"
   ).first<{ total: number }>();
 
+  // Count active affiliates (wallets with any earnings)
+  const activeAffiliates = await c.env.DB.prepare(
+    "SELECT COUNT(*) as cnt FROM affiliate_wallets WHERE total_earned > 0"
+  ).first<{ cnt: number }>();
+
   // Top affiliates by earnings
   const { results: topAffiliates } = await c.env.DB.prepare(
     `SELECT w.user_id, w.total_earned, w.balance, u.full_name, u.email, u.total_referrals
@@ -2836,6 +2841,12 @@ app.get("/api/admin/affiliate/stats", adminMiddleware, async (c) => {
     });
   }
 
+  // Map topAffiliates to include wallet_balance alias for frontend
+  const mappedTopAffiliates = (topAffiliates || []).map((a: any) => ({
+    ...a,
+    wallet_balance: a.balance,
+  }));
+
   return c.json({
     totalCommissions: totalCommissions?.total || 0,
     commissionBreakdown: {
@@ -2848,8 +2859,147 @@ app.get("/api/admin/affiliate/stats", adminMiddleware, async (c) => {
     },
     totalWithdrawn: totalWithdrawn?.total || 0,
     totalBonuses: totalBonuses?.total || 0,
-    topAffiliates: topAffiliates || [],
+    // Frontend-expected aliases
+    totalPending: pendingWithdrawals?.total || 0,
+    totalPaidOut: totalWithdrawn?.total || 0,
+    totalAffiliates: activeAffiliates?.cnt || 0,
+    topAffiliates: mappedTopAffiliates,
     monthlyTrend,
+  });
+});
+
+// ─── Admin: Payable Affiliates Report ────────────────────────────────
+
+app.get("/api/admin/affiliate/payable", adminMiddleware, async (c) => {
+  await ensureAffiliateTables(c.env.DB);
+  const period = c.req.query("period") || "all";
+
+  // Date filter for period earnings
+  let dateFilter = "";
+  const now = new Date();
+  if (period === "today") {
+    dateFilter = now.toISOString().split("T")[0];
+  } else if (period === "week") {
+    const weekAgo = new Date(now.getTime() - 7 * 86400000);
+    dateFilter = weekAgo.toISOString().split("T")[0];
+  } else if (period === "month") {
+    dateFilter = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-01`;
+  }
+
+  // Get all affiliates with balance > 0
+  const { results: affiliates } = await c.env.DB.prepare(
+    `SELECT w.user_id, w.balance, w.total_earned, w.total_withdrawn,
+            u.full_name, u.email
+     FROM affiliate_wallets w
+     JOIN users u ON u.id = w.user_id
+     WHERE w.balance > 0
+     ORDER BY w.balance DESC`
+  ).all();
+
+  const payable: any[] = [];
+  for (const a of (affiliates || [])) {
+    const af = a as any;
+
+    // Period earnings
+    let periodEarnings = af.total_earned || 0;
+    if (dateFilter) {
+      const pe = await c.env.DB.prepare(
+        "SELECT COALESCE(SUM(amount), 0) as total FROM affiliate_transactions WHERE user_id = ? AND type IN ('commission_l1', 'commission_l2') AND created_at >= ?"
+      ).bind(af.user_id, dateFilter).first<{ total: number }>();
+      periodEarnings = pe?.total || 0;
+    }
+
+    // Last commission date
+    const lastComm = await c.env.DB.prepare(
+      "SELECT created_at FROM affiliate_transactions WHERE user_id = ? AND type IN ('commission_l1', 'commission_l2') ORDER BY created_at DESC LIMIT 1"
+    ).bind(af.user_id).first<{ created_at: string }>();
+
+    // MoMo info from most recent withdrawal request
+    const momoInfo = await c.env.DB.prepare(
+      "SELECT momo_number, momo_network FROM withdrawal_requests WHERE user_id = ? ORDER BY created_at DESC LIMIT 1"
+    ).bind(af.user_id).first<{ momo_number: string; momo_network: string }>();
+
+    payable.push({
+      user_id: af.user_id,
+      full_name: af.full_name,
+      email: af.email,
+      balance: af.balance,
+      total_earned: af.total_earned,
+      total_withdrawn: af.total_withdrawn,
+      period_earnings: periodEarnings,
+      last_commission: lastComm?.created_at || null,
+      momo_number: momoInfo?.momo_number || null,
+      momo_network: momoInfo?.momo_network || null,
+    });
+  }
+
+  return c.json({ payable, period });
+});
+
+// ─── Admin: Per-Affiliate Transaction Ledger ─────────────────────────
+
+app.get("/api/admin/affiliate/transactions/:userId", adminMiddleware, async (c) => {
+  await ensureAffiliateTables(c.env.DB);
+  const userId = c.req.param("userId");
+  const page = Math.max(1, parseInt(c.req.query("page") || "1"));
+  const limit = Math.min(50, Math.max(1, parseInt(c.req.query("limit") || "20")));
+  const offset = (page - 1) * limit;
+
+  // User info
+  const user = await c.env.DB.prepare(
+    "SELECT id, full_name, email FROM users WHERE id = ?"
+  ).bind(userId).first<{ id: string; full_name: string; email: string }>();
+
+  if (!user) return c.json({ error: "User not found" }, 404);
+
+  // Wallet summary
+  const wallet = await c.env.DB.prepare(
+    "SELECT balance, total_earned, total_withdrawn FROM affiliate_wallets WHERE user_id = ?"
+  ).bind(userId).first<{ balance: number; total_earned: number; total_withdrawn: number }>();
+
+  // L1/L2/bonus breakdowns
+  const l1 = await c.env.DB.prepare(
+    "SELECT COALESCE(SUM(amount), 0) as total FROM affiliate_transactions WHERE user_id = ? AND type = 'commission_l1'"
+  ).bind(userId).first<{ total: number }>();
+
+  const l2 = await c.env.DB.prepare(
+    "SELECT COALESCE(SUM(amount), 0) as total FROM affiliate_transactions WHERE user_id = ? AND type = 'commission_l2'"
+  ).bind(userId).first<{ total: number }>();
+
+  const bonus = await c.env.DB.prepare(
+    "SELECT COALESCE(SUM(amount), 0) as total FROM affiliate_transactions WHERE user_id = ? AND type = 'bonus'"
+  ).bind(userId).first<{ total: number }>();
+
+  // Total transactions count
+  const total = await c.env.DB.prepare(
+    "SELECT COUNT(*) as cnt FROM affiliate_transactions WHERE user_id = ?"
+  ).bind(userId).first<{ cnt: number }>();
+
+  // Paginated transactions with source user name
+  const { results: transactions } = await c.env.DB.prepare(
+    `SELECT t.id, t.type, t.amount, t.description, t.source_user_id, t.created_at,
+            su.full_name as source_user_name
+     FROM affiliate_transactions t
+     LEFT JOIN users su ON su.id = t.source_user_id
+     WHERE t.user_id = ?
+     ORDER BY t.created_at DESC
+     LIMIT ? OFFSET ?`
+  ).bind(userId, limit, offset).all();
+
+  return c.json({
+    user: { id: user.id, full_name: user.full_name, email: user.email },
+    wallet: {
+      balance: wallet?.balance || 0,
+      total_earned: wallet?.total_earned || 0,
+      total_withdrawn: wallet?.total_withdrawn || 0,
+      l1_total: l1?.total || 0,
+      l2_total: l2?.total || 0,
+      bonus_total: bonus?.total || 0,
+    },
+    transactions: transactions || [],
+    total: total?.cnt || 0,
+    page,
+    limit,
   });
 });
 

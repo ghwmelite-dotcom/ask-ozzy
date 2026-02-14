@@ -88,7 +88,50 @@
         <div class="admin-toolbar">
           <input type="text" id="user-search" class="admin-search" placeholder="Search by name or email..." oninput="debouncedUserSearch()" />
           <span class="admin-count" id="user-count"></span>
+          <button class="btn-action primary" onclick="toggleAddUserForm()" id="btn-toggle-add-user">+ Add User</button>
         </div>
+
+        <!-- Inline Add User Form (hidden by default) -->
+        <div id="add-user-form" class="admin-card" style="display:none;margin-bottom:16px;">
+          <h3>Create Single User</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;">Full Name *</label>
+              <input type="text" id="add-user-name" placeholder="e.g., Kwame Asante" class="admin-search" style="max-width:100%;" />
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;">Email *</label>
+              <input type="email" id="add-user-email" placeholder="e.g., kwame@gov.gh" class="admin-search" style="max-width:100%;" />
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;">Department</label>
+              <input type="text" id="add-user-dept" placeholder="e.g., Ministry of Finance" class="admin-search" style="max-width:100%;" />
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;">Tier</label>
+              <select id="add-user-tier" class="inline-select" style="padding:8px 12px;width:100%;">
+                <option value="free">Free</option>
+                <option value="professional">Professional</option>
+                <option value="enterprise">Enterprise</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center;">
+            <button class="btn-action primary" onclick="submitAddUser()">Create User</button>
+            <button class="btn-action" onclick="toggleAddUserForm()">Cancel</button>
+            <span id="add-user-result" style="font-size:12px;"></span>
+          </div>
+          <div id="add-user-code" style="display:none;margin-top:12px;padding:12px 16px;background:var(--bg-tertiary);border:1px solid var(--gold);border-radius:var(--radius-sm);">
+            <div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;">Access Code (share with user):</div>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <code id="add-user-code-value" style="font-size:18px;font-weight:700;color:var(--gold);letter-spacing:1px;"></code>
+              <button class="btn-action" onclick="copyToClipboard(document.getElementById('add-user-code-value').textContent)" style="padding:4px 10px;font-size:11px;">Copy</button>
+            </div>
+          </div>
+        </div>
+
         <div id="users-content"><div class="admin-loader"><div class="spinner"></div></div></div>
         <div id="users-pagination" class="pagination"></div>
       </div>
@@ -110,6 +153,37 @@
 
         <!-- Affiliate Stats Summary -->
         <div id="affiliate-admin-stats" style="margin-top:24px;"></div>
+
+        <!-- Monthly Trend Chart -->
+        <div id="affiliate-monthly-chart" style="margin-top:24px;"></div>
+
+        <!-- Payable Affiliates Report -->
+        <div style="margin-top:32px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+            <h3 style="margin:0;font-size:18px;">Payable Affiliates</h3>
+            <button class="btn-action" onclick="exportPayableCSV()" id="btn-export-payable" style="display:none;">Export CSV</button>
+          </div>
+          <div class="admin-toolbar" style="margin-bottom:12px;">
+            <div style="display:flex;gap:6px;flex-wrap:wrap;">
+              <button class="admin-filter-btn active" data-payperiod="all" onclick="filterPayable('all', this)">All Time</button>
+              <button class="admin-filter-btn" data-payperiod="month" onclick="filterPayable('month', this)">This Month</button>
+              <button class="admin-filter-btn" data-payperiod="week" onclick="filterPayable('week', this)">This Week</button>
+              <button class="admin-filter-btn" data-payperiod="today" onclick="filterPayable('today', this)">Today</button>
+            </div>
+          </div>
+          <div id="payable-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+        </div>
+
+        <!-- Per-Affiliate Transaction Ledger (hidden until opened) -->
+        <div id="affiliate-ledger-section" style="display:none;margin-top:32px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+            <h3 style="margin:0;font-size:18px;" id="ledger-title">Affiliate Ledger</h3>
+            <button class="btn-action" onclick="closeAffiliateLedger()">Close Ledger</button>
+          </div>
+          <div id="ledger-summary" style="margin-bottom:16px;"></div>
+          <div id="ledger-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+          <div id="ledger-pagination" class="pagination"></div>
+        </div>
 
         <!-- Withdrawals Management -->
         <div style="margin-top:32px;">
