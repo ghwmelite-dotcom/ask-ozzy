@@ -523,6 +523,25 @@ function closeAuthModal() {
   state.pendingAction = null;
 }
 
+function showResetForm() {
+  document.getElementById("auth-error").classList.remove("visible");
+  document.getElementById("login-form").classList.add("hidden");
+  document.getElementById("register-form").classList.add("hidden");
+  document.getElementById("reset-form").classList.remove("hidden");
+  const authToggle = document.querySelector(".auth-toggle");
+  if (authToggle) authToggle.style.display = "none";
+  document.getElementById("auth-modal-title").textContent = "Reset Your Account";
+}
+
+function showLoginForm() {
+  document.getElementById("auth-error").classList.remove("visible");
+  document.getElementById("reset-form").classList.add("hidden");
+  document.getElementById("login-form").classList.remove("hidden");
+  const authToggle = document.querySelector(".auth-toggle");
+  if (authToggle) authToggle.style.display = "";
+  document.getElementById("auth-modal-title").textContent = "Sign in to AskOzzy";
+}
+
 function toggleAuthForm() {
   const loginForm = document.getElementById("login-form");
   const registerForm = document.getElementById("register-form");
@@ -559,15 +578,25 @@ function showAuthError(msg) {
 
 let _pendingTOTPEmail = null;
 
-function showTOTPSetup(totpUri, totpSecret, recoveryCode, email) {
+function showTOTPSetup(totpUri, totpSecret, recoveryCode, email, accessCode) {
   _pendingTOTPEmail = email;
   document.getElementById("auth-error").classList.remove("visible");
   document.getElementById("login-form").classList.add("hidden");
   document.getElementById("register-form").classList.add("hidden");
+  document.getElementById("reset-form").classList.add("hidden");
   const authToggle = document.querySelector(".auth-toggle");
   if (authToggle) authToggle.style.display = "none";
   const privacyBanner = document.querySelector("#auth-modal .privacy-banner");
   if (privacyBanner) privacyBanner.style.display = "none";
+
+  // Show access code box if provided (account reset flow)
+  const accessCodeBox = document.getElementById("access-code-box");
+  if (accessCode && accessCodeBox) {
+    document.getElementById("access-code-value").textContent = accessCode;
+    accessCodeBox.classList.remove("hidden");
+  } else if (accessCodeBox) {
+    accessCodeBox.classList.add("hidden");
+  }
 
   document.getElementById("totp-setup-step").classList.remove("hidden");
 
@@ -598,6 +627,15 @@ function copyRecoveryCode() {
   const code = document.getElementById("recovery-code-value").textContent;
   navigator.clipboard.writeText(code).then(() => {
     const btn = document.getElementById("btn-copy-recovery");
+    btn.textContent = "Copied!";
+    setTimeout(() => { btn.textContent = "Copy"; }, 2000);
+  });
+}
+
+function copyAccessCode() {
+  const code = document.getElementById("access-code-value").textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.getElementById("btn-copy-access-code");
     btn.textContent = "Copied!";
     setTimeout(() => { btn.textContent = "Copy"; }, 2000);
   });
@@ -636,6 +674,9 @@ async function verifyTOTPSetup() {
     document.getElementById("totp-setup-step").classList.add("hidden");
     document.getElementById("login-form").classList.remove("hidden");
     document.getElementById("register-form").classList.add("hidden");
+    document.getElementById("reset-form").classList.add("hidden");
+    const accessCodeBox = document.getElementById("access-code-box");
+    if (accessCodeBox) accessCodeBox.classList.add("hidden");
     const authToggle = document.querySelector(".auth-toggle");
     if (authToggle) authToggle.style.display = "";
     const privacyBanner = document.querySelector("#auth-modal .privacy-banner");
@@ -929,6 +970,34 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
   } finally {
     btn.disabled = false;
     btn.textContent = "Create Account";
+  }
+});
+
+// ─── Account Reset Form Handler ──────────────────────────────────────
+
+document.getElementById("reset-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = document.getElementById("reset-email").value;
+  const recoveryCode = document.getElementById("reset-recovery-code").value;
+  const btn = e.target.querySelector(".btn-auth");
+  btn.disabled = true;
+  btn.textContent = "Verifying...";
+
+  try {
+    const res = await fetch(`${API}/api/auth/reset-account`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, recoveryCode }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Reset failed");
+
+    showTOTPSetup(data.totpUri, data.totpSecret, data.recoveryCode, data.email, data.accessCode);
+  } catch (err) {
+    showAuthError(err.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Reset My Account";
   }
 });
 

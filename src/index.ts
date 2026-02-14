@@ -192,13 +192,13 @@ app.post("/api/auth/register/verify-totp", async (c) => {
   }
 
   const user = await c.env.DB.prepare(
-    "SELECT id, email, full_name, department, role, tier, referral_code, totp_secret, totp_enabled, user_type FROM users WHERE email = ?"
+    "SELECT id, email, full_name, department, role, tier, referral_code, totp_secret, totp_enabled, user_type, recovery_code_hash FROM users WHERE email = ?"
   )
     .bind(email.toLowerCase().trim())
     .first<{
       id: string; email: string; full_name: string; department: string;
       role: string; tier: string; referral_code: string; totp_secret: string;
-      totp_enabled: number; user_type: string | null;
+      totp_enabled: number; user_type: string | null; recovery_code_hash: string | null;
     }>();
 
   if (!user || !user.totp_secret) {
@@ -218,11 +218,14 @@ app.post("/api/auth/register/verify-totp", async (c) => {
 
   const token = await createToken(user.id, c.env);
 
-  // Regenerate recovery code to return it here (only time it's shown)
-  const newRecoveryCode = generateRecoveryCode();
-  const newRecoveryHash = await hashPassword(newRecoveryCode);
-  await c.env.DB.prepare("UPDATE users SET recovery_code_hash = ? WHERE id = ?")
-    .bind(newRecoveryHash, user.id).run();
+  // Only generate recovery code if one doesn't already exist (e.g. set during account reset)
+  let newRecoveryCode: string | null = null;
+  if (!user.recovery_code_hash) {
+    newRecoveryCode = generateRecoveryCode();
+    const newRecoveryHash = await hashPassword(newRecoveryCode);
+    await c.env.DB.prepare("UPDATE users SET recovery_code_hash = ? WHERE id = ?")
+      .bind(newRecoveryHash, user.id).run();
+  }
 
   return c.json({
     token,
@@ -238,6 +241,70 @@ app.post("/api/auth/register/verify-totp", async (c) => {
       referralCode: user.referral_code,
       userType: user.user_type || "gog_employee",
     },
+  });
+});
+
+// ─── Self-Service Account Reset via Recovery Code ────────────────────
+
+app.post("/api/auth/reset-account", async (c) => {
+  const ip = c.req.header("cf-connecting-ip") || "unknown";
+  const { email, recoveryCode } = await c.req.json();
+
+  if (!email || !recoveryCode) {
+    return c.json({ error: "Email and recovery code are required" }, 400);
+  }
+
+  const rl = await checkRateLimit(c.env, `${ip}:${email.toLowerCase().trim()}`, "auth");
+  if (!rl.allowed) return c.json({ error: "Too many attempts. Please wait 5 minutes." }, 429);
+
+  const user = await c.env.DB.prepare(
+    "SELECT id, email, recovery_code_hash FROM users WHERE email = ?"
+  )
+    .bind(email.toLowerCase().trim())
+    .first<{ id: string; email: string; recovery_code_hash: string | null }>();
+
+  if (!user || !user.recovery_code_hash) {
+    return c.json({ error: "Invalid email or recovery code" }, 401);
+  }
+
+  // Verify recovery code against stored hash
+  const normalizedCode = normalizeAccessCode(recoveryCode.trim());
+  let recoveryValid = await verifyPassword(normalizedCode, user.recovery_code_hash);
+  if (!recoveryValid) {
+    recoveryValid = await verifyPassword(recoveryCode.trim(), user.recovery_code_hash);
+  }
+  if (!recoveryValid) {
+    return c.json({ error: "Invalid email or recovery code" }, 401);
+  }
+
+  // Generate new credentials
+  const newAccessCode = generateAccessCode();
+  const newPasswordHash = await hashPassword(newAccessCode);
+
+  const secretBytes = new Uint8Array(20);
+  crypto.getRandomValues(secretBytes);
+  const base32Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+  let newTotpSecret = "";
+  for (let i = 0; i < secretBytes.length; i++) {
+    newTotpSecret += base32Chars[secretBytes[i] % 32];
+  }
+
+  const newRecoveryCode = generateRecoveryCode();
+  const newRecoveryHash = await hashPassword(newRecoveryCode);
+
+  // Update user: new access code, new TOTP secret, new recovery code, disable TOTP until re-verified
+  await c.env.DB.prepare(
+    "UPDATE users SET password_hash = ?, totp_secret = ?, totp_enabled = 0, recovery_code_hash = ? WHERE id = ?"
+  ).bind(newPasswordHash, newTotpSecret, newRecoveryHash, user.id).run();
+
+  const totpUri = `otpauth://totp/AskOzzy:${user.email}?secret=${newTotpSecret}&issuer=AskOzzy&digits=6&period=30`;
+
+  return c.json({
+    totpUri,
+    totpSecret: newTotpSecret,
+    accessCode: newAccessCode,
+    recoveryCode: newRecoveryCode,
+    email: user.email,
   });
 });
 
@@ -5779,6 +5846,49 @@ app.post("/api/admin/users/:userId/reset-code", adminMiddleware, async (c) => {
   await logAudit(c.env.DB, c.get("userId"), "reset_access_code", "user", targetUserId, `Reset access code for ${user.email}`);
 
   return c.json({ success: true, accessCode: newAccessCode, email: user.email, fullName: user.full_name });
+});
+
+// ─── Admin: Full Account Reset (access code + TOTP + recovery code) ───
+
+app.post("/api/admin/users/:userId/reset-account", adminMiddleware, async (c) => {
+  const targetUserId = c.req.param("userId");
+  const user = await c.env.DB.prepare("SELECT id, email, full_name FROM users WHERE id = ?")
+    .bind(targetUserId).first<{ id: string; email: string; full_name: string }>();
+  if (!user) return c.json({ error: "User not found" }, 404);
+
+  // Generate new credentials
+  const newAccessCode = generateAccessCode();
+  const newPasswordHash = await hashPassword(newAccessCode);
+
+  const secretBytes = new Uint8Array(20);
+  crypto.getRandomValues(secretBytes);
+  const base32Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+  let newTotpSecret = "";
+  for (let i = 0; i < secretBytes.length; i++) {
+    newTotpSecret += base32Chars[secretBytes[i] % 32];
+  }
+
+  const newRecoveryCode = generateRecoveryCode();
+  const newRecoveryHash = await hashPassword(newRecoveryCode);
+
+  // Update: new access code, new TOTP secret, new recovery code, disable TOTP until user re-verifies
+  await c.env.DB.prepare(
+    "UPDATE users SET password_hash = ?, totp_secret = ?, totp_enabled = 0, recovery_code_hash = ? WHERE id = ?"
+  ).bind(newPasswordHash, newTotpSecret, newRecoveryHash, targetUserId).run();
+
+  await logAudit(c.env.DB, c.get("userId"), "reset_account", "user", targetUserId, `Full account reset for ${user.email}`);
+
+  const totpUri = `otpauth://totp/AskOzzy:${user.email}?secret=${newTotpSecret}&issuer=AskOzzy&digits=6&period=30`;
+
+  return c.json({
+    success: true,
+    accessCode: newAccessCode,
+    recoveryCode: newRecoveryCode,
+    totpUri,
+    totpSecret: newTotpSecret,
+    email: user.email,
+    fullName: user.full_name,
+  });
 });
 
 // ─── Admin: Bulk User Import ──────────────────────────────────────────

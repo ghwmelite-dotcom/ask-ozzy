@@ -897,6 +897,43 @@
     </div>
   </div>
 
+  <!-- Reset Credentials Modal -->
+  <div class="modal-overlay" id="reset-creds-modal" style="display:none;">
+    <div class="modal" style="max-width:480px;">
+      <div class="modal-header">
+        <h3>Account Reset Successful</h3>
+        <button class="modal-close" onclick="document.getElementById('reset-creds-modal').style.display='none'">&#x2715;</button>
+      </div>
+      <div class="modal-body" style="padding:20px 24px;">
+        <p id="reset-creds-user" style="font-size:13px;color:var(--text-secondary);margin:0 0 16px;"></p>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="reset-cred-row">
+            <label>Access Code</label>
+            <div class="reset-cred-value-wrap">
+              <code id="reset-cred-access"></code>
+              <button onclick="copyResetCred('reset-cred-access', this)" class="btn-copy-small">Copy</button>
+            </div>
+          </div>
+          <div class="reset-cred-row">
+            <label>Recovery Code</label>
+            <div class="reset-cred-value-wrap">
+              <code id="reset-cred-recovery"></code>
+              <button onclick="copyResetCred('reset-cred-recovery', this)" class="btn-copy-small">Copy</button>
+            </div>
+          </div>
+          <div class="reset-cred-row">
+            <label>TOTP Secret</label>
+            <div class="reset-cred-value-wrap">
+              <code id="reset-cred-totp"></code>
+              <button onclick="copyResetCred('reset-cred-totp', this)" class="btn-copy-small">Copy</button>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:11px;color:var(--red-error-text,#ef4444);font-weight:600;margin:16px 0 0;">Share these with the user securely. They will not be shown again.</p>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" crossorigin="anonymous" defer></script>
   <script src="/js/admin.js"></script>
 </body>

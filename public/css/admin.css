@@ -942,3 +942,34 @@
   border-radius: 3px;
   transition: width 0.5s;
 }
+
+/* ─── Reset Credentials Modal ─────────────────────────────────────── */
+
+.reset-cred-row {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+.reset-cred-row label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+.reset-cred-value-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.reset-cred-value-wrap code {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 2px;
+  user-select: all;
+  word-break: break-all;
+}

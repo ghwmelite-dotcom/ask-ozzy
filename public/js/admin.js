@@ -327,7 +327,8 @@ async function loadUsers(page) {
           '</select></td>' +
           '<td>' + (u.total_referrals || 0) + '</td>' +
           '<td>' + formatDateShort(u.created_at) + '</td>' +
-          '<td>' + (isSelf ? '<span style="font-size:11px;color:var(--text-muted);">You</span>' :
+          '<td style="white-space:nowrap;">' + (isSelf ? '<span style="font-size:11px;color:var(--text-muted);">You</span>' :
+            '<button class="btn-action" onclick="resetUserAccount(\'' + u.id + '\', \'' + escapeHtml(u.email) + '\')" style="margin-right:4px;">Reset</button>' +
             '<button class="btn-action danger" onclick="deleteUser(\'' + u.id + '\', \'' + escapeHtml(u.email) + '\')">Delete</button>') +
           '</td>' +
         '</tr>';
@@ -387,6 +388,27 @@ async function deleteUser(userId, email) {
     }
   } catch {
     alert("Failed to delete user");
+  }
+}
+
+async function resetUserAccount(userId, email) {
+  if (!confirm("Reset ALL credentials for " + email + "?\n\nThis will generate a new access code, authenticator secret, and recovery code. The user will need to set up their authenticator app again.")) return;
+
+  try {
+    const res = await apiFetch("/api/admin/users/" + userId + "/reset-account", { method: "POST" });
+    const d = await res.json();
+    if (!res.ok) {
+      alert(d.error || "Failed to reset account");
+      return;
+    }
+
+    document.getElementById("reset-creds-user").textContent = "New credentials for " + d.fullName + " (" + d.email + ")";
+    document.getElementById("reset-cred-access").textContent = d.accessCode;
+    document.getElementById("reset-cred-recovery").textContent = d.recoveryCode;
+    document.getElementById("reset-cred-totp").textContent = d.totpSecret;
+    document.getElementById("reset-creds-modal").style.display = "flex";
+  } catch {
+    alert("Failed to reset account");
   }
 }
 
@@ -3886,6 +3908,14 @@ function copyToClipboard(text) {
     ta.select();
     document.execCommand("copy");
     document.body.removeChild(ta);
+  });
+}
+
+function copyResetCred(elementId, btn) {
+  const text = document.getElementById(elementId).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = "Copied!";
+    setTimeout(() => { btn.textContent = "Copy"; }, 2000);
   });
 }
 
