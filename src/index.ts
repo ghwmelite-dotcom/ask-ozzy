@@ -5523,6 +5523,24 @@ app.get("/api/admin/organizations", adminMiddleware, async (c) => {
   return c.json({ organizations: results || [] });
 });
 
+// ─── Admin: Reset User Access Code ───────────────────────────────────
+
+app.post("/api/admin/users/:userId/reset-code", adminMiddleware, async (c) => {
+  const targetUserId = c.req.param("userId");
+  const user = await c.env.DB.prepare("SELECT id, email, full_name FROM users WHERE id = ?")
+    .bind(targetUserId).first<{ id: string; email: string; full_name: string }>();
+  if (!user) return c.json({ error: "User not found" }, 404);
+
+  const newAccessCode = generateAccessCode();
+  const newHash = await hashPassword(newAccessCode);
+  await c.env.DB.prepare("UPDATE users SET password_hash = ? WHERE id = ?")
+    .bind(newHash, targetUserId).run();
+
+  await logAudit(c.env.DB, c.get("userId"), "reset_access_code", "user", targetUserId, `Reset access code for ${user.email}`);
+
+  return c.json({ success: true, accessCode: newAccessCode, email: user.email, fullName: user.full_name });
+});
+
 // ─── Admin: Bulk User Import ──────────────────────────────────────────
 
 app.post("/api/admin/users/bulk", adminMiddleware, async (c) => {
