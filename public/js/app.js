@@ -304,7 +304,6 @@ const GUIDE_SECTION_EMOJIS = {
   'languages':       { emoji: '\u{1F30D}', gradient: 'linear-gradient(135deg, #00b894, #55efc4)' },
   'vision':          { emoji: '\u{1F441}\uFE0F', gradient: 'linear-gradient(135deg, #0984e3, #74b9ff)' },
   'account-security':{ emoji: '\u{1F512}', gradient: 'linear-gradient(135deg, #636e72, #b2bec3)' },
-  'citizen-bot':     { emoji: '\u{1F465}', gradient: 'linear-gradient(135deg, #006B3F, #00a86b)' },
   'shortcuts':       { emoji: '\u{2328}\uFE0F', gradient: 'linear-gradient(135deg, #2d3436, #636e72)' },
   'install-offline': { emoji: '\u{1F4E5}', gradient: 'linear-gradient(135deg, #0984e3, #00cec9)' },
   'native-app':      { emoji: '\u{1F4F1}', gradient: 'linear-gradient(135deg, #6c5ce7, #a29bfe)' },
@@ -453,17 +452,6 @@ const GUIDE_SECTIONS = [
       { id: 'as-pricing', title: 'Subscription Tiers', tier: 'free', description: 'Choose from Free, Professional, or Enterprise plans. Students get discounted pricing on all paid tiers.', steps: ['Click your tier badge in the sidebar footer', 'Compare features across all 3 tiers', 'Standard pricing: Professional GHS 60/mo, Enterprise GHS 100/mo', 'Student pricing: Professional GHS 25/mo, Enterprise GHS 45/mo (up to 58% off!)', 'Pay via Mobile Money (MoMo) or card through Paystack', 'Try Professional free for 3 days before committing'] },
       { id: 'as-affiliate', title: 'Referral & Affiliate Program', tier: 'free', description: 'Earn GHS by referring colleagues. Every new user needs a referral code to register.', steps: ['Click "Earn GHS" in the sidebar footer', 'Copy your unique referral link or referral code', 'Share with colleagues — they\'ll enter your code during registration', 'On supported devices, use the Contact Picker to invite contacts directly', 'Earn commissions when your referrals subscribe to paid plans', 'Track your referrals, earnings, and milestones in the affiliate dashboard'] },
       { id: 'as-notifications', title: 'Push Notifications', tier: 'free', description: 'Enable push notifications to receive alerts about new features, subscription updates, and more.', steps: ['After a few conversations, AskOzzy will ask to enable notifications', 'Click "Allow" when prompted by your browser', 'Manage notification preferences in the sidebar (Settings)', 'Toggle categories: product updates, billing alerts, tips', 'Notifications work even when AskOzzy is closed'] },
-    ]
-  },
-  {
-    id: 'citizen-bot',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
-    title: 'Citizen Bot',
-    description: 'Public-facing widget with quick actions and multilingual support',
-    features: [
-      { id: 'cb-widget', title: 'Citizen Bot Widget', tier: 'free', description: 'A floating chat widget for citizens to ask government-related questions without logging in.', steps: ['The Citizen Bot appears as a floating button on the bottom-right', 'Click to open the chat widget', 'Citizens can ask about government services, forms, procedures', 'Responses are AI-powered with GoG knowledge'] },
-      { id: 'cb-quick', title: 'Quick Actions', tier: 'free', description: 'Pre-built quick action buttons for common citizen queries.', steps: ['Open the Citizen Bot widget', 'Quick action buttons appear at the bottom', 'Tap any action to get instant, pre-formatted responses', 'Actions include: find forms, office hours, service requirements'] },
-      { id: 'cb-lang', title: 'Multilingual Citizen Support', tier: 'free', description: 'Citizen Bot supports all 7 languages so citizens can interact in their preferred language.', steps: ['Open the Citizen Bot widget', 'Select your preferred language from the language picker', 'Chat in Twi, Ga, Ewe, Dagbani, Hausa, French, or English', 'Responses come in the selected language'] },
     ]
   },
   {
@@ -8701,126 +8689,6 @@ function sendFollowUp(btn) {
   }
 }
 
-// ─── Feature 12: Citizen Service Bot ────────────────────────────────
-
-function openCitizenBot() {
-  const fab = document.querySelector('.citizen-bot-fab');
-  let widget = document.getElementById('citizen-bot');
-  if (widget) {
-    const isOpen = widget.classList.toggle('active');
-    if (fab) fab.classList.toggle('open', isOpen);
-    return;
-  }
-
-  widget = document.createElement('div');
-  widget.id = 'citizen-bot';
-  widget.className = 'citizen-bot active';
-  widget.innerHTML = `
-    <div class="citizen-header">
-      <div class="citizen-title">
-        <div class="citizen-logo">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        </div>
-        <div>
-          <strong>Ozzy Citizen</strong>
-          <div class="citizen-subtitle">
-            <span class="citizen-status-dot"></span> Online &middot; Government Services
-          </div>
-        </div>
-      </div>
-      <div class="citizen-header-actions">
-        <select id="citizen-lang" class="citizen-lang-chip" onchange="citizenState.language = this.value">
-          <option value="en">EN</option>
-          <option value="tw">Twi</option>
-          <option value="ha">Hausa</option>
-          <option value="ee">Ewe</option>
-          <option value="ga">Ga</option>
-          <option value="dag">Dagbani</option>
-          <option value="fr">FR</option>
-        </select>
-        <button class="citizen-close" onclick="document.getElementById('citizen-bot').classList.remove('active')" aria-label="Close">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      </div>
-    </div>
-    <div class="citizen-messages" id="citizen-messages">
-      <div class="citizen-msg bot">
-        <div class="citizen-avatar">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        </div>
-        <div class="citizen-msg-content">
-          <div class="citizen-msg-bubble">Hello! I'm <strong>Ozzy</strong>, your digital assistant for government services.</div>
-          <div class="citizen-quick-actions">
-            <button onclick="document.getElementById('citizen-input').value='How do I get a passport?';sendCitizenMessage()">Passports</button>
-            <button onclick="document.getElementById('citizen-input').value='How do I check my SSNIT pension?';sendCitizenMessage()">Pensions</button>
-            <button onclick="document.getElementById('citizen-input').value='How do I file my taxes?';sendCitizenMessage()">Taxes</button>
-            <button onclick="document.getElementById('citizen-input').value='How do I get a Ghana Card?';sendCitizenMessage()">Ghana Card</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="citizen-input-area">
-      <input type="text" id="citizen-input" placeholder="Type your question..." onkeydown="if(event.key==='Enter')sendCitizenMessage()" />
-      <button class="citizen-send-btn" onclick="sendCitizenMessage()" aria-label="Send">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
-      </button>
-    </div>
-    <div class="citizen-footer">Powered by AskOzzy AI</div>`;
-  document.body.appendChild(widget);
-
-  // Toggle FAB icon to X when open
-  document.querySelector('.citizen-bot-fab')?.classList.add('open');
-}
-
-const citizenState = { sessionId: null, language: 'en' };
-
-async function sendCitizenMessage() {
-  const input = document.getElementById('citizen-input');
-  const message = input.value.trim();
-  if (!message) return;
-
-  input.value = '';
-  const container = document.getElementById('citizen-messages');
-
-  // Add user message
-  const userDiv = document.createElement('div');
-  userDiv.className = 'citizen-msg user';
-  userDiv.innerHTML = `<div class="citizen-msg-content"><div class="citizen-msg-bubble">${escapeHtml(message)}</div></div>`;
-  container.appendChild(userDiv);
-  container.scrollTop = container.scrollHeight;
-
-  // Typing indicator
-  const typingDiv = document.createElement('div');
-  typingDiv.className = 'citizen-msg bot';
-  typingDiv.innerHTML = `<div class="citizen-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="citizen-msg-content"><div class="citizen-msg-bubble"><div class="typing-indicator"><span></span><span></span><span></span></div></div></div>`;
-  container.appendChild(typingDiv);
-  container.scrollTop = container.scrollHeight;
-
-  try {
-    const res = await fetch(API + '/api/citizen/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sessionId: citizenState.sessionId, message, language: citizenState.language }),
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error);
-
-    citizenState.sessionId = data.sessionId;
-    typingDiv.remove();
-
-    const botDiv = document.createElement('div');
-    botDiv.className = 'citizen-msg bot';
-    botDiv.innerHTML = `<div class="citizen-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="citizen-msg-content"><div class="citizen-msg-bubble">${renderMarkdown(data.response)}</div></div>`;
-    container.appendChild(botDiv);
-    container.scrollTop = container.scrollHeight;
-  } catch (err) {
-    typingDiv.remove();
-    const errDiv = document.createElement('div');
-    errDiv.className = 'citizen-msg bot';
-    errDiv.innerHTML = `<div class="citizen-avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="citizen-msg-content"><div class="citizen-msg-bubble" style="color:var(--red-error-text);">Sorry, I'm temporarily unavailable. Please try again.</div></div>`;
-    container.appendChild(errDiv);
-  }
-}
 
 // ═══════════════════════════════════════════════════════════════════
 //  GROWTH SYSTEM — "Use. Share. Earn."
