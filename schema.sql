@@ -234,3 +234,4 @@ CREATE INDEX IF NOT EXISTS idx_user_memories_type ON user_memories(user_id, type
 CREATE INDEX IF NOT EXISTS idx_agents_active ON agents(active, name);
 CREATE INDEX IF NOT EXISTS idx_agents_department ON agents(department);
 CREATE INDEX IF NOT EXISTS idx_conversations_agent ON conversations(agent_id);
+CREATE INDEX IF NOT EXISTS idx_conversations_share_token ON conversations(share_token) WHERE share_token IS NOT NULL;

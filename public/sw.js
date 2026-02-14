@@ -1872,19 +1872,6 @@ self.addEventListener("periodicsync", (event) => {
   }
 });
 
-// ─── Online detection: process queue when connectivity returns ────────
-// Use a debounce flag so we don't flood processOfflineQueue on every fetch
-let _queueProcessing = false;
-let _lastQueueProcess = 0;
-const QUEUE_PROCESS_INTERVAL = 10000; // 10 seconds minimum between runs
-
-self.addEventListener("fetch", () => {
-  const now = Date.now();
-  if (!_queueProcessing && now - _lastQueueProcess > QUEUE_PROCESS_INTERVAL) {
-    _queueProcessing = true;
-    _lastQueueProcess = now;
-    processOfflineQueue().finally(() => {
-      _queueProcessing = false;
-    });
-  }
-});
+// Removed duplicate fetch listener that piggybacked queue processing on every fetch.
+// Queue processing is handled by: (1) explicit PROCESS_QUEUE messages from client,
+// (2) Background Sync API via "sync-offline-queue" tag, (3) online event in client.

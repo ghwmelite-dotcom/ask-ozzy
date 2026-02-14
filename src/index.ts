@@ -57,6 +57,16 @@ app.post("/api/auth/register", async (c) => {
     return c.json({ error: "Email and full name are required" }, 400);
   }
 
+  // Validate email format and length
+  const trimmedEmail = email.trim().toLowerCase();
+  if (trimmedEmail.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+    return c.json({ error: "Please enter a valid email address" }, 400);
+  }
+
+  if (fullName.trim().length < 2 || fullName.trim().length > 100) {
+    return c.json({ error: "Full name must be between 2 and 100 characters" }, 400);
+  }
+
   if (!referralCode || !referralCode.trim()) {
     return c.json({ error: "Referral code is required" }, 400);
   }
@@ -1363,7 +1373,7 @@ app.post("/api/chat", authMiddleware, async (c) => {
   messages.push({ role: "system", content: augmentedPrompt });
 
   // Add history (reversed to chronological order, skip the message we just added)
-  const historyChronological = history.reverse();
+  const historyChronological = [...history].reverse();
   for (const msg of historyChronological) {
     messages.push({ role: msg.role, content: msg.content });
   }
@@ -4031,16 +4041,20 @@ app.get("/api/agents/:id", async (c) => {
 
 app.post("/api/admin/agents", adminMiddleware, async (c) => {
   const adminId = c.get("userId");
-  const { name, description, system_prompt, department, knowledge_category, icon } = await c.req.json();
+  const { name, description, system_prompt, department, knowledge_category, icon, user_type, requires_paid } = await c.req.json();
 
   if (!name || !system_prompt) {
     return c.json({ error: "Name and system_prompt are required" }, 400);
   }
 
+  const validUserTypes = ["gog_employee", "student", "all"];
+  const agentUserType = validUserTypes.includes(user_type) ? user_type : "all";
+  const agentRequiresPaid = requires_paid ? 1 : 0;
+
   const id = generateId();
   await c.env.DB.prepare(
-    "INSERT INTO agents (id, name, description, system_prompt, department, knowledge_category, icon, created_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
-  ).bind(id, name, description || "", system_prompt, department || "", knowledge_category || "", icon || "\u{1F916}", adminId).run();
+    "INSERT INTO agents (id, name, description, system_prompt, department, knowledge_category, icon, created_by, user_type, requires_paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+  ).bind(id, name, description || "", system_prompt, department || "", knowledge_category || "", icon || "\u{1F916}", adminId, agentUserType, agentRequiresPaid).run();
 
   const agent = await c.env.DB.prepare("SELECT * FROM agents WHERE id = ?").bind(id).first();
   await logAudit(c.env.DB, adminId, "create_agent", "agent", id, name);
@@ -4063,6 +4077,8 @@ app.patch("/api/admin/agents/:id", adminMiddleware, async (c) => {
   if (body.knowledge_category !== undefined) { updates.push("knowledge_category = ?"); params.push(body.knowledge_category); }
   if (body.icon !== undefined) { updates.push("icon = ?"); params.push(body.icon); }
   if (body.active !== undefined) { updates.push("active = ?"); params.push(body.active ? 1 : 0); }
+  if (body.user_type !== undefined) { updates.push("user_type = ?"); params.push(body.user_type); }
+  if (body.requires_paid !== undefined) { updates.push("requires_paid = ?"); params.push(body.requires_paid ? 1 : 0); }
 
   if (updates.length === 0) return c.json({ error: "No fields to update" }, 400);
 
@@ -5542,7 +5558,10 @@ app.post("/api/payments/initialize", authMiddleware, async (c) => {
   const chargeAmount = billingCycle === "yearly"
     ? (isStudent ? plan.studentYearly : plan.yearly)
     : (isStudent ? plan.studentMonthly : plan.monthly);
-  const reference = `askozzy_${userId}_${tier}_${billingCycle}_${Date.now()}`;
+  // Deterministic reference prevents duplicate transactions within same billing period
+  const now = new Date();
+  const yearMonth = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}`;
+  const reference = `askozzy_${userId}_${tier}_${billingCycle}_${yearMonth}`;
 
   // If PAYSTACK_SECRET is configured, use real Paystack
   const paystackSecret = c.env.PAYSTACK_SECRET;
@@ -5603,7 +5622,12 @@ app.post("/api/webhooks/paystack", async (c) => {
     return c.json({ error: "Invalid signature" }, 401);
   }
 
-  const event = JSON.parse(body);
+  let event: any;
+  try {
+    event = JSON.parse(body);
+  } catch {
+    return c.json({ error: "Invalid JSON payload" }, 400);
+  }
 
   if (event.event === "charge.success") {
     const { metadata, reference, amount: amountPesewas, customer } = event.data;
@@ -7766,6 +7790,12 @@ function ussdTemplateMenu(): string {
 // ─── USSD Callback Endpoint ──────────────────────────────────────
 
 app.post("/api/ussd/callback", async (c) => {
+  // Validate webhook secret (same pattern as WhatsApp/SMS webhooks)
+  const isValid = await validateWebhookSecret(c.env, c.req.raw);
+  if (!isValid) {
+    return c.json({ error: "Invalid webhook signature" }, 403);
+  }
+
   try {
     await ensureUSSDTable(c.env.DB);
 
@@ -8599,10 +8629,17 @@ app.get("/api/admin/messaging/config", adminMiddleware, async (c) => {
       api_username: "",
       sender_id: "AskOzzy",
     };
+    // Mask sensitive fields before returning
+    const maskSecret = (s: string) => s ? ("*".repeat(Math.max(0, s.length - 4)) + s.slice(-4)) : "";
+    const safeConfig = {
+      ...config,
+      webhook_secret: maskSecret(config.webhook_secret || ""),
+      api_key: maskSecret(config.api_key || ""),
+    };
     const url = new URL(c.req.url);
     const baseUrl = `${url.protocol}//${url.host}`;
     return c.json({
-      config,
+      config: safeConfig,
       webhook_urls: {
         whatsapp: `${baseUrl}/api/whatsapp/webhook`,
         sms: `${baseUrl}/api/sms/webhook`,

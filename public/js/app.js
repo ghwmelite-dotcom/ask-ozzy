@@ -947,6 +947,10 @@ async function logout() {
   state.messages = [];
   localStorage.removeItem("askozzy_token");
   localStorage.removeItem("askozzy_user");
+  // Notify SW to clear cached data and offline queue
+  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage({ type: "LOGOUT" });
+  }
   updateSidebarFooter();
   updateUsageBadge(null);
   showWelcomeScreen();
@@ -961,6 +965,26 @@ function authHeaders() {
     "Content-Type": "application/json",
     Authorization: `Bearer ${state.token}`,
   };
+}
+
+// Centralized fetch wrapper — auto-handles 401/403 session expiry
+async function apiFetch(url, options = {}) {
+  const res = await fetch(url, options);
+  if ((res.status === 401 || res.status === 403) && state.token) {
+    // Session expired — force logout and prompt re-login
+    state.token = null;
+    state.user = null;
+    localStorage.removeItem("askozzy_token");
+    localStorage.removeItem("askozzy_user");
+    if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({ type: "LOGOUT" });
+    }
+    updateSidebarFooter();
+    showWelcomeScreen();
+    renderConversationList();
+    openAuthModal();
+  }
+  return res;
 }
 
 // Close auth modal on overlay click
@@ -4134,7 +4158,7 @@ function formatDateShort(dateStr) {
 async function loadFolders() {
   if (!isLoggedIn()) return;
   try {
-    const res = await fetch(`${API}/api/folders`, { headers: authHeaders() });
+    const res = await apiFetch(`${API}/api/folders`, { headers: authHeaders() });
     const data = await res.json();
     state.folders = data.folders || [];
   } catch {}
@@ -7196,7 +7220,7 @@ function useSuggestion(btn, text) {
 async function loadMemories() {
   if (!isLoggedIn()) return;
   try {
-    const res = await fetch(`${API}/api/memories`, { headers: authHeaders() });
+    const res = await apiFetch(`${API}/api/memories`, { headers: authHeaders() });
     const data = await res.json();
     state.memories = data.memories || [];
   } catch {}
@@ -7432,7 +7456,7 @@ async function downloadArtifact() {
 
 async function loadAgents() {
   try {
-    const res = await fetch(`${API}/api/agents`, {
+    const res = await apiFetch(`${API}/api/agents`, {
       headers: { Authorization: `Bearer ${state.token}` }
     });
     const data = await res.json();
