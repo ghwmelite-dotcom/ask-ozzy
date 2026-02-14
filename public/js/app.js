@@ -535,9 +535,23 @@ function showTOTPSetup(totpUri, totpSecret, recoveryCode, email) {
   if (privacyBanner) privacyBanner.style.display = "none";
 
   document.getElementById("totp-setup-step").classList.remove("hidden");
-  // Don't send TOTP secret to third-party QR service — show manual entry only
-  document.getElementById("totp-qr-img").style.display = 'none';
-  document.getElementById("totp-qr-img").insertAdjacentHTML('afterend', '<p style="font-size:11px;color:var(--text-muted);">Scan QR not available. Enter the secret code manually in your authenticator app.</p>');
+
+  // Render QR code client-side (no third-party API calls)
+  const qrCanvas = document.getElementById("totp-qr-canvas");
+  const qrFallback = document.getElementById("totp-qr-fallback");
+  if (typeof QRCode !== "undefined" && qrCanvas) {
+    try {
+      QRCode.toCanvas(qrCanvas, totpUri, { width: 180, margin: 1 });
+      qrFallback.style.display = "none";
+    } catch {
+      qrCanvas.style.display = "none";
+      qrFallback.style.display = "block";
+    }
+  } else {
+    if (qrCanvas) qrCanvas.style.display = "none";
+    if (qrFallback) qrFallback.style.display = "block";
+  }
+
   document.getElementById("totp-manual-secret").textContent = totpSecret;
   document.getElementById("recovery-code-value").textContent = recoveryCode;
   document.getElementById("totp-setup-error").textContent = "";
