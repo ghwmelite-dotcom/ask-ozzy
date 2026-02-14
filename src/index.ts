@@ -2545,6 +2545,11 @@ app.get("/api/affiliate/dashboard", authMiddleware, async (c) => {
 
   const baseUrl = new URL(c.req.url).origin;
 
+  // Last used MoMo details for auto-fill
+  const lastMomo = await c.env.DB.prepare(
+    "SELECT momo_number, momo_network FROM withdrawal_requests WHERE user_id = ? ORDER BY created_at DESC LIMIT 1"
+  ).bind(userId).first<{ momo_number: string; momo_network: string }>();
+
   return c.json({
     referralCode: user.referral_code,
     referralLink: `${baseUrl}?ref=${user.referral_code}`,
@@ -2564,6 +2569,7 @@ app.get("/api/affiliate/dashboard", authMiddleware, async (c) => {
     milestones,
     recentTransactions: recentTx || [],
     recentReferrals: recentRefs || [],
+    lastMomo: lastMomo ? { number: lastMomo.momo_number, network: lastMomo.momo_network } : null,
     // Backward compat
     affiliateTier: user.affiliate_tier,
     totalReferrals: user.total_referrals,

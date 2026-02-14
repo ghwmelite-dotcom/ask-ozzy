@@ -2676,6 +2676,18 @@ async function renderAffiliateWithdraw(el) {
         </div>
       </div>
     `;
+    // Auto-fill last used MoMo details
+    if (affiliateData && affiliateData.lastMomo) {
+      const num = affiliateData.lastMomo.number || "";
+      const net = (affiliateData.lastMomo.network || "").toUpperCase();
+      const momoInput = document.getElementById("withdraw-momo");
+      const netSelect = document.getElementById("withdraw-network");
+      if (momoInput && num) momoInput.value = num.replace(/^\+233/, "");
+      if (netSelect && net) {
+        const netMap = { MTN: "MTN", VODAFONE: "Vodafone", AIRTELTIGO: "AirtelTigo" };
+        netSelect.value = netMap[net] || net.charAt(0).toUpperCase() + net.slice(1).toLowerCase();
+      }
+    }
   } catch (err) {
     el.innerHTML = `
       <div class="affiliate-withdraw-wrap">
@@ -2713,6 +2725,18 @@ async function renderAffiliateWithdraw(el) {
         </div>
       </div>
     `;
+    // Auto-fill last used MoMo details (fallback form)
+    if (affiliateData && affiliateData.lastMomo) {
+      const num = affiliateData.lastMomo.number || "";
+      const net = (affiliateData.lastMomo.network || "").toUpperCase();
+      const momoInput = document.getElementById("withdraw-momo");
+      const netSelect = document.getElementById("withdraw-network");
+      if (momoInput && num) momoInput.value = num.replace(/^\+233/, "");
+      if (netSelect && net) {
+        const netMap = { MTN: "MTN", VODAFONE: "Vodafone", AIRTELTIGO: "AirtelTigo" };
+        netSelect.value = netMap[net] || net.charAt(0).toUpperCase() + net.slice(1).toLowerCase();
+      }
+    }
   }
 }
 
