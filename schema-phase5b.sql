@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS whatsapp_sessions (
   updated_at TEXT DEFAULT (datetime('now'))
 );
 CREATE INDEX IF NOT EXISTS idx_wa_phone ON whatsapp_sessions(phone_number);
+CREATE INDEX IF NOT EXISTS idx_wa_user ON whatsapp_sessions(user_id);
 
 -- Individual messages for audit trail
 CREATE TABLE IF NOT EXISTS whatsapp_messages (

@@ -1475,6 +1475,18 @@ async function sendMessage() {
               currentEvent = "";
               continue;
             }
+            // Handle model downgrade notification
+            if (currentEvent === "model_info") {
+              try {
+                const info = JSON.parse(line.slice(6));
+                if (info.downgraded) {
+                  const modelName = (info.model || "").split("/").pop() || "a free model";
+                  showSyncToast("Model switched to " + modelName + " (upgrade for premium models)", 4000);
+                }
+              } catch {}
+              currentEvent = "";
+              continue;
+            }
             // Feature 6: Handle follow-up suggestions from SSE
             if (currentEvent === "suggestions") {
               const suggestions = JSON.parse(line.slice(6));

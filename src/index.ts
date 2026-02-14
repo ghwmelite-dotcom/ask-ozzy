@@ -13,6 +13,12 @@ import {
 
 const app = new Hono<AppType>();
 
+// Global error handler — prevent stack trace leaks
+app.onError((err, c) => {
+  console.error("Unhandled error:", err.message, err.stack);
+  return c.json({ error: "Internal server error" }, 500);
+});
+
 app.use("/api/*", cors({
   origin: (origin) => {
     const allowed = ["https://askozzy.ghwmelite.workers.dev"];
@@ -243,8 +249,8 @@ app.post("/api/auth/login", async (c) => {
     return c.json({ error: "Email and authentication code are required" }, 400);
   }
 
-  // Rate limit login attempts
-  const clientIP = c.req.header("cf-connecting-ip") || c.req.header("x-forwarded-for") || "unknown";
+  // Rate limit login attempts (only trust cf-connecting-ip behind Cloudflare)
+  const clientIP = c.req.header("cf-connecting-ip") || "unknown";
   const rateCheck = await checkRateLimit(c.env, `${clientIP}:${email}`, "auth");
   if (!rateCheck.allowed) {
     return c.json({ error: "Too many login attempts. Please wait 5 minutes." }, 429);
@@ -1251,14 +1257,17 @@ app.post("/api/chat", authMiddleware, async (c) => {
   }
 
   let selectedModel = model || convo.model || "@cf/meta/llama-4-scout-17b-16e-instruct";
+  let modelDowngraded = false;
 
   // Free tier: restrict to basic models
   if (userTier === "free" && !FREE_TIER_MODELS.includes(selectedModel)) {
     selectedModel = "@cf/openai/gpt-oss-20b"; // fallback to best free model
+    modelDowngraded = true;
   }
   // Professional tier: restrict to pro + free models (6 total)
   if (userTier === "professional" && !PRO_TIER_MODELS.includes(selectedModel)) {
     selectedModel = "@cf/meta/llama-4-scout-17b-16e-instruct"; // fallback to best pro model
+    modelDowngraded = true;
   }
 
   // Save user message
@@ -1299,7 +1308,7 @@ app.post("/api/chat", authMiddleware, async (c) => {
     if (memories && memories.length > 0) {
       memoryPrefix = `## About this user\n${memories.map(m => `- ${m.key}: ${m.value}`).join("\n")}\n\nUse this context to personalize your responses. Reference the user's role, department, and preferences when relevant.\n\n`;
     }
-  } catch {}
+  } catch (e: any) { console.error("Memory lookup failed:", e?.message); }
 
   // Determine base system prompt (agent or default, persona-aware)
   const defaultPrompt = (user?.user_type === "student") ? STUDENT_SYSTEM_PROMPT : GOG_SYSTEM_PROMPT;
@@ -1317,7 +1326,7 @@ app.post("/api/chat", authMiddleware, async (c) => {
           agentKnowledgeCategory = agent.knowledge_category;
         }
       }
-    } catch {}
+    } catch (e: any) { console.error("Agent lookup failed:", e?.message); }
   }
 
   // RAG: Search knowledge base for relevant context
@@ -1345,7 +1354,7 @@ app.post("/api/chat", authMiddleware, async (c) => {
         webSearchResults = await webSearch(actualMessage, 5);
         await incrementWebSearchCount(c.env, userId);
       }
-    } catch {}
+    } catch (e: any) { console.error("Web search failed:", e?.message); }
   }
 
   let augmentedPrompt = memoryPrefix + buildAugmentedPrompt(baseSystemPrompt, ragResults, faqResults);
@@ -1378,11 +1387,15 @@ app.post("/api/chat", authMiddleware, async (c) => {
     messages.push({ role: msg.role, content: msg.content });
   }
 
+  // Tier-based max_tokens
+  const tierMaxTokens: Record<string, number> = { free: 2048, starter: 4096, professional: 6144, enterprise: 8192 };
+  const maxTokens = tierMaxTokens[userTier] || 4096;
+
   // Stream response from Workers AI
   const stream = await c.env.AI.run(selectedModel as any, {
     messages: messages as any,
     stream: true,
-    max_tokens: 4096,
+    max_tokens: maxTokens,
   });
 
   // We need to collect the full response to save it
@@ -1398,6 +1411,11 @@ app.post("/api/chat", authMiddleware, async (c) => {
       const decoder = new TextDecoder();
 
       try {
+        // Notify client if model was downgraded due to tier restrictions
+        if (modelDowngraded) {
+          await writer.write(encoder.encode(`event: model_info\ndata: ${JSON.stringify({ model: selectedModel, downgraded: true })}\n\n`));
+        }
+
         // Send web search sources as a custom SSE event before AI response
         if (webSearchResults.length > 0) {
           await writer.write(encoder.encode(`event: sources\ndata: ${JSON.stringify(webSearchResults)}\n\n`));
@@ -2630,6 +2648,9 @@ app.post("/api/affiliate/withdraw", authMiddleware, async (c) => {
   if (isNaN(withdrawAmount) || withdrawAmount < 20) {
     return c.json({ error: "Minimum withdrawal is GHS 20" }, 400);
   }
+  if (withdrawAmount > 5000) {
+    return c.json({ error: "Maximum withdrawal is GHS 5,000 per transaction" }, 400);
+  }
 
   await ensureWallet(c.env.DB, userId);
 
@@ -3254,7 +3275,7 @@ app.get("/api/admin/dashboard", adminMiddleware, async (c) => {
 
 // Paginated user list with search
 app.get("/api/admin/users", adminMiddleware, async (c) => {
-  const page = parseInt(c.req.query("page") || "1");
+  const page = Math.max(1, parseInt(c.req.query("page") || "1"));
   const limit = Math.min(parseInt(c.req.query("limit") || "20"), 100);
   const search = c.req.query("search") || "";
   const offset = (page - 1) * limit;
@@ -3364,7 +3385,7 @@ app.delete("/api/admin/users/:id", adminMiddleware, async (c) => {
 
 // All conversations with user info + message counts
 app.get("/api/admin/conversations", adminMiddleware, async (c) => {
-  const page = parseInt(c.req.query("page") || "1");
+  const page = Math.max(1, parseInt(c.req.query("page") || "1"));
   const limit = Math.min(parseInt(c.req.query("limit") || "20"), 100);
   const offset = (page - 1) * limit;
 
@@ -3538,7 +3559,7 @@ async function logAudit(db: D1Database, adminId: string, action: string, targetT
 async function logUserAudit(c: any, actionType: string, queryPreview?: string, model?: string) {
   try {
     const userId = c.get("userId");
-    const ip = c.req.header("cf-connecting-ip") || c.req.header("x-forwarded-for") || "unknown";
+    const ip = c.req.header("cf-connecting-ip") || "unknown";
     const user = (await c.env.DB.prepare(
       "SELECT email, department FROM users WHERE id = ?"
     ).bind(userId).first()) as { email: string; department: string } | null;
@@ -4012,11 +4033,11 @@ app.get("/api/agents", authMiddleware, async (c) => {
       query = "SELECT id, name, description, department, icon, knowledge_category, user_type, requires_paid FROM agents WHERE active = 1 AND (user_type = 'student' OR user_type = 'all') AND requires_paid = 0 ORDER BY name";
     }
   } else {
-    // gog_employee sees all agent types
+    // gog_employee sees gog_employee + all agents (not student-only)
     if (isPaid) {
-      query = "SELECT id, name, description, department, icon, knowledge_category, user_type, requires_paid FROM agents WHERE active = 1 ORDER BY name";
+      query = "SELECT id, name, description, department, icon, knowledge_category, user_type, requires_paid FROM agents WHERE active = 1 AND (user_type = 'gog_employee' OR user_type = 'all') ORDER BY name";
     } else {
-      query = "SELECT id, name, description, department, icon, knowledge_category, user_type, requires_paid FROM agents WHERE active = 1 AND requires_paid = 0 ORDER BY name";
+      query = "SELECT id, name, description, department, icon, knowledge_category, user_type, requires_paid FROM agents WHERE active = 1 AND (user_type = 'gog_employee' OR user_type = 'all') AND requires_paid = 0 ORDER BY name";
     }
   }
 
@@ -4658,7 +4679,7 @@ app.get("/api/admin/export/analytics", adminMiddleware, async (c) => {
 // ─── Audit Log — Admin Actions (legacy view) ─────────────────────────
 
 app.get("/api/admin/audit-log", adminMiddleware, async (c) => {
-  const page = parseInt(c.req.query("page") || "1");
+  const page = Math.max(1, parseInt(c.req.query("page") || "1"));
   const limit = Math.min(parseInt(c.req.query("limit") || "50"), 100);
   const offset = (page - 1) * limit;
 
@@ -4676,7 +4697,7 @@ app.get("/api/admin/audit-log", adminMiddleware, async (c) => {
 // ─── User Activity Audit Trail (admin view, filterable + paginated) ────
 
 app.get("/api/admin/audit", adminMiddleware, async (c) => {
-  const page = parseInt(c.req.query("page") || "1");
+  const page = Math.max(1, parseInt(c.req.query("page") || "1"));
   const limit = Math.min(parseInt(c.req.query("limit") || "50"), 100);
   const offset = (page - 1) * limit;
   const actionType = c.req.query("action_type") || "";
@@ -4819,7 +4840,7 @@ app.get("/api/admin/audit/stats", adminMiddleware, async (c) => {
 
 app.get("/api/admin/moderation", adminMiddleware, async (c) => {
   const status = c.req.query("status") || "pending";
-  const page = parseInt(c.req.query("page") || "1");
+  const page = Math.max(1, parseInt(c.req.query("page") || "1"));
   const limit = Math.min(parseInt(c.req.query("limit") || "20"), 100);
   const offset = (page - 1) * limit;
 
@@ -5646,8 +5667,9 @@ app.post("/api/webhooks/paystack", async (c) => {
       // Validate payment amount matches expected price (allow student pricing as minimum)
       const paidAmount = Number(amountPesewas) || 0;
       if (paidAmount < minAmount) {
-        console.error("Webhook: amount mismatch", { expected: minAmount, received: paidAmount, tier: metadata.tier, cycle });
-        return c.json({ error: "Payment amount mismatch" }, 400);
+        console.error("Webhook: amount mismatch — flagged for review", { expected: minAmount, received: paidAmount, tier: metadata.tier, cycle, reference });
+        // Return 200 to prevent Paystack retry loops; log for admin review
+        return c.json({ received: true, flagged: "amount_mismatch" }, 200);
       }
 
       // Calculate subscription expiry
@@ -6330,7 +6352,7 @@ app.post("/api/admin/documents/scrape-url", adminMiddleware, async (c) => {
 
 // 2. List documents
 app.get("/api/admin/documents", adminMiddleware, async (c) => {
-  const page = parseInt(c.req.query("page") || "1");
+  const page = Math.max(1, parseInt(c.req.query("page") || "1"));
   const limit = Math.min(parseInt(c.req.query("limit") || "20"), 100);
   const offset = (page - 1) * limit;
 
@@ -6409,7 +6431,7 @@ app.post("/api/admin/kb", adminMiddleware, async (c) => {
 
 // 6. List FAQ entries
 app.get("/api/admin/kb", adminMiddleware, async (c) => {
-  const page = parseInt(c.req.query("page") || "1");
+  const page = Math.max(1, parseInt(c.req.query("page") || "1"));
   const limit = Math.min(parseInt(c.req.query("limit") || "20"), 100);
   const offset = (page - 1) * limit;
   const category = c.req.query("category") || "";
@@ -6527,6 +6549,13 @@ app.get("/api/workflows/templates", async (c) => {
 
 app.post("/api/workflows", authMiddleware, async (c) => {
   const userId = c.get("userId");
+
+  // Tier gating: Starter+ only
+  const wfUser = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?").bind(userId).first<{ tier: string }>();
+  if (wfUser?.tier === "free") {
+    return c.json({ error: "Workflows require a paid plan. Upgrade to Starter or above.", code: "TIER_REQUIRED" }, 403);
+  }
+
   const { templateId, name } = await c.req.json();
 
   const template = WORKFLOW_TEMPLATES[templateId];
@@ -6866,6 +6895,16 @@ app.post("/api/spaces/:id/invite", authMiddleware, async (c) => {
     "SELECT user_id FROM space_members WHERE space_id = ? AND user_id = ?"
   ).bind(spaceId, invitee.id).first();
   if (existing) return c.json({ error: "User is already a member" }, 400);
+
+  // Limit space members (Professional: 20, Enterprise: 100)
+  const memberCount = await c.env.DB.prepare(
+    "SELECT COUNT(*) as cnt FROM space_members WHERE space_id = ?"
+  ).bind(spaceId).first<{ cnt: number }>();
+  const inviter = await c.env.DB.prepare("SELECT tier FROM users WHERE id = ?").bind(userId).first<{ tier: string }>();
+  const maxMembers = inviter?.tier === "enterprise" ? 100 : 20;
+  if (memberCount && memberCount.cnt >= maxMembers) {
+    return c.json({ error: `Space member limit reached (${maxMembers}). Upgrade for more.` }, 400);
+  }
 
   await c.env.DB.prepare(
     "INSERT INTO space_members (space_id, user_id, role) VALUES (?, ?, ?)"
@@ -7612,7 +7651,7 @@ app.get("/api/admin/knowledge/stats", adminMiddleware, async (c) => {
 
 // Enhanced document listing with search and category filter
 app.get("/api/admin/knowledge/documents", adminMiddleware, async (c) => {
-  const page = parseInt(c.req.query("page") || "1");
+  const page = Math.max(1, parseInt(c.req.query("page") || "1"));
   const limit = Math.min(parseInt(c.req.query("limit") || "20"), 100);
   const offset = (page - 1) * limit;
   const category = c.req.query("category") || "";
@@ -7825,6 +7864,16 @@ app.post("/api/ussd/callback", async (c) => {
         headers: { "Content-Type": "text/plain" },
       });
     }
+
+    // Validate phone number format (Ghana: +233XXXXXXXXX or 0XXXXXXXXX)
+    if (phoneNumber && !/^\+?[0-9]{10,15}$/.test(phoneNumber.replace(/\s/g, ""))) {
+      return new Response("END Invalid phone number", {
+        headers: { "Content-Type": "text/plain" },
+      });
+    }
+
+    // Sanitize text input (strip control characters)
+    text = text.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, "");
 
     // Check if USSD is enabled via KV config
     const ussdConfig = await c.env.SESSIONS.get("ussd_config");

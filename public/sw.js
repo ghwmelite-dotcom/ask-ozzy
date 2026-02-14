@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════════════
-//  AskOzzy — Enhanced Service Worker v5
+//  AskOzzy — Enhanced Service Worker v10
 //  Cache-first for static, network-first for API, offline queue for messages
 //  IndexedDB template cache + response cache + conversation cache for offline-first AI
 //  Push notifications, content indexing, background conversation sync
