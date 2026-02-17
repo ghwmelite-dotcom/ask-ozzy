@@ -1177,19 +1177,24 @@ function updateSidebarFooter() {
         ${tierName} Plan ${tier === 'free' ? '— Upgrade' : ''}
       </button>
       ${subStatusHtml}
-      <div class="sidebar-earn-widget-wrap"></div>
-      <div id="streak-badge-container"></div>
-      <div class="sidebar-links">
-        <button class="sidebar-link-btn" onclick="openUserDashboard()">Dashboard</button>
-        <button class="sidebar-link-btn" onclick="openProductivityDashboard()">Productivity</button>
-        <button class="sidebar-link-btn" onclick="openMemoryModal()">🧠 Memory</button>
-        <button class="sidebar-link-btn" onclick="openProfileModal()">👤 Profile</button>
-        ${isStudent() ? '<button class="sidebar-link-btn exam-prep-btn" onclick="openExamPrepDashboard()">📝 Exam Prep</button>' : ''}
-        <button class="sidebar-link-btn" onclick="openSecuritySettings()">Security</button>
-        <button class="sidebar-link-btn" onclick="revokeAllSessions()">Revoke Sessions</button>
-        <button class="sidebar-link-btn" onclick="openPromptEngineeringCourse()">📚 Prompt 101</button>
-        <button class="sidebar-link-btn" onclick="openGuide()">User Guide</button>
-        ${state.user.role === 'super_admin' ? '<a class="sidebar-link-btn" href="/admin" style="text-decoration:none;text-align:center;">Admin</a>' : ''}
+      <button class="sidebar-collapse-toggle" onclick="toggleSidebarSection(this)" aria-expanded="true" aria-label="Show or hide links">
+        <span class="sidebar-collapse-chevron">▾</span><span class="sidebar-collapse-label">Hide Links</span>
+      </button>
+      <div class="sidebar-collapsible">
+        <div class="sidebar-earn-widget-wrap"></div>
+        <div id="streak-badge-container"></div>
+        <div class="sidebar-links">
+          <button class="sidebar-link-btn" onclick="openUserDashboard()">Dashboard</button>
+          <button class="sidebar-link-btn" onclick="openProductivityDashboard()">Productivity</button>
+          <button class="sidebar-link-btn" onclick="openMemoryModal()">🧠 Memory</button>
+          <button class="sidebar-link-btn" onclick="openProfileModal()">👤 Profile</button>
+          ${isStudent() ? '<button class="sidebar-link-btn exam-prep-btn" onclick="openExamPrepDashboard()">📝 Exam Prep</button>' : ''}
+          <button class="sidebar-link-btn" onclick="openSecuritySettings()">Security</button>
+          <button class="sidebar-link-btn" onclick="revokeAllSessions()">Revoke Sessions</button>
+          <button class="sidebar-link-btn" onclick="openPromptEngineeringCourse()">📚 Prompt 101</button>
+          <button class="sidebar-link-btn" onclick="openGuide()">User Guide</button>
+          ${state.user.role === 'super_admin' ? '<a class="sidebar-link-btn" href="/admin" style="text-decoration:none;text-align:center;">Admin</a>' : ''}
+        </div>
       </div>
       <button class="btn-logout" onclick="logout()">Sign Out</button>`;
   } else {
@@ -2183,6 +2188,15 @@ function toggleSidebar() {
   } else if (window.innerWidth <= 768) {
     if (backdrop) backdrop.classList.add("active");
   }
+}
+
+function toggleSidebarSection(btn) {
+  const section = btn.nextElementSibling;
+  const expanded = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', !expanded);
+  section.classList.toggle('collapsed');
+  const label = btn.querySelector('.sidebar-collapse-label');
+  if (label) label.textContent = expanded ? 'Show Links' : 'Hide Links';
 }
 
 // Close sidebar when tapping backdrop on mobile

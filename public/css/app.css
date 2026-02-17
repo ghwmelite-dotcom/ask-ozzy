@@ -2860,6 +2860,32 @@ html, body {
 
 /* ─── Sidebar Dashboard/Security Links ────────────────────────────── */
 
+/* ── Collapsible Sidebar Section ── */
+.sidebar-collapse-toggle {
+  display: flex; align-items: center; justify-content: center; gap: 4px;
+  width: 100%; padding: 6px 4px; margin: 2px 0;
+  background: none; border: none; cursor: pointer;
+  font-size: 11px; font-weight: 600; color: var(--text-muted);
+  letter-spacing: .5px;
+  border-radius: 6px; transition: color .15s;
+}
+.sidebar-collapse-toggle:hover { color: var(--text-primary); }
+.sidebar-collapse-chevron {
+  font-size: 12px; transition: transform .2s ease;
+}
+.sidebar-collapse-toggle[aria-expanded="false"] .sidebar-collapse-chevron {
+  transform: rotate(-90deg);
+}
+.sidebar-collapsible {
+  display: flex; flex-direction: column; gap: 8px;
+  overflow: hidden; max-height: 500px;
+  transition: max-height .25s ease, opacity .2s ease;
+  opacity: 1;
+}
+.sidebar-collapsible.collapsed {
+  max-height: 0; opacity: 0; gap: 0;
+}
+
 .sidebar-links {
   display: flex;
   gap: 4px;
