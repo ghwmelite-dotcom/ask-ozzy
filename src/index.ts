@@ -925,6 +925,19 @@ async function ensurePhase7Tables(db: D1Database) {
   }
 }
 
+// ─── Prompt Engineering Course: Column Lazy Migration ────────────────
+let promptCourseColExists = false;
+async function ensurePromptCourseColumn(db: D1Database) {
+  if (promptCourseColExists) return;
+  try {
+    await db.prepare("SELECT prompt_course_progress FROM user_profiles LIMIT 1").first();
+    promptCourseColExists = true;
+  } catch {
+    await db.prepare("ALTER TABLE user_profiles ADD COLUMN prompt_course_progress TEXT DEFAULT '{}'").run();
+    promptCourseColExists = true;
+  }
+}
+
 // ─── Daily Streak Updater ───────────────────────────────────────────
 
 async function updateUserStreak(db: D1Database, userId: string) {
@@ -10332,6 +10345,127 @@ app.put("/api/push/preferences", authMiddleware, async (c) => {
   } catch (err: any) {
     console.error("Push preferences error:", err.message);
     return c.json({ error: "Failed to update preferences" }, 500);
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════════
+//  Prompt Engineering 101 Course
+// ═══════════════════════════════════════════════════════════════════
+
+app.get("/api/prompt-course/progress", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  try {
+    await ensureUserProfilesTable(c.env.DB);
+    await ensurePromptCourseColumn(c.env.DB);
+    await c.env.DB.prepare(
+      "INSERT OR IGNORE INTO user_profiles (user_id) VALUES (?)"
+    ).bind(userId).run();
+    const row = await c.env.DB.prepare(
+      "SELECT prompt_course_progress FROM user_profiles WHERE user_id = ?"
+    ).bind(userId).first<{ prompt_course_progress: string | null }>();
+    const progress = row?.prompt_course_progress ? JSON.parse(row.prompt_course_progress) : {};
+    return c.json({ progress });
+  } catch (err: any) {
+    console.error("Prompt course progress error:", err.message);
+    return c.json({ error: "Failed to load progress" }, 500);
+  }
+});
+
+app.post("/api/prompt-course/grade", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const { moduleId, exerciseId, userPrompt, exerciseBrief, exerciseContext } = await c.req.json();
+
+  if (!userPrompt || userPrompt.trim().length < 15) {
+    return c.json({ error: "Please write a more detailed prompt (at least 15 characters)" }, 400);
+  }
+  if (!moduleId || !exerciseId) {
+    return c.json({ error: "Missing module or exercise ID" }, 400);
+  }
+
+  const gradingPrompt = `You are an expert prompt engineering instructor. Grade this student's prompt attempt.
+
+EXERCISE: ${String(exerciseBrief || "").substring(0, 500)}
+CONTEXT: ${String(exerciseContext || "").substring(0, 500)}
+
+STUDENT'S PROMPT:
+${userPrompt.substring(0, 2000)}
+
+Score on these 4 axes (each 1-10):
+1. Clarity — Is the intent obvious and unambiguous?
+2. Specificity — Does it include concrete details, constraints, and scope?
+3. Structure — Is it well-organized with role, task, context, and format?
+4. Effectiveness — Would this prompt produce a high-quality AI response?
+
+Also provide:
+- feedback: 2-3 sentences of constructive feedback
+- grade: letter grade (A/B/C/D/F)
+- improvedVersion: rewrite their prompt to demonstrate best practices
+
+Return ONLY a JSON object:
+{"clarity": N, "specificity": N, "structure": N, "effectiveness": N, "feedback": "...", "grade": "X", "improvedVersion": "..."}`;
+
+  try {
+    const aiResponse = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as any, {
+      messages: [
+        { role: "system", content: "You are a prompt engineering instructor. Return ONLY valid JSON, no markdown." },
+        { role: "user", content: gradingPrompt },
+      ],
+      max_tokens: 800,
+    });
+
+    const raw = (aiResponse as any)?.response || "";
+    let scores = { clarity: 5, specificity: 5, structure: 5, effectiveness: 5, feedback: "Grading completed.", grade: "C", improvedVersion: "" };
+
+    try {
+      const jsonMatch = raw.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        const parsed = JSON.parse(jsonMatch[0]);
+        scores.clarity = Math.min(10, Math.max(1, parseInt(parsed.clarity) || 5));
+        scores.specificity = Math.min(10, Math.max(1, parseInt(parsed.specificity) || 5));
+        scores.structure = Math.min(10, Math.max(1, parseInt(parsed.structure) || 5));
+        scores.effectiveness = Math.min(10, Math.max(1, parseInt(parsed.effectiveness) || 5));
+        scores.feedback = String(parsed.feedback || "").substring(0, 2000) || "Grading completed.";
+        scores.grade = ["A", "B", "C", "D", "F"].includes(parsed.grade) ? parsed.grade : "C";
+        scores.improvedVersion = String(parsed.improvedVersion || "").substring(0, 3000);
+      }
+    } catch {}
+
+    const totalScore = scores.clarity + scores.specificity + scores.structure + scores.effectiveness;
+
+    // Save progress
+    try {
+      await ensureUserProfilesTable(c.env.DB);
+      await ensurePromptCourseColumn(c.env.DB);
+      await c.env.DB.prepare(
+        "INSERT OR IGNORE INTO user_profiles (user_id) VALUES (?)"
+      ).bind(userId).run();
+      const row = await c.env.DB.prepare(
+        "SELECT prompt_course_progress FROM user_profiles WHERE user_id = ?"
+      ).bind(userId).first<{ prompt_course_progress: string | null }>();
+      const progress = row?.prompt_course_progress ? JSON.parse(row.prompt_course_progress) : {};
+      if (!progress[moduleId] || (progress[moduleId].totalScore || 0) < totalScore) {
+        progress[moduleId] = { exerciseId, totalScore, maxScore: 40, grade: scores.grade, completedAt: new Date().toISOString() };
+      }
+      await c.env.DB.prepare(
+        "UPDATE user_profiles SET prompt_course_progress = ?, updated_at = datetime('now') WHERE user_id = ?"
+      ).bind(JSON.stringify(progress), userId).run();
+    } catch (saveErr: any) {
+      console.error("Progress save error:", saveErr.message);
+    }
+
+    c.executionCtx.waitUntil(trackProductivity(c, "prompt_course_exercise"));
+
+    return c.json({
+      scores: { clarity: scores.clarity, specificity: scores.specificity, structure: scores.structure, effectiveness: scores.effectiveness },
+      totalScore,
+      maxScore: 40,
+      grade: scores.grade,
+      feedback: scores.feedback,
+      improvedVersion: scores.improvedVersion,
+    });
+  } catch (err: any) {
+    console.error("Prompt course grading error:", err?.message);
+    return c.json({ error: "Grading failed. Please try again." }, 500);
   }
 });
 
