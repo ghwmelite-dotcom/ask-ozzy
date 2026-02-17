@@ -4289,6 +4289,94 @@ html, body {
 .meeting-item-title { flex: 1; font-size: 13px; color: var(--text-primary); }
 .meeting-item-date { font-size: 11px; color: var(--text-muted); }
 
+/* Phase 7: Meeting Tabs */
+.meeting-tabs {
+  display: flex; border-bottom: 1px solid var(--border-color);
+  padding: 0 16px; gap: 0; background: var(--bg-secondary);
+}
+.meeting-tab {
+  padding: 10px 16px; font-size: 13px; font-weight: 500;
+  color: var(--text-muted); background: none; border: none;
+  border-bottom: 2px solid transparent; cursor: pointer;
+  transition: all var(--transition);
+}
+.meeting-tab:hover { color: var(--text-primary); }
+.meeting-tab.active {
+  color: var(--gold); border-bottom-color: var(--gold); font-weight: 600;
+}
+
+/* Phase 7: Recording UI */
+.meeting-record-area {
+  border: 2px solid var(--border-color); border-radius: var(--radius);
+  transition: all 0.3s ease; margin-bottom: 12px;
+}
+.meeting-record-area.recording {
+  border-color: var(--red-error-text, #e53e3e);
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.15);
+  animation: recording-pulse 2s ease-in-out infinite;
+}
+@keyframes recording-pulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.15); }
+  50% { box-shadow: 0 0 0 6px rgba(229, 62, 62, 0.08); }
+}
+.meeting-record-btn {
+  width: 64px; height: 64px; border-radius: 50%;
+  border: 3px solid var(--border-color); background: var(--bg-tertiary);
+  cursor: pointer; display: inline-flex; align-items: center;
+  justify-content: center; transition: all 0.2s ease;
+}
+.meeting-record-btn:hover { border-color: var(--gold); transform: scale(1.05); }
+.recording .meeting-record-btn {
+  border-color: var(--red-error-text, #e53e3e);
+  background: rgba(229, 62, 62, 0.1);
+}
+.meeting-record-timer {
+  font-size: 24px; font-weight: 700; color: var(--text-primary);
+  font-variant-numeric: tabular-nums; margin-top: 8px;
+}
+
+/* Phase 7: Action Items */
+.action-items-list {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.action-item-card {
+  padding: 12px 14px; background: var(--bg-tertiary);
+  border: 1px solid var(--border-color); border-radius: var(--radius-sm);
+  transition: border-color var(--transition);
+}
+.action-item-card:hover { border-color: var(--gold-dim); }
+.action-item-header {
+  display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px;
+}
+.action-item-meta {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  font-size: 11px; color: var(--text-muted); margin-bottom: 8px;
+}
+.action-item-actions {
+  display: flex; justify-content: flex-end;
+}
+
+/* Phase 7: Translation Toggle */
+.message-translation-toggle {
+  margin: 8px 0 4px;
+}
+.translation-toggle-btn {
+  padding: 4px 12px; font-size: 11px; font-weight: 600;
+  border-radius: 12px; border: 1px solid var(--gold-dim);
+  background: transparent; color: var(--gold);
+  cursor: pointer; transition: all var(--transition);
+}
+.translation-toggle-btn:hover {
+  background: var(--gold-dim); color: var(--bg-primary);
+}
+.message-translated {
+  border-left: 3px solid var(--gold);
+  padding: 8px 12px; margin-top: 4px;
+  background: rgba(212, 175, 55, 0.04);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 14px; line-height: 1.7;
+}
+
 /* ─── Collaborative Spaces ─────────────────────────────────────────── */
 
 .spaces-list { display: flex; flex-direction: column; gap: 8px; }
@@ -4404,6 +4492,9 @@ html, body {
   /* Meeting items — more tap room */
   .meeting-item { padding: 12px; margin-bottom: 6px; }
   .meeting-item-title { font-size: 14px; }
+  .meeting-tabs { padding: 0 8px; overflow-x: auto; }
+  .meeting-tab { padding: 8px 12px; font-size: 12px; white-space: nowrap; }
+  .action-item-meta { flex-direction: column; gap: 4px; }
 
   /* Spaces */
   .space-card { padding: 12px; }

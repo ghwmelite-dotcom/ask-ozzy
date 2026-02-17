@@ -886,6 +886,45 @@ async function ensureExamTables(db: D1Database) {
   }
 }
 
+// ─── Phase 7: Meeting Action Items Table Lazy Migration ─────────────
+
+let phase7TablesExist = false;
+async function ensurePhase7Tables(db: D1Database) {
+  if (phase7TablesExist) return;
+  try {
+    await db.prepare("SELECT id FROM meeting_action_items LIMIT 1").first();
+    phase7TablesExist = true;
+  } catch {
+    await db.batch([
+      db.prepare(`CREATE TABLE IF NOT EXISTS meeting_action_items (
+        id TEXT PRIMARY KEY,
+        meeting_id TEXT NOT NULL,
+        user_id TEXT NOT NULL,
+        action TEXT NOT NULL,
+        assignee TEXT DEFAULT '',
+        deadline TEXT DEFAULT NULL,
+        status TEXT DEFAULT 'pending' CHECK (status IN ('pending','in_progress','done')),
+        completed_at TEXT DEFAULT NULL,
+        created_at TEXT DEFAULT (datetime('now')),
+        FOREIGN KEY (meeting_id) REFERENCES meetings(id) ON DELETE CASCADE,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+      )`),
+      db.prepare("CREATE INDEX IF NOT EXISTS idx_action_items_meeting ON meeting_action_items(meeting_id)"),
+      db.prepare("CREATE INDEX IF NOT EXISTS idx_action_items_user_status ON meeting_action_items(user_id, status)"),
+    ]);
+    phase7TablesExist = true;
+  }
+  // Also ensure meeting_type and language columns on meetings table
+  try {
+    await db.prepare("SELECT meeting_type FROM meetings LIMIT 1").first();
+  } catch {
+    await db.batch([
+      db.prepare("ALTER TABLE meetings ADD COLUMN meeting_type TEXT DEFAULT 'general'"),
+      db.prepare("ALTER TABLE meetings ADD COLUMN language TEXT DEFAULT 'en'"),
+    ]);
+  }
+}
+
 // ─── Daily Streak Updater ───────────────────────────────────────────
 
 async function updateUserStreak(db: D1Database, userId: string) {
@@ -1596,11 +1635,13 @@ app.post("/api/chat", authMiddleware, async (c) => {
   }
 
   // Language support: instruct AI to respond in target language
+  // Phase 7: For Ghanaian languages (no m2m100 code), respond in clear English then auto-translate
+  // For m2m100-supported languages (French, Hausa), keep direct prompt injection
   if (language && language !== "en" && SUPPORTED_LANGUAGES[language]) {
     const langName = SUPPORTED_LANGUAGES[language].name;
     const isGhanaianLang = !SUPPORTED_LANGUAGES[language].m2mCode;
     if (isGhanaianLang) {
-      augmentedPrompt += `\n\nCRITICAL LANGUAGE REQUIREMENT: You MUST respond ENTIRELY in ${langName}. Write every single word in ${langName} — do NOT use any English words at all. Even technical terms and descriptions must be expressed in ${langName} using native phrasing. Only proper nouns (organization names like SSNIT, GRA, DVLA), URLs, and phone numbers may remain in their original form. Think in ${langName} and write naturally as a fluent native ${langName} speaker from Ghana would. This is non-negotiable.`;
+      augmentedPrompt += `\n\nNote: The user's preferred language is ${langName}. Respond in clear, simple English. Your response will be automatically translated to ${langName}. Avoid complex idioms, slang, or highly technical jargon. Use short, clear sentences that translate well.`;
     } else {
       augmentedPrompt += `\n\nIMPORTANT: The user has selected ${langName} as their language. You MUST respond entirely in ${langName}.`;
     }
@@ -1698,6 +1739,20 @@ app.post("/api/chat", authMiddleware, async (c) => {
             }
           }
         } catch { /* ignore suggestion errors */ }
+
+        // Phase 7: Post-response translation for Ghanaian languages
+        if (language && language !== "en" && SUPPORTED_LANGUAGES[language] && !SUPPORTED_LANGUAGES[language].m2mCode && fullResponse.length > 10) {
+          try {
+            const langName = SUPPORTED_LANGUAGES[language].name;
+            // 10s timeout for translation
+            const translationPromise = translateText(c.env.AI, fullResponse, "en", language);
+            const timeoutPromise = new Promise<string>((_, reject) => setTimeout(() => reject(new Error("timeout")), 10000));
+            const translated = await Promise.race([translationPromise, timeoutPromise]);
+            if (translated && translated !== fullResponse) {
+              await writer.write(encoder.encode(`event: translation\ndata: ${JSON.stringify({ text: translated, language, languageName: langName })}\n\n`));
+            }
+          } catch { /* translation failure doesn't break the chat */ }
+        }
       } finally {
         await writer.close();
 
@@ -7626,6 +7681,129 @@ app.delete("/api/workflows/:id", authMiddleware, async (c) => {
 
 // ─── Feature 10: AI Meeting Assistant ───────────────────────────────
 
+const MEETING_MINUTE_TEMPLATES: Record<string, string> = {
+  general: `You are a professional minutes secretary for the Government of Ghana. Generate formal meeting minutes from the following transcript.
+
+Format the minutes as follows:
+1. MEETING TITLE
+2. DATE AND TIME
+3. ATTENDEES (extract from transcript if mentioned)
+4. AGENDA ITEMS
+5. DISCUSSIONS (summarise key points per agenda item)
+6. DECISIONS MADE
+7. ACTION ITEMS (with responsible person and deadline if mentioned)
+8. NEXT MEETING
+9. ADJOURNMENT
+
+Use formal British English. Be thorough but concise.
+
+IMPORTANT: At the very end, add a section called "EXTRACTED_ACTIONS_JSON" with a JSON array of action items in this format:
+[{"action": "description", "assignee": "person or TBD", "deadline": "date or TBD"}]`,
+
+  departmental: `You are a professional minutes secretary for a Government of Ghana department meeting. Generate formal departmental meeting minutes from the following transcript.
+
+Format the minutes as follows:
+1. DEPARTMENT MEETING TITLE
+2. DATE, TIME AND VENUE
+3. CHAIRPERSON
+4. ATTENDEES AND APOLOGIES
+5. CONFIRMATION OF PREVIOUS MINUTES
+6. MATTERS ARISING
+7. DEPARTMENTAL REPORTS / KPIs
+8. DISCUSSIONS (summarise key points per agenda item)
+9. DECISIONS AND RESOLUTIONS
+10. ACTION ITEMS (with responsible officer and deadline)
+11. ANY OTHER BUSINESS (A.O.B.)
+12. DATE OF NEXT MEETING
+13. ADJOURNMENT
+
+Use formal British English. Include department-specific terminology where relevant.
+
+IMPORTANT: At the very end, add a section called "EXTRACTED_ACTIONS_JSON" with a JSON array of action items in this format:
+[{"action": "description", "assignee": "person or TBD", "deadline": "date or TBD"}]`,
+
+  board: `You are a professional minutes secretary for a Government of Ghana statutory board meeting. Generate formal board meeting minutes from the following transcript.
+
+Format the minutes as follows:
+1. BOARD MEETING TITLE
+2. DATE, TIME AND VENUE
+3. BOARD MEMBERS PRESENT (with titles)
+4. IN ATTENDANCE (non-board members)
+5. APOLOGIES
+6. QUORUM CONFIRMATION
+7. ADOPTION OF PREVIOUS MINUTES
+8. MATTERS ARISING FROM PREVIOUS MINUTES
+9. CHAIRPERSON'S REMARKS
+10. MANAGEMENT REPORT
+11. FINANCIAL REPORT
+12. AGENDA ITEMS AND DELIBERATIONS
+13. BOARD RESOLUTIONS (numbered, with mover and seconder)
+14. ACTION ITEMS (with responsible person, deadline, and priority)
+15. ANY OTHER BUSINESS
+16. DATE OF NEXT MEETING
+17. CLOSURE
+
+Use formal British English. Number all resolutions (e.g., BR/2026/001). Include quorum status.
+
+IMPORTANT: At the very end, add a section called "EXTRACTED_ACTIONS_JSON" with a JSON array of action items in this format:
+[{"action": "description", "assignee": "person or TBD", "deadline": "date or TBD"}]`,
+
+  management_committee: `You are a professional minutes secretary for a Government of Ghana management committee meeting. Generate formal management committee minutes from the following transcript.
+
+Format the minutes as follows:
+1. MANAGEMENT COMMITTEE MEETING
+2. DATE, TIME AND VENUE
+3. MEMBERS PRESENT (with designations)
+4. APOLOGIES
+5. OPENING / CALL TO ORDER
+6. REVIEW OF PREVIOUS ACTION ITEMS (status update per item)
+7. KEY PERFORMANCE INDICATORS (KPI) REVIEW
+8. BUDGET AND EXPENDITURE UPDATE
+9. AGENDA ITEMS AND DISCUSSIONS
+10. MANAGEMENT DECISIONS
+11. NEW ACTION ITEMS (with owner, deadline, and KPI linkage)
+12. RISK ITEMS / ESCALATIONS
+13. ANY OTHER BUSINESS
+14. NEXT MEETING DATE
+15. ADJOURNMENT
+
+Use formal British English. Link action items to strategic objectives where possible.
+
+IMPORTANT: At the very end, add a section called "EXTRACTED_ACTIONS_JSON" with a JSON array of action items in this format:
+[{"action": "description", "assignee": "person or TBD", "deadline": "date or TBD"}]`,
+
+  cabinet_sub_committee: `You are a professional minutes secretary for a Government of Ghana cabinet sub-committee meeting. Generate formal cabinet sub-committee minutes from the following transcript.
+
+Format the minutes as follows:
+1. CABINET SUB-COMMITTEE ON [TOPIC]
+2. DATE, TIME AND VENUE
+3. MEMBERS PRESENT (Ministers / Deputy Ministers with portfolios)
+4. IN ATTENDANCE (Technical advisors, Permanent Secretaries)
+5. APOLOGIES
+6. OPENING REMARKS BY CHAIRPERSON
+7. REVIEW OF PREVIOUS DECISIONS AND IMPLEMENTATION STATUS
+8. POLICY DELIBERATIONS (per agenda item)
+9. CABINET SUB-COMMITTEE RECOMMENDATIONS (numbered, to be forwarded to Cabinet)
+10. DIRECTIVES TO MINISTRIES/AGENCIES (with responsible MDAs and timelines)
+11. CONFIDENTIAL MATTERS (if any, flagged appropriately)
+12. ANY OTHER BUSINESS
+13. DATE OF NEXT MEETING
+14. CLOSURE
+
+Use formal British English. Classify recommendations by urgency. Reference relevant policy frameworks.
+
+IMPORTANT: At the very end, add a section called "EXTRACTED_ACTIONS_JSON" with a JSON array of action items in this format:
+[{"action": "description", "assignee": "person or TBD", "deadline": "date or TBD"}]`,
+};
+
+// Shared transcription helper
+async function transcribeMeetingAudio(ai: Ai, audioBytes: ArrayBuffer): Promise<string> {
+  const transcriptResult = await ai.run("@cf/openai/whisper" as any, {
+    audio: [...new Uint8Array(audioBytes)],
+  });
+  return (transcriptResult as any).text || "";
+}
+
 app.post("/api/meetings/upload", authMiddleware, async (c) => {
   const userId = c.get("userId");
 
@@ -7647,10 +7825,13 @@ app.post("/api/meetings/upload", authMiddleware, async (c) => {
   if (!audio) return c.json({ error: "Audio file is required" }, 400);
   if (audio.size > 25 * 1024 * 1024) return c.json({ error: "Audio must be under 25MB" }, 400);
 
+  const meetingType = (formData.get("meetingType") as string) || "general";
+
+  await ensurePhase7Tables(c.env.DB);
   const meetingId = generateId();
   await c.env.DB.prepare(
-    "INSERT INTO meetings (id, user_id, title) VALUES (?, ?, ?)"
-  ).bind(meetingId, userId, title).run();
+    "INSERT INTO meetings (id, user_id, title, meeting_type) VALUES (?, ?, ?, ?)"
+  ).bind(meetingId, userId, title, meetingType).run();
 
   // Audit trail: log meeting transcription (non-blocking)
   c.executionCtx.waitUntil(logUserAudit(c, "meeting_transcribe", title, "@cf/openai/whisper"));
@@ -7658,10 +7839,7 @@ app.post("/api/meetings/upload", authMiddleware, async (c) => {
   // Transcribe with Whisper
   try {
     const audioBytes = await audio.arrayBuffer();
-    const transcriptResult = await c.env.AI.run("@cf/openai/whisper" as any, {
-      audio: [...new Uint8Array(audioBytes)],
-    });
-    const transcript = (transcriptResult as any).text || "";
+    const transcript = await transcribeMeetingAudio(c.env.AI, audioBytes);
 
     await c.env.DB.prepare(
       "UPDATE meetings SET transcript = ?, status = 'transcribed' WHERE id = ?"
@@ -7683,54 +7861,65 @@ app.post("/api/meetings/:id/minutes", authMiddleware, async (c) => {
 
   const meeting = await c.env.DB.prepare(
     "SELECT * FROM meetings WHERE id = ? AND user_id = ?"
-  ).bind(meetingId, userId).first<{ transcript: string; title: string }>();
+  ).bind(meetingId, userId).first<{ transcript: string; title: string; meeting_type: string }>();
   if (!meeting) return c.json({ error: "Meeting not found" }, 404);
   if (!meeting.transcript) return c.json({ error: "No transcript available" }, 400);
+
+  let body: { meetingType?: string } = {};
+  try { body = await c.req.json(); } catch {}
+  const meetingType = body.meetingType || meeting.meeting_type || "general";
+  const systemPrompt = MEETING_MINUTE_TEMPLATES[meetingType] || MEETING_MINUTE_TEMPLATES.general;
 
   try {
     const minutesResult = await c.env.AI.run("@cf/openai/gpt-oss-20b" as any, {
       messages: [
-        { role: "system", content: `You are a professional minutes secretary for the Government of Ghana. Generate formal meeting minutes from the following transcript.
-
-Format the minutes as follows:
-1. MEETING TITLE
-2. DATE AND TIME
-3. ATTENDEES (extract from transcript if mentioned)
-4. AGENDA ITEMS
-5. DISCUSSIONS (summarise key points per agenda item)
-6. DECISIONS MADE
-7. ACTION ITEMS (with responsible person and deadline if mentioned)
-8. NEXT MEETING
-9. ADJOURNMENT
-
-Use formal British English. Be thorough but concise.` },
+        { role: "system", content: systemPrompt },
         { role: "user", content: `Meeting: ${meeting.title}\n\nTranscript:\n${meeting.transcript.substring(0, 12000)}` },
       ],
       max_tokens: 4096,
     });
-    const minutes = (minutesResult as any).response || "";
+    let minutesRaw = (minutesResult as any).response || "";
 
-    // Extract action items
-    const actionsResult = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as any, {
-      messages: [
-        { role: "system", content: 'Extract all action items from these meeting minutes. Return a JSON array: [{"action": "description", "assignee": "person", "deadline": "date or TBD"}]. Return ONLY the JSON array.' },
-        { role: "user", content: minutes },
-      ],
-      max_tokens: 1024,
-    });
-
+    // Extract action items from embedded JSON section
     let actionItems: any[] = [];
-    try {
-      const aiText = (actionsResult as any).response || "[]";
-      const match = aiText.match(/\[[\s\S]*\]/);
-      actionItems = match ? JSON.parse(match[0]) : [];
-    } catch {}
+    const jsonSectionMatch = minutesRaw.match(/EXTRACTED_ACTIONS_JSON[\s\S]*?(\[[\s\S]*?\])/);
+    if (jsonSectionMatch) {
+      try { actionItems = JSON.parse(jsonSectionMatch[1]); } catch {}
+      // Remove the JSON section from the displayed minutes
+      minutesRaw = minutesRaw.replace(/\n*EXTRACTED_ACTIONS_JSON[\s\S]*$/, "").trim();
+    }
+
+    // Fallback: separate AI call to extract action items if none found
+    if (actionItems.length === 0) {
+      try {
+        const actionsResult = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct-fast" as any, {
+          messages: [
+            { role: "system", content: 'Extract all action items from these meeting minutes. Return a JSON array: [{"action": "description", "assignee": "person", "deadline": "date or TBD"}]. Return ONLY the JSON array.' },
+            { role: "user", content: minutesRaw },
+          ],
+          max_tokens: 1024,
+        });
+        const aiText = (actionsResult as any).response || "[]";
+        const match = aiText.match(/\[[\s\S]*\]/);
+        actionItems = match ? JSON.parse(match[0]) : [];
+      } catch {}
+    }
+
+    // Insert action items into meeting_action_items table
+    await ensurePhase7Tables(c.env.DB);
+    for (const item of actionItems) {
+      if (!item.action) continue;
+      const itemId = generateId();
+      await c.env.DB.prepare(
+        "INSERT OR IGNORE INTO meeting_action_items (id, meeting_id, user_id, action, assignee, deadline) VALUES (?, ?, ?, ?, ?, ?)"
+      ).bind(itemId, meetingId, userId, item.action, item.assignee || "", item.deadline || null).run();
+    }
 
     await c.env.DB.prepare(
-      "UPDATE meetings SET minutes = ?, action_items = ?, status = 'completed' WHERE id = ?"
-    ).bind(minutes, JSON.stringify(actionItems), meetingId).run();
+      "UPDATE meetings SET minutes = ?, action_items = ?, meeting_type = ?, status = 'completed' WHERE id = ?"
+    ).bind(minutesRaw, JSON.stringify(actionItems), meetingType, meetingId).run();
 
-    return c.json({ minutes, actionItems, status: "completed" });
+    return c.json({ minutes: minutesRaw, actionItems, status: "completed" });
   } catch {
     return c.json({ error: "Minutes generation failed" }, 500);
   }
@@ -7759,6 +7948,151 @@ app.delete("/api/meetings/:id", authMiddleware, async (c) => {
   const id = c.req.param("id");
   await c.env.DB.prepare("DELETE FROM meetings WHERE id = ? AND user_id = ?").bind(id, userId).run();
   return c.json({ success: true });
+});
+
+// ─── Phase 7: Meeting Recording (in-browser) ────────────────────────
+
+app.post("/api/meetings/record", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+
+  // Tier gate: Professional+ (honors trial)
+  const user = await c.env.DB.prepare("SELECT tier, trial_expires_at FROM users WHERE id = ?")
+    .bind(userId).first<{ tier: string; trial_expires_at: string | null }>();
+  let meetingTier = user?.tier || "free";
+  if (meetingTier === "free" && user?.trial_expires_at && new Date(user.trial_expires_at + "Z") > new Date()) {
+    meetingTier = "professional";
+  }
+  if (meetingTier === "free") {
+    return c.json({ error: "Meeting Assistant requires a Professional plan or above.", code: "TIER_REQUIRED" }, 403);
+  }
+
+  const formData = await c.req.formData();
+  const audio = formData.get("audio") as File | null;
+  const title = (formData.get("title") as string) || "Recording " + new Date().toISOString().split("T")[0];
+  const meetingType = (formData.get("meetingType") as string) || "general";
+
+  if (!audio) return c.json({ error: "Audio recording is required" }, 400);
+  if (audio.size > 25 * 1024 * 1024) return c.json({ error: "Recording must be under 25MB" }, 400);
+
+  await ensurePhase7Tables(c.env.DB);
+  const meetingId = generateId();
+  await c.env.DB.prepare(
+    "INSERT INTO meetings (id, user_id, title, meeting_type) VALUES (?, ?, ?, ?)"
+  ).bind(meetingId, userId, title, meetingType).run();
+
+  c.executionCtx.waitUntil(logUserAudit(c, "meeting_record", title, "@cf/openai/whisper"));
+
+  try {
+    const audioBytes = await audio.arrayBuffer();
+    const transcript = await transcribeMeetingAudio(c.env.AI, audioBytes);
+
+    await c.env.DB.prepare(
+      "UPDATE meetings SET transcript = ?, status = 'transcribed' WHERE id = ?"
+    ).bind(transcript, meetingId).run();
+
+    c.executionCtx.waitUntil(trackProductivity(c, "meeting"));
+    return c.json({ meetingId, transcript, status: "transcribed" });
+  } catch {
+    await c.env.DB.prepare("UPDATE meetings SET status = 'failed' WHERE id = ?").bind(meetingId).run();
+    return c.json({ error: "Transcription failed. Please try a different recording." }, 500);
+  }
+});
+
+// ─── Phase 7: Meeting Action Items ──────────────────────────────────
+
+app.get("/api/meetings/action-items", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const statusFilter = c.req.query("status");
+
+  await ensurePhase7Tables(c.env.DB);
+
+  let sql = `SELECT ai.*, m.title as meeting_title FROM meeting_action_items ai
+    JOIN meetings m ON m.id = ai.meeting_id
+    WHERE ai.user_id = ?`;
+  const params: string[] = [userId];
+
+  if (statusFilter && ["pending", "in_progress", "done"].includes(statusFilter)) {
+    sql += " AND ai.status = ?";
+    params.push(statusFilter);
+  }
+
+  sql += " ORDER BY ai.created_at DESC LIMIT 100";
+
+  const { results } = await c.env.DB.prepare(sql).bind(...params).all();
+  return c.json({ actionItems: results || [] });
+});
+
+app.put("/api/meetings/:id/action-items/:itemId", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const meetingId = c.req.param("id");
+  const itemId = c.req.param("itemId");
+  const { status } = await c.req.json();
+
+  if (!status || !["pending", "in_progress", "done"].includes(status)) {
+    return c.json({ error: "Invalid status. Must be pending, in_progress, or done" }, 400);
+  }
+
+  await ensurePhase7Tables(c.env.DB);
+
+  const item = await c.env.DB.prepare(
+    "SELECT id FROM meeting_action_items WHERE id = ? AND meeting_id = ? AND user_id = ?"
+  ).bind(itemId, meetingId, userId).first();
+  if (!item) return c.json({ error: "Action item not found" }, 404);
+
+  const completedAt = status === "done" ? new Date().toISOString().replace("T", " ").split(".")[0] : null;
+  await c.env.DB.prepare(
+    "UPDATE meeting_action_items SET status = ?, completed_at = ? WHERE id = ?"
+  ).bind(status, completedAt, itemId).run();
+
+  return c.json({ success: true });
+});
+
+// ─── Phase 7: Meeting Search ────────────────────────────────────────
+
+app.get("/api/meetings/search", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const q = (c.req.query("q") || "").trim();
+
+  if (q.length < 2) return c.json({ error: "Search query must be at least 2 characters" }, 400);
+
+  const pattern = `%${q}%`;
+  const { results } = await c.env.DB.prepare(
+    `SELECT id, title, status, meeting_type, created_at,
+     CASE WHEN title LIKE ? THEN 'title' WHEN transcript LIKE ? THEN 'transcript' ELSE 'minutes' END as match_field
+     FROM meetings WHERE user_id = ? AND (title LIKE ? OR transcript LIKE ? OR minutes LIKE ?)
+     ORDER BY created_at DESC LIMIT 20`
+  ).bind(pattern, pattern, userId, pattern, pattern, pattern).all();
+
+  return c.json({ results: results || [] });
+});
+
+// ─── Phase 7: Meeting Minutes Translation ───────────────────────────
+
+app.post("/api/meetings/:id/translate", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const meetingId = c.req.param("id");
+  const { targetLang } = await c.req.json();
+
+  if (!targetLang || !SUPPORTED_LANGUAGES[targetLang] || targetLang === "en") {
+    return c.json({ error: "Invalid or unsupported target language" }, 400);
+  }
+
+  const meeting = await c.env.DB.prepare(
+    "SELECT minutes FROM meetings WHERE id = ? AND user_id = ?"
+  ).bind(meetingId, userId).first<{ minutes: string }>();
+  if (!meeting) return c.json({ error: "Meeting not found" }, 404);
+  if (!meeting.minutes) return c.json({ error: "No minutes to translate" }, 400);
+
+  try {
+    const translated = await translateText(c.env.AI, meeting.minutes, "en", targetLang);
+    return c.json({
+      translated,
+      language: targetLang,
+      languageName: SUPPORTED_LANGUAGES[targetLang].name,
+    });
+  } catch {
+    return c.json({ error: "Translation failed" }, 500);
+  }
 });
 
 // ─── Feature 11: Collaborative Spaces ───────────────────────────────

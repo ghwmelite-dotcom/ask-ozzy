@@ -1427,7 +1427,16 @@ function renderMessages() {
       <div class="message-body">
         <div class="message-sender">${msg.role === "user" ? "You" : "AskOzzy"}</div>
         ${msg.imageUrl ? `<div class="chat-image"><img src="${escapeHtml(msg.imageUrl || '')}" alt="Uploaded image" /></div>` : ""}
-        <div class="message-content">${msg.role === "user" ? escapeHtml(msg.content) : renderMarkdownWithCitations(msg.content, msg.webSources)}</div>
+        <div class="message-content" id="msg-content-${i}">${msg.role === "user" ? escapeHtml(msg.content) : renderMarkdownWithCitations(msg.content, msg.webSources)}</div>
+        ${msg.translatedContent ? `
+        <div class="message-translation-toggle">
+          <button class="translation-toggle-btn" onclick="toggleTranslation(${i})" id="translation-toggle-${i}">
+            Show ${escapeHtml(msg.translationLangName || 'Translation')}
+          </button>
+        </div>
+        <div class="message-translated" id="msg-translated-${i}" style="display:none;">
+          ${renderMarkdown(msg.translatedContent)}
+        </div>` : ""}
         ${msg.webSources && msg.webSources.length > 0 ? renderSourcesFooter(msg.webSources) : ""}
         <div class="msg-actions">
           ${msg.role === "assistant" ? `<button class="msg-action-btn" data-speak="${i}" onclick="speakMessage(${i})" title="Listen to response"><span class="msg-action-icon">&#x1F50A;</span> Speak</button>` : ""}
@@ -1491,6 +1500,25 @@ function renderSourcesFooter(sources) {
       }).join("")}
     </div>
   </div>`;
+}
+
+function toggleTranslation(index) {
+  const contentEl = document.getElementById('msg-content-' + index);
+  const translatedEl = document.getElementById('msg-translated-' + index);
+  const toggleBtn = document.getElementById('translation-toggle-' + index);
+  const msg = state.messages[index];
+  if (!contentEl || !translatedEl || !msg) return;
+
+  const isShowingTranslation = translatedEl.style.display !== 'none';
+  if (isShowingTranslation) {
+    contentEl.style.display = '';
+    translatedEl.style.display = 'none';
+    toggleBtn.textContent = 'Show ' + (msg.translationLangName || 'Translation');
+  } else {
+    contentEl.style.display = 'none';
+    translatedEl.style.display = '';
+    toggleBtn.textContent = 'Show English';
+  }
 }
 
 function getUserInitials() {
@@ -1635,6 +1663,21 @@ async function sendMessage() {
               if (Array.isArray(suggestions) && suggestions.length > 0) {
                 renderFollowUpSuggestions(suggestions);
               }
+              currentEvent = "";
+              continue;
+            }
+            // Phase 7: Handle translation event from SSE
+            if (currentEvent === "translation") {
+              try {
+                const translationData = JSON.parse(line.slice(6));
+                const lastMsg = state.messages[state.messages.length - 1];
+                if (lastMsg && lastMsg.role === "assistant") {
+                  lastMsg.translatedContent = translationData.text;
+                  lastMsg.translationLang = translationData.language;
+                  lastMsg.translationLangName = translationData.languageName;
+                  renderMessages();
+                }
+              } catch {}
               currentEvent = "";
               continue;
             }
@@ -7564,6 +7607,28 @@ function openArtifactPanel(artifact) {
     contentEl.innerHTML = `<div class="artifact-document" contenteditable="true">${renderMarkdown(artifact.content)}</div>`;
   }
 
+  // Phase 7: Add meeting-specific buttons (translate, share to chat)
+  const actionsEl = panel.querySelector('.artifact-actions');
+  // Remove any previously added meeting buttons
+  actionsEl.querySelectorAll('.meeting-artifact-btn').forEach(b => b.remove());
+  if (artifact.meetingId) {
+    const shareBtn = document.createElement('button');
+    shareBtn.className = 'meeting-artifact-btn';
+    shareBtn.title = 'Share to Chat';
+    shareBtn.textContent = '\uD83D\uDCAC';
+    shareBtn.onclick = () => shareMinutesToChat();
+    actionsEl.insertBefore(shareBtn, actionsEl.firstChild);
+
+    if (state.language && state.language !== 'en') {
+      const translateBtn = document.createElement('button');
+      translateBtn.className = 'meeting-artifact-btn';
+      translateBtn.title = 'Translate Minutes';
+      translateBtn.textContent = '\uD83C\uDF10';
+      translateBtn.onclick = () => translateMeetingMinutes(artifact.meetingId);
+      actionsEl.insertBefore(translateBtn, actionsEl.firstChild);
+    }
+  }
+
   state.currentArtifact = artifact;
   panel.classList.add('open');
   document.querySelector('.main-content').classList.add('has-artifact');
@@ -7899,6 +7964,13 @@ async function submitWorkflowStep(workflowId, stepIndex, name) {
 
 // ─── Feature 10: AI Meeting Assistant ───────────────────────────────
 
+// Phase 7: Meeting state
+let _meetingRecorder = null;
+let _meetingRecordChunks = [];
+let _meetingRecordTimerInterval = null;
+let _meetingRecordSeconds = 0;
+let _meetingSearchTimeout = null;
+
 function openMeetingAssistant() {
   requireAuth(async () => {
     let modal = document.getElementById('meeting-modal');
@@ -7910,46 +7982,312 @@ function openMeetingAssistant() {
       document.body.appendChild(modal);
     }
 
-    modal.innerHTML = `<div class="modal" style="max-width:700px;">
+    const hasMediaRecorder = typeof MediaRecorder !== 'undefined';
+
+    modal.innerHTML = `<div class="modal" style="max-width:750px;">
       <div class="modal-header">
         <h3>&#x1F3A4; Meeting Assistant</h3>
         <button class="modal-close" onclick="document.getElementById('meeting-modal').classList.remove('active')">&#x2715;</button>
       </div>
+      <div class="meeting-tabs">
+        ${hasMediaRecorder ? '<button class="meeting-tab active" onclick="switchMeetingTab(\'record\')">Record</button>' : ''}
+        <button class="meeting-tab ${hasMediaRecorder ? '' : 'active'}" onclick="switchMeetingTab('upload')">Upload</button>
+        <button class="meeting-tab" onclick="switchMeetingTab('actions')">Action Items</button>
+        <button class="meeting-tab" onclick="switchMeetingTab('search')">Search</button>
+      </div>
       <div class="modal-body" id="meeting-modal-body" style="padding:20px;"></div>
     </div>`;
 
-    // Load meetings
-    let meetingsHtml = `<div class="meeting-upload-area" id="meeting-upload-area">
+    modal.classList.add('active');
+    switchMeetingTab(hasMediaRecorder ? 'record' : 'upload');
+  });
+}
+
+function switchMeetingTab(tab) {
+  document.querySelectorAll('.meeting-tab').forEach(t => t.classList.remove('active'));
+  const tabs = document.querySelectorAll('.meeting-tab');
+  for (const t of tabs) {
+    if (t.textContent.trim().toLowerCase() === tab || (tab === 'actions' && t.textContent.trim() === 'Action Items')) {
+      t.classList.add('active');
+    }
+  }
+  const body = document.getElementById('meeting-modal-body');
+  if (tab === 'record') renderMeetingRecordTab(body);
+  else if (tab === 'upload') renderMeetingUploadTab(body);
+  else if (tab === 'actions') loadMeetingActionItems(body);
+  else if (tab === 'search') focusMeetingSearch(body);
+}
+
+function getMeetingTypeSelector(id) {
+  return `<div style="margin-bottom:14px;">
+    <label style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:4px;">Meeting Type</label>
+    <select id="${id}" style="width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:1px solid var(--border-color);background:var(--bg-primary);color:var(--text-primary);font-size:13px;">
+      <option value="general">General Meeting</option>
+      <option value="departmental">Departmental Meeting</option>
+      <option value="board">Board Meeting</option>
+      <option value="management_committee">Management Committee</option>
+      <option value="cabinet_sub_committee">Cabinet Sub-Committee</option>
+    </select>
+  </div>`;
+}
+
+function renderMeetingRecordTab(body) {
+  body.innerHTML = `
+    ${getMeetingTypeSelector('meeting-record-type')}
+    <div class="meeting-record-area" id="meeting-record-area">
+      <div style="text-align:center;padding:30px;">
+        <button class="meeting-record-btn" id="meeting-record-btn" onclick="startMeetingRecording()">
+          <span style="font-size:24px;">&#x1F3A4;</span>
+        </button>
+        <div class="meeting-record-timer" id="meeting-record-timer">00:00</div>
+        <p style="font-size:13px;color:var(--text-muted);margin-top:8px;">Tap to start recording</p>
+      </div>
+    </div>
+    <div id="meeting-record-result"></div>
+    <div id="meeting-list-area" style="margin-top:20px;"></div>`;
+  loadMeetingList();
+}
+
+function renderMeetingUploadTab(body) {
+  body.innerHTML = `
+    ${getMeetingTypeSelector('meeting-upload-type')}
+    <div class="meeting-upload-area" id="meeting-upload-area">
       <div style="text-align:center;padding:30px 20px;border:2px dashed var(--border-color);border-radius:var(--radius);cursor:pointer;" onclick="document.getElementById('meeting-audio-input').click()">
         <div style="font-size:40px;margin-bottom:8px;">&#x1F399;&#xFE0F;</div>
         <p style="font-size:14px;color:var(--text-primary);font-weight:600;">Upload Meeting Recording</p>
         <p style="font-size:12px;color:var(--text-muted);">MP3, WAV, M4A, OGG — Max 25MB</p>
         <input type="file" id="meeting-audio-input" accept="audio/*" style="display:none;" onchange="uploadMeetingAudio(this.files[0])" />
       </div>
-    </div>`;
+    </div>
+    <div id="meeting-list-area" style="margin-top:20px;"></div>`;
+  loadMeetingList();
+}
 
-    meetingsHtml += '<div id="meeting-list-area" style="margin-top:20px;"></div>';
-    document.getElementById('meeting-modal-body').innerHTML = meetingsHtml;
-    modal.classList.add('active');
-
-    // Load existing meetings
-    try {
-      const res = await fetch(API + '/api/meetings', { headers: authHeaders() });
-      const { meetings } = await res.json();
-      if (meetings.length > 0) {
-        let listHtml = '<h4 style="font-size:14px;margin:0 0 12px;">Previous Meetings</h4>';
-        for (const m of meetings) {
-          const icon = m.status === 'completed' ? '&#x2705;' : m.status === 'transcribed' ? '&#x1F4DD;' : '&#x23F3;';
-          listHtml += `<div class="meeting-item" onclick="openMeetingDetail('${m.id}')">
-            <span>${icon}</span>
-            <span class="meeting-item-title">${escapeHtml(m.title)}</span>
-            <span class="meeting-item-date">${new Date(m.created_at).toLocaleDateString()}</span>
-          </div>`;
-        }
-        document.getElementById('meeting-list-area').innerHTML = listHtml;
+async function loadMeetingList() {
+  try {
+    const res = await fetch(API + '/api/meetings', { headers: authHeaders() });
+    const { meetings } = await res.json();
+    const area = document.getElementById('meeting-list-area');
+    if (!area) return;
+    if (meetings.length > 0) {
+      let listHtml = '<h4 style="font-size:14px;margin:0 0 12px;">Previous Meetings</h4>';
+      for (const m of meetings) {
+        const icon = m.status === 'completed' ? '&#x2705;' : m.status === 'transcribed' ? '&#x1F4DD;' : '&#x23F3;';
+        listHtml += `<div class="meeting-item" onclick="openMeetingDetail('${m.id}')">
+          <span>${icon}</span>
+          <span class="meeting-item-title">${escapeHtml(m.title)}</span>
+          <span class="meeting-item-date">${new Date(m.created_at).toLocaleDateString()}</span>
+        </div>`;
       }
-    } catch {}
-  });
+      area.innerHTML = listHtml;
+    }
+  } catch {}
+}
+
+async function startMeetingRecording() {
+  if (_meetingRecorder && _meetingRecorder.state === 'recording') {
+    stopMeetingRecording();
+    return;
+  }
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    _meetingRecordChunks = [];
+    _meetingRecorder = new MediaRecorder(stream, { mimeType: MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/ogg' });
+    _meetingRecorder.ondataavailable = (e) => { if (e.data.size > 0) _meetingRecordChunks.push(e.data); };
+    _meetingRecorder.onstop = () => { stream.getTracks().forEach(t => t.stop()); };
+    _meetingRecorder.start(1000);
+    updateMeetingRecordUI(true);
+    startMeetingRecordTimer();
+  } catch (err) {
+    const area = document.getElementById('meeting-record-area');
+    if (area) area.innerHTML = '<div style="padding:20px;text-align:center;color:var(--red-error-text);">Microphone access denied. Please allow microphone access and try again.</div>';
+  }
+}
+
+function stopMeetingRecording() {
+  if (_meetingRecorder && _meetingRecorder.state === 'recording') {
+    _meetingRecorder.stop();
+  }
+  stopMeetingRecordTimer();
+  updateMeetingRecordUI(false);
+
+  const resultArea = document.getElementById('meeting-record-result');
+  if (resultArea && _meetingRecordChunks.length > 0) {
+    resultArea.innerHTML = `<div style="margin-top:12px;">
+      <input type="text" id="meeting-record-title" placeholder="Meeting title" style="width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:1px solid var(--border-color);background:var(--bg-primary);color:var(--text-primary);font-size:13px;margin-bottom:8px;" />
+      <button class="btn-auth" onclick="submitMeetingRecording()" style="width:100%;">Submit Recording for Transcription</button>
+    </div>`;
+  }
+}
+
+async function submitMeetingRecording() {
+  if (_meetingRecordChunks.length === 0) return;
+  const blob = new Blob(_meetingRecordChunks, { type: _meetingRecorder?.mimeType || 'audio/webm' });
+  if (blob.size > 25 * 1024 * 1024) { showSyncToast('Recording too large (max 25MB)', 3000); return; }
+
+  const title = (document.getElementById('meeting-record-title')?.value || '').trim() || 'Recording ' + new Date().toISOString().split('T')[0];
+  const meetingType = document.getElementById('meeting-record-type')?.value || 'general';
+
+  const resultArea = document.getElementById('meeting-record-result');
+  if (resultArea) resultArea.innerHTML = '<div style="text-align:center;padding:20px;"><div class="typing-indicator"><span></span><span></span><span></span></div><p style="margin-top:12px;color:var(--text-muted);">Transcribing recording...</p></div>';
+
+  try {
+    const formData = new FormData();
+    formData.append('audio', blob, 'recording.webm');
+    formData.append('title', title);
+    formData.append('meetingType', meetingType);
+
+    const res = await fetch(API + '/api/meetings/record', {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + state.token },
+      body: formData,
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      if (err.code === 'TIER_REQUIRED') {
+        resultArea.innerHTML = '<div style="text-align:center;padding:20px;"><p style="color:var(--text-secondary);">Meeting Assistant requires a Professional plan.</p><button class="btn-auth" onclick="openPricingModal()" style="margin-top:12px;">View Plans</button></div>';
+        return;
+      }
+      throw new Error(err.error);
+    }
+
+    const data = await res.json();
+    resultArea.innerHTML = `<div style="padding:16px;background:var(--bg-tertiary);border-radius:var(--radius);margin-top:12px;">
+      <h4 style="margin:0 0 8px;">&#x2705; Transcription Complete</h4>
+      <div style="max-height:200px;overflow-y:auto;font-size:13px;color:var(--text-secondary);line-height:1.6;padding:12px;background:var(--bg-primary);border-radius:var(--radius-sm);">${escapeHtml(data.transcript.substring(0, 2000))}${data.transcript.length > 2000 ? '...' : ''}</div>
+      <button class="btn-auth" onclick="generateMinutes('${data.meetingId}')" style="margin-top:12px;width:100%;">Generate Meeting Minutes</button>
+    </div>`;
+    _meetingRecordChunks = [];
+  } catch (err) {
+    if (resultArea) resultArea.innerHTML = `<div style="color:var(--red-error-text);padding:20px;text-align:center;">${escapeHtml(err.message)}</div>`;
+  }
+}
+
+function updateMeetingRecordUI(isRecording) {
+  const area = document.getElementById('meeting-record-area');
+  const btn = document.getElementById('meeting-record-btn');
+  if (isRecording) {
+    if (area) area.classList.add('recording');
+    if (btn) btn.innerHTML = '<span style="font-size:24px;">&#x23F9;</span>';
+    const hint = area?.querySelector('p');
+    if (hint) hint.textContent = 'Recording... Tap to stop';
+  } else {
+    if (area) area.classList.remove('recording');
+    if (btn) btn.innerHTML = '<span style="font-size:24px;">&#x1F3A4;</span>';
+    const hint = area?.querySelector('p');
+    if (hint) hint.textContent = 'Tap to start recording';
+  }
+}
+
+function startMeetingRecordTimer() {
+  _meetingRecordSeconds = 0;
+  const timerEl = document.getElementById('meeting-record-timer');
+  _meetingRecordTimerInterval = setInterval(() => {
+    _meetingRecordSeconds++;
+    const mins = String(Math.floor(_meetingRecordSeconds / 60)).padStart(2, '0');
+    const secs = String(_meetingRecordSeconds % 60).padStart(2, '0');
+    if (timerEl) timerEl.textContent = mins + ':' + secs;
+  }, 1000);
+}
+
+function stopMeetingRecordTimer() {
+  if (_meetingRecordTimerInterval) { clearInterval(_meetingRecordTimerInterval); _meetingRecordTimerInterval = null; }
+}
+
+async function loadMeetingActionItems(body) {
+  body.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">Loading action items...</div>';
+  try {
+    const res = await fetch(API + '/api/meetings/action-items', { headers: authHeaders() });
+    const { actionItems } = await res.json();
+    if (!actionItems || actionItems.length === 0) {
+      body.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);"><p style="font-size:14px;">No action items yet.</p><p style="font-size:12px;">Generate meeting minutes to extract action items.</p></div>';
+      return;
+    }
+    let html = '<div class="action-items-list">';
+    for (const item of actionItems) {
+      const statusColor = item.status === 'done' ? 'var(--green-light, #006B3F)' : item.status === 'in_progress' ? 'var(--gold)' : 'var(--text-muted)';
+      html += `<div class="action-item-card">
+        <div class="action-item-header">
+          <span style="color:${statusColor};font-size:14px;">${item.status === 'done' ? '&#x2705;' : item.status === 'in_progress' ? '&#x1F504;' : '&#x23F3;'}</span>
+          <span style="flex:1;font-size:13px;color:var(--text-primary);">${escapeHtml(item.action)}</span>
+        </div>
+        <div class="action-item-meta">
+          <span>From: ${escapeHtml(item.meeting_title || 'Meeting')}</span>
+          ${item.assignee ? `<span>Assignee: ${escapeHtml(item.assignee)}</span>` : ''}
+          ${item.deadline ? `<span>Deadline: ${escapeHtml(item.deadline)}</span>` : ''}
+        </div>
+        <div class="action-item-actions">
+          <select onchange="updateActionItemStatus('${item.meeting_id}','${item.id}',this.value)" style="padding:4px 8px;border-radius:var(--radius-sm);border:1px solid var(--border-color);background:var(--bg-primary);color:var(--text-primary);font-size:12px;">
+            <option value="pending" ${item.status === 'pending' ? 'selected' : ''}>Pending</option>
+            <option value="in_progress" ${item.status === 'in_progress' ? 'selected' : ''}>In Progress</option>
+            <option value="done" ${item.status === 'done' ? 'selected' : ''}>Done</option>
+          </select>
+        </div>
+      </div>`;
+    }
+    html += '</div>';
+    body.innerHTML = html;
+  } catch {
+    body.innerHTML = '<div style="color:var(--red-error-text);padding:20px;text-align:center;">Failed to load action items.</div>';
+  }
+}
+
+async function updateActionItemStatus(meetingId, itemId, status) {
+  try {
+    await fetch(API + '/api/meetings/' + meetingId + '/action-items/' + itemId, {
+      method: 'PUT',
+      headers: authHeaders(),
+      body: JSON.stringify({ status }),
+    });
+    // Refresh action items
+    const body = document.getElementById('meeting-modal-body');
+    if (body) loadMeetingActionItems(body);
+  } catch { showSyncToast('Failed to update action item', 2000); }
+}
+
+function focusMeetingSearch(body) {
+  body.innerHTML = `<div style="margin-bottom:16px;">
+    <input type="text" id="meeting-search-input" placeholder="Search meetings by title, transcript or minutes..." oninput="debounceMeetingSearch()" style="width:100%;padding:10px 14px;border-radius:var(--radius-sm);border:1px solid var(--border-color);background:var(--bg-primary);color:var(--text-primary);font-size:13px;" />
+  </div>
+  <div id="meeting-search-results" style="color:var(--text-muted);text-align:center;padding:20px;font-size:13px;">Type at least 2 characters to search</div>`;
+  setTimeout(() => { const input = document.getElementById('meeting-search-input'); if (input) input.focus(); }, 100);
+}
+
+function debounceMeetingSearch() {
+  if (_meetingSearchTimeout) clearTimeout(_meetingSearchTimeout);
+  _meetingSearchTimeout = setTimeout(executeMeetingSearch, 400);
+}
+
+async function executeMeetingSearch() {
+  const q = (document.getElementById('meeting-search-input')?.value || '').trim();
+  const resultsArea = document.getElementById('meeting-search-results');
+  if (!resultsArea) return;
+  if (q.length < 2) { resultsArea.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:20px;font-size:13px;">Type at least 2 characters to search</div>'; return; }
+
+  resultsArea.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:20px;">Searching...</div>';
+  try {
+    const res = await fetch(API + '/api/meetings/search?q=' + encodeURIComponent(q), { headers: authHeaders() });
+    const { results } = await res.json();
+    if (!results || results.length === 0) {
+      resultsArea.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:20px;">No meetings found.</div>';
+      return;
+    }
+    let html = '';
+    for (const r of results) {
+      const icon = r.status === 'completed' ? '&#x2705;' : r.status === 'transcribed' ? '&#x1F4DD;' : '&#x23F3;';
+      const badge = r.match_field !== 'title' ? `<span style="font-size:10px;background:var(--bg-hover);padding:2px 6px;border-radius:8px;color:var(--text-muted);">Match in ${r.match_field}</span>` : '';
+      html += `<div class="meeting-item" onclick="openMeetingDetail('${r.id}')">
+        <span>${icon}</span>
+        <span class="meeting-item-title">${escapeHtml(r.title)}</span>
+        ${badge}
+        <span class="meeting-item-date">${new Date(r.created_at).toLocaleDateString()}</span>
+      </div>`;
+    }
+    resultsArea.innerHTML = html;
+  } catch {
+    resultsArea.innerHTML = '<div style="color:var(--red-error-text);padding:20px;text-align:center;">Search failed.</div>';
+  }
 }
 
 async function uploadMeetingAudio(file) {
@@ -7962,9 +8300,11 @@ async function uploadMeetingAudio(file) {
   const title = prompt('Meeting title:', file.name.replace(/\.[^.]+$/, '')) || file.name;
 
   try {
+    const meetingType = document.getElementById('meeting-upload-type')?.value || 'general';
     const formData = new FormData();
     formData.append('audio', file);
     formData.append('title', title);
+    formData.append('meetingType', meetingType);
 
     const res = await fetch(API + '/api/meetings/upload', {
       method: 'POST',
@@ -7993,20 +8333,23 @@ async function uploadMeetingAudio(file) {
 }
 
 async function generateMinutes(meetingId) {
-  const area = document.getElementById('meeting-upload-area');
-  area.innerHTML = '<div style="text-align:center;padding:30px;"><div class="typing-indicator"><span></span><span></span><span></span></div><p style="margin-top:12px;color:var(--text-muted);">Generating minutes and extracting action items...</p></div>';
+  const area = document.getElementById('meeting-upload-area') || document.getElementById('meeting-record-result');
+  if (area) area.innerHTML = '<div style="text-align:center;padding:30px;"><div class="typing-indicator"><span></span><span></span><span></span></div><p style="margin-top:12px;color:var(--text-muted);">Generating minutes and extracting action items...</p></div>';
+
+  const meetingType = document.getElementById('meeting-record-type')?.value || document.getElementById('meeting-upload-type')?.value || 'general';
 
   try {
     const res = await fetch(API + '/api/meetings/' + meetingId + '/minutes', {
       method: 'POST',
       headers: authHeaders(),
+      body: JSON.stringify({ meetingType }),
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.error);
 
     // Show in artifact panel
     document.getElementById('meeting-modal').classList.remove('active');
-    const artifact = { type: 'document', title: 'Meeting Minutes', content: data.minutes };
+    const artifact = { type: 'document', title: 'Meeting Minutes', content: data.minutes, meetingId };
     openArtifactPanel(artifact);
 
     // Show action items as a toast
@@ -8032,10 +8375,11 @@ async function openMeetingDetail(meetingId) {
 
     if (meeting.minutes) {
       document.getElementById('meeting-modal').classList.remove('active');
-      const artifact = { type: 'document', title: meeting.title + ' — Minutes', content: meeting.minutes };
+      const artifact = { type: 'document', title: meeting.title + ' — Minutes', content: meeting.minutes, meetingId };
       openArtifactPanel(artifact);
     } else if (meeting.transcript) {
-      document.getElementById('meeting-upload-area').innerHTML = `
+      const area = document.getElementById('meeting-upload-area') || document.getElementById('meeting-record-result') || document.getElementById('meeting-modal-body');
+      if (area) area.innerHTML = `
         <div style="padding:16px;background:var(--bg-tertiary);border-radius:var(--radius);">
           <h4 style="margin:0 0 8px;">${escapeHtml(meeting.title)}</h4>
           <div style="max-height:200px;overflow-y:auto;font-size:13px;color:var(--text-secondary);line-height:1.6;padding:12px;background:var(--bg-primary);border-radius:var(--radius-sm);">${escapeHtml(meeting.transcript.substring(0, 2000))}</div>
@@ -8043,7 +8387,40 @@ async function openMeetingDetail(meetingId) {
         </div>`;
     }
   } catch {
-    alert('Failed to load meeting');
+    showSyncToast('Failed to load meeting', 2000);
+  }
+}
+
+async function shareMinutesToChat() {
+  const artifactContent = document.querySelector('.artifact-content');
+  if (!artifactContent) return;
+  const text = artifactContent.innerText || artifactContent.textContent || '';
+  if (!text.trim()) return;
+  const input = document.getElementById('chat-input');
+  if (input) {
+    input.value = 'Based on these meeting minutes, please summarise the key decisions:\n\n' + text.substring(0, 2000);
+    input.focus();
+  }
+}
+
+async function translateMeetingMinutes(meetingId) {
+  if (!meetingId || !state.language || state.language === 'en') {
+    showSyncToast('Set a non-English language first', 2000);
+    return;
+  }
+  showSyncToast('Translating minutes...', 3000);
+  try {
+    const res = await fetch(API + '/api/meetings/' + meetingId + '/translate', {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify({ targetLang: state.language }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    const artifact = { type: 'document', title: 'Translated Minutes (' + data.languageName + ')', content: data.translated };
+    openArtifactPanel(artifact);
+  } catch (err) {
+    showSyncToast(err.message || 'Translation failed', 3000);
   }
 }
 
