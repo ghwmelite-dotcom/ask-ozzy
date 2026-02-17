@@ -118,6 +118,7 @@ const state = {
   userType: null,
   docCredits: null,
   userProfile: null,
+  promptCourseProgress: null,
 };
 
 // ─── Growth System State ────────────────────────────────────────────
@@ -320,6 +321,7 @@ const GUIDE_TRY_IT_ACTIONS = {
   'as-pricing':   { label: 'View Plans \u2192', action: "closeGuide();openPricingModal();" },
   'ps-memory':    { label: 'Open Memory \u2192', action: "closeGuide();openMemoryModal();" },
   'fm-upload':    { label: 'Upload a File \u2192', action: "closeGuide();openFileUpload();" },
+  'lang-translate':{ label: 'Set Language \u2192', action: "closeGuide();document.querySelector('[data-action=\"language\"]')?.click();" },
 };
 
 const GUIDE_TIPS = [
@@ -339,6 +341,10 @@ const GUIDE_TIPS = [
   'Student users get up to 58% off on all paid plans \u2014 register as a Student to save!',
   'Your drafts are auto-saved. Close the app and your unsent message will be waiting when you return.',
   'Install AskOzzy as an app for the best experience \u2014 it works offline too!',
+  'Record meetings directly in your browser \u2014 no need to upload separate files!',
+  'Set your language to Twi, Ga, or Ewe and toggle between English and translated responses on every message.',
+  'Use the Action Items tab in Meeting Assistant to track follow-ups from all your meetings in one place.',
+  'Choose from 5 GoG meeting templates \u2014 Board and Cabinet formats include quorum, resolutions, and directives.',
 ];
 
 const GUIDE_SECTIONS = [
@@ -377,7 +383,7 @@ const GUIDE_SECTIONS = [
       { id: 'st-research', title: 'Deep Research Mode', tier: 'professional', description: 'AI-powered research that synthesizes information into structured reports with citations.', steps: ['Click the Research tool pill below the input area', 'Enter your research topic or question', 'AI generates a comprehensive report with sections', 'Review findings, sources, and recommendations'] },
       { id: 'st-analysis', title: 'Data Analysis', tier: 'professional', description: 'Upload spreadsheets or paste data for AI-powered analysis with charts and insights.', steps: ['Upload a CSV/Excel file or paste tabular data', 'Ask the AI to analyze trends, summarize, or visualize', 'Get charts, statistics, and actionable insights', 'Export results or continue the analysis conversation'] },
       { id: 'st-workflows', title: 'Workflow Wizard', tier: 'professional', description: 'Multi-step guided workflows for complex GoG processes like procurement, HR actions, and policy drafts.', steps: ['Click the Workflow tool pill', 'Select a workflow category (procurement, HR, policy, etc.)', 'Follow the step-by-step wizard with guided inputs', 'AI generates complete documents based on your inputs', 'Review, edit, and export the final output'] },
-      { id: 'st-meetings', title: 'Meeting Assistant', tier: 'professional', description: 'Generate agendas, take notes, and create minutes with AI assistance.', steps: ['Click the Meeting tool pill', 'Choose: create agenda, take notes, or generate minutes', 'Enter meeting details (participants, topics, decisions)', 'AI structures and formats everything professionally'] },
+      { id: 'st-meetings', title: 'Meeting Assistant', tier: 'professional', description: 'Record or upload meetings, generate professional GoG minutes with 5 format templates, track action items, and search past meetings.', steps: ['Click the Meeting tool pill to open the tabbed Meeting Assistant', 'Record tab: Tap the microphone to record live — a timer shows elapsed time; tap again to stop', 'Upload tab: Upload an MP3, WAV, M4A, or OGG file (max 25MB)', 'Select a meeting type: General, Departmental, Board, Management Committee, or Cabinet Sub-Committee', 'After transcription, click "Generate Meeting Minutes" — AI formats using the GoG template', 'Action Items tab: View all extracted action items with status dropdowns (Pending / In Progress / Done)', 'Search tab: Search across all your meeting titles, transcripts, and minutes', 'Minutes open in the artifact panel — download as DOCX, share to chat, or translate to a local language'] },
       { id: 'st-spaces', title: 'Collaborative Spaces', tier: 'professional', description: 'Shared workspaces where team members can collaborate on AI-powered projects together.', steps: ['Click "Spaces" in the sidebar', 'Create a new space with a name and description', 'Invite team members by email', 'All members can chat, share files, and collaborate in real-time'] },
       { id: 'st-websearch', title: 'Web Search', tier: 'professional', description: 'Enable real-time web search to ground AI responses with current information.', steps: ['Toggle the Web Search pill below the input area', 'Ask a question that needs up-to-date information', 'AI searches the web and cites sources in its response', 'Source links appear below the message for verification'] },
     ]
@@ -423,9 +429,10 @@ const GUIDE_SECTIONS = [
     id: 'languages',
     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
     title: 'Languages',
-    description: '7 Ghanaian and international languages with text-to-speech',
+    description: '7 Ghanaian and international languages with auto-translation and text-to-speech',
     features: [
-      { id: 'lang-multi', title: 'Multilingual Support', tier: 'free', description: 'Chat in English, Twi, Ga, Ewe, Dagbani, Hausa, or French. The interface and AI adapt to your language.', steps: ['Click the language selector (globe icon) in the input area', 'Choose from: English, Twi, Ga, Ewe, Dagbani, Hausa, French', 'The AI responds in your selected language', 'Interface labels also translate where available'] },
+      { id: 'lang-multi', title: 'Multilingual Support', tier: 'free', description: 'Chat in English, Twi, Ga, Ewe, Dagbani, Hausa, or French. The interface and AI adapt to your language.', steps: ['Click the language selector (globe icon) in the input area', 'Choose from: English, Twi, Ga, Ewe, Dagbani, Hausa, French', 'For French and Hausa: the AI responds directly in your language', 'For Twi, Ga, Ewe, Dagbani: the AI responds in clear English first, then auto-translates', 'Interface labels also translate where available'] },
+      { id: 'lang-translate', title: 'Auto-Translation & Toggle', tier: 'free', description: 'For Ghanaian languages, AI generates a high-quality English response then automatically translates it. Toggle between both versions.', steps: ['Set your language to Twi, Ga, Ewe, or Dagbani', 'Send a message — the AI response streams in English', 'A translation arrives moments after, shown with a gold toggle button', 'Click "Show Twi" (or your language) to see the translated version', 'Click "Show English" to switch back — both versions are always available', 'This approach produces much better translations than forcing the AI to write in Twi directly'] },
       { id: 'lang-tts', title: 'Text-to-Speech', tier: 'free', description: 'Listen to AI responses read aloud. Useful for accessibility and hands-free use.', steps: ['Click the speaker icon on any AI response', 'The message is read aloud using browser TTS', 'Works best with English; Ghanaian languages use approximation', 'Adjust system volume to control speech volume'] },
     ]
   },
@@ -1180,6 +1187,7 @@ function updateSidebarFooter() {
         ${isStudent() ? '<button class="sidebar-link-btn exam-prep-btn" onclick="openExamPrepDashboard()">📝 Exam Prep</button>' : ''}
         <button class="sidebar-link-btn" onclick="openSecuritySettings()">Security</button>
         <button class="sidebar-link-btn" onclick="revokeAllSessions()">Revoke Sessions</button>
+        <button class="sidebar-link-btn" onclick="openPromptEngineeringCourse()">📚 Prompt 101</button>
         <button class="sidebar-link-btn" onclick="openGuide()">User Guide</button>
         ${state.user.role === 'super_admin' ? '<a class="sidebar-link-btn" href="/admin" style="text-decoration:none;text-align:center;">Admin</a>' : ''}
       </div>
@@ -10198,4 +10206,832 @@ async function generatePracticeQuestion(subject) {
   } catch (err) {
     container.innerHTML = `<div style="padding:40px;text-align:center;color:var(--text-muted);">${escapeHtml(err.message || 'Failed to generate question')}</div>`;
   }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  Prompt Engineering 101 — Interactive In-App Course
+// ═══════════════════════════════════════════════════════════════════
+
+const PROMPT_COURSE_MODULES = [
+  {
+    id: 'basics',
+    title: 'The Basics — What Makes a Good Prompt?',
+    icon: '🚀',
+    duration: '5 min',
+    lessons: [
+      {
+        title: 'The 4 Pillars of a Great Prompt',
+        content: `<p>Every effective prompt has <strong>4 pillars</strong>:</p>
+<ol>
+<li><strong>Role</strong> — Tell the AI who it should be<br><em>"You are a senior policy analyst for the Ministry of Finance..."</em></li>
+<li><strong>Task</strong> — State exactly what you need<br><em>"Write a 2-page briefing note on..."</em></li>
+<li><strong>Context</strong> — Provide background details<br><em>"This is for the Deputy Minister's review ahead of the Q2 budget hearing."</em></li>
+<li><strong>Format</strong> — Specify the output structure<br><em>"Use bullet points, include an executive summary, and keep it under 500 words."</em></li>
+</ol>
+<div class="pe-tip-box">💡 <strong>Tip:</strong> You don't always need all 4, but using at least Role + Task dramatically improves quality.</div>`
+      },
+      {
+        title: 'Before vs. After',
+        content: `<div class="pe-example-compare">
+<div class="pe-example-bad">
+<div class="pe-example-label">❌ Vague Prompt</div>
+<p>"Help me with procurement"</p>
+</div>
+<div class="pe-example-good">
+<div class="pe-example-label">✅ Effective Prompt</div>
+<p>"You are a GoG procurement officer. Draft a sole-source justification memo for purchasing 50 HP laptops for the Ministry of Education ICT lab. Include: vendor name (CompuGhana Ltd), unit cost (GHS 4,500), total budget, justification under PPA Act 2003 Section 40, and the approval authority required. Format as a formal GoG memo with reference number."</p>
+</div>
+</div>
+<p>The second prompt gives the AI everything it needs: <strong>role, task, specific details, legal context, and format</strong>.</p>`
+      },
+      {
+        title: 'Quick Wins',
+        content: `<p>Start improving your prompts today with these quick wins:</p>
+<ul>
+<li><strong>Be specific about length</strong> — "Write 3 paragraphs" beats "Write about..."</li>
+<li><strong>Name your audience</strong> — "Explain for a Minister" vs "Explain for a tech team"</li>
+<li><strong>Give examples</strong> — "Format like: Name | Role | Department"</li>
+<li><strong>State what you DON'T want</strong> — "Do not include technical jargon"</li>
+</ul>
+<div class="pe-tip-box">💡 <strong>Remember:</strong> The AI can only be as good as the instructions you give it. Garbage in, garbage out!</div>`
+      }
+    ],
+    exercise: {
+      id: 'basics-rewrite',
+      brief: 'Rewrite this vague prompt into an effective one using the 4 pillars (Role, Task, Context, Format):',
+      badPrompt: 'Help me with procurement',
+      hint: 'Think about: Who are you? What exactly do you need? Who is this for? What format should the output be in?',
+      rubricContext: 'GoG procurement context. The student should add a role (e.g. procurement officer), a specific task (e.g. draft a justification memo), context (ministry, item, budget), and format requirements.'
+    }
+  },
+  {
+    id: 'gog-documents',
+    title: 'GoG Documents — Memos, Briefs & Letters',
+    icon: '📄',
+    duration: '7 min',
+    lessons: [
+      {
+        title: 'GoG Document Types',
+        content: `<p>Government of Ghana operations rely on specific document types. Here's how to prompt for each:</p>
+<ul>
+<li><strong>Memos</strong> — Internal communication between departments or officials</li>
+<li><strong>Briefing Notes</strong> — Concise summaries for decision-makers</li>
+<li><strong>Official Letters</strong> — External correspondence with formal letterhead</li>
+<li><strong>Cabinet Submissions</strong> — Policy proposals for Cabinet review</li>
+<li><strong>Minutes of Meeting</strong> — Records of official proceedings</li>
+</ul>
+<div class="pe-tip-box">💡 <strong>Key:</strong> Always specify the document type, the recipient's title, and the reference number format in your prompt.</div>`
+      },
+      {
+        title: 'Memo Prompt Template',
+        content: `<p>Here's a proven template for GoG memos:</p>
+<div class="pe-example-good">
+<div class="pe-example-label">✅ Memo Template Prompt</div>
+<p>"You are the Director of HR at the Ministry of [X]. Draft an official GoG memo to the Chief Director regarding [topic]. Include: reference number (format: MOH/HR/2026/xxx), date, subject line, background (2 paragraphs), recommendation, and signature block. Tone: formal, concise. Keep under 1 page."</p>
+</div>
+<p>Key elements to always include:</p>
+<ul>
+<li><strong>Reference number format</strong> — Ministry abbreviation + department + year + serial</li>
+<li><strong>Recipient's exact title</strong> — "Chief Director" not just "boss"</li>
+<li><strong>Specific sections</strong> — Background, recommendation, action required</li>
+</ul>`
+      },
+      {
+        title: 'Briefing Notes',
+        content: `<div class="pe-example-compare">
+<div class="pe-example-bad">
+<div class="pe-example-label">❌ Weak</div>
+<p>"Write a brief about the new education policy"</p>
+</div>
+<div class="pe-example-good">
+<div class="pe-example-label">✅ Strong</div>
+<p>"You are a policy analyst at the Ministry of Education. Write a 1-page briefing note for the Hon. Minister on the Free SHS Policy Phase 3 expansion. Structure: Executive Summary (3 bullets), Background, Current Status (with enrollment figures from 2025), Key Challenges (funding, infrastructure), Recommendations (3 actionable items with timelines). Tone: neutral, evidence-based."</p>
+</div>
+</div>
+<div class="pe-tip-box">💡 <strong>Pro tip:</strong> Always tell the AI what data points to include, even if approximate. It makes the output instantly more useful.</div>`
+      }
+    ],
+    exercise: {
+      id: 'gog-memo',
+      brief: 'Write a prompt to generate a formal GoG memo from the IT Director to the Chief Director, requesting approval for a cybersecurity training program:',
+      badPrompt: 'Write a memo about cybersecurity training',
+      hint: 'Include: your role, the recipient, reference number format, specific sections (background, cost, recommendation), and format requirements.',
+      rubricContext: 'GoG memo writing. The student should specify the sender role, recipient title, reference format, memo sections, specific details about the training program, and formal GoG memo format.'
+    }
+  },
+  {
+    id: 'research-analysis',
+    title: 'Research & Analysis Prompts',
+    icon: '🔬',
+    duration: '6 min',
+    lessons: [
+      {
+        title: 'Deep Research Prompts',
+        content: `<p>AskOzzy's Deep Research agent can investigate topics thoroughly. Make the most of it:</p>
+<div class="pe-example-good">
+<div class="pe-example-label">✅ Research Prompt</div>
+<p>"Research the current state of digital governance initiatives in West Africa. Focus on: (1) Ghana's National Digital Property Addressing System, (2) Nigeria's NIN system, (3) Senegal's digital ID program. Compare implementation timelines, adoption rates, and challenges. Provide sources where possible."</p>
+</div>
+<p>Research prompt essentials:</p>
+<ul>
+<li><strong>Narrow the scope</strong> — Don't ask "research everything about digital governance"</li>
+<li><strong>List specific aspects</strong> — What exactly should be compared?</li>
+<li><strong>Request structure</strong> — Comparison table, timeline, or analysis framework</li>
+</ul>`
+      },
+      {
+        title: 'Data Analysis Prompts',
+        content: `<p>When working with data, be explicit about what analysis you need:</p>
+<div class="pe-example-compare">
+<div class="pe-example-bad">
+<div class="pe-example-label">❌ Vague</div>
+<p>"Analyze this data"</p>
+</div>
+<div class="pe-example-good">
+<div class="pe-example-label">✅ Specific</div>
+<p>"Analyze the quarterly revenue data I'll provide. Calculate: (1) quarter-over-quarter growth rate, (2) year-on-year comparison, (3) identify the top 3 revenue categories. Present findings in a summary table, then write 3 key insights for the Finance Director. Flag any anomalies."</p>
+</div>
+</div>
+<div class="pe-tip-box">💡 <strong>Tip:</strong> Tell the AI what calculations to perform, what format to present results in, and who the audience is.</div>`
+      }
+    ],
+    exercise: {
+      id: 'research-prompt',
+      brief: 'Write a prompt asking AskOzzy to research and compare two policy options for improving teacher retention in rural Ghana:',
+      badPrompt: 'Tell me about teacher retention',
+      hint: 'Specify the two policy options to compare, what criteria to evaluate (cost, effectiveness, feasibility), and what output format you want (comparison table, recommendation).',
+      rubricContext: 'Policy research comparison. The student should specify two concrete policy options, evaluation criteria, data sources or evidence to consider, output structure (table, analysis), and target audience.'
+    }
+  },
+  {
+    id: 'meetings',
+    title: 'Meeting Minutes & Action Items',
+    icon: '📋',
+    duration: '5 min',
+    lessons: [
+      {
+        title: 'Minutes from Recordings',
+        content: `<p>AskOzzy can generate meeting minutes from audio recordings or transcripts. Better prompts = better minutes:</p>
+<div class="pe-example-good">
+<div class="pe-example-label">✅ Meeting Minutes Prompt</div>
+<p>"Generate formal GoG meeting minutes from this transcript. Meeting type: Departmental Review. Include: (1) Header with date, time, venue, attendees, (2) Agenda items discussed, (3) Key decisions made, (4) Action items with assignee and deadline, (5) Next meeting date. Use the standard GoG minutes format."</p>
+</div>
+<ul>
+<li>Always specify the <strong>meeting type</strong> — it changes the format</li>
+<li>Request <strong>action items with assignees</strong> — not just a summary</li>
+<li>Mention <strong>GoG format</strong> to get proper structure</li>
+</ul>`
+      },
+      {
+        title: 'Action Item Extraction',
+        content: `<p>Need just the action items? Be specific:</p>
+<div class="pe-example-compare">
+<div class="pe-example-bad">
+<div class="pe-example-label">❌ Vague</div>
+<p>"What are the action items from the meeting?"</p>
+</div>
+<div class="pe-example-good">
+<div class="pe-example-label">✅ Specific</div>
+<p>"Extract all action items from this meeting transcript. For each item list: (1) Action description, (2) Responsible person/department, (3) Deadline if mentioned, (4) Priority (High/Medium/Low based on context). Format as a numbered list."</p>
+</div>
+</div>
+<div class="pe-tip-box">💡 <strong>Tip:</strong> Use AskOzzy's Meeting Minutes feature (sidebar) for best results — it auto-applies GoG templates!</div>`
+      }
+    ],
+    exercise: {
+      id: 'meeting-minutes',
+      brief: 'Write a prompt to generate minutes from a Cabinet Sub-Committee meeting about infrastructure spending:',
+      badPrompt: 'Write meeting minutes',
+      hint: 'Specify meeting type, what sections to include (header, attendees, decisions, action items), format requirements, and any GoG-specific formatting.',
+      rubricContext: 'GoG meeting minutes generation. The student should specify meeting type (Cabinet Sub-Committee), required sections, action item format with assignees/deadlines, and formal GoG minutes structure.'
+    }
+  },
+  {
+    id: 'languages',
+    title: 'Translation & Local Languages',
+    icon: '🌍',
+    duration: '5 min',
+    lessons: [
+      {
+        title: 'Translation-Friendly Writing',
+        content: `<p>AskOzzy supports Twi, Ga, Ewe, and Dagbani translations. For best results:</p>
+<ul>
+<li><strong>Write in clear, simple English first</strong> — complex sentences translate poorly</li>
+<li><strong>Avoid idioms and slang</strong> — "kick the bucket" won't translate well</li>
+<li><strong>Use short sentences</strong> — 15-20 words max per sentence</li>
+<li><strong>Be explicit</strong> — "the government" instead of "they"</li>
+</ul>
+<div class="pe-example-compare">
+<div class="pe-example-bad">
+<div class="pe-example-label">❌ Hard to Translate</div>
+<p>"The ball's in their court regarding the implementation of the policy vis-à-vis stakeholder engagement."</p>
+</div>
+<div class="pe-example-good">
+<div class="pe-example-label">✅ Easy to Translate</div>
+<p>"The Ministry of Health must now decide how to implement the policy. They should talk to community leaders and health workers first."</p>
+</div>
+</div>`
+      },
+      {
+        title: 'Cultural Context in Prompts',
+        content: `<p>When generating content for Ghanaian audiences, add cultural context:</p>
+<div class="pe-example-good">
+<div class="pe-example-label">✅ Culturally-Aware Prompt</div>
+<p>"Write a public health announcement about malaria prevention for rural communities in the Northern Region. Use simple language suitable for translation to Dagbani. Include: (1) symptoms to watch for, (2) when to visit the nearest CHPS compound, (3) how to use treated mosquito nets. Tone: respectful, community-focused. Avoid medical jargon."</p>
+</div>
+<div class="pe-tip-box">💡 <strong>Tip:</strong> Enable the language toggle in AskOzzy to see AI responses in both English and your local language side by side.</div>`
+      }
+    ],
+    exercise: {
+      id: 'translation-prompt',
+      brief: 'Write a prompt to create a public service announcement about voter registration that will be translated into Twi:',
+      badPrompt: 'Write about voter registration',
+      hint: 'Use simple sentences, specify the audience, mention it will be translated, include specific information (dates, locations, requirements), and set an appropriate tone.',
+      rubricContext: 'Translation-friendly content creation for Ghanaian audience. The student should use simple language, specify the target audience and language, include concrete details, and consider cultural context.'
+    }
+  },
+  {
+    id: 'student-exams',
+    title: 'Study & Exam Prep Prompts',
+    icon: '🎓',
+    duration: '6 min',
+    lessons: [
+      {
+        title: 'WASSCE/BECE Study Prompts',
+        content: `<p>Use AskOzzy as your study partner with targeted prompts:</p>
+<div class="pe-example-good">
+<div class="pe-example-label">✅ Study Prompt</div>
+<p>"You are a WASSCE Biology examiner. Create 5 practice essay questions on the topic of Ecology (food chains, energy flow, nutrient cycling) at the WASSCE difficulty level. For each question: state the marks, list the key points expected in the marking scheme, and give one common mistake students make."</p>
+</div>
+<ul>
+<li><strong>Specify the exam</strong> — WASSCE, BECE, or university level</li>
+<li><strong>Name the topic</strong> — Don't just say "Biology", say "Photosynthesis" or "Genetics"</li>
+<li><strong>Request marking schemes</strong> — This is where the real learning happens</li>
+</ul>`
+      },
+      {
+        title: 'Essay Practice',
+        content: `<p>Get the AI to grade your practice essays:</p>
+<div class="pe-example-compare">
+<div class="pe-example-bad">
+<div class="pe-example-label">❌ Weak</div>
+<p>"Grade my essay"</p>
+</div>
+<div class="pe-example-good">
+<div class="pe-example-label">✅ Strong</div>
+<p>"Grade my WASSCE English Language Essay 2 response below using WAEC criteria: Content (10 marks), Organization (10 marks), Expression (10 marks), Mechanical Accuracy (10 marks). Give specific feedback on each criterion and suggest 2 concrete improvements. My essay: [paste essay]"</p>
+</div>
+</div>
+<div class="pe-tip-box">💡 <strong>Tip:</strong> Use AskOzzy's Exam Prep mode for auto-graded WASSCE/BECE practice with past questions!</div>`
+      }
+    ],
+    exercise: {
+      id: 'study-prompt',
+      brief: 'Write a prompt to get AskOzzy to help you study for WASSCE Mathematics (specifically Quadratic Equations):',
+      badPrompt: 'Help me study math',
+      hint: 'Specify the exam (WASSCE), the topic (quadratic equations), what you need (practice questions, step-by-step solutions, common pitfalls), and the difficulty level.',
+      rubricContext: 'WASSCE exam study. The student should specify the exam type, specific math topic, what kind of help they need (practice problems, explanations, marking schemes), and difficulty level.'
+    }
+  },
+  {
+    id: 'advanced',
+    title: 'Advanced Techniques',
+    icon: '⚡',
+    duration: '8 min',
+    lessons: [
+      {
+        title: 'Prompt Chaining',
+        content: `<p><strong>Prompt chaining</strong> means breaking a complex task into sequential steps:</p>
+<div class="pe-example-good">
+<div class="pe-example-label">✅ Chain Example</div>
+<p><strong>Step 1:</strong> "List the 5 most critical infrastructure projects in the Greater Accra Region for 2026, with estimated budgets."</p>
+<p><strong>Step 2:</strong> "For project #3 from the list above, draft a project proposal outline including: objectives, timeline, budget breakdown, and key risks."</p>
+<p><strong>Step 3:</strong> "Now expand the 'Key Risks' section into a full risk assessment matrix with likelihood, impact, and mitigation strategies."</p>
+</div>
+<p>Each prompt builds on the previous answer. This produces far better results than one massive prompt.</p>`
+      },
+      {
+        title: 'Role Stacking',
+        content: `<p><strong>Role stacking</strong> gives the AI multiple perspectives:</p>
+<div class="pe-example-good">
+<div class="pe-example-label">✅ Multi-Role Prompt</div>
+<p>"First, as a Public Health Specialist, identify the top 3 health risks from the proposed mining project. Then, as an Environmental Scientist, assess the ecological impact. Finally, as a Policy Advisor to the Minister, synthesize both analyses into a 1-page recommendation with a clear yes/no decision."</p>
+</div>
+<div class="pe-tip-box">💡 <strong>Tip:</strong> Role stacking works best when the roles offer genuinely different perspectives on the same issue.</div>`
+      },
+      {
+        title: 'Constraints & Few-Shot',
+        content: `<p><strong>Constraints</strong> prevent unwanted output:</p>
+<ul>
+<li>"Do NOT include an introduction paragraph"</li>
+<li>"Limit each bullet point to one sentence"</li>
+<li>"Use only data from 2023-2025"</li>
+<li>"Do not mention competing products by name"</li>
+</ul>
+<p><strong>Few-shot examples</strong> show the AI exactly what you want:</p>
+<div class="pe-example-good">
+<div class="pe-example-label">✅ Few-Shot Pattern</div>
+<p>"Convert these department names to abbreviations. Follow this pattern:<br>
+Ministry of Finance → MoF<br>
+Ministry of Health → MoH<br>
+Ghana Education Service → GES<br>
+Now do: Ministry of Roads and Highways, Ghana Revenue Authority, National Communications Authority"</p>
+</div>`
+      }
+    ],
+    exercise: {
+      id: 'advanced-chain',
+      brief: 'Write a 2-step prompt chain: Step 1 should analyze a problem, Step 2 should propose a solution. Topic: reducing paperwork in GoG district offices.',
+      badPrompt: 'Help reduce paperwork in government',
+      hint: 'Step 1 should ask for analysis (identify top causes of excessive paperwork). Step 2 should reference Step 1\'s output and ask for specific digital solutions with implementation timeline.',
+      rubricContext: 'Advanced prompt chaining technique. The student should demonstrate two clear sequential prompts where the second builds on the first, with specific details, constraints, and format requirements.'
+    }
+  },
+  {
+    id: 'common-mistakes',
+    title: '10 Common Mistakes & Fixes',
+    icon: '🔧',
+    duration: '5 min',
+    lessons: [
+      {
+        title: 'Mistakes 1-5',
+        content: `<p><strong>1. Being too vague</strong></p>
+<div class="pe-example-compare">
+<div class="pe-example-bad"><p>❌ "Write a report"</p></div>
+<div class="pe-example-good"><p>✅ "Write a 3-page progress report on the Tema Port Expansion project for Q1 2026"</p></div>
+</div>
+<p><strong>2. Not specifying the audience</strong></p>
+<div class="pe-example-compare">
+<div class="pe-example-bad"><p>❌ "Explain blockchain"</p></div>
+<div class="pe-example-good"><p>✅ "Explain blockchain to a non-technical Deputy Minister in 3 paragraphs"</p></div>
+</div>
+<p><strong>3. Asking multiple unrelated questions at once</strong></p>
+<div class="pe-example-compare">
+<div class="pe-example-bad"><p>❌ "What's the GDP, who's the finance minister, and draft a budget memo"</p></div>
+<div class="pe-example-good"><p>✅ Ask each as a separate prompt for better answers</p></div>
+</div>
+<p><strong>4. Not specifying format</strong></p>
+<div class="pe-example-compare">
+<div class="pe-example-bad"><p>❌ "Give me information about the new tax policy"</p></div>
+<div class="pe-example-good"><p>✅ "Summarize the new tax policy in 5 bullet points, each under 20 words"</p></div>
+</div>
+<p><strong>5. Using AI without context</strong></p>
+<div class="pe-example-compare">
+<div class="pe-example-bad"><p>❌ "Is this a good idea?"</p></div>
+<div class="pe-example-good"><p>✅ "Given Ghana's current fiscal constraints and the IMF program conditions, evaluate whether increasing public sector hiring by 10% in 2026 is advisable. Consider: budget impact, service delivery needs, and IMF spending caps."</p></div>
+</div>`
+      },
+      {
+        title: 'Mistakes 6-10',
+        content: `<p><strong>6. Not iterating</strong></p>
+<p>Your first prompt rarely produces perfect output. Say: "Good, but make it more formal" or "Shorten this to half the length."</p>
+
+<p><strong>7. Ignoring the AI's strengths</strong></p>
+<div class="pe-example-compare">
+<div class="pe-example-bad"><p>❌ Using AI for: "What's 247 × 38?"</p></div>
+<div class="pe-example-good"><p>✅ Using AI for: "Analyze this revenue trend and identify anomalies"</p></div>
+</div>
+
+<p><strong>8. Not providing examples</strong></p>
+<p>When you need a specific format, show one example. The AI will match it perfectly.</p>
+
+<p><strong>9. Writing prompts in ALL CAPS or being rude</strong></p>
+<p>It doesn't help. Clear, polite instructions work best.</p>
+
+<p><strong>10. Not using AskOzzy's built-in features</strong></p>
+<ul>
+<li><strong>Templates</strong> — Pre-built prompts for common GoG tasks</li>
+<li><strong>Agents</strong> — Specialized AI for documents, research, meetings</li>
+<li><strong>Memory</strong> — Teach AskOzzy about your role and preferences</li>
+<li><strong>Knowledge Base</strong> — Upload your own documents for context</li>
+</ul>
+<div class="pe-tip-box">💡 <strong>Final tip:</strong> The best prompt engineers iterate. Write, review the output, refine, repeat. Every interaction makes you better!</div>`
+      }
+    ],
+    exercise: {
+      id: 'fix-bad-prompt',
+      brief: 'Fix this terrible prompt by applying everything you\'ve learned in this course:',
+      badPrompt: 'Write something about health for the people in the north',
+      hint: 'Apply all 4 pillars: specify a role, a concrete task (what document?), context (which health topic? which region? who is the audience?), and format (length, structure, tone).',
+      rubricContext: 'Comprehensive prompt improvement. The student should demonstrate mastery of all 4 pillars (Role, Task, Context, Format), include specific details, consider the target audience, and produce a prompt that would generate highly useful output.'
+    }
+  }
+];
+
+let _peActiveModule = 'basics';
+let _peActiveLesson = 0;
+
+async function openPromptEngineeringCourse() {
+  if (!isLoggedIn()) { openAuthModal(); return; }
+
+  let modal = document.getElementById('pe-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.className = 'pe-modal';
+    modal.id = 'pe-modal';
+    modal.innerHTML = buildPromptCourseHTML();
+    document.body.appendChild(modal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closePromptCourse(); });
+  }
+  modal.classList.remove('closing');
+  modal.classList.add('active');
+  _peActiveModule = 'basics';
+  _peActiveLesson = 0;
+
+  // Load progress
+  if (!state.promptCourseProgress) {
+    try {
+      const res = await fetch('/api/prompt-course/progress', { headers: { Authorization: `Bearer ${state.token}` } });
+      if (res.ok) {
+        const data = await res.json();
+        state.promptCourseProgress = data.progress || {};
+      } else {
+        state.promptCourseProgress = {};
+      }
+    } catch { state.promptCourseProgress = {}; }
+  }
+
+  renderCourseModuleList();
+  renderCourseModule(_peActiveModule);
+}
+
+function closePromptCourse() {
+  const modal = document.getElementById('pe-modal');
+  if (!modal || !modal.classList.contains('active')) return;
+  modal.classList.add('closing');
+  setTimeout(() => { modal.classList.remove('active', 'closing'); }, 200);
+}
+
+function buildPromptCourseHTML() {
+  return `
+    <div class="pe-layout">
+      <div class="pe-sidebar">
+        <div class="pe-sidebar-header">
+          <h2>📚 Prompt 101</h2>
+          <button class="pe-close-btn" onclick="closePromptCourse()">&times;</button>
+        </div>
+        <div class="pe-overall-progress">
+          <div class="pe-progress-bar"><div class="pe-progress-bar-fill" id="pe-overall-fill"></div></div>
+          <span class="pe-progress-text" id="pe-overall-text">0 / 8 modules</span>
+        </div>
+        <div id="pe-module-list" class="pe-module-list"></div>
+      </div>
+      <div class="pe-main" id="pe-main-content">
+        <div style="padding:40px;text-align:center;color:var(--text-muted);">Select a module to begin</div>
+      </div>
+    </div>`;
+}
+
+function renderCourseModuleList() {
+  const list = document.getElementById('pe-module-list');
+  if (!list) return;
+  const progress = state.promptCourseProgress || {};
+  let completedCount = 0;
+
+  list.innerHTML = PROMPT_COURSE_MODULES.map(m => {
+    const done = progress[m.id];
+    if (done) completedCount++;
+    const isActive = m.id === _peActiveModule;
+    return `<button class="pe-module-item${isActive ? ' active' : ''}${done ? ' completed' : ''}" onclick="selectCourseModule('${m.id}')">
+      <span class="pe-module-icon">${m.icon}</span>
+      <div class="pe-module-info">
+        <div class="pe-module-title">${escapeHtml(m.title)}</div>
+        <div class="pe-module-meta">${m.duration}${done ? ' · Grade: ' + done.grade : ''}</div>
+      </div>
+      ${done ? '<span class="pe-module-check">✓</span>' : ''}
+    </button>`;
+  }).join('');
+
+  // Certificate button when all 8 modules completed
+  if (completedCount === 8) {
+    list.insertAdjacentHTML('beforeend', `<button class="pe-cert-trigger" onclick="renderCourseCertificate()">🏆 View Certificate</button>`);
+  }
+
+  const fill = document.getElementById('pe-overall-fill');
+  const text = document.getElementById('pe-overall-text');
+  if (fill) fill.style.width = ((completedCount / 8) * 100) + '%';
+  if (text) text.textContent = `${completedCount} / 8 modules`;
+}
+
+function selectCourseModule(moduleId) {
+  _peActiveModule = moduleId;
+  _peActiveLesson = 0;
+  renderCourseModuleList();
+  renderCourseModule(moduleId);
+}
+
+function renderCourseModule(moduleId) {
+  const main = document.getElementById('pe-main-content');
+  if (!main) return;
+  const mod = PROMPT_COURSE_MODULES.find(m => m.id === moduleId);
+  if (!mod) return;
+
+  const lesson = mod.lessons[_peActiveLesson];
+  const totalLessons = mod.lessons.length;
+
+  main.innerHTML = `
+    <div class="pe-module-header">
+      <span class="pe-module-header-icon">${mod.icon}</span>
+      <h2>${escapeHtml(mod.title)}</h2>
+    </div>
+
+    <div class="pe-lesson-section">
+      <div class="pe-lesson-nav">
+        <span class="pe-lesson-counter">Lesson ${_peActiveLesson + 1} of ${totalLessons}</span>
+        <div class="pe-lesson-dots">
+          ${mod.lessons.map((_, i) => `<span class="pe-dot${i === _peActiveLesson ? ' active' : ''}"></span>`).join('')}
+        </div>
+      </div>
+      <div class="pe-lesson-card">
+        <h3>${escapeHtml(lesson.title)}</h3>
+        <div class="pe-lesson-content">${lesson.content}</div>
+      </div>
+      <div class="pe-lesson-buttons">
+        <button class="pe-btn pe-btn-secondary" onclick="navigateCourseLesson(-1)" ${_peActiveLesson === 0 ? 'disabled' : ''}>← Previous</button>
+        <button class="pe-btn pe-btn-primary" onclick="navigateCourseLesson(1)" ${_peActiveLesson === totalLessons - 1 ? 'disabled' : ''}>Next →</button>
+      </div>
+    </div>
+
+    <div class="pe-exercise-section">
+      <h3>📝 Exercise</h3>
+      <p class="pe-exercise-brief">${escapeHtml(mod.exercise.brief)}</p>
+      <div class="pe-bad-prompt-box">
+        <div class="pe-bad-prompt-label">The bad prompt:</div>
+        <p>"${escapeHtml(mod.exercise.badPrompt)}"</p>
+      </div>
+      <button class="pe-hint-toggle" onclick="this.nextElementSibling.classList.toggle('visible')">💡 Show Hint</button>
+      <div class="pe-hint-box">${escapeHtml(mod.exercise.hint)}</div>
+      <textarea id="pe-exercise-input" class="pe-exercise-textarea" rows="5" placeholder="Write your improved prompt here...">${document.getElementById('pe-exercise-input')?.value && _peActiveModule === moduleId ? document.getElementById('pe-exercise-input').value : ''}</textarea>
+      <button class="pe-btn pe-btn-gold" onclick="submitCourseExercise('${mod.id}', '${mod.exercise.id}')">Grade My Prompt</button>
+      <div id="pe-score-area"></div>
+    </div>`;
+}
+
+function navigateCourseLesson(dir) {
+  const mod = PROMPT_COURSE_MODULES.find(m => m.id === _peActiveModule);
+  if (!mod) return;
+  const next = _peActiveLesson + dir;
+  if (next >= 0 && next < mod.lessons.length) {
+    _peActiveLesson = next;
+    renderCourseModule(_peActiveModule);
+  }
+}
+
+async function submitCourseExercise(moduleId, exerciseId) {
+  const input = document.getElementById('pe-exercise-input');
+  const scoreArea = document.getElementById('pe-score-area');
+  if (!input || !scoreArea) return;
+  const userPrompt = input.value.trim();
+
+  if (userPrompt.length < 15) {
+    scoreArea.innerHTML = '<div class="pe-error">Please write at least 15 characters.</div>';
+    return;
+  }
+
+  const mod = PROMPT_COURSE_MODULES.find(m => m.id === moduleId);
+  if (!mod) return;
+
+  scoreArea.innerHTML = '<div class="pe-grading-spinner"><div class="spinner"></div> AI instructor is reviewing your prompt...</div>';
+
+  try {
+    const res = await fetch('/api/prompt-course/grade', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${state.token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        moduleId,
+        exerciseId,
+        userPrompt,
+        exerciseBrief: mod.exercise.brief,
+        exerciseContext: mod.exercise.rubricContext,
+      })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Grading failed');
+
+    // Update local progress
+    if (!state.promptCourseProgress) state.promptCourseProgress = {};
+    if (!state.promptCourseProgress[moduleId] || (state.promptCourseProgress[moduleId].totalScore || 0) < data.totalScore) {
+      state.promptCourseProgress[moduleId] = { exerciseId, totalScore: data.totalScore, maxScore: 40, grade: data.grade, completedAt: new Date().toISOString() };
+    }
+    renderCourseModuleList();
+
+    scoreArea.innerHTML = renderCourseScoreCard(data);
+  } catch (err) {
+    scoreArea.innerHTML = `<div class="pe-error">${escapeHtml(err.message || 'Grading failed. Please try again.')}</div>`;
+  }
+}
+
+function renderCourseScoreCard(data) {
+  const axes = [
+    { key: 'clarity', label: 'Clarity', color: '#4fc3f7' },
+    { key: 'specificity', label: 'Specificity', color: '#81c784' },
+    { key: 'structure', label: 'Structure', color: '#ffb74d' },
+    { key: 'effectiveness', label: 'Effectiveness', color: '#e57373' },
+  ];
+  const gradeColors = { A: '#4caf50', B: '#8bc34a', C: '#ffc107', D: '#ff9800', F: '#f44336' };
+
+  return `
+    <div class="pe-score-card">
+      <div class="pe-score-header">
+        <div class="pe-grade-badge" style="background:${gradeColors[data.grade] || '#888'}">${escapeHtml(data.grade)}</div>
+        <div class="pe-score-total">${data.totalScore} <span>/ ${data.maxScore}</span></div>
+      </div>
+      <div class="pe-score-bars">
+        ${axes.map(a => `
+          <div class="pe-score-row">
+            <span class="pe-score-label">${a.label}</span>
+            <div class="pe-score-bar"><div class="pe-score-bar-fill" style="width:${(data.scores[a.key] / 10) * 100}%;background:${a.color}"></div></div>
+            <span class="pe-score-value">${data.scores[a.key]}/10</span>
+          </div>
+        `).join('')}
+      </div>
+      <div class="pe-feedback">
+        <h4>Feedback</h4>
+        <p>${escapeHtml(data.feedback)}</p>
+      </div>
+      ${data.improvedVersion ? `
+        <div class="pe-improved-section">
+          <button class="pe-improved-toggle" onclick="this.nextElementSibling.classList.toggle('visible')">✨ See Expert Version</button>
+          <div class="pe-improved-prompt">
+            <h4>How an expert would write it:</h4>
+            <p>${escapeHtml(data.improvedVersion)}</p>
+          </div>
+        </div>
+      ` : ''}
+      <button class="pe-btn pe-btn-secondary" onclick="document.getElementById('pe-score-area').innerHTML='';document.getElementById('pe-exercise-input').value='';document.getElementById('pe-exercise-input').focus();">Try Again</button>
+    </div>`;
+}
+
+// ─── Certificate of Completion ─────────────────────────────────────────
+
+function computeOverallCourseGrade(progress) {
+  let total = 0;
+  PROMPT_COURSE_MODULES.forEach(m => { total += (progress[m.id]?.totalScore || 0); });
+  const avg = total / (8 * 40) * 100;
+  if (avg >= 85) return 'A';
+  if (avg >= 70) return 'B';
+  if (avg >= 55) return 'C';
+  if (avg >= 40) return 'D';
+  return 'F';
+}
+
+function renderCourseCertificate() {
+  const main = document.getElementById('pe-main-content');
+  if (!main) return;
+  const progress = state.promptCourseProgress || {};
+  const userName = (state.user && state.user.fullName) || 'Student';
+  const dept = (state.user && state.user.department) || '';
+  const gradeColors = { A: '#4caf50', B: '#8bc34a', C: '#ffc107', D: '#ff9800', F: '#f44336' };
+  const overallGrade = computeOverallCourseGrade(progress);
+  let totalScore = 0;
+  PROMPT_COURSE_MODULES.forEach(m => { totalScore += (progress[m.id]?.totalScore || 0); });
+
+  // Find latest completedAt date
+  let latestDate = '';
+  PROMPT_COURSE_MODULES.forEach(m => {
+    const d = progress[m.id]?.completedAt;
+    if (d && d > latestDate) latestDate = d;
+  });
+  const dateStr = latestDate ? new Date(latestDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  const moduleRows = PROMPT_COURSE_MODULES.map(m => {
+    const p = progress[m.id];
+    return `<tr>
+      <td class="pe-cert-mod-icon">${m.icon}</td>
+      <td class="pe-cert-mod-name">${escapeHtml(m.title)}</td>
+      <td class="pe-cert-mod-score">${p ? p.totalScore + '/40' : '—'}</td>
+      <td class="pe-cert-mod-grade"><span class="pe-cert-grade-pill" style="background:${gradeColors[p?.grade] || '#888'}">${p?.grade || '—'}</span></td>
+    </tr>`;
+  }).join('');
+
+  main.innerHTML = `
+    <div class="pe-cert-container">
+      <div class="pe-cert-card">
+        <div class="pe-cert-adinkra" title="Nea Onnim — Symbol of Knowledge">&#x2726;</div>
+        <div class="pe-cert-header">
+          <div class="pe-cert-republic">REPUBLIC OF GHANA</div>
+          <div class="pe-cert-star">&#9733;</div>
+        </div>
+        <div class="pe-cert-title">Certificate of Completion</div>
+        <div class="pe-cert-subtitle">Prompt Engineering 101</div>
+        <div class="pe-cert-divider"></div>
+        <div class="pe-cert-body">This is to certify that</div>
+        <div class="pe-cert-name">${escapeHtml(userName)}</div>
+        ${dept ? '<div class="pe-cert-dept">' + escapeHtml(dept) + '</div>' : ''}
+        <div class="pe-cert-body">has successfully completed all 8 modules of the<br><strong>Prompt Engineering 101</strong> course on AskOzzy</div>
+        <div class="pe-cert-grades">
+          <table>
+            <thead><tr><th></th><th>Module</th><th>Score</th><th>Grade</th></tr></thead>
+            <tbody>${moduleRows}</tbody>
+          </table>
+        </div>
+        <div class="pe-cert-overall">
+          <div class="pe-cert-overall-grade" style="background:${gradeColors[overallGrade] || '#888'}">${overallGrade}</div>
+          <div class="pe-cert-overall-label">Overall: ${totalScore} / 320 (${Math.round(totalScore / 320 * 100)}%)</div>
+        </div>
+        <div class="pe-cert-date">${dateStr}</div>
+        <div class="pe-cert-divider"></div>
+        <div class="pe-cert-footer">Issued by <strong>AskOzzy</strong> — AI-Powered Productivity for the Government of Ghana</div>
+      </div>
+      <div class="pe-cert-actions">
+        <button class="pe-btn pe-btn-primary" onclick="printCourseCertificate()">🖨️ Print Certificate</button>
+        <button class="pe-btn pe-btn-secondary" onclick="selectCourseModule(_peActiveModule || 'basics')">← Back to Modules</button>
+      </div>
+    </div>`;
+}
+
+function printCourseCertificate() {
+  const progress = state.promptCourseProgress || {};
+  const userName = (state.user && state.user.fullName) || 'Student';
+  const dept = (state.user && state.user.department) || '';
+  const gradeColors = { A: '#4caf50', B: '#8bc34a', C: '#ffc107', D: '#ff9800', F: '#f44336' };
+  const overallGrade = computeOverallCourseGrade(progress);
+  let totalScore = 0;
+  PROMPT_COURSE_MODULES.forEach(m => { totalScore += (progress[m.id]?.totalScore || 0); });
+  let latestDate = '';
+  PROMPT_COURSE_MODULES.forEach(m => {
+    const d = progress[m.id]?.completedAt;
+    if (d && d > latestDate) latestDate = d;
+  });
+  const dateStr = latestDate ? new Date(latestDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  const moduleRows = PROMPT_COURSE_MODULES.map(m => {
+    const p = progress[m.id];
+    return `<tr>
+      <td style="text-align:center;font-size:18px;padding:6px">${m.icon}</td>
+      <td style="padding:6px 10px;font-size:11pt">${m.title}</td>
+      <td style="text-align:center;padding:6px;font-size:11pt">${p ? p.totalScore + '/40' : '—'}</td>
+      <td style="text-align:center;padding:6px"><span style="display:inline-block;padding:2px 10px;border-radius:10px;color:#fff;font-weight:700;font-size:10pt;background:${gradeColors[p?.grade] || '#888'}">${p?.grade || '—'}</span></td>
+    </tr>`;
+  }).join('');
+
+  const win = window.open('', '_blank');
+  if (!win) { alert('Please allow popups to print.'); return; }
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>AskOzzy — Certificate</title>
+<style>
+@page { size: landscape A4; margin: 0; }
+body { margin: 0; padding: 0; font-family: Georgia, 'Times New Roman', serif; background: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.cert {
+  width: 920px; padding: 48px 56px; box-sizing: border-box;
+  border: 4px double #D4AF37; outline: 2px solid #D4AF37; outline-offset: 8px;
+  background: linear-gradient(135deg, #fffef5 0%, #fff 50%, #fffef5 100%);
+  text-align: center; position: relative;
+}
+.cert::before, .cert::after {
+  content: '✦'; position: absolute; font-size: 28px; color: #D4AF37; opacity: .4;
+}
+.cert::before { top: 20px; left: 24px; }
+.cert::after { bottom: 20px; right: 24px; }
+.republic { font-size: 15pt; font-weight: bold; color: #006B3F; letter-spacing: 3px; margin-bottom: 2px; }
+.star { font-size: 36pt; color: #D4AF37; line-height: 1.1; }
+.cert-title { font-size: 26pt; color: #333; font-weight: bold; margin: 10px 0 4px; letter-spacing: 1px; }
+.cert-subtitle { font-size: 14pt; color: #D4AF37; font-weight: 600; margin-bottom: 8px; }
+.divider { width: 120px; height: 2px; background: linear-gradient(90deg, transparent, #D4AF37, transparent); margin: 12px auto; }
+.body-text { font-size: 11pt; color: #555; margin: 6px 0; line-height: 1.5; }
+.name { font-size: 22pt; font-weight: bold; color: #1a1a1a; margin: 8px 0 2px; }
+.dept { font-size: 11pt; color: #006B3F; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; }
+thead th { background: #006B3F; color: #fff; padding: 6px 10px; font-size: 10pt; text-transform: uppercase; letter-spacing: .5px; }
+tbody tr:nth-child(even) { background: #f9f8f2; }
+tbody tr:nth-child(odd) { background: #fff; }
+tbody td { border-bottom: 1px solid #e8e4d4; }
+.overall { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 14px 0 8px; }
+.overall-grade { width: 48px; height: 48px; border-radius: 50%; color: #fff; font-size: 22pt; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.overall-label { font-size: 12pt; color: #555; }
+.cert-date { font-size: 11pt; color: #888; margin: 8px 0; }
+.footer { font-size: 9pt; color: #999; margin-top: 8px; }
+.flag-stripe { height: 4px; display: flex; margin: 12px 0 0; }
+.flag-stripe span { flex: 1; }
+.flag-red { background: #CE1126; }
+.flag-gold { background: #FCD116; }
+.flag-green { background: #006B3F; }
+@media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+</style>
+</head><body>
+<div class="cert">
+  <div class="republic">REPUBLIC OF GHANA</div>
+  <div class="star">&#9733;</div>
+  <div class="cert-title">Certificate of Completion</div>
+  <div class="cert-subtitle">Prompt Engineering 101</div>
+  <div class="divider"></div>
+  <div class="body-text">This is to certify that</div>
+  <div class="name">${escapeHtml(userName)}</div>
+  ${dept ? '<div class="dept">' + escapeHtml(dept) + '</div>' : ''}
+  <div class="body-text">has successfully completed all 8 modules of the<br><strong>Prompt Engineering 101</strong> course on AskOzzy</div>
+  <table>
+    <thead><tr><th></th><th>Module</th><th>Score</th><th>Grade</th></tr></thead>
+    <tbody>${moduleRows}</tbody>
+  </table>
+  <div class="overall">
+    <div class="overall-grade" style="background:${gradeColors[overallGrade] || '#888'}">${overallGrade}</div>
+    <div class="overall-label">Overall: ${totalScore} / 320 (${Math.round(totalScore / 320 * 100)}%)</div>
+  </div>
+  <div class="cert-date">${dateStr}</div>
+  <div class="divider"></div>
+  <div class="footer">Issued by AskOzzy &mdash; AI-Powered Productivity for the Government of Ghana</div>
+  <div class="flag-stripe"><span class="flag-red"></span><span class="flag-gold"></span><span class="flag-green"></span></div>
+</div>
+</body></html>`);
+  win.document.close();
+  setTimeout(() => win.print(), 300);
 }
