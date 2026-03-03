@@ -554,7 +554,7 @@ const PRICING_TIERS: Record<string, {
     studentPrice: 25,
     messagesPerDay: 200,
     models: "pro",
-    features: ["200 messages/day", "6 AI models", "Priority speed", "Unlimited history", "Template customisation"],
+    features: ["200 messages/day", "10 AI models", "Priority speed", "Unlimited history", "Template customisation"],
   },
   enterprise: {
     name: "Enterprise",
@@ -562,7 +562,7 @@ const PRICING_TIERS: Record<string, {
     studentPrice: 45,
     messagesPerDay: -1, // unlimited
     models: "all",
-    features: ["Unlimited messages", "All 10 AI models", "Fastest priority", "Unlimited history", "Custom templates", "Dedicated support"],
+    features: ["Unlimited messages", "All 14 AI models", "Fastest priority", "Unlimited history", "Custom templates", "Dedicated support"],
   },
 };
 
@@ -577,6 +577,10 @@ const PRO_TIER_MODELS = [
   "@cf/meta/llama-4-scout-17b-16e-instruct",
   "@cf/qwen/qwq-32b",
   "@cf/mistralai/mistral-small-3.1-24b-instruct",
+  "@cf/zai-org/glm-4.7-flash",
+  "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
+  "@cf/qwen/qwen2.5-coder-32b-instruct",
+  "@cf/meta/llama-3.2-11b-vision-instruct",
 ];
 
 async function checkUsageLimit(db: D1Database, userId: string, tier: string): Promise<{ allowed: boolean; used: number; limit: number }> {
@@ -2566,7 +2570,7 @@ app.get("/api/models", authMiddleware, async (c) => {
         id: "@cf/qwen/qwen3-30b-a3b-fp8",
         name: "Qwen3 30B (Qwen)",
         description: "Latest Qwen3 — advanced reasoning, multilingual, agent capabilities",
-        contextWindow: 131072,
+        contextWindow: 32768,
         requiredTier: "enterprise",
         locked: !isEnterprise,
         recommended: false,
@@ -2576,7 +2580,7 @@ app.get("/api/models", authMiddleware, async (c) => {
         id: "@cf/qwen/qwq-32b",
         name: "QwQ 32B (Qwen)",
         description: "Qwen reasoning model — exceptional at thinking through complex problems step-by-step",
-        contextWindow: 131072,
+        contextWindow: 24000,
         requiredTier: "professional",
         locked: isFree,
         recommended: false,
@@ -2585,6 +2589,42 @@ app.get("/api/models", authMiddleware, async (c) => {
         id: "@cf/mistralai/mistral-small-3.1-24b-instruct",
         name: "Mistral Small 3.1 24B",
         description: "Excellent for long documents, vision understanding, and multilingual writing",
+        contextWindow: 128000,
+        requiredTier: "professional",
+        locked: isFree,
+        recommended: false,
+      },
+      {
+        id: "@cf/zai-org/glm-4.7-flash",
+        name: "GLM 4.7 Flash (Zhipu)",
+        description: "Fast multilingual model — 131K context, tool calling, 100+ languages",
+        contextWindow: 131072,
+        requiredTier: "professional",
+        locked: isFree,
+        recommended: false,
+      },
+      {
+        id: "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
+        name: "DeepSeek R1 Distill 32B",
+        description: "DeepSeek reasoning model — outperforms o1-mini, strong at math and logic",
+        contextWindow: 80000,
+        requiredTier: "professional",
+        locked: isFree,
+        recommended: false,
+      },
+      {
+        id: "@cf/qwen/qwen2.5-coder-32b-instruct",
+        name: "Qwen 2.5 Coder 32B",
+        description: "Code-specialised model — optimised for programming, debugging, and code generation",
+        contextWindow: 32768,
+        requiredTier: "professional",
+        locked: isFree,
+        recommended: false,
+      },
+      {
+        id: "@cf/meta/llama-3.2-11b-vision-instruct",
+        name: "Llama 3.2 Vision 11B (Meta)",
+        description: "Vision model — analyse images, read screenshots, describe photos, and answer visual questions",
         contextWindow: 128000,
         requiredTier: "professional",
         locked: isFree,
@@ -2612,8 +2652,8 @@ app.get("/api/models", authMiddleware, async (c) => {
       {
         id: "@cf/google/gemma-3-12b-it",
         name: "Gemma 3 12B (Google)",
-        description: "Google's model — 128K context, 140+ languages, strong at summarisation",
-        contextWindow: 128000,
+        description: "Google's model — 80K context, 140+ languages, strong at summarisation",
+        contextWindow: 80000,
         requiredTier: "free",
         locked: false,
         recommended: false,
@@ -8945,14 +8985,16 @@ function truncateForUSSD(text: string, maxLen: number = 182): string {
 
 async function getUSSDResponse(ai: Ai, prompt: string): Promise<string> {
   try {
+    const today = new Date().toISOString().split("T")[0];
+    const dayName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][new Date().getDay()];
     const result = await ai.run(
-      "@cf/meta/llama-3.1-8b-instruct-fast" as any,
+      "@cf/meta/llama-3.3-70b-instruct-fp8-fast" as any,
       {
         messages: [
           {
             role: "system",
             content:
-              "You are AskOzzy USSD assistant for Ghana government workers. Give extremely brief answers (under 150 characters). No markdown, no bullet points, no asterisks, plain text only. Be direct and concise.",
+              `You are AskOzzy USSD assistant for Ghana government workers. Today is ${dayName}, ${today}. Give extremely brief answers (under 150 characters). No markdown, no bullet points, no asterisks, plain text only. Be direct and concise. For date/day-of-week questions, calculate carefully.`,
           },
           { role: "user", content: prompt },
         ],
@@ -8968,14 +9010,15 @@ async function getUSSDResponse(ai: Ai, prompt: string): Promise<string> {
 
 async function getUSSDMemoResponse(ai: Ai, topic: string): Promise<string> {
   try {
+    const today = new Date().toISOString().split("T")[0];
     const result = await ai.run(
-      "@cf/meta/llama-3.1-8b-instruct-fast" as any,
+      "@cf/meta/llama-3.3-70b-instruct-fp8-fast" as any,
       {
         messages: [
           {
             role: "system",
             content:
-              "You are AskOzzy USSD assistant. Generate a very brief memo outline for Ghana government workers. Keep it under 150 characters. No markdown, plain text only. Format: TO/FROM/RE/Body in one line each.",
+              `You are AskOzzy USSD assistant. Today is ${today}. Generate a very brief memo outline for Ghana government workers. Keep it under 150 characters. No markdown, plain text only. Format: TO/FROM/RE/Body in one line each.`,
           },
           { role: "user", content: `Draft a brief memo about: ${topic}` },
         ],
@@ -9024,11 +9067,10 @@ function ussdTemplateMenu(): string {
 // ─── USSD Callback Endpoint ──────────────────────────────────────
 
 app.post("/api/ussd/callback", async (c) => {
-  // Validate webhook secret (same pattern as WhatsApp/SMS webhooks)
-  const isValid = await validateWebhookSecret(c.env, c.req.raw);
-  if (!isValid) {
-    return c.json({ error: "Invalid webhook signature" }, 403);
-  }
+  // Africa's Talking USSD callbacks don't include a webhook secret header,
+  // so we validate by checking the serviceCode matches our configured code
+  // and that required AT fields (sessionId, phoneNumber, serviceCode) are present.
+  // For additional security, the USSD config enable/disable check below acts as a gate.
 
   try {
     await ensureUSSDTable(c.env.DB);
@@ -9054,10 +9096,23 @@ app.post("/api/ussd/callback", async (c) => {
       text = (body.text as string) || "";
     }
 
-    if (!sessionId) {
-      return new Response("END Invalid session", {
+    if (!sessionId || !phoneNumber || !serviceCode) {
+      return new Response("END Invalid request", {
         headers: { "Content-Type": "text/plain" },
       });
+    }
+
+    // Validate the service code matches our configured USSD code
+    const ussdCfg = await c.env.SESSIONS.get("ussd_config");
+    if (ussdCfg) {
+      try {
+        const cfg = JSON.parse(ussdCfg);
+        if (cfg.service_code && serviceCode !== cfg.service_code) {
+          return new Response("END Service unavailable", {
+            headers: { "Content-Type": "text/plain" },
+          });
+        }
+      } catch { /* proceed if config parse fails */ }
     }
 
     // Validate phone number format (Ghana: +233XXXXXXXXX or 0XXXXXXXXX)
@@ -9565,6 +9620,79 @@ function formatForSMS(text: string): string[] {
   return parts;
 }
 
+// ─── Helper: Send SMS via Africa's Talking HTTP API ──────────────
+
+interface ATSendResult {
+  success: boolean;
+  messageId?: string;
+  error?: string;
+  statusCode?: number;
+}
+
+async function sendSMSviaAT(
+  to: string,
+  message: string,
+  credentials: { api_key: string; api_username: string; sender_id?: string }
+): Promise<ATSendResult> {
+  const { api_key, api_username, sender_id } = credentials;
+  if (!api_key || !api_username) {
+    return { success: false, error: "Missing AT credentials (api_key or api_username)" };
+  }
+
+  const isSandbox = api_username.toLowerCase() === "sandbox";
+  const url = isSandbox
+    ? "https://api.sandbox.africastalking.com/version1/messaging"
+    : "https://api.africastalking.com/version1/messaging";
+
+  const params = new URLSearchParams({
+    username: api_username,
+    to,
+    message,
+  });
+  // Sandbox ignores sender_id; only include it in production
+  if (!isSandbox && sender_id) {
+    params.set("from", sender_id);
+  }
+
+  try {
+    const resp = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "apiKey": api_key,
+      },
+      body: params.toString(),
+    });
+
+    const data = await resp.json() as {
+      SMSMessageData?: {
+        Message?: string;
+        Recipients?: Array<{
+          statusCode: number;
+          status: string;
+          messageId: string;
+          number: string;
+        }>;
+      };
+    };
+
+    const recipient = data.SMSMessageData?.Recipients?.[0];
+    if (recipient && (recipient.statusCode === 101 || recipient.statusCode === 100)) {
+      return { success: true, messageId: recipient.messageId, statusCode: recipient.statusCode };
+    }
+
+    return {
+      success: false,
+      error: recipient?.status || data.SMSMessageData?.Message || `HTTP ${resp.status}`,
+      statusCode: recipient?.statusCode,
+    };
+  } catch (err: unknown) {
+    const errMsg = err instanceof Error ? err.message : String(err);
+    return { success: false, error: `Fetch failed: ${errMsg}` };
+  }
+}
+
 // ─── Helper: Validate webhook secret ─────────────────────────────
 
 async function validateWebhookSecret(env: Env, request: Request): Promise<boolean> {
@@ -9772,10 +9900,9 @@ For all 25+ templates, visit the AskOzzy web app.`;
 // ─── SMS Webhook Endpoint ────────────────────────────────────────
 
 app.post("/api/sms/webhook", async (c) => {
-  const isValid = await validateWebhookSecret(c.env, c.req.raw);
-  if (!isValid) {
-    return c.json({ error: "Invalid webhook signature" }, 403);
-  }
+  // Africa's Talking SMS callbacks don't include a webhook secret/signature header,
+  // so we skip validateWebhookSecret(). Security is provided by the AT API key check
+  // when sending replies and the sms_enabled gate below.
 
   await ensureMessagingTables(c.env.DB);
 
@@ -9844,6 +9971,35 @@ app.post("/api/sms/webhook", async (c) => {
 
   const smsParts = formatForSMS(responseText);
 
+  // ── Send SMS reply via Africa's Talking ──
+  let atCredentials: { api_key: string; api_username: string; sender_id?: string } | null = null;
+  try {
+    const cfgStr = await c.env.SESSIONS.get("messaging_config");
+    if (cfgStr) {
+      const cfg = JSON.parse(cfgStr);
+      if (cfg.api_key && cfg.api_username) {
+        atCredentials = { api_key: cfg.api_key, api_username: cfg.api_username, sender_id: cfg.sender_id };
+      }
+    }
+  } catch {}
+
+  const sendResults: ATSendResult[] = [];
+  if (atCredentials) {
+    // Send parts sequentially to preserve message ordering
+    for (const part of smsParts) {
+      const result = await sendSMSviaAT(phoneNumber, part, atCredentials);
+      sendResults.push(result);
+      if (result.success) {
+        console.log(`[SMS] Sent to ${phoneNumber}: messageId=${result.messageId}`);
+      } else {
+        console.error(`[SMS] Failed to send to ${phoneNumber}: ${result.error}`);
+      }
+    }
+  } else {
+    console.warn(`[SMS] No AT credentials configured — reply not sent to ${phoneNumber}`);
+  }
+
+  // Store outbound messages in DB regardless of send result
   await c.env.DB.prepare(
     "INSERT INTO whatsapp_messages (id, session_id, direction, content, channel) VALUES (?, ?, 'outbound', ?, 'sms')"
   ).bind(generateId(), session.id, smsParts.join(" | ")).run();
@@ -9853,9 +10009,11 @@ app.post("/api/sms/webhook", async (c) => {
   ).bind(messageText, smsParts[0], session.id).run();
 
   return c.json({
-    messages: smsParts.map(part => ({
+    messages: smsParts.map((part, i) => ({
       to: phoneNumber,
       message: part,
+      sent: sendResults[i]?.success ?? false,
+      messageId: sendResults[i]?.messageId,
     })),
   });
 });

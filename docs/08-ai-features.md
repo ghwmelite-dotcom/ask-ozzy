@@ -2,22 +2,28 @@
 
 ## AI Models
 
-AskOzzy offers 10 AI models via Cloudflare Workers AI:
+AskOzzy offers 14 AI models via Cloudflare Workers AI:
 
 | # | Model ID | Display Name | Parameters | Context | Tier | Recommended | Best For |
 |---|----------|-------------|------------|---------|------|-------------|----------|
-| 1 | @cf/openai/gpt-oss-120b | GPT-OSS 120B (OpenAI) | 120B | 131K | Professional | Yes | Top-tier reasoning, agentic tasks |
+| 1 | @cf/openai/gpt-oss-120b | GPT-OSS 120B (OpenAI) | 120B | 131K | Enterprise | Yes | Top-tier reasoning, agentic tasks |
 | 2 | @cf/meta/llama-4-scout-17b-16e-instruct | Llama 4 Scout 17B (Meta) | 17B (16 experts) | 131K | Professional | Yes | Complex drafting, multimodal |
-| 3 | @cf/meta/llama-3.3-70b-instruct-fp8-fast | Llama 3.3 70B (Meta) | 70B | 131K | Professional | No | Deep reasoning, long documents |
-| 4 | @cf/qwen/qwq-32b | QwQ 32B (Qwen) | 32B | 131K | Professional | No | Step-by-step problem solving |
-| 5 | @cf/qwen/qwen3-30b-a3b-fp8 | Qwen3 30B (Qwen) | 30B | 131K | Professional | No | Multilingual, agent capabilities |
-| 6 | @cf/openai/gpt-oss-20b | GPT-OSS 20B (OpenAI) | 20B | 131K | Free | No | Fast reasoning (free tier) |
-| 7 | @cf/mistralai/mistral-small-3.1-24b-instruct | Mistral Small 3.1 24B | 24B | 128K | Professional | No | Long docs, vision, multilingual |
-| 8 | @cf/google/gemma-3-12b-it | Gemma 3 12B (Google) | 12B | 128K | Free | No | 140+ languages, summarization |
-| 9 | @cf/ibm-granite/granite-4.0-h-micro | Granite 4.0 Micro (IBM) | Micro | 131K | Professional | No | Structured enterprise tasks |
-| 10 | @cf/meta/llama-3.1-8b-instruct-fast | Llama 3.1 8B Fast (Meta) | 8B | 8K | Free | No | Instant responses, simple tasks |
+| 3 | @cf/meta/llama-3.3-70b-instruct-fp8-fast | Llama 3.3 70B (Meta) | 70B | 131K | Enterprise | No | Deep reasoning, long documents |
+| 4 | @cf/qwen/qwq-32b | QwQ 32B (Qwen) | 32B | 24K | Professional | No | Step-by-step problem solving |
+| 5 | @cf/qwen/qwen3-30b-a3b-fp8 | Qwen3 30B (Qwen) | 30B | 33K | Enterprise | No | Multilingual, agent capabilities |
+| 6 | @cf/mistralai/mistral-small-3.1-24b-instruct | Mistral Small 3.1 24B | 24B | 128K | Professional | No | Long docs, vision, multilingual |
+| 7 | @cf/ibm-granite/granite-4.0-h-micro | Granite 4.0 Micro (IBM) | Micro | 131K | Enterprise | No | Structured enterprise tasks |
+| 8 | @cf/zai-org/glm-4.7-flash | GLM 4.7 Flash (Zhipu) | ~9B | 131K | Professional | No | Multilingual, tool calling, 100+ languages |
+| 9 | @cf/deepseek-ai/deepseek-r1-distill-qwen-32b | DeepSeek R1 Distill 32B | 32B | 80K | Professional | No | Reasoning, math, logic |
+| 10 | @cf/qwen/qwen2.5-coder-32b-instruct | Qwen 2.5 Coder 32B | 32B | 33K | Professional | No | Programming, debugging, code generation |
+| 11 | @cf/meta/llama-3.2-11b-vision-instruct | Llama 3.2 Vision 11B (Meta) | 11B | 128K | Professional | No | Image analysis, screenshots, visual Q&A |
+| 12 | @cf/openai/gpt-oss-20b | GPT-OSS 20B (OpenAI) | 20B | 131K | Free | No | Fast reasoning (free tier) |
+| 13 | @cf/google/gemma-3-12b-it | Gemma 3 12B (Google) | 12B | 80K | Free | No | 140+ languages, summarization |
+| 14 | @cf/meta/llama-3.1-8b-instruct-fast | Llama 3.1 8B Fast (Meta) | 8B | 8K | Free | No | Instant responses, simple tasks |
 
-Free tier users get models #6, #8, #10. Professional/Enterprise get all 10.
+Free tier users get models #12, #13, #14. Professional gets 10 models. Enterprise gets all 14.
+
+> **Note:** The Llama 3.2 Vision model (#11) requires a one-time Meta license agreement. Send an initial request with `"prompt": "agree"` to accept the terms before use.
 
 ## SSE Streaming Implementation
 
