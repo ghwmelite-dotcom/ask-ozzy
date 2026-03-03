@@ -92,3 +92,39 @@ export async function deptAdminMiddleware(c: any, next: () => Promise<void>): Pr
   }
   await next();
 }
+
+// ─── Org Admin Middleware ────────────────────────────────────────────
+
+export async function orgAdminMiddleware(c: any, next: () => Promise<void>): Promise<Response | void> {
+  const authHeader = c.req.header("Authorization");
+  if (!authHeader?.startsWith("Bearer ")) {
+    return c.json({ error: "Unauthorized" }, 401);
+  }
+  const token = authHeader.slice(7);
+  const userId = await verifyToken(token, c.env);
+  if (!userId) {
+    return c.json({ error: "Invalid or expired session" }, 401);
+  }
+  const user = (await c.env.DB.prepare(
+    "SELECT role, org_id, org_role FROM users WHERE id = ?"
+  ).bind(userId).first()) as { role: string; org_id: string | null; org_role: string | null } | null;
+
+  if (!user) {
+    return c.json({ error: "User not found" }, 404);
+  }
+  // Super admins can access any org admin route
+  if (user.role === "super_admin") {
+    c.set("userId", userId);
+    c.set("orgId", c.req.query("org_id") || user.org_id);
+    c.set("isSuperAdmin", true);
+    await next();
+    return;
+  }
+  if (!user.org_id || user.org_role !== "org_admin") {
+    return c.json({ error: "Forbidden: organisation admin access required" }, 403);
+  }
+  c.set("userId", userId);
+  c.set("orgId", user.org_id);
+  c.set("isSuperAdmin", false);
+  await next();
+}

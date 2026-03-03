@@ -8,7 +8,7 @@ import {
   createToken, verifyToken,
 } from "./lib/utils";
 import {
-  checkRateLimit, authMiddleware, adminMiddleware, deptAdminMiddleware,
+  checkRateLimit, authMiddleware, adminMiddleware, deptAdminMiddleware, orgAdminMiddleware,
 } from "./lib/middleware";
 
 const app = new Hono<AppType>();
@@ -327,8 +327,9 @@ app.post("/api/auth/login", async (c) => {
   await ensureUserTypeColumn(c.env.DB);
   await ensureAuthMethodColumns(c.env.DB);
   await ensureSubscriptionColumns(c.env.DB);
+  await ensureOrgRoleColumn(c.env.DB);
   const user = await c.env.DB.prepare(
-    "SELECT id, email, password_hash, full_name, department, role, tier, referral_code, affiliate_tier, total_referrals, affiliate_earnings, trial_expires_at, user_type, totp_secret, totp_enabled, auth_method, recovery_code_hash, subscription_expires_at, billing_cycle FROM users WHERE email = ?"
+    "SELECT id, email, password_hash, full_name, department, role, tier, referral_code, affiliate_tier, total_referrals, affiliate_earnings, trial_expires_at, user_type, totp_secret, totp_enabled, auth_method, recovery_code_hash, subscription_expires_at, billing_cycle, org_id, org_role FROM users WHERE email = ?"
   )
     .bind(email.toLowerCase().trim())
     .first<{
@@ -598,25 +599,89 @@ async function checkUsageLimit(db: D1Database, userId: string, tier: string): Pr
   return { allowed: used < tierConfig.messagesPerDay, used, limit: tierConfig.messagesPerDay };
 }
 
-// ─── Effective Tier (trial + subscription expiry + grace period) ────
+// ─── Organisation Pricing ────────────────────────────────────────────
+
+const ORG_PRICING_TIERS: Record<string, {
+  name: string;
+  pricePerSeat: number;
+  memberTier: string;
+  features: string[];
+}> = {
+  starter: {
+    name: "Org Starter",
+    pricePerSeat: 50,
+    memberTier: "professional",
+    features: ["10 AI models per member", "200 messages/day per member", "Org admin portal", "Org analytics"],
+  },
+  business: {
+    name: "Org Business",
+    pricePerSeat: 85,
+    memberTier: "enterprise",
+    features: ["All 14 AI models per member", "Unlimited messages", "Org knowledge base", "Org admin portal", "Priority support"],
+  },
+  custom: {
+    name: "Org Custom",
+    pricePerSeat: 0,
+    memberTier: "enterprise",
+    features: ["Custom configuration", "SLA", "Dedicated support"],
+  },
+};
+
+const VOLUME_DISCOUNTS = [
+  { minSeats: 200, discount: 0.35 },
+  { minSeats: 51, discount: 0.25 },
+  { minSeats: 11, discount: 0.15 },
+  { minSeats: 1, discount: 0 },
+];
+
+function getVolumeDiscount(seats: number): number {
+  for (const tier of VOLUME_DISCOUNTS) {
+    if (seats >= tier.minSeats) return tier.discount;
+  }
+  return 0;
+}
+
+function getEffectiveOrgSeatPrice(plan: string, seats: number): number {
+  const tier = ORG_PRICING_TIERS[plan];
+  if (!tier || plan === "custom") return 0;
+  const discount = getVolumeDiscount(seats);
+  return Math.round(tier.pricePerSeat * (1 - discount) * 100) / 100;
+}
+
+// ─── Effective Tier (trial + subscription expiry + grace period + org sponsorship) ────
+
+const TIER_RANK: Record<string, number> = { free: 0, professional: 1, enterprise: 2 };
+
+function maxTier(a: string, b: string): string {
+  return (TIER_RANK[a] || 0) >= (TIER_RANK[b] || 0) ? a : b;
+}
 
 function getEffectiveTier(user: {
   tier: string;
   subscription_expires_at: string | null;
   trial_expires_at: string | null;
+  org_sponsored_tier?: string | null;
 }): string {
   const now = new Date();
   // Trial: free users with active trial get professional
   if (user.trial_expires_at && new Date(user.trial_expires_at + "Z") > now
-      && (!user.tier || user.tier === "free")) return "professional";
+      && (!user.tier || user.tier === "free")) {
+    const baseTier = "professional";
+    if (user.org_sponsored_tier) return maxTier(baseTier, user.org_sponsored_tier);
+    return baseTier;
+  }
   // Paid tier with expiry set: check grace period (7 days)
   if (user.tier && user.tier !== "free" && user.subscription_expires_at) {
     const expiresAt = new Date(user.subscription_expires_at + "Z");
     const graceEnd = new Date(expiresAt.getTime() + 7 * 86400000);
-    return now <= graceEnd ? user.tier : "free";
+    const personalTier = now <= graceEnd ? user.tier : "free";
+    if (user.org_sponsored_tier) return maxTier(personalTier, user.org_sponsored_tier);
+    return personalTier;
   }
   // Legacy paid users (no subscription_expires_at) keep access indefinitely
-  return user.tier || "free";
+  const personalTier = user.tier || "free";
+  if (user.org_sponsored_tier) return maxTier(personalTier, user.org_sponsored_tier);
+  return personalTier;
 }
 
 // ─── Trial Column Lazy Migration ────────────────────────────────────
@@ -651,6 +716,16 @@ async function ensureUserTypeColumn(db: D1Database) {
     await db.prepare("SELECT user_type FROM users LIMIT 1").first();
   } catch {
     await db.prepare("ALTER TABLE users ADD COLUMN user_type TEXT DEFAULT 'gog_employee'").run();
+  }
+}
+
+// ─── Org Role Column Lazy Migration ──────────────────────────────────
+
+async function ensureOrgRoleColumn(db: D1Database) {
+  try {
+    await db.prepare("SELECT org_role FROM users LIMIT 1").first();
+  } catch {
+    await db.prepare("ALTER TABLE users ADD COLUMN org_role TEXT DEFAULT NULL").run();
   }
 }
 
