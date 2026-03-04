@@ -3385,12 +3385,69 @@ async function openPricingModal() {
     window._pricingPlans = data.plans;
     window._pricingStudentPricing = studentPricing;
 
+    // Track which pricing tab is active
+    window._pricingTab = 'individual';
+
+    function renderPricingTypeToggle() {
+      const isOrg = window._pricingTab === 'organisation';
+      return `<div style="display:flex;justify-content:center;gap:0;margin-bottom:20px;background:var(--bg-tertiary);border:1px solid var(--border);border-radius:8px;overflow:hidden;width:fit-content;margin-left:auto;margin-right:auto;">
+        <button onclick="switchPricingTab('individual')" style="padding:8px 24px;font-size:13px;font-weight:${!isOrg ? '600' : '400'};border:none;cursor:pointer;transition:all 0.2s;font-family:inherit;${!isOrg ? 'background:var(--accent,#FCD116);color:var(--text-on-accent,#000);' : 'background:transparent;color:var(--text-secondary);'}">\uD83D\uDC64 Individual</button>
+        <button onclick="switchPricingTab('organisation')" style="padding:8px 24px;font-size:13px;font-weight:${isOrg ? '600' : '400'};border:none;border-left:1px solid var(--border);cursor:pointer;transition:all 0.2s;font-family:inherit;${isOrg ? 'background:var(--accent,#FCD116);color:var(--text-on-accent,#000);' : 'background:transparent;color:var(--text-secondary);'}">\uD83C\uDFE2 Organisation</button>
+      </div>`;
+    }
+
+    function renderOrgPricingCards() {
+      const orgPlans = [
+        {
+          id: 'starter', name: 'Org Starter', price: 50, popular: false,
+          features: ['10 AI models per member', '200 messages/day per member', 'Org admin portal', 'Org analytics', 'Member management'],
+        },
+        {
+          id: 'business', name: 'Org Business', price: 85, popular: true,
+          features: ['All 14 AI models per member', 'Unlimited messages', 'Org knowledge base', 'Org admin portal', 'Priority support', 'Custom agents'],
+        },
+        {
+          id: 'custom', name: 'Org Custom', price: 0, popular: false,
+          features: ['Custom configuration', 'Service Level Agreement', 'Dedicated support', 'Custom integrations', 'Tailored onboarding'],
+        },
+      ];
+
+      return renderPricingTypeToggle()
+        + '<div style="text-align:center;margin-bottom:16px;"><p style="font-size:13px;color:var(--text-secondary);margin:0;">Per-seat pricing for organisations. Volume discounts: 11+ seats (15% off), 51+ (25% off), 200+ (35% off).</p></div>'
+        + '<div class="pricing-grid">'
+        + orgPlans.map(function(plan) {
+            return '<div class="pricing-card ' + (plan.popular ? 'popular' : '') + '">'
+              + '<div class="pricing-name">' + plan.name + '</div>'
+              + '<div class="pricing-price">'
+              + (plan.price === 0 ? 'Contact Us' : 'GH\u20B5 ' + plan.price)
+              + (plan.price > 0 ? '<span>/seat/month</span>' : '')
+              + '</div>'
+              + '<ul class="pricing-features">' + plan.features.map(function(f) { return '<li>' + f + '</li>'; }).join('') + '</ul>'
+              + (plan.price > 0
+                ? '<button class="btn-pricing ' + (plan.popular ? 'primary' : 'secondary') + '" onclick="window.location.href=\'/#register-org\'">Get Started</button>'
+                : '<button class="btn-pricing secondary" onclick="window.location.href=\'mailto:support@askozzy.ai?subject=Custom%20Org%20Plan\'">Contact Sales</button>')
+              + '</div>';
+          }).join('')
+        + '</div>'
+        + '<div style="text-align:center;margin-top:20px;font-size:12px;color:var(--text-muted);">All prices in Ghana Cedis (GH\u20B5). Volume discounts applied at checkout. Payment via Mobile Money or card.</div>';
+    }
+
+    window.switchPricingTab = function(tab) {
+      window._pricingTab = tab;
+      if (tab === 'organisation') {
+        body.innerHTML = renderOrgPricingCards();
+      } else {
+        body.innerHTML = renderPricingCards(document.getElementById('billing-cycle-toggle')?.checked ? 'yearly' : 'monthly');
+        insertTrialBanner(document.getElementById('billing-cycle-toggle')?.checked ? 'yearly' : 'monthly');
+      }
+    };
+
     function renderPricingCards(cycle) {
       const isYearly = cycle === 'yearly';
       const subExpiry = state.user && state.user.subscriptionExpiresAt;
       const inGrace = state.user && state.user.inGracePeriod;
 
-      return `
+      return renderPricingTypeToggle() + `
       ${studentPricing ? '<div class="student-discount-banner"><span>&#127891;</span> Student pricing applied — save up to 58%!</div>' : ''}
       <div class="billing-toggle" style="display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:20px;">
         <span style="font-size:14px;font-weight:${!isYearly ? '600' : '400'};color:var(--text-${!isYearly ? 'primary' : 'secondary'});">Monthly</span>
