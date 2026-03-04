@@ -728,8 +728,8 @@ async function loadBilling() {
 
     el.innerHTML =
       '<div class="stats-grid">' +
-        '<div class="stat-card"><div class="billing-value">$' + (d.monthlyTotal || 0).toFixed(2) + '</div><div class="billing-label">Monthly Total</div></div>' +
-        '<div class="stat-card"><div class="billing-value">$' + (pricing.price_per_seat || 0).toFixed(2) + '</div><div class="billing-label">Per Seat / Month</div></div>' +
+        '<div class="stat-card"><div class="billing-value">GH\u20B5' + (d.monthlyTotal || 0).toFixed(2) + '</div><div class="billing-label">Monthly Total</div></div>' +
+        '<div class="stat-card"><div class="billing-value">GH\u20B5' + (pricing.price_per_seat || 0).toFixed(2) + '</div><div class="billing-label">Per Seat / Month</div></div>' +
         '<div class="stat-card"><div class="billing-value">' + (d.discount || 0) + '%</div><div class="billing-label">Volume Discount</div></div>' +
         '<div class="stat-card"><div class="billing-value" style="text-transform:capitalize">' + escapeHtml(pricing.plan || "—") + '</div><div class="billing-label">Current Plan</div></div>' +
       '</div>' +

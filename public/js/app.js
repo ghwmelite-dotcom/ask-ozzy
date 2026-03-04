@@ -273,9 +273,9 @@ function updateOrgPricing() {
   const priceEl = document.getElementById('org-price-per-seat');
   const discEl = document.getElementById('org-discount');
   const totalEl = document.getElementById('org-monthly-total');
-  if (priceEl) priceEl.textContent = plan === 'custom' ? 'Contact us' : '$' + effective.toFixed(2) + '/mo';
+  if (priceEl) priceEl.textContent = plan === 'custom' ? 'Contact us' : 'GH\u20B5' + effective.toFixed(2) + '/mo';
   if (discEl) discEl.textContent = Math.round(discount * 100) + '%';
-  if (totalEl) totalEl.textContent = plan === 'custom' ? 'Contact us' : '$' + total.toFixed(2);
+  if (totalEl) totalEl.textContent = plan === 'custom' ? 'Contact us' : 'GH\u20B5' + total.toFixed(2);
 }
 
 // ─── Persona System ─────────────────────────────────────────────────
