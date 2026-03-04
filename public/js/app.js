@@ -201,6 +201,83 @@ function dismissInlineTip(btn) {
   }
 }
 
+// ─── Registration Type System ───────────────────────────────────────
+let _regType = 'individual';
+
+function selectRegType(type, btn) {
+  _regType = type;
+  document.querySelectorAll('#register-form > .persona-selector:first-child .persona-option').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  const indFields = document.getElementById('individual-fields');
+  const orgFields = document.getElementById('org-fields');
+
+  if (type === 'organisation') {
+    indFields.classList.add('hidden');
+    orgFields.classList.remove('hidden');
+    // Remove required from individual fields
+    const regName = document.getElementById('reg-name');
+    const regEmail = document.getElementById('reg-email');
+    const regReferral = document.getElementById('reg-referral');
+    if (regName) regName.removeAttribute('required');
+    if (regEmail) regEmail.removeAttribute('required');
+    if (regReferral) regReferral.removeAttribute('required');
+    updateOrgPricing();
+  } else {
+    indFields.classList.remove('hidden');
+    orgFields.classList.add('hidden');
+    // Restore required on individual fields
+    const regName = document.getElementById('reg-name');
+    const regEmail = document.getElementById('reg-email');
+    const regReferral = document.getElementById('reg-referral');
+    if (regName) regName.setAttribute('required', '');
+    if (regEmail) regEmail.setAttribute('required', '');
+    if (regReferral) regReferral.setAttribute('required', '');
+  }
+}
+
+function autoGenerateSlug() {
+  const nameInput = document.getElementById('reg-org-name');
+  const slugInput = document.getElementById('reg-org-slug');
+  if (!nameInput || !slugInput) return;
+  slugInput.value = nameInput.value
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+    .slice(0, 50);
+}
+
+const ORG_PLANS = {
+  starter: { price: 50, name: 'Starter' },
+  business: { price: 85, name: 'Business' },
+  custom: { price: 0, name: 'Custom' },
+};
+
+function getVolDiscount(seats) {
+  if (seats >= 200) return 0.35;
+  if (seats >= 51) return 0.25;
+  if (seats >= 11) return 0.15;
+  return 0;
+}
+
+function updateOrgPricing() {
+  const plan = document.getElementById('reg-org-plan')?.value || 'starter';
+  const seats = Math.max(1, parseInt(document.getElementById('reg-org-seats')?.value) || 1);
+  const basePrice = ORG_PLANS[plan]?.price || 0;
+  const discount = getVolDiscount(seats);
+  const effective = plan === 'custom' ? 0 : Math.round(basePrice * (1 - discount) * 100) / 100;
+  const total = Math.round(effective * seats * 100) / 100;
+
+  const priceEl = document.getElementById('org-price-per-seat');
+  const discEl = document.getElementById('org-discount');
+  const totalEl = document.getElementById('org-monthly-total');
+  if (priceEl) priceEl.textContent = plan === 'custom' ? 'Contact us' : '$' + effective.toFixed(2) + '/mo';
+  if (discEl) discEl.textContent = Math.round(discount * 100) + '%';
+  if (totalEl) totalEl.textContent = plan === 'custom' ? 'Contact us' : '$' + total.toFixed(2);
+}
+
 // ─── Persona System ─────────────────────────────────────────────────
 let _selectedPersona = 'gog_employee';
 
@@ -1014,33 +1091,61 @@ function autoGenerateReferralCode() {
 
 document.getElementById("register-form").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const fullName = document.getElementById("reg-name").value;
-  const email = document.getElementById("reg-email").value;
-  const department = document.getElementById("reg-dept").value;
-  const referralInput = document.getElementById("reg-referral");
-  const referralCode = referralInput.value.trim();
-
-  // Validate referral code is filled
-  if (!referralCode) {
-    referralInput.focus();
-    showAuthError("Referral code is required. Click \"Auto-fill\" if you don't have one from a colleague.");
-    return;
-  }
-
   const btn = e.target.querySelector(".btn-auth");
   btn.disabled = true;
   btn.textContent = "Creating account...";
 
   try {
-    const res = await fetch(`${API}/api/auth/register`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, fullName, department, referralCode, userType: _selectedPersona }),
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Registration failed");
+    if (_regType === 'organisation') {
+      // Organisation registration
+      const orgName = document.getElementById("reg-org-name").value.trim();
+      const orgSlug = document.getElementById("reg-org-slug").value.trim();
+      const adminName = document.getElementById("reg-org-admin-name").value.trim();
+      const adminEmail = document.getElementById("reg-org-admin-email").value.trim();
+      const orgSector = document.getElementById("reg-org-sector").value;
+      const orgDomain = document.getElementById("reg-org-domain").value.trim();
+      const plan = document.getElementById("reg-org-plan").value;
+      const seats = document.getElementById("reg-org-seats").value;
+      const referralCode = document.getElementById("reg-org-referral").value.trim();
 
-    showTOTPSetup(data.totpUri, data.totpSecret, data.recoveryCode, data.email);
+      if (!orgName || !orgSlug || !adminName || !adminEmail) {
+        showAuthError("Organisation name, slug, admin name, and admin email are required.");
+        return;
+      }
+
+      const res = await fetch(`${API}/api/auth/register/organisation`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ orgName, orgSlug, orgSector, orgDomain, adminName, adminEmail, plan, seats, referralCode }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Organisation registration failed");
+
+      showTOTPSetup(data.totpUri, data.totpSecret, data.recoveryCode, data.email);
+    } else {
+      // Individual registration
+      const fullName = document.getElementById("reg-name").value;
+      const email = document.getElementById("reg-email").value;
+      const department = document.getElementById("reg-dept").value;
+      const referralInput = document.getElementById("reg-referral");
+      const referralCode = referralInput.value.trim();
+
+      if (!referralCode) {
+        referralInput.focus();
+        showAuthError("Referral code is required. Click \"Auto-fill\" if you don't have one from a colleague.");
+        return;
+      }
+
+      const res = await fetch(`${API}/api/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, fullName, department, referralCode, userType: _selectedPersona }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Registration failed");
+
+      showTOTPSetup(data.totpUri, data.totpSecret, data.recoveryCode, data.email);
+    }
   } catch (err) {
     showAuthError(err.message);
   } finally {

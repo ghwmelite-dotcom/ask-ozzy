@@ -303,39 +303,132 @@
 
         <!-- Register Form -->
         <form id="register-form" class="hidden">
+          <!-- Registration Type Toggle -->
           <div class="persona-selector">
-            <div class="persona-label">I am a...</div>
+            <div class="persona-label">Registration Type</div>
             <div class="persona-options">
-              <button type="button" class="persona-option active" onclick="selectPersona('gog_employee', this)">
-                <span class="persona-icon">🏛️</span>
-                <span class="persona-text">GoG Employee</span>
+              <button type="button" class="persona-option active" onclick="selectRegType('individual', this)">
+                <span class="persona-icon">👤</span>
+                <span class="persona-text">Individual</span>
               </button>
-              <button type="button" class="persona-option" onclick="selectPersona('student', this)">
-                <span class="persona-icon">🎓</span>
-                <span class="persona-text">Student</span>
+              <button type="button" class="persona-option" onclick="selectRegType('organisation', this)">
+                <span class="persona-icon">🏢</span>
+                <span class="persona-text">Organisation</span>
               </button>
             </div>
           </div>
-          <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" id="reg-name" placeholder="e.g. Kwame Asante" required />
-          </div>
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" id="reg-email" placeholder="your.name@gov.gh" required />
-          </div>
-          <div class="form-group">
-            <label id="reg-dept-label">Department / MDA</label>
-            <input type="text" id="reg-dept" placeholder="e.g. Ministry of Finance" />
-          </div>
-          <div class="form-group">
-            <label>Referral Code <span style="color:var(--accent-red,#CE1126);">*</span></label>
-            <div style="display:flex;gap:8px;align-items:center;">
-              <input type="text" id="reg-referral" placeholder="e.g. OZZY-KWAME" required style="flex:1;" />
-              <button type="button" id="btn-auto-referral" onclick="autoGenerateReferralCode()" style="white-space:nowrap;padding:8px 12px;font-size:11px;border-radius:8px;border:1px solid var(--border);background:var(--bg-secondary);color:var(--text-muted);cursor:pointer;transition:all .2s;">Don't have one? Auto-fill</button>
+
+          <!-- Individual Fields -->
+          <div id="individual-fields">
+            <div class="persona-selector">
+              <div class="persona-label">I am a...</div>
+              <div class="persona-options">
+                <button type="button" class="persona-option active" onclick="selectPersona('gog_employee', this)">
+                  <span class="persona-icon">🏛️</span>
+                  <span class="persona-text">GoG Employee</span>
+                </button>
+                <button type="button" class="persona-option" onclick="selectPersona('student', this)">
+                  <span class="persona-icon">🎓</span>
+                  <span class="persona-text">Student</span>
+                </button>
+              </div>
             </div>
-            <div id="referral-hint" style="font-size:11px;color:var(--text-muted);margin-top:4px;">Enter a referral code from a colleague, or click "Auto-fill" if you don't have one.</div>
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" id="reg-name" placeholder="e.g. Kwame Asante" required />
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" id="reg-email" placeholder="your.name@gov.gh" required />
+            </div>
+            <div class="form-group">
+              <label id="reg-dept-label">Department / MDA</label>
+              <input type="text" id="reg-dept" placeholder="e.g. Ministry of Finance" />
+            </div>
+            <div class="form-group">
+              <label>Referral Code <span style="color:var(--accent-red,#CE1126);">*</span></label>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <input type="text" id="reg-referral" placeholder="e.g. OZZY-KWAME" required style="flex:1;" />
+                <button type="button" id="btn-auto-referral" onclick="autoGenerateReferralCode()" style="white-space:nowrap;padding:8px 12px;font-size:11px;border-radius:8px;border:1px solid var(--border);background:var(--bg-secondary);color:var(--text-muted);cursor:pointer;transition:all .2s;">Don't have one? Auto-fill</button>
+              </div>
+              <div id="referral-hint" style="font-size:11px;color:var(--text-muted);margin-top:4px;">Enter a referral code from a colleague, or click "Auto-fill" if you don't have one.</div>
+            </div>
           </div>
+
+          <!-- Organisation Fields (hidden by default) -->
+          <div id="org-fields" class="hidden">
+            <div class="form-group">
+              <label>Organisation Name</label>
+              <input type="text" id="reg-org-name" placeholder="e.g. Ghana Health Service" oninput="autoGenerateSlug()" />
+            </div>
+            <div class="form-group">
+              <label>Organisation Slug</label>
+              <input type="text" id="reg-org-slug" placeholder="e.g. ghana-health-service" style="font-family:monospace;" />
+              <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Lowercase letters, numbers, and hyphens only. Used in your org URL.</div>
+            </div>
+            <div class="form-group">
+              <label>Admin Full Name</label>
+              <input type="text" id="reg-org-admin-name" placeholder="e.g. Kwame Asante" />
+            </div>
+            <div class="form-group">
+              <label>Admin Email Address</label>
+              <input type="email" id="reg-org-admin-email" placeholder="admin@organisation.gov.gh" />
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div class="form-group">
+                <label>Sector</label>
+                <select id="reg-org-sector" style="width:100%;padding:10px 14px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;color:var(--text-primary);font-size:13px;font-family:inherit;">
+                  <option value="">Select sector...</option>
+                  <option value="Health">Health</option>
+                  <option value="Education">Education</option>
+                  <option value="Finance">Finance</option>
+                  <option value="Agriculture">Agriculture</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Legal">Legal</option>
+                  <option value="Defence">Defence</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Email Domain (optional)</label>
+                <input type="text" id="reg-org-domain" placeholder="e.g. ghs.gov.gh" />
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div class="form-group">
+                <label>Plan</label>
+                <select id="reg-org-plan" onchange="updateOrgPricing()" style="width:100%;padding:10px 14px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;color:var(--text-primary);font-size:13px;font-family:inherit;">
+                  <option value="starter">Starter — $50/seat/mo</option>
+                  <option value="business">Business — $85/seat/mo</option>
+                  <option value="custom">Custom — Contact us</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Number of Seats</label>
+                <input type="number" id="reg-org-seats" value="10" min="1" max="1000" oninput="updateOrgPricing()" style="width:100%;padding:10px 14px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:8px;color:var(--text-primary);font-size:13px;font-family:inherit;" />
+              </div>
+            </div>
+            <!-- Pricing Summary -->
+            <div id="org-pricing-summary" style="background:var(--bg-tertiary);border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:12px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                <span style="font-size:12px;color:var(--text-secondary);">Price per seat</span>
+                <span id="org-price-per-seat" style="font-weight:600;color:var(--text-primary);">$50.00/mo</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                <span style="font-size:12px;color:var(--text-secondary);">Volume discount</span>
+                <span id="org-discount" style="font-weight:600;color:var(--green-light,#00a86b);">0%</span>
+              </div>
+              <div style="border-top:1px solid var(--border);padding-top:8px;display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:13px;font-weight:600;color:var(--text-primary);">Monthly Total</span>
+                <span id="org-monthly-total" style="font-size:18px;font-weight:700;color:var(--gold,#FCD116);">$500.00</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Referral Code (optional)</label>
+              <input type="text" id="reg-org-referral" placeholder="e.g. OZZY-KWAME" />
+            </div>
+          </div>
+
           <button type="submit" class="btn-auth">Create Account</button>
         </form>
 
