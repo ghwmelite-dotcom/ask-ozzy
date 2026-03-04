@@ -178,6 +178,251 @@ app.post("/api/auth/register", async (c) => {
   });
 });
 
+// ─── Organisation Registration ───────────────────────────────────────
+
+app.post("/api/auth/register/organisation", async (c) => {
+  const ip = c.req.header("cf-connecting-ip") || "unknown";
+  const rl = await checkRateLimit(c.env, ip, "auth");
+  if (!rl.allowed) return c.json({ error: "Too many registration attempts. Try again later." }, 429);
+
+  const { orgName, orgSlug, orgSector, orgDomain, adminName, adminEmail, plan, seats, referralCode } = await c.req.json();
+
+  if (!orgName || !orgSlug || !adminName || !adminEmail || !plan) {
+    return c.json({ error: "Organisation name, slug, admin name, admin email, and plan are required" }, 400);
+  }
+
+  // Validate slug format: lowercase alphanumeric + hyphens only
+  const slugRegex = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+  if (!slugRegex.test(orgSlug)) {
+    return c.json({ error: "Slug must be lowercase letters, numbers, and hyphens only (no leading/trailing hyphens)" }, 400);
+  }
+
+  if (orgSlug.length < 3 || orgSlug.length > 50) {
+    return c.json({ error: "Slug must be between 3 and 50 characters" }, 400);
+  }
+
+  // Validate email
+  const trimmedEmail = adminEmail.trim().toLowerCase();
+  if (trimmedEmail.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+    return c.json({ error: "Please enter a valid email address" }, 400);
+  }
+
+  // Validate plan
+  if (!ORG_PRICING_TIERS[plan]) {
+    return c.json({ error: "Invalid plan. Choose starter, business, or custom" }, 400);
+  }
+
+  const seatCount = Math.max(1, Math.min(1000, parseInt(seats) || 10));
+
+  // Check slug uniqueness
+  const existingSlug = await c.env.DB.prepare(
+    "SELECT id FROM organizations WHERE slug = ?"
+  ).bind(orgSlug).first();
+  if (existingSlug) {
+    return c.json({ error: "This organisation slug is already taken" }, 409);
+  }
+
+  // Check email uniqueness
+  const existingEmail = await c.env.DB.prepare(
+    "SELECT id FROM users WHERE email = ?"
+  ).bind(trimmedEmail).first();
+  if (existingEmail) {
+    return c.json({ error: "An account with this email already exists" }, 409);
+  }
+
+  const orgId = generateId();
+  const userId = generateId();
+  const accessCode = generateAccessCode();
+  const passwordHash = await hashPassword(accessCode);
+
+  // Generate referral code for the admin user
+  const firstName = adminName.split(" ")[0].toUpperCase();
+  const suffix = generateReferralSuffix();
+  const userReferralCode = `OZZY-${firstName}-${suffix}`;
+
+  // Calculate effective price
+  const effectivePrice = getEffectiveOrgSeatPrice(plan, seatCount);
+  const discount = getVolumeDiscount(seatCount);
+
+  // Handle referral code lookup
+  let referredBy: string | null = null;
+  if (referralCode && referralCode.trim()) {
+    const isSystemReferral = referralCode.trim().toUpperCase().startsWith("OZZY-SYSTEM-");
+    if (!isSystemReferral) {
+      const referrer = await c.env.DB.prepare(
+        "SELECT id FROM users WHERE referral_code = ?"
+      ).bind(referralCode.trim().toUpperCase()).first<{ id: string }>();
+      if (referrer) {
+        referredBy = referrer.id;
+      }
+    }
+  }
+
+  // Auto-generate TOTP secret
+  const secretBytes = new Uint8Array(20);
+  crypto.getRandomValues(secretBytes);
+  const base32Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+  let totpSecret = "";
+  for (let i = 0; i < secretBytes.length; i++) {
+    totpSecret += base32Chars[secretBytes[i] % 32];
+  }
+
+  // Generate recovery code
+  const recoveryCode = generateRecoveryCode();
+  const recoveryCodeHash = await hashPassword(recoveryCode);
+
+  const pricingId = generateId();
+
+  // Batch insert: organization + admin user + org pricing
+  await c.env.DB.batch([
+    c.env.DB.prepare(
+      "INSERT INTO organizations (id, name, slug, owner_id, tier, max_seats, used_seats, sector, domain, settings) VALUES (?, ?, ?, ?, ?, ?, 1, ?, ?, '{}')"
+    ).bind(orgId, orgName, orgSlug, userId, plan, seatCount, orgSector || null, orgDomain || null),
+    c.env.DB.prepare(
+      "INSERT INTO users (id, email, password_hash, full_name, department, referral_code, referred_by, user_type, org_id, org_role, totp_secret, auth_method, recovery_code_hash) VALUES (?, ?, ?, ?, '', ?, ?, 'gog_employee', ?, 'org_admin', ?, 'totp', ?)"
+    ).bind(userId, trimmedEmail, passwordHash, adminName, userReferralCode, referredBy, orgId, totpSecret, recoveryCodeHash),
+    c.env.DB.prepare(
+      "INSERT INTO org_pricing (id, org_id, plan, seats_purchased, price_per_seat, billing_cycle) VALUES (?, ?, ?, ?, ?, 'monthly')"
+    ).bind(pricingId, orgId, plan, seatCount, effectivePrice),
+  ]);
+
+  // If referred, record the referral
+  if (referredBy) {
+    await c.env.DB.prepare(
+      "INSERT INTO referrals (id, referrer_id, referred_id, status, bonus_amount) VALUES (?, ?, ?, 'completed', 0.00)"
+    ).bind(generateId(), referredBy, userId).run();
+
+    await c.env.DB.prepare(
+      "UPDATE users SET total_referrals = total_referrals + 1 WHERE id = ?"
+    ).bind(referredBy).run();
+  }
+
+  const totpUri = `otpauth://totp/AskOzzy:${trimmedEmail}?secret=${totpSecret}&issuer=AskOzzy&digits=6&period=30`;
+
+  return c.json({
+    totpUri,
+    email: trimmedEmail,
+    fullName: adminName,
+    orgId,
+    orgSlug,
+    referralCode: userReferralCode,
+    pricing: {
+      plan,
+      seats: seatCount,
+      pricePerSeat: effectivePrice,
+      discount: Math.round(discount * 100),
+      monthlyTotal: Math.round(effectivePrice * seatCount * 100) / 100,
+    },
+  });
+});
+
+// ─── Domain Check (email -> org match) ──────────────────────────────
+
+app.get("/api/auth/domain-check/:email", async (c) => {
+  const email = c.req.param("email");
+  if (!email || !email.includes("@")) {
+    return c.json({ match: false, org: null });
+  }
+
+  const domain = email.split("@")[1].toLowerCase();
+  const org = await c.env.DB.prepare(
+    "SELECT id, name, slug FROM organizations WHERE domain = ?"
+  ).bind(domain).first<{ id: string; name: string; slug: string }>();
+
+  if (org) {
+    return c.json({ match: true, org: { id: org.id, name: org.name, slug: org.slug } });
+  }
+  return c.json({ match: false, org: null });
+});
+
+// ─── Accept Org Invite ──────────────────────────────────────────────
+
+app.post("/api/auth/invite/accept/:id", async (c) => {
+  const ip = c.req.header("cf-connecting-ip") || "unknown";
+  const rl = await checkRateLimit(c.env, ip, "auth");
+  if (!rl.allowed) return c.json({ error: "Too many attempts. Try again later." }, 429);
+
+  const inviteId = c.req.param("id");
+  const { fullName } = await c.req.json();
+
+  if (!fullName) {
+    return c.json({ error: "Full name is required" }, 400);
+  }
+
+  // Look up invite
+  const invite = await c.env.DB.prepare(
+    "SELECT id, org_id, email, role, tier FROM org_invites WHERE id = ? AND status = 'pending'"
+  ).bind(inviteId).first<{ id: string; org_id: string; email: string; role: string; tier: string | null }>();
+
+  if (!invite) {
+    return c.json({ error: "Invite not found or already used" }, 404);
+  }
+
+  // Check email not already registered
+  const existingUser = await c.env.DB.prepare(
+    "SELECT id FROM users WHERE email = ?"
+  ).bind(invite.email.toLowerCase().trim()).first();
+  if (existingUser) {
+    return c.json({ error: "An account with this email already exists" }, 409);
+  }
+
+  // Check org seat limit
+  const org = await c.env.DB.prepare(
+    "SELECT id, max_seats, used_seats FROM organizations WHERE id = ?"
+  ).bind(invite.org_id).first<{ id: string; max_seats: number; used_seats: number }>();
+
+  if (!org) {
+    return c.json({ error: "Organisation not found" }, 404);
+  }
+
+  if (org.used_seats >= org.max_seats) {
+    return c.json({ error: "Organisation has reached its seat limit" }, 400);
+  }
+
+  // Create user account
+  const userId = generateId();
+  const accessCode = generateAccessCode();
+  const passwordHash = await hashPassword(accessCode);
+  const firstName = fullName.split(" ")[0].toUpperCase();
+  const suffix = generateReferralSuffix();
+  const userReferralCode = `OZZY-${firstName}-${suffix}`;
+
+  // Auto-generate TOTP secret
+  const secretBytes = new Uint8Array(20);
+  crypto.getRandomValues(secretBytes);
+  const base32Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+  let totpSecret = "";
+  for (let i = 0; i < secretBytes.length; i++) {
+    totpSecret += base32Chars[secretBytes[i] % 32];
+  }
+
+  const recoveryCode = generateRecoveryCode();
+  const recoveryCodeHash = await hashPassword(recoveryCode);
+
+  // Batch: create user, update invite status, increment seats
+  await c.env.DB.batch([
+    c.env.DB.prepare(
+      "INSERT INTO users (id, email, password_hash, full_name, department, referral_code, user_type, org_id, org_role, totp_secret, auth_method, recovery_code_hash) VALUES (?, ?, ?, ?, '', ?, 'gog_employee', ?, ?, ?, 'totp', ?)"
+    ).bind(userId, invite.email.toLowerCase().trim(), passwordHash, fullName, userReferralCode, invite.org_id, invite.role || "member", totpSecret, recoveryCodeHash),
+    c.env.DB.prepare(
+      "UPDATE org_invites SET status = 'accepted' WHERE id = ?"
+    ).bind(inviteId),
+    c.env.DB.prepare(
+      "UPDATE organizations SET used_seats = used_seats + 1 WHERE id = ?"
+    ).bind(invite.org_id),
+  ]);
+
+  const totpUri = `otpauth://totp/AskOzzy:${invite.email.toLowerCase().trim()}?secret=${totpSecret}&issuer=AskOzzy&digits=6&period=30`;
+
+  return c.json({
+    totpUri,
+    email: invite.email.toLowerCase().trim(),
+    fullName,
+    referralCode: userReferralCode,
+    orgId: invite.org_id,
+  });
+});
+
 // ─── Verify TOTP After Registration ──────────────────────────────────
 
 app.post("/api/auth/register/verify-totp", async (c) => {
@@ -3595,6 +3840,505 @@ app.post("/api/upgrade", adminMiddleware, async (c) => {
   });
 });
 
+// ─── Org Admin Routes ────────────────────────────────────────────────
+
+// Task 6: Core org admin endpoints
+
+app.get("/api/org-admin/verify", orgAdminMiddleware, async (c) => {
+  const orgId = c.get("orgId");
+  if (!orgId) return c.json({ error: "No organisation context" }, 400);
+
+  const org = await c.env.DB.prepare(
+    "SELECT o.*, u.full_name as owner_name, u.email as owner_email FROM organizations o JOIN users u ON u.id = o.owner_id WHERE o.id = ?"
+  ).bind(orgId).first();
+
+  if (!org) return c.json({ error: "Organisation not found" }, 404);
+
+  return c.json({ org });
+});
+
+app.get("/api/org-admin/dashboard", orgAdminMiddleware, async (c) => {
+  const orgId = c.get("orgId");
+  if (!orgId) return c.json({ error: "No organisation context" }, 400);
+
+  const [totalMembers, activeToday, messagesToday, totalConversations, orgInfo, pricing] = await Promise.all([
+    c.env.DB.prepare(
+      "SELECT COUNT(*) as count FROM users WHERE org_id = ?"
+    ).bind(orgId).first<{ count: number }>(),
+    c.env.DB.prepare(
+      "SELECT COUNT(*) as count FROM users WHERE org_id = ? AND last_login >= date('now')"
+    ).bind(orgId).first<{ count: number }>(),
+    c.env.DB.prepare(
+      `SELECT COUNT(*) as count FROM messages m
+       JOIN conversations c ON c.id = m.conversation_id
+       JOIN users u ON u.id = c.user_id
+       WHERE u.org_id = ? AND m.created_at >= date('now')`
+    ).bind(orgId).first<{ count: number }>(),
+    c.env.DB.prepare(
+      `SELECT COUNT(*) as count FROM conversations c
+       JOIN users u ON u.id = c.user_id
+       WHERE u.org_id = ?`
+    ).bind(orgId).first<{ count: number }>(),
+    c.env.DB.prepare(
+      "SELECT name, slug, max_seats, used_seats, tier, sector FROM organizations WHERE id = ?"
+    ).bind(orgId).first<{ name: string; slug: string; max_seats: number; used_seats: number; tier: string; sector: string | null }>(),
+    c.env.DB.prepare(
+      "SELECT plan, seats_purchased, price_per_seat, billing_cycle FROM org_pricing WHERE org_id = ?"
+    ).bind(orgId).first(),
+  ]);
+
+  return c.json({
+    totalMembers: totalMembers?.count || 0,
+    activeToday: activeToday?.count || 0,
+    messagesToday: messagesToday?.count || 0,
+    totalConversations: totalConversations?.count || 0,
+    seats: {
+      used: orgInfo?.used_seats || 0,
+      total: orgInfo?.max_seats || 0,
+    },
+    tier: orgInfo?.tier || "starter",
+    orgName: orgInfo?.name || "",
+    orgSlug: orgInfo?.slug || "",
+    sector: orgInfo?.sector || "",
+    pricing: pricing || null,
+  });
+});
+
+// Task 7: User management endpoints
+
+app.get("/api/org-admin/users", orgAdminMiddleware, async (c) => {
+  const orgId = c.get("orgId");
+  if (!orgId) return c.json({ error: "No organisation context" }, 400);
+
+  const page = parseInt(c.req.query("page") || "1");
+  const limit = Math.min(parseInt(c.req.query("limit") || "20"), 100);
+  const search = c.req.query("search") || "";
+  const offset = (page - 1) * limit;
+
+  let countQuery = "SELECT COUNT(*) as count FROM users WHERE org_id = ?";
+  let dataQuery = "SELECT id, email, full_name, department, tier, org_role, last_login, created_at FROM users WHERE org_id = ?";
+  const params: string[] = [orgId];
+
+  if (search) {
+    const searchFilter = " AND (full_name LIKE ? OR email LIKE ?)";
+    countQuery += searchFilter;
+    dataQuery += searchFilter;
+    params.push(`%${search}%`, `%${search}%`);
+  }
+
+  dataQuery += " ORDER BY created_at DESC LIMIT ? OFFSET ?";
+
+  const countStmt = c.env.DB.prepare(countQuery);
+  const dataStmt = c.env.DB.prepare(dataQuery);
+
+  const countParams = search ? [orgId, `%${search}%`, `%${search}%`] : [orgId];
+  const dataParams = search ? [orgId, `%${search}%`, `%${search}%`, String(limit), String(offset)] : [orgId, String(limit), String(offset)];
+
+  const [total, { results }] = await Promise.all([
+    countStmt.bind(...countParams).first<{ count: number }>(),
+    dataStmt.bind(...dataParams).all(),
+  ]);
+
+  return c.json({
+    users: results || [],
+    total: total?.count || 0,
+    page,
+    totalPages: Math.ceil((total?.count || 0) / limit),
+  });
+});
+
+app.post("/api/org-admin/users/invite", orgAdminMiddleware, async (c) => {
+  const orgId = c.get("orgId");
+  const userId = c.get("userId");
+  if (!orgId) return c.json({ error: "No organisation context" }, 400);
+
+  const { email, role } = await c.req.json();
+  if (!email) return c.json({ error: "Email is required" }, 400);
+
+  const trimmedEmail = email.trim().toLowerCase();
+
+  // Check seat limit
+  const org = await c.env.DB.prepare(
+    "SELECT max_seats, used_seats FROM organizations WHERE id = ?"
+  ).bind(orgId).first<{ max_seats: number; used_seats: number }>();
+
+  if (org && org.used_seats >= org.max_seats) {
+    return c.json({ error: `Organisation seat limit (${org.max_seats}) reached. Upgrade your plan to add more seats.` }, 400);
+  }
+
+  // Check duplicate invite
+  const existingInvite = await c.env.DB.prepare(
+    "SELECT id FROM org_invites WHERE org_id = ? AND email = ? AND status = 'pending'"
+  ).bind(orgId, trimmedEmail).first();
+  if (existingInvite) {
+    return c.json({ error: "An invite for this email is already pending" }, 409);
+  }
+
+  // Check if user already exists in org
+  const existingMember = await c.env.DB.prepare(
+    "SELECT id FROM users WHERE email = ? AND org_id = ?"
+  ).bind(trimmedEmail, orgId).first();
+  if (existingMember) {
+    return c.json({ error: "This user is already a member of your organisation" }, 409);
+  }
+
+  const inviteId = generateId();
+  await c.env.DB.prepare(
+    "INSERT INTO org_invites (id, org_id, email, role, invited_by) VALUES (?, ?, ?, ?, ?)"
+  ).bind(inviteId, orgId, trimmedEmail, role || "member", userId).run();
+
+  return c.json({ id: inviteId, success: true, message: `Invite sent to ${trimmedEmail}` });
+});
+
+app.delete("/api/org-admin/users/:id", orgAdminMiddleware, async (c) => {
+  const orgId = c.get("orgId");
+  if (!orgId) return c.json({ error: "No organisation context" }, 400);
+
+  const memberId = c.req.param("id");
+
+  // Verify membership
+  const member = await c.env.DB.prepare(
+    "SELECT id, org_role FROM users WHERE id = ? AND org_id = ?"
+  ).bind(memberId, orgId).first<{ id: string; org_role: string | null }>();
+
+  if (!member) {
+    return c.json({ error: "User is not a member of this organisation" }, 404);
+  }
+
+  // Check if member is the owner
+  const org = await c.env.DB.prepare(
+    "SELECT owner_id FROM organizations WHERE id = ?"
+  ).bind(orgId).first<{ owner_id: string }>();
+
+  if (org && org.owner_id === memberId) {
+    return c.json({ error: "Cannot remove the organisation owner" }, 400);
+  }
+
+  // Remove member from org
+  await c.env.DB.batch([
+    c.env.DB.prepare("UPDATE users SET org_id = NULL, org_role = NULL WHERE id = ?").bind(memberId),
+    c.env.DB.prepare("UPDATE organizations SET used_seats = MAX(0, used_seats - 1) WHERE id = ?").bind(orgId),
+  ]);
+
+  return c.json({ success: true });
+});
+
+app.patch("/api/org-admin/users/:id/role", orgAdminMiddleware, async (c) => {
+  const orgId = c.get("orgId");
+  if (!orgId) return c.json({ error: "No organisation context" }, 400);
+
+  const memberId = c.req.param("id");
+  const { role } = await c.req.json();
+
+  if (!role || !["member", "org_admin"].includes(role)) {
+    return c.json({ error: "Role must be 'member' or 'org_admin'" }, 400);
+  }
+
+  // Verify membership
+  const member = await c.env.DB.prepare(
+    "SELECT id FROM users WHERE id = ? AND org_id = ?"
+  ).bind(memberId, orgId).first();
+
+  if (!member) {
+    return c.json({ error: "User is not a member of this organisation" }, 404);
+  }
+
+  await c.env.DB.prepare(
+    "UPDATE users SET org_role = ? WHERE id = ? AND org_id = ?"
+  ).bind(role, memberId, orgId).run();
+
+  return c.json({ success: true, role });
+});
+
+// Task 8: Analytics endpoints
+
+app.get("/api/org-admin/analytics", orgAdminMiddleware, async (c) => {
+  const orgId = c.get("orgId");
+  if (!orgId) return c.json({ error: "No organisation context" }, 400);
+
+  const [messagesPerDay, activePerDay, popularModels, topUsers, tierBreakdown] = await Promise.all([
+    c.env.DB.prepare(
+      `SELECT date(m.created_at) as date, COUNT(*) as count
+       FROM messages m
+       JOIN conversations c ON c.id = m.conversation_id
+       JOIN users u ON u.id = c.user_id
+       WHERE u.org_id = ? AND m.created_at >= datetime('now', '-30 days')
+       GROUP BY date(m.created_at) ORDER BY date ASC`
+    ).bind(orgId).all(),
+    c.env.DB.prepare(
+      `SELECT date(m.created_at) as date, COUNT(DISTINCT c.user_id) as count
+       FROM messages m
+       JOIN conversations c ON c.id = m.conversation_id
+       JOIN users u ON u.id = c.user_id
+       WHERE u.org_id = ? AND m.created_at >= datetime('now', '-30 days')
+       GROUP BY date(m.created_at) ORDER BY date ASC`
+    ).bind(orgId).all(),
+    c.env.DB.prepare(
+      `SELECT m.model as name, COUNT(*) as count
+       FROM messages m
+       JOIN conversations c ON c.id = m.conversation_id
+       JOIN users u ON u.id = c.user_id
+       WHERE u.org_id = ? AND m.role = 'assistant' AND m.created_at >= datetime('now', '-30 days')
+       GROUP BY m.model ORDER BY count DESC LIMIT 10`
+    ).bind(orgId).all(),
+    c.env.DB.prepare(
+      `SELECT u.id, u.full_name, u.email, COUNT(m.id) as message_count
+       FROM users u
+       JOIN conversations c ON c.user_id = u.id
+       JOIN messages m ON m.conversation_id = c.id
+       WHERE u.org_id = ? AND m.created_at >= datetime('now', '-30 days')
+       GROUP BY u.id ORDER BY message_count DESC LIMIT 10`
+    ).bind(orgId).all(),
+    c.env.DB.prepare(
+      "SELECT tier, COUNT(*) as count FROM users WHERE org_id = ? GROUP BY tier"
+    ).bind(orgId).all(),
+  ]);
+
+  return c.json({
+    messagesPerDay: messagesPerDay.results || [],
+    activePerDay: activePerDay.results || [],
+    popularModels: popularModels.results || [],
+    topUsers: topUsers.results || [],
+    tierBreakdown: tierBreakdown.results || [],
+  });
+});
+
+app.get("/api/org-admin/export/users", orgAdminMiddleware, async (c) => {
+  const orgId = c.get("orgId");
+  if (!orgId) return c.json({ error: "No organisation context" }, 400);
+
+  const { results } = await c.env.DB.prepare(
+    "SELECT id, email, full_name, department, tier, org_role, last_login, created_at FROM users WHERE org_id = ? ORDER BY created_at DESC"
+  ).bind(orgId).all();
+
+  const headers = ["id", "email", "full_name", "department", "tier", "org_role", "last_login", "created_at"];
+  const csv = [headers.join(","), ...(results || []).map((r: any) =>
+    headers.map(h => `"${String(r[h] || "").replace(/"/g, '""')}"`).join(",")
+  )].join("\n");
+
+  return new Response(csv, {
+    headers: {
+      "Content-Type": "text/csv",
+      "Content-Disposition": "attachment; filename=org-members.csv",
+    },
+  });
+});
+
+// Task 9: CRUD — Announcements
+
+app.get("/api/org-admin/announcements", orgAdminMiddleware, async (c) => {
+  const orgId = c.get("orgId");
+  if (!orgId) return c.json({ error: "No organisation context" }, 400);
+
+  const { results } = await c.env.DB.prepare(
+    `SELECT a.*, u.full_name as admin_name
+     FROM announcements a JOIN users u ON u.id = a.admin_id
+     WHERE a.org_id = ?
+     ORDER BY a.created_at DESC LIMIT 50`
+  ).bind(orgId).all();
+
+  return c.json({ announcements: results || [] });
+});
+
+app.post("/api/org-admin/announcements", orgAdminMiddleware, async (c) => {
+  const orgId = c.get("orgId");
+  const adminId = c.get("userId");
+  if (!orgId) return c.json({ error: "No organisation context" }, 400);
+
+  const { title, content, type, dismissible, expiresAt } = await c.req.json();
+  if (!title || !content) return c.json({ error: "Title and content are required" }, 400);
+
+  const id = generateId();
+  await c.env.DB.prepare(
+    "INSERT INTO announcements (id, admin_id, title, content, type, dismissible, expires_at, org_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+  ).bind(id, adminId, title, content, type || "info", dismissible !== false ? 1 : 0, expiresAt || null, orgId).run();
+
+  return c.json({ id, success: true });
+});
+
+app.patch("/api/org-admin/announcements/:id", orgAdminMiddleware, async (c) => {
+  const orgId = c.get("orgId");
+  if (!orgId) return c.json({ error: "No organisation context" }, 400);
+
+  const announcementId = c.req.param("id");
+  const { active, title, content } = await c.req.json();
+
+  const updates: string[] = [];
+  const params: any[] = [];
+
+  if (active !== undefined) { updates.push("active = ?"); params.push(active ? 1 : 0); }
+  if (title !== undefined) { updates.push("title = ?"); params.push(title); }
+  if (content !== undefined) { updates.push("content = ?"); params.push(content); }
+
+  if (updates.length === 0) return c.json({ error: "No fields to update" }, 400);
+
+  params.push(announcementId, orgId);
+
+  await c.env.DB.prepare(
+    `UPDATE announcements SET ${updates.join(", ")} WHERE id = ? AND org_id = ?`
+  ).bind(...params).run();
+
+  return c.json({ success: true });
+});
+
+app.delete("/api/org-admin/announcements/:id", orgAdminMiddleware, async (c) => {
+  const orgId = c.get("orgId");
+  if (!orgId) return c.json({ error: "No organisation context" }, 400);
+
+  const announcementId = c.req.param("id");
+  await c.env.DB.prepare(
+    "DELETE FROM announcements WHERE id = ? AND org_id = ?"
+  ).bind(announcementId, orgId).run();
+
+  return c.json({ success: true });
+});
+
+// Task 9: CRUD — Agents
+
+app.get("/api/org-admin/agents", orgAdminMiddleware, async (c) => {
+  const orgId = c.get("orgId");
+  if (!orgId) return c.json({ error: "No organisation context" }, 400);
+
+  const { results } = await c.env.DB.prepare(
+    "SELECT * FROM agents WHERE org_id = ? ORDER BY created_at DESC"
+  ).bind(orgId).all();
+
+  return c.json({ agents: results || [] });
+});
+
+app.post("/api/org-admin/agents", orgAdminMiddleware, async (c) => {
+  const orgId = c.get("orgId");
+  const adminId = c.get("userId");
+  if (!orgId) return c.json({ error: "No organisation context" }, 400);
+
+  const { name, description, system_prompt, department, knowledge_category, icon } = await c.req.json();
+  if (!name || !system_prompt) {
+    return c.json({ error: "Name and system_prompt are required" }, 400);
+  }
+
+  const id = generateId();
+  await c.env.DB.prepare(
+    "INSERT INTO agents (id, name, description, system_prompt, department, knowledge_category, icon, created_by, org_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+  ).bind(id, name, description || "", system_prompt, department || "", knowledge_category || "", icon || "🤖", adminId, orgId).run();
+
+  const agent = await c.env.DB.prepare("SELECT * FROM agents WHERE id = ?").bind(id).first();
+  return c.json({ agent });
+});
+
+app.patch("/api/org-admin/agents/:id", orgAdminMiddleware, async (c) => {
+  const orgId = c.get("orgId");
+  if (!orgId) return c.json({ error: "No organisation context" }, 400);
+
+  const agentId = c.req.param("id");
+  const body = await c.req.json();
+
+  const updates: string[] = [];
+  const params: any[] = [];
+
+  if (body.name !== undefined) { updates.push("name = ?"); params.push(body.name); }
+  if (body.description !== undefined) { updates.push("description = ?"); params.push(body.description); }
+  if (body.system_prompt !== undefined) { updates.push("system_prompt = ?"); params.push(body.system_prompt); }
+  if (body.department !== undefined) { updates.push("department = ?"); params.push(body.department); }
+  if (body.knowledge_category !== undefined) { updates.push("knowledge_category = ?"); params.push(body.knowledge_category); }
+  if (body.icon !== undefined) { updates.push("icon = ?"); params.push(body.icon); }
+  if (body.active !== undefined) { updates.push("active = ?"); params.push(body.active ? 1 : 0); }
+
+  if (updates.length === 0) return c.json({ error: "No fields to update" }, 400);
+
+  updates.push("updated_at = datetime('now')");
+  params.push(agentId, orgId);
+
+  await c.env.DB.prepare(
+    `UPDATE agents SET ${updates.join(", ")} WHERE id = ? AND org_id = ?`
+  ).bind(...params).run();
+
+  const agent = await c.env.DB.prepare("SELECT * FROM agents WHERE id = ? AND org_id = ?").bind(agentId, orgId).first();
+  return c.json({ agent });
+});
+
+app.delete("/api/org-admin/agents/:id", orgAdminMiddleware, async (c) => {
+  const orgId = c.get("orgId");
+  if (!orgId) return c.json({ error: "No organisation context" }, 400);
+
+  const agentId = c.req.param("id");
+  await c.env.DB.prepare(
+    "DELETE FROM agents WHERE id = ? AND org_id = ?"
+  ).bind(agentId, orgId).run();
+
+  return c.json({ success: true });
+});
+
+// Task 9: KB Stats
+
+app.get("/api/org-admin/kb/stats", orgAdminMiddleware, async (c) => {
+  const orgId = c.get("orgId");
+  if (!orgId) return c.json({ error: "No organisation context" }, 400);
+
+  const count = await c.env.DB.prepare(
+    "SELECT COUNT(*) as count FROM knowledge_base WHERE created_by IN (SELECT id FROM users WHERE org_id = ?)"
+  ).bind(orgId).first<{ count: number }>();
+
+  return c.json({ totalDocuments: count?.count || 0 });
+});
+
+// Task 9: Billing
+
+app.get("/api/org-admin/billing", orgAdminMiddleware, async (c) => {
+  const orgId = c.get("orgId");
+  if (!orgId) return c.json({ error: "No organisation context" }, 400);
+
+  const [org, pricing] = await Promise.all([
+    c.env.DB.prepare(
+      "SELECT id, name, slug, tier, max_seats, used_seats, sector, created_at FROM organizations WHERE id = ?"
+    ).bind(orgId).first(),
+    c.env.DB.prepare(
+      "SELECT plan, seats_purchased, price_per_seat, billing_cycle, billing_started_at, billing_expires_at FROM org_pricing WHERE org_id = ?"
+    ).bind(orgId).first<{ plan: string; seats_purchased: number; price_per_seat: number; billing_cycle: string; billing_started_at: string; billing_expires_at: string | null }>(),
+  ]);
+
+  if (!org) return c.json({ error: "Organisation not found" }, 404);
+
+  const discount = pricing ? getVolumeDiscount(pricing.seats_purchased) : 0;
+  const monthlyTotal = pricing ? Math.round(pricing.price_per_seat * pricing.seats_purchased * 100) / 100 : 0;
+
+  return c.json({
+    org,
+    pricing: pricing || null,
+    discount: Math.round(discount * 100),
+    monthlyTotal,
+  });
+});
+
+// Task 9: Settings
+
+app.patch("/api/org-admin/settings", orgAdminMiddleware, async (c) => {
+  const orgId = c.get("orgId");
+  if (!orgId) return c.json({ error: "No organisation context" }, 400);
+
+  const body = await c.req.json();
+  const updates: string[] = [];
+  const params: any[] = [];
+
+  if (body.name !== undefined) { updates.push("name = ?"); params.push(body.name); }
+  if (body.logo_url !== undefined) { updates.push("logo_url = ?"); params.push(body.logo_url); }
+  if (body.domain !== undefined) { updates.push("domain = ?"); params.push(body.domain); }
+  if (body.sector !== undefined) { updates.push("sector = ?"); params.push(body.sector); }
+
+  if (updates.length === 0) return c.json({ error: "No fields to update" }, 400);
+
+  params.push(orgId);
+
+  await c.env.DB.prepare(
+    `UPDATE organizations SET ${updates.join(", ")} WHERE id = ?`
+  ).bind(...params).run();
+
+  const updated = await c.env.DB.prepare(
+    "SELECT id, name, slug, tier, max_seats, used_seats, sector, logo_url, domain FROM organizations WHERE id = ?"
+  ).bind(orgId).first();
+
+  return c.json({ success: true, org: updated });
+});
+
 // ─── Admin Routes ────────────────────────────────────────────────────
 
 // Bootstrap: self-disabling — only works when zero admins exist
@@ -6843,13 +7587,114 @@ app.get("/api/admin/rate-limits", adminMiddleware, async (c) => {
 // ─── Admin: Organization management ───────────────────────────────────
 
 app.get("/api/admin/organizations", adminMiddleware, async (c) => {
+  const page = parseInt(c.req.query("page") || "1");
+  const limit = Math.min(100, Math.max(1, parseInt(c.req.query("limit") || "25")));
+  const search = c.req.query("search") || "";
+  const offset = (page - 1) * limit;
+
+  let query = `SELECT o.*, op.plan, op.seats_purchased, op.price_per_seat, op.billing_cycle, op.billing_expires_at,
+    (SELECT full_name FROM users WHERE id = o.owner_id) as owner_name,
+    (SELECT email FROM users WHERE id = o.owner_id) as owner_email
+    FROM organizations o LEFT JOIN org_pricing op ON o.id = op.org_id`;
+  const params: any[] = [];
+
+  if (search) {
+    query += " WHERE o.name LIKE ? OR o.slug LIKE ?";
+    params.push(`%${search}%`, `%${search}%`);
+  }
+  query += " ORDER BY o.created_at DESC LIMIT ? OFFSET ?";
+  params.push(limit, offset);
+
+  const { results } = await c.env.DB.prepare(query).bind(...params).all();
+
+  let countQuery = "SELECT COUNT(*) as count FROM organizations";
+  const countParams: any[] = [];
+  if (search) {
+    countQuery += " WHERE name LIKE ? OR slug LIKE ?";
+    countParams.push(`%${search}%`, `%${search}%`);
+  }
+  const total = countParams.length > 0
+    ? await c.env.DB.prepare(countQuery).bind(...countParams).first<{ count: number }>()
+    : await c.env.DB.prepare(countQuery).first<{ count: number }>();
+
+  return c.json({ organizations: results, total: total?.count || 0, page, limit });
+});
+
+app.post("/api/admin/organizations", adminMiddleware, async (c) => {
+  const { name, slug, ownerEmail, tier, maxSeats, sector, domain, plan } = await c.req.json();
+  if (!name || !slug || !ownerEmail) return c.json({ error: "Name, slug, and owner email required" }, 400);
+
+  const slugRegex = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+  if (!slugRegex.test(slug)) return c.json({ error: "Slug must be lowercase letters, numbers, and hyphens" }, 400);
+
+  const existingSlug = await c.env.DB.prepare("SELECT id FROM organizations WHERE slug = ?").bind(slug).first();
+  if (existingSlug) return c.json({ error: "Organisation slug already taken" }, 409);
+
+  const owner = await c.env.DB.prepare("SELECT id FROM users WHERE email = ?").bind(ownerEmail.toLowerCase()).first<{ id: string }>();
+  if (!owner) return c.json({ error: "Owner email not found" }, 404);
+
+  const orgId = generateId();
+  const seatCount = Math.max(1, Math.min(1000, parseInt(maxSeats) || 10));
+  const selectedPlan = plan || "starter";
+  const effectivePrice = getEffectiveOrgSeatPrice(selectedPlan, seatCount);
+
+  await c.env.DB.batch([
+    c.env.DB.prepare(
+      "INSERT INTO organizations (id, name, slug, owner_id, tier, max_seats, used_seats, sector, domain) VALUES (?, ?, ?, ?, ?, ?, 1, ?, ?)"
+    ).bind(orgId, name, slug, owner.id, tier || "professional", seatCount, sector || null, domain || null),
+    c.env.DB.prepare("UPDATE users SET org_id = ?, org_role = 'org_admin' WHERE id = ?").bind(orgId, owner.id),
+    c.env.DB.prepare(
+      "INSERT INTO org_pricing (id, org_id, plan, seats_purchased, price_per_seat) VALUES (?, ?, ?, ?, ?)"
+    ).bind(generateId(), orgId, selectedPlan, seatCount, effectivePrice),
+  ]);
+
+  return c.json({ success: true, orgId });
+});
+
+app.patch("/api/admin/organizations/:id", adminMiddleware, async (c) => {
+  const orgId = c.req.param("id");
+  const { name, tier, maxSeats, sector, domain, plan } = await c.req.json();
+
+  const org = await c.env.DB.prepare("SELECT id FROM organizations WHERE id = ?").bind(orgId).first();
+  if (!org) return c.json({ error: "Organisation not found" }, 404);
+
+  await c.env.DB.prepare(
+    "UPDATE organizations SET name = COALESCE(?, name), tier = COALESCE(?, tier), max_seats = COALESCE(?, max_seats), sector = COALESCE(?, sector), domain = COALESCE(?, domain) WHERE id = ?"
+  ).bind(name || null, tier || null, maxSeats || null, sector || null, domain || null, orgId).run();
+
+  if (plan || maxSeats) {
+    const seats = maxSeats || 10;
+    const effectivePrice = getEffectiveOrgSeatPrice(plan || "starter", seats);
+    await c.env.DB.prepare(
+      "UPDATE org_pricing SET plan = COALESCE(?, plan), seats_purchased = COALESCE(?, seats_purchased), price_per_seat = ? WHERE org_id = ?"
+    ).bind(plan || null, maxSeats || null, effectivePrice, orgId).run();
+  }
+
+  return c.json({ success: true });
+});
+
+app.delete("/api/admin/organizations/:id", adminMiddleware, async (c) => {
+  const orgId = c.req.param("id");
+
+  const org = await c.env.DB.prepare("SELECT id FROM organizations WHERE id = ?").bind(orgId).first();
+  if (!org) return c.json({ error: "Organisation not found" }, 404);
+
+  await c.env.DB.batch([
+    c.env.DB.prepare("UPDATE users SET org_id = NULL, org_role = NULL WHERE org_id = ?").bind(orgId),
+    c.env.DB.prepare("DELETE FROM org_invites WHERE org_id = ?").bind(orgId),
+    c.env.DB.prepare("DELETE FROM org_pricing WHERE org_id = ?").bind(orgId),
+    c.env.DB.prepare("DELETE FROM organizations WHERE id = ?").bind(orgId),
+  ]);
+
+  return c.json({ success: true });
+});
+
+app.get("/api/admin/organizations/:id/users", adminMiddleware, async (c) => {
+  const orgId = c.req.param("id");
   const { results } = await c.env.DB.prepare(
-    `SELECT o.*, u.full_name as owner_name, u.email as owner_email,
-       (SELECT COUNT(*) FROM users WHERE org_id = o.id) as member_count
-     FROM organizations o JOIN users u ON u.id = o.owner_id
-     ORDER BY o.created_at DESC`
-  ).all();
-  return c.json({ organizations: results || [] });
+    "SELECT id, email, full_name, department, tier, org_role, last_login, created_at FROM users WHERE org_id = ? ORDER BY created_at"
+  ).bind(orgId).all();
+  return c.json({ users: results });
 });
 
 // ─── Admin: Reset User Access Code ───────────────────────────────────

@@ -14,6 +14,8 @@ export type Env = {
 export type Variables = {
   userId: string;
   deptFilter?: string;
+  orgId?: string;
+  isSuperAdmin?: boolean;
 };
 
 export type AppType = { Bindings: Env; Variables: Variables };

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AskOzzy — Organisation Admin Portal</title>
+
+  <!-- PWA Meta Tags -->
+  <meta name="theme-color" content="#0f1117" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f5f3ef" media="(prefers-color-scheme: light)" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="AskOzzy" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/app.css" />
+  <link rel="stylesheet" href="/css/org-admin.css" />
+  <link rel="icon" href="/icons/icon.svg" type="image/svg+xml" />
+</head>
+<body>
+  <div class="flag-stripe" style="position:fixed;top:0;left:0;right:0;z-index:999;"></div>
+
+  <!-- Loading screen (shown until auth verified) -->
+  <div id="admin-loading" class="admin-loading">
+    <div class="spinner" style="width:32px;height:32px;border-width:3px;"></div>
+    <p>Verifying organisation admin access...</p>
+  </div>
+
+  <!-- Main app (hidden until verified) -->
+  <div id="admin-app" class="admin-app hidden">
+
+    <!-- Header -->
+    <header class="admin-header">
+      <div class="admin-header-left">
+        <div class="admin-logo-icon"></div>
+        <div>
+          <h1>AskOzzy <span>Org Admin</span></h1>
+          <p class="org-name-subtitle" id="org-name-subtitle"></p>
+        </div>
+      </div>
+      <div class="admin-header-right">
+        <span class="admin-user-name" id="admin-user-name"></span>
+        <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
+          <div class="theme-toggle-track">
+            <span class="theme-toggle-icon-dark">&#x1F319;</span>
+            <span class="theme-toggle-icon-light">&#x2600;&#xFE0F;</span>
+            <div class="theme-toggle-thumb"></div>
+          </div>
+        </button>
+        <a href="/" class="admin-back-link">Back to App</a>
+        <button class="btn-admin-logout" onclick="orgAdminLogout()">Sign Out</button>
+      </div>
+    </header>
+
+    <!-- Tab Navigation -->
+    <nav class="admin-tabs" id="admin-tabs">
+      <button class="admin-tab active" data-tab="dashboard" onclick="switchTab('dashboard')">Dashboard</button>
+      <button class="admin-tab" data-tab="members" onclick="switchTab('members')">Members</button>
+      <button class="admin-tab" data-tab="analytics" onclick="switchTab('analytics')">Analytics</button>
+      <button class="admin-tab" data-tab="knowledge" onclick="switchTab('knowledge')">Knowledge Base</button>
+      <button class="admin-tab" data-tab="agents" onclick="switchTab('agents')">AI Agents</button>
+      <button class="admin-tab" data-tab="announcements" onclick="switchTab('announcements')">Announcements</button>
+      <button class="admin-tab" data-tab="billing" onclick="switchTab('billing')">Billing</button>
+      <button class="admin-tab" data-tab="settings" onclick="switchTab('settings')">Settings</button>
+    </nav>
+
+    <!-- Tab Content -->
+    <div class="admin-content">
+
+      <!-- Dashboard -->
+      <div class="admin-tab-panel active" id="panel-dashboard">
+        <div id="dashboard-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+      </div>
+
+      <!-- Members -->
+      <div class="admin-tab-panel" id="panel-members">
+        <div class="admin-toolbar">
+          <input type="text" id="member-search" class="admin-search" placeholder="Search members by name or email..." oninput="debouncedMemberSearch()" />
+          <span class="admin-count" id="member-count"></span>
+          <button class="btn-action primary" onclick="openInviteModal()">+ Invite Member</button>
+        </div>
+        <div id="members-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+        <div id="members-pagination" class="pagination"></div>
+      </div>
+
+      <!-- Analytics -->
+      <div class="admin-tab-panel" id="panel-analytics">
+        <div id="analytics-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+      </div>
+
+      <!-- Knowledge Base -->
+      <div class="admin-tab-panel" id="panel-knowledge">
+        <div id="knowledge-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+      </div>
+
+      <!-- AI Agents -->
+      <div class="admin-tab-panel" id="panel-agents">
+        <div class="admin-card" style="margin-bottom:24px;">
+          <h3>Create Agent</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Agent Name</label>
+              <input type="text" id="agent-name" class="admin-search" style="max-width:100%;" placeholder="e.g. HR Assistant" />
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Icon</label>
+              <input type="text" id="agent-icon" class="admin-search" style="max-width:100%;" placeholder="Emoji icon e.g. &#x1F916;" value="&#x1F916;" />
+            </div>
+          </div>
+          <div style="margin-bottom:12px;">
+            <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Description</label>
+            <input type="text" id="agent-description" class="admin-search" style="max-width:100%;" placeholder="Short description of what this agent does" />
+          </div>
+          <div style="margin-bottom:12px;">
+            <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">System Prompt</label>
+            <textarea id="agent-system-prompt" rows="4" style="width:100%;padding:10px 14px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:13px;font-family:inherit;resize:vertical;outline:none;box-sizing:border-box;" placeholder="You are an AI assistant that..."></textarea>
+          </div>
+          <button class="btn-action primary" onclick="createAgent()">Create Agent</button>
+        </div>
+        <div id="agents-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+      </div>
+
+      <!-- Announcements -->
+      <div class="admin-tab-panel" id="panel-announcements">
+        <div class="admin-card" style="margin-bottom:24px;">
+          <h3>Create Announcement</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Title</label>
+              <input type="text" id="announcement-title" class="admin-search" style="max-width:100%;" placeholder="Announcement title" />
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Type</label>
+              <select id="announcement-type" class="inline-select" style="width:100%;padding:10px 14px;">
+                <option value="info">Info</option>
+                <option value="warning">Warning</option>
+                <option value="success">Success</option>
+                <option value="maintenance">Maintenance</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-bottom:12px;">
+            <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Content</label>
+            <textarea id="announcement-content" rows="3" style="width:100%;padding:10px 14px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:13px;font-family:inherit;resize:vertical;outline:none;box-sizing:border-box;" placeholder="Announcement content..."></textarea>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center;">
+            <label style="font-size:12px;color:var(--text-secondary);">
+              <input type="checkbox" id="announcement-dismissible" checked /> Dismissible
+            </label>
+            <button class="btn-action primary" onclick="createAnnouncement()">Publish</button>
+          </div>
+        </div>
+        <div id="announcements-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+      </div>
+
+      <!-- Billing -->
+      <div class="admin-tab-panel" id="panel-billing">
+        <div id="billing-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+      </div>
+
+      <!-- Settings -->
+      <div class="admin-tab-panel" id="panel-settings">
+        <div id="settings-content"><div class="admin-loader"><div class="spinner"></div></div></div>
+      </div>
+
+    </div><!-- /admin-content -->
+
+    <!-- Invite Member Modal -->
+    <div class="modal-overlay" id="invite-modal">
+      <div class="modal" style="max-width:480px;">
+        <div class="modal-header">
+          <h3>Invite Member</h3>
+          <button class="modal-close" onclick="closeInviteModal()">&#x2715;</button>
+        </div>
+        <div class="modal-body" style="padding:20px 24px;">
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Email Address</label>
+            <input type="email" id="invite-email" class="admin-search" style="max-width:100%;width:100%;" placeholder="colleague@example.com" />
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Role</label>
+              <select id="invite-role" class="inline-select" style="width:100%;padding:10px 14px;">
+                <option value="member">Member</option>
+                <option value="org_admin">Admin</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Tier Override</label>
+              <select id="invite-tier" class="inline-select" style="width:100%;padding:10px 14px;">
+                <option value="">Use org default</option>
+                <option value="free">Free</option>
+                <option value="professional">Professional</option>
+                <option value="premium">Premium</option>
+              </select>
+            </div>
+          </div>
+          <div id="invite-result" style="margin-bottom:12px;"></div>
+          <button class="btn-action primary" onclick="submitInvite()" style="width:100%;">Send Invite</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /admin-app -->
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" crossorigin="anonymous" defer></script>
+  <script src="/js/org-admin.js"></script>
+</body>
+</html>
