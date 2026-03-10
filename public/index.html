@@ -162,8 +162,13 @@
       <div id="discover-screen" class="discover-screen hidden" style="display:none;">
         <div class="discover-header">
           <div class="discover-title-row">
-            <h2>Discover</h2>
-            <p class="discover-subtitle">Trending news from around the world</p>
+            <button class="discover-back-btn" onclick="hapticFeedback('light'); showWelcomeScreen();" title="Back to Home" aria-label="Back to Home">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            </button>
+            <div>
+              <h2>Discover</h2>
+              <p class="discover-subtitle">Trending news from around the world</p>
+            </div>
           </div>
         </div>
         <div class="discover-categories-wrap" id="discover-categories-wrap">

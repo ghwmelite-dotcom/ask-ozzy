@@ -10505,6 +10505,37 @@ button, a, [onclick], [role="button"], .tool-pill, .category-tab,
 .discover-header {
   margin-bottom: 24px;
 }
+.discover-title-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.discover-back-btn {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+.discover-back-btn:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-color: var(--border-light);
+  transform: translateX(-2px);
+}
+.discover-back-btn:active {
+  transform: scale(0.92);
+  transition-duration: 0.1s;
+}
 .discover-title-row h2 {
   font-size: 1.75rem;
   font-weight: 700;
