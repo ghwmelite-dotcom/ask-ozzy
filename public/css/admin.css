@@ -369,6 +369,65 @@
   box-shadow: var(--gold-glow-soft);
 }
 
+.btn-action.warning {
+  color: #f59e0b;
+}
+.btn-action.warning:hover {
+  border-color: #f59e0b;
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.btn-action.success {
+  color: #10b981;
+}
+.btn-action.success:hover {
+  border-color: #10b981;
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.08);
+}
+
+/* ─── Status Badges ─────────────────────────────────────────────── */
+
+.status-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.status-active {
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+.status-deactivated {
+  background: rgba(239, 68, 68, 0.10);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+/* ─── User Actions Group ────────────────────────────────────────── */
+
+.user-actions-cell {
+  white-space: nowrap;
+}
+.user-actions-group {
+  display: flex;
+  gap: 4px;
+  flex-wrap: nowrap;
+}
+
+/* ─── Deactivated Row ───────────────────────────────────────────── */
+
+tr.row-deactivated td {
+  opacity: 0.55;
+}
+tr.row-deactivated td:last-child {
+  opacity: 1;
+}
+
 /* ─── Bar Chart ──────────────────────────────────────────────────── */
 
 .bar-chart {

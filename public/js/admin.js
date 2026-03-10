@@ -308,15 +308,23 @@ async function loadUsers(page) {
     }
 
     el.innerHTML = '<div class="admin-table-wrapper"><table class="admin-table"><thead><tr>' +
-      '<th>Name</th><th>Email</th><th>Department</th><th>Tier</th><th>Role</th><th>Referrals</th><th>Joined</th><th>Actions</th>' +
+      '<th>Name</th><th>Email</th><th>Department</th><th>Status</th><th>Tier</th><th>Role</th><th>Referrals</th><th>Joined</th><th>Actions</th>' +
       '</tr></thead><tbody>' +
       d.users.map(u => {
         const isSelf = u.id === adminUser.id;
-        return '<tr>' +
+        const isActive = u.status !== 'deactivated';
+        const statusBadge = isActive
+          ? '<span class="status-badge status-active">Active</span>'
+          : '<span class="status-badge status-deactivated">Deactivated</span>';
+        const toggleStatusBtn = isActive
+          ? '<button class="btn-action warning" onclick="toggleUserStatus(\'' + u.id + '\', \'' + escapeHtml(u.email) + '\', \'deactivated\')" title="Deactivate user">Deactivate</button>'
+          : '<button class="btn-action success" onclick="toggleUserStatus(\'' + u.id + '\', \'' + escapeHtml(u.email) + '\', \'active\')" title="Activate user">Activate</button>';
+        return '<tr' + (!isActive ? ' class="row-deactivated"' : '') + '>' +
           '<td>' + escapeHtml(u.full_name) + '</td>' +
           '<td>' + escapeHtml(u.email) + '</td>' +
           '<td>' + escapeHtml(u.department || '—') + '</td>' +
-          '<td><select class="inline-select" onchange="changeTier(\'' + u.id + '\', this.value)" ' + '>' +
+          '<td>' + statusBadge + '</td>' +
+          '<td><select class="inline-select" onchange="changeTier(\'' + u.id + '\', this.value)">' +
             ['free','professional','enterprise'].map(t =>
               '<option value="' + t + '"' + (t === u.tier ? ' selected' : '') + '>' + t.charAt(0).toUpperCase() + t.slice(1) + '</option>'
             ).join('') +
@@ -328,9 +336,12 @@ async function loadUsers(page) {
           '</select></td>' +
           '<td>' + (u.total_referrals || 0) + '</td>' +
           '<td>' + formatDateShort(u.created_at) + '</td>' +
-          '<td style="white-space:nowrap;">' + (isSelf ? '<span style="font-size:11px;color:var(--text-muted);">You</span>' :
-            '<button class="btn-action" onclick="resetUserAccount(\'' + u.id + '\', \'' + escapeHtml(u.email) + '\')" style="margin-right:4px;">Reset</button>' +
-            '<button class="btn-action danger" onclick="deleteUser(\'' + u.id + '\', \'' + escapeHtml(u.email) + '\')">Delete</button>') +
+          '<td class="user-actions-cell">' + (isSelf ? '<span style="font-size:11px;color:var(--text-muted);">You</span>' :
+            '<div class="user-actions-group">' +
+              toggleStatusBtn +
+              '<button class="btn-action" onclick="resetUserAccount(\'' + u.id + '\', \'' + escapeHtml(u.email) + '\')">Reset</button>' +
+              '<button class="btn-action danger" onclick="deleteUser(\'' + u.id + '\', \'' + escapeHtml(u.email) + '\')">Delete</button>' +
+            '</div>') +
           '</td>' +
         '</tr>';
       }).join("") +
@@ -373,6 +384,28 @@ async function changeRole(userId, role) {
   } catch {
     alert("Failed to change role");
     loadUsers(usersPage);
+  }
+}
+
+async function toggleUserStatus(userId, email, newStatus) {
+  const action = newStatus === 'active' ? 'activate' : 'deactivate';
+  if (!confirm(action.charAt(0).toUpperCase() + action.slice(1) + " user " + email + "?\n\n" +
+    (newStatus === 'deactivated' ? "The user will be unable to log in until reactivated." : "The user will be able to log in again."))) return;
+
+  try {
+    const res = await apiFetch("/api/admin/users/" + userId + "/status", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: newStatus })
+    });
+    if (!res.ok) {
+      const d = await res.json();
+      alert(d.error || "Failed to " + action + " user");
+    } else {
+      loadUsers(usersPage);
+    }
+  } catch {
+    alert("Failed to " + action + " user");
   }
 }
 

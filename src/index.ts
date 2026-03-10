@@ -591,6 +591,12 @@ app.post("/api/auth/login", async (c) => {
     return c.json({ error: "Invalid email or authentication code" }, 401);
   }
 
+  // Check if account is deactivated
+  const userStatus = await c.env.DB.prepare("SELECT status FROM users WHERE id = ?").bind(user.id).first<{ status: string }>();
+  if (userStatus?.status === "deactivated") {
+    return c.json({ error: "Your account has been deactivated. Please contact your administrator." }, 403);
+  }
+
   const trimmedCred = credential.trim();
   const isNumericCode = /^\d{6}$/.test(trimmedCred);
   let authenticated = false;
@@ -4435,7 +4441,7 @@ app.get("/api/admin/users", adminMiddleware, async (c) => {
   const offset = (page - 1) * limit;
 
   const countQuery = "SELECT COUNT(*) as count FROM users";
-  const dataQuery = "SELECT id, email, full_name, department, role, tier, affiliate_tier, total_referrals, affiliate_earnings, created_at, last_login FROM users";
+  const dataQuery = "SELECT id, email, full_name, department, role, tier, status, affiliate_tier, total_referrals, affiliate_earnings, created_at, last_login FROM users";
 
   if (search) {
     const where = " WHERE email LIKE ? OR full_name LIKE ?";
@@ -4482,6 +4488,29 @@ app.patch("/api/admin/users/:id/role", adminMiddleware, async (c) => {
   }
   await c.env.DB.prepare("UPDATE users SET role = ? WHERE id = ?").bind(role, id).run();
   return c.json({ success: true });
+});
+
+// Activate or deactivate user
+app.patch("/api/admin/users/:id/status", adminMiddleware, async (c) => {
+  const id = c.req.param("id");
+  const adminId = c.get("userId");
+  if (id === adminId) {
+    return c.json({ error: "Cannot change your own status" }, 400);
+  }
+  const { status } = await c.req.json();
+  const validStatuses = ["active", "deactivated"];
+  if (!validStatuses.includes(status)) {
+    return c.json({ error: "Invalid status. Must be: active or deactivated" }, 400);
+  }
+  await c.env.DB.prepare("UPDATE users SET status = ? WHERE id = ?").bind(status, id).run();
+  // Log to audit trail
+  const user = await c.env.DB.prepare("SELECT email FROM users WHERE id = ?").bind(id).first();
+  try {
+    await c.env.DB.prepare(
+      "INSERT INTO user_audit_log (id, user_id, action, details, created_at) VALUES (?, ?, ?, ?, datetime('now'))"
+    ).bind(crypto.randomUUID(), id, status === "active" ? "account_activated" : "account_deactivated", `Admin action on ${user?.email || id}`).run();
+  } catch {}
+  return c.json({ success: true, status });
 });
 
 // Delete user + all data (comprehensive cascade)
