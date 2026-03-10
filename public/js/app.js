@@ -4890,6 +4890,16 @@ function hideDiscoverScreen() {
   if (navBtn) navBtn.classList.remove('active');
 }
 
+function discoverGoBack() {
+  if (typeof hapticFeedback === 'function') hapticFeedback('light');
+  hideDiscoverScreen();
+  document.getElementById('welcome-screen').classList.remove('hidden');
+  document.getElementById('welcome-screen').style.display = '';
+  const chatScreen = document.getElementById('chat-screen');
+  chatScreen.classList.add('hidden');
+  chatScreen.style.display = 'none';
+}
+
 function initDiscoverPullToRefresh(container) {
   if (container.dataset.ptrInit) return;
   container.dataset.ptrInit = '1';
