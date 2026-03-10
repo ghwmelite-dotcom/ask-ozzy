@@ -4521,52 +4521,37 @@ app.delete("/api/admin/users/:id", adminMiddleware, async (c) => {
     return c.json({ error: "Cannot delete your own account" }, 400);
   }
   const db = c.env.DB;
-  // Delete messages in user's conversations
-  await db.prepare(
-    "DELETE FROM messages WHERE conversation_id IN (SELECT id FROM conversations WHERE user_id = ?)"
-  ).bind(id).run();
-  // Delete message ratings
-  await db.prepare("DELETE FROM message_ratings WHERE user_id = ?").bind(id).run();
-  // Delete conversations
-  await db.prepare("DELETE FROM conversations WHERE user_id = ?").bind(id).run();
-  // Delete folders
-  await db.prepare("DELETE FROM folders WHERE user_id = ?").bind(id).run();
-  // Delete user memories
-  await db.prepare("DELETE FROM user_memories WHERE user_id = ?").bind(id).run();
-  // Delete usage log
-  await db.prepare("DELETE FROM usage_log WHERE user_id = ?").bind(id).run();
-  // Delete referrals
-  await db.prepare("DELETE FROM referrals WHERE referrer_id = ? OR referred_id = ?").bind(id, id).run();
-  // Delete push subscriptions
-  await db.prepare("DELETE FROM push_subscriptions WHERE user_id = ?").bind(id).run();
-  // Delete webauthn credentials
-  await db.prepare("DELETE FROM webauthn_credentials WHERE user_id = ?").bind(id).run();
-  // Delete moderation flags
-  await db.prepare("DELETE FROM moderation_flags WHERE user_id = ?").bind(id).run();
-  // Delete research reports
-  await db.prepare("DELETE FROM research_reports WHERE user_id = ?").bind(id).run();
-  // Delete workflows
-  await db.prepare("DELETE FROM workflows WHERE user_id = ?").bind(id).run();
-  // Delete meetings
-  await db.prepare("DELETE FROM meetings WHERE user_id = ?").bind(id).run();
-  // Delete space memberships
-  await db.prepare("DELETE FROM space_members WHERE user_id = ?").bind(id).run();
-  // Delete affiliate data
-  await db.prepare("DELETE FROM affiliate_transactions WHERE user_id = ?").bind(id).run();
-  await db.prepare("DELETE FROM withdrawal_requests WHERE user_id = ?").bind(id).run();
-  await db.prepare("DELETE FROM affiliate_wallets WHERE user_id = ?").bind(id).run();
-  // Delete productivity stats
-  await db.prepare("DELETE FROM productivity_stats WHERE user_id = ?").bind(id).run();
-  // Delete audit log entries (keep for compliance? — delete since user requested full removal)
-  await db.prepare("DELETE FROM user_audit_log WHERE user_id = ?").bind(id).run();
-  // Delete USSD sessions
-  await db.prepare("DELETE FROM ussd_sessions WHERE user_id = ?").bind(id).run();
-  // Phase 6: Delete user profiles, document credits, exam attempts
-  try { await db.prepare("DELETE FROM user_profiles WHERE user_id = ?").bind(id).run(); } catch {}
-  try { await db.prepare("DELETE FROM document_credits WHERE user_id = ?").bind(id).run(); } catch {}
-  try { await db.prepare("DELETE FROM document_credit_transactions WHERE user_id = ?").bind(id).run(); } catch {}
-  try { await db.prepare("DELETE FROM exam_attempts WHERE user_id = ?").bind(id).run(); } catch {}
-  // Delete user
+  // Cascade delete all user data — each wrapped in try/catch in case table doesn't exist
+  const deletes: Array<{ sql: string; binds: string[] }> = [
+    { sql: "DELETE FROM messages WHERE conversation_id IN (SELECT id FROM conversations WHERE user_id = ?)", binds: [id] },
+    { sql: "DELETE FROM message_ratings WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM conversations WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM folders WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM user_memories WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM usage_log WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM referrals WHERE referrer_id = ? OR referred_id = ?", binds: [id, id] },
+    { sql: "DELETE FROM push_subscriptions WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM webauthn_credentials WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM moderation_flags WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM research_reports WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM workflows WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM meetings WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM space_members WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM affiliate_transactions WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM withdrawal_requests WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM affiliate_wallets WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM productivity_stats WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM user_audit_log WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM ussd_sessions WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM user_profiles WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM document_credits WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM document_credit_transactions WHERE user_id = ?", binds: [id] },
+    { sql: "DELETE FROM exam_attempts WHERE user_id = ?", binds: [id] },
+  ];
+  for (const del of deletes) {
+    try { await db.prepare(del.sql).bind(...del.binds).run(); } catch {}
+  }
+  // Delete user record
   await db.prepare("DELETE FROM users WHERE id = ?").bind(id).run();
   return c.json({ success: true });
 });
