@@ -9,6 +9,7 @@ export type Env = {
   VAPID_PUBLIC_KEY: string;
   PAYSTACK_SECRET: string;
   BOOTSTRAP_SECRET?: string;
+  GNEWS_API_KEY: string;
 };
 
 export type Variables = {

@@ -201,6 +201,93 @@ function dismissInlineTip(btn) {
   }
 }
 
+// ─── Rotating Tip Bar (Claude Code style) ───────────────────────────
+const _platformTips = [
+  // Affiliate earnings
+  "Earn 30% commission every month when someone you refer subscribes. That's up to GHS 30/month per referral.",
+  "Built a network of 10 paying referrals? That's GHS 300/month in passive income — automatically.",
+  "Your referrals refer others? You earn 5% on their payments too. Two levels of passive income.",
+  "Hit 10 referrals and unlock a GHS 30 bonus. 25 referrals = GHS 60. 100 referrals = free Enterprise for life.",
+  "Share your referral link on WhatsApp — one tap, and you start earning when they subscribe.",
+  "Imagine 50 colleagues subscribing at GHS 60/month. That's GHS 900/month in your affiliate wallet.",
+  "New users get GHS 5 welcome bonus when they use your referral code. Easy sell.",
+  // Platform benefits
+  "AskOzzy runs on 10 AI models — switch between them for different tasks, all in one place.",
+  "Draft official GoG memos, cabinet briefs, and policy documents with ready-made templates.",
+  "Deep Research mode scans the web in 5 steps and delivers sourced, referenced answers.",
+  "Upload a CSV or Excel file and get instant charts, summaries, and AI-powered analysis.",
+  "Voice input works in Twi, Ga, Ewe, Hausa, Dagbani, French, and English.",
+  "Your data stays in Ghana — sovereign, private, encrypted. No foreign servers.",
+  "AskOzzy works offline. Start typing even without internet — it syncs when you're back online.",
+
+  "Upload meeting recordings and get AI-generated minutes in seconds.",
+  "Pro users get 200 messages/day, all AI models, and priority response speeds.",
+];
+
+const _studentPlatformTips = [
+  // Affiliate earnings
+  "Earn 30% commission when classmates you refer subscribe. Share your link, earn every month.",
+  "Refer 10 classmates on Starter plans — that's GHS 36/month in passive income.",
+  "Your referrals refer others? You earn 5% on their payments too. Two levels of earnings.",
+  "Hit 10 referrals = GHS 30 bonus. 25 = GHS 60. 100 referrals = free Enterprise for life.",
+  "Share your referral link in your class WhatsApp group — start earning today.",
+  "New users get GHS 5 welcome bonus with your code. Tell your study group.",
+  // Platform benefits
+  "Student plans start at GHS 12/month — less than a printout at the library.",
+  "AskOzzy has 16 academic templates: essays, research proposals, lit reviews, and more.",
+  "Deep Research mode finds and cites web sources — perfect for assignments.",
+  "Upload your data and get instant charts and analysis for your thesis or project.",
+  "Voice input in Twi, Ga, Ewe, Hausa, Dagbani, French, and English — speak naturally.",
+  "Works offline — draft essays even without Wi-Fi. Syncs when you reconnect.",
+  "Pro students get unlimited conversations — no daily caps during exam season.",
+  "AI remembers your courses and research topics — picks up right where you left off.",
+];
+
+let _tipBarIndex = 0;
+let _tipBarInterval = null;
+
+function getTipBarTips() {
+  return isStudent() ? _studentPlatformTips : _platformTips;
+}
+
+function initTipBar() {
+  const tips = getTipBarTips();
+  _tipBarIndex = Math.floor(Math.random() * tips.length);
+
+  const welcomeText = document.getElementById('welcome-tip-text');
+  const inputText = document.getElementById('input-tip-text');
+  if (welcomeText) welcomeText.textContent = tips[_tipBarIndex];
+  if (inputText) inputText.textContent = tips[_tipBarIndex];
+
+  if (_tipBarInterval) clearInterval(_tipBarInterval);
+  _tipBarInterval = setInterval(rotateTip, 8000);
+}
+
+function rotateTip() {
+  const tips = getTipBarTips();
+  const welcomeText = document.getElementById('welcome-tip-text');
+  const inputText = document.getElementById('input-tip-text');
+  const targets = [welcomeText, inputText].filter(Boolean);
+
+  // Fade out
+  targets.forEach(el => { el.classList.add('tip-fade-out'); el.classList.remove('tip-fade-in'); });
+
+  setTimeout(() => {
+    _tipBarIndex = (_tipBarIndex + 1) % tips.length;
+    targets.forEach(el => {
+      el.textContent = tips[_tipBarIndex];
+      el.classList.remove('tip-fade-out');
+      el.classList.add('tip-fade-in');
+    });
+    // Fade in
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        targets.forEach(el => el.classList.remove('tip-fade-in'));
+      });
+    });
+  }, 400);
+}
+
 // ─── Registration Type System ───────────────────────────────────────
 let _regType = 'individual';
 
@@ -346,10 +433,10 @@ function applyPersonaUI() {
 
   if (isStudent()) {
     if (subtitle) subtitle.textContent = 'Your AI study companion for academic success. Choose a template below or start a free conversation.';
-    if (sidebarSub) sidebarSub.textContent = 'AI for Ghana Students';
+    if (sidebarSub) sidebarSub.textContent = 'Smart Learning Starts Here';
   } else {
     if (subtitle) subtitle.textContent = 'Your private AI assistant for GoG operations. Choose a template below or start a free conversation.';
-    if (sidebarSub) sidebarSub.textContent = 'AI for All GoG Staff';
+    if (sidebarSub) sidebarSub.textContent = 'Smart Government Starts Here';
   }
   // Hide welcome persona selector when logged in (persona is saved in account)
   if (welcomeSelector) {
@@ -609,6 +696,9 @@ document.addEventListener("DOMContentLoaded", () => {
     state.userType = state.user.userType || 'gog_employee';
     onAuthenticated();
   }
+
+  // Initialize rotating tip bar
+  initTipBar();
 });
 
 // ─── Auth Gate — the core UX pattern ─────────────────────────────────
@@ -1518,7 +1608,9 @@ async function deleteConversation(id) {
 // ─── Chat ────────────────────────────────────────────────────────────
 
 function showChatScreen() {
+  hideDiscoverScreen();
   document.getElementById("welcome-screen").classList.add("hidden");
+  document.getElementById("welcome-screen").style.display = "none";
   const chatScreen = document.getElementById("chat-screen");
   chatScreen.classList.remove("hidden");
   chatScreen.style.display = "flex";
@@ -1526,13 +1618,13 @@ function showChatScreen() {
 }
 
 function showWelcomeScreen() {
+  hideDiscoverScreen();
   document.getElementById("welcome-screen").classList.remove("hidden");
+  document.getElementById("welcome-screen").style.display = "";
   const chatScreen = document.getElementById("chat-screen");
   chatScreen.classList.add("hidden");
   chatScreen.style.display = "none";
 }
-
-
 
 function renderMessages() {
   const container = document.getElementById("chat-messages");
@@ -4741,6 +4833,304 @@ function dismissAnnouncement(id) {
   }
 }
 
+// ─── Discover News Feed ─────────────────────────────────────────────
+
+const discoverState = {
+  articles: [],
+  category: 'all',
+  page: 1,
+  hasMore: false,
+  loading: false,
+};
+
+const DISCOVER_CATEGORIES = [
+  { id: 'all', label: 'All' },
+  { id: 'world', label: 'World' },
+  { id: 'government', label: 'Gov & Politics' },
+  { id: 'business', label: 'Business' },
+  { id: 'technology', label: 'Technology' },
+  { id: 'science', label: 'Science' },
+  { id: 'health', label: 'Health' },
+  { id: 'sports', label: 'Sports' },
+  { id: 'entertainment', label: 'Entertainment' },
+];
+
+function showDiscoverScreen() {
+  document.getElementById('welcome-screen').classList.add('hidden');
+  document.getElementById('welcome-screen').style.display = 'none';
+  const chat = document.getElementById('chat-screen');
+  chat.classList.add('hidden');
+  chat.style.display = 'none';
+
+  const discover = document.getElementById('discover-screen');
+  discover.classList.remove('hidden');
+  discover.style.display = '';
+
+  // Highlight nav button
+  const navBtn = document.getElementById('btn-discover-nav');
+  if (navBtn) navBtn.classList.add('active');
+
+  // Load on first visit or if stale
+  if (discoverState.articles.length === 0) {
+    renderDiscoverCategories();
+    loadDiscoverArticles(true);
+  }
+
+  // Set up pull-to-refresh
+  initDiscoverPullToRefresh(discover);
+}
+
+function hideDiscoverScreen() {
+  const discover = document.getElementById('discover-screen');
+  if (discover) {
+    discover.classList.add('hidden');
+    discover.style.display = 'none';
+  }
+  const navBtn = document.getElementById('btn-discover-nav');
+  if (navBtn) navBtn.classList.remove('active');
+}
+
+function initDiscoverPullToRefresh(container) {
+  if (container.dataset.ptrInit) return;
+  container.dataset.ptrInit = '1';
+
+  let startY = 0;
+  let pulling = false;
+  const THRESHOLD = 80;
+
+  container.addEventListener('touchstart', (e) => {
+    if (container.scrollTop <= 0) {
+      startY = e.touches[0].clientY;
+      pulling = true;
+    }
+  }, { passive: true });
+
+  container.addEventListener('touchmove', (e) => {
+    if (!pulling) return;
+    const dy = e.touches[0].clientY - startY;
+    if (dy > 10 && container.scrollTop <= 0) {
+      container.style.transform = `translateY(${Math.min(dy * 0.4, THRESHOLD)}px)`;
+      container.style.transition = 'none';
+      if (dy >= THRESHOLD && !container.dataset.hapticFired) {
+        container.dataset.hapticFired = '1';
+        hapticFeedback('light');
+      }
+    }
+  }, { passive: true });
+
+  container.addEventListener('touchend', () => {
+    if (!pulling) return;
+    pulling = false;
+    delete container.dataset.hapticFired;
+
+    const currentTransform = parseFloat(container.style.transform.replace(/[^0-9.]/g, '')) || 0;
+    container.style.transform = '';
+    container.style.transition = 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+
+    if (currentTransform >= THRESHOLD * 0.4) {
+      hapticFeedback('medium');
+      discoverState.articles = [];
+      loadDiscoverArticles(true);
+    }
+  }, { passive: true });
+}
+
+function renderDiscoverCategories() {
+  const container = document.getElementById('discover-categories');
+  if (!container) return;
+
+  container.innerHTML = DISCOVER_CATEGORIES.map(cat => `
+    <button class="discover-cat-btn${cat.id === discoverState.category ? ' active' : ''}"
+            onclick="selectDiscoverCategory('${cat.id}')">
+      ${cat.label}
+    </button>
+  `).join('');
+
+  // Set up scroll edge indicators
+  updateDiscoverCategoryScroll();
+}
+
+function updateDiscoverCategoryScroll() {
+  const container = document.getElementById('discover-categories');
+  const wrap = document.getElementById('discover-categories-wrap');
+  if (!container || !wrap) return;
+
+  function update() {
+    const { scrollLeft, scrollWidth, clientWidth } = container;
+    wrap.classList.toggle('scrolled-start', scrollLeft > 8);
+    wrap.classList.toggle('scrolled-end', scrollLeft + clientWidth >= scrollWidth - 8);
+  }
+  container.removeEventListener('scroll', update);
+  container.addEventListener('scroll', update, { passive: true });
+  update();
+}
+
+function selectDiscoverCategory(categoryId) {
+  hapticFeedback('light');
+  discoverState.category = categoryId;
+  discoverState.page = 1;
+  discoverState.articles = [];
+  renderDiscoverCategories();
+  loadDiscoverArticles(true);
+}
+
+async function loadDiscoverArticles(reset) {
+  if (discoverState.loading) return;
+  discoverState.loading = true;
+
+  const grid = document.getElementById('discover-grid');
+  const loadMoreBtn = document.getElementById('discover-load-more');
+  const emptyState = document.getElementById('discover-empty');
+
+  if (reset) {
+    discoverState.page = 1;
+    grid.innerHTML = renderDiscoverSkeletons(6);
+    if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+    if (emptyState) emptyState.style.display = 'none';
+  }
+
+  try {
+    const params = new URLSearchParams({
+      page: String(discoverState.page),
+      limit: '20',
+    });
+    if (discoverState.category !== 'all') {
+      params.set('category', discoverState.category);
+    }
+
+    const res = await fetch(`${API}/api/discover?${params}`);
+    const data = await res.json();
+
+    if (reset) {
+      discoverState.articles = data.articles || [];
+    } else {
+      discoverState.articles = discoverState.articles.concat(data.articles || []);
+    }
+    discoverState.hasMore = data.hasMore || false;
+
+    if (discoverState.articles.length === 0) {
+      grid.innerHTML = '';
+      if (emptyState) emptyState.style.display = '';
+      if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+    } else {
+      if (emptyState) emptyState.style.display = 'none';
+      grid.innerHTML = discoverState.articles.map(renderDiscoverCard).join('');
+      if (loadMoreBtn) loadMoreBtn.style.display = discoverState.hasMore ? '' : 'none';
+    }
+  } catch (err) {
+    console.error('Failed to load discover articles:', err);
+    if (reset) {
+      grid.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:32px;">Failed to load news. Please try again.</p>';
+    }
+  } finally {
+    discoverState.loading = false;
+  }
+}
+
+function loadMoreDiscover() {
+  discoverState.page++;
+  loadDiscoverArticles(false);
+}
+
+function renderDiscoverCard(article) {
+  const timeAgo = getDiscoverTimeAgo(article.published_at);
+  const catClass = `cat-${article.category}`;
+  const catLabel = DISCOVER_CATEGORIES.find(c => c.id === article.category)?.label || article.category;
+
+  const imgHtml = article.image_url
+    ? `<img class="discover-card-img" src="${escapeHtml(article.image_url)}" alt="" loading="lazy" onerror="this.outerHTML='<div class=\\'discover-card-img-placeholder\\'><svg width=\\'32\\' height=\\'32\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'1.5\\'><circle cx=\\'12\\' cy=\\'12\\' r=\\'10\\'/><polygon points=\\'16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76\\'/></svg></div>'">`
+    : `<div class="discover-card-img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>`;
+
+  return `
+    <article class="discover-card">
+      ${imgHtml}
+      <div class="discover-card-body">
+        <div class="discover-card-meta">
+          <span class="discover-card-category ${catClass}">${escapeHtml(catLabel)}</span>
+          <span>${escapeHtml(article.source_name || 'Unknown')}</span>
+          <span>&middot;</span>
+          <span>${timeAgo}</span>
+        </div>
+        <h3 class="discover-card-title">${escapeHtml(article.title)}</h3>
+        <p class="discover-card-desc">${escapeHtml(article.description || '')}</p>
+      </div>
+      <div class="discover-card-actions">
+        <a class="discover-btn discover-btn-read" href="${escapeHtml(article.article_url)}" target="_blank" rel="noopener noreferrer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Read
+        </a>
+        <button class="discover-btn discover-btn-discuss" onclick="discussArticle('${article.id}')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Discuss with Ozzy
+        </button>
+      </div>
+    </article>
+  `;
+}
+
+function renderDiscoverSkeletons(count) {
+  return Array.from({ length: count }, () => `
+    <div class="discover-skeleton">
+      <div class="discover-skeleton-img"></div>
+      <div class="discover-skeleton-body">
+        <div class="discover-skeleton-line short"></div>
+        <div class="discover-skeleton-line medium"></div>
+        <div class="discover-skeleton-line"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function getDiscoverTimeAgo(dateStr) {
+  if (!dateStr) return '';
+  const now = Date.now();
+  const then = new Date(dateStr).getTime();
+  const diff = Math.max(0, now - then);
+  const mins = Math.floor(diff / 60000);
+  if (mins < 1) return 'Just now';
+  if (mins < 60) return mins + 'm ago';
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return hours + 'h ago';
+  const days = Math.floor(hours / 24);
+  return days + 'd ago';
+}
+
+async function discussArticle(articleId) {
+  hapticFeedback('medium');
+  if (!isLoggedIn()) {
+    requireAuth(() => discussArticle(articleId));
+    return;
+  }
+
+  try {
+    const res = await fetch(`${API}/api/discover/discuss`, {
+      method: 'POST',
+      headers: { ...authHeaders(), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ articleId }),
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      alert(err.error || 'Failed to start discussion');
+      return;
+    }
+
+    const data = await res.json();
+    state.activeConversationId = data.conversationId;
+
+    // Hide Discover, show Chat
+    hideDiscoverScreen();
+    showChatScreen();
+    await loadConversations();
+
+    // Load the conversation messages (the pre-loaded article context)
+    await loadMessages(data.conversationId);
+  } catch (err) {
+    console.error('Failed to discuss article:', err);
+    alert('Something went wrong. Please try again.');
+  }
+}
+
 // ─── User Usage Dashboard ────────────────────────────────────────────
 
 async function openUserDashboard() {
@@ -6171,6 +6561,14 @@ function viewTransition(callback) {
   if (typeof origOpenConv === 'function') {
     window.openConversation = function () {
       document.startViewTransition(() => origOpenConv.apply(this, arguments));
+    };
+  }
+
+  // Patch showDiscoverScreen
+  const origShowDiscover = window.showDiscoverScreen;
+  if (typeof origShowDiscover === 'function') {
+    window.showDiscoverScreen = function () {
+      document.startViewTransition(() => origShowDiscover.apply(this, arguments));
     };
   }
 })();
@@ -11213,3 +11611,438 @@ tbody td { border-bottom: 1px solid #e8e4d4; }
   win.document.close();
   setTimeout(() => win.print(), 300);
 }
+
+// ═══════════════════════════════════════════════════════════════════
+//  NATIVE APP ENHANCEMENTS
+// ═══════════════════════════════════════════════════════════════════
+
+// ─── Feature 1: Splash Screen ──────────────────────────────────────
+(function initSplash() {
+  const splash = document.getElementById('splash-screen');
+  const app = document.getElementById('app-screen');
+  if (!splash || !app) return;
+
+  function dismissSplash() {
+    if (splash._dismissed) return;
+    splash._dismissed = true;
+    app.style.opacity = '1';
+    app.style.transition = 'opacity 0.3s ease';
+    splash.classList.add('splash-hide');
+    setTimeout(() => splash.remove(), 500);
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(dismissSplash, 600);
+  } else {
+    window.addEventListener('load', () => setTimeout(dismissSplash, 600));
+  }
+
+  // Safety: always dismiss by 3s
+  setTimeout(dismissSplash, 3000);
+})();
+
+// ─── Feature 2: Page Transitions ───────────────────────────────────
+(function patchTransitions() {
+  const origShowChat = window.showChatScreen;
+  const origShowWelcome = window.showWelcomeScreen;
+
+  window.showChatScreen = function () {
+    const welcome = document.getElementById('welcome-screen');
+    const chat = document.getElementById('chat-screen');
+    if (!welcome || !chat) return origShowChat();
+
+    welcome.classList.add('slide-out-left');
+    chat.classList.remove('hidden', 'slide-out-right');
+    chat.style.display = 'flex';
+    chat.classList.add('slide-in-right');
+    document.getElementById('chat-input')?.focus();
+    const wtb = document.getElementById('welcome-tip-bar');
+    if (wtb) wtb.style.display = 'none';
+
+    setTimeout(() => {
+      welcome.classList.add('hidden');
+      chat.classList.remove('slide-in-right');
+    }, 350);
+  };
+
+  window.showWelcomeScreen = function () {
+    const welcome = document.getElementById('welcome-screen');
+    const chat = document.getElementById('chat-screen');
+    if (!welcome || !chat) return origShowWelcome();
+
+    chat.classList.add('slide-out-right');
+    welcome.classList.remove('hidden', 'slide-out-left');
+    const wtb = document.getElementById('welcome-tip-bar');
+    if (wtb) wtb.style.display = '';
+
+    setTimeout(() => {
+      chat.classList.add('hidden');
+      chat.style.display = 'none';
+      chat.classList.remove('slide-out-right');
+    }, 300);
+  };
+})();
+
+// ─── Feature 3: Smart Scroll-to-Bottom Pill ────────────────────────
+(function initScrollPill() {
+  const chatArea = document.getElementById('chat-area');
+  const pill = document.getElementById('scroll-bottom-pill');
+  const badge = document.getElementById('scroll-bottom-badge');
+  if (!chatArea || !pill) return;
+
+  let _newMsgCount = 0;
+  let _userScrolledUp = false;
+  let _scrollTicking = false;
+
+  chatArea.addEventListener('scroll', function () {
+    if (_scrollTicking) return;
+    _scrollTicking = true;
+    requestAnimationFrame(() => {
+      const distFromBottom = chatArea.scrollHeight - chatArea.scrollTop - chatArea.clientHeight;
+      _userScrolledUp = distFromBottom > 200;
+      pill.classList.toggle('visible', _userScrolledUp);
+      if (!_userScrolledUp) {
+        _newMsgCount = 0;
+        updateScrollBadge();
+      }
+      _scrollTicking = false;
+    });
+  }, { passive: true });
+
+  function updateScrollBadge() {
+    if (!badge) return;
+    badge.textContent = _newMsgCount;
+    badge.classList.toggle('has-count', _newMsgCount > 0);
+  }
+
+  // Patch scrollToBottom to respect user scroll position
+  const origScrollToBottom = window.scrollToBottom;
+  window.scrollToBottom = function () {
+    if (_userScrolledUp && state.isStreaming) {
+      _newMsgCount++;
+      updateScrollBadge();
+      return;
+    }
+    origScrollToBottom();
+  };
+
+  window.scrollToBottomSmooth = function () {
+    _newMsgCount = 0;
+    updateScrollBadge();
+    _userScrolledUp = false;
+    pill.classList.remove('visible');
+    chatArea.scrollTo({ top: chatArea.scrollHeight, behavior: 'smooth' });
+  };
+})();
+
+// ─── Feature 4: Ripple Touch Feedback ──────────────────────────────
+(function initRipple() {
+  const selectors = '.tool-pill, .btn-new-chat, .template-card, .conversation-item, .welcome-persona-btn';
+
+  document.addEventListener('pointerdown', function (e) {
+    const host = e.target.closest(selectors);
+    if (!host) return;
+
+    host.classList.add('ripple-host');
+    const rect = host.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+    const y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+    host.style.setProperty('--ripple-x', x + '%');
+    host.style.setProperty('--ripple-y', y + '%');
+
+    host.classList.remove('rippling');
+    void host.offsetWidth;
+    host.classList.add('rippling');
+
+    function cleanup() {
+      setTimeout(() => host.classList.remove('rippling'), 400);
+      host.removeEventListener('pointerup', cleanup);
+      host.removeEventListener('pointerleave', cleanup);
+    }
+    host.addEventListener('pointerup', cleanup, { once: true });
+    host.addEventListener('pointerleave', cleanup, { once: true });
+  }, { passive: true });
+})();
+
+// ─── Feature 5: Keyboard-Aware Input (Visual Viewport API) ────────
+(function initKeyboardHandler() {
+  if (!window.visualViewport) return;
+  const app = document.getElementById('app-screen');
+  const chatArea = document.getElementById('chat-area');
+  if (!app) return;
+
+  let initialHeight = window.visualViewport.height;
+  let keyboardVisible = false;
+
+  window.visualViewport.addEventListener('resize', function () {
+    const vvHeight = window.visualViewport.height;
+    const diff = initialHeight - vvHeight;
+    const isKeyboard = diff > 100;
+
+    if (isKeyboard && !keyboardVisible) {
+      keyboardVisible = true;
+      app.classList.add('keyboard-open');
+      app.style.height = vvHeight + 'px';
+      if (chatArea) requestAnimationFrame(() => { chatArea.scrollTop = chatArea.scrollHeight; });
+    } else if (!isKeyboard && keyboardVisible) {
+      keyboardVisible = false;
+      app.classList.remove('keyboard-open');
+      app.style.height = '';
+    } else if (isKeyboard) {
+      app.style.height = vvHeight + 'px';
+    }
+  });
+
+  window.addEventListener('orientationchange', () => {
+    setTimeout(() => { initialHeight = window.visualViewport.height; }, 200);
+  });
+})();
+
+// ─── Feature 6: Dynamic Header (auto-hide on scroll + theme-color) ─
+(function initDynamicHeader() {
+  const header = document.querySelector('.main-header');
+  const chatArea = document.getElementById('chat-area');
+  if (!header || !chatArea) return;
+
+  let lastScrollTop = 0;
+  let headerHidden = false;
+  let scrollTicking = false;
+
+  chatArea.addEventListener('scroll', function () {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+      const st = chatArea.scrollTop;
+      const delta = st - lastScrollTop;
+
+      if (delta > 8 && st > 80 && !headerHidden) {
+        header.classList.add('header-hidden');
+        headerHidden = true;
+      } else if (delta < -8 && headerHidden) {
+        header.classList.remove('header-hidden');
+        headerHidden = false;
+      }
+
+      lastScrollTop = st;
+      scrollTicking = false;
+    });
+  }, { passive: true });
+
+  // Dynamic theme-color
+  function updateThemeColor(color) {
+    document.querySelectorAll('meta[name="theme-color"]').forEach(m => m.setAttribute('content', color));
+  }
+
+  const origChat2 = window.showChatScreen;
+  const origWelcome2 = window.showWelcomeScreen;
+  const isDark = () => document.documentElement.getAttribute('data-theme') !== 'light';
+
+  window.showChatScreen = function () {
+    origChat2();
+    updateThemeColor(isDark() ? '#1a1d27' : '#ffffff');
+    if (headerHidden) { header.classList.remove('header-hidden'); headerHidden = false; }
+  };
+
+  window.showWelcomeScreen = function () {
+    origWelcome2();
+    updateThemeColor(isDark() ? '#0f1117' : '#f5f3ef');
+  };
+})();
+
+// ─── Feature 7: Smooth Textarea + Empty Send Shake ─────────────────
+(function initTextareaEnhancements() {
+  const origSend = window.sendMessage;
+  if (!origSend) return;
+
+  window.sendMessage = function () {
+    const input = document.getElementById('chat-input');
+    if (input && !input.value.trim()) {
+      const wrapper = document.getElementById('input-wrapper');
+      if (wrapper) {
+        wrapper.classList.remove('shake');
+        void wrapper.offsetWidth;
+        wrapper.classList.add('shake');
+        setTimeout(() => wrapper.classList.remove('shake'), 450);
+        if (typeof hapticFeedback === 'function') hapticFeedback('error');
+      }
+      return;
+    }
+    const btn = document.getElementById('btn-send');
+    if (btn) {
+      btn.classList.add('send-success');
+      setTimeout(() => btn.classList.remove('send-success'), 600);
+    }
+    origSend.apply(this, arguments);
+  };
+})();
+
+// ─── Feature 8: Offline UX Polish ──────────────────────────────────
+(function initOfflineUX() {
+  const app = document.getElementById('app-screen');
+  const toast = document.getElementById('sync-toast');
+  const toastText = document.getElementById('sync-toast-text');
+  const toastIcon = document.getElementById('sync-toast-icon');
+  if (!app) return;
+
+  function setOffline() {
+    app.classList.add('app-offline');
+    if (typeof hapticFeedback === 'function') hapticFeedback('error');
+  }
+
+  function setOnline() {
+    app.classList.remove('app-offline');
+    if (typeof hapticFeedback === 'function') hapticFeedback('success');
+
+    if (toast && toastText && toastIcon) {
+      toastText.textContent = 'Back online — syncing...';
+      toastIcon.className = 'sync-toast-spinner';
+      toastIcon.innerHTML = '';
+      toastIcon.style.cssText = '';
+      toast.classList.add('visible');
+
+      setTimeout(() => {
+        toastText.textContent = 'All caught up!';
+        toastIcon.innerHTML = '\u2713';
+        toastIcon.className = '';
+        toastIcon.style.cssText = 'color:var(--flag-green);font-weight:700;font-size:16px;';
+      }, 1500);
+
+      setTimeout(() => {
+        toast.classList.remove('visible');
+        toastIcon.style.cssText = '';
+      }, 3500);
+    }
+  }
+
+  window.addEventListener('offline', setOffline);
+  window.addEventListener('online', setOnline);
+  if (!navigator.onLine) setOffline();
+})();
+
+// ─── Feature 9: Swipe-Back Gesture (Chat → Welcome) ───────────────
+(function initSwipeBack() {
+  const indicator = document.getElementById('swipe-back-indicator');
+  if (!indicator) return;
+
+  let startX = 0, startY = 0, swiping = false;
+  const EDGE = 25, THRESHOLD = 80;
+
+  document.addEventListener('touchstart', function (e) {
+    const t = e.touches[0];
+    if (t.clientX > EDGE) return;
+    const chat = document.getElementById('chat-screen');
+    if (!chat || chat.classList.contains('hidden')) return;
+    startX = t.clientX;
+    startY = t.clientY;
+    swiping = true;
+  }, { passive: true });
+
+  document.addEventListener('touchmove', function (e) {
+    if (!swiping) return;
+    const t = e.touches[0];
+    const dx = t.clientX - startX;
+    const dy = Math.abs(t.clientY - startY);
+    if (dy > dx) { swiping = false; indicator.classList.remove('active'); return; }
+
+    if (dx > 15) {
+      indicator.classList.add('active');
+      const progress = Math.min(dx / THRESHOLD, 1);
+      indicator.style.transform = `translateY(-50%) translateX(${-36 + progress * 44}px)`;
+      indicator.style.opacity = String(progress);
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchend', function (e) {
+    if (!swiping) return;
+    swiping = false;
+    const dx = e.changedTouches[0].clientX - startX;
+    indicator.classList.remove('active');
+    indicator.style.transform = '';
+    indicator.style.opacity = '';
+    if (dx >= THRESHOLD) {
+      if (typeof hapticFeedback === 'function') hapticFeedback('medium');
+      if (typeof showWelcomeScreen === 'function') showWelcomeScreen();
+    }
+  }, { passive: true });
+})();
+
+// ─── Feature 10: Long-Press Context Menu on Conversations ──────────
+(function initLongPress() {
+  const ctxMenu = document.getElementById('ctx-menu');
+  if (!ctxMenu) return;
+
+  let pressTimer = null, pressTarget = null;
+
+  function closeCtxMenu() {
+    ctxMenu.classList.remove('visible');
+  }
+
+  function showCtxMenu(x, y, convId) {
+    const safeId = String(convId).replace(/[^a-zA-Z0-9_-]/g, '');
+    ctxMenu.innerHTML =
+      '<button class="ctx-menu-item" data-action="rename" data-id="' + safeId + '">\u270F\uFE0F Rename</button>' +
+      '<button class="ctx-menu-item" data-action="share" data-id="' + safeId + '">\uD83D\uDCE4 Share</button>' +
+      '<button class="ctx-menu-item danger" data-action="delete" data-id="' + safeId + '">\uD83D\uDDD1\uFE0F Delete</button>';
+    ctxMenu.style.left = Math.min(x, window.innerWidth - 180) + 'px';
+    ctxMenu.style.top = Math.min(y, window.innerHeight - 150) + 'px';
+    ctxMenu.classList.add('visible');
+    if (typeof hapticFeedback === 'function') hapticFeedback('heavy');
+    setTimeout(() => document.addEventListener('pointerdown', closeCtxMenu, { once: true }), 50);
+  }
+
+  document.addEventListener('pointerdown', function (e) {
+    const item = e.target.closest('.conversation-item');
+    if (!item) return;
+    pressTarget = item;
+    const convId = item.dataset.id || item.getAttribute('onclick')?.match(/'([^']+)'/)?.[1] || '';
+    pressTimer = setTimeout(() => {
+      showCtxMenu(e.clientX, e.clientY, convId);
+      pressTarget = null;
+    }, 500);
+  });
+
+  document.addEventListener('pointerup', () => { clearTimeout(pressTimer); pressTarget = null; });
+  document.addEventListener('pointermove', () => { if (pressTarget) { clearTimeout(pressTimer); pressTarget = null; } });
+
+  ctxMenu.addEventListener('click', function (e) {
+    const btn = e.target.closest('.ctx-menu-item');
+    if (!btn) return;
+    const action = btn.dataset.action;
+    const id = btn.dataset.id;
+    if (action === 'rename' && typeof renameConversation === 'function') renameConversation(id);
+    else if (action === 'share' && typeof shareConversation === 'function') shareConversation(id);
+    else if (action === 'delete' && typeof deleteConversation === 'function') deleteConversation(id);
+    setTimeout(closeCtxMenu, 100);
+  });
+})();
+
+// ─── Feature 11: Collapsing Welcome Title (IntersectionObserver) ───
+(function initCollapsingTitle() {
+  const heading = document.querySelector('#welcome-screen h2');
+  if (!heading) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        heading.classList.toggle('welcome-title-pinned', !entry.isIntersecting);
+      });
+    },
+    { threshold: 0, rootMargin: '-60px 0px 0px 0px' }
+  );
+  observer.observe(heading);
+})();
+
+// ─── Feature 12: Passive Event Listeners + Performance ─────────────
+(function retrofitPassiveListeners() {
+  const containers = ['chat-area', 'sidebar', 'chat-messages'];
+  containers.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    let scrollTimeout;
+    el.addEventListener('scroll', function () {
+      if (!el.style.willChange) el.style.willChange = 'transform';
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => { el.style.willChange = ''; }, 150);
+    }, { passive: true });
+  });
+})()

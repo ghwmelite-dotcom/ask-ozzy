@@ -36,7 +36,7 @@ app.use("*", async (c, next) => {
   c.header("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
   c.header("Referrer-Policy", "strict-origin-when-cross-origin");
   c.header("Permissions-Policy", "camera=(self), microphone=(self), geolocation=()");
-  c.header("Content-Security-Policy", "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://cdn.jsdelivr.net; frame-ancestors 'none'; base-uri 'self'; form-action 'self';");
+  c.header("Content-Security-Policy", "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://cdn.jsdelivr.net https://gnews.io; frame-ancestors 'none'; base-uri 'self'; form-action 'self';");
 });
 
 // ─── Request Body Size Limit ─────────────────────────────────────────
@@ -11547,6 +11547,78 @@ Return ONLY a JSON object:
   }
 });
 
+// ─── Discover News Feed ─────────────────────────────────────────────
+
+app.get("/api/discover", async (c) => {
+  const category = c.req.query("category");
+  const page = Math.max(1, parseInt(c.req.query("page") || "1"));
+  const limit = Math.min(50, Math.max(1, parseInt(c.req.query("limit") || "20")));
+  const offset = (page - 1) * limit;
+
+  let query = "SELECT * FROM discover_articles";
+  let countQuery = "SELECT COUNT(*) as total FROM discover_articles";
+  const params: string[] = [];
+
+  if (category && category !== "all") {
+    query += " WHERE category = ?";
+    countQuery += " WHERE category = ?";
+    params.push(category);
+  }
+
+  query += " ORDER BY published_at DESC LIMIT ? OFFSET ?";
+
+  const countParams = [...params];
+  params.push(String(limit), String(offset));
+
+  const [articles, countResult] = await Promise.all([
+    c.env.DB.prepare(query).bind(...params).all(),
+    c.env.DB.prepare(countQuery).bind(...countParams).first<{ total: number }>(),
+  ]);
+
+  const total = countResult?.total || 0;
+
+  return c.json({
+    articles: articles.results,
+    total,
+    page,
+    hasMore: offset + limit < total,
+  });
+});
+
+app.post("/api/discover/discuss", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const { articleId } = await c.req.json();
+
+  if (!articleId) {
+    return c.json({ error: "articleId is required" }, 400);
+  }
+
+  const article = await c.env.DB.prepare(
+    "SELECT * FROM discover_articles WHERE id = ?"
+  ).bind(articleId).first();
+
+  if (!article) {
+    return c.json({ error: "Article not found" }, 404);
+  }
+
+  const convoId = generateId();
+  const title = `Discussing: ${(article.title as string).substring(0, 80)}`;
+
+  await c.env.DB.prepare(
+    "INSERT INTO conversations (id, user_id, title) VALUES (?, ?, ?)"
+  ).bind(convoId, userId, title).run();
+
+  // Insert article context as the first assistant message
+  const contextMessage = `📰 **${article.title}**\n*Source: ${article.source_name} · ${article.published_at}*\n\n${article.description || ""}\n\n🔗 [Read full article](${article.article_url})\n\nI've read this article summary. What would you like to know or discuss about it?`;
+
+  const msgId = generateId();
+  await c.env.DB.prepare(
+    "INSERT INTO messages (id, conversation_id, role, content) VALUES (?, ?, 'assistant', ?)"
+  ).bind(msgId, convoId, contextMessage).run();
+
+  return c.json({ conversationId: convoId, title });
+});
+
 export default {
   fetch: app.fetch,
   async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext) {
@@ -11565,5 +11637,62 @@ export default {
         "UPDATE exam_seasons SET active = CASE WHEN start_date <= ? AND end_date >= ? THEN 1 ELSE 0 END"
       ).bind(today, today).run();
     } catch {}
+
+    // ─── Discover: Fetch news from GNews API ────────────────────────
+    try {
+      const GNEWS_BASE = "https://gnews.io/api/v4";
+      const apiKey = env.GNEWS_API_KEY;
+
+      const topicFetches = [
+        { category: "world", url: `${GNEWS_BASE}/top-headlines?topic=world&lang=en&max=20&apikey=${apiKey}` },
+        { category: "business", url: `${GNEWS_BASE}/top-headlines?topic=business&lang=en&max=20&apikey=${apiKey}` },
+        { category: "technology", url: `${GNEWS_BASE}/top-headlines?topic=technology&lang=en&max=20&apikey=${apiKey}` },
+        { category: "science", url: `${GNEWS_BASE}/top-headlines?topic=science&lang=en&max=20&apikey=${apiKey}` },
+        { category: "health", url: `${GNEWS_BASE}/top-headlines?topic=health&lang=en&max=20&apikey=${apiKey}` },
+        { category: "sports", url: `${GNEWS_BASE}/top-headlines?topic=sports&lang=en&max=20&apikey=${apiKey}` },
+        { category: "entertainment", url: `${GNEWS_BASE}/top-headlines?topic=entertainment&lang=en&max=20&apikey=${apiKey}` },
+        { category: "government", url: `${GNEWS_BASE}/search?q=government OR politics OR policy OR parliament OR legislation&lang=en&max=20&apikey=${apiKey}` },
+      ];
+
+      for (const { category, url } of topicFetches) {
+        try {
+          const res = await fetch(url);
+          if (!res.ok) continue;
+          const data = await res.json() as { articles?: Array<{ title: string; description: string; url: string; image: string; publishedAt: string; source: { name: string; url: string } }> };
+          if (!data.articles) continue;
+
+          for (const article of data.articles) {
+            const id = generateId();
+            try {
+              await env.DB.prepare(
+                `INSERT OR IGNORE INTO discover_articles (id, title, description, source_name, source_url, article_url, image_url, category, published_at)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+              ).bind(
+                id,
+                article.title,
+                article.description || "",
+                article.source?.name || "Unknown",
+                article.source?.url || "",
+                article.url,
+                article.image || "",
+                category,
+                article.publishedAt || new Date().toISOString()
+              ).run();
+            } catch {
+              // Duplicate article_url — skip silently
+            }
+          }
+        } catch {
+          console.error(`Discover: failed to fetch ${category}`);
+        }
+      }
+
+      // Purge articles older than 48 hours
+      await env.DB.prepare(
+        "DELETE FROM discover_articles WHERE published_at < datetime('now', '-48 hours')"
+      ).run();
+    } catch (err: any) {
+      console.error("Discover cron error:", err?.message);
+    }
   },
 };

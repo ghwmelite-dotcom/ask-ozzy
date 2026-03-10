@@ -40,8 +40,18 @@
 </head>
 <body>
 
+  <!-- ═══ Splash Screen ═══ -->
+  <div id="splash-screen" class="splash-screen">
+    <div class="splash-logo">⚡</div>
+    <div class="splash-name">AskOzzy</div>
+    <div class="splash-tagline">AI for Ghana's Public Service</div>
+    <div class="splash-loader">
+      <div class="splash-loader-bar"></div>
+    </div>
+  </div>
+
   <!-- ═══ Main App (always visible) ═══ -->
-  <div id="app-screen" class="app-container">
+  <div id="app-screen" class="app-container" style="opacity:0;">
     <div class="flag-stripe" style="position:fixed;top:0;left:0;right:0;z-index:999;"></div>
 
     <!-- Sidebar -->
@@ -49,7 +59,7 @@
       <div class="sidebar-header">
         <div class="sidebar-logo">
           <div class="logo-icon"></div>
-          <h1>AskOzzy <span id="sidebar-subtitle">AI for All GoG Staff</span></h1>
+          <h1>AskOzzy <span id="sidebar-subtitle">Smart Government Starts Here</span></h1>
         </div>
       </div>
 
@@ -72,46 +82,102 @@
       </div>
     </aside>
 
+    <!-- Swipe Back Indicator -->
+    <div class="swipe-back-indicator" id="swipe-back-indicator">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </div>
+
     <!-- Main Content -->
     <main class="main-content" style="margin-top:3px;">
+      <!-- Offline Banner -->
+      <div class="offline-top-banner" id="offline-top-banner">
+        <div class="offline-pulse-dot"></div>
+        <span>You're offline — messages will send when you reconnect</span>
+      </div>
+
       <header class="main-header">
-        <button class="btn-toggle-sidebar" onclick="toggleSidebar()" title="Toggle sidebar">☰</button>
-        <select class="model-selector" id="model-selector" onchange="onModelChange()" aria-label="Select AI model">
-          <optgroup label="Enterprise Models" id="optgroup-enterprise">
-            <option value="@cf/openai/gpt-oss-120b" data-tier="enterprise">GPT-OSS 120B — OpenAI (Best)</option>
-            <option value="@cf/meta/llama-3.3-70b-instruct-fp8-fast" data-tier="enterprise">Llama 3.3 70B — Meta</option>
-            <option value="@cf/deepseek-ai/deepseek-r1-distill-qwen-32b" data-tier="enterprise">DeepSeek R1 32B — Reasoning</option>
-            <option value="@cf/qwen/qwen3-30b-a3b-fp8" data-tier="enterprise">Qwen3 30B — Qwen (Latest)</option>
-            <option value="@cf/ibm-granite/granite-4.0-h-micro" data-tier="enterprise">Granite 4.0 — IBM</option>
-          </optgroup>
-          <optgroup label="Professional Models" id="optgroup-professional">
-            <option value="@cf/meta/llama-4-scout-17b-16e-instruct" data-tier="professional">Llama 4 Scout 17B — Meta</option>
-            <option value="@cf/qwen/qwq-32b" data-tier="professional">QwQ 32B — Qwen (Deep Thinking)</option>
-            <option value="@cf/mistralai/mistral-small-3.1-24b-instruct" data-tier="professional">Mistral Small 3.1 24B</option>
-          </optgroup>
-          <optgroup label="Free Models" id="optgroup-free">
-            <option value="@cf/openai/gpt-oss-20b" data-tier="free" selected>GPT-OSS 20B — OpenAI (Fast)</option>
-            <option value="@cf/google/gemma-3-12b-it" data-tier="free">Gemma 3 12B — Google</option>
-            <option value="@cf/meta/llama-3.1-8b-instruct-fast" data-tier="free">Llama 3.1 8B Fast — Instant</option>
-          </optgroup>
-        </select>
-        <div class="usage-badge" id="usage-badge" onclick="openPricingModal()" title="Click to view plans"></div>
-        <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light/dark mode">
-          <div class="theme-toggle-track">
-            <span class="theme-toggle-icon-dark">&#x1F319;</span>
-            <span class="theme-toggle-icon-light">&#x2600;&#xFE0F;</span>
-            <div class="theme-toggle-thumb"></div>
-          </div>
-        </button>
-        <div class="offline-status-badge" id="offline-status-badge">
-          <span class="offline-status-dot"></span>
-          <span class="offline-status-text">Online</span>
+        <!-- Left zone: nav controls -->
+        <div class="header-zone header-zone-left">
+          <button class="btn-toggle-sidebar" onclick="toggleSidebar()" title="Toggle sidebar" aria-label="Toggle sidebar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="18" x2="18" y2="18"/></svg>
+          </button>
+          <button class="btn-discover-nav" id="btn-discover-nav" onclick="showDiscoverScreen()" title="Discover — Trending News">
+            <span class="discover-nav-dot"></span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+            <span class="discover-nav-label">Discover</span>
+          </button>
         </div>
-        <div class="privacy-badge">Private & Encrypted</div>
+
+        <!-- Center zone: model selector -->
+        <div class="header-zone header-zone-center">
+          <select class="model-selector" id="model-selector" onchange="onModelChange()" aria-label="Select AI model">
+            <optgroup label="Enterprise Models" id="optgroup-enterprise">
+              <option value="@cf/openai/gpt-oss-120b" data-tier="enterprise">GPT-OSS 120B — OpenAI (Best)</option>
+              <option value="@cf/meta/llama-3.3-70b-instruct-fp8-fast" data-tier="enterprise">Llama 3.3 70B — Meta</option>
+              <option value="@cf/deepseek-ai/deepseek-r1-distill-qwen-32b" data-tier="enterprise">DeepSeek R1 32B — Reasoning</option>
+              <option value="@cf/qwen/qwen3-30b-a3b-fp8" data-tier="enterprise">Qwen3 30B — Qwen (Latest)</option>
+              <option value="@cf/ibm-granite/granite-4.0-h-micro" data-tier="enterprise">Granite 4.0 — IBM</option>
+            </optgroup>
+            <optgroup label="Professional Models" id="optgroup-professional">
+              <option value="@cf/meta/llama-4-scout-17b-16e-instruct" data-tier="professional">Llama 4 Scout 17B — Meta</option>
+              <option value="@cf/qwen/qwq-32b" data-tier="professional">QwQ 32B — Qwen (Deep Thinking)</option>
+              <option value="@cf/mistralai/mistral-small-3.1-24b-instruct" data-tier="professional">Mistral Small 3.1 24B</option>
+            </optgroup>
+            <optgroup label="Free Models" id="optgroup-free">
+              <option value="@cf/openai/gpt-oss-20b" data-tier="free" selected>GPT-OSS 20B — OpenAI (Fast)</option>
+              <option value="@cf/google/gemma-3-12b-it" data-tier="free">Gemma 3 12B — Google</option>
+              <option value="@cf/meta/llama-3.1-8b-instruct-fast" data-tier="free">Llama 3.1 8B Fast — Instant</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <!-- Right zone: utilities -->
+        <div class="header-zone header-zone-right">
+          <div class="usage-badge" id="usage-badge" onclick="openPricingModal()" title="Click to view plans"></div>
+          <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode" aria-label="Toggle light/dark mode">
+            <div class="theme-toggle-track">
+              <span class="theme-toggle-icon-dark">&#x1F319;</span>
+              <span class="theme-toggle-icon-light">&#x2600;&#xFE0F;</span>
+              <div class="theme-toggle-thumb"></div>
+            </div>
+          </button>
+          <div class="lang-selector-wrap" style="position:relative;">
+            <button class="lang-selector" id="lang-selector" onclick="openLanguageMenu()" title="Select language">EN</button>
+          </div>
+          <button class="header-help-btn" onclick="openGuide()" title="User Guide (Ctrl+/)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </button>
+          <div class="offline-status-badge" id="offline-status-badge">
+            <span class="offline-status-dot"></span>
+            <span class="offline-status-text">Online</span>
+          </div>
+          <div class="privacy-badge">Private & Encrypted</div>
+        </div>
       </header>
 
       <!-- Announcements Area -->
       <div id="announcements-area"></div>
+
+      <!-- Discover Screen -->
+      <div id="discover-screen" class="discover-screen hidden" style="display:none;">
+        <div class="discover-header">
+          <div class="discover-title-row">
+            <h2>Discover</h2>
+            <p class="discover-subtitle">Trending news from around the world</p>
+          </div>
+        </div>
+        <div class="discover-categories-wrap" id="discover-categories-wrap">
+          <div class="discover-categories" id="discover-categories"></div>
+        </div>
+        <div class="discover-grid" id="discover-grid"></div>
+        <div class="discover-load-more" id="discover-load-more" style="display:none;">
+          <button class="btn-load-more" onclick="loadMoreDiscover()">Load More Articles</button>
+        </div>
+        <div class="discover-empty" id="discover-empty" style="display:none;">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          <p>No articles available right now. Check back soon.</p>
+        </div>
+      </div>
 
       <!-- Welcome Screen -->
       <div id="welcome-screen" class="welcome-screen">
@@ -148,6 +214,11 @@
       <div id="chat-screen" class="hidden" style="display:flex;flex-direction:column;flex:1;min-height:0;">
         <div class="chat-area" id="chat-area">
           <div class="chat-messages" id="chat-messages"></div>
+          <!-- Scroll-to-bottom pill -->
+          <button class="scroll-bottom-pill" id="scroll-bottom-pill" onclick="scrollToBottomSmooth()" aria-label="Scroll to bottom">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            <span class="scroll-bottom-badge" id="scroll-bottom-badge"></span>
+          </button>
         </div>
 
         <div class="input-area">
@@ -239,7 +310,17 @@
             AskOzzy may produce inaccurate information. Verify critical details.
             <span class="shortcut-hint"><kbd>Ctrl</kbd>+<kbd>K</kbd> Search</span>
           </div>
+          <!-- Rotating Tip Bar (below input) -->
+          <div class="tip-bar tip-bar-input" id="input-tip-bar">
+            <span class="tip-bar-label">tip</span>
+            <span class="tip-bar-text" id="input-tip-text"></span>
+          </div>
         </div>
+      </div>
+      <!-- Rotating Tip Bar (fixed bottom, welcome screen only) -->
+      <div class="tip-bar tip-bar-welcome" id="welcome-tip-bar">
+        <span class="tip-bar-label">tip</span>
+        <span class="tip-bar-text" id="welcome-tip-text"></span>
       </div>
     </main>
   </div>
@@ -522,5 +603,14 @@
   <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js" defer></script>
   <script src="/js/templates.js"></script>
   <script src="/js/app.js"></script>
+
+  <!-- Sync Toast -->
+  <div class="sync-toast" id="sync-toast">
+    <div class="sync-toast-spinner" id="sync-toast-icon"></div>
+    <span id="sync-toast-text">Syncing...</span>
+  </div>
+
+  <!-- Context Menu -->
+  <div class="ctx-menu" id="ctx-menu"></div>
 </body>
 </html>
