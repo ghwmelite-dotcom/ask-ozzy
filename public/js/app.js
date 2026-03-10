@@ -1532,6 +1532,8 @@ function showWelcomeScreen() {
   chatScreen.style.display = "none";
 }
 
+
+
 function renderMessages() {
   const container = document.getElementById("chat-messages");
 
