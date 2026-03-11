@@ -11633,6 +11633,54 @@ app.post("/api/discover/discuss", authMiddleware, async (c) => {
   return c.json({ conversationId: convoId, title });
 });
 
+// ─── Admin: Manual Discover Refresh ─────────────────────────────────
+app.post("/api/admin/discover/refresh", adminMiddleware, async (c) => {
+  const env = c.env;
+  const results: Record<string, number> = {};
+
+  const GNEWS_BASE = "https://gnews.io/api/v4";
+  const apiKey = env.GNEWS_API_KEY;
+
+  const topicFetches = [
+    { category: "ghana", url: `${GNEWS_BASE}/top-headlines?country=gh&lang=en&max=20&apikey=${apiKey}` },
+    { category: "africa", url: `${GNEWS_BASE}/search?q=Africa OR "African Union" OR ECOWAS OR "West Africa" OR "East Africa" OR "South Africa"&lang=en&max=20&apikey=${apiKey}` },
+    { category: "world", url: `${GNEWS_BASE}/top-headlines?topic=world&lang=en&max=20&apikey=${apiKey}` },
+    { category: "business", url: `${GNEWS_BASE}/top-headlines?topic=business&lang=en&max=20&apikey=${apiKey}` },
+    { category: "technology", url: `${GNEWS_BASE}/top-headlines?topic=technology&lang=en&max=20&apikey=${apiKey}` },
+    { category: "science", url: `${GNEWS_BASE}/top-headlines?topic=science&lang=en&max=20&apikey=${apiKey}` },
+    { category: "health", url: `${GNEWS_BASE}/top-headlines?topic=health&lang=en&max=20&apikey=${apiKey}` },
+    { category: "sports", url: `${GNEWS_BASE}/top-headlines?topic=sports&lang=en&max=20&apikey=${apiKey}` },
+    { category: "entertainment", url: `${GNEWS_BASE}/top-headlines?topic=entertainment&lang=en&max=20&apikey=${apiKey}` },
+    { category: "government", url: `${GNEWS_BASE}/search?q=government OR politics OR policy OR parliament OR legislation&lang=en&max=20&apikey=${apiKey}` },
+  ];
+
+  for (const { category, url } of topicFetches) {
+    let count = 0;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) { results[category] = 0; continue; }
+      const data = await res.json() as { articles?: Array<{ title: string; description: string; url: string; image: string; publishedAt: string; source: { name: string; url: string } }> };
+      if (!data.articles) { results[category] = 0; continue; }
+
+      for (const article of data.articles) {
+        const id = generateId();
+        try {
+          await env.DB.prepare(
+            `INSERT OR IGNORE INTO discover_articles (id, title, description, source_name, source_url, article_url, image_url, category, published_at)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+          ).bind(id, article.title, article.description || "", article.source?.name || "Unknown", article.source?.url || "", article.url, article.image || "", category, article.publishedAt || new Date().toISOString()).run();
+          count++;
+        } catch { /* duplicate */ }
+      }
+    } catch { /* fetch error */ }
+    results[category] = count;
+  }
+
+  await env.DB.prepare("DELETE FROM discover_articles WHERE published_at < datetime('now', '-48 hours')").run();
+
+  return c.json({ success: true, results });
+});
+
 export default {
   fetch: app.fetch,
   async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext) {
