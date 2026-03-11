@@ -11658,6 +11658,8 @@ export default {
       const apiKey = env.GNEWS_API_KEY;
 
       const topicFetches = [
+        { category: "ghana", url: `${GNEWS_BASE}/top-headlines?country=gh&lang=en&max=20&apikey=${apiKey}` },
+        { category: "africa", url: `${GNEWS_BASE}/search?q=Africa OR "African Union" OR ECOWAS OR "West Africa" OR "East Africa" OR "South Africa"&lang=en&max=20&apikey=${apiKey}` },
         { category: "world", url: `${GNEWS_BASE}/top-headlines?topic=world&lang=en&max=20&apikey=${apiKey}` },
         { category: "business", url: `${GNEWS_BASE}/top-headlines?topic=business&lang=en&max=20&apikey=${apiKey}` },
         { category: "technology", url: `${GNEWS_BASE}/top-headlines?topic=technology&lang=en&max=20&apikey=${apiKey}` },
