@@ -19,6 +19,13 @@ import { getAuthorityForAgent } from "./config/authorities";
 import { getParams, resolveAgentCategory } from "./config/inference-params";
 import { checkKnownErrors } from "./lib/known-errors";
 import { handleFeedback, type FeedbackPayload } from "./lib/feedback";
+import { hybridRetrieve } from "./lib/hybrid-retriever";
+import { uploadDocumentToR2, listR2Documents, deleteR2Document } from "./lib/autorag-retriever";
+import { runStreamWithGateway } from "./lib/ai-client";
+import { buildCacheKey, shouldSkipCache } from "./lib/cache-key";
+import { checkAgentRateLimit, recordGatewayMetrics } from "./lib/rate-limiter";
+import { runWithTools, agentHasTools } from "./lib/tool-loop";
+import { getToolsForAgent, TOOL_USE_RULES } from "./config/tools";
 
 const app = new Hono<AppType>();
 
@@ -2044,6 +2051,11 @@ app.post("/api/chat", authMiddleware, async (c) => {
     }
   }
 
+  // Inject tool use rules for tool-enabled agents
+  if (agentHasTools(agentCategory)) {
+    augmentedPrompt += '\n\n' + TOOL_USE_RULES;
+  }
+
   messages.push({ role: "system", content: augmentedPrompt });
 
   // Add history (reversed to chronological order, skip the message we just added)
@@ -2052,19 +2064,39 @@ app.post("/api/chat", authMiddleware, async (c) => {
     messages.push({ role: msg.role, content: msg.content });
   }
 
+  // Agent-specific rate limiting
+  try {
+    const rateCheck = await checkAgentRateLimit(userId, agentCategory, c.env);
+    if (!rateCheck.allowed) {
+      return c.json({
+        error: `Rate limit exceeded for this agent. ${rateCheck.remaining} requests remaining. Resets at ${new Date(rateCheck.resetAt * 1000).toISOString()}.`,
+        rate_limited: true,
+      }, 429);
+    }
+  } catch (e: any) {
+    console.error("Agent rate limit check failed:", e?.message);
+    // Non-fatal — proceed
+  }
+
   // Tier-based max_tokens
   const tierMaxTokens: Record<string, number> = { free: 2048, starter: 4096, professional: 6144, enterprise: 8192 };
   const maxTokens = tierMaxTokens[userTier] || 4096;
 
-  // Stream response from Workers AI with agent-specific inference params
-  const stream = await c.env.AI.run(selectedModel as any, {
+  // Build cache options for AI Gateway
+  const skipCache = shouldSkipCache(message);
+  const cacheOpts = await buildCacheKey(message, agentCategory, ragResults.map(r => r.source));
+  cacheOpts.skipCache = skipCache;
+  cacheOpts.requestId = requestId;
+  cacheOpts.userTier = userTier;
+
+  // Stream response via AI Gateway with agent-specific inference params
+  const stream = await runStreamWithGateway(selectedModel, {
     messages: messages as any,
-    stream: true,
     max_tokens: maxTokens,
     temperature: inferenceParams.temperature,
     top_p: inferenceParams.top_p,
     top_k: inferenceParams.top_k,
-  });
+  }, c.env, cacheOpts);
 
   // We need to collect the full response to save it
   const { readable, writable } = new TransformStream();
@@ -11773,6 +11805,57 @@ app.post("/api/admin/discover/refresh", adminMiddleware, async (c) => {
   await env.DB.prepare("DELETE FROM discover_articles WHERE published_at < datetime('now', '-48 hours')").run();
 
   return c.json({ success: true, results });
+});
+
+// ─── Admin: R2 Knowledge Document Management ────────────────────────
+
+// Upload a document to R2 for AutoRAG indexing
+app.post("/api/admin/knowledge/upload", adminMiddleware, async (c) => {
+  const formData = await c.req.formData();
+  const file = formData.get("file") as File | null;
+  const category = formData.get("category") as string || "general";
+  const subcategory = formData.get("subcategory") as string || "misc";
+
+  if (!file) return c.json({ error: "No file provided" }, 400);
+
+  const buffer = await file.arrayBuffer();
+  const result = await uploadDocumentToR2(buffer, file.name, category, subcategory, c.env);
+  return c.json({ success: true, ...result, filename: file.name });
+});
+
+// List documents in R2 bucket
+app.get("/api/admin/knowledge/documents", adminMiddleware, async (c) => {
+  const prefix = c.req.query("prefix");
+  const docs = await listR2Documents(c.env, prefix || undefined);
+  return c.json({ success: true, documents: docs, count: docs.length });
+});
+
+// Delete a document from R2
+app.delete("/api/admin/knowledge/documents/:key{.+}", adminMiddleware, async (c) => {
+  const key = c.req.param("key");
+  await deleteR2Document(c.env, key);
+  return c.json({ success: true, deleted: key });
+});
+
+// ─── Admin: Gateway Metrics ─────────────────────────────────────────
+
+app.get("/api/admin/metrics/gateway", adminMiddleware, async (c) => {
+  const days = parseInt(c.req.query("days") || "7", 10);
+  const rows = await c.env.DB.prepare(
+    `SELECT * FROM gateway_metrics WHERE date >= date('now', '-' || ? || ' days') ORDER BY date DESC, agent_type`
+  ).bind(days).all();
+  return c.json({ success: true, metrics: rows.results });
+});
+
+// ─── Admin: Tool Invocation Logs ────────────────────────────────────
+
+app.get("/api/admin/metrics/tools", adminMiddleware, async (c) => {
+  const limit = parseInt(c.req.query("limit") || "50", 10);
+  const rows = await c.env.DB.prepare(
+    `SELECT id, request_id, agent_type, tool_name, success, latency_ms, created_at
+     FROM tool_invocations ORDER BY created_at DESC LIMIT ?`
+  ).bind(limit).all();
+  return c.json({ success: true, invocations: rows.results });
 });
 
 export default {

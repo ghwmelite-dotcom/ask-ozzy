@@ -5,6 +5,7 @@ export type Env = {
   DB: D1Database;
   SESSIONS: KVNamespace;
   VECTORIZE: VectorizeIndex;
+  KNOWLEDGE_R2: R2Bucket;
   JWT_SECRET: string;
   VAPID_PUBLIC_KEY: string;
   PAYSTACK_SECRET: string;

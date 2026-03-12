@@ -22,6 +22,12 @@
       "id": "ab4c606dc306424499681ecdcd99dbdc"
     }
   ],
+  "r2_buckets": [
+    {
+      "binding": "KNOWLEDGE_R2",
+      "bucket_name": "askozzy-knowledge-docs"
+    }
+  ],
   "vectorize": [
     {
       "binding": "VECTORIZE",
