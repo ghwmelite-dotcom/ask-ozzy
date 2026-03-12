@@ -30,6 +30,22 @@ export async function checkRateLimit(env: Env, key: string, category: string): P
   }
 }
 
+// ─── Global Per-User Rate Limit (100/hr across all agents) ─────────
+
+export async function globalRateLimit(env: Env, userId: string): Promise<{ allowed: boolean; remaining: number }> {
+  const key = `global_rate:${userId}`;
+  try {
+    const current = parseInt(await env.SESSIONS.get(key) || '0');
+    if (current >= 100) {
+      return { allowed: false, remaining: 0 };
+    }
+    await env.SESSIONS.put(key, String(current + 1), { expirationTtl: 3600 });
+    return { allowed: true, remaining: 100 - current - 1 };
+  } catch {
+    return { allowed: true, remaining: 100 };
+  }
+}
+
 // ─── Auth Middleware ─────────────────────────────────────────────────
 
 export async function authMiddleware(c: any, next: () => Promise<void>): Promise<Response | void> {

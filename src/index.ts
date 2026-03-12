@@ -8,7 +8,7 @@ import {
   createToken, verifyToken,
 } from "./lib/utils";
 import {
-  checkRateLimit, authMiddleware, adminMiddleware, deptAdminMiddleware, orgAdminMiddleware,
+  checkRateLimit, globalRateLimit, authMiddleware, adminMiddleware, deptAdminMiddleware, orgAdminMiddleware,
 } from "./lib/middleware";
 import {
   buildGroundedSystemPrompt, buildContextBlock, buildNoContextResponse,
@@ -31,17 +31,16 @@ import { verify, requiresFullVerification, selfConsistencyCheck } from "./lib/ve
 import { adjudicate } from "./lib/adjudicator";
 import { computeConfidence } from "./lib/confidence";
 import { parseCitations } from "./lib/citation-parser";
-import { classifyTranslationRisk, CERTIFIED_TRANSLATOR_RESOURCES } from "./config/translation-resources";
 import { loadStudentProfile, saveStudentProfile, updateSessionScore } from "./lib/session-tracker";
-import { getOrCreateStudentProfile, buildScaffoldingPrompt, generateOrientationBrief, isNewTopic } from "./agents/tutor-agent";
+import { assessStudentLevel, getOrCreateStudentProfile, buildScaffoldingPrompt, generateOrientationBrief, isNewTopic } from "./agents/tutor-agent";
 import { retrieveAtLevel } from "./lib/difficulty-retriever";
-import { translateWithSafeguards } from "./agents/translation-agent";
+import { log } from "./lib/logger";
 
 const app = new Hono<AppType>();
 
 // Global error handler — prevent stack trace leaks
 app.onError((err, c) => {
-  console.error("Unhandled error:", err.message, err.stack);
+  log('error', 'Unhandled error', { error: err.message, stack: err.stack });
   return c.json({ error: "Internal server error" }, 500);
 });
 
@@ -184,7 +183,7 @@ app.post("/api/auth/register", async (c) => {
         );
         await checkMilestones(c.env.DB, referredBy);
       } catch (err) {
-        console.error("Referral bonus error:", err);
+        log("error", "Referral bonus error", { error: String(err) });
       }
     })());
   }
@@ -1786,7 +1785,7 @@ async function webSearch(query: string, maxResults = 5): Promise<Array<{ title: 
 
     return results;
   } catch (e) {
-    console.error("Web search failed:", e);
+    log("error", "Web search failed", { error: String(e) });
     return [];
   }
 }
@@ -1854,7 +1853,13 @@ app.post("/api/chat", authMiddleware, async (c) => {
     return c.json({ error: "Too many requests. Please slow down.", code: "RATE_LIMITED" }, 429);
   }
 
-  const { conversationId, message, model, systemPrompt, agentId, webSearch: webSearchEnabled, language } = await c.req.json();
+  // Global per-user rate limit (100/hr across all agents)
+  const globalCheck = await globalRateLimit(c.env, userId);
+  if (!globalCheck.allowed) {
+    return c.json({ error: "Hourly request limit reached (100/hr). Please try again later.", code: "GLOBAL_RATE_LIMITED" }, 429);
+  }
+
+  const { conversationId, message, model, systemPrompt, agentId, webSearch: webSearchEnabled } = await c.req.json();
 
   if (!conversationId || !message) {
     return c.json({ error: "conversationId and message are required" }, 400);
@@ -1969,7 +1974,7 @@ app.post("/api/chat", authMiddleware, async (c) => {
     if ((memories && memories.length > 0) || profileSection) {
       memoryPrefix = `## About this user\n${profileSection}${memories ? memories.map(m => `- ${m.key}: ${m.value}`).join("\n") : ""}\n\nUse this context to personalize your responses. Reference the user's role, department, and preferences when relevant.\n\n`;
     }
-  } catch (e: any) { console.error("Memory lookup failed:", e?.message); }
+  } catch (e: any) { log('error', 'Memory lookup failed', { error: e?.message }); }
 
   // Determine base system prompt (agent or default, persona-aware)
   const defaultPrompt = (user?.user_type === "student") ? STUDENT_SYSTEM_PROMPT : GOG_SYSTEM_PROMPT;
@@ -1989,7 +1994,7 @@ app.post("/api/chat", authMiddleware, async (c) => {
           agentKnowledgeCategory = agent.knowledge_category;
         }
       }
-    } catch (e: any) { console.error("Agent lookup failed:", e?.message); }
+    } catch (e: any) { log('error', 'Agent lookup failed', { error: e?.message }); }
   }
 
   // Resolve inference parameters for this agent type
@@ -2018,7 +2023,7 @@ app.post("/api/chat", authMiddleware, async (c) => {
     }
   } catch (e: any) {
     // Known errors check is non-fatal — proceed with normal pipeline
-    console.error("Known errors check failed:", e?.message);
+    log("error", "Known errors check failed", { error: e?.message });
   }
 
   // RAG: Hybrid search (Vectorize + AutoRAG) for relevant context
@@ -2046,7 +2051,7 @@ app.post("/api/chat", authMiddleware, async (c) => {
         webSearchResults = await webSearch(actualMessage, 5);
         await incrementWebSearchCount(c.env, userId);
       }
-    } catch (e: any) { console.error("Web search failed:", e?.message); }
+    } catch (e: any) { log('error', 'Web search failed', { error: e?.message }); }
   }
 
   let augmentedPrompt = memoryPrefix + buildAugmentedPrompt(baseSystemPrompt, ragResults, faqResults);
@@ -2058,19 +2063,6 @@ app.post("/api/chat", authMiddleware, async (c) => {
       augmentedPrompt += `[${i + 1}] ${r.title}\nURL: ${r.url}\n${r.snippet}\n\n`;
     });
     augmentedPrompt += '---\nIMPORTANT: When referencing information from web results, cite the source number (e.g., [1], [2]). At the end of your response, list all cited sources in a "Sources:" section.\n';
-  }
-
-  // Language support: instruct AI to respond in target language
-  // Phase 7: For Ghanaian languages (no m2m100 code), respond in clear English then auto-translate
-  // For m2m100-supported languages (French, Hausa), keep direct prompt injection
-  if (language && language !== "en" && SUPPORTED_LANGUAGES[language]) {
-    const langName = SUPPORTED_LANGUAGES[language].name;
-    const isGhanaianLang = !SUPPORTED_LANGUAGES[language].m2mCode;
-    if (isGhanaianLang) {
-      augmentedPrompt += `\n\nNote: The user's preferred language is ${langName}. Respond in clear, simple English. Your response will be automatically translated to ${langName}. Avoid complex idioms, slang, or highly technical jargon. Use short, clear sentences that translate well.`;
-    } else {
-      augmentedPrompt += `\n\nIMPORTANT: The user has selected ${langName} as their language. You MUST respond entirely in ${langName}.`;
-    }
   }
 
   // Inject tool use rules for tool-enabled agents
@@ -2100,7 +2092,7 @@ Start with these warm-up questions: ${brief.starter_questions.join(' | ') || 'N/
         }
       }
     } catch (e: any) {
-      console.error("Tutor scaffolding failed:", e?.message);
+      log("error", "Tutor scaffolding failed", { error: e?.message });
     }
   }
 
@@ -2122,54 +2114,13 @@ Start with these warm-up questions: ${brief.starter_questions.join(' | ') || 'N/
       }, 429);
     }
   } catch (e: any) {
-    console.error("Agent rate limit check failed:", e?.message);
+    log("error", "Agent rate limit check failed", { error: e?.message });
     // Non-fatal — proceed
-  }
-
-  // Translation safeguard: check for hard blocks on Tier 4 + official docs
-  if (agentCategory === 'translation') {
-    try {
-      // Detect target language from message
-      const langPatterns = ['twi', 'ewe', 'ga', 'dagbani', 'hausa', 'nzema', 'gonja', 'asante', 'akuapem'];
-      const detectedLang = langPatterns.find(l => message.toLowerCase().includes(l)) || '';
-      // Detect use case from message or default to casual
-      const useCasePatterns: Array<{ pattern: RegExp; useCase: 'official_document' | 'health_information' | 'civic_information' | 'educational_content' }> = [
-        { pattern: /contract|official|legal|government|memo|letter|statutory|gazette/i, useCase: 'official_document' },
-        { pattern: /health|medical|prescription|dosage|diagnosis|treatment/i, useCase: 'health_information' },
-        { pattern: /civic|voting|regulation|policy|citizen|assembly/i, useCase: 'civic_information' },
-        { pattern: /school|student|lesson|exam|curriculum|textbook/i, useCase: 'educational_content' },
-      ];
-      const detectedUseCase = useCasePatterns.find(p => p.pattern.test(message))?.useCase || 'casual_communication';
-
-      if (detectedLang) {
-        const risk = classifyTranslationRisk(detectedLang, detectedUseCase);
-        // Hard block: Tier 4 or official_document
-        if (risk.riskLevel === 'critical' || detectedUseCase === 'official_document') {
-          const safeguardResult = await translateWithSafeguards(message, detectedLang, detectedUseCase, c.env);
-          if (safeguardResult.blocked) {
-            const assistantMsgId = generateId();
-            await c.env.DB.prepare(
-              "INSERT INTO messages (id, conversation_id, role, content, model) VALUES (?, ?, 'assistant', ?, ?)"
-            ).bind(assistantMsgId, conversationId, safeguardResult.text, 'translation-safeguard').run();
-            return c.json({ response: safeguardResult.text, request_id: requestId, translation_blocked: true });
-          }
-        }
-      }
-    } catch (e: any) {
-      console.error("Translation safeguard check failed:", e?.message);
-    }
   }
 
   // Tier-based max_tokens
   const tierMaxTokens: Record<string, number> = { free: 2048, starter: 4096, professional: 6144, enterprise: 8192 };
   const maxTokens = tierMaxTokens[userTier] || 4096;
-
-  // Build cache options for AI Gateway
-  const skipCache = shouldSkipCache(message);
-  const cacheOpts = await buildCacheKey(message, agentCategory, ragResults.map(r => r.source));
-  cacheOpts.skipCache = skipCache;
-  cacheOpts.requestId = requestId;
-  cacheOpts.userTier = userTier;
 
   // Convert RAG results to RetrievedContext for verification pipeline
   const retrievedContexts: RetrievedContext[] = ragResults.map((r, i) => ({
@@ -2178,6 +2129,67 @@ Start with these warm-up questions: ${brief.starter_questions.join(' | ') || 'N/
     score: r.score,
     source: r.source,
   }));
+
+  // Tool execution for tool-enabled agents (non-streaming first pass)
+  if (agentHasTools(agentCategory)) {
+    try {
+      const toolResult = await runWithTools(
+        messages as any,
+        agentCategory,
+        c.env,
+        requestId,
+      );
+      if (toolResult.toolsUsed.length > 0) {
+        const assistantMsgId = generateId();
+        await c.env.DB.prepare(
+          "INSERT INTO messages (id, conversation_id, role, content, model) VALUES (?, ?, 'assistant', ?, ?)"
+        ).bind(assistantMsgId, conversationId, toolResult.response, selectedModel).run();
+
+        // Auto-flag for moderation
+        c.executionCtx.waitUntil(checkModeration(c.env.DB, conversationId, assistantMsgId, userId, toolResult.response));
+
+        // Post-response verification in background
+        c.executionCtx.waitUntil((async () => {
+          try {
+            if (requiresFullVerification(agentCategory)) {
+              const vResult = await Promise.race([
+                verify(toolResult.response, retrievedContexts, agentCategory, c.env),
+                new Promise<never>((_, reject) => setTimeout(() => reject(new Error('verification timeout')), 10000)),
+              ]);
+              if (vResult && !vResult.is_supported) {
+                await c.env.DB.prepare(
+                  "INSERT INTO hallucination_events (id, request_id, agent_type, claim, source_checked, verdict) VALUES (?, ?, ?, ?, ?, ?)"
+                ).bind(generateId(), requestId, agentCategory, toolResult.response.substring(0, 500), 'tool-response', 'unsupported').run().catch(() => {});
+              }
+            }
+          } catch {}
+        })());
+
+        // Record gateway metrics
+        c.executionCtx.waitUntil(recordGatewayMetrics(agentCategory, 0, 0, c.env).catch(() => {}));
+
+        // Update student profile for tutor agents
+        if (isTutorAgent && studentProfile) {
+          try {
+            const outcome = toolResult.response.length > 100 ? 'correct' : 'skipped';
+            const updatedProfile = updateSessionScore(studentProfile, outcome as any);
+            await saveStudentProfile(conversationId, updatedProfile, c.env);
+          } catch {}
+        }
+
+        return c.json({ response: toolResult.response, request_id: requestId, tools_used: toolResult.toolsUsed });
+      }
+    } catch (e: any) {
+      log("error", "Tool execution failed, falling back to streaming", { error: e?.message });
+    }
+  }
+
+  // Build cache options for AI Gateway
+  const skipCache = shouldSkipCache(message);
+  const cacheOpts = await buildCacheKey(message, agentCategory, ragResults.map(r => r.source));
+  cacheOpts.skipCache = skipCache;
+  cacheOpts.requestId = requestId;
+  cacheOpts.userTier = userTier;
 
   // Stream response via AI Gateway with agent-specific inference params
   const stream = await runStreamWithGateway(selectedModel, {
@@ -2266,19 +2278,6 @@ Start with these warm-up questions: ${brief.starter_questions.join(' | ') || 'N/
           }
         } catch { /* ignore suggestion errors */ }
 
-        // Phase 7: Post-response translation for Ghanaian languages
-        if (language && language !== "en" && SUPPORTED_LANGUAGES[language] && !SUPPORTED_LANGUAGES[language].m2mCode && fullResponse.length > 10) {
-          try {
-            const langName = SUPPORTED_LANGUAGES[language].name;
-            // 10s timeout for translation
-            const translationPromise = translateText(c.env.AI, fullResponse, "en", language);
-            const timeoutPromise = new Promise<string>((_, reject) => setTimeout(() => reject(new Error("timeout")), 10000));
-            const translated = await Promise.race([translationPromise, timeoutPromise]);
-            if (translated && translated !== fullResponse) {
-              await writer.write(encoder.encode(`event: translation\ndata: ${JSON.stringify({ text: translated, language, languageName: langName })}\n\n`));
-            }
-          } catch { /* translation failure doesn't break the chat */ }
-        }
       } finally {
         await writer.close();
 
@@ -2301,12 +2300,32 @@ Start with these warm-up questions: ${brief.starter_questions.join(' | ') || 'N/
           // Auto-flag for moderation
           await checkModeration(c.env.DB, conversationId, assistantMsgId, userId, fullResponse);
 
-          // Update student profile score for tutor agents
+          // Update student profile score and interaction count for tutor agents
           if (isTutorAgent && studentProfile) {
             try {
               // Simple heuristic: if response is long and structured, mark as correct interaction
               const outcome = fullResponse.length > 100 ? 'correct' : 'skipped';
               const updatedProfile = updateSessionScore(studentProfile, outcome as any);
+
+              // Increment interaction count and reassess level every 10 interactions
+              const count = (updatedProfile.interaction_count || 0) + 1;
+              updatedProfile.interaction_count = count;
+              if (count > 0 && count % 10 === 0) {
+                try {
+                  const reassessment = await assessStudentLevel(message, c.env);
+                  if (reassessment.level !== updatedProfile.level) {
+                    updatedProfile.level = reassessment.level;
+                    updatedProfile.confidence = reassessment.confidence;
+                    log('info', 'Student level reassessed', {
+                      conversationId,
+                      oldLevel: studentProfile.level,
+                      newLevel: reassessment.level,
+                      interactions: count,
+                    });
+                  }
+                } catch {}
+              }
+
               await saveStudentProfile(conversationId, updatedProfile, c.env);
             } catch {}
           }
@@ -2397,18 +2416,24 @@ Start with these warm-up questions: ${brief.starter_questions.join(' | ') || 'N/
               const citationReport = parseCitations(fullResponse, retrievedContexts);
 
               if (requiresFullVerification(agentCategory)) {
-                // High-risk agents: 70B verification
+                // High-risk agents: 70B verification (10s timeout)
                 const generatedForVerify = {
                   text: fullResponse,
                   claims: citationReport.citations.map(c => c.source),
                   citations_used: citationReport.citations.map(c => c.source),
                   raw: fullResponse,
                 };
-                const verificationReport = await verify(generatedForVerify, retrievedContexts, c.env);
+                const verificationReport = await Promise.race([
+                  verify(generatedForVerify, retrievedContexts, c.env),
+                  new Promise<never>((_, reject) => setTimeout(() => reject(new Error('verification timed out after 10s')), 10000)),
+                ]);
 
                 if (verificationReport.overall === 'FAIL') {
-                  // Log hallucination event to D1
-                  await adjudicate(generatedForVerify, verificationReport, c.env, requestId, agentCategory, message);
+                  // Log hallucination event to D1 (10s timeout)
+                  await Promise.race([
+                    adjudicate(generatedForVerify, verificationReport, c.env, requestId, agentCategory, message),
+                    new Promise<never>((_, reject) => setTimeout(() => reject(new Error('adjudication timed out after 10s')), 10000)),
+                  ]);
                 }
 
                 // Record metrics
@@ -2420,8 +2445,11 @@ Start with these warm-up questions: ${brief.starter_questions.join(' | ') || 'N/
                 const confidenceNumeric = confidence.final_confidence === 'high' ? 0.9 : confidence.final_confidence === 'medium' ? 0.6 : confidence.final_confidence === 'low' ? 0.3 : 0;
                 await recordGatewayMetrics(c.env, agentCategory, false, verificationReport.overall === 'FAIL', responseTimeMs, confidenceNumeric);
               } else {
-                // Non-critical agents: self-consistency check (cheaper)
-                const consistencyScore = await selfConsistencyCheck(message, augmentedPrompt, c.env);
+                // Non-critical agents: self-consistency check (10s timeout)
+                const consistencyScore = await Promise.race([
+                  selfConsistencyCheck(message, augmentedPrompt, c.env),
+                  new Promise<never>((_, reject) => setTimeout(() => reject(new Error('self-consistency timed out after 10s')), 10000)),
+                ]);
                 const confidence = computeConfidence(
                   retrievedContexts.map(r => r.score),
                   'SKIPPED',
@@ -2442,7 +2470,7 @@ Start with these warm-up questions: ${brief.starter_questions.join(' | ') || 'N/
               }
             }
           } catch (verifyErr: any) {
-            console.error("Post-stream verification failed:", verifyErr?.message);
+            log("error", "Post-stream verification failed", { error: verifyErr?.message });
           }
         }
       }
@@ -2859,82 +2887,6 @@ Keep datasets data arrays to max 20 items. Return ONLY valid JSON.`;
   } catch (e) {
     return c.json({ error: "Analysis failed. Please try again with a smaller file." }, 500);
   }
-});
-
-// ─── Translation / Language Support ──────────────────────────────────
-
-const SUPPORTED_LANGUAGES: Record<string, { name: string; m2mCode: string | null }> = {
-  en: { name: "English", m2mCode: "en" },
-  fr: { name: "French", m2mCode: "fr" },
-  ha: { name: "Hausa", m2mCode: "ha" },
-  tw: { name: "Twi (Akan)", m2mCode: null },      // LLM fallback
-  ga: { name: "Ga", m2mCode: null },               // LLM fallback
-  ee: { name: "Ewe", m2mCode: null },              // LLM fallback
-  dag: { name: "Dagbani", m2mCode: null },          // LLM fallback
-};
-
-async function translateText(
-  ai: Ai,
-  text: string,
-  sourceLang: string,
-  targetLang: string
-): Promise<string> {
-  const source = SUPPORTED_LANGUAGES[sourceLang];
-  const target = SUPPORTED_LANGUAGES[targetLang];
-
-  if (!source || !target || sourceLang === targetLang) return text;
-
-  // Use m2m100 if both languages are supported
-  if (source.m2mCode && target.m2mCode) {
-    try {
-      const result = await ai.run("@cf/meta/m2m100-1.2b" as any, {
-        text,
-        source_lang: source.m2mCode,
-        target_lang: target.m2mCode,
-      });
-      return (result as any).translated_text || text;
-    } catch {
-      // Fall through to LLM fallback
-    }
-  }
-
-  // LLM fallback for unsupported language pairs (Twi, Ga, Ewe, Dagbani)
-  try {
-    const result = await ai.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast" as any, {
-      messages: [
-        {
-          role: "system",
-          content: `You are a professional ${target.name} translator from Ghana. Your ONLY job is to translate text from ${source.name} into ${target.name}.
-
-CRITICAL RULES:
-- Output ONLY the ${target.name} translation. No English at all.
-- Do NOT include the original text, explanations, or notes.
-- Do NOT mix English words into the translation. Translate EVERYTHING including technical terms, place names can stay.
-- If a word has no direct ${target.name} equivalent, use the closest ${target.name} phrase to describe it.
-- URLs, phone numbers, and proper nouns (organization names like SSNIT, GRA, DVLA) can remain as-is.
-- Maintain the same formatting (bullet points, numbering, bold markers).
-- Write naturally as a native ${target.name} speaker would.`,
-        },
-        { role: "user", content: `Translate this to ${target.name}:\n\n${text}` },
-      ],
-      max_tokens: 2048,
-    });
-    return (result as any).response || text;
-  } catch {
-    return text;
-  }
-}
-
-app.post("/api/translate", authMiddleware, async (c) => {
-  const userId = c.get("userId");
-  const { text, sourceLang, targetLang } = await c.req.json();
-
-  if (!text || !targetLang) {
-    return c.json({ error: "text and targetLang are required" }, 400);
-  }
-
-  const translated = await translateText(c.env.AI, text, sourceLang || "en", targetLang);
-  return c.json({ translated, sourceLang: sourceLang || "en", targetLang });
 });
 
 // ─── Image / Vision Understanding ───────────────────────────────────
@@ -5270,7 +5222,7 @@ app.post("/api/feedback", authMiddleware, async (c) => {
     await handleFeedback(body, c.env);
     return c.json({ success: true });
   } catch (e: any) {
-    console.error("Feedback submission failed:", e?.message);
+    log("error", "Feedback submission failed", { error: e?.message });
     return c.json({ error: "Failed to submit feedback" }, 500);
   }
 });
@@ -5917,7 +5869,7 @@ Return ONLY a JSON object:
       feedback: scores.feedback,
     });
   } catch (err: any) {
-    console.error("Exam grading error:", err?.message);
+    log("error", "Exam grading error", { error: err?.message });
     return c.json({ error: "Grading failed. Please try again." }, 500);
   }
 });
@@ -7746,13 +7698,13 @@ app.post("/api/webhooks/paystack", async (c) => {
     if (metadata?.type === "doc_credits" && metadata?.userId && metadata?.packId) {
       const pack = DOC_CREDIT_PACKS[metadata.packId];
       if (!pack) {
-        console.error("Webhook: unknown doc credit pack", metadata.packId);
+        log("error", "Webhook: unknown doc credit pack", { packId: metadata.packId });
         return c.json({ received: true, flagged: "unknown_pack" }, 200);
       }
 
       const paidAmount = Number(amountPesewas) || 0;
       if (paidAmount < pack.pricePesewas) {
-        console.error("Webhook: doc credit amount mismatch", { expected: pack.pricePesewas, received: paidAmount, reference });
+        log("error", "Webhook: doc credit amount mismatch", { expected: pack.pricePesewas, received: paidAmount, reference });
         return c.json({ received: true, flagged: "amount_mismatch" }, 200);
       }
 
@@ -7778,7 +7730,7 @@ app.post("/api/webhooks/paystack", async (c) => {
           try {
             await processAffiliateCommissions(c.env.DB, metadata.userId, paymentAmountGHS, reference || "");
           } catch (err) {
-            console.error("Affiliate commission error:", err);
+            log("error", "Affiliate commission error", { error: String(err) });
           }
         })());
       }
@@ -7790,7 +7742,7 @@ app.post("/api/webhooks/paystack", async (c) => {
       // Validate tier exists in our plans
       const plan = PAYSTACK_PLANS[metadata.tier];
       if (!plan) {
-        console.error("Webhook: unknown tier", metadata.tier);
+        log("error", "Webhook: unknown tier", { tier: metadata.tier });
         return c.json({ error: "Unknown tier" }, 400);
       }
 
@@ -7801,7 +7753,7 @@ app.post("/api/webhooks/paystack", async (c) => {
       // Validate payment amount matches expected price (allow student pricing as minimum)
       const paidAmount = Number(amountPesewas) || 0;
       if (paidAmount < minAmount) {
-        console.error("Webhook: amount mismatch — flagged for review", { expected: minAmount, received: paidAmount, tier: metadata.tier, cycle, reference });
+        log("error", "Webhook: amount mismatch", { expected: minAmount, received: paidAmount, tier: metadata.tier, cycle, reference });
         // Return 200 to prevent Paystack retry loops; log for admin review
         return c.json({ received: true, flagged: "amount_mismatch" }, 200);
       }
@@ -7827,7 +7779,7 @@ app.post("/api/webhooks/paystack", async (c) => {
           try {
             await processAffiliateCommissions(c.env.DB, metadata.userId, paymentAmountGHS, reference || "");
           } catch (err) {
-            console.error("Affiliate commission error:", err);
+            log("error", "Affiliate commission error", { error: String(err) });
           }
         })());
       }
@@ -8108,7 +8060,7 @@ app.post("/api/admin/users/bulk", adminMiddleware, async (c) => {
 
       results.push({ email, status: "created", accessCode });
     } catch (err) {
-      console.error("Bulk user import error:", email, (err as Error).message);
+      log("error", "Bulk user import error", { email, error: (err as Error).message });
       results.push({ email, status: "failed" });
     }
   }
@@ -8364,14 +8316,14 @@ app.post("/api/admin/documents/upload-file", adminMiddleware, async (c) => {
       try {
         content = await extractDocxText(file);
       } catch (err) {
-        console.error("DOCX extraction error:", (err as Error).message);
+        log("error", "DOCX extraction error", { error: (err as Error).message });
         return c.json({ error: "Failed to extract text from DOCX. The file may be corrupted or in an unsupported format." }, 400);
       }
     } else if (fileName.endsWith(".pptx")) {
       try {
         content = await extractPptxText(file);
       } catch (err) {
-        console.error("PPTX extraction error:", (err as Error).message);
+        log("error", "PPTX extraction error", { error: (err as Error).message });
         return c.json({ error: "Failed to extract text from PPTX. The file may be corrupted or in an unsupported format." }, 400);
       }
     } else if (fileName.endsWith(".doc")) {
@@ -8381,7 +8333,7 @@ app.post("/api/admin/documents/upload-file", adminMiddleware, async (c) => {
           return c.json({ error: "Could not extract enough readable text from this .doc file. Try converting it to .docx first." }, 400);
         }
       } catch (err) {
-        console.error("DOC extraction error:", (err as Error).message);
+        log("error", "DOC extraction error", { error: (err as Error).message });
         return c.json({ error: "Failed to extract text from DOC. Try converting to .docx first." }, 400);
       }
     } else if (fileName.endsWith(".ppt")) {
@@ -8441,7 +8393,7 @@ app.post("/api/admin/documents/upload-file", adminMiddleware, async (c) => {
       message: "File uploaded and processing started",
     });
   } catch (err) {
-    console.error("File upload failed:", (err as Error).message);
+    log("error", "File upload failed", { error: (err as Error).message });
     return c.json({ error: "File upload failed" }, 500);
   }
 });
@@ -8612,7 +8564,7 @@ app.post("/api/admin/documents/scrape-url", adminMiddleware, async (c) => {
 
         results.push({ url, status: "success", docId, charCount: content.length, title: pageTitle });
       } catch (err) {
-        console.error("Scrape error for", url, (err as Error).message);
+        log("error", "Scrape error", { url, error: (err as Error).message });
         results.push({ url, status: "failed", error: "Failed to scrape this URL" });
       }
     }
@@ -8623,7 +8575,7 @@ app.post("/api/admin/documents/scrape-url", adminMiddleware, async (c) => {
       summary: { total: urlList.length, succeeded, failed: urlList.length - succeeded },
     });
   } catch (err) {
-    console.error("URL scraping failed:", (err as Error).message);
+    log("error", "URL scraping failed", { error: (err as Error).message });
     return c.json({ error: "URL scraping failed" }, 500);
   }
 });
@@ -9340,35 +9292,6 @@ app.get("/api/meetings/search", authMiddleware, async (c) => {
   return c.json({ results: results || [] });
 });
 
-// ─── Phase 7: Meeting Minutes Translation ───────────────────────────
-
-app.post("/api/meetings/:id/translate", authMiddleware, async (c) => {
-  const userId = c.get("userId");
-  const meetingId = c.req.param("id");
-  const { targetLang } = await c.req.json();
-
-  if (!targetLang || !SUPPORTED_LANGUAGES[targetLang] || targetLang === "en") {
-    return c.json({ error: "Invalid or unsupported target language" }, 400);
-  }
-
-  const meeting = await c.env.DB.prepare(
-    "SELECT minutes FROM meetings WHERE id = ? AND user_id = ?"
-  ).bind(meetingId, userId).first<{ minutes: string }>();
-  if (!meeting) return c.json({ error: "Meeting not found" }, 404);
-  if (!meeting.minutes) return c.json({ error: "No minutes to translate" }, 400);
-
-  try {
-    const translated = await translateText(c.env.AI, meeting.minutes, "en", targetLang);
-    return c.json({
-      translated,
-      language: targetLang,
-      languageName: SUPPORTED_LANGUAGES[targetLang].name,
-    });
-  } catch {
-    return c.json({ error: "Translation failed" }, 500);
-  }
-});
-
 // ─── Feature 11: Collaborative Spaces ───────────────────────────────
 
 app.post("/api/spaces", authMiddleware, async (c) => {
@@ -9613,7 +9536,7 @@ app.post("/api/admin/bulk-import", adminMiddleware, async (c) => {
         imported++;
         users.push({ name: row.fullName, email: row.email, access_code: accessCode, department: row.department, tier: row.tier, status: "created" });
       } catch (err) {
-        console.error("CSV import error:", row.email, (err as Error).message);
+        log("error", "CSV import error", { email: row.email, error: (err as Error).message });
         errors.push(`${row.email}: import failed`);
         users.push({ name: row.fullName, email: row.email, access_code: "", department: row.department, tier: row.tier, status: "failed" });
       }
@@ -9629,7 +9552,7 @@ app.post("/api/admin/bulk-import", adminMiddleware, async (c) => {
       total: userRows.length,
     });
   } catch (err) {
-    console.error("CSV processing error:", (err as Error).message);
+    log("error", "CSV processing error", { error: (err as Error).message });
     return c.json({ error: "Failed to process CSV. Check the file format and try again." }, 500);
   }
 });
@@ -9807,7 +9730,7 @@ app.get("/api/admin/departments/stats", deptAdminMiddleware, async (c) => {
 
     return c.json({ departments });
   } catch (err) {
-    console.error("Department stats error:", err);
+    log("error", "Department stats error", { error: String(err) });
     return c.json({ error: "Failed to load department stats" }, 500);
   }
 });
@@ -9922,7 +9845,7 @@ app.post("/api/admin/knowledge/bulk", adminMiddleware, async (c) => {
           try {
             content = await extractDocxText(file);
           } catch (err) {
-            console.error("Bulk DOCX error:", file.name, (err as Error).message);
+            log("error", "Bulk DOCX error", { file: file.name, error: (err as Error).message });
             results.push({ filename: file.name, status: 'error', error: 'Failed to extract DOCX text. File may be corrupted.' });
             continue;
           }
@@ -9930,7 +9853,7 @@ app.post("/api/admin/knowledge/bulk", adminMiddleware, async (c) => {
           try {
             content = await extractPptxText(file);
           } catch (err) {
-            console.error("Bulk PPTX error:", file.name, (err as Error).message);
+            log("error", "Bulk PPTX error", { file: file.name, error: (err as Error).message });
             results.push({ filename: file.name, status: 'error', error: 'Failed to extract PPTX text. File may be corrupted.' });
             continue;
           }
@@ -10003,7 +9926,7 @@ app.post("/api/admin/knowledge/bulk", adminMiddleware, async (c) => {
         await logAudit(c.env.DB, adminId, "bulk_upload_document", "document", docId, `${title} (${file.name}, ${content.length} chars)`);
 
       } catch (err) {
-        console.error("Bulk upload error:", file.name, (err as Error).message);
+        log("error", "Bulk upload error", { file: file.name, error: (err as Error).message });
         results.push({ filename: file.name, status: 'error', error: 'Failed to process file' });
       }
     }
@@ -10017,7 +9940,7 @@ app.post("/api/admin/knowledge/bulk", adminMiddleware, async (c) => {
     });
 
   } catch (err) {
-    console.error("Bulk upload failed:", (err as Error).message);
+    log("error", "Bulk upload failed", { error: (err as Error).message });
     return c.json({ error: "Bulk upload failed" }, 500);
   }
 });
@@ -10100,7 +10023,7 @@ app.get("/api/admin/knowledge/stats", adminMiddleware, async (c) => {
       gog_library: gogStatus,
     });
   } catch (err) {
-    console.error("Failed to load knowledge stats:", (err as Error).message);
+    log("error", "Failed to load knowledge stats", { error: (err as Error).message });
     return c.json({ error: "Failed to load knowledge stats" }, 500);
   }
 });
@@ -10224,7 +10147,7 @@ async function getUSSDResponse(ai: Ai, prompt: string): Promise<string> {
     );
     return (result as any)?.response || "Sorry, I could not process that request.";
   } catch (err) {
-    console.error("USSD AI error:", err);
+    log("error", "USSD AI error", { error: String(err) });
     return "Service temporarily unavailable. Please try again.";
   }
 }
@@ -10248,7 +10171,7 @@ async function getUSSDMemoResponse(ai: Ai, topic: string): Promise<string> {
     );
     return (result as any)?.response || "Could not generate memo. Please try again.";
   } catch (err) {
-    console.error("USSD memo AI error:", err);
+    log("error", "USSD memo AI error", { error: String(err) });
     return "Service temporarily unavailable. Please try again.";
   }
 }
@@ -10542,7 +10465,7 @@ app.post("/api/ussd/callback", async (c) => {
       headers: { "Content-Type": "text/plain" },
     });
   } catch (err: any) {
-    console.error("USSD callback error:", err);
+    log("error", "USSD callback error", { error: String(err) });
     return new Response("END An error occurred. Please try again later.", {
       headers: { "Content-Type": "text/plain" },
     });
@@ -10583,7 +10506,7 @@ app.get("/api/admin/ussd/stats", adminMiddleware, async (c) => {
       popular_menu_choices: menuChoices,
     });
   } catch (err: any) {
-    console.error("USSD stats error:", err);
+    log("error", "USSD stats error", { error: String(err) });
     return c.json({ error: "Failed to load USSD stats" }, 500);
   }
 });
@@ -10687,7 +10610,7 @@ app.post("/api/admin/ussd/test", adminMiddleware, async (c) => {
       isEnd: response.startsWith("END"),
     });
   } catch (err: any) {
-    console.error("USSD test error:", err);
+    log("error", "USSD test error", { error: String(err) });
     return c.json(
       { error: "USSD test failed. Check server logs for details." },
       500
@@ -10777,7 +10700,7 @@ async function getMessagingAIResponse(
     if (result && typeof result === "object" && "response" in result) return (result as any).response || "";
     return String(result);
   } catch (err) {
-    console.error("Messaging AI error:", err);
+    log("error", "Messaging AI error", { error: String(err) });
     return "Sorry, I'm having trouble processing your request right now. Please try again or use the AskOzzy web app at https://askozzy.ghwmelite.workers.dev";
   }
 }
@@ -11213,7 +11136,7 @@ app.post("/api/sms/webhook", async (c) => {
       if (result.success) {
         console.log(`[SMS] Sent to ${phoneNumber}: messageId=${result.messageId}`);
       } else {
-        console.error(`[SMS] Failed to send to ${phoneNumber}: ${result.error}`);
+        log('error', 'SMS send failed', { phoneNumber, error: result.error });
       }
     }
   } else {
@@ -11338,7 +11261,7 @@ app.get("/api/admin/messaging/stats", adminMiddleware, async (c) => {
       recent_sessions: recentSessions || [],
     });
   } catch (err) {
-    console.error("Messaging stats error:", err);
+    log("error", "Messaging stats error", { error: String(err) });
     return c.json({
       total_sessions: 0,
       messages_today: 0,
@@ -11397,7 +11320,7 @@ app.post("/api/admin/messaging/test", adminMiddleware, async (c) => {
       session_id: session.id,
     });
   } catch (err) {
-    console.error("Messaging test error:", err);
+    log("error", "Messaging test error", { error: String(err) });
     return c.json({ error: "Messaging test failed. Check server logs for details." }, 500);
   }
 });
@@ -11629,7 +11552,7 @@ app.post("/api/push/subscribe", authMiddleware, async (c) => {
 
     return c.json({ success: true });
   } catch (err: any) {
-    console.error("Push subscribe error:", err.message);
+    log("error", "Push subscribe error", { error: err.message });
     return c.json({ error: "Failed to save push subscription" }, 500);
   }
 });
@@ -11654,7 +11577,7 @@ app.delete("/api/push/unsubscribe", authMiddleware, async (c) => {
 
     return c.json({ success: true });
   } catch (err: any) {
-    console.error("Push unsubscribe error:", err.message);
+    log("error", "Push unsubscribe error", { error: err.message });
     return c.json({ error: "Failed to remove push subscription" }, 500);
   }
 });
@@ -11685,7 +11608,7 @@ app.get("/api/push/status", authMiddleware, async (c) => {
       },
     });
   } catch (err: any) {
-    console.error("Push status error:", err.message);
+    log("error", "Push status error", { error: err.message });
     return c.json({ error: "Failed to check push status" }, 500);
   }
 });
@@ -11722,7 +11645,7 @@ app.put("/api/push/preferences", authMiddleware, async (c) => {
 
     return c.json({ success: true });
   } catch (err: any) {
-    console.error("Push preferences error:", err.message);
+    log("error", "Push preferences error", { error: err.message });
     return c.json({ error: "Failed to update preferences" }, 500);
   }
 });
@@ -11745,7 +11668,7 @@ app.get("/api/prompt-course/progress", authMiddleware, async (c) => {
     const progress = row?.prompt_course_progress ? JSON.parse(row.prompt_course_progress) : {};
     return c.json({ progress });
   } catch (err: any) {
-    console.error("Prompt course progress error:", err.message);
+    log("error", "Prompt course progress error", { error: err.message });
     return c.json({ error: "Failed to load progress" }, 500);
   }
 });
@@ -11829,7 +11752,7 @@ Return ONLY a JSON object:
         "UPDATE user_profiles SET prompt_course_progress = ?, updated_at = datetime('now') WHERE user_id = ?"
       ).bind(JSON.stringify(progress), userId).run();
     } catch (saveErr: any) {
-      console.error("Progress save error:", saveErr.message);
+      log("error", "Progress save error", { error: saveErr.message });
     }
 
     c.executionCtx.waitUntil(trackProductivity(c, "prompt_course_exercise"));
@@ -11843,7 +11766,7 @@ Return ONLY a JSON object:
       improvedVersion: scores.improvedVersion,
     });
   } catch (err: any) {
-    console.error("Prompt course grading error:", err?.message);
+    log("error", "Prompt course grading error", { error: err?.message });
     return c.json({ error: "Grading failed. Please try again." }, 500);
   }
 });
@@ -12085,7 +12008,7 @@ export default {
             }
           }
         } catch {
-          console.error(`Discover: failed to fetch ${category}`);
+          log('error', 'Discover fetch failed', { category });
         }
       }
 
@@ -12094,7 +12017,51 @@ export default {
         "DELETE FROM discover_articles WHERE published_at < datetime('now', '-48 hours')"
       ).run();
     } catch (err: any) {
-      console.error("Discover cron error:", err?.message);
+      log("error", "Discover cron error", { error: err?.message });
     }
+
+    // ─── Monitoring: Hallucination rate alerting ──────────────────────
+    try {
+      const stats = await env.DB.prepare(`
+        SELECT
+          COUNT(*) as total,
+          SUM(CASE WHEN confidence_score < 0.5 THEN 1 ELSE 0 END) as low_confidence,
+          AVG(confidence_score) as avg_confidence
+        FROM gateway_metrics
+        WHERE date >= date('now', '-1 day')
+      `).first<{ total: number; low_confidence: number; avg_confidence: number }>();
+
+      if (stats && stats.total > 0) {
+        const hallRate = (stats.low_confidence || 0) / stats.total;
+        log('info', 'Daily confidence metrics', {
+          total_requests: stats.total,
+          low_confidence_count: stats.low_confidence || 0,
+          hallucination_rate: hallRate,
+          avg_confidence: stats.avg_confidence,
+        });
+        if (hallRate > 0.2) {
+          log('error', 'HIGH_HALLUCINATION_RATE', {
+            rate: hallRate,
+            total: stats.total,
+            low_confidence: stats.low_confidence,
+            avg_confidence: stats.avg_confidence,
+            alert: true,
+          });
+        }
+      }
+    } catch {}
+
+    // ─── Fetch daily exchange rates for currency converter ───────────
+    try {
+      const rateRes = await fetch('https://open.er-api.com/v6/latest/GHS');
+      if (rateRes.ok) {
+        const rateData = await rateRes.json() as { rates?: Record<string, number> };
+        if (rateData.rates) {
+          await env.SESSIONS.put('exchange_rates', JSON.stringify(rateData.rates), { expirationTtl: 86400 });
+          await env.SESSIONS.put('exchange_rates_updated', new Date().toISOString(), { expirationTtl: 86400 });
+          log('info', 'Exchange rates updated', { currencies: Object.keys(rateData.rates).length });
+        }
+      }
+    } catch {}
   },
 };

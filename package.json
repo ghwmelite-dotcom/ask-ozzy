@@ -8,6 +8,8 @@
     "deploy": "wrangler deploy",
     "db:init": "wrangler d1 execute ghana-civil-ai-db --local --file=schema.sql",
     "db:init:remote": "wrangler d1 execute ghana-civil-ai-db --remote --file=schema.sql",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
@@ -22,6 +24,7 @@
     "sharp": "^0.34.5",
     "typescript": "^5.7.0",
     "typescript-eslint": "^8.55.0",
+    "vitest": "^4.1.0",
     "wrangler": "^3.99.0"
   }
 }

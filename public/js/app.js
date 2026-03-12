@@ -1640,15 +1640,6 @@ function renderMessages() {
         <div class="message-sender">${msg.role === "user" ? "You" : "AskOzzy"}</div>
         ${msg.imageUrl ? `<div class="chat-image"><img src="${escapeHtml(msg.imageUrl || '')}" alt="Uploaded image" /></div>` : ""}
         <div class="message-content" id="msg-content-${i}">${msg.role === "user" ? escapeHtml(msg.content) : renderMarkdownWithCitations(msg.content, msg.webSources)}</div>
-        ${msg.translatedContent ? `
-        <div class="message-translation-toggle">
-          <button class="translation-toggle-btn" onclick="toggleTranslation(${i})" id="translation-toggle-${i}">
-            Show ${escapeHtml(msg.translationLangName || 'Translation')}
-          </button>
-        </div>
-        <div class="message-translated" id="msg-translated-${i}" style="display:none;">
-          ${renderMarkdown(msg.translatedContent)}
-        </div>` : ""}
         ${msg.webSources && msg.webSources.length > 0 ? renderSourcesFooter(msg.webSources) : ""}
         <div class="msg-actions">
           ${msg.role === "assistant" ? `<button class="msg-action-btn" data-speak="${i}" onclick="speakMessage(${i})" title="Listen to response"><span class="msg-action-icon">&#x1F50A;</span> Speak</button>` : ""}
@@ -1712,25 +1703,6 @@ function renderSourcesFooter(sources) {
       }).join("")}
     </div>
   </div>`;
-}
-
-function toggleTranslation(index) {
-  const contentEl = document.getElementById('msg-content-' + index);
-  const translatedEl = document.getElementById('msg-translated-' + index);
-  const toggleBtn = document.getElementById('translation-toggle-' + index);
-  const msg = state.messages[index];
-  if (!contentEl || !translatedEl || !msg) return;
-
-  const isShowingTranslation = translatedEl.style.display !== 'none';
-  if (isShowingTranslation) {
-    contentEl.style.display = '';
-    translatedEl.style.display = 'none';
-    toggleBtn.textContent = 'Show ' + (msg.translationLangName || 'Translation');
-  } else {
-    contentEl.style.display = 'none';
-    translatedEl.style.display = '';
-    toggleBtn.textContent = 'Show English';
-  }
 }
 
 function getUserInitials() {
@@ -1801,7 +1773,6 @@ async function sendMessage() {
         model: state.selectedModel,
         agentId: state.selectedAgent,
         webSearch: state.webSearchEnabled || message.startsWith("@web "),
-        language: state.language,
       }),
     });
     state.webSearchSources = [];
@@ -1875,21 +1846,6 @@ async function sendMessage() {
               if (Array.isArray(suggestions) && suggestions.length > 0) {
                 renderFollowUpSuggestions(suggestions);
               }
-              currentEvent = "";
-              continue;
-            }
-            // Phase 7: Handle translation event from SSE
-            if (currentEvent === "translation") {
-              try {
-                const translationData = JSON.parse(line.slice(6));
-                const lastMsg = state.messages[state.messages.length - 1];
-                if (lastMsg && lastMsg.role === "assistant") {
-                  lastMsg.translatedContent = translationData.text;
-                  lastMsg.translationLang = translationData.language;
-                  lastMsg.translationLangName = translationData.languageName;
-                  renderMessages();
-                }
-              } catch {}
               currentEvent = "";
               continue;
             }
@@ -7033,89 +6989,6 @@ function toggleWebSearch() {
   }
 }
 
-// ─── Language / Translation ─────────────────────────────────────────
-
-function changeLanguage(lang) {
-  state.language = lang;
-  const btn = document.getElementById('lang-selector');
-  const langNames = { en: 'EN', fr: 'FR', ha: 'HA', tw: 'TW', ga: 'GA', ee: 'EW', dag: 'DG' };
-  if (btn) btn.textContent = langNames[lang] || 'EN';
-  // Update placeholder
-  const input = document.getElementById('chat-input');
-  if (input && lang !== 'en') {
-    const placeholders = {
-      tw: 'Bisa Ozzy biribiara... (Twi)',
-      ha: 'Tambayi Ozzy komai... (Hausa)',
-      ga: 'Bi Ozzy nu... (Ga)',
-      ee: 'Bia Ozzy nu... (Ewe)',
-      fr: 'Demandez \u00e0 Ozzy... (Fran\u00e7ais)',
-      dag: 'Bui Ozzy soli... (Dagbani)',
-    };
-    input.placeholder = placeholders[lang] || 'Ask Ozzy anything...';
-  } else if (input) {
-    input.placeholder = 'Ask Ozzy anything... (Shift+Enter for new line)';
-  }
-  // Update speech recognition language when language changes
-  if (_recognition) {
-    _recognition.lang = getRecognitionLang();
-  }
-}
-
-function openLanguageMenu() {
-  const languages = [
-    { code: 'en', name: 'English', flag: '\u{1F1EC}\u{1F1E7}' },
-    { code: 'tw', name: 'Twi (Akan)', flag: '\u{1F1EC}\u{1F1ED}' },
-    { code: 'ga', name: 'Ga', flag: '\u{1F1EC}\u{1F1ED}' },
-    { code: 'ee', name: 'Ewe', flag: '\u{1F1EC}\u{1F1ED}' },
-    { code: 'ha', name: 'Hausa', flag: '\u{1F1EC}\u{1F1ED}' },
-    { code: 'fr', name: 'Fran\u00e7ais', flag: '\u{1F1EB}\u{1F1F7}' },
-    { code: 'dag', name: 'Dagbani', flag: '\u{1F1EC}\u{1F1ED}' },
-  ];
-
-  let menu = document.getElementById('lang-menu');
-  if (menu) {
-    menu.classList.toggle('active');
-    return;
-  }
-
-  menu = document.createElement('div');
-  menu.id = 'lang-menu';
-  menu.className = 'lang-menu active';
-  menu.innerHTML = languages.map(l =>
-    `<button class="lang-option ${state.language === l.code ? 'active' : ''}" onclick="changeLanguage('${l.code}'); document.getElementById('lang-menu').classList.remove('active');">
-      <span>${l.flag}</span> ${l.name}
-    </button>`
-  ).join('');
-
-  const btn = document.getElementById('lang-selector');
-  if (btn) btn.parentElement.appendChild(menu);
-
-  // Close on outside click
-  setTimeout(() => {
-    document.addEventListener('click', function closeLang(e) {
-      if (!menu.contains(e.target) && e.target.id !== 'lang-selector') {
-        menu.classList.remove('active');
-        document.removeEventListener('click', closeLang);
-      }
-    });
-  }, 10);
-}
-
-async function translateMessage(text, targetLang) {
-  if (!state.token || targetLang === 'en') return text;
-  try {
-    const res = await fetch(`${API}/api/translate`, {
-      method: 'POST',
-      headers: authHeaders(),
-      body: JSON.stringify({ text, sourceLang: 'en', targetLang }),
-    });
-    const data = await res.json();
-    return data.translated || text;
-  } catch {
-    return text;
-  }
-}
-
 // ─── Text-to-Speech ─────────────────────────────────────────────────
 
 function speakMessage(index) {
@@ -8215,14 +8088,6 @@ function openArtifactPanel(artifact) {
     shareBtn.onclick = () => shareMinutesToChat();
     actionsEl.insertBefore(shareBtn, actionsEl.firstChild);
 
-    if (state.language && state.language !== 'en') {
-      const translateBtn = document.createElement('button');
-      translateBtn.className = 'meeting-artifact-btn';
-      translateBtn.title = 'Translate Minutes';
-      translateBtn.textContent = '\uD83C\uDF10';
-      translateBtn.onclick = () => translateMeetingMinutes(artifact.meetingId);
-      actionsEl.insertBefore(translateBtn, actionsEl.firstChild);
-    }
   }
 
   state.currentArtifact = artifact;
@@ -8996,27 +8861,6 @@ async function shareMinutesToChat() {
   if (input) {
     input.value = 'Based on these meeting minutes, please summarise the key decisions:\n\n' + text.substring(0, 2000);
     input.focus();
-  }
-}
-
-async function translateMeetingMinutes(meetingId) {
-  if (!meetingId || !state.language || state.language === 'en') {
-    showSyncToast('Set a non-English language first', 2000);
-    return;
-  }
-  showSyncToast('Translating minutes...', 3000);
-  try {
-    const res = await fetch(API + '/api/meetings/' + meetingId + '/translate', {
-      method: 'POST',
-      headers: authHeaders(),
-      body: JSON.stringify({ targetLang: state.language }),
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error);
-    const artifact = { type: 'document', title: 'Translated Minutes (' + data.languageName + ')', content: data.translated };
-    openArtifactPanel(artifact);
-  } catch (err) {
-    showSyncToast(err.message || 'Translation failed', 3000);
   }
 }
 

@@ -90,7 +90,7 @@ function executeCalculate(input: Record<string, unknown>): string {
 
 // Recursive descent parser for safe math evaluation
 // Supports: +, -, *, /, %, ^, parentheses, unary minus
-function safeEvaluate(expr: string): number {
+export function safeEvaluate(expr: string): number {
   const tokens = tokenize(expr);
   let pos = 0;
 

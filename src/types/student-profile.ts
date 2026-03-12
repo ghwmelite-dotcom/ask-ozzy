@@ -10,4 +10,5 @@ export interface StudentProfile {
   strong_topics: string[];
   target_exam: 'bece' | 'wassce' | 'none';
   session_score: number;
+  interaction_count?: number;
 }
