@@ -26,6 +26,16 @@ import { buildCacheKey, shouldSkipCache } from "./lib/cache-key";
 import { checkAgentRateLimit, recordGatewayMetrics } from "./lib/rate-limiter";
 import { runWithTools, agentHasTools } from "./lib/tool-loop";
 import { getToolsForAgent, TOOL_USE_RULES } from "./config/tools";
+import { generate } from "./lib/generator";
+import { verify, requiresFullVerification, selfConsistencyCheck } from "./lib/verifier";
+import { adjudicate } from "./lib/adjudicator";
+import { computeConfidence } from "./lib/confidence";
+import { parseCitations } from "./lib/citation-parser";
+import { classifyTranslationRisk, CERTIFIED_TRANSLATOR_RESOURCES } from "./config/translation-resources";
+import { loadStudentProfile, saveStudentProfile, updateSessionScore } from "./lib/session-tracker";
+import { getOrCreateStudentProfile, buildScaffoldingPrompt, generateOrientationBrief, isNewTopic } from "./agents/tutor-agent";
+import { retrieveAtLevel } from "./lib/difficulty-retriever";
+import { translateWithSafeguards } from "./agents/translation-agent";
 
 const app = new Hono<AppType>();
 
@@ -1634,35 +1644,47 @@ async function generateEmbeddings(ai: Ai, texts: string[]): Promise<number[][]> 
   return (response as any).data as number[][];
 }
 
-async function searchKnowledge(env: Env, query: string, topK = 5): Promise<{
+async function searchKnowledge(env: Env, query: string, topK = 5, agentType?: string): Promise<{
   ragResults: Array<{ content: string; score: number; source: string; title: string; category: string }>;
   faqResults: Array<{ question: string; answer: string; category: string }>;
 }> {
   const ragResults: Array<{ content: string; score: number; source: string; title: string; category: string }> = [];
   let faqResults: Array<{ question: string; answer: string; category: string }> = [];
 
-  // RAG: Embed query and search Vectorize
+  // Hybrid RAG: Merge Vectorize + AutoRAG (R2) results in parallel
   try {
-    const embeddings = await generateEmbeddings(env.AI, [query]);
-    const vectorResults = await env.VECTORIZE.query(embeddings[0], { topK, returnMetadata: 'all' });
-
-    if (vectorResults.matches && vectorResults.matches.length > 0) {
-      const validMatches = vectorResults.matches.filter((m: any) => m.score >= 0.7);
-      for (const match of validMatches) {
-        const metadata = match.metadata as any;
-        if (metadata?.content) {
-          ragResults.push({
-            content: metadata.content,
-            score: match.score,
-            source: metadata.source || metadata.title || 'Knowledge Base',
-            title: metadata.title || metadata.source || 'Knowledge Base',
-            category: metadata.category || 'general',
-          });
-        }
-      }
+    const hybridResults = await hybridRetrieve(query, agentType || 'general', env);
+    for (const r of hybridResults) {
+      ragResults.push({
+        content: r.text,
+        score: r.score,
+        source: r.source,
+        title: r.source,
+        category: agentType || 'general',
+      });
     }
   } catch (e) {
-    // Graceful degradation — Vectorize may be empty or unavailable
+    // Fallback: direct Vectorize query if hybrid retriever fails
+    try {
+      const embeddings = await generateEmbeddings(env.AI, [query]);
+      const vectorResults = await env.VECTORIZE.query(embeddings[0], { topK, returnMetadata: 'all' });
+
+      if (vectorResults.matches && vectorResults.matches.length > 0) {
+        const validMatches = vectorResults.matches.filter((m: any) => m.score >= 0.7);
+        for (const match of validMatches) {
+          const metadata = match.metadata as any;
+          if (metadata?.content) {
+            ragResults.push({
+              content: metadata.content,
+              score: match.score,
+              source: metadata.source || metadata.title || 'Knowledge Base',
+              title: metadata.title || metadata.source || 'Knowledge Base',
+              category: metadata.category || 'general',
+            });
+          }
+        }
+      }
+    } catch { /* Graceful degradation */ }
   }
 
   // FAQ: Keyword search in D1 knowledge_base
@@ -1999,8 +2021,8 @@ app.post("/api/chat", authMiddleware, async (c) => {
     console.error("Known errors check failed:", e?.message);
   }
 
-  // RAG: Search knowledge base for relevant context
-  const { ragResults: rawRagResults, faqResults } = await searchKnowledge(c.env, message);
+  // RAG: Hybrid search (Vectorize + AutoRAG) for relevant context
+  const { ragResults: rawRagResults, faqResults } = await searchKnowledge(c.env, message, 5, agentCategory);
 
   // If agent has a knowledge_category, filter RAG results to that category
   let ragResults = rawRagResults;
@@ -2056,6 +2078,32 @@ app.post("/api/chat", authMiddleware, async (c) => {
     augmentedPrompt += '\n\n' + TOOL_USE_RULES;
   }
 
+  // Adaptive difficulty for student-facing agents (WASSCE, BECE, Study Coach)
+  const isTutorAgent = ['wassce', 'bece', 'study_coach', 'exam_marker'].includes(agentCategory);
+  let studentProfile = null;
+  if (isTutorAgent) {
+    try {
+      studentProfile = await getOrCreateStudentProfile(conversationId, message, c.env);
+      augmentedPrompt += '\n\n' + buildScaffoldingPrompt(studentProfile, agentCategory);
+
+      // Generate orientation brief for new topics (first message in conversation)
+      const msgCount = history.length;
+      if (isNewTopic(msgCount)) {
+        const brief = await generateOrientationBrief(message, studentProfile, agentCategory, c.env);
+        if (brief.key_concepts.length > 0) {
+          augmentedPrompt += `\n\n## ORIENTATION BRIEF FOR THIS TOPIC
+Topic: ${brief.topic_title}
+Key concepts to cover: ${brief.key_concepts.join(', ')}
+Prerequisites: ${brief.prerequisites.join(', ') || 'None identified'}
+Estimated difficulty: ${brief.estimated_difficulty}
+Start with these warm-up questions: ${brief.starter_questions.join(' | ') || 'N/A'}`;
+        }
+      }
+    } catch (e: any) {
+      console.error("Tutor scaffolding failed:", e?.message);
+    }
+  }
+
   messages.push({ role: "system", content: augmentedPrompt });
 
   // Add history (reversed to chronological order, skip the message we just added)
@@ -2078,6 +2126,40 @@ app.post("/api/chat", authMiddleware, async (c) => {
     // Non-fatal — proceed
   }
 
+  // Translation safeguard: check for hard blocks on Tier 4 + official docs
+  if (agentCategory === 'translation') {
+    try {
+      // Detect target language from message
+      const langPatterns = ['twi', 'ewe', 'ga', 'dagbani', 'hausa', 'nzema', 'gonja', 'asante', 'akuapem'];
+      const detectedLang = langPatterns.find(l => message.toLowerCase().includes(l)) || '';
+      // Detect use case from message or default to casual
+      const useCasePatterns: Array<{ pattern: RegExp; useCase: 'official_document' | 'health_information' | 'civic_information' | 'educational_content' }> = [
+        { pattern: /contract|official|legal|government|memo|letter|statutory|gazette/i, useCase: 'official_document' },
+        { pattern: /health|medical|prescription|dosage|diagnosis|treatment/i, useCase: 'health_information' },
+        { pattern: /civic|voting|regulation|policy|citizen|assembly/i, useCase: 'civic_information' },
+        { pattern: /school|student|lesson|exam|curriculum|textbook/i, useCase: 'educational_content' },
+      ];
+      const detectedUseCase = useCasePatterns.find(p => p.pattern.test(message))?.useCase || 'casual_communication';
+
+      if (detectedLang) {
+        const risk = classifyTranslationRisk(detectedLang, detectedUseCase);
+        // Hard block: Tier 4 or official_document
+        if (risk.riskLevel === 'critical' || detectedUseCase === 'official_document') {
+          const safeguardResult = await translateWithSafeguards(message, detectedLang, detectedUseCase, c.env);
+          if (safeguardResult.blocked) {
+            const assistantMsgId = generateId();
+            await c.env.DB.prepare(
+              "INSERT INTO messages (id, conversation_id, role, content, model) VALUES (?, ?, 'assistant', ?, ?)"
+            ).bind(assistantMsgId, conversationId, safeguardResult.text, 'translation-safeguard').run();
+            return c.json({ response: safeguardResult.text, request_id: requestId, translation_blocked: true });
+          }
+        }
+      }
+    } catch (e: any) {
+      console.error("Translation safeguard check failed:", e?.message);
+    }
+  }
+
   // Tier-based max_tokens
   const tierMaxTokens: Record<string, number> = { free: 2048, starter: 4096, professional: 6144, enterprise: 8192 };
   const maxTokens = tierMaxTokens[userTier] || 4096;
@@ -2088,6 +2170,14 @@ app.post("/api/chat", authMiddleware, async (c) => {
   cacheOpts.skipCache = skipCache;
   cacheOpts.requestId = requestId;
   cacheOpts.userTier = userTier;
+
+  // Convert RAG results to RetrievedContext for verification pipeline
+  const retrievedContexts: RetrievedContext[] = ragResults.map((r, i) => ({
+    id: `rag_${i}`,
+    text: r.content,
+    score: r.score,
+    source: r.source,
+  }));
 
   // Stream response via AI Gateway with agent-specific inference params
   const stream = await runStreamWithGateway(selectedModel, {
@@ -2109,6 +2199,7 @@ app.post("/api/chat", authMiddleware, async (c) => {
       let fullResponse = "";
       const reader = (stream as ReadableStream).getReader();
       const decoder = new TextDecoder();
+      const streamStartMs = Date.now();
 
       try {
         // Send request_id for feedback tracking
@@ -2210,6 +2301,16 @@ app.post("/api/chat", authMiddleware, async (c) => {
           // Auto-flag for moderation
           await checkModeration(c.env.DB, conversationId, assistantMsgId, userId, fullResponse);
 
+          // Update student profile score for tutor agents
+          if (isTutorAgent && studentProfile) {
+            try {
+              // Simple heuristic: if response is long and structured, mark as correct interaction
+              const outcome = fullResponse.length > 100 ? 'correct' : 'skipped';
+              const updatedProfile = updateSessionScore(studentProfile, outcome as any);
+              await saveStudentProfile(conversationId, updatedProfile, c.env);
+            } catch {}
+          }
+
           if (msgCount && msgCount.count <= 2) {
             // AI-generated title from first exchange
             try {
@@ -2283,6 +2384,66 @@ app.post("/api/chat", authMiddleware, async (c) => {
               } catch {}
             }
           } catch {}
+
+          // ─── Post-Stream Verification Pipeline ──────────────────────
+          // Run verification AFTER streaming to avoid blocking UX
+          // For high-risk agents: full 70B verification
+          // For other agents: self-consistency check
+          try {
+            const responseTimeMs = Date.now() - streamStartMs;
+
+            if (fullResponse.length > 50 && retrievedContexts.length > 0) {
+              // Parse citations from the response
+              const citationReport = parseCitations(fullResponse, retrievedContexts);
+
+              if (requiresFullVerification(agentCategory)) {
+                // High-risk agents: 70B verification
+                const generatedForVerify = {
+                  text: fullResponse,
+                  claims: citationReport.citations.map(c => c.source),
+                  citations_used: citationReport.citations.map(c => c.source),
+                  raw: fullResponse,
+                };
+                const verificationReport = await verify(generatedForVerify, retrievedContexts, c.env);
+
+                if (verificationReport.overall === 'FAIL') {
+                  // Log hallucination event to D1
+                  await adjudicate(generatedForVerify, verificationReport, c.env, requestId, agentCategory, message);
+                }
+
+                // Record metrics
+                const confidence = computeConfidence(
+                  retrievedContexts.map(r => r.score),
+                  verificationReport.overall === 'PASS' ? 'PASS' : verificationReport.overall === 'FAIL' ? 'FAIL' : 'PARTIAL',
+                  1.0
+                );
+                const confidenceNumeric = confidence.final_confidence === 'high' ? 0.9 : confidence.final_confidence === 'medium' ? 0.6 : confidence.final_confidence === 'low' ? 0.3 : 0;
+                await recordGatewayMetrics(c.env, agentCategory, false, verificationReport.overall === 'FAIL', responseTimeMs, confidenceNumeric);
+              } else {
+                // Non-critical agents: self-consistency check (cheaper)
+                const consistencyScore = await selfConsistencyCheck(message, augmentedPrompt, c.env);
+                const confidence = computeConfidence(
+                  retrievedContexts.map(r => r.score),
+                  'SKIPPED',
+                  consistencyScore
+                );
+
+                // Flag if consistency is very low
+                if (consistencyScore < 0.3) {
+                  try {
+                    await c.env.DB.prepare(
+                      `INSERT INTO hallucination_events (request_id, agent_type, query, generated_response, verification_report, flagged_by)
+                       VALUES (?, ?, ?, ?, ?, 'consistency_check')`
+                    ).bind(requestId, agentCategory, message.slice(0, 500), fullResponse.slice(0, 2000), JSON.stringify({ consistency: consistencyScore })).run();
+                  } catch {}
+                }
+                const confNum = confidence.final_confidence === 'high' ? 0.9 : confidence.final_confidence === 'medium' ? 0.6 : confidence.final_confidence === 'low' ? 0.3 : 0;
+                await recordGatewayMetrics(c.env, agentCategory, false, consistencyScore < 0.3, responseTimeMs, confNum);
+              }
+            }
+          } catch (verifyErr: any) {
+            console.error("Post-stream verification failed:", verifyErr?.message);
+          }
         }
       }
     })()
