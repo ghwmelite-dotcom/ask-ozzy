@@ -1,0 +1,2424 @@
+Consortium for Research on
+Educational Access,
+Transitions and Equity
+Access to Basic Education in Ghana:
+politics, policies and progress
+Angela W Little
+CREATE PATHWAYS TO ACCESS
+Research Monograph No. 42
+August2010
+The Institute of Education
+University of London, UK
+
+The   Consortium  for   Educational   Access,   Transitions  and   Equity  (CREATE)   is  a   Research  Programme
+Consortium supported by the UK Department for International Development (DFID). Its purpose is to undertake
+research designed to improve access to basic education in developing countries. It seeks to achieve this through
+generating new knowledge and encouraging its application through effective communication and dissemination
+to   national   and   international   development   agencies,   national   governments,   education   and   development
+professionals, non-government organisations and other interested stakeholders.
+Access to basic education lies at the  heart of development. Lack of educational access,  and securely acquired
+knowledge and skill, is both a part of the definition of poverty, and a means for its diminution. Sustained access
+to meaningful learning that has value is critical to long term improvements in productivity, the reduction of inter-
+generational cycles of poverty, demographic transition, preventive health care, the empowerment of women, and
+reductions in inequality.
+The CREATE partners
+CREATE is developing its research collaboratively with partners in Sub-Saharan Africa and South Asia. The
+lead partner of CREATE is the Centre for International Education at the Universityof Sussex. The partners are:
+The Centre for International Education, University of Sussex: Professor Keith M Lewin (Director)
+The Institute of Education and Development, BRAC University, Dhaka, Bangladesh: Dr Manzoor Ahmed
+The National University of Educational Planning and Administration, Delhi, India: Professor R Govinda
+The Education Policy Unit, University of the Witwatersrand, South Africa: Dr Shireen Motala
+The Universities of Education at Winneba and Cape Coast, Ghana: Professor Jerome Djangmah,
+Professor Joseph Ghartey Ampiah
+The Institute of Education, University of London: Professor Angela W Little
+Disclaimer
+The research on which this paper is based was commissioned by theConsortium for Research on Educational
+Access,   Transitions   and   Equity   (CREATE   http://www.create-rpc.org).   CREATE   is   funded   by   the   UK
+Department  for  International  Development  (DFID)  for  the  benefit  of  developing  countries  and  is  coordinated
+from the Centre for International Education, University of Sussex. The views expressed are those of the author(s)
+and not necessarily those of DFID, the University of Sussex, or the CREATE Team. Authors are responsible for
+ensuring  that  any  content  cited  is  appropriately  referenced  and  acknowledged,  and  that  copyright  laws  are
+respected. CREATE papers are peer reviewed and approved according to academic conventions. Permission will
+be  granted  to  reproduce  research  monographs  on  request  to  the  Director  of  CREATE  providing  there  is  no
+commercial benefit. Responsibility for the content of the final publication remains with authors and the relevant
+Partner Institutions.
+Copyright © CREATE 2010
+ISBN: 0-901881-49-X
+Address for correspondence:
+CREATE,
+Centre for International Education, Department of Education
+School of Education & Social Work,
+Essex House, University of Sussex, Falmer BN1 9QQ, United Kingdom
+Tel:+ 44 (0) 1273 877984
+Fax:+ 44 (0) 1273 877534
+Author email:A.Little@ioe.ac.uk
+Website:http://www.create-rpc.org
+Emailcreate@sussex.ac.uk
+Please contact CREATE using the details above if you require a hard copy of this publication.
+
+Access to Basic Education in Ghana:
+politics, policies and progress
+Angela W Little
+CREATE PATHWAYS TO ACCESS
+Research Monograph No.42
+August2010
+
+ii
+
+iii
+Contents
+Preface.......................................................................................................................................vi
+Summary..................................................................................................................................vii
+1. Introduction............................................................................................................................1
+2. Progress in Access to Basic Education..................................................................................3
+3. The Pre-Independence Period................................................................................................5
+4. Transition to Independence....................................................................................................7
+5. Educational Policy and Military Governments......................................................................8
+6. The 1987 Education Reforms...............................................................................................12
+6.1 Policy Context................................................................................................................12
+6.2 Policy Implementation and Resistance..........................................................................14
+6.3 Technical Challenges.....................................................................................................16
+6.4 Tensions between Technical and Political Imperatives.................................................18
+6.5 Formal Evaluations........................................................................................................19
+6.6 Political Will..................................................................................................................21
+7. Sustaining Implementation of the 1987 Reforms in a New Democracy..............................22
+8. Parallel Policies and Plans, 2000-2008................................................................................27
+9. The International Dimension of Educational Policy............................................................31
+9.1 The Donor Assistance Community................................................................................31
+9.1.1Finance.....................................................................................................................31
+9.1.2 Discourse.................................................................................................................32
+9.1.3 The Sector Wide Approach (SWAp)......................................................................33
+9.2 World Conferences.........................................................................................................35
+10. The Presentand the Future.................................................................................................38
+11. Conclusions........................................................................................................................42
+11.1 Progress in Basic Education.........................................................................................42
+11.2 Policies for Basic Education........................................................................................42
+11.3 Political Regimes and Education Policies....................................................................44
+11.4 Political Will................................................................................................................44
+11.5 Drivers and Inhibitors of Reform Implementation.......................................................44
+Appendices...............................................................................................................................48
+List ofTables
+Table 1: Proportions of children aged 7, 14 and 5-17 years who were currently attending
+school by region and survey round, 1991, 1998 and 2006.........................................................4
+List of Figures
+Figure 1: Enrolment projections c. 1934....................................................................................6
+Figure 2: Costs per student by education level..........................................................................6
+
+iv
+List of Acronyms
+ADPAccelerated Development Plan
+AFRCArmed Forces Revolutionary Council
+BECEBasic Education Certificate Examination
+BESIPBasic Education Sector Improvement Project
+CEECommon Entrance Examination
+COTVETCouncil for Technical and Vocational Education and Training
+CPPConvention People’s Party
+CWIQCore Welfare Indicators Questionnaire
+DFIDDepartment for International Development (UK)
+DHSDemographic and Health Surveys
+EFAEducation for All
+EFA-FTIEducation for All Fast Track Initiative
+ERPEconomic Recovery Programme
+ESPEducation Strategic Plan
+fCUBEfree Compulsory Universal Basic Education
+GDPGross Domestic Product
+GERGross Enrolment Ratio
+GESGhana Education Service
+GLSSGhana Living Standards Survey
+GNATGhana National Association of Teachers
+GoGGovernment of Ghana
+HERPHealth and Education Rehabilitation Project
+ICTInformation and Communication Technology
+INSETIn-service Education and Training
+JHSJunior High School
+JICAJapan International Co-operation Agency
+JSSJunior Secondary School
+MICSMultiple Indicator Cluster Survey
+MOESSMinistry of Education Science and Sports
+NDCNational Democratic Congress
+NECNational Education Commission
+NEFNational Education Forum
+NERNet Enrolment Ratio
+NLCNational Liberation Council
+NPPNew Patriotic Party
+NRCNational Redemption Council
+NCSENew Structure and Content of Education
+ODAOverseas Development Administration (UK)
+OPECOrganisation of Petroleum Exporting Countries
+PNDCProvisional National Defence Council
+PNPPeople’s National Party
+PPProgress Party
+PSDPrimary School Development
+SHSSenior High School
+SSSSenior Secondary School
+SSSCESenior Secondary School Certificate Examination
+STMEScience Technology Mathematics Education
+SWAPSector-Wide Approach
+UNICEFUnited Nations Children’s Fund
+UPEUniversal Primary Education
+
+v
+Acknowledgements
+I am grateful to colleagues in Ghana who gave of their time so generously to share with me
+their  reflections  on  the  politics,  policies  and  progress  of  basic  education  inGhana.  Unless
+quoted from their published writings I refer to their views by ‘interview with author’, and not
+by interviewee name.
+I am very grateful to Professor Jerome Djangmah and Dr Kwame Akyeampong who assisted
+me in setting up the interviews, to Dilrukshi Weeraratne for her patient transcription of many
+hours of interview material, to Stephen Adu for his comments on progress towards manifesto
+pledges  since  the  2008  election  and  to  Caine  Rolleston  for  his  editing  of  the  text  and  his
+general assistance on the paper. I am also grateful to Professor Djangmah, Dr Akyeampong
+and Dr Ato Essuman for comments on earlier drafts of this work.
+
+vi
+Preface
+Ghana  was  well  known  for  its  high  levels  of  access  to  education  relative  to  other  West
+African States in the1960s. By the mid 1970s growth in participation had stalled and a series
+of political events including military government and global recession had derailed attempts
+to ensure that every Ghanaian child received a full cycle of primary schooling. Moreoverlong
+standing  differences  in  access  to  education  between  the  North  and  the  South  remained
+entrenched  and  may  even  have  grown  despite  various  initiatives  to  reduce  the  gaps  in
+participation.
+This  Research  Monograph  tells  the  story  of  how  over  30  years  patterns  of  access  have
+changed.  The  various  policy  events  that  have  shaped  progress  are  identified  and  analysed,
+with a special focus on the post 1987 reforms for Free Compulsory Universal Basic Education
+(FCUBE)  and  the  political  economy  of  their  implementation.  Part  of  this  story  is  one  of
+fluctuating political will accompanied first by rapid gains in access through the 1990s which
+reached  a  plateau  in  the  first  years  of  the  new  millennium.  Another  part  relates  to  the
+consistent  engagement  of  development  partners  in  supporting  the  ambitions  of  FCUBE,
+alongside the tensions that inevitably exist in relationships between donors and recipients.
+Importantly the analysis highlights several developments that have more general relevance to
+the experience of otherSub Saharan African countries in various ways. There are concerns
+that growth in participation may have stalled in the 2000s for several reasons that include the
+difficulties of reaching the last 20% of primary age children especially in the North, increased
+numbers  of  overage  children  especially  from  poorer  households,  and  softening  demand  at
+junior  secondary  level  amongst  those  unlikely  to  progress  to  senior  secondary  school.
+Nevertheless there have been gains, not least in the reduction in differences between girls and
+boys.  Capitation  grants  have  been  used  to  provide  fee  free  schooling  but  this  has  not
+prevented schools from beginning to collect other monies in various ways. The initial gain in
+enrolments may not be sustained. Though the focus of concernfor selection has now shifted
+from entry to junior secondary to entry to senior secondary, it is clear that pressures related to
+high stakes examinations remain important in constraining the curriculum and providing fuel
+for the growth of private tuitionand demand for private schools, both of which disadvantage
+the poorest.
+This  analysis  gives  real  insight  into  the  swings  of  policy  and  political  will  which  have
+accompanied efforts to meet government obligations to educate every child. At the centre of
+the story lie the actors that influenced events at key points in the evolution of participation,
+complemented by the underlying drivers of growth which illustrate how political will is often
+necessary but not sufficient to ensure sustained achievement of universal access to education.
+There are many lessons in this for other countries sharing the same goals.
+Keith Lewin
+Director of CREATE
+Centre for International Education
+University of Sussex
+
+vii
+Summary
+This monograph examines the history and politics of educational reform in Ghana, focusing
+on the issue of access to basic education in the post-colonial period.The monograph employs
+data  from  a  series  of  interviews  conducted  with  senior  policy-makers,  implementers  and
+researchers, as well as drawing on documentary sources, to explore the drivers and inhibitors
+of  change  at  the  political,  bureaucratic  and  grass-roots  levels.It  describes  the  patterns  of
+change in relation to enrolment and outlines the key policies adopted through from the British
+colonial  administration  to  the  various  independent  regimes,  authoritarian  and  democratic.
+Progress  in  universalising  access  has  been  substantial  and  basic  education  indicators  in
+Ghana, both  in early post-colonial times and today,  stand out positively when compared  to
+most countries in sub-Saharan Africa.The study explores the nature of the domestic political
+and administrative machinery which has enabled comparative success in enrolment growth in
+Ghana,  attending  also  to  the  importance  of  political  will  as  well  as  toshifting  patterns  of
+international and donor influence.
+The study draws out key tensions in education policy making, including tensions between the
+goals  of  access,  equity,  quality  and  relevance;  those  between  academic  and  vocational
+orientations;  thosebetween  elite  and  popular  interests  and  those  between  political  and
+technical imperatives.The processes of reform begun by the Kwapong and Dzobo committees
+and continued through to the fCUBE policy are examined in detail and the underlying aims
+and  objectives  of  these  processes  are  shown  to  share  a  number  of  common  although
+sometimes  mutually  conflicting  features.Interview  data  allow  a  nuanced  interpretation  of
+both impetus and resistance to policy formulation and implementation.The reforms of 1987
+areshown  to  be  critical  in  the  development  of  the  universal  basic  education  policies  that
+emerged subsequently and those later policies are considered partly as responses to unrealised
+objectives from 1987.
+Following  the  restoration  of  democratic  governmentin  Ghana,  the  establishment  of  a
+constitutional  commitment  to  universal  basic  education  in  1992  provided  a  lasting  and
+binding  responsibility  for  the  state,  which  was  followed  by  a  comprehensive  policy  in
+fCUBE.Subsequently  education  policy  has  played  animportant  role  in  political  manifesto
+pledges.The  monograph  concludes  by considering the  election  pledges  of  the  2008  Ghana
+Government,  their  provenance  and  initial  indications  of  their  implementation  and  finally
+summarises its findings on progress and on the importance of policy, regime, political will,
+and  the  drivers  and  inhibitors  of  reform  implementation  in  relation  to  the  pursuit  of  basic
+education for all in historical perspective.
+
+viii
+
+1
+Access to Basic Education in Ghana:
+politics, policies and progress
+1. Introduction
+Ghana,  formerly the  Gold  Coast,  gained  full  independence  in  1957.  During  the  1950s  and
+1960s her education system was the envy of much of the rest of sub-Saharan Africa. Access
+to  basic  education,  indicated  by  enrolment  rates,  increased  over  the  decades,  especially
+between 1991 and 1998. It levelled off between 1998 and 2006, increasing again thereafter
+following the introduction of the‘capitation grant’designed to relieve parents of the burden
+of  paying  tuition  fees  in  public  schools.  Since  the  early  1950s  a  number  of  policies  to
+increase  access  to  all  levels  of  educationhave  beenimplemented,  several  of  which  are
+described in CREATE’s Country Analytic Review on Ghana (Akyeampong et al, 2007).
+Major policy initiatives in basiceducation in Ghana are numerous. Most commentators on the
+history of educational policy in Ghana agree that each successive policy text owes much to
+the policy themes set out in earlier texts. Recurring policy themes include the provision of
+free educationand the need for a practical, vocationally oriented education. The call for free
+primary  education  goes  back  to  at  least  1951,  and  that  for  practical,  vocationally-oriented
+education to as early as 1847, during the British colonial period.Recurring policyconcerns
+include  access,  quality  and  costs,  with  varying  emphases  at  different  points  in  time.  A
+recurring  policy  tension  has  been  that  between  expansion  of  access  and  the  quality  of
+education, reflecting the tension between CREATE’s Zones of Exclusion in which, in Zone 1
+children are excluded from enrolling in school and in Zone 3 are excluded from meaningful
+learning in school, once enrolled (Lewin, 2007)
+The most radical reforms of basic education in the second half of the twentieth century are
+generally  agreed  to  have  been  those  set  out  in  the  report  of  the  Commission  chaired  by
+Professor Dzobo in 1973/4. The Dzobo report recommended a restructuring of the secondary
+school system and  a reorientation of the curriculum towards vocational skills. The reforms
+were implemented selectively and on an experimental basis. It was left to the new military
+government of 1981 to renew the push for their comprehensive implementation through the
+1987 reforms. By 1992, the right to free and compulsory education was enshrined in the new
+constitution,   heralding   another   implementation   push   from   1995   through   the   ‘Free,
+Compulsory  and  Universal  Education  by  2005  Programme’,  known,  more  commonly,  as
+fCUBE.fCUBE was linked closely with the Dzobo Commission proposals of 1974and the
+1987 reforms. As one of the case study interviewees explained
+1974  was  ...the  blueprint...86  was  when  the  government  came  in  and  said  ‘we
+would do it, implement it’. fCUBE 1996 was when it said ‘let’s correct some of the
+things, amend some of theissues that some of the problems that were raised by the
+people who were against it...about (let’s correct) how it affects quality. And let us
+also    deepen    some    of    the    structures’.    fCUBE    deepened    the    structure    of
+decentralization. Decentralization was key. So ...74 set the blue print, 86/87 came in
+to  implement  it;  and  95/96  fCUBE  came  to  consolidate,  to  strengthen  it  (interview
+with author).
+
+Access to BasicEducation in Ghana: politics, policies and progress
+2
+Thismonograph explores the politics, policies and progress in access to basic education in
+Ghana since independence through primary and secondary evidence. The primary source of
+evidence is a set of interviews with fifteen Ghanaian policy-makers, policy implementers and
+researchers  who  have  played  various  roles  in  Ghana’s  education  history  over  the  past  35
+years.  Theyinclude  senior  government  political  appointees,  senior  civil  servants,  vice
+chancellors and university staff, trade union officials and district directors of education. Most
+interviewees have played various roles in policy formulation and policy implementation over
+many  years.  A  particular  effort  was  made  to  interview  and  meet  those  involved  in  the
+formulation of the 1986 and 1996 education reforms policies and implementation.Interviews
+were tape recorded and transcribed. Evidence from interviews is supplemented by a range of
+documentary  sources.  These  include  published  histories  of  education  in  Ghana,  research
+reports,  policy  documents,  commission  and  committee  reports,  evaluation  studies  and
+conference papers.
+The monographaddresses 5 main questions:
+What progress has there been in access to basic education over the past 30 years?
+What policies for access to basic education have been promoted?
+What  role  have  political  regimes  played  in  the  formulation  of  policies  on  access  to
+basic education?
+What role has political will played in the process of policy formulation?
+What have been the drivers and inhibitors of the implementation of reforms in basic
+education since 1987?
+The monograph offers a brief review of education policy during the political regimes of the
+British period, the transition to independence (1951-1957), democratic independence (1957-
+1969)  and  the  first  three  military  regimes  (1972-1981).  It  explores  in  greater  detail  the
+process   of   policy   formulation   of   the   1987   Education   Reforms   and   the   1996   Free,
+Compulsory,  Universal  and  Basic  Education  ProgrammeFCUBEand  the  drivers  and
+inhibitors of the implementation of these policies.The international dimension of policy, in
+particular   the   role   of   the   international   donor   community  and   world   conferences   and
+declarations, is explored for their role in policy formulation and implementation.
+
+Access to BasicEducation in Ghana: politics, policies and progress
+3
+2. Progress in Access to Basic Education
+Progress in access to basic education is conventionally assessed through gross, net and age-
+specific enrolment ratios. Time periods and the data sources used in various evaluations vary,
+rendering complex what should be a simple story. In a favourable assessment of educational
+progress between the 1950s and the 1980s the World Bank (1989) commented:
+Despitea  more  than  doubling  of  the  population,  enrollment  rates  at  all  levels  have
+increased significantly, the number of schools and colleges has increased several fold,
+the number of teachers has grown considerably faster than that of students, and real
+unit cost allocations at all levels have fallen dramatically (World Bank, 1989:vi).
+The  pattern  of  enrolment  growth  over  time  was  not  consistent,  however,  and  economic
+decline  which  began  in  the  1970s  impacted  negatively  on  basic  education  provision,
+especiallyin  the  latter  part  of  the  1970s  and  into  the  early  1980s.Grossenrolmentratios
+(GER)in primary education continued to rise throughout most of the 1970s, but began to fall
+steadily at the turn of the decade and into the early 1980s (Colclough, Lewin andChiswick
+1993).Between 1987 and 1991 the GER in primary education increased from 76% to 79%,
+fell back to 73% in 1997 before increasing to 80% by 2001 and decreasing again to 78% in
+2003  (Thompson  and  Casely-Hayford,  2008:1).  An  evaluation  of  educationalprogress
+undertaken  by  the  World  Bank  suggested  that  between  1988  and  2003  there  was  aten%
+increase  in  enrolment  in  basic  education,  a  reduction  in  dropouts  and  an  increase  in  girls’
+enrolment. Primary school graduate rates of illiteracy in English declined from 66% to less
+than  20%,  while  school  infrastructure  and  the  availability  of  textbooks  and  other  learning
+materials increased markedly over the same period (World Bank, 2004:36).
+GERs disguise the numbers of over-age and under-age children in an education system. The
+Ghana Living Standards Surveys (GLSS) offer an age specific snapshot of school attendance.
+Amongsevenyear olds the proportion attending school increased from 71% to 84% between
+1991 and 1998 and remained constant at 84% between 1998 and 2006. Among fourteen year
+olds the proportion increased from 77% to 86% between 1991 and 1998 and dropped back to
+81% by 2006. Among those aged betweenfiveand 17 the proportion increased from 71% to
+81%  between  1991  and  1998  and  remained  constant  between  1998  and  2006  (Rolleston,
+2009).
+National GERs also belie differencesbetween social groups. The GLSS4 survey found that
+83% of girls and 86% of boys aged 6-11 were enrolled in school in 1998. By the time of the
+GLSS5 survey in 2006 these figures hadincreased to 85% for both boys and girls. But it is
+the  interaction  of  enrolment  with  poverty  that  is  more  illuminating.In  2006,  the  greatest
+discrepancies between girls and boys lay among the poorest urban quintile where girls out-
+enrolled boys by 83% to 69% and among the middle quintile where boys out-enrolled girls by
+98% to 93% (Rolleston, personal communication). Of even greater concern is the decline in
+educational  participation  among  the  poorest  between  1998  and  2006.  Among  all  boys  and
+girls,  rural  boys  and  girls  and  urban  boys  and  girls  participation  rates  among  the  poorest
+quintile have declined, while in every other income quartile participation rates have increased
+(Akyeampong, 2009:185).Since fCUBE was designed to introduce free basic education and
+expansion of access to the poorest these findings are of particular concern.
+Another area of current concern is the apparent decrease in participation experienced in the
+Northern  regions  between  1998  and  2006.  Table  1  shows  the  proportions  of  children  aged
+
+Access to BasicEducation in Ghana: politics, policies and progress
+4
+sevenyears, 14 years and 5-17 years who were enrolled in school at the time of three nation-
+wide Ghana Living Standards Surveys (GLSS) undertaken in 1991, 1998 and 2006.
+Table1:Proportions of children aged 7, 14 and 5-17 years who were currently
+attending school by region and survey round, 1991, 1998 and 2006
+Age 7Age 14Total age 5-17
+GLSS
+3
+1991
+GLSS
+4
+1998
+GLSS
+5
+2006
+GLSS
+3
+1991
+GLSS
+4
+1998
+GLSS
+5
+2006
+GLSS
+3
+1991
+GLSS
+4
+1998
+GLSS
+5
+2006
+Western0.760.910.940.770.910.830.750.890.89
+Central0.740.860.920.780.930.880.710.850.90
+Greater Accra0.810.920.910.880.950.870.820.870.89
+Eastern0.830.750.830.900.790.870.800.800.79
+Volta0.730.900.880.790.890.940.770.870.86
+Ashanti0.830.930.970.810.880.840.790.860.89
+Brong Ahafo0.820.850.910.880.930.820.790.880.86
+Northern0.460.700.520.440.680.580.440.600.55
+Upper West0.350.690.630.310.680.580.340.640.60
+Upper East0.220.690.690.480.570.640.320.570.64
+Total0.710.840.840.770.860.810.710.810.81
+Source:Rolleston (2009) computed from GLSS 3, 4 and 5
+Table 1 suggests that in the threenorthern regions of Upper East, Upper West and Northern,
+educational  participation  among5-17  years  olds  increased  between  1991  and  2006.  The
+greatest advance was made between 1991 and 1998, with a subsequent decrease in two of the
+three  regions  between  1998  and  2006,  during  the  early  period  of  fCUBE  implementation.
+Why this is happening is not entirely clear and will be discussed subsequently.
+
+Access to BasicEducation in Ghana: politics, policies and progress
+5
+3. The Pre-Independence Period
+Education  traditions  in  Ghana  go  back  centuries.  But  the  origins  of  the  the  current  basic
+education  structure  in  Ghana  owes  much  to  its  colonial  past.  Between  the  fifteenth  and
+nineteenth  centuries  French,  Portuguese,  Dutch  and  English  traders  and  settlers  provided
+limited education access, especially in the coastal areas, a legacy which has lived on into the
+present. Christian missions were also active in the education field. Between 1821 and 1840
+the  British  Crown  authorities  financed  a  number  of  government  schools,  including one  for
+girls.  Both  government  and  church-funded  schools  were  based  on  the  public  ‘monitorial’
+schools then current in England (Foster, 1963:49). Educated unemployment emerged as early
+as 1850 when the supply of educated  school leavers seeking ‘modern’  colonial sector jobs
+exceeded  available  opportunities.  Between  1881  and  1901  the  number  of  schools  grew.  In
+1901 61 schools were associated with the Basel and 49 with the Wesleyan Christian missions,
+compared  withsevengovernment  run  schools.  Education  was  the  privilege  of  a  small
+minority, largely elite, male and urban and residing in the South of the country. In general,
+the social demand for education remained low (Foster 1963:79).
+All  in  all,  education  at  this  period  did  not  become  essentially  part  of  a  coherent
+Government  policy.  The  pattern  that  emerged  was  a  group  of  Government  aided
+schools as well as a large number of unaided ones, some of which from time to time
+asked   the   Government   for   money.   There   was   no   definite   pattern   of   school
+distribution, either. Schools sprang up wherever the need was expressed for them, and
+wherever  the  townsfolk  showed  a  genuine  desire  to  help  in  their  running(Graham
+1971:103).
+Schooling for girls remained limited and provided mainly by the missions. Curricula for girls
+focused  on  social  accomplishments  such  as  needlework  and  dress  making,  were  oriented
+towards marriage and reflected curricula in middle classschools for girls in England at the
+time.  But,  as  Graham  (1971:133)  also  pointed  out,  the  role  of  women  in  Ghana  was  quite
+unlike  that  of  women  in  England  at  that  time.  Ghanaian  women  were  and  are  more
+independent of their husbands.
+From  1919  there  wasa  marked   change  in  government  policy.  Governor  Guggisberg
+established  16  guiding  principles  for  the  development  of  education.  These  stressed  equal
+opportunities  for  boys   and   girls,  co-education   in  certain  stages,  the   importance  of  a
+vernacular  education  as  the  base  for  English  education,  the  provision  of  trade  schools  to
+equip young men with craft skills and high quality teachers. The principles did not include
+free and compulsory basic education. Educational expansion was cautious and limited by the
+supply of trained teachers (Akyeampomg et al, 2007:4). In 1925 the Committee of the Privy
+Council  recommended  that  school  curricula  should  have  a  stronger  technical/agricultural
+orientation in order to develop a thriving agricultural economy (Foster, 1963:54-58).
+By the  1930s,  education  planners  were  projecting  student  enrolments  based  on  past  trends
+and  costs.  Figure  1  indicates  that  between  1911  and  1937  the  enrolment  of  pupils  in
+government and aided schools increased from around 18,000 to 44,000. With an estimated
+school  age  population  of  740,000  it  was  calculated  that  it  would  take  600  years  before  all
+were in school (Figure 1). Based instead on the growth in the percentage of the school-age
+population enrolled in school it was calculated (Figure 1) that itwould take 3,500  years to
+achieve a GER of 100%! Figure 2 indicates that the costs to the government per student by
+level of education ranged from £3.9 at the primary level, to £24.6 at secondary to £66.7 at
+
+Access to BasicEducation in Ghana: politics, policies and progress
+6
+college  level.  The  pupil  projections  were  basedon  very  slow  and  unplanned  growth  of
+enrolment in governmentandin aided schools in the past andin a context wheregovernment
+policy to speed up enrolment and raise revenue for educationwas weak.
+By 1945/6 the colonial government had set out atenyear education plan designed to enrol all
+children in primary education by 1970.
+Figure1:Enrolment projections c. 1934
+Source: University of London Archive, Senate House Library
+Figure2:Costs per student by education level
+Source: University of London Archive, Senate House Library
+
+Access to BasicEducation in Ghana: politics, policies and progress
+7
+4. Transition to Independence
+In  1951  a  legislative  assembly  was  elected,  marking  the  transition  from  colonial  rule  to
+independence  for  what  was  still  known  at  that  time  as  the  Gold  Coast.  The  transitional
+government  was  led  by  Dr  Kwame  Nkrumah  and  his  Convention  People’s  Party  (CPP).
+Educational  access  was  more  extensive  than  in  any  other  Africanterritory  apart  from  the
+Union of South Africa. However, literacy levels were very low, estimated at below 20% of
+the population. Geographical inequalities in educational provision between the north and the
+south of the country were marked. The educational system showed:
+marked structural similarities to that of the metropolitan power. Superimposed upon
+an  expanding  primary  network  were  a  few  highly  selective  academic  secondary
+schools together with a very limited provision of alternative types of schools offering
+technical  instruction.  As  in  the  earlier  stagesof  English  educational  development,
+direct  government  provision  of  schools  was  negligible,  and  government  action  was
+primarily concerned with offering grants-in-aid to institutions developed by voluntary
+agencies (Foster, 1963:170).
+The authors of the Accelerated Development Plan (ADP) for Education of 1951 proposed a
+massive expansion of provision for primary and middle school education. The plan laid down
+a  revised  structure  for  general  education  comprising  six  years  of  primary,  four  years  of
+middle schools, five years of secondary and two years of sixth-form education. This structure
+was introduced gradually and became the blueprint for the system until the 1970s when the
+structure of the middle and secondary schools was experimented with and until the late 1980s
+when the structurewas changed more fundamentally.
+Under the ADP,  Teacher Training Colleges were opened  and ‘pupil teachers’  were  trained
+while  in  service.  The  ADP  introduced  tuition  fee-free  primary  education  and  undertook
+‘emergency’  trainingof  large  groups  of  teachers.  The  emphasis  was  on  an  expansion  of
+access  to  education  for  all  groups  in  society.  The  authors  of  the  ADP  introduced  the  term
+‘Universal Primary Education’ (UPE) into the policy discourse. Enrolment growth was rapid.
+In  1957,the  Gold  Coast  and  British  Togoland  were  unified.  In  1960  Nkrumah  became
+President  of  the  First  Republic  of  Ghana  led  by  the  socialist  Convention  People’s  Party
+(CPP). As a result of the growing regional gap in educational access scholarships for primary,
+secondary and tertiary education were introduced for children from the regions of thenorth
+and from parts of Brong-Ahafo. The Education Act of 1961 made primary and middle school
+education, referred to as elementary education, fee-free. Parents were required to contribute a
+modest sum for textbooks (Addae-Mensah et al 1973:5). In the six years between 1960/1 and
+1966/7 enrolment in public elementary schools more than doubled. By the early 1960s social
+stratification  in  access  to  education  in  Ghana  was  already  clear.  By  the  early  1970s  only
+aboutfivepercentof those who entered primary made the transition to secondary education
+for which tuition fees continued to be charged (Addae-Mensah et al, 1973:16). The son of a
+secondary  school  educated  man  and  a  university  educated  man  had  17  and  32  times
+respectively the chance of entering secondary education as the son of an illiterate. Moreover
+the  general  quality  of  education  available  to  the  masses  was  low,  due  mainly  to  the  large
+numbers of untrained and poorly trained teachers (Foster, 1965).
+
+Access to BasicEducation in Ghana: politics, policies and progress
+8
+5. Educational Policy and Military Governments
+In  1966,  Nkrumah  was  deposed  in  acoup  d’étatled  by  the  military.  The  new  military
+government  of  the  National  Liberation  Council  (NLC)  and  its  Chairman,  Major  General
+Ankrah, appointed  an Educational Review Committee under the  chairmanship of Professor
+A.A. Kwapong. The rapid expansion of access to education in the 1960s was raising concerns
+in some quarters about the low quality of educational provision. This led to calls to decelerate
+plans to expand enrolments and to focus on quality. Unemployment among educated schools
+leavers  was  surfacing  as  a  problem  and  ‘alleged  interference  by  politiciansin  educational
+matters  were  blamed  for  a  relaxation  in  discipline  in  schools’  (National  Education  Forum,
+1999:6). Indeed one of those who overthrew Nkrumah, A.A.Afrifa, is quoted as justifying
+the coup in part because of the havoc wrought by rapid education expansion and the lowering
+of educational standards during Nkrumah’s period (Afrifa, 1966 cited in Pedley and Taylor,
+2009).
+The Kwapong committee recommended that after two  years of middle school, a portion of
+students  should  be  selected  for  the  academic  stream  in  the  secondary  school.  Those  not
+selected would follow a pre-vocational course of two further years in ‘continuation’ classes.
+The committee’s report also recommended that a long-term objective for the system should
+be a course of six years at primary school, four years of secondary education, and two years
+of  sixth-form  leading  to  three  or  more  years  at  university.Although  the  introduction  of
+‘continuation school’ was intended to meet the demand for education relevant to the world of
+work, its implementation reinforced social divisions between rich and poor as it channelled
+poorer children into an inferior education oriented to lower status jobs. Under this reform it
+was still possible to enter the academic secondary stream directly with a strong performance
+in  the  Common  Entrance  Examination  (CEE).  One  unintended  result  of  the  policy was  an
+expansion  in  the  number  of  private  primary schools  oriented  to  academic  selection  via  the
+CEE.
+In 1969, parliamentary elections brought the right-leaning Progress Party (PP) to power with
+Dr Kofi Busia as Prime Minister. This government promoted an anti NLC and anti-Nkrumaist
+stance. It adopted a liberalised economic system, devalued the Ghanacediby almost half and
+deported large numbers ofNigeriansand others under the ‘Aliens Compliance Order’ (1969)
+which  provided  for  the  removal  of  immigrants  without  proper  documentation  within  two
+weeks. Public resistance to Busia’s government grew rapidly. In 1971, a series of proposals
+for  education  reform  were  made.  Anothermilitary  coup  intervened  before  they  could  be
+implemented.
+The second militarycoup d’état, in 1972, brought the National Redemption Council (NRC)
+to  power.  While  the  education  policy  discourse  had  shifted  between  1966  and  1970  to  a
+concern with education quality, it was clear that attention to quality rather more than general
+levels of access was favouring the educational chances of the elite and ruling classes. By the
+early 1970s educational access had resurfaced as a prime concern. By now, it was theissue of
+access to secondary rather than primary school that had moved centre-stage.
+Educational research was being used in the policy discourse to promote a renewed emphasis
+on access. Addae-Mensah et al.(1973) explored the relationship between familybackground,
+educational opportunity and performance in CEE. They demonstrated that children who had
+attended what were termed ‘special primary schools’ (i.e. private schools) typically made the
+transition to secondary after onlysixorsevenyears of primary education, whereas most of
+
+Access to BasicEducation in Ghana: politics, policies and progress
+9
+those attending the government-funded schools who passed the exam did so only aftereight,
+nineortenyears  of  primary  and  middle  school.  In  1972,  21%  of  students  from  special
+primary schools appeared among the first 1,000 best performing candidates, compared with
+less  thanonepercentof  students  from  government  schools.Successful  candidates  from
+special schools entered the high reputation secondary schools disproportionately. Many of the
+middle classes used the private primary schools to give their children a head start in the race
+to gain access the best government secondary schools via the CEE without recourse to the
+middleschool. Access to secondary education was not only unequal across the social classes
+but it was also inequitable.
+In 1974 the Dzobo Committee on education recommended a ‘New Structure and Content of
+Education’ (NSCE).  It drew on several of the proposals made first by the 1971 committee
+that had worked during the time of Busia’s progress party. The NSCE proposed a common,
+diversified and extended basic education cycle in which all children would follow a common
+curriculum for nine  years, six  in primary schools and three in the newly establishedjunior
+secondary schools (JSS), followed by four years ofsenior secondary school(SSS) split into
+two  stages  of  two  years  each.  The  recommendation  was  partly  motivated  by  concerns  in
+relation to equity which had surfaced following the appearance of favourable routes through
+the  basic-school  system  for  those  ableto  access  better  quality  education  (often  through
+private schooling) at the earlier stages, which afforded a considerable selection advantage at
+secondary-level.
+The former ‘middle schools’ were  to be removed from the structure, reducing the  notional
+maximum length  of  the  school  system  from  17  years  to  13  years.  It  was  intended  that  the
+‘middle  schools’  be  ‘converted’  intojunior  secondary  schools,  which  would  provide  a
+curriculum akin to the first three forms of the traditional secondary schools.At thesame time,
+the  committee  also  recommended  that  the  curriculum  be  made  more  practical  and  skills-
+oriented,  through  pre-technical  and  pre-vocational  subjects  in  both  the  primary  and  junior
+secondary stage. In order to implement the new reforms the Ghana Education Service (GES)
+was established, bringing together teachers, administrators and other education personnel into
+a unified service under the Ministry of Education.
+The proposals encountered many implementation challenges. Although 118 experimental JSS
+were established between 1974 and 1986, this plan was not extended to the whole country.
+There was considerable resistance to the JSS concept, not least from among the middle-class
+bureaucrats of the newly established GES. A member of the subsequent 1987 reforms central
+committee explained that the main resistance flowed from the middle class bureaucrats rather
+than the middle classes as a whole. The bureaucrats were:
+afraid  of  losing  their  power  and  their  authority.That’s  why–human  nature.They
+were very conservative, they were resisting change (interview with author).
+The  implementation  of  the  Dzobo  committee  proposals  was  also  undermined  by  a  lack  of
+financial  resources.  Oil  price  hikes,  low  levels  of  domestic  and  foreign  investment  and
+general economic decline saw the percentage of government revenues spent on education fall
+from 6.4%to 1.5%between 1976 and 1983(World Bank, 2004:7). Shortages of teaching and
+learning materials in schools impoverished the quality of the education system.Many trained
+teachers  migrated  to  Nigeria  for  work  in  its  fast-growing  oil-based  economy.  Growth  in
+enrolment in all stages of education was slower  than the growth in the relevant population
+age groups and:
+
+Access to BasicEducation in Ghana: politics, policies and progress
+10
+the decay of those parts of the system patronised by themass of the population was so
+marked that it was doubtful whether children were learning anything. More than half
+the  teachers  were  untrained,  there  were  virtually  no  textbooks  in  the  schools,  there
+was  no  inspection  or  supervision,  and  the  few  resources  available  were  used  to
+employ  superfluous  staff  rather  than  purchase  essential  educational  materials.  In
+addition pilferage and theft has reached endemic proportions (World Bank, 1989:vi).
+As  well  as  a  lack  of  financial  resources,  one  official  at  the  timereflected  on  the  lack  of
+political will to implement the proposals (interview with author).
+The  introduction  ofjunior  secondary  schools  with  a  three-year  cycle,  in  the  presence  of
+resourcing difficulties including in terms of facilities and adequately trained teaching-staff,
+has ledto believe that theyhave served to replicate or even to worsen the inequality inherent
+in  the  former  middle-school  system  (interview  with  author).The  newjunior  secondary
+schools  (which  had  been  formermiddle  schools)  couldnot  prepare  pupils  to  the  standard
+achieved in the former academic secondary schools.Equivalence at the end of Form Three
+between new JSS and old secondary schools was defined by the reforms, but not realised in
+practice.Previously, the academic secondary schools comprised pupils who had passed the
+Common  Entrance  Examination,  and  these  schools  were  considerably  better  resourced,
+especially  in  terms  of  teachers  who  were  typically  university  graduates,  compared  to  the
+former middle-school teachers who were typically post-secondary trained.Comparing the old
+and new ‘elite’ and ‘mainstream’ routes through  the system, commentators note that under
+the  new  system  it  was  the  mainstream  pupil  whosede  factopre-tertiary  preparation  was
+significantly reduced.Thepotential to access ‘academic’ secondary schooling after two, three
+or four years ofmiddle school(eight,nineortenyears of basic education) was removed and a
+common cycle of 9 years of basic education imposed.The elite continued to avail themselves
+of access to private preparatory schools and either high quality former secondary (now JSS)
+or private JSS schools (interview with author).
+For some, it was the failure to ensure the quality of state primary schooling in terms of pre-
+secondary  preparation  and  the  failure  to  ensure  quality  improvements  in  the  ex-middle
+schools that served to perpetuate and reinforce inequality in the post-Dzobo system.This was
+caused, the argument goes, by those among the elite bent on reforming a system they did not
+intend to use for their own children and the doubts expressed, particularly among bureaucrats
+in  the  GES,  stemmed  rather  more  from  concerns  about  widening  inequality  under  the
+proposed reforms than from vested interests.Moreover, some argue that the reforms were not
+supported by a majority of the elite, whose interests were well served by the old system, but
+that certain powerful elites allied themselves with reforms supported by the World Bank for
+reasons  associated  with  their  own  political  interests,  recommending  a  system  of  improved
+equityde  jurebut  which,  in  line  with  the  concerns  of  the  rest  of  the  elite  and  among  the
+bureaucrats, was to result in potentially greater inequity de facto(interview with author).
+In 1979 the third military coup brought Flight Lieutenant Rawlings to power as Chairman of
+the  Armed  Forces  Revolutionary Council  (AFRC)  for  a  brief  period.  The  AFRC  aimed  to
+purge  corruption  and  graft  from  the  armed  forces  and  wider  society.  After  elections  in
+September  1979,  power  was  handed  overto  Dr  Hilla  Limann  of  the  social  democratic
+People’s National Party (PNP). The PNP government lasted for just over  two  years before
+Rawlings led Ghana’s fourth, and his second,coup d’état,assuming power with his left-wing
+Provisional National Defence Council (PNDC). The economy remained in a dire state and by
+1982 per capita incomes were 30% below their 1970s level, import volumes were one third
+
+Access to BasicEducation in Ghana: politics, policies and progress
+11
+less and export earnings just half (World Bank,1989). The economy was very weak, and the
+prospects of reformin education poor.
+
+Access to BasicEducation in Ghana: politics, policies and progress
+12
+6. The 1987 Education Reforms
+6.1Policy Context
+The character of political will and the availability of financial resourceswere to change in the
+mid 1980s. After leading his second military coup Rawlings had expected financial support to
+flowinfrom  socialist  countries  and  the  Eastern  Bloc  in  his  efforts  to  counter  economic
+decline.  When  this  support  did  not  materialise,  he  turned  to  the  World  Bank  and  the
+International Monetary Fund, launching the Economy Recovery Programme (ERP) in 1983
+(Pedley and Taylor, 2009). The ERP included currency devaluation, reductions in tariff levels
+and  import  restrictions,  increased  prices  for  export  crops,  retrenchment  of  public  sector
+employment and increased levels of government expenditure. With GDP growth of 6.3% per
+annum, the early economic gains were substantial (World Bank, 1989).
+Alongside the ERP came a political agenda that was anti-elitist, pro-poor, pro-rural: in short
+populist.  Radical  reforms  in  education  were  aimed  at  improving the  quality of  educational
+provision and at more equitable access to primary and secondary education. Much of the ERP
+focussed on the rural economy.
+The PNDC government realised that if the ERP was to succeed, the skill and attitudes
+of  Ghanaianyouth  would  have  to  be  changed  so  that  they  would  be  prepared  to
+become productive farmers or skilled artisans and craftsmen ready to work for their
+own, their community’s and their country’s development (World Bank, 1989:2).
+The low quality of educationin the early 1980s has been described by many, including the
+National Education Forum (NEF), which, in 1999 offered a retrospective.
+By 1983, Ghana’s  educational system, which until the mid-1970s was known to be
+one  of  the  most  highly developed  and  effective  in  West  Africa,  had  deteriorated  in
+quality. Enrolment rates, once among the highest in the sub-Saharan region, stagnated
+and fell. The percentage of GDP allocated to education dropped from 6.4 percent in
+1976 to 1.7 percent. The real levels of financing fell by about two-thirds. Government
+resources  were  no  longer  available  to  construct,  complete  or  maintain  educational
+facilities.  Scarcity  of  foreign  exchange  affected  the  country’s  ability  to  purchase
+textbooks  and  other  teaching  and  learning  materials.  The  economic  downturn  also
+resulted  in  the  mass  exodus  of  qualified  teachers.  At  the  basic  education  level,  the
+ratio of trained to untrained teachers fell significantly. Low motivation and morale led
+to  ineffective  supervision.  Finally,  the  lack  of  data  and  statistics  needed  for  vital
+planning led to decisions being taken on anad hocbasis (National Education Forum,
+1999:9).
+In its retrospective assessment of the same period, but published some ten years earlier, the
+World Bank provided a witheringand harsh description of the state of teaching and learning
+in the early 1980s, not inconsistent with that offered by the National Education Forum. The
+authors of the report commented on the limited number of school hours and days available
+for student learning, the  absence of  learning materials and the  low level of literacy among
+gradesixcompleters.  They  went  on  to  comment  very  unfavourably  on  the  quality  and
+motivation of teachers and school administrators.
+
+Access to BasicEducation in Ghana: politics, policies and progress
+13
+...the  school  has  been  seen  by  unscrupulousadministrators  as  a  way  of  placing
+relatives  or  friends  in  salaried  employment,  even  when  the  prospective  teacher  is
+semi-literate himself and his post not justified according to student numbers...The
+job of circuit officer (inspector) has generally been considered a sinecure, offered as a
+reward  to  long  serving  teachers  with  no  precise  job  description  or  clear  duties.
+Teachers would only turn up to school when it suited them and consequently student
+attendance was generally low and dropout rates high. Teachers would often demand
+that students work on their farms which led parents to withdraw their children from
+school (World Bank, 1989:18).
+An early policy reform by the PNDC in 1983 was the promulgation of the PNDC Law 42.
+The Ghana Education Service Council and the National Council for Higher Education were
+dissolved  and  their  statutory  powers  transferred  to  the  PNDC  Secretary  (equivalent  to  the
+term Minister in an elected parliamentary government). In 1983 a conference of Directors of
+Education  reviewed  the  Dzobo  report  and  made  recommendations.  In  1985  a  National
+Education  Commission  (NEC)  on  education  was  established  to  advise  the  Secretary.  The
+commission held extensive consultations across the country that involved  trade unions, the
+heads  of  secondaryschools,  civil  servants  and  university  students.  Technical  advice  from
+foreign  consultants  and  the  World  Bank  was  employed  alongside  technical  advice  from  a
+wide range of Ghanaian professionals. In essence, the NEC’s recommendations echoed those
+made nineyears earlier by the Dzobo committee under the military regime of the National
+Redemption Council. The challenge now was their implementation.
+The  NEC’s  work  was  soon  taken  over  by  the  Ministryof  Education.  Indeed  some  would
+describe the take-over as anaggressive political move by the Ministry of Education and in
+particular by one of thedeputysecretaries ofeducation.
+...as  the  commission  was  working,  all  of  a  sudden  the  thendeputysecretary  for
+education  took  charge  of  the  reform  in  a  very  aggressive  way  and  therefore  this
+commission was sidelined...So it was I would say so aggressive that there was some
+kind of resistance.People felt that there was indeed a need for reform, there was no
+question about it but the pace at which the reform was going Ithink looked too fast
+for  people...But  it  was  a  military  government  so  there  wasn’t  anything  like  say
+democracy  or  anything.And  so  she  set  up  some  committees  operating  within  the
+ministry and  in  fact  thesecretary herself  was  not  actively involved  (interview  with
+author).
+The revolutionary, military political regime under which the 1986/7 reforms were formulated
+and  driven,  was  markedly  different  from  that  of  earlier  periods.  The  process  of  policy
+formulation   brought   professional   experts,   several   from   the   university  sector,   into   the
+decision-making  arena  and  conferred  political  powers  on  them  asministers  ordeputy
+ministers. Some of those who were centrally involved in the policy dialogue recalled:
+this was a government that saw itself as a revolutionary government...and in it were
+people who had a lot of ideas about how to get us ...out of the economic crunch and
+the social consequences of the economic crunch.So that was from the very top ...and
+...the people who were ministers were often technocrats with a passion for change
+and ...who wanted to reformulate things and see how to make them more with a few
+resources. We were the sort of people who thought that the universities should have
+farms, that sort of thing (interview with author).
+
+Access to BasicEducation in Ghana: politics, policies and progress
+14
+When the PNDC government came into power and...it was all political...this mass
+movement. Everybody then was interested in seeing issues in their right perspective
+...And  all  of  us  agreed  that  something  drastic  had  to  happen  for  education...the
+drive in policy was increaseaccess (interview with author).
+The  1987  reforms  were  designed  to  overcome  many  maladies  in  education-both  in
+improving access to education, especially to the junior secondary stage,  and improving the
+quality of education and learning. Wide ranging in scope and covering the entire education
+sector from primary to tertiary level, the key basic education elements with implications for
+education access reflected the much earlier 1974 proposals of the Dzobo committee. Indeed,
+most  commentators  agree  that  the1987  reforms  were  an  attempt  to  put  into  practice  the
+recommendations of the 1974 proposals which, in turn, owed their roots to a 1971 committee
+appointed by Dr Busia.The 1987 reforms were of four main types.
+Structure  of  Education:Reduce  the  pre-university  span  from  17  years  to  12  years.
+Replace the primary (6), middle (4) and secondary school (5) structure with primary
+(6), junior secondary (3) and secondary (3). Introduce non-selective basic education
+across the primary and junior secondary stages (6+3).
+Curriculum:Provide  children  with  literacy  skills  intheirown  language,  a  second
+Ghanaian  language  and  English,  modern  farming  skills,  familiarity  in  using  tools,
+manual  dexterity,  practical  mathematics.  Create  positive  attitudes  to  hard  work  and
+national development. Restructure teacher education.
+Expected destinations of graduates from basic education:The majority of graduates
+from  basic  education  were  expected  to  become  productive  modern  farmers  (with
+support   from   agricultural   extension   services);   a   substantial   number   to   become
+productive  skilled  workers  (with  short  term  training  or  informal  apprenticeships);
+30% to proceed to secondary education.
+Finance of Education:Concentration of resources on basic education. Savings to be
+made by reducing length of pre-university course from 17 to12 years; redeployment
+of  unnecessary  non  teaching  and  unqualified  teaching  staff;  charging  of  book  user
+fees from Grade 3; the removal of boarding and feeding subsidies for secondary and
+tertiary  institutionsand  removal  of  student  subsides  in  tertiary  education.  (World
+Bank, 1989).
+6.2 Policy Implementation and Resistance
+The reforms were announced by thesecretary foreducation andculture in October 1986 for
+implementation from September 1987. Their initialimplementation was handled firmly and
+decisively.  Leadership  from  the  top,  comprising  thesecretary  foreducation,  thedeputy
+secretary  forbasic  andsecondaryeducation  and  thedeputysecretary  forhighereducation
+was strong.
+The detailed planning ofthe reforms and their implementation occurred in parallel for most
+of the 1987-1992 period. The PNDC government wasted no time in moving to country-wide
+implementation, just eleven months after the reforms had been announced.The reforms were
+not  piloted  and  were  introduced  nationwide  ‘with  less  than  a  year’s  lead  time  in  order  to
+prevent vested interests from mobilising against the reforms’ (World Bank, 1989:2). Vested
+
+Access to BasicEducation in Ghana: politics, policies and progress
+15
+interests in maintaining the structure and content of education were anticipated to lieamong
+the elite who had for some time gained considerable advantage for their  own children in a
+socially  stratified,  urban-oriented,  academic  and  selective  education  system.  Despite  the
+political determination to embark on implementation ‘money or no money’, external financial
+support was necessary. The World Bank stepped in early to support the reform process. In
+1984-5  initial  education  sector  analytical  and  planning  work  as  well  as  essential  school
+materials  were  provided,  followed  by substantial  education  sector  credits  between  1986-91
+and 1990-94 to support the reforms (World Bank, 2004:20).
+The decision to introduce the reforms with less than year’s lead time points to a well-known
+tension between the technical and political imperatives of educationreform. Most education
+policy implementers stress the need to trial and pilot reforms in order to test their technical
+characteristics and take corrective action before going to scale. Politically, reforms are often
+pushed  through  hard  and  fast  to  circumvent  resistance  and/or  to  secure  electoral  support.
+Pushed too fast the political imperative can backfire and create tensions in the early stages of
+implementation.
+The reforms met with resistance from several quarters. Those in the driving seat were aware
+that  the  middle  classes  and  associated  political  groups  from  earlier  regimes  would  resist
+components of the reforms. Already, the middle classes’ resistance to a common system of
+secondary education that  would place their  children in  a common  race for educational and
+occupational opportunities had thwarted reform efforts in the 1960s and the 1970s. But the
+political scene had changed. Since the PNDC’s political base was the rural poor, it did not
+fear the middle classes.
+Students  resisted  proposed  reformsin  higher  education.  These  were  dealt  with  firmly  and
+universities were closed for periods of time. The PNDC government had relied on students
+for  their  support  initially.But  since  universities  and  the  students  within  them  were  widely
+regarded  as  elitist,the  government  did  not  feel  threatened  by  the  anticipated  loss  of  their
+support(World Bank, 2004:29-30).
+Resistance to the general education reforms also came from the middle class bureaucrats in
+the (GES). Once again the government acted firmly.
+...the  Secretary  for  Education  told  the  GES  that  if  they  are  not  prepared  for  the
+implementation of the reform they will all be removed from office by revolutionary
+order (interview with author).
+This  demonstrated  the  government’s  determination  to  overcome  resistance  by  all  means
+possible, it transferred three important units from the GES-Supplies, Curriculum Research
+and Development and Planning, Budgeting, Monitoring and Evaluation-to theministry. The
+army was mobilised to distribute textbooks to the new JSS. Some GES officials were charged
+with corruption. A formerdirectorgeneral of the GES at that time recalled the way in which
+the GES was sidelined by both government and the World Bank.
+I  was  hardly  consulted.The  World  Bank  people  were  part  of  theproblem.They
+preferred really the political heads... they made a b-line to the political heads. They
+ignored  thedirectorgeneral  and  I should have  resigned...But...that  would have
+been (seen a) a case of sabotage.That’s how they would have looked at it.There was
+no way I could explain myself (interview with author).
+
+Access to BasicEducation in Ghana: politics, policies and progress
+16
+Anticipated  resistance  from  the  regional  administrations  was  bypassed  largely  by  the
+establishment  of  the  newly  establisheddistrict  Assemblies.  Thedistrictassemblies  were
+expected to raise public awareness of the reforms, mobilise funds and oversee the massive
+school building programme.
+Overt  resistance  to  the  reforms  was  muted.  Military  regimes  typically  wield  power  in  an
+authoritarian way. Orders are orders, directives are directives.Debate is stifled. People do not
+speak out and are intimidated. As a university academic who was played a key role in the
+educational reform commented:
+This was a directive.So it was easier.And you know the direction...whether people
+like  it  or  not  they don’t  mind  the  other  opposing views.It  can  come  but  it  doesn’t
+matter (interview with author).
+Resistance to the reform  from the middle classes was certainly present, but it was passive.
+Those who resisted did not speak out at public discussions aboutthe reforms. Instead, they
+found  ways  of  by-passing  the  new  system.  Many  middle  class  children  attended  private
+primary  schools  and  sat  the  CEE  a  year  early.  In  this  way  they  entered  the  traditional
+secondary school directly rather than wait a year and proceed to secondary via the new JSS.
+This practice was also followed by the children of some, but not all, members of PNDC. The
+practice of using the private primary schools to gain subsequent advantage within the public
+secondary and tertiary systems continues to the present day (Djangmah, 2009:1).
+6.3Technical Challenges
+As implementation moved forward, a number of challenges were faced, some technical and
+some political. Technically, some felt that change was being pushed too fast, with insufficient
+attention  being paid  to  detail.  While  controversial  reforms  for  the  financing of  universities
+were  leading  to  student  protests,  university  staff  expressed  their  concerns  about  the  likely
+impact of the reforms on basic and secondary education and the qualityof university student
+intake.
+Suddenly we decided that aftersixyears everybody must transit into something that
+ought to beequivalent to a secondary school...Ideally this was perfect, excellent if
+every  child  in  the  country  could  have  education  to  thelevel  of  what  we  would
+consider  to  be  secondary  education.It  would  boost  the  intellectual  level  of  all
+children.Unfortunately over 80% of the schools in the country in the public system
+were  the  so-called  middle  schools...transformed  overnight  to  juniorsecondary
+schools but they were nothing more than glorified middle schools.Suddenly schools
+where one person was teaching every subject in a class in the middle school became a
+junior secondary school.And the same teacher was supposed to teach various subjects
+-mathematics, English,geography,history-to a level that ought to be equivalent to
+what used to be secondary schoolForm 1 in the old system. Naturally that affected
+standards (interview with author).
+An evaluation by a British volunteer teacher-educator working in thenorth during the earliest
+years  of  the  reform  confirmed  the  burdens  on  teachers  (Scadding,  1989).  Because  the  JSS
+curriculum had been extended to thirteen subjects, teachers were now obliged to teach four
+subjects where previouslythey had taught two and felt under increased pressure to cover the
+official  syllabi.  A  compulsory  two  week  training  course  conducted  country-wide  in  the
+
+Access to BasicEducation in Ghana: politics, policies and progress
+17
+summer  of  1987  was  judged  by  teachers  to  be  inadequate,  especially  in  relation  to  the
+teaching  of  thespecifics  of  particular  subjects.  The  sense  of  isolation  was  acute  among
+teachers  in  the  rural  and  sparsely  populatednorth.  The  innovative  pedagogic  methods  of
+continuous  assessment,  group-work  and  inquiry-based  learning  posed  particular  challenges
+for teachers. There were worries too about the overwhelming emphasis on the JSS stage to
+the detriment of the first six years of primary where the foundations of formal learning and
+the  foundations  for  the  JSS  stage  are  built.  Early  concerns  were  also  expressedabout  the
+inequalities  beginning  to  arise  between  communities  as  they  ‘shared’  responsibility  with
+government  for  the  building  of  the  new  schools.Recognising  that  the  reforms  themselves
+were ‘fundamentally imaginative, forward-thinking’ and were inspiringand enthusing many
+teachers and educationalists, Scadding (1989:48) also wondered ‘if thegovernment has not
+bitten off more than it can chew’.
+Scepticism about the quality of the graduates from the restructured secondary school system
+was  considerable.In  1993,  the  Senior  Secondary  School  Certificate  Examination  (SSSCE)
+results among the first nationwide JSS cohort were lower than expected, triggering national
+debate about the effectiveness and appropriateness of the new structure of education.There
+was considerable confusion about the intended level of the SSSCE.
+The Education Commission was clear that it should be pegged at O level since the old
+A level was for the cream of the O level who enrolled in sixth forms. Theministry
+said  that  the  SSSCE should  be  a  shade  above  O  level,  so  syllabuses  were  prepared
+based on standard of examinations above O level (interview with author).
+They  were  also  unhappy  about  the  school-based  continuous  assessment  which  contributed
+40% of the total marks per subject. The universities expected about 20,000 students to qualify
+with  a  minimum  aggregate  of  24.  In  the  event,  only 1,300  reached  this  level.  As  a  former
+chairman of the Universities Entrance Examination Committee was to ponder, years later:
+In  which  countrydoes  mass education reach such levels  with all the inadequacy of
+books, science and mathematics teaching and a basic school system which is taught
+by trained teachers who are university rejects ambition-wise and examination results
+wise (interview with author).
+The universities responded by insisting on setting their own entrance examinations.
+Notwithstanding the quality of education and levels of achievement reached, the restructuring
+of  the  pre-university system  nationwide  to  a  6+3+3  model  went  ahead  and  has  endured.  It
+was probably the most radical reform component to have been implemented.
+The second most radical component was the vocationalisation of the curriculum, especially at
+the JSS level. It posed technical challenges. It was capital intensive, requiring equipment and
+workshops unavailable everywhere. Since 12-15 subjects were to be studied in all it placed a
+heavy  burden  on  the  curriculum  and  on  students.  The  requirement  that  practical  skills  in
+technical  and  vocational  subjects  be  developed  across  the  country  in  an  objective  and
+comparable  manner  proved  impossible  to  meet  and  the  Examinations  Council  resorted  to
+using  written  items  to  assess  practical  work.  A  former  chairman  of  a  JSS  management
+committee recalled:
+
+Access to BasicEducation in Ghana: politics, policies and progress
+18
+In the whole of the CentralRegion (our children) were the best in terms of the exams
+introduced under the reforms but they didn’t have a workshop. They could do well in
+all these technical subjects and so on but they really didn’t have any workshop.They
+were just memorising the things and passing (interview with author).
+The  proposal  to  provide  one  workshop  per  JSS  contrasted  markedly  with  the  technical
+training  centres  that  had  previously  served  a  number  of  middle  schools.  The  financial
+requirements were considerable and did notattract support from the World Bank (see World
+Bank, 2004:28).
+6.4 Tensions between Technical and Political Imperatives
+At a local level politicians were involved in implementation decisions through their role in
+districtassemblies and in particular the education social services committee. Politicians were
+also  involved  at  the  village  level  in  decisions  about  school  restructuring  and  in  ways  that
+were sometimes in conflict with the technical plans of education managers. A former district
+director  recalled  some  of  the  conflicts  with  politicians  and  religious  leaders,  and  the
+compromises that had to be reached at village level:
+The  total  enrolment  of  the  primary  school  was  96  but  for  political  reasons  the
+assembly man wanted popularity and attempted toput in a six-classroom block... I
+went  there  to  inspect  with  my team  to  see  the  facility before  we  gave  a  ruling and
+there were a lot of local chiefs...they wanted schools ...even if the proximity of the
+other school is less thanfivekilometresstill they wanted it.And it had implications
+for resources.But of course when we saw that it was going to bring a lot of conflict
+and issues, we sometimes acceded to some of these.You look at the situation on the
+ground;  because  in  some  cases  they won’t  let  the  children  go  school...you  really
+have to do a lot of consultation even at a friendly level (with the churches). You could
+see a church here is very close and it has a Roman Catholic primary school, then there
+is a Methodist primary school. But the (total) enrolment of these two together does
+not even meet the criteria for one school.You need to talk to them, consult, and say
+‘OK we’ll give you the primary school but they will pick the JSS’...So there were
+political (aspects) under of all those things about access (interview with author).
+Resistance of other kinds also arose at local level. Community labour was key to the success
+of  the  JSS  school  building  programme.  The  government  provided  pavilion  structures  with
+foundations,  walls  and  a  roof,  while  communitymembers  were  trained  to  complete  the
+cladding  of  walls.  In  some  cases  those  opposed  to  the  military  government  persuaded
+communities that the government was wrong to expect them to provide their labour and that
+school buildings were entirely a government responsibility. Such influence discouraged some
+communities from sharing the responsibility for the provision of school infrastructure.
+Notwithstanding the difficulties faced in some communities, all those interviewed judged that
+it  was  easier  to  implement  the  hardware  programmes  of  buildings  than  the  software
+programmes of the curriculum and teacher education. A particular issue arose in relation to
+the  rewriting  of  textbooks.  Traditionally  most  text  book  writers  had  been  contracted  from
+among universityteachers. When the new texts needed to be written, theministry fell back,
+not unexpectedly on traditional expertise-the same university teachers who had offered the
+greatest source of resistance to the reforms.
+
+Access to BasicEducation in Ghana: politics, policies and progress
+19
+6.5 Formal Evaluations
+Large-scale formalevaluations reinforce many of the points made above. Within two years of
+the  1987  reforms  being  launched,  the  World  Bank  (1989)  undertook  an  early  formal
+assessment, with a particular focus on the junior secondary stage and its likely effectiveness
+on employment opportunities for young people. In part this early assessment was motivated
+by a desire to make constructive input to the implementation stage which had been launched
+quickly and  with  no  pilot.Implicitly it  provided  encouragement  to  the  governmentfor  the
+reforms and endorsed their general ideology.
+The  evaluation  reported  varying  levels  of  support  among  parents  for  the  reforms.  Strong
+support was voiced by rural and small town craftsmen, though this was lower in the Central
+and Western regions compared with the Eastern, Volta and Ashanti regions. Parents in the
+Central  and  Western  regions  expressed  concerns  over  the  hurried  implementation  of  the
+reforms and shortages of teachers to teach the practical and technical subjects. Least support
+for  thereforms  was  reported  from  thenorth  where,  historically,  educational  provision  and
+participation had been lower, where parents feared that teachers used education to proselytise,
+and   where,   historically   education   had   been   completely   free.   These   problems   were
+compounded  by  the  fact  that  household  incomes  were  heavily  dependent  on  subsistence
+agriculture,  that  academic  timetables  were  insensitive  to  the  seasons  in  thenorth  and  the
+opportunity  costs  of  education  were  therefore  likely  to  be  relatively  high.  The  evaluators
+noted  that  while  the  long  school  vacation  had  been  changed  to  coincide  with  the  peak
+planting  season  in  thesouth,  the  same  period  coincided  with  a  very low  demand  for  farm
+labour in thenorth. The possibility of aligning the dates of schoolvacations in thenorth and
+thesouth with their respective peaks of seasonal labour demand did not appear to have been
+considered  and  to  this  day  remains  an  issue  (see  Hadley,  2009  for  a  fuller  discussion  of
+seasonality).  Community  involvement  in  the  construction  of  school  buildings  and  JSS
+workshops was reported to be high in many areas, though the evaluators noted that the wide
+range of roles and responsibilities expected of communities extend beyond building.
+The evaluation of the reforms to improve the quality of curriculum and assessment yielded
+mixed results. While the JSS level textbooks were judged to be well-prepared and conveyed
+messages consistent with the objectives of the reform.
+The timetable still carries an anti-practical bias, with the practical work often being
+concentrated at the end of the day or even outside the normal timetable. The lack of a
+textbook  for  Ghanaian  languages  carries  the  hidden  message  that  these  are  less
+important than English and other subjects. At the primary levelless attention has been
+paid  to  avoiding  an  urban,  middle-class,  modern-sector  bias  in  the  textbooks...
+Pedagogically there  are  too  many subjects  taught  in  any  one  year  at  the  JSS  level.
+There  is  no  way  a  student  can  absorb  12  or  13  subjects  at  a  time  (World  Bank,
+1989:20).
+The system was judged to be both under-financed and over-financed. Teachers qualified to
+teach  the  new  JSS  subjects  were  in  short  supply.  This  was  confirmed  some  years  later  by
+Akyeampong  et  al  (2007:9)  who  concluded  that  the  implementation  of  the  technical  and
+vocational aspects of the reform was compromised by the inadequate supply of well-trained
+technical  and  vocational  instructors.  While  this  indicated  under-financing,  the  World  Bank
+study  drew  attention  to  the  ‘overfinancing’  of  thesystem  caused  by  overstaffing  and  the
+inefficient  use  of  resources  and  time.  In  many,  JSS  staff  had  been  appointed  in  excess  of
+
+Access to BasicEducation in Ghana: politics, policies and progress
+20
+quotas. Duplication of facilities was noted in thesouth where schools belonging to different
+church  denominations,  but  fundedalmost  entirely  by  government,  were  located  very close
+together. Schooling hours were judged to be very low-23 official school hours per week in
+JSS and 17.5 hours in primary. When teacher absenteeism, late starts to the day and unofficial
+school closures are taken into account actual school hours were far fewer.
+A subsequent World Bank evaluation (2004) reported that the textbook charges in primary
+education  were  removed  in  1995.  Subsidies  for  boarding  and  feeding  in  secondary  and
+tertiary  institutionswere  removed  through  an  increase  in  parental  contributions  and  the
+subsequent  removal  of  the  parental  contribution.  The  proposal  to  remove  subsidies  for
+university students ran into political difficulties owing to student protests and was delayed for
+sometime before a loan scheme was introduced.
+Teachers’ views on the reform were mixed. In 1991 an evaluation of teachers’ perceptions of
+the reform was conducted by John Nyoagbe on behalf of the Ghana National Association of
+Teachers  (GNAT).  This  evaluation  of  333  teachers  assessed  teacher  preparation  for  the
+reforms  and  examined  how  the  reforms  affected  teacher  workload  in  terms  of  pre-lesson
+preparation, lesson delivery, evaluation of learning outcomes and class-size. It also explored
+teacher  involvementin  community  participation  and  teacher  views  on  the  policy  of  cost
+sharing.
+In general, teachers felt they had been consulted insufficiently prior to the implementation of
+the reforms.When contrary views were expressed during the consultations that didtake place
+these were felt to have been suppressed.
+...the public fora organised in the wake of the reforms in 1987 did not offer them
+enough opportunity to articulate their candid views as professionals and the live-wire
+in  the  implementation  of  the  school  reforms.  Where  views  contrary  to  the  official
+stance were expressed... these were not tolerated and in certain instances they were
+considered subversive. A case in point was the timing and phasing of the reforms and
+their  position  that  necessary  logistics  be  mobilised  up  front  before  implementation
+took off (Nyoagbe, 1993:9).
+Most teachers felt that their professional training had equipped them well to implement the
+reforms  in  most  curriculum  areas.  The  exception  was  technical  and  vocational  education,
+introduced in the JSS. A dearth of teachers was qualified to teach technical drawing and other
+technical  and  vocational  skills.  Many  teachers  called  for  the  need  for  more  orientation
+courses  to  specific  aspects  of  the  reforms.  In  an  interview  in  2009  Nyoagbe  recalled  the
+teachers’  union’ssuggestion  for  a  phased  implementation  of  the  reforms  and  the  PNDC’s
+resistance to this proposal
+We  even  made  some  proposals  to  them  that  the  reforms  should  have  started  from
+Primary 1.The thinking was that with each passing year, you phase in another grade
+after you develop the curriculum and all that. But the government was suspicious of
+that  arrangement...  So  when  the  Ghana  National  Association  of  Teachers  advised
+that we should prepare, we should take things slowly andphase things gradually, the
+PNDC  government  was  not  too  accommodating  of  that  request.And  in  order  to
+ensure that the reforms went through they rather started from the junior high school
+level.They  went  to  the  top  before  they  came  back  to  look  at  the  primary  school
+curriculum.And  that  is  what  happened.And  then  hurriedly  teachers  ...were
+
+Access to BasicEducation in Ghana: politics, policies and progress
+21
+orientated for a couple of weeks. It was a very rough take off and many teachers were
+not happy.They didn’t  have the confidence  and  the mastery to handle many of the
+newsubjects introduced in the curriculum (interview with author).
+Teachers   commented   on   the   increased   workload   required   for   lesson   preparation   and
+assessment of pupil work. Although the continuous assessment scheme had introduced new
+forms  of  assessment  itconsumed  large  amounts  of  teacher  time  and  effort.  In  many  cases
+class sizes had increased. At the time of the survey, 43% of teachers were managing class
+sizes of between 41 and 60 pupils withfivepercentof teachers managing more than 60. The
+charging of fees for the use of books was felt by many teachers to be deterring some pupils
+from  attending  school.  The  non  availability  of  pupil  learning  materials  was  a  source  of
+frustration for most teachers. Teacher views were divided on whether the increased level of
+examination  fees  could  be  afforded  by  many  parents.  There  was  general  agreement  that
+school involvement in co-curricular activities such as sports and games had been enhanced.
+Teacher perceptions of community support for the reforms were also divided, reflecting in all
+probability  the  variations  in  community  involvement  in  education  reforms.  Teachers  were
+also divided on whether the reforms had improved the quality of teaching and learning and on
+whether they had experienced greater fulfilment in teaching or not (Nyoagbe, 1993:13).
+Financial resources ploughed into the 1986 reforms were considerable. The principal external
+donor during the period 1986 to 1994 was the World Bank, initially through the Health and
+Education  Rehabilitation  Project  (HERP)and  two  education  sector  adjustment  credits,
+EdSACI   and   II.   These   were   followed   in   subsequent   years   by   the   Primary   School
+Development (PSD) project and the Basic Education Sector Improvement Project (BESIP),
+two   investment   projects   for   Community  SecondarySchool   Construction   and   Tertiary
+Education and two projects for adult literacy (World Bank, 2004).
+6.6 Political Will
+Political scientists underline the strength of political will associated with the 1987 reforms.
+Elsewhere,  I  have  offered  a  definitionof  political  will  as  a  sustained  commitment  of
+politicians and administrators to invest the necessary resources to achieve specific objectives
+and a willingness to make and implement policy despite opposition (Little, 2008). Addressing
+the  question  of  political  will  and  reforms  in  primary education  Kosak  (2009:496)  suggests
+that‘no government will provide primary education unless doing so helps the government to
+stay in power’ and suggests two conditions under which support for primary education helps
+thegovernment to stay in power. The first is where the political base of the government is the
+rural poor, and the second is where employers need large numbers of workers qualified to the
+primary school level.But the poor need a ‘political entrepreneur’ to help their claims. In the
+Ghana  case,  especially  between  1986  and  1992,  the  interests  of  the  poor  were  served  by
+General Rawlings’ PNDC revolutionary government, challenging the assertions of those that
+suggest  that  investments  in  primary  education  are  bestserved  by  democratic  governments
+(Kosak, 2009). Most evaluators of the 1987  reforms would agree that they were driven by
+considerable high level political will. Inevitably, resistance arose from various quarters but it
+was  dealt  with  firmly  and  was  muted.While  implementation  of  the  reforms  made  good
+headway in the early years, overall progress was much slower than expected. Implementation
+would gain new momentum in the 1990s.
+
+Access to BasicEducation in Ghana: politics, policies and progress
+22
+7. Sustaining Implementation of the 1987 Reforms in a New Democracy
+1992 wasa watershed in Ghana’s political history and marked the beginning of a period of
+sustained   political   stability   and   strengthening   democracy.   Military   governments   had
+dominated for more than half the period since 1957. By the early 1990s pressures from within
+the country and from external development partners led to the establishment of the National
+Commission  for  Democracy.  The  commission  consulted  widely  and  recommended  the
+election of an executive president, the formation of a national assembly, the creation of the
+post ofprimeminister and the adoption of a new constitution. Among the many issues raised
+were falling standards in education and the continued exclusion of many from education.
+In power since 1981, Rawlings retired from the Army in 1992 andstood for election under
+the newly named National Democratic Congress (NDC). The NDC won most of the seats in
+the new assembly. The 1992 Constitution of theFourth Republic of Ghana came into effect
+onthe 7
+th
+ofJanuary 1993. It marked a highly significant shift in the political environment in
+which education policy would be formulated and implemented. More than that, it marked a
+distinct shift in political legitimacy and the beginnings of a new democratic era.
+The 1992 parliamentary and presidential elections were the first of five so far in the
+new democratic era, including a peaceful handover of government from one political
+party (the NDC) to another, the New Patriotic Party, (NPP) in 2008, and back again in
+2008... this marks a shift in terms of political legitimacy. In the past, democratically
+elected governments were at risk of being overthrown by the military... governments
+have skilfully managed the leadership and incentives of the military so that it poses no
+real threat to continued civilian rule (Pedley and Taylor, 2009:15).
+Article 25 of the new constitution made basic education ‘free, compulsory and available to
+all’. Article 38 (2) of the constitution required that the government:
+shall within two years after Parliament first meets after thecoming into force of this
+Constitution,  draw  up  a  programme  for  implementation  within  the  following  ten
+years, for the provision of free, compulsory and universal basic education (Article 38
+(2), the Constitution of the Fourth Republic of Ghana, 1992).
+This  constitutional  duty  added  new  impetus  to  the  implementation  of  the  1987  reforms
+through   the   Free,   Compulsory,   Universal   Basic   Education   programme   (fCUBE).   The
+enshrinement  of  free  and  compulsory  basic  education  in  theconstitution  reinforced  more
+strongly than before the principles of free primary education set out in 1951 and the free and
+compulsory education  clauses  in  the  1961  act.  The  constitutional  mandate  gave  citizens  of
+Ghana  the  legal  right  to  free  and  compulsory  education.  It  also  offered  legitimacy  to  the
+civilian government. As a recently retiredchiefdirector of theministry explained:
+fCUBE  was  started  in  1996  and  ended  in  2005.  It  was  driven  by  a  constitutional
+mandate...successive governments cannot run away from this. It is somethingthat
+has to be run to make sure there is access for all school children ...When these people
+who came from a military government became  a  civilian government, there was an
+issue  of  legitimacy  and  acceptability.Education  has  been  the  key  agenda  of  many
+governments ... and was coming from a political angle (interview with author).
+
+Access to BasicEducation in Ghana: politics, policies and progress
+23
+The development of the fCUBE programme was spearheaded by theminister ofeducation.
+Ad hoccommittees and sub committees were formed. Membership drew  from experienced
+members  of  the  education  service,  the  universities  and  others.  The  main  objectives  of  the
+programme were increasing access and participation, increasing the quality of education and
+improving  management  efficiency.  Recalling  the  discourse  of  the  time,  a  formerdirector
+general of theministry said:
+they always added participation to access (to refer to the fact that) not only should the
+people be in school but also the community’s involvement in this whole process. In
+between this everyone was talking about gender and girls’ education. So in the access
+and participation making sure that equal opportunities were given to girls and making
+sure there was gender parity and so on (interview with author).
+The  fCUBE  programme  was  published  in  1995  and  reflected  several  years  of  work  by
+ministry personnel, education officers, citizen groups, donors and consultants. Described as a
+strategic plan rather than a policy it sought to add momentum to the implementation of the
+1986 reforms through five ‘strategic elements’ which in turn were intended to ‘redress four
+major deficiencies in the present education system’ (GoG, 1995:4). These four (GoG, 1995:4-
+5) were:
+Access-must be expanded but especially for girls and citizens living in disadvantaged
+areas and who, for social and economic reasons have not yet sufficiently partaken in
+the educational process.
+Efficiency-repetition and dropout rates must be reduced.
+Quality-increase the pass rate for admission into secondary cycle institutions to 80%
+by 2005. By the same year 75%of Basic stage pupils to meet minimum standards of
+performance on national criterion referenced tests.
+Relevancyof  basic  education  will  be  increased  through  quality improvement  in  the
+curriculum  and  by  strengthening  community  participation  in  oversightof  local
+schools.
+The five strategic and integrated elements designed to remedy these four deficiencies were
+infrastructuredevelopment,managementreform,curriculumchange,community
+participation  and  improvement  of  quality  of  personnel  who  support  basic  education  at  all
+levels. Technical sub-committees were established for each of these areas.
+The  designers  of  fCUBE  undertook  to  make  education  decentralisation  a  reality  in  the
+districts  through  the  Local  Government  Acts  of  1988  and  1993  (Act  462)  and  through  the
+1995 Ghana Education Service Act. They reviewed and revised teaching material and syllabi,
+introduced  additional  incentives  for  teachers  (through  housing  and  prizes),  and  proposed  a
+shift  to  distance-based  in-service  teacher  training.  Accessand  participation  were  promoted
+through  school  infrastructure  schemes  and  pilot  scholarship  schemes  to  increase  access
+among  girls  in  primary  schools.  fCUBE  also  provided  a  framework  for  coordinated  donor
+support to education.
+
+Access to BasicEducation in Ghana: politics, policies and progress
+24
+Consultation was conductedextensively with representatives of teachers and parent-teacher
+associations, with churches, district directors of education, district assemblies and the West
+African Examinations Council. Theminister was centrally involved, not least because:
+he  realised  that  this  was  a  constitutional  issue  and  in  parliament  questions  were
+always being asked as to how far this was going (interview with author).
+While high level political will continued to have a positive impact on policy implementation
+it continued toundermine the formal and mandated role of the bureaucrats in the GES.
+In  our  structure  like  in  many  other  countries  there  is  a  separation  of  policy  from
+implementation. Theministry focuses on policy ...and the Ghana Education Service
+is  for  implementation.  The  criticism  I  had  (was  that)  it  did  not  allow  the  Ghana
+Education Service who are really in touch with the schools and teachers to own the
+programme.  They were  just  driven  to  do  this  and  that  ...  education  that  was  being
+talked  about  and  being  pushed  but  the  motivations  were  mixed  (interview  with
+author).
+In recognition of the rushed preparation of teachers for the 1987 reforms, fCUBE proposed
+more thorough schemes for teacher preparation and upgrading.
+There  was  the  need  for  a  more  thorough  teacherpreparation  and  that  thorough
+preparation  includes  not  only  feeding  them  with  the  necessary  content  and  the
+pedagogical  skills  but  also  preparing  them  psychologically  to  own  the  fCUBE
+process. So that was one aspect. Then the question of teacher motivationitself and a
+whole   lot   of   things   go   into   motivation.   (There   are)   issues   about   continuous
+professional education, about recognition for excellent performance, and about better
+pay which will retain them in the existing profession (interview with author).
+A  major  programme  of  teacher  education  and  the  upgrading  of  teachers’  qualifications
+through distance education was spearheaded by the University College of Winneba. As if this
+challenge  was  not  enough  in  itself  Winneba  became  a  university in  its  own  rightin  1994.
+Winneba  would  face  technical  and  institutional  implementation  challenges  simultaneously.
+The  technical  challenge  was  the  development  of  a  large-scale  teacher  education  system
+though a new technology-distance learning. The institutional challenge was the creation of a
+new university from six teacher training colleges. A formervicechancellor recalled four of
+the  institutional  challenges  that  arose.  The  first  was  the  rivalry  among  the  staff  of  the  six
+colleges. A second was the creation of new syllabi tailored to the work of training teachers. A
+third was a shortage of accommodation to meet the various needs of technical, agriculture,
+music  and  physical  education.  Finally  there  was  the  need  to  establish  a  university  and  a
+university culture.
+Weeven  had  a  re-designation  of  staff.We  were  moving  people  from  the  Ghana
+Education Service culture into a university culture.Therefore  they are  coming with
+different  designations  and  we  had  to  make  sure  that  these  designations  became
+university designations (interview with author).
+Under the Access and Participation Programme of fCUBE the government committed itself
+to achieve gender parity in admissions to the first grade of primary school by 2000 and to
+equalise  completion  at  sixth  and  seventh  grade  by2005.  In  view  of  the  historically  lower
+
+Access to BasicEducation in Ghana: politics, policies and progress
+25
+levels of access, it committed to universalise access to Grade 1 in the North by 2000 and to
+achieve a 93%completion rate at Grade 6 by 2005 (GoG, 1995:4).
+We realised that in the northern parts of our country their participation in education
+was very low.So apart from targeting girls, we also put special emphasis in the three
+northern regions for people to go to school so that we can reach the level there.And
+of course because of that, politicians from the north ...were really keen  on having
+their children going to school, yes, we were very, very keen on that and they assisted
+a lot of schools and of course the president, the head of state himself and his ministers
+haverealised that look if we are to move our country forward then education requires
+our party’s attention.And...if we are to fight ethnic problems in the country, it is
+necessary  to  ensure  that  those  who  are  low  down  in  participation  in  education  are
+brought  up,  for  national  stability,  national  progress  and  so  forth  (interview  with
+author).
+A more specific action plan for girls’ education aimed to increase girls’ enrolment inbasic
+education,  reduce  their  dropout,  increase  transition  from  basic  education  to  the  senior
+secondary  school,  and  expose  ‘ten  thousand  girls  in  pre-tertiary  education  to  science,
+technology, mathematics education (STME)’ (Sutherland-Addy, 2001:75-76).
+AGirls’  Education  Unit  was  set  up  in  1997  and  considerable  financial  investment  made,
+largely by external agencies. The programme involved a range of activities from advocacy
+and community sensitisation to scholarship schemes, formation of girls’ clubs, micro-credit
+schemes  and  community  mobilisation.  In  2002  a  sobering  assessment  of  progress  in  girl’s
+access  and  participation,  commissioned  by  UNICEF-Ghana,  concluded  that  the  rate  of
+improvement was slower than expected.
+The enrolment rate of  girls at primary level has  decreased by 0.5% over  the 4  year
+period since 1998. The dropout rate at this level is stagnant while at the JSS level it is
+1.1%. Transition from JSS 3 to SSS is also stagnant (33% to 32.8%). At the secondary
+and  tertiary  level  it  seems  that  policies  and  programmes  specifically  addressing
+questions of gender equity have stimulated a response in the target population. There
+is evidence of improved performance. ...Despite these indicative improvements, low
+enrolment and transitions at basic level give a general view of stagnation (Sutherland-
+Addy, 2002:67-68).
+The strong political will for education reform that was evident in the 1980s continued through
+the  1990s  with  the  push  from  policy  formulation  into  policy  implementation.  The  donor
+community was very active in its support both for fCUBE and for policy-relevant research.
+Indeed some have gone so far to suggest that the funding of policy research in Africa through
+the  1980s  and  1990s  became  so  donor-dominated  and  led  by  researchers  external  to  the
+country that local needs and views were suppressed (e.g. Samoff et al, 1996). An evaluation
+of  34  policy  studies  and  views  of  policymakers,  policy  implementers,  researchers  and
+initiator  organisations  by  a  team  of  Ghanaian  researchers  confirmed  that  the  research  was
+funded  disproportionately  by  development  partners.  However,  a  majority  of  studies  were
+conducted  by Ghanaianresearchers  and  the  development  partners  were  judged  not  to  have
+‘interfered’ with the process and outcomes of the studies (Agyeman, Baku and Gbadamosi,
+2000).
+
+Access to BasicEducation in Ghana: politics, policies and progress
+26
+The implementation challenges posed by fCUBE for the supply and training of teachers were
+similar to those faced in the wake of the 1987 reforms. The supply of untrained teachers and
+of trained teachers struggled to keep pace with increases in enrolment. The student-teacher
+ratio in primary declined from 32:1 in 1996/7 to 35:1 in 2005/6, while it was more or less
+constant at 18:1at the junior secondary level. The student to trained-teacher ratio in primary
+declined  from  43:1  to  63:1,  and  in  junior  secondary  they  rose  from  23:1  to  26:1  (figures
+rounded). Pass rates in the BECE examination sat at theend of the junior secondary stage
+increased only very slightly from 60.4% in 1998 to 62.2% in 2008 (Akyeampong, 2009).
+
+Access to BasicEducation in Ghana: politics, policies and progress
+27
+8. Parallel Policies and Plans, 2000-2008
+The target date for the provision of free and compulsory basic education for all children was
+2005.  Elections  in  2000  heralded  a  regime  change.  While  the  left-of-centre  National
+Democratic  Congress  was  replaced  by  the  right-of-centre  National  Patriotic  Party,  the
+commitment to fCUBE was maintained. The Ministry of Education led an EducationSector
+Review which fed into a long term plan for education, the Education Strategic Plan (ESP),
+2003-2015.  Developed  largely  by  professional  educational  planners,  well  aware  of  the
+discourse on basic education circulating among members of the international community, the
+ESP  was  framed  in  the  language  of  Education  for  All  and  the  Millennium  Development
+Goals.
+It  provided  the  fully-costed  basis  for  annual  operational  plans,  for  Ghana’s  bid  for
+additional resources under the EFA Fast Track Initiative (FTI), and for sector budget
+support  from  donors  particularly  DFID  and  the  World  Bank  (Pedley  and  Taylor,
+2009:19).
+In  parallel  with  this  Ministry-led  policy  and  planning  process,  thepresident  established  a
+separate  30-member  committee,  working  under  the  chairmanship  of  Professor  Anamuah-
+Mensah.  The  committee  undertook  widespread  consultations  through  visits  to  institutions,
+districts  and  regions,  phone-in  radio  programmes,  press  briefings  and  submissions  of
+memoranda. In 2002,Meeting the Challenges of the Twenty First Centurywas presented to
+the Office of the President and thecabinet. It reported GERs of 38.7% at pre-school, 82.3% at
+primary,  63.3%  at  thejuniorsecondary  stage  and  17%  atseniorsecondary  stage.  The
+committee  identified  the  ‘major  defects’in  the  current  structure  of  education  as  exclusion
+from  pre-school  education,  and  over-emphasis  of  a  ‘grammar/general  type  of  education’,
+inadequate attention to technical and vocational education and the limited opportunities for
+transfer between streams.It recommended a new structure of basic education: two years of
+kindergarten, six years of primary and three years of JSS. Beyond JSS there would be three
+parallel  streams,  each  of  three  years  duration,  namely  senior  secondary  schools,  technical
+institutesandvocational institutes along with a programme of apprenticeships.
+To   increase   access   and   participation   in   basic   education,   the   authors   of   the   report
+recommended thatdistrictassemblies and traditional authorities should embark on enrolment
+drives.They recommended a relaxation of the insistence by some principals of the wearing of
+school uniforms in kindergarten and lower primary, especially in deprived areas where school
+uniforms represent a significant cost to the household. They also recommendedthatdistrict
+assemblies  should  supply  more  facilities  and  equipment,  and  that  MoESS  anddistrict
+assemblies should persuade Koranic schools to adopt the national curriculum.
+The government’s assessment of this reportled to the publication of awhitepaper in 2004
+and  the  commitment  on  paper  at  least  to  additional  reforms  not  included  in  theministry’s
+long term Education Strategic Plan. A capitation grant scheme was also introduced in 2005 as
+part  of  the  larger  process  educational  decentralisation.  Itspurpose  was  to  support  primary
+schools  and  reduce  their  need  to  charge  any  type  of  fee.  Its  initial  impact  on  increasing
+enrolments was marked but has not been sustained (Akyeampong, 2009:182, Thompson and
+Casely-Hayford, 2008:1).
+During  the  period  from  2000  to  2008,  parallel  machineries  for  policy  formulation  were  in
+place. On the one hand theministry had created the Education Strategic Plan for the period
+
+Access to BasicEducation in Ghana: politics, policies and progress
+28
+2003-2015.On   the   other   the   President’s   Review   Committee   had   made   a   series   of
+recommendations,  manyof  which  had  been  translated  into  awhitepaper.  The  donor
+community  appears  to  have  perceived  the  production  of  thewhitepaper  as  indicating  a
+weakening of  the  commitment  to  the  Education  Strategic  Plan  with  its  overriding  goals  of
+universal  primary  education  (Pedley  and  Taylor,  2009)  and  a  commitment  to  reforms  that
+were unsustainable financially (MoESS, 2008).
+Five  years  elapsed  before  some  of  the  recommendations  in  the  2002  President’sReview
+Committee had been implemented.
+there  was  a  lot  of  disagreement  at  cabinet  and  it  took  some  time  before  the
+government issued thewhitepaper on it. It was unfortunate that thewhitepaper was
+issued sometime in 2004 which was just at the end of the first term of thegovernment
+then it (finally) took off justone year before the end of the second term of the (same)
+government (interview with author).
+One reason for the delay was the frequent change ofminister. A senior official in theministry
+recalled how in seven years he had worked with fiveministers. This stands in direct contrast
+with the 1986 reforms  when the seniorministerial team endured for  many years. Effective
+political leadership does not emerge whenministers can expect to be changing their job after
+15 months. When thewhitepaper was issued theministry established the National Education
+Reform  Implementation  Committee.  Although  theminister  was  formally  the  chair,  in  the
+minister’s absence the meetings were generally chaired by theministry’schiefdirector or a
+representative of the tertiarysector. The committee comprised professionals from the private
+sector, industry employers, from tertiary education and from basic education.In contrast with
+the 1986 reforms when the GES was substantially by-passed, this time a deliberate attempt
+was madeto involve the GES.
+...learning from the 86/87 reforms, where theministry was accused of high-jacking
+the whole reform, I made sure that thedirectorgeneral of the GES who is head of the
+implementing wing, was part of it. I sat in the chair with him infront there every time.
+Sometime last year we handed over the implementation reports to them for them at
+the implementation level to look at it and study and have their own way of working
+out what has been recommended (interview with author).
+By the timethe new reforms were introduced in 2007 some of the original recommendations
+made in the 2002 report had been changed. Most controversially, secondary education was
+extended  from  three  to  four  years.  Less  controversially  JSS  and  SSS  schools  were  to  be
+renamed as Junior High Schools (JHS) and Senior High Schools (SHS) respectively.
+Reflecting on  the  NPPs proposed  change  of  senior  secondary schooling  from  three  to  four
+years one policy-maker who had been very involved in the 1986 and 1992 reforms said:
+We actually never finished (the 87 reforms) and one would have expected that it will
+be fine tuned to do the evaluations and then step back and correct and move forward,
+not  change  just  because  you  didn’t  like  the  thing.Like  what  the  last  government
+(NPP)did,  they  changed  it  tofouryears...for  absolutely  no  reason,  no  scientific
+logic.Because   the   very   committee   they   put   together   to   look   and   make
+recommendations did not recommend that. They said ‘look thethreeyears is good,
+
+Access to BasicEducation in Ghana: politics, policies and progress
+29
+there is a lesson’... What isthe cost of that to the nation, to students, to parents?It
+doesn’t make sense (interview with author).
+By 2008, the NPP had been in power for eight years, compared with the nineteen preceding
+years of the military PNDC and the civilian NDC. While the NPPis generally perceived as
+the pro-private sector party of the middle classes, with a stronger emphasis on the quality of
+education,  the  PNDC  period  is  seen  as  the  one  in  which  the  greatest  improvements  in  the
+expansion  of  enrolment  were  achieved.  The  rateof  change  in  education  enrolment  in
+secondary  education,  compared  with  the  growth  in  population,  would,  arguably,  not  have
+been  so  great  had  it  not  been  for  the  determination  of  Rawlings’  military  government.  If
+change  had  depended  on  a  voting  electorate,no  government  would  have  been  courageous
+enough to take some of the steps on access that Rawlings did.Indeed some have viewed the
+NPP’s emphasis on quality:
+as a way for the elite to come to have their agenda.You find more private institutions
+set upduring the NPP government.Right from primary to university we have more
+private  universities  than  public  universities.  There  is  always  this  tension  (interview
+with author).
+Another observer claimed that although educational access was on the NPP’s agenda, they
+did  not  address  seriously  the  question  of  equitable  access.  The  introduction  of  a  school
+feeding programme offers a case in point.
+They deprived communities that really needed this support. For example, the school
+feeding programme was supposedto increase access in the deprived communities.So
+why  do  you  have  the  school  feeding  programme  in  Kumasi  and  Accra  and  the
+deprived communities are not having the service. This is the political leadership.They
+brought  in  that  in.  If  you  want  to  get  thesupport  of  the  voting  community–the
+communities that vote for you, they were predominantly in Kumasi and Accra.If the
+feeding programmes are done there, next time they will vote for you (interview with
+author).
+Another spoke of the enduring tensions between the political and the technical imperatives of
+reform.
+Politicians set the broad political parameters or the guidelines...Then some of the
+bad things–it looks like sometimes when issues of curriculum come up, they are not
+referred to curriculum specialists.The politicians make the decisions. For example the
+issue about religious and moral education, I thought it was terrible for people to walk
+to thepresident and ask thepresident to make a curriculum decision. Because yes he
+is  the  most  powerfulbut  I  don’t  think  he  is  a  curriculum  specialist.  Of  course  he
+didn’t make the decision directly but by merely referring the thing and telling ‘take
+another look at it’ the message was clear.He said you cannot go against thepresident
+(interview with author).
+At   the   same   time,   politicians’   sensitivity  to   the   voting  public   can   be   beneficial   for
+implementation, especially in relation to the provision of infrastructure.
+
+Access to BasicEducation in Ghana: politics, policies and progress
+30
+The general public judge politicians.So the politicians are more sensitive about those
+things that the voting public judge them on like ‘do we have schools that have roofs,
+children have furniture to sit on and are the teachers there?’ (Interview with author).
+The power of the political over the technical dimensions in policy formulationand planning,
+as distinct from implementation, appears to have strengthened during the period 2000-2008.
+The gatekeepers who controlled access to policy formulation were the President himself and
+those approved by him.
+All  key  appointments  are  personally  approved  by  thepresident.  This  included
+membership of the 2002 President’s Committee on Review of Educational Reforms.
+The result seems to be that, to a great extent, this committee acted as a filter of policy
+ideas on education (Pedley and Taylor, 2009:25).
+Although  theministry  carried  the  formal  mandate  for  education  policy  formulation,  the
+agenda  of  thepresident’scommittee  appeared  to  enjoy  greater  influence  than  the  agenda
+embedded within the ESP. In turn this suggests thatpresidential associates and advisers ‘had
+more  influence  than  officials,  consultants,  and  donor  agency  staff  working  in  or  with  the
+Ministry of Education’ (Pedley and Taylor, 2009:25).This position may reflect the views of
+donors largely. Ghanaian commentators suggested thatwith the exception of the donors there
+was a high degree of overlap in the membership ofpresident’scommittee and the group that
+produced the ESP (interview with the author). What all are agreed on is that the President’s
+Committee had a broader remit forall sectors of education-primary, secondary and tertiary-
+while the ESP focussed more on basic education.
+
+Access to BasicEducation in Ghana: politics, policies and progress
+31
+9. The International Dimension of Educational Policy
+International ideas and practices in education influence domestic policy formulation inmany
+ways.Inter aliathese include the influence of the donor assistance community, of ideas and
+practices  borrowed  and  lentthrough  conferences,  professional  associations,  networks  and
+journals,  of  foreign  consultants,  advisers  and  delegates  and  of  accountability  systems
+associated with so-called global standards (Little, 2008). Here we focus on two main types of
+influence–the   donor   assistance   community   and   Ghana’s   engagement   with   World
+Conferences on Education.
+9.1 The Donor Assistance Community
+Thedonor assistance community offers both finance for policy reform, a discourse about the
+content of policy reform and a discourse about ways of organising the finance for reform. All
+three are considered here.
+9.1.1Finance
+Following  full  independence  in1957  Ghana’s  education  system  was  financed  largely  by
+domestic resources. During the 1980s the World Bank became a major provider of additional
+resources for education. These resources were part and parcel of theWorldBank’s broader
+support  for  the  Economic  Recovery  Programme.  As  noted  earlier,analytical  and  planning
+work  and  essential  school  materials  were  provided  from  1984.  These  were  followed  by
+substantial  education  sector  credits  between  1986-91  and  1990-94.  Subsequent  projects
+included a CommunitySecondary SchoolConstructionProject (1991-1995), the Literacy and
+Functional  SkillsProject  (1991-1995),  Tertiary  EducationInitiative  (1992-1998),  Primary
+School  DevelopmentProject  (PSD,  1993-1998),  the  Basic  Education  Sector  Improvement
+Project (BESIP, 1996-2002), Vocational Skills andInformalSectorProject (1995-2001) and
+a National Functional Literacy Programme(1999-2004). Between 1986 and 2002 the Bank
+disbursed  $269  million.  This  money  has  been  spent  on  many  inputs,  including  35  million
+textbooks and 8,000 school pavilions (World Bank, 2004).
+The World Bank’s own assessment of its impact on education policies and outputs over the
+period 1989-2004 is positive. In contrast to Heyneman’s (2003:315) claim that ‘local policy
+makers  have  become  passive  recipient’s  of  theWorldBank’s  agendas’,  the  Operations
+Evaluation  Department  of  theWorldBank  presents  a  different  view  of  its  operations  in
+Ghana  in  the  1980s.  It  argued  that  theWorldBank  did  not  push  a  particular  education
+agenda.  Rather  it  supported  a  reform  process  that  was  owned  by  the  PNDC  Military
+Government and rooted in a domestic reform agenda stretching back to the early 1970s. From
+this perspective theWorldBank saw itself as a catalyst and funder of the 1987 reforms, rather
+than driver (World Bank, 2004). While this is theWorldBank’s own assessment, some have
+suggested that donors expressed their demands by linking the provision of finance to reform
+implementation. Donors  bought reforms  as part  of a structural  adjustment package (Pedley
+and Taylor, 2009:13). Still others, on the Ghanaian side, have suggested that the World Bank
+was co-opted by Rawlings, and did not seek out or listen to the views of other stakeholder
+groups, including the Ghana Education Service (Interview withauthor).
+
+Access to BasicEducation in Ghana: politics, policies and progress
+32
+9.1.2 Discourse
+A key member of Rawlings’ government recalled the relationship with theWorldBank in the
+lead  up  to  the  1987  reforms  and  the  negotiations  between  the  Ghanaian  government,  the
+WorldBank  education  sector  staff  and  theWorldBank’s  macro  finance  staff.It  illustrates
+well the discussion and the language that surrounded the negotiation of a financial loan and is
+worth quoting at length.
+it was at a time when they (the World Bank) believed in conditionalities...So what
+they would do would be to say ‘ok, what do you want to achieve and let’s cost it, let’s
+look at how long it will take, what it would take to do it, do the whole staffing ...all
+of that thing’.And then they would say ‘well, we can’t do it because we can’t afford
+it.And besides you should concentrate on one area’.So they tried very hard to use
+the funds to get us to fit into their conception of what an educational reform should
+look like for a country at the stage that we were at.So we spent a lot of time debating
+and arguing our way through these things and then you had the macro people dealing
+with the Ministry of Finance and so on and they would say you can’t spend more than
+an X amount.And so there was that debate as well.The sector people and the macro
+people  in  the  Bank  I  don’t  think  they  have  coffee  together  or  anything.This  was
+completely mind-boggling ...different worlds.But they did try to look at issues of
+efficiency and so on.But we think by and large we did make some progress in saying
+-‘look we can’tsee a situation where you are dealing with primary education where
+are the teachers going to come from and so on’.So we got to work on upper levels of
+education as well and it was hard. Especially in the area of higher education they felt
+that we couldn’t afford to do certain things like set up a teachers’ university and we
+thought that if you have 120,000 people in an industry, they’ve got to have an outlet.
+They’ve got to have a place where they can improve themselves and we thought the
+overall effect on the sector would be many, many times what was invested in it and so
+on.So  we  tried  to  rationalize  our  diploma  colleges  and  get  them  together,  to  put
+together a university college for teachers (interview with author).
+The  pro-active  role  of  government  and  the  critical  stance  towards  aid  and  conditions  was
+echoed by several who played key roles in Rawlings’ government.
+And the economic  recovery programme affected  education...we needed  money to
+promote education.So that initiative came from the government, not from the World
+Bank  ...and  they  gave  the  advice  that  you  have  to  plan  and  get  money  for  the
+education sector at that time(interview with author).
+It was not easy... we accepted conditions in so far as it did not move us too far away
+from our objective.To start with the US government... refused to do anything.They
+refused   absolutely   refused...We   really   got   pissed   off   by  the   United   States
+Government attitude.But eventually they turned around towards the end.They were
+very, very critical because itlooked so good and they couldn’t be left out (interview
+with author).
+Speaking   particularly   about   the   higher   education   reforms,   a   former   deputy   secretary
+recollected  the  tensions  between  the  PNDC  rhetoric,  theWorldBank’s  rhetoric  and  the
+demands of various constituencies.
+
+Access to BasicEducation in Ghana: politics, policies and progress
+33
+Part of the difficulty was thatwehad gone to the World Bank to go and get funding.
+And so there was a stigma around the efforts that were being made... This (reform)
+was  driven  from  within  (but)  there  was  this  feeling  that  it  was  theBank  that  was
+making us do these things and asking for efficiency and asking for this and that and
+the other...we had to work on the rhetoric, so it did not sound so much as if it was
+the   Bank...That   made   it   quite   difficult   sometimes   to   work   with   certain
+constituencies  like  the  teachers’  unions,  the  university  unions,  the  vice  chancellors
+and so on (interview with author).
+TheWorldBank played three main roles in support of the reforms. The first was financial
+support, especially for teacher training, textbooks, learning materials and school building and
+rehabilitation.The   second   was   the   provision   of   technical   assistance   for   studies   that
+contributed   to   planning,   policy   and   implementation.   Thirdly,itwas   instrumental   in
+mobilising support for the programme from other donors.
+But negotiation and policy dialogue is, in principle at least, a two-way process. TheWorld
+Bank did not support every aspect of the 1987 reform and had to concede some ground. As
+described earlier, it resisted strongly the vocationalisation of the junior secondary curriculum
+but  accepted  it  in  return  for  agreement  that  it  should  support  the  education  sector  more
+generally. Secondlyitdid not wish to support the government’s proposed rate of expansion of
+secondary  education   and   triedwithout   success   to   find   another   donor   to   support   the
+Community Secondary Schools Project. Having failed to do so, it supported the project itself.
+Thirdly,it‘quickly accepted the government’s view that it was politic to bring in a subsidised
+loan schemeat tertiary level once feeding subsidies were eliminated’ (World Bank, 2004:28).
+9.1.3 TheSector Wide Approach (SWAp)
+In 1987 theWorldBank led an important meeting of donors to education in Ghana in Vienna.
+Recognising the  suspicion  with  which  it  wasperceived  by some  in  the  international  donor
+community at that time, theWorldBank’s assessment of its role included the comment that
+‘it  probably helped  that  the  meeting was  jointly sponsored  by UNICEF,  since  donors  may
+have resisted being directed solely by the Bank’ (World Bank, 2004:31). The donors agreed
+to contribute to a common programme of support to education. Donor support for the 1987
+reforms had the character of a sector-wideapproach(SWAp):
+a  decade  before  the  term  came  into  usage  and  theBank  can  claim  some  credit  for
+achieving this degree of donor coordination(World Bank, 2004:31).
+As more donors became involved in education in Ghana, so the competition between them
+grew, especially between the World Bank, USAID and ODA/DFID. By the early 1990s, the
+new NDC government was developing fCUBE. A sizeable budget was prepared, from which
+theWorldBank was planning to commit about one fifth of the required finance. Although the
+ministry  was  formally  in  charge  of  the  planning,  theWorldBank  saw  fit  to  remind  the
+minister ofeducation of the importance of the ‘government being seen to be firmly in charge’
+and to suggest that theminister invite other donors to a meeting to mobilise their support for
+the new fCUBE programme. While other donors had little or no experience in education in
+the mid 1980s and were willing to follow theWorldBank’s lead, this would not be the case
+nine   years   later   (World   Bank,   2004:32).   DFID   and   USAID   were   beginning   to   act
+independently of  theWorldBank.  For  examplethe  Overseas  Development  Administration
+(subsequently DFID) invited a high level team from the Ghanaian Ministryof Educationto
+
+Access to BasicEducation in Ghana: politics, policies and progress
+34
+London.  The purpose of  the meeting was the  development of  an education sector strategy,
+despite the fact that a strategy had been developed already. No other donors were invited to
+the London meeting. From this time onward first DFID and then USAID went their own way
+with programmes to finance basic education (interview with author).
+A  former  senior  civil  servant  in  the  GES  recalled  that  during  this  period  there  was
+considerable disagreement and some argument with donors, particularly with USAID.
+SWAps were not accepted by USAID as a funding mechanism initially although they
+are  now  changing somewhat.The  World  Bank  is  also  slightly more  sympathetic  to
+country driven priorities (interview with author).
+But by the late 1990s the donor community as a whole was not working through the modality
+of  a  SWAp.  The  fragmentation  of  funds  led  to  similar  projects  being  managed  through
+separate silos and separate relations with government. As the number of donors increased so
+did the fragmentation of their efforts.
+The increasednumber of donorsand the corresponding increase in the number of their
+activities, outside the central government’s framework for the reforms, raised fears of
+duplication  of  efforts  and  the  likelihood  of  these  donors  operating  at  variance  with
+government’s priorities in the sector. For example, while the Saudi Fund focused on
+secondary education, the Norwegian government preferred non-formal education, the
+OPEC  Fund  concentrated  on  basic  schools  in  the  three  Northern  Regions,  with  the
+African Development Bank concentrating on the tertiary sector. Each donor adopted
+its own method of operations (Thompson and Casely-Hayford, 2008:16).
+Tensions between the bilateral donors and theWorldBank grew. The insistence of most of
+the bi-lateral donors on  an exclusive focus onbasiceducation was  at odds with theWorld
+Bank who wished to support tertiary education as an extension ofbasiceducation, a tension
+which led some to claim that theWorldBank was a ‘traitor to the Education for All agenda’
+(Thompson and Caseley-Hayford, 2008:16)
+While potential for a SWAp with strong donor coordination was weakened from this point
+on,  the  flow  of  funds  increased,  with  major  contributions  from  USAID  and  DFID  in
+particular. A formeracting-director of fCUBE recalled the considerable volume of resources
+from external sources:
+ODA  (DFID)  assisted  in  providing  materials  and  so  on,  especially  for  the  new
+curriculum in JSS around vocational and technical subjects.Resource allocation was
+intended  to  be  sufficient  to  provide  text  books  for  every  pupil.A  lot  of  donor
+resources were available and were largely sufficient for the 1996 action programme
+(interview with author).
+Throughout the 1990s the power of the donor community to influence  educational policies
+and  action  plans  remained  strong.  But  this  did  not  mean  that  government  officials  were
+steam-rollered into spending money on what thedonors wanted. As two government officials
+reflected together:
+It has always been a struggle balancing with what the donors want and what we want.
+And we have always argued with them and we used to have ... a consultative panel
+
+Access to BasicEducation in Ghana: politics, policies and progress
+35
+meeting once every month.Wemet with all the donor agencies briefed them on what
+was going on and they would give their thoughts on the way–because they do their
+monitoring as well.And sometimes they disagree with some of the things we want to
+do.We try to convince them.When they are able to persuade us of some of the things
+and  the  merit  in  them  and  we  see  merit  in  them,  we  take  them.But  sometimes  we
+have to argue with them strongly (interview with author)
+The  inevitable  strain  placed  on  the  ability of  theministry to  deal  with  the  separate  project
+management  structures  resulted  some  years  later  in  a  merged  Project  Management  Unit
+within theministry.
+By the 2000s the power of the donors had weakened considerably. With onlyten% of total
+public expenditure coming from external sources, the donor community was of the view that
+it  enjoyed  less  policy  influence  and  leverage  compared  with  the  1980s  and  1990s.  The
+strategy of ‘strong conditionality’ could no longer be employed (Pedley and Taylor, 2009:24-
+25). From the perspectiveof the Ghanaian government the donor community had lost some
+influence because it has not wished to support some of the nonbasiceducation programmes
+that the government has wished to promote. Reflecting on a conversation with the outgoing
+minister ofeducation in 2008, a Ghanaian consultant commented:
+one thing theminister said was you know we never realised just how much expensive
+this (recent) reform was going to be and realised that we didn’t have the money to do
+it.But when we looked at the fCUBEwe saw that it was only possible because it had
+a  lot  of  financial  backing  from  the  donors...The  NPP  government  started  talking
+about reforms, by talking about higher education, talking about secondary. But then
+the  money  wasn’t  there.So  they  were  stuck  with  the  reforms.  They  couldn’t
+implement  because  there  was  no  financial  support  from  the  donors(interview  with
+author).
+At  the  same  time  the  general  policy  environment  within  which  policies  in  all  sectors,
+including education, are formulated, had changed. With a change in the political legitimacy
+of government after 1992, but especially after 2000, the rules of the political game had also
+changed.  Influence  had  become  more  indirect  and  informal  and  many  more  groups  had  a
+political  voice,  including  those  of  the  media,  trade  unions,  those  inparliament  and  civil
+society groups. This changed policy environment changed the way that donors have needed
+to work in-country. No longer could donors cannot rely on government alone to drive through
+reforms  (Pedley  andTaylor,  2009).  Ghanaian  commentators  agree  that  the  influence  of
+donors on national policy agenda is waning and changing its nature. While in earlier regimes
+the views of the  political leadership on the  agenda in which donors  could participate  were
+reasonably clear and donor representatives knew with whom they could and should negotiate
+in  theministry,  the  space  in  which  donors  can  act  and  negotiate  appears  to  have  become
+ambiguous (interview with author).
+9.2 World Conferences
+Even if financial aid fromthe donor community and direct influence through the discourse of
+negotiation have diminished, the education policy-making community in Ghana is now more
+engaged  with  the  international  community  through  international  conferences  and  meetings
+than it was three decades ago. Post-colonial policy discourses in education have continued to
+be influenced by discourses from beyond Ghana’s shores. As importantly, Ghana’s practices
+
+Access to BasicEducation in Ghana: politics, policies and progress
+36
+and discourses in education have influenced discourses beyond Ghana’s shores, and notonly
+in the West Africa region.
+Ghana’s 1987 reforms were influential in the discussions and texts at the World Conference
+on Education for All, held in Jomtien in 1990. A former deputy secretary of education had
+played a key role in Jomtien as one of two chief rapporteurs. In the interview transcript below
+she  describes  her  role,  her  perception  of  some  of  the  tensions  in  that  work  and  the
+contribution she was able to make, representing both Ghana and developing countries more
+generally.  She  recalls  howdelegates  from  developing  countries  with  poorly  developed
+education  systems  wanted  more  clarification  about  the  meaning,  ambitions  and  targets  for
+basic  education  while  delegates  from  European  countries  wanted  to  define  basic  education
+rather broadly.
+Alot of the developing nations wanted more clarification especially on the whole idea
+of  achieving  this  within  a  decade  and  so  on.That  was  difficult.And  I  think  the
+Europeans had difficulty with how relevant this is to them and could they define basic
+education more broadly and so on.So that kind of wording–form of words to convey
+how you can make basic education, you can customise the concept whichever angle
+you were coming from, that’s really something and I think the final declaration did
+manage to satisfy people to some extent as far as that was concerned.I think that was
+the most major thing (interview with author)
+Ghana had much to offer the discourse at Jomtien. Ghana’s 1987 reforms in basic education
+were ‘ahead of the curve. We had not even gone to Jomtien when we were talking about basic
+education’ (interview with author).
+In turn, the emerging international EFA discourse was employed in the Ghanaian debate and
+is  apparent  in  the  policy  texts  produced  between  1992  and  1996  when  fCUBE  emerged.
+Asked whether the Jomtien discourse had entered the policy discourse in Ghana and to what
+extent there were two parallel discourses, a former Acting Director General of fCUBE and a
+former Deputy Secretary of Education commented:
+Jomtien was influentialin that there was a dovetailing of policy documents (interview
+with author).
+Ghana in particular was very good at adapting the sort of multi-national or global...
+conceptions of where to go, the direction.They would sort of incorporate it into the
+policydirection.For example the idea of basic education–we used to have primary
+school and so on.But we adopted basic education.In fact in a way Ghana was ahead
+of the curve because by the time we talked about basic education we hadn’t even gone
+to Jomtienyet (interview with author).
+The  report  of  the  President’s  Review  Committee  published  in  2002  referred  to  Ghana’s
+commitment to Education for All (EFA) and recognised the use of innovative approaches to
+improvetheGER. These included the mainstreaming of shepherd and Koranic schools and
+the  use  of  distance  education  and  ICT,  including  radio  and  television  (GoG,  2004).  The
+language of the Millennium DevelopmentGoalsdeclared at the Millennium Summit in 2000
+is also apparent in several subsequent policy texts. The Education Sector Performance Report
+of 2008 produced by the Ministry of Education, Science and Sports (MoESS) reports that the
+Education Strategic Plan (ESP) for the period 2003-2015 was informed by ‘key documents,
+
+Access to BasicEducation in Ghana: politics, policies and progress
+37
+such  as  GPRS1  and  2,Educationfor  All  (EFA)  and  the  Millennium  Development  Goals’
+(MoESS,  2008:10).  It  goes  on  to  indicate  the  influence  of  a  range  of  other  international
+frameworks for development cooperation on decisions about targets and policies, including
+the Education for All Fast Track Initiative (EFA-FTI).
+
+Access to BasicEducation in Ghana: politics, policies and progress
+38
+10. The Present and the Future
+Elections  in  December  2008  placed  educational  policy  under  the  spotlight  once  more.  All
+parties contesting the elections produced manifestos on education. The incumbent party-the
+National Patriotic Party (NPP)-asserted that ‘education is the key to the development of our
+nation and a healthy democracy (and) a public good’ (NPP, 2008:46). They claimed that they
+would:
+work  hard  towards  a  new  Ghana  where  all  children  have  an  equal  and  unfettered
+chance   at   gaining   access   to   quality   education   regardless   of   their   economic
+circumstances or what part of the country they live or come from.(NPP, 2008:46).
+Inter aliathe NPP committed to a programme designed to promote both access and quality
+including commitments to:
+Guarantee  access  for  all  children  of  school-going  age  to  free  quality  education
+currently  available  at  the  basic  school  level.  This  will  be  extended  to  cover  Senior
+High School level as well
+Improve school supervision
+Make available adequate teaching and learning materials
+Establish  ‘league  tables’  for  schools  in  each  district/region  to  spur  competition  and
+raise academic standards and performance, with rewards going to dedicated teachers
+and head teachers
+Refocus   teaching   from   remembering  facts   and   figures   to   stimulating  thinking,
+creativity, analysis and problem-solving(NPP, 2008).
+In  its  manifesto,  the  National  Democratic  Congress  (NDC)  acknowledged  the  work  of  the
+Anamuah-Mensah  Committee  during  the  time  of  the  NPP  government  (2001-2009)  and
+deplored ‘the cycle of reforms the (education) sector undergoes each time there is a change of
+government, making the sector unpredictable and dysfunctional’ (NDC, 2008:67). The NDC
+promised to convene an all-party conference on  EducationReform, to review the technical
+options available and to strive to reach a consensus. All parties would be invited to sign an
+‘Education Pact’, committing the country to an educational reform package for the next 25
+years. Major reforms within this periodcould only be made by a similarly reconvened all-
+partyeducationconference (NDC, 2008:67)
+The  NDC’s  manifesto  committed  itself  to  a  longer  list  of  promises  than  that  of  the  NPP.
+These are detailed below along with comments on the progress made in relation to each in the
+period between the 2008 election and the time of writing (July 2010).
+Providing  a  coordinating  mechanism  to  enable  pre-school  education  to  become  a
+component of the fCUBE program as a cure for the present chaotic situation whereby
+the  Ministry  of  Education,  the  Department  of  Social  Welfare,  District  Assemblies,
+NGOs and individuals are allinvolved in pre-school education.
+This   commitment   follows   developments   in   pre-school   education   begun   by  the
+previous   government.While   co-ordinatingmechanisms   have   not   been   fully
+established, pre-schooling has become compulsory and is being integrated into basic
+school  provision  so  that  pre-schools  are  being  attached  to  existing  basic  schools.
+
+Access to BasicEducation in Ghana: politics, policies and progress
+39
+Some 11,000 basic schools have pre-school facilities attached at the time of writing.
+In 2010, 200 new pre-schools were scheduled to be built.
+Establishing a pre-school training college in each of the ten regions.
+Currently   seven   colleges   are   implementing   early-childhood   training   and   the
+University  of  Education,  Winneba  is  organising  both  pre-service  and  in-service
+training for early-childhood education with support from UNICEF.There is not yet a
+pre-school training college in every region in Ghana, however.
+Within basic education abolish fees for sports and cultural activities. Provide school
+uniforms for children in public schools in deprived communities and reduce walking
+distances of children by establishing basic schools in all under-served communities.
+These  fees  have  been  abolished  and  the  provisionof  free  uniforms  has  begun.
+Political issues surrounding the selection of ‘deprived communities’ based on rather
+dated definitions has meant that a longer list of deprived communities has been used
+for  this  purpose  and  also  that  free  uniforms  have  been  provided  to  some  ‘non-
+deprived’ communities in addition.The establishment of basic-schools in all under-
+served communities has yet to be completed.
+Ensure that each constituency has a minimum of oneseniorhighschool.
+This has not been achieved and hasbeen complicated by changes to the number and
+size of constituencies and districts.
+Revamp  the  science  resource  centres  and  restore  vacation  science  and  technology
+workshops for girls.
+This process has begun including by means of the renovation of resource centres and
+the  training and  mobilisation  of  technicians.The  task  has  been  decentralised  to  the
+regions  (via  the  regional  co-ordinating  directors)  and  is  no  longer  a  national  focus.
+Moreover, the focus is no longer on girls only and will include provision for boys.
+Modernise and  expand technical schools and provide for  alternative  well-developed
+streams of technical education.
+Provision  in  relation  to  this  commitment  remains  largely  in  the  planning  stage.
+COTVET (Council  for  Technical  and  Vocational Education  and Training)  has been
+established  and  is  mandated  to  establish  apprenticeship  programmes.It  is  also
+mandated to develop technical school provision.The pursuit of this commitment may
+depend on the availability of funds although developmentis being supported by JICA
+among other donors.
+Improve  the  general  conditions  of  teachers  through  the  payment  of  competitive
+salaries, provision of decent accommodation and enhanced retirement benefits.
+Negotiations continue in relation to this area.A15%increase in salaries  across the
+board has been approved and programmes supported by donors to improve conditions
+(especially teachers’  accommodation)  in  deprived  areas  are  in  operation.Support  is
+
+Access to BasicEducation in Ghana: politics, policies and progress
+40
+also being received in deprived areas from the World Bank.Allowances for teachers
+and other state employees in deprived areas are being reviewed and pensions are also
+under  review  in  consultation  with  unions.At  the  present  moment,  however,  these
+changes are unrealised.
+Pay certificated teachers a professional allowance.
+This ‘professional allowance’ is said to be reflected in the agreed15%salary increase.
+This  is  an  across  the  board  increase,  however,  so  is  not  specifically a  ‘professional
+allowance’.
+Pay hardship allowance to teachers in identifieddeprived areas.
+These allowances have not yet been agreed or paid but are under review along with
+allowances for other government workers.
+Provide access and support to teachers for training and professional development.
+Following a process begun bythe previous government, a nationalINSETpolicy is
+now  in  place.This  is  a  school-based  programme  and  structures  for  operation  are
+already in place.The ministry is supporting INSET distance programmes as part of
+the  national  policy  provided  by  the  University  of  Education,  Winneba  and  the
+University of Cape Coast.School-based INSET programmes are decentralised to the
+district level.
+Streamline and strengthen the operational and delivery capacity of the school feeding
+programme and expand the programmeto cover all primary schools.
+This  is  being  developed  and  new  schools  are  being  added  to  the  school-feeding
+programme,  although  it  is  far  from  covering  all  basic  schools.Expansion  is  very
+gradual and is sensitive to political issues at the local levelaround the definition of
+deprivation and need.
+Review  the  capitation  grant  policy and  expand  infrastructure  to  cope  with  expected
+surges in enrolments resulting from the policy review.
+The level of the capitation grant has been increased from3 to 4.5GhanaCedis(US$
+2.44 to 2.79).The policy itself has not yet been reviewed.Provision for infrastructure
+development has been made in the budget, including for the construction of new pre-
+schools and other basic schools, with support from donors including DFID and JICA.
+Computer  literacy  and  basic  typing  skills  will  become  part  of  the  basic  education
+system(NDC, 2008).
+While computer literacy and typing skills are already part of the  ICT curriculum in
+basic schools, implementation of this provision is hindered by major problems of ICT
+infrastructure including the provision of computers and the connection of schools to
+the electricity grid.Progress on this commitment is likely to take considerable time
+and  investment.Planned  examinations  in  ICT  couldnot  be  implemented  owing  to
+inadequate infrastructure.Progress will depend heavily on the availability of funding.
+
+Access to BasicEducation in Ghana: politics, policies and progress
+41
+The  introduction  of  a  ‘School  Report  Card’  system  will  aid  the  identification  of
+infrastructural   deficiencies   and   is   being   supported   by   USAID.Nonetheless,
+movement in concrete terms on this pledge has been very limited.
+Revert the duration of the four yearseniorhighschool to three.
+This controversial plan resonates with that of the predecessor NDC, in power between
+1992 and 2000. Somehave argued that:
+the  objective  for  the  extension  of  the  duration  of  thefouryear  SHS  was  to
+enable  the  majority  of  students  who  are  products  of  the  under-funded  and
+poorly taught public basic education system to benefit more from second cycle
+education (Djangmah, 2009).
+While students who have been taught well in private fee paying primary and junior
+secondary schools perform well in thefouryear SHS and are expected to continue to
+perform well in thethreeyear SHS, it is suggested that the poorestwho access low
+quality basic  education  would  benefit  greatly from  a  fourth  year  in  SHS  (Interview
+with author).
+This pledge has not been achieved as yet, and a final decision requires a decision in
+parliament.Parliament  approved  the  document  submittedproposing  the  change  in
+July 2010 and infrastructural provisions for the move back to three years of SHS are
+in preparation.
+
+Access to BasicEducation in Ghana: politics, policies and progress
+42
+11. Conclusions
+This  monograph  has  explored  five  questions  in  relation  to  the  politics  of,  policies  for  and
+progress in basiceducation. These were:
+What progress has there been in access to basic education over the past 30 years?
+What policies for access to basic education have been promoted?
+What  role  have  political  regimes  played  in  the  formulation  of  policies  on  access  to
+basic education?
+What role has political will played in the process of policy formulation?
+What have been the drivers and inhibitors of the implementation of reforms in basic
+education since 1987?
+11.1 Progress in Basic Education
+We saw in Table 1 that the greatest strides in enrolment in recent  years in basic education
+occurred between 1991 and 1998. This progress has appeared to level off in recent years and
+appears  to  have  reversed  for  the  children  in  the  poorest  quintile.In  partial  explanation,
+Akyeampong (2009) suggests that children in the lowest poverty quintile are more likely to
+enrol children in primaryGrade 1 late and that the mean age-grade ‘delay’ is greatest in the
+Northern, Upper West and Upper East regions. This, combined with greater levels of relative
+poverty, and perhaps, the increasing opportunity costs of child labour, may have conspired to
+demotivate households from investing in education.
+While   Sutherland-Addy   (2002)   focussed   on   the   four   year   period   1998-2002,   and
+Akyeampong  (2009)  and  Rolleston  (2009)  focussed  on  the  period  1991-2006,  the  World
+Bank’s  2004  evaluation  purports to assess the  impact of  efforts over the 15  years  between
+1989 and 2004. It points to increasing school attendance (enrolment) rates among children of
+primary and  junior  secondary school  age  and  a  levelling  off  of  enrolment  in  secondary.  It
+records the virtual elimination of the gap between male and female enrolment, except in the
+northern regions. In contrast to the analyses of Akyeampong (2009) and Rolleston (2009), the
+World Bank (2004) claim that primary enrolment hasrisen more sharply among the poor than
+the non-poor. In part this must reflect the boundaries drawn by each evaluator between poor
+and  non-poor,  the  particular  years  selected  for  comparison  as  well  as  the  data  sources
+employed.  There  are  significant  discrepancies  between  administrative  and  survey  data  and
+between the GLSS, DHS, CWIQ and MICS surveys.These are partly due to definitions. The
+primaryNERamong  the  poor  may  have  improvedmore  dramatically  as  a  result  of  more
+children enrolling in lower grades.What does seem clear however is that up to 2006 there
+was no significant improvement in completion, and that the higher up the system a child is
+the more poverty appears to disadvantagethem, most likely because of the increasing costs to
+be met by households (Rolleston, personal communication).
+11.2 Policies for Basic Education
+Policies for the expansion of access to basic education in Ghana have been advanced since
+the beginning ofthe 20
+th
+century, starting with Governor Guggisberg’s 16 guiding principles
+
+Access to BasicEducation in Ghana: politics, policies and progress
+43
+for the development of education. These included equal opportunities for boys and girls and
+co-education at certain stages, the use of vernaculars as media of instruction in the earliest
+stages  of  education,  curricula  relevant  to  the  economy  and  high  quality  teachers.  These
+themes would recur several times and in the run up to independence the colonial government
+set out atenyear development plan for universal enrolment of children in primary education
+by 1970.
+Nkrumah’s  Accelerated  Development  Plan  (ADP)  of  1951  was  even  more  radical  and
+promoted both supply and demand-led strategies. Fees for primary education were removed,
+large  numbers  of  new  teachers  recruited  and  trained  and  schools  expanded.  A  revised
+structure  of  education  was  proposed  and  introduced  gradually.  After  full  independence  in
+1957 and the introduction of the Education Act of 1961 tuition fees for middle school were
+also removed. Scholarships for primary, secondary and tertiary education were introduced to
+increase the demand for education from students in thenorthern regionsand Brong-Ahafo.
+Up to this point the policy emphasis was on increasing access through enrolment.
+After  1966,  policies  for  basic  education–and  in  education  more  generally–focussed  on
+standards and the quality of education experienced by children once they had enrolled. This
+included  a  focus  on  the  content  of  curriculum  relevant  to  the  world  of  work  in  the  post
+primary grades and a proposal that children be selected for the academic stream of secondary
+after two years in middle school. Those not selected would follow a further two years in ‘pre-
+vocational’ classes prior to leaving school.This policy was perceived by many as elitist and
+pamdering  to  the  needs  of  the  middle  classes  and  by 1972  the  pendulum  had  swung  back
+from standards and quality to access. By this time large numbers of children from the poorer
+households  had  gained  access  to  primary  education  and  their  aspirations  now  were  for
+improved access to secondary, especially to the academic rather than the vocational stream of
+secondary. Policies to create a basic education stage, common to all children, and covering
+primary and the first three years of secondary (junior secondary) were promoted as part of the
+New  Structure  and  Content  of  Education  (NSCE)  in  1974.  The  NSCE  also  recommended
+changes in the curriculum that would make the experience of primary and junior secondary
+education more practical and skills-oriented.
+In  essence  the  NSCE  proposals  became  the  blueprint  for  the  1987  and  the  1996  reforms
+which  emphasised  increases  in  enrolments  in  basic  education  as  well  as  changes  in  the
+content and relevance of the curriculum.To increase the demand for education among girls,
+scholarship  schemes  were  piloted.  Teachers  were  given  incentives  in  addition  to  salary
+through housing, prizes for teaching and training schemes.
+By the mid 1990s the focus of attention had reverted to the question of standards when the
+performance of the first junior secondary school cohort of students was lower than expected.
+Inter alia,this would lead to an extension of the senior secondary stage in 2007, from three
+years to four, to make up for the lower than expected performance of students in thejunior
+secondary stage.
+While  much  of  the  policy  discourse  in  the  1970s  about  inequalities  in  education  focussed
+around  the  transition  from  primary to  junior  secondary,  the  focus  now  is  on  the  transition
+from junior secondary to senior secondary. In 2002policies for the introduction of a fee-free
+twoyear pre-school and a diversified, three-stream, secondary school were recommended. To
+increase demand for schooling among the poorest recommendations were made to relax the
+insistence on the wearing of school uniforms among pre-school and lower primary children
+
+Access to BasicEducation in Ghana: politics, policies and progress
+44
+and  a  school  capitation  grant  introduced  to  reduce  the  need  for  primary  schools  to  raise
+revenues from households.
+During the run up to the parliamentary elections in December 2008 both the right ofcentre
+NPP and the left of centre NDC promised increases in access and quality at all levels.The
+NPP stressed quality and standards at all levels rather more than the NDC who emphasised
+expansion  of  pre-school  education  and  teacher  training,  an  expansionof  technical  schools,
+while at the same time proposing a reduction for thesenior secondary stage from four years
+to three.
+11.3 Political Regimes and Education Policies
+Political regimes both before and after the establishment of a stable democracy haveplayed
+an important role in the direction of education policiesas have external priorities and issues
+of  resource  availability.  Populist  regimes,  both  democratic  and  military,  have  both  pushed
+education  reform  hard  and  mainly  in  the  direction  of  increased  opportunities  for  the  rural
+poor. This has been so during the early post independence years of Nkrumah’s Convention
+People’s Party (1951-1966) years through the military regimes of the National Redemption
+Council  (1972-1979)  and  the  Provisional  NationalDefence  Council  (1981-1992)  and  on
+through the democratic National Democratic Congress (1992-2000). While not backtracking
+on access, regimes owing their power base to the urban middle classes have tended to stress
+the  importance  of  improving  quality  and  maintaining  and  improving  standards.  Both  the
+military regime of Ankrah (1966-1969) and the elected Progress Party (1969-1972) wished to
+see the rate of expansion contained with a greater focus on quality and standards.
+It  would  be  almost  thirty  years  before  a  right  of  centre  regime  would  reappear,  after  the
+democratic   elections   of   2000.   The   right   of   centre   National   Patriotic   Party   remained
+committed to fCUBE, created a long-term plan for education (2003-2015) and introduced a
+capitation  grant  scheme  to  remove  the  need  for  schools  to  charge  any  type  of  fee.  It  also
+promoted  the  private  sector,  promoted  diversification  of  the  senior  secondary  stage  of
+education and education decentralisation and management, a move which some feared was
+contributing to increasing, rather than reducing, disparities between schools in the quality of
+public basic education on offer (Akyeampong et al, 2007). Annex 1 provides a summary of
+the links between political regimes and education policies over the period 1951-2008.
+11.4 Political Will
+Political will can be defined as a sustained commitment of politicians and administrators to
+invest the necessary resources to achieve specific objectives and a willingness to make and
+implement  policy  despite  opposition.  The  formulation  and  implementation  of  the  1987
+reforms  offer  a  clear  illustration  of  an  education  reform  driven  from  the  highest  political
+authority  and  a  mobilisation  of  financial  and  human  resources  to  support  implementation.
+Some of the politicians were themselves drawn fromamong practising educationists and led
+not only the formulation of plans but also their implementation. The military regime brooked
+no opposition and reduced the powers of those who opposed aspects of the implementation,
+in particular that of the bureaucrats in the Ghana Education Service.
+11.5 Drivers and Inhibitors of Reform Implementation
+In sectiononeit was suggested that both the 1987 and 1996 education reforms were attempts
+to implement policies that had been formulated in 1974. The 1974 policieson restructuring
+
+Access to BasicEducation in Ghana: politics, policies and progress
+45
+the education system and changing the content of education had run into myriad obstacles.
+These included a lack of finance in a declining economy, and considerable resistance from
+the  middle  classes  as  well  as  the  middle  class  bureaucratsrunning  the  education  system.
+There were shortages of trained teachers, educational equipment and other learning materials.
+Overall there was little political will to push the reforms forward in the face of opposition and
+extremely limited resources.
+From  1987  the  pattern  of  drivers  for  and  inhibitors  of  reform  would  change.  Through  the
+1980s  there  was  a  very  strong  political  will  and  agenda  for  change.  The  institutional
+framework  for  change  was  strengthened  through  the  creation  of  a  National  Education
+Commission and a Ministryof Educationand committees peopled with experts in education.
+Planning and implementation were pushed simultaneously, awareness programmes mounted
+anddistrictassemblieswereinvolved  in  implementation  of  the  large  scale  infrastructure
+programme. Significant financial resources for the reforms were made available by the World
+Bank.Resistance to the reforms was similar in some respects to that experienced post 1974.
+The education bureaucrats were not enthusiastic implementers andthe middle classes resisted
+passively.   The   revolutionary   government   dealt   with   resistance,   through,inter   alia,
+restructuring theministry and the  GES  and by directing the  army to  deliver textbooks and
+other  logistics.The  implementation  process  was  stymied  technically  because  the  reforms
+were  not  piloted  and  teachers  insufficiently  oriented  and  trained  in  the  more  radical
+curriculum  content  and  pedagogy,  including  assessment  and  some  shortages  of  equipment.
+Parental  support  for  the  reforms  was  variable  across  the  regions  and  some  plans  were
+insensitive to the different agricultural seasons in thenorth and thesouth of the country. In
+some  areas  local  politicians  worked  alongside  local  communities  to  undermine  some  of
+components of the building programme.
+The  1996  fCUBE  programme  benefited  from  constitutional  change.  Article  38  (2)  of  the
+constitution  required  that  the  government  develop  a  plan  for  implementation  within  the
+following  ten  years,  for  the  provision  of  free,  compulsory  and  universal  basic  education.
+These gave legal force to the provision of basic education across the country. The political
+will  that  had  driven  the  1987  reforms  remained  and  finance  from  the  international  donor
+community  continued  to  flow.  This  time  teachers  were  better  preparedfor  the  reforms
+through extensive upgrading programmes. Research began to be used more readily to inform
+the  work  of  policy  makers  and  implementers.  Education  decentralisation  became  a  reality
+through legal fiat. The technical challenges faced in the development of large scale distance
+education programmes  for teachers  were  great  and the supply of  untrained teachers  and of
+trained teachers struggled to keep pace with increases in school enrolments.
+The  drive  for  universal  access  to  basic  education  remains  strong  even  today.  The  tensions
+between  increases  in  enrolments  and  improvements  in  the  quality  of  learning  also  remain.
+The supply of trained teachers struggles to keep a pace with the numbers of children enrolled,
+and, as more and more  children complete primary and junior secondary education the  goal
+posts of what constitutes education for all will shift. So too will the ideological preferences of
+political parties in a democratic system.  In its 2008 election manifesto the victorious NDC
+promised to convene an  all-partyconference oneducationreform, to reach a consensus on
+education reform for the next 25 years (NDC, 2008:67). To date that conference has not been
+convened.
+
+Access to BasicEducation in Ghana: politics, policies and progress
+46
+References
+Addae-Mensah,   I.,   J.   Djangmah,   and   C.   Agbenyega,   (1973)FamilyBackgroundand
+Educational Opportunity in Ghana. Accra: Ghana Universities Press
+Afrifa, A. A. (1966)The Ghana Coup. London:Cass
+Agyeman,  D.,  R.  Baku  and  R.  Gbadamosi  (2000)Review  of  Education  Sector  Analysis  in
+Ghana 1987-1998. Paris:UNESCO for Working Group on Education Sector Analysis
+Akyeampong, K.(2009) Revisiting Free Compulsory Universal Basic Education (FCUBE) in
+Ghana.Comparative Education45 (2), pp.175-195
+Akyeampong,  K.,  J.  Djangmah,A.  Seidu,  A.  Oduro,  and  F.  Hunt  (2007)Access  to  Basic
+Education  in  Ghana:  The  Evidence  and  the  Issues.CREATE  Country  Analytic
+Report. Sussex:CREATE
+Colclough, C., K. Lewin and C. Chiswick (1993)Educating all the Children: Strategies for
+Primary Schooling in the South.Oxford:Clarendon Press
+Djangmah,J.  (2009)  Senior  High  School–Four  Years  for  Majority  and  Three  Years  for
+Minority. Mimeo
+Foster,  P.  (1963)Secondary  Schooling  and  Social  Mobility  in  a  West  African  Nation.
+Sociology of Education37, pp.150-171
+Foster, P. (1965)Education and Social Change in Ghana. Chicago: University of Chicago
+Press.
+Government  of  Ghana  (GoG)  (1995)Programme  for  the  Development  of  Basic  Education
+within the Framework of free Compulsory Basic Education (fCUBE).Accra:Ministry
+of Education.
+Government  of  Ghana.  (2002)Meeting  the  Challenges  of  Education  in  the  Twenty  First
+Century.  Report  of  the  President's  Committee  on  Reviews  of  Education  Reforms  in
+Ghana.Ministry of Education. Accra: Adwinsa Publications (Gh) Ltd.
+Graham,  C.  (1971)The  History  of  Education  in  Ghana  from  the  Earliest  Times  to  the
+Declaration of independence.London:Cass
+Hadley, S. (2010) Seasonality and Access to Education:The Case of Primary Education in
+sub-Saharan Africa. CREATEPathways to AccessMonograph 31.Sussex:CREATE
+Heyneman,  S.  (2003)  The  History and  Problems  in  the  Making of  Education  Policy at  the
+World  Bank:  1960-2000International  Journal  of  Education  Development23,  pp.
+315-337.
+Kosak (2009) Realizing Education for All: Defining and Using the Political Will to Investin
+Primary Education.Comparative Education45(4), pp.495-523
+
+Access to BasicEducation in Ghana: politics, policies and progress
+47
+Lewin, K.M. (2007)ImprovingAccess,EquityandTransitionsinEducation:Creatinga
+ResearchAgenda,CREATE Pathways to Access Monograph 1. Sussex: CREATE
+Little,  A.W.(2008)  EFA  Politics,  Policies  and  Progress.CREATEPathways  to  Access
+Monograph 13.London/Sussex:CREATE
+Ministry of  Education  Science  and  Sports  (MoESS)  (2008)Education  Sector  Performance
+Report 2008, Accra:MoESS
+National  Democratic  Congress  (2008)A  Better  Ghana:  Investing  in  People,  Jobs  and  the
+Economy.NDC Manifesto. Accra:NDC
+National  Education  Forum  (1999)Towards  Sustaining  an  Effective  National  Education
+System.Accra:Ministry of Education
+New  Patriotic  Party  (2008)Moving  Ghana  Forward:  Building  a  Modern  Ghana.  NPP
+Manifesto. Accra:NPP
+Nyoagbe (1993)The Impact of the Education Reforms on Teacher Job Performance at Basic
+Education Level.Accra:Ghana National Teachers’ Secretariat.
+Pedley and Taylor (2009)Politics and Policy in Education in Ghana.Paper presented at the
+UKFIET Conference on Politics, Policies and Progress, Sept13-15 2009.
+Republic of Ghana (1992)Constitution of the Fourth Republic of Ghana.Accra
+Rolleston (2009) Human Capital, Education and Exclusion:The Case of Ghana 1991-2006.
+CREATEPathways to AccessMonograph 22.London/Sussex:CREATE
+Scadding,  H.  (1989)  Junior  Secondary  Schools-An  Educational  Initiative  in  Ghana.
+Compare19(1), pp43-48
+Sutherland-Addy, E. (2002)Impact Assesment Study ofthe Girl’s Education Programme in
+Ghana.Accra:UNICEF-Ghana
+Thompson and Casely-Hayford (2008) The Financing and Outcomes of Education in Ghana.
+RECOUP Working Paper No. 16. Oxford:RECOUP
+World Bank (1989)Basic Education for Self-Employment and RuralDevelopment in Ghana.
+Washington DC:World Bank Population and Human Resource Department
+World  Bank  (2004)Books,  Buildings,  and  Learning  Outcomes:  An  Impact  Evaluation  of
+World   Bank   Support   to   Education   in   Ghana.   Washington   DC:   World   Bank,
+Operations Evaluation Department (OED)
+
+48
+
+49
+Annex 1 Political Regimes and Education Policy Texts, by year, 1951-2008
+YearPolitical RegimePolitical
+Head
+Regime
+orientation
+and power
+base
+Significant
+Education Policy
+Texts
+Policy themes
+1951Transition from
+colonialpower
+elections (under
+universal suffrage)
+for Legislative
+Assembly won by
+the Convention
+People’s Party
+(CPP)
+NkrumahNationalist,
+Populist
+1951 Accelerated
+Development Plan for
+Education
+Expansion of
+primaryeducation
+1957Convention
+People’s Party
+(CPP)
+NkrumahLeft,
+Populist,
+Rural base
+1961 The Education
+Act (Act 87)
+Expansion of
+primaryeducation
+1966
+Military
+Coup
+National Liberation
+Council (NLC)
+AnkrahThe Kwapong
+Committee Report
+Contain expansion
+of primary
+education; focus on
+quality.Selection to
+academic and
+vocational streams
+after two years of
+middle school
+1969
+Elections
+Progress Party (PP)BusiaRight1971 committee on
+education reform
+Common and
+extended basic
+education.
+1972
+Military
+Coup
+National
+Redemption
+Council
+Acheampong1974 The Dzobo
+Report: the New
+Structure and Content
+of Education
+1974 The Ghana
+Education Service
+Decree
+Common and
+extended basic
+education cycle of6
+years primary and 3
+years junior
+secondary. Removal
+of middle schools
+from the structure of
+education
+1979
+Military
+Coup
+Armed Forces
+Revolutionary
+Council (AFRC)
+RawlingsLeft,
+Populist,
+Rural
+1981
+Elections
+Social Democratic
+People’s National
+Party (PNP)
+LimannSocial
+Democratic
+1981
+Military
+Coup
+Provisional
+National Defence
+Council (PNDC)
+RawlingsLeft,
+Populist,
+Rural
+1983 The PNDC Law
+42
+1987 The 1987
+Education Reforms
+1988 The PNDC Law
+207
+1988 University
+Rationalisation
+Committee (URC)
+Report
+1991 Government
+Increase access to
+common and
+extended basic
+education. Reduce
+pre-university span
+from 17 to 12 years
+in a 6+3+3 system.
+Literacy in the
+vernacular, a second
+Ghanaian language
+and English,
+technical and
+vocational
+education,
+restructured teacher
+
+Access to Basic Education in Ghana: politics, policies and progress
+50
+White Paper on the
+URC report
+education,
+introduction of
+continuous
+assessment
+1992
+Elections
+National
+Democratic
+Congress (NDC)
+RawlingsLeft,
+Populist,
+Rural
+The Constitution of
+1992, the Fourth
+Republic
+The NCTE Act (Act
+454)
+1994 Education
+Reforms Review
+Committee Report
+1994 Programme for
+the Provision of Free,
+Compulsory and
+Universal Education
+(fCUBE) by the Year
+2005
+1995 the Ghana
+Education Service
+Act (Act 506)
+1995 Programme for
+the Development of
+Basic Education
+within the Framework
+of Free Compulsory
+Universal Basic
+education (fCUBE)
+by the year 2005
+Continued
+implementation of
+the 1987 reforms
+2000
+Elections
+National People’s
+Party (NPP)
+KufourRight, Middle
+classes
+2002 President’s
+Education Review
+Committee (the
+Anamuah-Mensah
+Committee)
+2003 Launch of the
+Education Strategic
+Plan 2003-2015
+2004 Report of the
+President’s Review
+Committee
+2005 Review of
+fCUBE
+2006 White paper on
+the Report of the
+President’s Education
+Review
+Committee
+2007 National
+Education Reform
+Implementation
+Continued
+implementation of
+the 1987/1992
+reforms
+Pre-schools
+Diversification of
+senior secondary
+Capitation grants to
+schools
+
+Access to Basic Education in Ghana: politics, policies and progress
+51
+Committee
+2008 Education Act
+2008
+Elections
+National
+Democratic
+Congress (NDC)
+Atta MillsLeft, Rural,
+Populist
+
+52
+Report summary:
+This  monograph  examines  the  history and  politics  of  educational  reform  inGhana.  Using data  from
+interviews   conducted   with   senior   policy-makers,implementers   and   researchers,   as   well   as
+documentary sources, toexplorethe drivers and inhibitors of change at the political, bureaucratic and
+grass-roots  levels.  The  monograph  explores  the  nature  of  the  domesticpolitical  and  administrative
+machinery which has enabled comparativesuccess in enrolment growth in Ghana, attending also to
+the importance ofpolitical will as well as to shifting patterns of international and donorinfluence.
+Author notes:
+Professor  Angela  Little  isProfessor  of  Education  and  International  Development  at  the  Institute  of
+Education and CREATE Convenor for the Institute. Angela’s research interests include, globalisation,
+education  and  development;  qualifications  and  livelihoods;  Education  for  All  (EFA)  policy  and
+planning; Multi-grade teaching; Access and transitions in education.
+Address for Correspondence:
+CREATE, Centre for International Education,
+Department of Education, School of Education & Social Work
+Essex House, University of Sussex, Falmer, BN1 9QQ, UK.
+Website:   http://www.create-rpc.org,
+Email:create@sussex.ac.uk
+
+Access to Basic Education in Ghana: politics, policies and progress
+53

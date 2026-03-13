@@ -1,0 +1,1034 @@
+http://wje.sciedupress.com World Journal of Education Vol. 11, No. 6; 2021 
+Published by Sciedu Press                         18                          ISSN 1925-0746  E-ISSN 1925-0754 
+Open Access Electronic Resources Use and Research Productivity of 
+Faculty Members: A Case Study of a Selected University in Ghana 
+ 
+Ellen Amponsah
+1,*
+, E. Madukoma
+2
+ & V. E. Unegbu
+2
+ 
+1
+Valley View University, P. O. Box AF 98, Oyibi-Accra, Ghana 
+2
+Department of Information Resources Management, Babcock University, ILishan-Remo, Nigeria 
+*Correspondence: Valley  View  University,  P.  O.  Box  AF  98,  Oyibi-Accra,  Ghana.  Tel:  233-246-812-882.  E-mail: 
+elleamps@gmail.com 
+ 
+Received: September 28, 2021          Accepted: November 26, 2021         Online Published: December 6, 2021 
+doi:10.5430/wje.v11n6p18         URL: https://doi.org/10.5430/wje.v11n6p18 
+ 
+Abstract 
+Research is one of the key pillars in the teaching and learning situation in any university in the world. However, the 
+approach to research varies from one university to the other. The purpose of this study was to find out how the level 
+of awareness and satisfaction, the challenges and extent of use of open access resources impact research productivity 
+of faculty in *Dartum University. A quantitative survey research method was adopted. A sample size of 62 full-time 
+lecturers and 134 part-time lecturers was selected for the study using a stratified simple random sampling technique. 
+The findings revealed that research productivity is low despite the high level of awareness and satisfaction with open 
+access use. Again, the findings showed that faculty members use open access to a considerable extent and point out 
+some challenges associated with open access use. It was concluded that there is a very weak but significant influence 
+of open access use on research productivity in Dartum University. It is recommended that African universities, and in 
+particular Dartum University, establish or patronise institutional repositories which support open access. 
+Keywords: research productivity, electronic resources, open access, faculty productivity 
+ 
+1. Introduction 
+Over  the  past  few  years,  there  has  been  a  tremendous  increase  in  the  emphasis  on  research  productivity  in 
+universities.  Alongside  teaching,  research  and publication  output  have  become  tools  for  measuring  performance 
+among  universities (Ram  &  Paliwal,  2016). The  high  emphasis  on  research  is  because  of  changes  in  government 
+research  funding  patterns,  nationwide  research  assessments  and  international  league  tables.  Around  the  world, 
+research productivity in universities is gaining a lot of attention mostly among researchers, administrators, scientists 
+and  policy  makers.  In  the  current  academic  setting,  one  main  way  of  measuring  academic  success  is  the  ability to 
+publish in high status refereed journals. Many Universities encourage research by remunerating the faculty members 
+for research productivity (Brew, Boud, Namgung, Lucas & Crawford, 2015). 
+Research  Productivity  commonly  refers  to  the  number  of  publications  per  researcher.  Due  to  its  measurement 
+parameters, research productivity is very difficult to measure. There have been attempts by bibliometrics to come up 
+with  accurate  and  reliable  research  indicators,  however,  such  attempts  have  only  caused  an  increasing  confusion 
+(Abramo & D'Angelo, 2014). When it comes to measurement of research productivity, “one size does not fit all.” It 
+is  easier  to  measure  articles  published  in  mainstream  scientific  journals  than  books,  online  and  open  access 
+publications (Altback,   2014).   In   this   article,   measurement   of   faculty   productivity   was   limited   to   research 
+publications.  
+Studies  indicate  that research  productivity  in  Africa  is  relatively  low  (Lertputtarak  2008). Maasen (2015)  describes 
+African universities  as  lagging  behind  as  far  as  research  productivity  is  concerned,  despite  the  presence  of  highly 
+productive  scholars  and  academics.  This  is  attributed  to  economic  reasons  and  research  strategies  and  practices  in 
+African universities.  In  the  Sub-Saharan  Africa,  research  productivity  differs  from  country  to  country  just  like  its 
+diverse  cultural  and  economic  profiles (Saric,  Utzinger,  &  Bonfoh, 2018). In Ghana, university  education  is on  the 
+rise. As at 2017, there were 10 public universities, 4 private universities which were chartered, 72 private university 
+
+http://wje.sciedupress.com World Journal of Education Vol. 11, No. 6; 2021 
+Published by Sciedu Press                         19                          ISSN 1925-0746  E-ISSN 1925-0754 
+colleges,  10  polytechnics  of  which  some  have  been  converted  to  technical  universities,  29  nurses  training  colleges 
+and  45  colleges  of  education (Alabi  &  Mohammed,  2018).  Though  the  number  of  universities  has increased, 
+according to Alabi and Mohammed (2018), research production is very low, but efforts are being made towards its 
+expansion.  Utulu  (2005)  and  Ogbomo  (2010)  mentioned  some  hindering  factors  to  research  productivity.  Among 
+them are failure to understand the purpose of publication, lack of funds, lack of time, ignorance of where to publish 
+and many more. 
+To  increase  research  productivity,  there  is a need  for  researchers  to  gain  access  to  good  journals.  With  most 
+universities’ inability to fund subscriptions to good electronic journals, reliance on predatory  journals has  become 
+rampant.  Though  open  access  resources  come  with  several  benefits,  there  are also  some  predatory  features too.  In 
+Africa,  most  people  in  the  field  of  academia  have  resorted  to  the  use  of  and  reliance  on  predatory  journals  which 
+publish  in  large  volumes  whiles  transgressing  the  research  integrity  rules.  This  has  put  the  integrity  of universities 
+into question and must therefore be taken seriously by academicians and universities at large. To improve upon this 
+situation, there has been calls by people in academia to enact more policies to enhance the existing policies. In Ghana, 
+there are two bodies, which regulate the higher education sector: The National Accreditation Board which plays the 
+role  of  accrediting  private  and  public  institutions  and  ensuring  that  all  institutions  meet  professional  standards  in 
+teaching  and  research;  and  the  National  Council  for  Tertiary  Education  which  provides  advisory  services  to  the 
+ministry of education on tertiary institution development, formulates policies to regulate institutions and also plays a 
+role in financing and budgeting for the sector (Alabi & Mohammed, 2018). 
+The productivity level of faculty at Dartum University in the area of open access resources takes into consideration 
+the  level  of  awareness  and  satisfaction  towards faculty,  their  frequent  or  otherwise  use  of open  access  electronic 
+resources,  the  purpose  for  using  open  access  electronic  resources,  how  the  use  of  open  access  electronic  resources 
+significantly  influence  faculty  members’ research  productivity and  finally the challenges to faculty’s use of open 
+access e-resources.  
+In  the western  part of Africa  where financial  hardship  is so much of  an  issue  to battle  with,  subscription  to  a good 
+number  of  journals  in  order  to  have  access  to  publications  is  not  so  affordable  for  many  researchers.  Some 
+institutions such  as  universities  try  their  best  to  subscribe  to  a  number  of  journals  for  their  faculty  and  students  to 
+have access. These institutions, however, do not have much funds. As a result, the journals they are able to subscribe 
+to  are  but  a  few.  This  greatly  affects  the  extent  to  which  most  faculty  in  Africa  are  able  to  get  access  to  new 
+publications and new developments in their areas of interest. This seems to have adverse effect on their productivity 
+in research. 
+Though  several  studies  have  been  conducted on  research  output  and  open  access  resources,  according  to  Iddris 
+(2017), there is not much research on the research output of faculty in universities in Ghana. The researcher has also 
+identified  that  studies  on  research  productivity  and  open  access  is  lacking  at Dartum  University  even  though  open 
+access is used by faculty. Therefore, this study seeks to determine the influence of open access electronic resources 
+use on the productivity of faculty members of Dartum University, Ghana. The specific objectives are to: 1) determine 
+the research productivity level of faculty members, 2) determine the level of awareness and satisfaction towards open 
+access resources, 3) examine the extent to which faculty members use open access electronic resources, 4) examine 
+the purpose for using open access electronic resources, 5) examine how the use of open access electronic resources 
+will significantly influence faculty members’ research productivity, and 6) identify the challenges to faculty’s use of 
+open access e-resources.  
+1.1 Research Hypotheses 
+The following hypotheses guided the research which was measured at 0.05 significance level: 
+H
+0
+: The use of open access electronic resources will not significantly influence the research productivity of Dartum 
+University faculty members. 
+H1:  The  use  of  open  access  electronic  resources  will  significantly  influence  the  research  productivity  of Dartum 
+University faculty members.  
+In these hypotheses testing, a number of factors were taken into consideration. It is established that faculty of Dartum 
+University use open access resources and their level of awareness and satisfaction, the extent of use of open access 
+electronic resources, the purpose for using open access electronic resources is very high.  
+1.2 Concept of Open Access Electronic Resources 
+The concept  of open  access is today widely  recognized  amongst  various  researchers  of  diverse  geographical 
+
+http://wje.sciedupress.com World Journal of Education Vol. 11, No. 6; 2021 
+Published by Sciedu Press                         20                          ISSN 1925-0746  E-ISSN 1925-0754 
+locations  and  fields  of  research. Open  access,  according  to Suber  (2015), refers to electronic,  online  digital, 
+unrestricted and free of most limitations on copyright and licensing. Although open access is a term mostly used to 
+apply  to  online  publications, nonetheless,  journals  with  printed  versions  have  their  compatibility  with  open  access. 
+According to Morrison (2012), just as other concepts, open access has much to it than portrayed in its definitions. It 
+has many concepts embedded in it. To fully comprehend the discussions of open access, it is necessary to have the 
+knowledge about lobby and its tactics by influential, powerful and wealthy publishers, which further complicates and 
+as well opposes to the idea of open access (Guedon, 2015, Morrison, 2012). 
+1.3 Types of Open Access Resources 
+Studies  suggest  that  there  are  two  different  forms  of  open  access  available (Musa,  Sanusi,  Yusuf,  &  Shittu,  2015). 
+The open access journal which is known as the “gold road” and open access repositories or institutional repositories 
+which is the “green road.” Examples of open access journals have been developed by the Lund University library, 
+following the First Nordic Conference on Scholarly communication in Lund Copenhagen in 2002. In more specific 
+terms, Harnad (2013) mentions two main ways open access can be provided by authors. They are: 
+1. The open access publishing (Gold open access): Where articles are published in freely accessible journals online. 
+2. Open access self-archiving (Green open access): Where articles are published in any random journal, but the final 
+peer-reviewed draft  is  deposited  in  an open access repository,  so  it becomes freely  accessible online. Journals with 
+open access follow a peer-evaluation procedure for their content. Many open access journals are published online in 
+order to make their content available freely and free of charge shortly after publication. This is called the “golden 
+road”  to  open  access.  Some  publishers,  including  the  BioMed  Central  and  the  Public  Library  of  Science,  are 
+providing open access journals (Kumar & Bansal, 2008; Pinfield, 2008). 
+Examples  of  open  acesss  journals  cut  across  almost  all  fields  of  endearvour.  Particular  mention  of  a  few  of  these 
+journals  are  African  Journal  of  Food, Agriculture,  Nutrition  and  Development (Agriculture), Journal  of  Korean 
+Astronomical Society (Astronomy), Journal of Open Source Software (Computer Science), Journal of International 
+Students (Education), and Journal of World Systems Research (Social Science) 
+1.4 Theoretical Framework 
+In this research, two theories were used to assess and support the variables under study. The theories were combined, 
+and the resulting concept aided in conceptualizing how the various variables under study relate to each other. These 
+theories are Social Exchange Theory (SET) and Unified Theory of Acceptance Use of Technology (UTAUT) 
+1.4.1 Social Exchange Theory (SET) 
+The social exchange theory is a theory that was developed by an American sociologist known as George Homans in 
+1958. The theory proposes that human social behavior is the result of an exchange process which seeks to minimize 
+costs  and  maximize  profits.  The  theory  stipulates  that  for  people  to  enter  social  relationships,  they  weigh  the 
+potential benefits and the risks of that relationship. If the risks outweigh the benefits, they are likely to terminate the 
+relationship  and  if  the  benefits  outweigh  the  risks,  they  are  likely  to  continue  to  be  in  the  relationship (Crossman, 
+2020). The theory is commonly used in the field of economics and psychology and other sociologists like Peter Blau 
+in 1964 and Richard Emerson in 1962 (Crossman, 2020) who made major contributions to the theory.  
+The theory may be used to explain the contribution of scientists to open access. In his study, Kim (2011) related the 
+social  exchange  theory  to  open  access  based  on  the  cost  and  benefits  analysis.  He  identified  costs  to  include 
+additional  effort  and  time  needed  to  upload  research  work  to  open  access  repositories  and  also  cited  copyright 
+concerns. He also cited some benefits including easy accessibility, publicity, increased citation, trustworthiness as a 
+result  of  peer  review  and  professional  recognition.  The  cost  factors  inhibit  knowledge  sharing  whiles  the  benefits 
+promote  knowledge  sharing. Kim  explains  the  following  variables:  cost  is  an  additional  effort  and  time  with  copy 
+right issues and fear of plagiarism; extrinsic benefits refer to academic reward, professional recognition, accessibility, 
+publicity  and  trustworthiness;  intrinsic  gains  also  refer  to  altruism  and  self-interest;  circumstantial  factors  relate  to 
+self-archiving  of  culture,  influence  of  external  factors  and  finally,  individual  traits  embody  age,  professional  rank, 
+technical skills.  
+The  cost  and  benefit  factors proposed  by  the  Social  Exchange  Theory  is adopted  in  the  study.  A  framework  which 
+could be used to understand how scientists communicate with systems of open access in the sharing of the results if 
+their  research  has  been  provided  by  the  social  exchange  theory.  Nonetheless,  other  factors  like  technological 
+infrastructure is not specified by the model. SET could therefore be extended to cover the technological acceptance 
+model, to be able to improve upon the ease of use and factors of usefulness on the use of knowledge repositories by 
+
+http://wje.sciedupress.com World Journal of Education Vol. 11, No. 6; 2021 
+Published by Sciedu Press                         21                          ISSN 1925-0746  E-ISSN 1925-0754 
+the contributions (Kankanhalli, Tan, & Wei, 2005). The Social Exchange Theory, as explained by Kim (2011), helps 
+in the understanding of how researchers and faculty members share information by means of open access using the 
+cost  and  benefit  factor  making  it  relevant  to  this  present  study.  Faculty  members  are  likely  to  use  open  access  for 
+their publications if the benefits of using open access outweigh the costs. In West Africa, where research funding is 
+difficult  to  come  by,  open  access through Agricultural  and  Food  Science  Journal  of  Ghana,  Ghana  Journal  of 
+Development Studies, Ghana Journal of Forestry, and Ghana Library Journal provides an easier avenue for faculty 
+in their research activities.  
+1.4.2 Unified Theory of Acceptance and Use of Technology (UTAUT) 
+The  Unified  Theory  of  Acceptance  and  Use  of  Technology  model  is  a  Technology  Acceptance  Model,  which  was 
+developed  by Venkatesh, Morris,  Davis  and Davis  (2003).  The  model was  developed  from  eight  other  Technology 
+Acceptance models which are as follows; “The Theory of Reasoned Action (TRA), Technology Acceptance Model 
+(TAM),  the  Motivational  Model  (MM),  the  Theory  of  Planned  Behaviour  (TPB),  a  blended  Theory  of  Planned 
+Behaviour/Technology  Acceptance  Model  (MPCU),  the  Innovation  Diffusion  Theory  and  the  Social  Cognitive 
+Theory (SCT)” (Zhou, et al., 2019). 
+These different models were put together to form the Unified  Theory of Acceptance and Use of Technology  and it 
+aims  to  explain  the  intentions  of  users  in  using  information  systems  and  their  subsequent  usage  behaviour.  The 
+theory holds that there are four main constructs which determine user adoption of technology (Alwahaishi & Vaclav, 
+2013). They are as follows: performance expectancy, effort expectancy, social influence and facilitating conditions. 
+This current study hinges on both the social exhange theory and unified theory of acceptance and use of technology. 
+ 
+2. Methodology 
+This article adopted regression analysis in the analysis of data. Regression is an aspect of the quantitative survey that 
+was  used  as research  design in  this  study.  The  survey  research  design  was  used  because  it  helps  to  collect  a  lot  of 
+information  from  a  large  population  within  the  shortest  possible  time.  The  study  was  carried  out at  Dartum 
+University and it included all faculty members of the various campuses and centres of the University comprising 389 
+faculty  members.  The  study  included  full-time  faculty  members  and  part-time  lecturers  engaged  by  the  university. 
+The population is broken down into campuses and centres as outlined in Table 1: 
+ 
+Table 1. Population of the Study 
+Campus/Centre Full-Time Lecturers Part-Time Lecturers Total 
+Oyibi 70 60 130 
+Techiman 45 50 95 
+Kumasi 5 50 55 
+Tamale 0 40 40 
+Takoradi 2 40 42 
+Swedru 0 15 15 
+City Campus (Accra) 1 11 12 
+Grand Total 123 266 389 
+Source: Dartum Human Resource Department (2019) 
+ 
+2.1 Sample Size 
+Stratified  simple  random  sampling  technique  was  used.  The  Yamane’s  (1967) formula, as  cited  in  Osahon  and 
+Kingsley  (2016), was  used  to  determine  the  appropriate  sample  size  of  196  respondents (refer  to  Table  2).  The 
+sample  size  was  distributed  proportionately  across  the  various  campuses  and  centres  using  percentages  of  the  total 
+population as indicated in Table 2. In selecting the respondents, a list of all members of the population was made and 
+numbered sequentially  according  to  the  various  campuses  and  centres.  A  random  number  table  was  then  prepared 
+and used to select respondents. 
+ 
+ 
+  
+
+http://wje.sciedupress.com World Journal of Education Vol. 11, No. 6; 2021 
+Published by Sciedu Press                         22                          ISSN 1925-0746  E-ISSN 1925-0754 
+Table 2. Sample Size 
+Campus 
+Respondents 
+Full Time Part Time 
+Oyibi 35 30 
+Techiman 23 25 
+Kumasi 3 25 
+Tamale 0 20 
+Takoradi 1 20 
+Swedru 0 8 
+City Campus (Accra) 0 6 
+Total 62 134 
+ 
+A  structured  questionnaire was  developed  with  the  support  of  experts  in  the  fields  of  education,  library  and 
+psychology. The questionnaire was developed taking into consideration the objectives and the research questions of 
+the  study.  It was  this  structured  questionnaire  that was  used  to  collect  data  for  the  study.  Face  and  content  validity 
+were also done  by  experts  in  the  fields  of  education,  library  and  psychology. In  addition,  construct  validity  of 
+translating  ideas  or  theories  into  actual  measures  was  highly  considered. To  ensure reliability  of  the  research 
+instrument,  a  pre-test  was  conducted  using  30  lecturers  from  a  selected  university  other  than Dartum University 
+using the reliability coefficients. The reliability test was conducted using a Cronbach’s Alpha coefficient of 0.78 
+using faculty members from the Ghana Christian University  College. The collected data was analysed by means of 
+descriptive  and  inferential  analysis.  According  to  Bhatia  (2018),  descriptive  analysis  includes  the  use  of  modes, 
+percentages and frequencies whiles an inferential analysis includes the use of regression and correlation, which were 
+used in this article.  
+2.2 Data Analysis  
+The data that were collected from the 196 respondents were inputted into the computer and analysed with the help of 
+the Statistical Package for Social Sciences (SPSS) software version twenty-five. Also, a multiple regression analysis 
+was used to analyse the hypothesis, tested at 0.05 significant level. All the 196 responses were well completed and 
+retrieved from the respondents for analysis. This represented a 100 percent response rate, which is adequate to attain 
+the objectives of the study. 
+ 
+3. Results 
+3.1 Results Based on the Objectives of the Study 
+Objective One: Determining the productivity level of faculty members 
+Faculty  members  were  asked  four major  questions  intended  to obtain  information on  their  productivity.  The  fourth 
+question  had  11  sub-questions,  which  were intended  to  find  information  on  the  various  avenues  through  which 
+faculty members publish their research work. The analysis of their responses is presented in Table 3. 
+Table 3 provides an analysis of the publication behaviour of faculty members of Dartum University. A grand mean 
+of 1.48 for publications in various avenues indicates a very low research productivity among faculty members. The 
+table  also  revealed  that  only  14.8%  of  respondents  had  more  than  10  publications  and  as  much  as  56.7%  had  total 
+publications  of  five  or  less.  This  indicates  a  generally  low  productivity  among  faculty  members.  Open  access 
+publications  were  also  low  with  3.6%  of  respondents  having  more  than  10  open  access  publications  and  87.2% 
+having five or less open access publications. Publications in subscription-based journals was also low with only 2% 
+of respondents having more than 10 subscription-based publications and 87.7% having less than six publications in 
+paid journals. 
+ 
+ 
+ 
+ 
+  
+
+http://wje.sciedupress.com World Journal of Education Vol. 11, No. 6; 2021 
+Published by Sciedu Press                         23                          ISSN 1925-0746  E-ISSN 1925-0754 
+Table 3. Productivity of Faculty Members 
+S/N Publications 0 1-2 3-5 6-10 More 
+than 10 
+Mean Standard 
+Deviation 
+1. How many publications have 
+you produced? 
+16 
+(8.2%) 
+54 
+(27.6%) 
+41 
+(20.9%) 
+56 
+(28.6%) 
+29 
+(14.8%) 
+3.14 1.21 
+2. How many of your research 
+work has been published in 
+open access journals? 
+52 
+(26.5%) 
+70 
+(35.7%) 
+49 
+(25.0%) 
+18 
+(9.2%) 
+7 
+(3.6%) 
+2.28 1.06 
+3. How  many  of  your  research 
+work  has  been  published  in 
+paid journals? 
+58 
+(29.6%) 
+70 
+(35.7%) 
+44 
+(22.4%) 
+20 
+(10.2%) 
+4 
+(2.0%) 
+2.19 1.04 
+         
+i. Articles in learned journals 45 
+(23.0%) 
+65 
+(33.2%) 
+37 
+(18.9%) 
+29 
+(14.8%) 
+20 
+(10.2%) 
+2.56 1.27 
+ii. Chapters in books 111 
+(56.6%) 
+72 
+(36.7%) 
+9 
+(4.6%) 
+4 
+(2.0%) 
+0 
+(0.0%) 
+1.52 0.68 
+iii. Conference proceedings 92 
+(46.9%) 
+77 
+(39.3%) 
+14 
+(7.1%) 
+7 
+(3.6%) 
+6 
+(3.1%) 
+1.77 0.95 
+iv. Occasional papers 122 
+(62.2%) 
+56 
+(28.6%) 
+11 
+(5.6%) 
+4 
+(2.0%) 
+3 
+(1.5%) 
+1.52 0.82 
+v. Co-authored textbooks 152 
+(77.6%) 
+38 
+(19.4%) 
+6 
+(3.1%) 
+0 
+(0.0%) 
+0 
+(0.0%) 
+1.26 0.50 
+vi. Edited books 157 
+(80.1%) 
+39 
+(19.9%) 
+0 
+(0.0%) 
+0 
+(0.0%) 
+0 
+(0.0%) 
+1.20 0.40 
+vii. Monographs 174 
+(88.8%) 
+19 
+(9.7%) 
+0 
+(0.0%) 
+0 
+(0.0%) 
+3 
+(1.5%) 
+1.16 0.56 
+viii. Textbooks 164 
+(83.7%) 
+29 
+(14.8%) 
+3 
+(1.5%) 
+0 
+(0.0%) 
+0 
+(0.0%) 
+1.18 0.42 
+ix. Technical reports 145 
+(74.0%) 
+34 
+(17.3%) 
+13 
+(6.6%) 
+0 
+(0.0%) 
+4 
+(2.0%) 
+1.39 0.79 
+x. Patent and certified 
+invention 
+173 
+(87.8%) 
+9 
+(4.6%) 
+14 
+(7.1%) 
+0 
+(0.0%) 
+0 
+(0.0%) 
+1.19 0.55 
+ Grand Mean       1.48  
+Source: Field Survey, 2020 
+Decision rule: ≤1.99 = Very Low, 2.00 – 2.99 = Low, 3.00-3.99 = High, 4.00 – 5.00 = Very High 
+ 
+Objective Two: The level of awareness and satisfaction towards open access use 
+Respondents were  asked questions  to  determine  their  awareness  and  satisfaction  towards open  access  resource  use. 
+The details of the analysis are found in Table 4. 
+ 
+Table 4. Awareness of and Satisfaction with Open Access Resources 
+Awareness of open access resources Frequency (Percentage) 
+Fully Aware 83 (42.3%) 
+Aware 74 (37.8%) 
+Somewhat Aware 
+ 
+Satisfaction towards the use of open access resources 
+Fully satisfied 
+Satisfied 
+Not Satisfied 
+39 (19.9%) 
+ 
+ 
+37 (18.9%) 
+139 (70.9%) 
+20 (10.2%) 
+Source: Field Survey, 2020 
+ 
+
+http://wje.sciedupress.com World Journal of Education Vol. 11, No. 6; 2021 
+Published by Sciedu Press                         24                          ISSN 1925-0746  E-ISSN 1925-0754 
+Table  4  presents  responses  on  the  awareness  of  open  access  resources  and  the  satisfaction  level  of  respondents.  It 
+reveals  that  83  (42.3%)  of  respondents  are  fully  aware  of  open  access  resources,  74  (37.8%)  are  aware  whiles  39 
+(19.9%)  of respondents  are  somewhat  aware  of  open  access  resources.  This  indicates  a  high  level  of  awareness  of 
+open access resources. Again, it reveals that only 37 (18.9%) are fully satisfied with the open access resources with 
+as  many  as  139  (70.9%)  being  satisfied  and  finally  20  (10.2%)  not  satisfied  with  the  open  access  resources.  It  is 
+concluded generally that the faculty members are satisfied with the open access resources but not fully satisfied with 
+them. 
+Objective Three: The extent to which faculty members use open access electronic resources. 
+Respondents were asked questions to determine their open access usage behaviour or pattern, satisfaction, extent of 
+use of various open access resources and repositories as well as the rate at which they use open access resources. The 
+details of the analysis are found in Table 5.  
+In Table 5, analysis of the extent to which faculty members use open access resources is presented using a five-point 
+scale which is from “Never” to “Always”. Here, the extent of use of open access journals, open access repositories, 
+open access databases, open access e-books, personal blogs and websites by faculty members is assessed. Details of 
+the responses are summarized in Table 5. 
+ 
+Table 5. Extent to Which Faculty Members use Open Access Resources 
+S/N  
+Open Access Resources 
+Always Frequently Sometimes As and 
+when 
+needed 
+Never Mean Standard 
+Deviation 
+1. DOAJ    (Directory    of    Open 
+Access Journals) 
+25 
+(12.8%) 
+55  
+(28.1%) 
+67 
+(34.2%) 
+35 
+(17.9%) 
+14 
+(7.1%) 
+3.21 1.10 
+2. Open Access Library 11 
+(5.6%) 
+66  
+(33.7%) 
+68 
+(34.7%) 
+34 
+(17.3%) 
+17 
+(8.7%) 
+3.10 1.04 
+3. SAGE 13 
+(6.6%) 
+64 
+(32.7%) 
+46 
+(23.5%) 
+45 
+(23.0%) 
+28 
+(14.3%) 
+2.94 1.18 
+4. Open J Gate 0 
+(0.0%) 
+29 
+(14.8%) 
+50 
+(25.5%) 
+50 
+(25.5%) 
+67 
+(34.2%) 
+2.21 1.07 
+5. Open Access Portals of 
+payment journals 
+3 
+(1.5%) 
+60 
+(30.6%) 
+41 
+(20.9%) 
+28 
+(14.3%) 
+64 
+(32.7%) 
+2.54 1.27 
+6. OAJSE  (Open  Access  Journal 
+Search Engine) 
+18 
+(9.2%) 
+39 
+(19.9%) 
+53 
+(27.0%) 
+39 
+(19.9%) 
+47 
+(24.0%) 
+2.70 1.28 
+7. MDPI (Management 
+Development and Productivity 
+Institute 
+6 
+(3.1%) 
+19 
+(9.7%) 
+36 
+(18.4%) 
+49 
+(25.0%) 
+86 
+(43.9%) 
+2.03 1.14 
+8. Open  DOAR  (The  Directory 
+of Open Access Repositories) 
+9 
+(4.6%) 
+44 
+(22.4%) 
+54 
+(27.6%) 
+40 
+(20.4%) 
+49 
+(25.0%) 
+2.61 1.21 
+9. NDLTD (Networked   Digital 
+Library of Thesis and 
+Dissertation) 
+7 
+(3.6%) 
+33 
+(16.8%) 
+78 
+(39.8%) 
+19 
+(9.7%) 
+59 
+(30.1%) 
+2.54 1.19 
+10. OCW (Open Courseware, 
+MIT) 
+3 
+(1.5%) 
+31 
+(15.8%) 
+57 
+(29.1%) 
+50 
+(25.5%) 
+55 
+(28.1%) 
+2.37 1.10 
+11. ERIC   database   (Educational 
+Research Information Center) 
+15 
+(7.7%) 
+56 
+(28.6%) 
+54 
+(27.6%) 
+22 
+(11.2%) 
+49 
+(25.0%) 
+2.83 1.30 
+12. e-books 55 
+(28.1%) 
+70 
+(35.7%) 
+48 
+(24.5%) 
+20 
+(10.2%) 
+3 
+(1.5%) 
+3.79 1.02 
+13. Institutional Websites 43 
+(21.9%) 
+94 
+(48.0%) 
+32 
+(16.3%) 
+20 
+(10.2%) 
+7 
+(3.6%) 
+3.74 1.03 
+14. Personal Blogs and Website 16 
+(8.2%) 
+38 
+(19.4%) 
+56 
+(28.6%) 
+61 
+(31.1%) 
+25 
+(12.8%) 
+2.79 1.14 
+       2.81 1.15 
+Source: Field Survey, 2020 
+
+http://wje.sciedupress.com World Journal of Education Vol. 11, No. 6; 2021 
+Published by Sciedu Press                         25                          ISSN 1925-0746  E-ISSN 1925-0754 
+Decision  Rule:  Very  Low  Extent:  0.00 – 0.99,  Low  Extent:  1.00 – 1.99, Considerable  Extent:  2.00 – 2.99,  High 
+Extent: 3.00 – 3.99, Very High Extent: 4.00 – 5.00 
+ 
+From Table 5, a grand mean of 2.81 indicates faculty members of Dartum University use open access resources to a 
+considerable extent. The table shows a high extent of use for e-books (mean 3.79), institutional websites (mean 3.74), 
+DOAJ  (mean  3.12),  Open  Access  Library  (3.10)  and  a  considerable  usage  of  all  the  other  open  access  resources 
+presented. 
+Objective Four: The purpose for which faculty members use open access electronic resources.  
+Respondents were  asked  to  indicate  their  agreement  or  disagreement  to  some  purposes  of  using  open  access 
+resources. Table 6 provides the details of the responses. 
+ 
+Table 6. Purpose of Using Open Access Resources 
+S/N Purpose Strongly 
+Agree 
+Agree Disagree Strongly 
+Disagree 
+1. To do course work 58 
+(29.6%) 
+116 
+(59.2%) 
+19 
+(9.7%) 
+3 
+(1.5%) 
+2. Updating subject knowledge 80 
+(40.8%) 
+109 
+(55.6%) 
+7 
+(3.6%) 
+0 
+(0.0%) 
+3. Research work 103 
+(52.6%) 
+93 
+(47.4%) 
+0 
+(0.0%) 
+0 
+(0.0%) 
+4. Writing Papers/Articles 73 
+(37.2%) 
+120 
+(61.2%) 
+3 
+(1.5%) 
+0 
+(0.0%) 
+5. Teaching  67 
+(34.2%) 
+116 
+(59.2%) 
+13 
+(6.6%) 
+0 
+(0.0%) 
+6. Other academic activities 49 
+(25.0%) 
+127 
+(64.8%) 
+13 
+(6.6%) 
+7 
+(3.6%) 
+7. Preparation of lecture notes 51 
+(26.0%) 
+121 
+(61.7%) 
+19 
+(9.7%) 
+5 
+(2.6%) 
+Source: Field Survey, 2020 
+ 
+From Table 6, 174 (88.8%) of respondents strongly agreed and agreed that they use open access to do course work, 
+189  (96.4%)  strongly  agreed  and  agreed  that  they  use  open  access  to  update  subject  knowledge,  all  respondents 
+strongly  agreed  or agreed  that  they  use  open  access  for  research  work,  98.4%,  93.4%,  89.8%  and  87.7%  of 
+respondents  agreed  or  strongly  disagreed  that  they  use  open  access  for  writing  papers/articles,  teaching,  other 
+academic activities and preparation of lecture notes respectively. It can be concluded generally that the respondents 
+agreed  to  the  use  of  open  access  resources  for  course  work,  updating  subject  knowledge,  research  work,  writing 
+papers and the other activities. 
+Objective Five: The challenges that faculty members face in the use of open access e-resources. Respondents were 
+asked to find out some challenges of the use of open access e-resources. The questions demanded the respondents to 
+indicate  their  agreement  or  disagreement  to four statements  and  questions,  which  were  presented  in  a  Likert-scale 
+format. Table 7 provides the details of the responses. 
+From table 7, four challenges of open access were identified based on the responses from the respondents. In terms 
+of  education,  72.9%  of  respondents  affirmed that  the  librarians  at Dartum University  do  not  provide  education  to 
+faculty, administrators and others about the benefits of open access. With regard to predatory journals, 62.3% agreed 
+and  strongly  agreed  that  open  access  has  contributed  to  the  rise  of  predatory  journals.  In  relation  to  ICT,  69.9% 
+affirmed that poor ICT infrastructure has made the development of institutional repositories unsustainable and 72% 
+of respondents were in agreement that inadequate skills to navigate the internet exacerbates the constraints to the use 
+of open access.  
+ 
+ 
+
+http://wje.sciedupress.com World Journal of Education Vol. 11, No. 6; 2021 
+Published by Sciedu Press                         26                          ISSN 1925-0746  E-ISSN 1925-0754 
+Table 7. Challenges to Faculty Members’ Use of Open Access e-resources 
+S/N Items Strongly 
+Agree 
+Agree Disagree Strongly 
+Disagree 
+1. The   librarians   in   my   institution   do   not   provide 
+education  to  faculty, administrators  and  others  about 
+the benefits of open access. 
+70 
+(35.7%) 
+73 
+(37.2%) 
+50 
+(25.5%) 
+3 
+(1.5%) 
+2. Poor  ICT  infrastructure  has  made  development  of 
+institutional repositories unsustainable. 
+36 
+(18.4%) 
+101 
+(51.5%) 
+52 
+(26.5%) 
+7 
+(3.6%) 
+3. Inadequate  skills  to  navigate  the  internet  exacerbates 
+the constraints to the use of open access. 
+36 
+(18.4%) 
+105 
+(53.6%) 
+33 
+(16.8%) 
+22 
+(11.2%) 
+4. My  institution  has  adequate  ICT  infrastructure 
+and promotes the use of open access resources. 
+32 
+(16.3%) 
+91 
+(46.4%) 
+69 
+(35.2%) 
+4 
+(2.0%) 
+Source: Field Survey, 2020 
+ 
+3.2 Testing of Hypothesis 
+Tables 8 and 9 present the regression results of testing the hypothesis. A multiple regression analysis was used with 
+the help of the SPSS. The factors which were considered in the testing of hypothesis included the level of awareness 
+and satisfaction, the extent of use of open access electronic resources, the purpose for using open access electronic 
+resources and the related challenges in the use of open access e-resources 
+H
+0
+: The use of open access electronic resources will not significantly influence the research productivity of Dartum 
+University faculty members. 
+ 
+Table 8. Regression Model Summary 
+Model 
+Model Summary 
+R R Square Adjusted R Square Std. Error of the Estimate Durbin-Watson 
+x1 .589
+a 
+.347 .297 1.01572 1.929 
+ 
+Table 9. Anova 
+Model Anova 
+Sum of Squares df Mean Square F Sig. 
+Regression 99.263 14 7.090 6.872 .000
+a
+ 
+Residual 186.737 181 1.032   
+Total 286.000 195    
+Predictors:  (Constant),  Blogs/Websites,  Open  Access  Portals  of  Payment  Journals,  e-books,  SAGE,  Open  Access 
+Library,  Institutional  Websites,  NDLTD  (Networked  Digital  Library  of  Thesis  and  Dissertation),  OAJSE  (Open 
+Access Journal Search Engine), Open J Gate, OCW (Open Courseware, MIT), ERIC database (Educational Research 
+Information  Center),  DOAJ  (Directory  of  Open  Access  Journals),  Open  DOAR  (Directory  of  Open  Access 
+Repositories), MPDI (Management Development and Productivity Issue) 
+Dependent Variable: How many publications have you produced? 
+ 
+A  standard  multiple  regression  was  conducted  using  the  enter  method  to  determine  if  the  use  of  open  access 
+resources  will  significantly  influence  research  productivity  in Dartum University.  The  regression  analysis  included 
+number  of  publications  produced  as  the  dependent  variable  and  Directory  of  Open  Access  Journals  (DOAJ),  Open 
+Access  Library,  SAGE,  Open  J  Gate,  Open  Access  Portals  of  payment  journals,  OAJSE  (Open  Access  Journal 
+Search Engine), MDPI (Management Development and Productivity Institute), NDLTD (networked Digital Library 
+of  Thesis  and  Dissertation),  OCW  (Open  Courseware,  MIT),  ERIC  database  (Educational  Research  Information 
+Center),  e-books,  Institutional  Websites  and  Personal  Blogs  and  Websites  as  the  independent  variables.  The 
+Regression  results  indicate  that  the  overall  model  significantly  predicts  faculty  members  productivity  as  seen  in 
+Table 8 R
+2
+=0.347, R
+2
+ adj = 0.297, F(14,181) = 6.872, p < 0.005. This model accounts for 34.7% variance in faculty 
+members’ productivity. A summary of regression coefficients is presented in Table 10 and indicates that eight out of 
+
+http://wje.sciedupress.com World Journal of Education Vol. 11, No. 6; 2021 
+Published by Sciedu Press                         27                          ISSN 1925-0746  E-ISSN 1925-0754 
+fourteen open access electronic resource variables have p-values greater than an α-value of 0.05. They imply that we 
+fail  to  reject  the  null  hypothesis  and  conclude  that  eight  out  of  fourteen  open  access  electroniic  resources  will  not 
+significantly influence research productivity. On the other hand, six out of fourteen open access electronic resource 
+variables have p-values less than α=0.05.They imply that we reject the null hypothesis and conclude that six out of 
+fourteen  open  access  electronic  resources  will  significantly  influence  research  productivity.  Since  57.14%  of  the 
+resources  will   not   significantly   influence   research   productivity   and   42.86%   significantly   influence  research 
+productivity  by  simple  majority  most  of  open  access  electronic  resources  will  not  significantly  influence  research 
+productivity. 
+ 
+Table 10. Summary of Coefficient for Model Variables 
+Source B Beta t p 
+DOAJ (Directory of Open Access Journals) .285 .259 2.865 .005 
+Open Access Library -.163 -.140 -1.658 .099 
+SAGE .385 .376 4.870 .000 
+Open J Gate .193 .171 2.124 .035 
+Open Access Portals of Payment Journals .153 .161 1.863 .064 
+OAJSE (Open Access Journal Search Engine) -.140 -.148 -1.790 .075 
+MPDI (Management Development and Productivity Issue) .027 .025 .262 .793 
+Open DOAR (Directory of Open Access Repositories) .006 .006 .060 .952 
+NDLTD (Networked Digital Library of Thesis and Dissertation) -.397 -.389 -4.454 .000 
+OCW (Open Courseware, MIT) -.165 -.150 -1.792 .075 
+ERIC database (Educational Research Information Center) -.220 -.236 -2.787 .006 
+e-books .353 .296 4.303 .000 
+Institutional Websites .031 .026 .386 .700 
+Blogs/Websites -.096 -.091 -1.242 .216 
+ 
+3.3 Discussion of Findings 
+The  study  was  carried  out  with  five  key  items  as  guiding  principles:  the  research  productivity  level  of  faculty,  the 
+level of awareness and satisfaction, the extent of use of open access electronic resources, the purpose for using open 
+access  electronic  resources  and  the  challenges  of  use  of  open  access  e-resources.  It  was  found  out  that  research 
+productivity  level  of  faculty  was  very  low  (14.8%)  with  low  open  access  publication  (3.6%)  and  with  low 
+publications  in  subscription-based  journals  (2%).  These  findings  confirm  Lertputtarak’s  (2008)  and  Alabi  and 
+Mohammed’s (2018) research findings that research productivity in Africa is relatively low. They also fall within 
+Maasen’s (2015) description of African universities as lagging behind as far as research productivity  is  concerned 
+despite the presence of highly productive scholars and academics. 
+The  study  also  found  out  that  the  use  of  open  access  resources  was  to  a  considerable  extent  with  a  grand  mean  of 
+2.81.  There  was  a high  extent  of use of  e-books (3.79),  institutional websites  (3.74),  use  of DOAJ (3.12) and  open 
+access  library  use  (3.10).  The  extent  of  use  of  open  access  electronic  resources  was  therefore  very  high. These 
+findings  are  also  in  line  with  the Social  Exchange  Theory  explained  by Kim (2011). Kim’s explanation shows that 
+The Social Exchange Theory helps in the understanding of how researchers and faculty members share information 
+by means of open access using the cost and benefits analysis. The high mean scores and the extent of use of e-books 
+shows taht faculty members were using open access for their publications as the benefits of using open access might 
+have outweighed the  costs.  The  high  mean  scores  and  the  extent  of  use of  open  access  are  also  in  line  with  the 
+unified  theory  of acceptance  and  use  of  technology  (Venkatesh,  Morris,  Davis & Davis, 2003) as  the  faculty 
+members  were  influenced  by  the performance  expectancy,  effort  expectancy,  social  influence  and  facilitating 
+conditions (Alwahaishi & Vaclav, 2013) 
+The respondents were fully aware of the use of open access resources (42.3%), but those who were just aware of the 
+use of open access resources gave 37.8%. In terms of respondents’ satisfaction, it was found that they were generally 
+satisfied but not fully satisfied. 
+The  purpose  for  the  use  of  open  access  e-resources  was  also  very  high  as  the  percentages  for  both  Strongly  Agree 
+and Agree were  very high.  For  instance,  the  respondents agreed  in  using open  access for  course  work  (59.2%),  for 
+updating subject knowledge (55.6%), for research work (47.1%), for writing articles (61.2%), for teaching (59.2%), 
+
+http://wje.sciedupress.com World Journal of Education Vol. 11, No. 6; 2021 
+Published by Sciedu Press                         28                          ISSN 1925-0746  E-ISSN 1925-0754 
+for preparation of lecture notes (61.7) and for other academic activities (64.8%). The purpose for using open access 
+e-resoures was therefore very encouraging. 
+The  respondents  agree  on  enormous  challenges  as  they  disagreed  that  institutions  have  insitutional repository 
+(67.7%). With regard to plagiarism, it was agreed that open access can be plagiarised (55.1%), and it is vulnerable to 
+copyright  issues  (62.2%),  and  finally,  libririans  do  not  normally  provide  education  to  faculty  on  the  use  of 
+e-resources (72.9%). 
+Finally,  the  fourteen  independent  variables  were  found  to  have  influenced faculty’s  productivity  level.  The  null 
+hypothesis  which  says  that  the  use  of  open  access  electronic  resources  will  not  significantly  influence  the  research 
+productivity of faculty members was rejected but failed to reject the alternate hypothesis that the use of open access 
+electronic resources will significantly influence the research productivity of faculty members. 
+ 
+4. Conclusion 
+Universities  play  a  vital  role  in  nation  building  through  research  by  faculty  members.  Nations  with  low  research 
+productivity  will  therefore  continue  to  lag  behind  the  world  with  African  countries  included.  It  is,  therefore, 
+important  for  nations  and  universities  to  commit  adequate  resources  including  ICT  infrastructure  to  research 
+development.  This  article,  just  like  other  reviewed  researches  in  Africa,  concludes  on  findings  of  low  productivity 
+among faculty members even in the open access era. The article revealed that open access resource use has a weak 
+significant influence on research productivity among faculty members at Dartum University. It is therefore necessary 
+for  faculty  members  to  be  provided  with  the  right  education  and  resources  to  help  improve  research  productivity. 
+Challenges like poor ICT infrastructure, poor navigation skills, absence of institutional repositories and others which 
+make research difficult should gradually become a thing of the past.  
+4.1 Recommendations of the Study 
+Based on the findings of the research, the following recommendations are proposed: 
+i Efforts  to  promote  research  productivity  must  be  intensified  with  the  government  providing  support  to  its 
+institutions. 
+ii African universities including Dartum University should have institutional repositories which support open access 
+and its research activities in place. 
+iii  Librarians  must  perform  the  duty  of  educating  faculty,  administrators  and  others  on  the  benefits  of  open  access 
+use. 
+iv  Developing  ICT  infrastructure  should  be  an  important  objective  of  universities  in  Africa  with  support  from 
+governments as ICT remains the foundation for research and other activities. 
+4.2 Contribution to Knowledge 
+With the growing need for electronic resources and open access resources, it is expedient to understand its role in the 
+educational  system.  The  role  of  open  access  resources  in  research  can  no  longer  be  downplayed  with  the 
+ever-increasing  number  of  journals  and  repositories  which  support  open  access.  The  growing  need  for  research 
+which  is  seen  as  a  tool  for  nation  and  economic  building  with  universities  playing  the  central  role  has  been 
+highlighted.  The  study  has  also  brought  to  light  the  role  of  open  access  resources  in  the  development  of  research 
+productivity  especially  in  the  developing  world  by  highlighting  the  various  purposes  faculty  members  use  open 
+access and the extent to which it is used in research. The challenges associated with the use of open access resources 
+have also been expatiated in the study. 
+4.3 Suggestions for Further Study 
+The article revealed that research productivity is low despite the high awareness of open access. Much study needs to 
+be conducted to identify the reasons research productivity continues to be low despite the growing awareness of open 
+access resources. The study also focused on Dartum University, a private university in Ghana. Further studies could 
+be conducted considering public universities, technical universities and other private universities. Future research can 
+also venture into open access use and research productivity focusing on age and gender. 
+4.4 Implications of the Study 
+The  awareness  level  of  the  use  of  open  access  resources  by  faculty  members  was  not  very  high  hence  very  low 
+productivity level. Again, librarians have been accused of not providing education to faculty. The implication is that 
+
+http://wje.sciedupress.com World Journal of Education Vol. 11, No. 6; 2021 
+Published by Sciedu Press                         29                          ISSN 1925-0746  E-ISSN 1925-0754 
+high productivity level of faculty members is dependent on their education in order to create in them awareness and 
+satisfaction. In this regard, librarians have a very significant role to play. Research, teaching and community service 
+are three interplay of factors that keep a university vibrant so if the research element is very low then the implication 
+is that teaching and community service will be ultimately affected.  
+ 
+References 
+Abramo,  G.,  &  D'Angelo,  C.  A.  (2014,  March  19).  How  do  you  define  and  measure  research  productivity? 
+Scientometrics, 101, 1129-1144. https://doi.org/10.1007/s11192-014-1269-8 
+Alabi, G., & Mohammed, I. (2018). Research and PhD Capacities in Sub-Saharan Africa. Deutscher Akademischer 
+Austauschdienst. 
+Altback,  P.  G.  (2014,  July  18). What  counts  for  academic  productivity  in  research  universities? University  World 
+News. 
+Alwahaishi,  S.,  &  Vaclav,  S.  (2013).  Consumers'  Acceptance  and  Use  of  Information  and  Communications 
+Technology: A UTAUT and Flow Based Theoretical Model. Journal of Technology Management & Innovation, 
+8(2), 61-73. https://doi.org/10.4067/S0718-27242013000200005 
+Brew,  A.,  Boud,  D.,  Namgung,  S.  U.,  Lucas,  L.,  &  Crawford,  K.  (2015,  August  9).  Research  Productivity  and 
+Academics' conception of research. Higher Education, 71, 681-697. https://doi.org/10.1007/s10734-015-9930-6 
+Crossman, A. (2020, January 14). Understanding Social Exchange Theory. ThoughtCo. 
+Guedon, J. C. (2015). Open Access: Towards the Internet of the Mind. Budapest Open Access Initiative  
+Iddris, F. (2017, September). Examining the Research output of Lecturers in Ghana. 1st International Conference on 
+Competerncy-Based Training and Research (pp. 207-215). Winneba: University of Education. 
+Kankanhalli, A., Tan, B. C., & Wei, K. K. (2005). Contributing Knowledge to Electronic Knowledge Repositories: 
+An Empirical Investigation. MIS Quarterly, 29(1), 113-143. https://doi.org/10.2307/25148670 
+Kumar, S. A., & Bansal, J. (2008). The Impact of Open Access on Scholarly Communication and its Future. Library 
+Herald, 46(2), 91-102.  
+Lertputtarak,  S.  (2008). An  Investigation  of  Factors  Related  to  Research  Productivity  in  Pulic  Universitys'  in 
+Thailand: A Case Study. Victoria University Research Repository, Victoria University. 
+Maasen, P. (2015, March 6). Research Productivity at flagship African Universities. University World News. 
+Morrison,  H.  (2012). Freedom  for  Scholarship  in  the  Internet  Age (PhD  Dissertation).  Simon  Fraser  University, 
+Britain. 
+Musa, A. U., Sanusi, A. B., Yusuf, S., & Shittu, M. (2015, February). Open Access Scholarly Publishing: A Chance 
+for  Maximization  of  Research  Productivity  among  Academics  in  Nigerian  Federal  Universities. Journal  of 
+Humanities and Social Science, 20(2), 1-9.  
+Ogbomo,  E.  F.  (2010).  Publication  Output  of  Librarians  in  Tertiary  Institutions:  A  Case  Study  of  Delta  State 
+University. Library Philosophy and Practice (e-journal), 1-10.  
+Osahon, O. J., & Kingsley, O. (2016). Statistical approach to the link between internal service quality and employee 
+job  satisfaction:  A  case  study. American  Journal  of  Applied  Mathematics  and  Statistics,  4(6),  178-184. 
+https://doi.org/10.12691/ajams-4-6-3 
+Pinfield, S. (2008). Libraries and Open Access: The Implications of Open Access Publishing and Dissemination for 
+Libraries  in  Higher  Education  Institutions.  In  Earnshaw  R.,  Vince  J.  (Eds.),  Digital  Convergence-Libraries  of 
+the Future. London: Springer. 
+Ram,  S.,  &  Paliwal,  N.  (2016,  July).  Management  of  University  Research  Publication:  A  Case  Study  of  JUIT 
+Publication Database. DESIDOC   Journal   of   Library   and   Information   Technology,   36(4),   212-219. 
+https://doi.org/10.14429/djlit.36.4.9912 
+Saric,  J.,  Utzinger,  J.,  &  Bonfoh,  B.  (2018,  August  23).  Research  Productivity  and  main  publishing  institutions  in 
+Cote D'Ivoire, 2000-2016. Globalization and Health, 14, 88. https://doi.org/10.1186/s12992-018-0406-1 
+Suber,  P.  (2015).  Open  Access  Overview:  Focusing  on  open  access  to  peer-reviewed  research  articles  and  their 
+preprints.  
+
+http://wje.sciedupress.com World Journal of Education Vol. 11, No. 6; 2021 
+Published by Sciedu Press                         30                          ISSN 1925-0746  E-ISSN 1925-0754 
+Utulu,  S.  (2005). Role  of  Journals  in  Developing  Emerging  Scholars  in  Library  and  Information  Science. 
+Proceedings  of  the  Conference  held  at Conference  Centre  University  of  Ibadan,  Nigeria:  Third  World 
+Information Service Limited, (pp. 137-147).  
+Venkatesh,  V.,  Morris,  M.  G.,  &  Davis,  G.  B.  (2003).  User  Acceptance  of  Information  Technology:  Toward  a 
+Unified View. MIS Quarterly, 27(3), 425-478. https://doi.org/10.2307/30036540 
+Yamane, T. (1967). Statistics: An Introductory Analysis (2nd ed.). New York: Harper and Row. 
+Zhou, L. L., Owusu-Marfo, J., Antwi, H. A., Antwi, M. O., Kachie, A. D., & Ampong-Wireko, S. (2019, November 
+21).  Assessment  of  the  social  influence  and  facilitating  conditions  that  support  nurses'  adoption  of  hospital 
+electronic information management systems (HEIMS) in Ghana using the unified theory of acceptance and use 
+of    technology    (UTAUT)    model. BMC    Medical    Informatics    and    Decision    Making,    19,    230. 
+https://doi.org/10.1186/s12911-019-0956-z 
+ 
+Copyrights 
+Copyright for this article is retained by the author(s), with first publication rights granted to the journal. 
+This  is  an  open-access  article  distributed  under  the  terms  and  conditions  of  the  Creative  Commons  Attribution 
+license (http://creativecommons.org/licenses/by/4.0/).

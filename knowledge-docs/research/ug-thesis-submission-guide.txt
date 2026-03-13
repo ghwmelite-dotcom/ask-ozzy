@@ -1,0 +1,119 @@
+1 
+ 
+GUIDELINES TO STUDENTS ON NEW THESIS SUBMISSION AND 
+TRACKING SYSTEM 
+1. ACCESSING THE SYSTEM 
+To access the system, type the following URL in any standard web browser: 
+https://academic.ug.edu.gh/ugtracker 
+The login screen will look like the image below: 
+ 
+2. Log in with student ID number and PIN. 
+ 
+3. Click on ‘Thesis/Dissertation title’ under the drop-down menu on the left-hand side of the 
+screen.  
+ 
+ 
+
+ 
+2 
+ 
+4. Copy and paste the approved dissertation/thesis title in the ‘Dissertation/Thesis Title’ 
+field. 
+ 
+ 
+5. Select the option of either Dissertation or Thesis under the ‘Title’ section. 
+ 
+ 
+
+ 
+3 
+ 
+6. Select ‘Dissertation/Thesis’ code. 
+ 
+7. Click on ‘Save’ to proceed to upload documents. 
+ 
+
+ 
+4 
+ 
+8. Click on ‘Attachment’ to upload documents. Documents must be uploaded in the 
+following order: Thesis→Turnitin report→Clearance form→’Other’. The first three 
+documents are compulsory uploads. 
+ 
+9. To upload the documents, follow the steps below: 
+i. Click on ‘Type’ 
+ 
+
+ 
+5 
+ 
+ 
+ii. Select ‘Thesis/Dissertation’ 
+ 
+ 
+iii. Click on ‘Choose file’ 
+ 
+
+ 
+6 
+ 
+iv. Proceed to select your thesis/dissertation document from your storage location. 
+v. Click on ‘Upload’ 
+ 
+vi. Click the ‘OK’ button on the pop-up message at the top of the screen then click 
+on the ‘Return’ button.  
+ 
+
+ 
+7 
+ 
+vii. Repeat the steps to upload the remaining documents i.e. Turnitin report, 
+Financial clearance form and ‘other’ documents (if required). 
+Note: To upload other documents, in the ‘File Description’ box, type the name 
+of the document e.g. Extension Letter, as seen in the example below. 
+ 
+10.  Once all documents have been uploaded, click on ‘Return’ and then click on the 
+‘Submit’ button. 
+ 
+
+ 
+8 
+ 
+11. Click the ‘OK’ button on the pop-up message at the top of the screen to proceed to the 
+confirmation page. 
+ 
+ 
+12.  Confirmation page includes date of submission of thesis/dissertation and is proof of 
+submission. Save and/or print the confirmation page for your records. 
+13. To obtain the printout of your submission follow the steps below: 
+i.  Click on ‘Proof of Submission’ under the drop-down menu on the left-hand side of 
+the screen. 
+
+ 
+9 
+ 
+ 
+ 
+ii.  Click on ‘Export Proof of Submission’ as shown below to get your proof in a pdf file which 
+you can print or save and use as a proof of submission. 
+ 
+
+ 
+10 
+ 
+iii.  To complete the process, log out of the system by clicking on the ‘logout’ button as shown in the image 
+below. 
+ 
+iv. If you upload the wrong document by mistake, select the item you want to remove by clicking on the check 
+box in front of the item to remove and proceed to click on the ‘Delete’ button as shown in the images below.  
+ 
+ 
+
+ 
+11 
+ 
+ 
+ 
+Once the document has been deleted you may continue to upload the right item.  
+Ensure that all documents uploaded are the correct documents required. Any submissions containing 
+wrong documents will be returned.

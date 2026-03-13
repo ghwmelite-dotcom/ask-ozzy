@@ -1,0 +1,1506 @@
+Guide for  
+Preparation and Evaluation  
+of Higher Degree Research Thesis
+KWAME NKRUMAH UNIVERSITY OF  
+SCIENCE AND TECHNOLOGY  
+KUMASI
+JUNE 2016
+
+2 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+
+| 3 |
+PREFACE
+The thesis represents the main outcome of a student’s research and fulfils 
+his/her scholarly aspiration. A good thesis should be clear and unambiguous 
+and have a logical structure that should assist the reader to understand 
+the discussion being presented but not obscure it. In order to achieve this 
+objective, the layout of the thesis should conform to a set pattern. At the 
+Kwame Nkrumah University of Science and Technology (KNUST), thesis is a 
+requirement for the award of masters (MPhil, MSc, MA, LLM, MBA, MPA, MPH, 
+M.Arch, MFA, etc) and Doctoral degrees. This Guide provides the graduate 
+research student with most of the information needed to organise the thesis to 
+meet the requirements of higher degree research (HDR). A thesis may be either 
+print or non-print. The format for a print thesis can be either a typescript or a 
+series of papers that have been published, have been submitted for publication 
+and/or are manuscripts that could be submitted for publication.
+This Guide is written to help the student and the supervisor(s) to communicate 
+as required in scientific writing. Thus, the purpose of this Guide is to outline 
+the format that a masters or a Doctoral thesis submitted to departments in 
+KNUST and the School of Graduate Studies should follow. This guide begins 
+with an introductory note on the types of HDR at KNUST followed by general 
+regulations. The section on graduate thesis provides information on what is 
+required of an HDR candidate.
+Full details of the layout and style of a thesis are provided in this Guide. It is 
+important to note the option given to HDR candidates to present the major 
+(text) section of the thesis in the form of topical/thematic chapters (with 
+specific objectives as sub-chapters). With this option, each chapter becomes 
+a complete publishable paper/manuscript. It is strongly recommended that 
+all supervisors and graduate students familiarise themselves with the general 
+information and regulations in this Guide.
+
+| 4 |
+Table of Content
+PREFACE                                                                                                        3
+INTRODUCTION                                                                                                5
+Thesis for a Doctoral Degree 5
+Thesis for a Master of Philosophy Degree 5
+Thesis for Taught Master Degree 6
+CONTENTS                                                                                               6
+A.  PRELIMINARY SECTION 7
+1. Title Page 7
+2. Intellectual Property Rights 7
+3. Declaration of Authorship 7
+4.  Abstract 8
+5. Table of Contents 8
+6. List of Tables 8
+7. List of Figures 8
+8. List of Abbreviations 9
+9. Prefatory Material 9
+B. MAJOR COMPONENTS OF THE THESIS 11
+OPTION 1: THESIS AS A MONOGRAPH 12
+OPTION 2: MANUSCRIPT-BASED THESIS 15
+C. MINOR COMPONENTS OF THE THESIS (BACK MATTERS) 21
+Bibliography or References or Works or Literature Cited 21
+D. PUBLISHING FROM THESIS, AUTHORSHIP PROTOCOLS AND GUIDES 24
+E. EVALUATION OF HIGHER DEGREE RESEARCH THESIS 26
+F. GRADUATION REQUIREMENTS 27
+G. OTHER CONSIDERATIONS 28
+H.  APPENDICES  31
+Evaluation of MPhil Thesis 42
+
+| 5 |
+INTRODUCTION
+The School of Graduate Studies is the main statutory body in the Kwame 
+Nkrumah University of Science and Technology (KNUST) that oversees 
+graduate programmes offered by the Colleges, Faculties and Departments 
+of the University. Individual departments also conduct workshops/forums/
+colloquiums. These allow postgraduate students to discuss and present their 
+work in a supportive environment with other higher degree research (HDR)
+1
+ 
+candidates and academics. These opportunities provide the HDR students with 
+important feedback and support to facilitate the production of a high quality 
+thesis. Students are advised to contact their departments or centres for more 
+information.
+Thesis for a Doctoral Degree
+A Doctoral candidate is required to undertake original and significant 
+research on an approved topic, the results of which are presented in a thesis. 
+Candidates for the award of a Doctoral degree must demonstrate advanced 
+theoretical and methodological knowledge. The research should make an 
+original and significant contribution to knowledge or understanding.
+As part of the training of a Doctoral candidate, a residency is required. This is to allow 
+students to concentrate on their degrees, acquire the necessary habits, attitudes, skills 
+and insights required for contribution to scholarship and have the opportunity to work 
+closely with other scholars including Faculty and HDR students. The residency goals can 
+be achieved by multiple means that include:
+i. Presentation at scholarly seminars;
+ii. Participation in scholarly seminars;
+iii. Participation in conferences;
+iv. Publications or other forms of scholarly dissemination; and
+v. Passing other mandatory courses.
+Thesis for a Master of Philosophy Degree
+A research candidate for the degree of Master of Philosophy is required to 
+undertake research on an approved topic, the results of which are presented 
+in a thesis. Such candidates must demonstrate appropriate theoretical and 
+1 HDR has been defined to include PhD, MPhil and all taught masters candidates.
+
+6 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+methodological knowledge. The thesis must, therefore, contain ample evidence 
+of the student’s familiarity with the research process. The scope of work in a 
+Master degree by research is normally less than that undertaken in a Doctoral 
+programme. A distinct contribution to knowledge is not mandatory in a thesis 
+for the award of a Master of Philosophy.
+Thesis for Taught Master Degree
+A candidate enrolled in a taught Master programme is required to undertake 
+research on an approved topic and present the results in a thesis. These 
+candidates must demonstrate adequate methodological knowledge, although 
+the expectation is normally lower in relation to Master of Philosophy 
+candidates.
+CONTENTS
+The contents of this Guide are divided into three (3) main sections namely 
+preliminary, major (text) and minor (back matters) sections. An additional 
+section – mechanics of presentation – is included to ensure that quality work is 
+produced.
+
+| 7 |
+A.  PRELIMINARY SECTION
+1. Title Page
+The first page identifies the work as a thesis being submitted to a department 
+in the Kwame Nkrumah University of Science and Technology, Kumasi for the 
+award of [NAME OF DEGREE]. The candidate’s name, qualifications held (not the 
+qualification being sought), the full title of the thesis or other examinable work, 
+and the month and year of submission are recorded on the title page.
+The order of the candidate’s name is first name, middle name (if any) and 
+surname. The candidate’s name should carry no prefixes such as Dr., Mr, Mrs. 
+etc. A specimen of a title page is presented in Appendix 1.
+2. Intellectual Property Rights
+If there is any material in the thesis or other examinable work that could or 
+does have implications for the intellectual property rights of the candidate, 
+the University, a sponsor of the research or some other person or body, those 
+implications shall be stated under the heading “Intellectual Property Rights” 
+either on the same page as the Acknowledgments or on the next page in 
+sequence.
+3. Declaration of Authorship
+On the first page after the table of contents, the certificate of authorship signed 
+by the candidate certifying the original author of the thesis or other examinable 
+work appears which states:
+“I hereby declare that this submission is my own work and that, to the best 
+of my knowledge and belief, it contains no material previously published or 
+written by another person nor material which to a substantial extent has been 
+accepted for the award of any other degree or diploma at Kwame Nkrumah 
+University of Science and Technology, Kumasi or any other educational 
+institution, except where due acknowledgment is made in the thesis.”
+A specimen of a declaration page is presented in Appendix 2.
+
+8 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+4.  Abstract
+The thesis should contain one paragraph Abstract not exceeding 500 words 
+(1 page) for a Doctoral thesis and 350 words (1 page) for a Master thesis. 
+The Abstract is a short summary of the thesis and should start with a brief 
+sentence to orientate readers about the overall issue addressed in the thesis.
+The Abstract should indicate the main goal or objective of the study, its 
+academic or practical importance, the methodology used, the main findings, 
+the conclusion (that indicates the contributions made by the study in filling 
+gaps in literature) and implications of the findings.
+5. Table of Contents
+All Doctoral or Master theses are required to have a Table of Contents. List the 
+page number on which each section first appears. Use proper capitalisation and 
+include headers and sectional titles exactly as they appear within the thesis. 
+(For example, if “Chapter” is used in the text headers, it must appear in the 
+Table of Contents).
+6. List of Tables
+A list of tables should be included on a separate page immediately following 
+the Table of Contents and should follow the format below:
+List of Tables
+Table No.TitlePage
+Table 2.1.National Population and its Urban Composition from 1960 – 201020
+7. List of Figures
+A list of figures should be included on a separate page immediately following 
+the list of tables and should follow the format below:
+List of Figures
+Figure No.CaptionPage
+Figure 2.1.Conceptualising Housing Affordability45
+
+ 9
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+8. List of Abbreviations
+If a large number of abbreviations are used in the thesis, which may be unfamiliar to 
+readers, an explanatory list should be provided. The abbreviations should be arranged in 
+alphabetical order as presented below:
+AMAAccra Metropolitan Assembly
+APKAverage Passenger Kilometres
+CBDCentral Business District
+DVLADriver and Vehicle Licensing Authority
+9. Prefatory Material
+Prefatory materials are to be presented on separate pages in the thesis. 
+These include the Acknowledgements, Ethical Approval, Professional Editorial 
+Assistance and Confidential Material. Details of each of these requirements are 
+presented in the sections below.
+9.1.  Acknowledgments
+Where appropriate, a brief acknowledgment of any substantial assistance received 
+shall be included on a separate page. The acknowledgment should list the names of 
+the people, organisations or institutions that provided substantial assistance for the 
+research and the type of assistance, which may relate, for example to the:
+• collection of data;
+• processing of the data including the selection and use of particular 
+statistical techniques;
+• editing of the thesis;
+• use of graphics in the thesis; and
+• word processing of the thesis.
+If any of the assistance was provided for a fee, this fact should also be 
+recorded.
+9.2. Ethical Approval
+If the thesis or other examinable work reports on research involving humans or 
+animals, a page containing the name(s) of the relevant University and/or other 
+ethics committee and the approval number(s) shall be inserted in sequence in 
+the soft-bound copies of the print thesis or other examinable print work.
+
+10 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+9.3 Professional Editorial Assistance
+If professional editorial assistance was obtained by the candidate during the 
+conduct of the research and the production of the examinable work (and 
+written permission granted before obtaining the assistance), the name of the 
+editor and a brief description of the services provided must be specified in the 
+thesis or any other examinable work under the heading “Professional Editorial 
+Assistance” on a separate page inserted in sequence. If the professional 
+editor’s current or former area of academic specialisation is similar to that of 
+the candidate, this too should be stated in the prefatory matter of the thesis 
+or other examinable work. Professional editing of a candidate’s thesis or other 
+examinable work is limited to formatting, grammar and style and must not 
+alter or improve the substantive content or conceptual organisation of the 
+thesis. Where a professional editor provides advice to a candidate on matters 
+of structure, exemplars only should be given.
+9.5. Confidential Material
+If there is any material in the thesis or other examinable work which is 
+confidential for commercial or other reasons either for a specified period 
+or indefinitely, the confidential material, the period and the reasons for its 
+confidentiality shall be specified under the heading “Confidential Material” 
+on a separate page inserted in sequence. In addition, the following statement 
+shall appear on the cover of the soft-bound copies of the print thesis or other 
+examinable print work: “This thesis contains confidential material as described 
+on page [insert page number]. The thesis shall not be given to anyone who is 
+not directly involved in the examination of the thesis [or portfolio].”
+The Head of the Department from which the thesis originates is required to 
+write a cover letter to indicate that the thesis contains confidential materials. 
+Such a letter will inform the administration and prevent it from disseminating 
+the thesis to the public.
+
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+B. MAJOR COMPONENTS OF THE 
+THESIS
+The main text of the thesis is usually divided into chapters with sub-headings 
+to indicate the orderly progression of topics and their relation to each other. All 
+chapter headings should be typed consistently. When there are sub-headings, 
+each level of heading should be clearly distinguished typographically from 
+the other levels, and the variations should be selected so as to reflect, in an 
+obvious way, the hierarchy of headings (that is, higher level headings should 
+look more important). Always allow, at least, one extra line of space above and 
+preferably below sub-headings. Students are expected to keep a maximum of 4 
+levels for the sub-headings.
+In this thesis format, the MAJOR (TEXT) SECTION should consist of the following 
+chapters:
+• Introduction – Why am I doing it? My aim (what do I hope to discover) 
+and what is its significance?
+• A Review of Research/Literature – What is known and unknown/identified 
+gaps.
+• Approach and Methodology – How am I going to achieve the aim?
+• Results – What have I found?
+• Discussions – What does it mean? The results should be related to 
+literature.
+• Conclusions – What are the possible applications or recommendations 
+and what contributions does the thesis make to knowledge?
+• References – What materials have been consulted in writing the thesis?
+The School of Graduate Studies provides postgraduate students two options 
+for the organisation of the main components of the thesis. The options are: 1) 
+THESIS AS A MONOGRAPH and 2) MANUSCRIPT-BASED THESIS. The choice of an 
+option is based on the department’s tradition, subject area, methods used, and 
+requirements of research project that the student or supervisor has. Details of 
+these options are presented in the following section of the Guide.
+
+12 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+OPTION 1: THESIS AS A MONOGRAPH
+Chapter 1: General Introduction
+The thesis should normally begin with a general introduction, which presents 
+an overview of the purpose and significance of the study. The introduction 
+should show why the topic selected is worth investigating. This will normally 
+be done with reference to the existing research knowledge, identifying areas 
+that have not been explored and the gaps that need to be explored or filled by 
+the investigation or where new research findings justify a reconsideration of 
+established knowledge.
+The research problem(s) that need(s) solving or investigating should be 
+correctly and precisely defined. The research problem(s) can be stated in 
+question form, with sub-questions, if possible. The general introduction should 
+propose a solution to this problem. This response should make explicit the 
+objective of the research, and not simply state an intention to explore or 
+discuss. The study should be based on a well-defined hypothesis, which should 
+be clearly stated.
+How the research makes an original contribution to the theoretical body of 
+knowledge and also the study’s practical significance should be mentioned. 
+It is especially critical that the Introduction be well-written. A clearly defined 
+purpose and a strong theoretical grounding fundamentally strengthen the 
+thesis. They direct the reader from the advanced knowledge level towards the 
+definite question the student is addressing. Without a clearly defined problem 
+and a strong theoretical grounding, the thesis is fundamentally flawed from the 
+outset.
+The general introduction should be interesting and must tell the direction of 
+the research. The central concept underlying the work – conceptual framework 
+– should be described, making it a “theme’’ that ties together all the arguments 
+of the student. Theoretical assumptions of the study should be provided 
+with a discussion of the limitations they impose. The expected outcome as 
+a prelude to the solution of the problem(s), the need for the research and 
+the beneficiaries should be well-addressed. This chapter should be brief, 
+well-developed and unambiguously written to cover one or two pages. It 
+should end with the specific objectives, which would constitute the various 
+unique research chapters. In some departments in the University, the first 
+chapter covers sub-headings such as justification of the research, scope of the 
+research, summary of methodology, limitations of the study and organisation of 
+the thesis. These sub-headings could be maintained while following OPTION 1.
+
+ 13
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+Chapter 2: Literature Review
+It is called Literature Review because the contents of this chapter should 
+be based on most relevant and latest information/literature relating to the 
+field of study. The purpose is to summarise, evaluate and compare the main 
+developments and current discussions in the field, which are specifically 
+relevant to the subject of research embodied in the thesis. It should also aim at 
+identifying ways to address these issues with the present research programme.
+Every statement that goes beyond basic textbook or electronic knowledge 
+needs to be supported by an appropriate reference. The literature review 
+should recap, appraise and match the major changes in the related field to the 
+research subject that would form the thesis. Key papers should be identified 
+instead of quoting from those that only contribute to the student’s field of 
+study in a minor way. Those not read should not be quoted. The number of 
+relevant papers to include is a matter of judgement depending on the field.
+Students should avoid plagiarism (see Section 21 – “Plagiarism Test for Theses” 
+of the Graduate Handbook) which occurs when a writer uses words, phrases 
+or passages from someone else’s work and presents them verbatim as his/her 
+own without providing complete documentation or source of citation. A student 
+could be guilty of plagiarism if he/she copies a whole paragraph from a writer 
+despite acknowledging the source. It is a serious and punishable offense in 
+research project reporting. Sanctions could include, but not limited to penalties, 
+suspension, and even expulsion from the university. Certificates of students 
+shall be revoked if this is detected and proven after the student has graduated 
+from the university. Research students, therefore, need to develop and respect 
+ethical values including the unacceptability of plagiarism and falsifying results 
+to make them appear more satisfactory.
+All aspects that lead to the work must be integrated without losing sight of the 
+focus. For example, candidates can incorporate one or two relevant schemes 
+and diagrams in the literature review. However, one should avoid expansion 
+into topics that are not directly related to the research. Similarly, one should 
+not reproduce textbook pictures, proofs, derivations, etc. without sources 
+of citation. Concepts crucial for the proper understanding and appreciation 
+of the questions addressed, the techniques applied, and the results obtained 
+should be clearly explained. The literature review thus describes and analyses 
+previous research on the topic and should not merely string together what 
+other researchers have found. One should state the origin of the problem, 
+what is already known about it, and the other methods applied to solve it. 
+When gaps are identified, they should be discussed and the body of knowledge 
+
+14 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+analysed to determine what is known and not known about the topic. What is 
+not known should inform the objectives of the study.
+It is paramount to stress that the theoretical framework or conceptual 
+framework that guides the study should be made an essential part of the 
+literature review. Please, refer to Appendix 3 to clarify the differences between 
+Theoretical Framework and Conceptual Framework.
+Chapter 3: Approach and Methodology
+This chapter outlines the design adopted for the study, explains the methods 
+employed to select the sample, discusses the tools used to collect quantitative 
+and / or qualitative data, and traces the steps taken to screen, combine, and 
+reduce the quantitative data in preparation for a testing and validation of the 
+theoretical model.
+Chapter 4: Results and Discussion
+The data analysis section is one of the most essential sections of a research 
+work. It consists of the data that have been collected as a part of the research 
+and the researcher’s analysis of the data. Presenting the data collected and its 
+analysis in comprehensive and easy to understand manner is the key to have 
+a good analysis section. The data should be procedurally analysed in line and 
+build-up to the objectives for which the study is being undertaken. The analysis 
+should be in an appropriate format and detailed enough to address the 
+researcher objectives. Quantitative data could be presented in tables, charts, 
+figures, etc. and should be explained and discussed in the context of the study. 
+The results from the analysis should be related to real life situations and in 
+case of negative results, it is important to provide some level of justification to 
+such situations.
+The discussion section needs to review the findings from the analysis in the 
+context of the literature and the existing knowledge about the subject. The 
+discussion section, therefore, needs to follow from the results and relate back 
+to the literature review. Typically HDR thesis contains specific objectives that 
+can stand alone as chapters. Where a HDR student devotes a separate chapter 
+on analysis and discussion to each objective, chapter four can be written as 
+follows:
+Chapter 4.1. Heading that reflects the first objective
+Chapter 4.2. Heading that reflects the second objectives
+Chapter 4.3. Heading the reflects the third objectives
+
+ 15
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+The number of sub-chapters under chapter four depends on the number of 
+specific objectives in the study.
+Chapter 5: General Discussion
+The general discussion/synthesis should contribute to the understanding of 
+the whole study/experiment and the results obtained from the sub-chapters. 
+The chapter should contain the latest available papers or relevant knowledge 
+available at the time of the student’s results/work. Such facts need to be 
+mentioned and compared to the findings. Students are expected to draw 
+implications of the entire study along the lines of the research questions or 
+specific objectives set at the beginning of the thesis. In addition, the novelty 
+of the work should be stressed in addition to the contribution/significance and 
+implications of the findings. For example, have the objectives been achieved 
+and have the hypotheses or research questions been answered?
+Chapter 6: Conclusions and Recommendations
+i. Use few sentences to summarise the most important results and 
+conclude by giving the strongest and most important statement that 
+highlights the outcome of the study. It should be reasonably short.
+ii. The student might find it helpful to put the conclusions in the form of 
+points.
+iii. The student should provide answers/solutions to the questions/
+problems raised in the introduction.
+iv. State how the research findings and results would contribute to the 
+field in general and what broader or general implications (practical or 
+otherwise) these may have. Summarise what was learned and how it 
+can be applied.
+v. Describe variations, extensions or other applications of the central idea.
+vi. Are there ways in which the student’s work could be improved by future 
+researchers?
+vii. Suggestions may be made for further research or work.
+OPTION 2: MANUSCRIPT-BASED THESIS
+Chapters 1 and 2 in a manuscript-based thesis follow the same format as has 
+been described under OPTION 1.
+
+16 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+Chapter 3: Topical or Thematic Chapters
+These parts of the major (text) section should be divided into logical sub-chapters, each 
+containing the data obtained for each specific objective or theme during the research. 
+Each topical or thematic chapter comprises
+1.    heading;
+2. brief introduction;
+3. approach and methods;
+4. results and interpretation; and
+5. discussion (or results/discussion)
+NB: Each chapter then becomes a complete publishable paper/manuscript.
+Chapter 3.1 Topical or Thematic Chapter One
+Heading
+i. Should focus on each specific objective; and
+ii. Should be concise and properly couched to reflect what the chapter (i.e., 
+specific objective) entails.
+3.1.1 Introduction
+i. An overview of the problem and a statement of the hypothesis or 
+specific question to be explored.
+ii. Why is this part of the problem worth studying/investigating?
+iii. Relevance of this in contributing to solving the problem(s) prescribed or 
+identified in the main objective.
+iv. The introduction should also highlight the “gaps” that need to be filled. 
+These gaps are areas not fully explored in the thematic area.
+v. Use some recently published material or existing research on the topic 
+to evaluate the information regarding the developmental issues in the 
+subject area and the potential original contribution to the theoretical 
+body of knowledge to be made.
+vi. A conceptual model may be used to provide an answer to the question 
+posed in the introduction (at a conceptual level).
+vii. Ensure that the introduction is not alienated from the general 
+introduction (Chapter 1) but try to avoid unnecessary repetitions.
+
+ 17
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+3.1.2 Approach and Methodology
+i. This area describes and justifies the data-gathering method used, its 
+appropriateness and outlines how the data would be analysed.
+ii. The method should be clearly and meticulously described, exactly 
+reproducible, detailed and purposeful to generate accurate results or 
+sufficient data.
+iii. Candidates should check methods adopted in previous theses or sources 
+before they use them.
+iv. Follow the description of the Research Design detailing every step of the 
+data-gathering and analysis processes.
+v.  Reference  literature  about  Method:  Citation  should  be  limited  
+to  data  sources  and  references  of  where  to  find  more  complete  
+description of procedure.
+vi. Detailed description of design, experiment or survey.
+vii.   Measurements   and   operational   definitions:   Include   detailed   
+discussions of indexes and scales. Specify methods used to assess 
+validity and reliability.
+viii.   Analysis:   Techniques   to   be   used   and   justification.   Nature   of   
+relationships  expected  –    asymmetrical,  symmetrical,  reciprocal,  
+linear, monotonic, other curvilinear, necessary, etc.
+ix. Description of data analysis: Description of statistical analysis and 
+tests  performed  to  be  given;  identification  of  themes/categories  
+(qualitative or historical research).
+x. Tests of hypotheses: ANOVAs, cross-tabulations, correlations, etc, 
+depending on techniques used should be given in the same order 
+as hypotheses.
+3.1.3 Results and Interpretation
+i.  Data  need  be  interpreted  thoroughly  for  the  solution  of  each  
+problem.
+ii. Results section is reserved for the description of the experimental 
+data and should not contain extensive interpretation.
+
+18 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+iii.  Describe  the  results  of  experiments  that  provide  evidence  in  
+support  of  the  thesis:  Make  actual  statements  of  observation,  
+including statistics, tables and graphs or figures.
+iv. Mention negative and positive results.
+v. Use SI units throughout thesis.
+vi. Break up results into logical segments by using subheadings.
+vii. Key results should be given in clear sentences.
+viii. Do not repeat in the text all the values given in tables.
+ix. Tables and/or figures should be used to illustrate and summarise 
+all numeric information.
+x. Do not present the same data in a graph/figure as well as in a table.
+xi.     Findings should  address  results  from  data  analysis  and  results  of  
+the tests of the hypotheses.
+xii. Use error bars if possible.
+3.1.4 Discussion
+i. Interpret results in terms of background spelt out in the Introduction.
+ii. Break up the section into logical segments by using subheadings.
+iii. Include the evidence of line of reasoning supporting each interpretation.
+iv. Discuss the observations in relation to the critical body of knowledge on 
+the topic.
+v. Identify all papers that report data related to the findings, and discuss 
+them appropriately. It is the purpose of the discussion to evaluate and 
+interpret the results against the background of the relevant literature.
+vi. Appropriate review of the relevant literature: Compare the novelty in the 
+findings with what is confirmatory (or contradictory) to published work.
+vii. Do not just reiterate what is found but rather discuss what the findings 
+mean in relation to the theoretical body of knowledge on the topic and 
+your profession.
+viii. Begin by discussing your findings in relation to the theoretical 
+framework introduced in the Literature Review.
+
+ 19
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+ix. Address what the findings mean for communication professionals in that 
+field – the practical and pedagogical implications of the study.
+• Do  not  write  lengthy  discussion:  avoid  repetitions  of  the  data.  
+Instead interpret them;
+•  Address  the  theoretical  and  the  practical  implications  of  the  
+findings;
+• Present only interpretations of the findings, not opinion; and
+•  Outline  the  limitation  of  the  study,  and  propose  areas  for  future  
+research.
+x. The thesis should end with a brief conclusion that provides closure.
+NOTE: In Departments where students present results and discussion together, 
+subsection 3.1.3 would be written as follows:
+3.1.3 Results and Discussion
+i. In most cases, results and discussion go together.
+ii. This is when the thesis is lengthy with several pages of results that 
+would make it difficult for the reader to remember the results before the 
+discussion.
+iii. However, care should be taken to describe the conditions obtained for 
+each set of results and how they fit into the existing body of knowledge 
+whether they are together or not.
+iv. Are the results consistent with current theories? Do they give new 
+insights? Do they suggest new theories or mechanisms?
+v. Ensure that appropriate statistical analyses have been used.
+vi. Use appropriate statistical tests. Where applicable, show measurement 
+errors and standard errors on the graphs.
+vii. Show how other people in the field appreciate the findings. Do the 
+findings have any implications that do not relate to the questions that 
+you set out to answer?
+Chapters 3.2 – 3.x: Other Topical/Thematic Chapters
+These should be written by following the format described in 3.1 above.
+
+20 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+Chapter 4: General Discussion
+The general discussion/synthesis should contribute to the understanding of the 
+whole study or experiment and the results obtained from the sub-chapters. 
+The chapter should contain the latest available papers or relevant knowledge 
+available at the time of the student’s work. Such facts need to be mentioned 
+and compared to the findings. Students are expected to draw implications of 
+the entire study along the lines of the research questions or specific objectives 
+set at the beginning of the thesis. In addition, the novelty of the work should 
+be stressed in addition to the contribution/significance and implications of the 
+findings. For example, have the objectives, hypotheses or research questions 
+been achieved or answered?
+Chapter 5: Conclusions and Recommendations
+i. Use few sentences to summarise the most important results and 
+conclude by giving the strongest and most important statement that 
+highlights the outcome of the study. It should be reasonably short.
+ii. The student might find it helpful to put the conclusions in the form of 
+points.
+iii. The chapter should provide answers or solutions to the questions or 
+problems raised in the Introduction.
+iv. State how the research findings and results would contribute to the field 
+in general and what sort of broader or general implications (practical or 
+otherwise) these may have. Summarise what was learned and how it 
+can be applied.
+v. Describe variations, extensions or other applications of the central idea.
+vi. Are there ways in which the student’s work could be improved by future 
+researchers?
+vii. Suggestions may be made for further research or work.
+
+| 21 |
+C. MINOR COMPONENTS OF THE 
+THESIS (BACK MATTERS)
+Bibliography or References or Works or Literature Cited
+Referencing is done in order to demonstrate the evidence and research 
+that you have undertaken to complete and support your ideas and to give 
+appropriate credit to those sources and authors. In addition, it enables readers 
+to consult the same materials that you have used. In view of this, a list of 
+all references shall be provided. The list of references that will be indicated 
+at the end will list alphabetically the sources acknowledged. The Harvard 
+Style of referencing shall be used. This guide acknowledges that there are 
+many adapted forms of the Harvard referencing style (e.g. Format 7, Harvard 
+Educational Review, Elsevier Harvard with titles, Elsevier Harvard without titles, 
+etc). The rule-of-thumb is that when using the Harvard referencing style, the 
+candidate must be consistent. The references below provide a general overview 
+of the Harvard referencing style.
+Author: Contribution/Chapter in a Book
+Bibliography example: Quagraine, V. (2011). Kumasi as a Garden City, In: K. 
+K. Adarkwa (ed.), The future of the tree: Towards growth and development of 
+Kumasi (pp. 14-34), Kumasi, Ghana: KNUST Printing Press.
+In-text example: (Quagraine, 2014) or As noted by Quagraine (2014)...
+Book (1 author)
+Bibliography example: Adarkwa, K. K. (2011). Future of the Tree: Towards Growth 
+and 
+Development of Kumasi. KNUST, Kumasi: University Printing Press (UPK).
+In-text examples: (Adarkwa, 2011) or Adarkwa (2011) commented that...
+Book (2 authors)
+Duah, D. Y. and Amos-Abanye, S. (2015). The Urban Poor and the Excesses of 
+Rents: Evidence from Kumasi, Ghana. Kumasi: University Printing Press (UPK).
+In-text examples: (Duah and Amos-Abanye, 2015) or Duah and Amos-Abanye 
+(2015) commented that...
+
+22 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+Book (3 authors)
+Poku-Boansi, M., Duah, D. Y. and Amos-Abanye, S. (2015). The Urban Poor 
+and the Excesses of Rents: Evidence from Kumasi, Ghana. Kumasi: University 
+Printing Press (UPK).
+In-text examples: (Poku-Boansi et al., 2015) or as noted by Poku-Boansi et al. 
+(2015)
+Book or Journal (multiple works by an author in the same year)
+Bibliography example:
+Cobbinah, P. B., Erdiaw-Kwasie, M. O., and Amoateng, P. (2015a). Rethinking 
+sustainable development within the framework of poverty and urbanisation 
+in developing countries. Environmental Development, 13, 18-32. http://dx.doi.
+org/10.1016/j.envdev.2014.11.001
+Cobbinah, P. B., Erdiaw-Kwasie, M. O. and Amoateng, P. (2015b). Africa’s 
+urbanisation: implications for sustainable development. Cities, 47, 62-72. doi: 
+http://dx.doi.org/10.1016/j.cities.2015.03.013
+In-text example:
+(Cobbinah et al., 2015a)
+(Cobbinah et al., 2015b)
+Cobbinah et al. (2015a) commented that...
+Cobbinah et al. (2015b) indicated that...
+Conference Papers
+Bibliography example: Adarkwa, K. K. and Poku-Boansi, M. (2011).
+ 
+Climate 
+Change, Food Security, and Poverty in Ghana’s Northern Regions – Policy 
+Implications for Local Governments. Paper presented at the Senior Policy 
+Seminar Towards a Green Economy: The Effects of Climate Change on Food 
+Security and Earth Resources in Africa and Asia, Vietnam, September 21-24, 
+2011.
+In-text example: (Adarkwa and Poku-Boansi, 2011) or Adarkwa and Poku-Boansi 
+(2011) noted that......
+Journal article (printed journal article)
+Bibliography examples: Poku-Boansi, M. and Adarkwa, K. K. (2013). The 
+determinants of demand for public transport services in Kumasi, Ghana. Journal 
+of Science and Technology, 33 (3), pp.....
+
+ 23
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+In-text example: (Poku-Boansi and Adarkwa, 2013) or According to Poku-Boansi 
+and Adarkwa (2013), .....
+Journal article (online/electronic journal article)
+Bibliography example:
+Cobbinah, P. B., Erdiaw-Kwasie, M. O. and Amoateng, P. (2015). Africa’s 
+urbanisation: implications for sustainable development. Cities, 47, 62-72. 
+Available: http://dx.doi.org/10.1016/j.cities.2015.03.013. [Accessed 30/07/2015]
+In-text example: (Cobbinah et al. 2015) or According to Cobbinah et al. (2015)....
+Maps
+Bibliography example: Town and Country Planning Department (2014). 
+Infrastructure Map of Kumasi, Scale two hundred and fifty kilometres to one 
+feet. Kumasi: Infrastructure Survey.
+In-text example: (Town and Country Planning Department, 2014) or As can 
+be seen in the Infrastructure Map of Kumasi (Town and Country Planning 
+Department, 2014)
+Newspaper article (printed article)
+Bibliography example: Tamakloe, E. K. A. (2008)......... Daily Graphic. 26
+th
+ February.
+In-text Example: (Tamakloe, 2008) or Tamakloe’s (2008) article indicates that...
+Newspaper article (online / electronic article)
+Bibliography example: Tamakloe, E. K. A. (2008)........... Daily Graphic. [online] 
+26th February. p.14. Available from: http://www.dailygraphiconline.com/gh. 
+[Accessed: 22nd May 2008].
+In-text Example: (Tamakloe, 2008) or Tamakloe’s (2008) article indicates that...
+Newspaper article (no author)
+Bibliography example: Daily Graphic. (2008). The rains are here again. Nov 24th.
+In-text example: (Daily Graphic, 2008) or Daily Graphic (2008) article indicates 
+that...
+
+| 24 |
+D. PUBLISHING FROM THESIS, 
+AUTHORSHIP PROTOCOLS AND 
+GUIDES
+It is generally expected that HDR students seek to publish results from their 
+research in academic journals. Supervisors will normally mentor them through 
+this process as there is a lot to learn. One decision that a candidate will need 
+to make early in his/her candidature is whether to try to publish as he/she 
+goes on or wait until completion before he/she starts to publish. There are 
+advantages and disadvantages for both choices and the candidate’s supervisors 
+will help him/her in making this decision. In view of this, it is recommended 
+that the candidate begins the publication process before completing the draft 
+thesis. This is because the candidate will be expected to show evidence of this 
+during the examination of the thesis (see Graduation Requirements in Section 
+12 of Graduate School Handbook).
+In considering publishing from the thesis, decisions must be made about 
+attribution of authorship. The issue that arises is whether the candidate is 
+the sole author of any resulting publications or the authorship should be 
+jointly attributed to supervisors or others. It is, therefore, important that HDR 
+candidates and supervisors agree on authorship of a publication at an early 
+stage in the research project and review their decisions periodically.
+Attribution of authorship depends, to some extent, on the discipline, but in all 
+cases, authorship must be based on substantial contributions in a combination 
+of:
+i. conception and design of the project;
+ii. analysis and interpretation of research data; and
+iii. drafting significant parts of the work or critically revising it so as to 
+contribute to the interpretation.
+Authorship should, therefore, not be offered to those who do not meet the 
+requirements set out above. For example, none of the following contributions, 
+in and of themselves, justifies including a person as a co-author:
+i. being Head of Department or holding other positions of authority or 
+personal friendship with the HDR candidate;
+
+ 25
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+ii. providing a technical contribution but no other intellectual input to the 
+project or publication;
+iii. providing routine assistance in some aspects of the project as the 
+acquisition of funding or general supervision of the research team;
+iv. providing data that has already been published or materials obtained 
+from third parties, but with no other intellectual input.
+A HDR candidate should be the principal author of publications emerging 
+from a thesis with supervisors, where appropriate, taking first author status. 
+It is a courtesy if the supervisor designates the general area or substantially 
+contributes to design. It is not acceptable if the supervisor only provides 
+encouragement, physical resources, financial support, critiques or editorial 
+contribution. In the last case, supervisors should be acknowledged in the 
+acknowledgments section. There are some circumstances where the supervisor 
+may be the principal author but where this occurs it must be with the HDR 
+candidate’s written approval. If research supervisors use contracts with their 
+HDR candidates it would be appropriate to include a statement of authorship.
+“Details on Publishing from a Student’s Thesis, Authorship Protocols and 
+Guides” can be seen in Publication Policy of the School of Graduate Studies, 
+Kwame Nkrumah University of Science and Technology, Kumasi.
+
+| 26 |
+E. EVALUATION OF HIGHER DEGREE 
+RESEARCH THESIS
+The following shall be considered in the assessment of a Higher Degree Research 
+candidate’s thesis:
+1. Statement of the problem and justification for the study;
+2. Critical review of literature and theoretical and conceptual frameworks/
+modelling techniques;
+3. Approach and methodology;
+4. Analysis of data and presentation of results;
+5. Statement of main findings and discussion;
+6. Conclusions and recommendations; and
+7.    Presentation.
+The oral examination of a Higher Degree Research candidate shall also be based on the 
+following:
+1. Presentation by PowerPoint;
+2. Understanding of subject matter during presentation; and
+3. Response to questions.
+Details of the criteria for the evaluation of the thesis and oral examination of a 
+Higher Degree Research candidate are given in Appendix 4 of this guide.
+
+| 27 |
+F. GRADUATION REQUIREMENTS
+The School of Graduate Studies expects HDR Students to meet some basic 
+requirements prior to graduation. Details of these requirements have been 
+presented extensively in Section 12 of the Graduate School Handbook. HDR 
+students are advised to refer to the Handbook for details.
+
+| 28 |
+G. OTHER CONSIDERATIONS
+Margins and Text Spacing
+The thesis submitted to the Board of Graduate School should normally be 
+double-sided, with the pages numbered consecutively. The margins are to be: 
+2.5 cm with the gutter margin, 4 cm. Text is spaced one-and-a-half with the 
+exception of the abstract, quotations, footnotes, references, table and figure 
+captions, which are to be single spaced.
+Font Type, Size and Style
+The print thesis or other examinable print work needs to be word processed 
+or a typescript paper document (A4 size paper (21.0 x 29.7 cm)) with the text 
+in a consistent font throughout (Times New Roman font - 12 point) and any 
+footnotes in a smaller font. It should not be submitted in an electronic format.
+Captions/Legends for Tables and Figures
+Captions for tables should be numbered and set above the table to reflect the 
+content of the table. In the case of figures, the captions should be related to 
+the contents and set below the figure. Numbering for the tables and figures 
+should be linked to the chapters, i.e. numbers for the tables and figures should 
+begin with the number of the chapter within which it is found.
+Photographs
+Photographs or pictures that have been prepared in the study and are 
+presented in the thesis should be captioned as plates and numbered 
+appropriately as in the case of figures.
+Pagination
+All pages must be numbered consecutively. Each chapter/section should begin 
+on a separate page. The School of Graduate Studies requires that page numbers 
+be centred two lines below the bottom margin.
+i. Title page
+On the title page, the page number is omitted, though it is considered as page 
+“i”.
+
+ 29
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+ii. Front Matter (Preliminary Pages)
+Preliminary pages are numbered with lower case Roman numerals, beginning 
+with (ii) following the title page centred at the bottom. On the title page, the 
+page number is omitted, though it is considered as page (i).
+iii. Text (Main Body) and Back Matter
+Arabic numerals are used for all pages in the main text and back matter. The 
+main body of the thesis begins with Arabic numeral “1”, “2”, “3” etc centred at 
+the bottom of the page. The Arabic numeral on a new page starting a chapter/
+section is placed in the centre at the bottom. This includes the first page of 
+each back matter, chapter/section (i.e., appendices, endnotes, etc.).
+iv. References and Other Matter
+Pagination for the references and other materials is by Arabic numerals.
+Length of Thesis/Word Limits of Thesis
+The Board of the Graduate School has set a limit for HDR thesis and they are presented 
+as follows:
+i. The maximum length of a Doctoral thesis shall be between 60,000 
+and 100,000 words inclusive of footnotes, appendices, other than 
+documentary or statistical appendices and bibliography.
+ii. The maximum length of a Master of Philosophy thesis shall not 
+exceed 60,000 words inclusive of footnotes, appendices, other than 
+documentary or statistical appendices and bibliography.
+Binding of thesis for Assessment
+A thesis ready for submission to assessors should be paper (comb) bound and 
+submitted according to the following:
+i. For a Doctoral degree thesis, five (5) copies should be submitted.
+ii. For a Master degree thesis, three (3) copies should be submitted.
+Copies for final submission
+After the thesis has been approved, it must be bound in standard form Art 
+vellum or cloth; overcast, edges uncut. A hard copy of a thesis that has been 
+accepted for the award of either a Master or Doctoral degree shall be sent 
+to the School of Graduate Studies. A PDF version of the final thesis shall be 
+submitted along with the hardcopies to the School of Graduate Studies.
+
+30 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+Labelling of Final Hard Copy
+i. Front Cover
+The front cover of the final copy should be lettered boldly (0.5 cm to 1.25 cm) 
+with the Title, Author and Date (Month and Year).
+ii. Spine
+The spine of the thesis should be lettered boldly up back (0.5 cm to 1.25cm) 
+with the degree, year, and name, before the award of the degree is published 
+by the Registrar.
+Binding Colour
+The colour scheme for a Master thesis shall be deep blue while that for 
+Doctoral degrees shall be wine.
+Paragraphing
+Every paragraph in the thesis should have at least three sentences and each 
+of them should develop one main idea and have a topic sentence which 
+expresses this idea. The text should be fully “justified”.
+
+| 31 |
+H.  APPENDICES
+The appendix comprises materials considered necessary for the comprehension of 
+the text but which would otherwise disturb the flow of the text or bore the reader 
+unbearably. Some things that are typically included in the appendix are:
+i. important and original computer programmes;
+ii. data files that are too large to be represented simply in the main text; 
+and
+iii. pictures, maps or diagrams of results which are not important enough to 
+form a part of the main text.
+
+32 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+Appendix 1 – Specimen Thesis Title Page
+THE IMPACT OF GHANA’S OIL DISCOVERY ON LAND 
+USE IN SEKONDI – TAKORADI
+By 
+Samuel Kofi Duah 
+(B.Sc. Planning; MPhil Planning)
+A thesis submitted to the Department of Planning, Kwame 
+Nkrumah University of Science and Technology, Kumasi in 
+partial fulfilment of the requirements for the award degree of
+DOCTOR OF PHILOSOPHY IN PLANNING
+June, 2016
+
+ 33
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+Appendix 2 –Specimen Declaration Page
+I hereby declare that this submission is my own work and that, to the best 
+of my knowledge and belief, it contains no material previously published 
+or written by another person nor material which to a substantial extent has 
+been accepted for the award of any other degree or diploma at Kwame 
+Nkrumah University of Science and Technology, Kumasi or any other 
+educational institution, except where due acknowledgment is made in 
+the thesis.
+.........................................................................
+Name of Student Name and IDSignatureDate
+Certified by:
+............................................................................
+Name of SupervisorSignatureDate
+Certified by:
+............................................................................
+Name of Head of DepartmentSignatureDate
+
+34 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+Appendix 3: Clarifying the differences between 
+Theoretical and Conceptual Framework
+In attempting to distinguish between a conceptual and theoretical framework, a 
+few key terms ought to be defined.
+A theoretical framework refers to the theory that a researcher chooses to guide 
+him/her in his/her research. Thus, a theoretical framework is the application 
+of a theory, or a set of concepts drawn from one and the same theory, to offer 
+an explanation of an event, or shed some light on a particular phenomenon or 
+research problem. This could refer to, for instance, the Set theory, evolution, 
+quantum mechanics, particulate theory of matter, or similar pre-existing 
+generalisation that could be applied to a given research problem, deductively.
+On the other hand, a researcher may opine that his/her research problem 
+cannot meaningfully be researched in reference to only one theory, or 
+concepts resident within one theory. In such cases, the researcher may have 
+to “synthesize” the existing views in the literature concerning a given situation 
+– both theoretical and from empirical findings. The synthesis may be called a 
+model or conceptual framework, which essentially represents an ‘integrated’ 
+way of looking at the problem (Liehr and Smith 1999). Such a model could then 
+be used in place of a theoretical framework.  Thus, a conceptual framework 
+may be defined as an end result of bringing together a number of related 
+concepts to explain or predict a given event, or give a broader understanding 
+of the phenomenon of interest – or simply, of a research problem. The process 
+of arriving at a conceptual framework is akin to an inductive process whereby 
+small individual pieces (in this case, concepts) are joined together to tell a 
+bigger map of possible relationships.
+In conclusion, the conceptual framework is something you can develop yourself 
+based on a particular theory. You inevitably would use some -if not all-concept 
+that this particular theory operates with. In addition, in your conceptual 
+framework you can add your own concept or constructs or variables that you 
+think are relevant and then proceed to explore or test the relationship between 
+them.
+Conceptual Framework Theoretical framework
+GenesisCreated from a variety of 
+conceptual and theoretical 
+perspectives
+Evolve from literature review / 
+adapted from existing theory
+Conceptual 
+Meaning
+Synthesis of relevant conceptsApplication of a theory as a 
+whole or in part
+
+ 35
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+Conceptual Framework Theoretical framework
+Process Underline 
+Review of Literature
+Inductive – many aspects 
+of different theoretical 
+perspectives are brought 
+together
+Deductive – use dominantly in 
+natural science
+Methodological 
+Approach
+Located in both quantitative 
+and qualitative paradigms
+Located mainly in the 
+quantitative research paradigm
+School of 
+Application
+Limited to specific research 
+problem and / or context
+Wider application beyond the 
+current research problem and 
+context
+Research BaseSocial Science / Management 
+based research
+Natural Sciences based 
+research
+Source: Imenda, 2014.
+Further reading:
+Imenda, S. (2014). Is There a Conceptual Difference between Theoretical and 
+Conceptual Frameworks? J Soc Sci, 38(2): 185-195.
+Liehr, P. and Smith M.J. (1999). Middle range theory: Spinning research and 
+practice to create knowledge for the new millennium. Advances in 
+Nursing Science, 21(4): 81-91.
+
+36 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+Appendix 4 – Evaluation of Thesis
+A thesis will be assessed based on the numerical marks and grades in 
+Appendix 4.1.
+Appendix 4.1. Evaluation of Doctoral Thesis
+Numeric Marks (%)GradeInterpretation
+70 – 100AExcellent
+60 – 69BVery Good
+55 – 59CGood
+50 – 54EReferred*
+Below 50FFail
+*A referred thesis means the affected candidate has the opportunity to review 
+the thesis for re-assessment. However, the re-assessment of a referred thesis 
+should not be scored more than 60.
+The detailed criteria to be used for the evaluation of a Doctoral thesis are 
+outlined in Appendix 4.2.
+Appendix 4.2. Detailed Criteria, Marks and Guidelines for Assessment of 
+Doctoral Thesis
+CriteriaMarksGuidelines for assessment
+1. Statement of the Problem and 
+Justification for the Study
+a. Ability to articulate or explain 
+the import of the topic and its 
+implications (5 marks).
+b. Justification: An explanation of 
+why the topic merits a study 
+in local and/or international 
+perspectives (5 marks).
+c. Statement of Research Questions, 
+Objectives and Hypotheses/
+Propositions (Where necessary) (5 
+marks).
+15
+• A candidate scores very high 
+marks in each section of the 
+detailed criteria if he/she 
+demonstrates a high level of 
+competence in all the listed 
+areas plus any integral aspects 
+that the examiner deems 
+necessary.
+
+ 37
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+CriteriaMarksGuidelines for assessment
+2. Critical Review of Literature 
+and Theoretical and Conceptual 
+Frameworks/Modelling Techniques
+a. Candidate’s demonstration of 
+evidence of scholarly analysis, 
+and criticism of research relevant 
+to the topic/problem being 
+investigated (4 marks).
+b. Meticulous citation of relevant 
+scholarly work by quotation, 
+paraphrasing and/or commentary 
+(4 marks).
+c. Demonstration of competence in 
+understanding and evaluating the 
+material (4 marks).
+d. Candidate drawing differences and 
+similarities between the thesis 
+and previous investigations and 
+identifying knowledge gaps (4 
+marks).
+e. Candidate developing robust 
+conceptual/theoretical 
+frameworks/modelling techniques 
+and justifying references from the 
+literature (4 marks).
+20
+• A candidate scores close to 
+75% of the total marks if he 
+demonstrates high level of 
+competence in 75% of listed 
+criteria plus any integral the 
+examiner deems fit.
+• A candidate scores half of 
+the marks allocated if s/he 
+demonstrates high level of 
+competence in 50% of the 
+details listed plus any integral 
+that the examiner deems fit.
+• A candidate scores less than 
+half of the allocated marks if 
+s/he demonstrates high level 
+of competence in less than 
+50% of the criteria plus any 
+integral that the examiner 
+deems fit.
+3. Approach and Methodology
+a. Statement of the design or 
+blueprint for the study: Whether 
+qualitative, quantitative, mixed 
+and whether cross-sectional in the 
+collection mode, with justification 
+(5 marks).
+b. Sampling Procedures: 
+Determination of sample size, 
+sample frames, techniques with 
+justification (5 marks).
+
+38 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+CriteriaMarksGuidelines for assessment
+c. Data collection techniques/tools, 
+processes in the field and data 
+analysis framework (5 marks).
+NB: The methodology must:
+i. draw links with the theoretical/
+conceptual framework.
+ii. state the research philosophy 
+such as empiricism, pragmatism, 
+positivism, etc.
+15
+4. Analysis of Data and Presentation of 
+Results
+a. Use of appropriate methods and 
+techniques to analyse the data 
+(7.5 marks).
+b. Accurate (i.e. reliability and 
+validity of data) and clear 
+presentation of results e.g. by 
+tabulation, graphically, textually 
+(in the case of qualitative 
+findings) (7.5 marks).
+15
+5. Statement of Main Findings and 
+Discussion
+a. Findings and discussion to be 
+based on data from the thesis (4 
+marks).
+b. Coherence in the presentation of 
+argument (3 marks).
+c. Presentation of major findings of 
+the project (4 marks).
+d. Discussion/arguments to reflect 
+the results in the context of the 
+relevant research questions, 
+theory, hypotheses or propositions 
+(4 marks).
+15
+
+ 39
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+CriteriaMarksGuidelines for assessment
+6. Conclusions and Recommendations
+a. Conclusive statements to 
+incorporate the major findings of 
+the thesis (2 marks).
+b. Critical discussion of the key 
+issues arising from the research, 
+in terms of what was discovered, 
+achieved, established, and argued 
+(2 marks).
+c. Statement of major contributions 
+to knowledge in terms of 
+theoretical or model building 
+and methodology and policy 
+recommendations/industrial 
+application (2 marks).
+d. Addressing and accounting for 
+limitations such as researcher/
+interviewer biases (2 marks).
+e. Recommendations, as related 
+to the objectives, and brief 
+discussion of relevant and 
+interesting future research 
+directions (2 marks).
+10
+7. Presentation i.e., formatting, 
+language, citation and referencing, 
+sectioning, use of upper and lower 
+cases, typing, clarity of tables, figures 
+and plates, conforming to word-
+length requirement etc.
+10
+TOTAL
+100
+The oral examination of a Doctoral thesis will be evaluated based on the format 
+in Appendix 4.3.
+
+40 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+Appendix 4.3. Score Breakdown for Thesis Oral Examination
+S/No.
+Area of AssessmentDetails of AssessmentMaximum 
+Mark
+1
+Presentation by 
+PowerPoint
+a. appropriateness of slides;
+b. confidence in presentation;
+c. articulation (Presentation with less 
+reading from the slides);
+d. presentation of key ideas; research 
+problem, research objectives/goal, 
+framework, methods, findings, etc.;
+e. time management; and
+f. clarity of communication
+15
+2
+Understanding of 
+Subject Matter during 
+presentation
+a. Ability to explain research data 
+however anomalous;
+b. Applicability of research data to the 
+research problem;
+c. Ability to link data to findings;
+d. Ability to link findings to the 
+conceptual framework, theory/
+model/hypothesis;
+e. Ability to explain why hypotheses 
+or research objectives could not be 
+realised;
+f. Succinct statement of contribution of 
+the research to knowledge; and
+g. Limitations to the study.
+45
+3
+Response to 
+Questions/Other 
+Considerations
+a. Mastery of research questions/
+objectives and hypotheses/
+prepositions, if any;
+b. Grasp of theoretical basis of the 
+problem, i.e. understanding  of 
+models and theories used;
+40
+
+ 41
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+S/No.
+Area of AssessmentDetails of AssessmentMaximum 
+Mark
+c. Clear understanding of conceptual 
+framework and how it is related to 
+the problem; and
+d. Understanding of design and 
+methods used to analyse the 
+problem.
+Total100
+
+42 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+Evaluation of MPhil Thesis
+An MPhil Thesis will be assessed based on the detailed criteria presented in 
+Appendix 3.4.
+Appendix 4.4. Detailed Criteria, Marks and Guidelines for Assessment of 
+MPhil Thesis
+Criteria
+Marks
+Guidelines for 
+assessment
+1. Statement of the Problem and Justification for 
+the Study
+a. Ability to articulate or explain the import of 
+the topic and its implications (3 marks).
+b. Justification: An explanation of why the topic 
+merits a study in local and/or international 
+perspectives (3 marks).
+c. Statement of Research Questions, Objectives 
+and Hypotheses/Propositions (Where 
+necessary) (4 marks).
+10
+• A candidate scores 
+very high marks in 
+each section of the 
+detailed criteria if s/
+he demonstrates high 
+level of competence 
+in all the listed areas 
+plus any integral 
+that examiner deems 
+necessary.
+2. Critical Review of Literature and Theoretical and 
+Conceptual Frameworks/Modelling Techniques
+a. Candidate’s demonstration of evidence 
+of scholarly analysis, and criticism of 
+research relevant to the topic/problem being 
+investigated (5 marks).
+b. Meticulous citation of relevant scholarly 
+work by quotation, paraphrasing and/or 
+commentary (5 marks).
+c. Demonstration of competence in 
+understanding and evaluating the material 
+investigated (5 marks).
+d. Candidate drawing differences and 
+similarities between the thesis and previous 
+investigations and identifying of knowledge 
+gaps investigated (5 marks).
+e. Candidate developing robust conceptual/
+theoretical frameworks/modelling technique 
+and justify drawing from the literature 
+investigated (5 marks).
+25
+• A candidate scores 
+close to 75% of the 
+total marks if he 
+demonstrates high 
+level of competence 
+in 75% of listed 
+criteria plus any 
+integral the examiner 
+deems fit.
+
+ 43
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+Criteria
+Marks
+Guidelines for 
+assessment
+3. Research Design and Methodology
+a. Statement of the design or blueprint for the 
+study: Whether qualitative, quantitative, 
+mixed and whether cross-sectional in 
+the collection mode, with justification 
+investigated (6 marks).
+b. Sampling Procedures: Determination of 
+sample size, sample frames, techniques with 
+justification (7 marks).
+ c. Data collection techniques/tools, processes 
+in the field and data analysis framework (7 
+marks).
+NB: The methodology must:
+i. draw links with the theoretical/conceptual 
+framework.
+ii. state the research philosophy such as 
+empiricism, pragmatism, positivism, etc..
+20
+• A candidate scores 
+half of the marks 
+allocated if s/he 
+demonstrates high 
+level of competence 
+in 50% of the details 
+listed plus any 
+integral that the 
+examiner deems fit.
+• A candidate scores 
+less than half of the 
+allocated marks if s/
+he demonstrates high 
+level of competence 
+in less than 50% 
+of the criteria plus 
+any integral that the 
+examiner deems fit.
+4. Analysis of Data and Presentation of Results
+a. Use of appropriate methods and techniques 
+to analyse the data (7 marks).
+b. Accurate (i.e. reliability and validity of data) 
+and clear presentation of results e.g. by 
+tabulation, graphically, textually (in the case 
+of qualitative findings) (5.5 marks).
+12.5
+5. Statement of Main Findings and Discussion
+a. Findings and discussion to be based on data 
+from the thesis (3 marks).
+b. Coherence in the presentation of argument (3 
+marks).
+c. Presentation of major findings of the project 
+(3 marks),
+d. Discussion/arguments to reflect the results 
+in the context of the relevant research 
+questions, theory, hypotheses or propositions 
+(3.5 marks).
+12.5
+
+44 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+Criteria
+Marks
+Guidelines for 
+assessment
+6. Conclusions and Recommendations
+a. Conclusive statements to incorporate the 
+major findings of the thesis (2 marks).
+b. Critical discussion of the key issues arising 
+from the research, in terms of what was 
+discovered, achieved, established, and 
+argued (2 marks).
+c. Statement of major contributions to 
+knowledge in terms of theoretical or model 
+building and methodology and policy 
+recommendations/industrial application (2 
+marks).
+d. Addressing and accounting for limitations 
+such as researcher/interviewer biases (2 
+marks).
+e. Recommendations, as related to the 
+objectives, and brief discussion of relevant 
+and interesting future research directions (2 
+marks).
+10
+7. Presentation i.e., formatting, language, citation 
+and referencing, sectioning, use of upper and 
+lower cases, typing, clarity of tables, figures and 
+plates, conforming to word-length requirement 
+etc.
+10
+TOTAL
+100
+The Oral examination of an MPhil thesis shall follow the details in Appendix 4.5.
+
+ 45
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+Table 4.5. Score Breakdown for Thesis Oral Examination
+S/No.Area of 
+Assessment
+Details of AssessmentMaximum 
+Mark
+1
+Presentation by 
+PowerPoint
+a. appropriateness of slides;
+b. confidence in presentation;
+c. articulation (Presentation with less 
+reading from the slides);
+d. presentation of key ideas; research 
+problem, research objectives/goal, 
+framework, methods, findings, etc.;
+e. time management; and
+f. clarity of communication
+15
+2
+Understanding 
+of Subject 
+Matter during 
+presentation
+a. Ability to explain research data however 
+anomalous
+b. Applicability of data to the research 
+problem
+c. Ability to link data to findings;
+d. Ability to link findings to the conceptual 
+framework, theory/model/hypothesis;
+e. Ability to explain why hypotheses or 
+research objectives could not be realised;
+f. Succinct statement of contribution of the 
+research to knowledge; and
+g. Limitations to the study.
+45
+3
+Response to 
+Questions/Other 
+Considerations
+a. Mastery of research questions/objectives 
+and hypotheses/prepositions, if any;
+b. Grasp of theoretical basis of the problem, 
+i.e. understanding of models and 
+theories used;
+c. Clear understanding of conceptual 
+framework and how related to the 
+problem; and
+d. Understanding of design and methods 
+used to analyse the problem.
+40
+Total100
+
+46 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+Notes
+
+ 47
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+Notes
+
+48 
+Guide for Preparation and Evaluation of  
+Higher Degree Research Thesis
+Notes

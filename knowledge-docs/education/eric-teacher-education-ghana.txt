@@ -1,0 +1,495 @@
+http://jct.sciedupress.com Journal of Curriculum and Teaching Vol. 9, No. 1; 2020 
+Published by Sciedu Press                         86                          ISSN 1927-2677  E-ISSN 1927-2685 
+Teacher Education in Ghana: Policies and Practices 
+ 
+Isaac Buabeng
+1,*
+, Forster Danso Ntow
+2
+ & Charles Deodat Otami
+3  
+1,2
+Department of Basic Education, University of Cape Coast, Ghana 
+3
+Department of Science Education, University of Cape Coast, Ghana 
+*Correspondence: Department of Basic Education, University of Cape Coast, Ghana. E-mail: ibuabeng@ucc.edu.gh 
+ 
+Received: November 18, 2019      Accepted: January 15, 2020    Online Published: February 20, 2020 
+doi:10.5430/jct.v9n1p86               URL: https://doi.org/10.5430/jct.v9n1p86 
+ 
+Abstract 
+This  article  focuses  on  teacher  education  in  Ghana.  It  examines a  number  of  reforms  involving  curricular  changes 
+and  restructuring  of  teacher  education  institutions  tasked  with  the  responsibility  of  preparing  teachers  for  the  basic 
+school level. The article highlights the structure and changes in Ghana’s teacher development policies and practices 
+following  the  adoption  of  a  new  programme  which  took  effect  in  2018  with  the  intake  of  the  first  batch  of  4-year 
+degree students in the country’s Colleges of Education. We envisage that improved teacher qualification and a 
+conscious  effort  to  link  theory  to  practice  will  result  in  improved  teacher  knowledge  and  skills  required  for  a 
+professional teacher. Despite this stated enthusiasm, a number of contextual issues which could negatively affect the 
+intended gains from this most current reforms have been discussed. We end with a call on policy makers to address 
+the contextual issues highlighted in this paper and also a need for continuity in teacher education policies in Ghana 
+considering the numerous politically-related reforms. 
+Keywords: teacher education, educational reforms, teaching and learning, teacher effectiveness 
+ 
+1. Introduction 
+Teacher education issues continue to receive much attention in the literature. One major reason for this has been the 
+belief that students’ learning  outcomes,  especially  those  from  underprivileged  and  underserved  communities  are 
+significantly influenced by their teachers. Such outcomes hinge on the educational quality and the efficiency of the 
+educational system (Archibald, 2006; Darling-Hammond & Baratz-Snowden, 2005). As  a result, we argue, that the 
+educational  system  of  any  nation  serves  as  a  mirror  through  which  the  image  of  its  future  can  be  seen  and  shaped 
+because  it  is  from  the  school  systems  that  the  workforce  of  the  nation  are  obtained.  Therefore, Ghana’s quest at 
+becoming an industrialised country depends on the quality of its citizens who are a product of its educational system. 
+It may not be farfetched to appreciate why the country has undertaken a number of teacher education reforms within 
+the last few decades.  
+In Ghana, the vision of pre-tertiary teacher education programme is to “prepare teachers to enable them function in 
+the basic and second cycle schools and to develop and nurture them to become reflective and proficient practitioners 
+capable of providing quality education for Ghanaian children” (Ministry  of  Education  [MOE],  2012,  p.  8).  This 
+statement  and  several  others  in  the  past  have  led  to  a  number  of  reforms  involving  curricular  changes  and 
+restructuring of teacher education institutions tasked with the responsibility of preparing teachers for the early grades 
+to the senior high school levels. In spite of the numerous teacher education reforms (elaborated later) that Ghana has 
+experienced,  the  quality  of  teaching  and  learning  leaves  a  lot  to  be  desired  due  to  a  myriad  of  factors  such  lack  of 
+policy  coherence,  mismatch  between  expectations  as  espoused  in  official  policy  documents  and  what  is  possible 
+within  a  constrained  school  system  among  others.  (MoE).  This  article,  therefore, takes  a  look  at  the  policies  and 
+practices that were put in place to prepare individuals to teach and ends with the current teacher education reforms 
+efforts  which  are  aimed  at  preparing  teachers  with  the  requisite  teaching  competencies  to  respond  to  the changing 
+needs  of  Ghana.  In  the  next  section,  we  provide  a  brief  context  of  teacher  education  in  Ghana  for  the  basic  school 
+system (KG to Grade 9) highlighting some concerns with these models.  
+1.1 Context of Pre-tertiary Education in Ghana  
+In Ghana, pre-tertiary education comprises the basic school level (at the moment, involves kindergarten, primary and 
+
+http://jct.sciedupress.com Journal of Curriculum and Teaching Vol. 9, No. 1; 2020 
+Published by Sciedu Press                         87                          ISSN 1927-2677  E-ISSN 1927-2685 
+junior high schools), the second cycle level (senior high school, technical/vocational institutions) and special schools. 
+The preparation of teachers to teach at the basic school level takes place in post-secondary institutions known as the 
+College of Education (CoE). Currently, there are 48 Colleges of Education (CoE) in Ghana, up from 38 in 2014. The 
+increase is due to the government absorbing 10 private CoE with the aim of expanding the infrastructural facilities in 
+the  colleges.  These  CoE,  prior  to  the  current  reforms  which  began  in  2014,  offered  three-year  Diploma  in  Basic 
+Education (DBE) programmes. However, there are also two universities (University of Cape Coast and University of 
+Education,  Winneba)  which  are  traditional  teacher  education  institutions  with  the  mandate  to  prepare  teachers  to 
+teach  at  various  educational  levels  including  at  the  basic  schools.    Notwithstanding  this,  some graduates,  who  are 
+not  prepared  to  teach,  from  other  universities  find  their  way  to  the  classroom  to  teach  at  either  the  primary,  junior 
+high,  or  senior  high  schools. The  subsequent  paragraphs provide  further details  on  the categories of  the  teachers  in 
+the pre-tertiary schools. 
+All teachers in the pre-tertiary education sector are categorised into professional and non-professional teachers (MoE, 
+2012). The minimum teaching qualification of professional teachers for basic school level had been the Diploma in 
+Basic  Education  obtained  from  an  accredited  higher  educational  institution  for  training  teachers,  i.e.  CoE.  The 
+minimum teaching qualification of professional teachers for second cycle level is a Bachelor’s degree in Education 
+designed  in  the  appropriate subject(s)  for  that  level,  or  a  BA/BSc  (in  a  teaching  subject)  in  addition  to  a 
+post-graduate diploma in education (PGDE) or its equivalent. 
+The  non-professional  teachers  are  categorized  into  two:  persons  holding  the  Senior  High  School  (SHS)  certificate 
+with  three credits including English and  mathematics and persons with diploma from accredited polytechnics (now 
+technical  universities)  and  university  graduates  without  certificate  in  education  (MoE,  2012). This  situation  raises 
+concerns  about  the  professionalism  of  teaching  in  Ghana  considering  that  any  graduate  with  any  academic 
+qualification can be employed to teach. 
+Also, there are various pathways that an individual can use to enter the teaching profession as follows: 
+1.  Three-year Diploma  in  Basic  Education  (DBE).  Accredited  Colleges  of  Education  (CoE)  are  responsible  for  the 
+training of these teachers. Teachers from the CoE teach at the basic school level. 
+2. Two-year post-DBE (for basic school teachers). The programme is designed for teachers who already possess the 
+DBE.  These  teachers  get  trained  from  the  University  of  Cape  Coast  or  University  of  Education,  Winneba.  Such 
+training  is  mostly  voluntary  as  at  the  time  teachers  were  not  required  to  obtain  a  Bachelors  to  teach  at  the  basic 
+school level. 
+3. Four-year bachelor’s degree (for both basic and second cycle schools). These are graduates from mostly the 
+University  of  Cape  Coast  and  University  of  Education,  Winneba.  That  is,  while  the  CoE  prepared  teachers  who 
+graduated  with  a  DBE  to  teach  at  the  basic  school  level,  the  two  traditional  teaching  universities  offered  degree 
+programmes for prospective teachers at this level. 
+4. Two-year DBE (sandwich) program for teachers who already possess initial professional teacher’s Certificate “A” 
+3-Year post-secondary qualification. This is offered through the CoE by the University of Cape Coast.  
+5. Our-year (distance education) Untrained Teacher’s Diploma in Basic Education (UTDBE) for practicing teachers 
+who  have  not  received  initial  professional  teacher  training  (non-professional  teachers  with  senior  high  school 
+certificate). This programme is offered in the CoE in partnership with the Teacher Education Division (TED) of the 
+Ghana  Education  Service  as  an  ad  hoc  measure  to  increase  teacher  numbers  to  handle  basic schools  especially  in 
+rural communities (Asare & Nti, 2014). 
+From the foregoing, teacher education in Ghana has different pathways. This has led to a number of criticisms of the 
+system.  The  first  criticism  has  to  do  with  the  mode  of  delivery  which  has  been described as “following traditional 
+teacher  education  programme”  (Anamuah-Mensah  &  Benneh,  as  cited  by  Asare  &  Nti,  2014,  p.3).  A  second 
+criticism  has  to  do with  the  lack  of  a  common  framework  to prepare  teachers  with  since  the  curricular  followed  in 
+these institutions tended to be varied in nature. For example, apart from the CoE which follow a common curriculum 
+developed by the Institute of Education the other pathways follow different curricular. For instance, while the CoE 
+provide a yearlong  school-based  teaching practice in addition to a semester  long campus-based peer teaching, their 
+colleagues  offering  an  education  degree  in  the  University  of  Cape  Coast  (UCC)  engage  in  a  semester  long 
+school-based teaching experience. Such variations can have implications on the learning experiences of prospective 
+teachers  such  as  ability  to  cope  with  the  complexities  of  teaching  thereby  minimising  the  reported  challenges 
+beginning teachers face in schools. As such, while the differences in curricular, CoE versus universities, are good for 
+innovations  in  teacher  education,  it  can  also  lead  to  very  different  teachers  being  produced  based  upon  the 
+
+http://jct.sciedupress.com Journal of Curriculum and Teaching Vol. 9, No. 1; 2020 
+Published by Sciedu Press                         88                          ISSN 1927-2677  E-ISSN 1927-2685 
+instructional  philosophies  of  the  various  institutions  and  whether  or  not  such  ideas  are  in  tandem  with  the  national 
+aspirations in terms the ‘kind’ of teacher required to teach at the basic school level. Additionally, the fact that 
+individuals with senior high school certificate can be employed to teach raises concerns about the quality of teaching 
+and learning across the country and also the image of teaching.  
+In  summary,  the  different  pathways  to  teaching  in  Ghana  raise  a  number  of  concerns  such  as:  1)  With  the  teacher 
+education institutions using different curricular in preparing teachers to teach, are the competencies and knowledge 
+being acquired by the graduates of these institutions comparable? 2) Are these curricular such that they confirm with 
+a national vision of who a ‘good’ teacher is, assuming such a vision exists? 3) Can there be a national consensus on 
+criteria on quality teacher indicators without sacrificing academic freedom to innovate? In the next section, we focus 
+on various teacher education reforms carried out in Ghana. 
+1.2 Teacher Education Reforms in Ghana 
+Teacher  education  reform  initiatives  in  Ghana  have largely  been  influenced  by  socio-political  changes.  That  is, 
+nearly  every  political  party  that  has  ruled  the  country  since  independence  has  engaged  in  some  form  of  teacher 
+education  reforms which  were  aimed  at  preparing  qualified  teachers  to  meet  the  educational  needs  of  the  country. 
+These reforms have produced different sets of teachers with different types of certificates (Anamuah-Mensah, 2006). 
+Teacher  Training  Colleges  (TTC),  now  known  as  Colleges  of  Education,  initially  offered  2-year  Post-Middle 
+Certificate “B” programs, followed by 4-year Post-Middle Certificate “A” and 2-year Post-Secondary Certificate “A” 
+programmes.  In  the  1980s,  the  2-year  Post-Secondary  programme  was  extended  to  a  3-year  program,  but  ran 
+alongside  the 4-year certificate “A” programs until  it  was  truncated  (Newman,  n.d.). However,  the  reforms  yielded 
+little impact on students’ learning outcomes (MoE, 2012) such as achievement and development of critical values 
+like  problem  solving.  In  recent  times,  there  have  been  two  pieces  of  major  legislation  related  to  teacher  education 
+preparation which are aimed at transforming the country’s educational system.  
+The  first  legislation  is  the  passing  of  the  2008  Education  Act  (Act  778).  Under  the  Act,  Section  9  called  for  the 
+creation of a National Teacher Council (NTC) which has since been established. The NTC is mandated to establish 
+professional  practices  and  ethical  standards  for  teachers  and  teaching,  and  registration  and  licensing  of  individual 
+seeking to enter the teaching profession. The Act also empowers the NTC to withdraw the license of any teacher who 
+misconducts him/herself and does not adhere to the professional code of ethics governing the teaching profession in 
+Ghana.  As  such,  ACT  778  is  focused  on  making  teaching  in  Ghana  a  profession  with  clear  codes  of  ethics  and 
+minimum acceptable competencies of those who get to teach at the pre-tertiary institutions in the country. 
+The second legislation is the Colleges of Education Act 847 to upgrade CoE into tertiary institutions. Following this 
+legislation and with effect from October, 2018 the CoE were upgraded to four-year degree awarding institutions and 
+no  longer  three-year  diploma  awarding  Colleges.  Prior  to  the  enactment  and  passage  of  Act  847,  the  CoE  were 
+designated  as  TTC  and  were  under  the  supervision  of  the  Ghana  Education  Service,  the  body  responsible  for 
+pre-tertiary  teacher  education.  The  passage  of  the  Colleges  of  Education  Act  2012,  Act  847  has  provided  legal 
+backing to their new elevated status. The colleges have since been under the National Council for Tertiary Education 
+(NCTE). The NCTE is a government body responsible for the regulation of tertiary education institutions in Ghana.  
+ 
+2. Teacher Preparation Programme Design  
+Prior to the implementation of the current teacher education reforms in 2019, the preparation of pre-service teachers 
+for  the basic  school  level followed  a dual mode  where  both  content  and  methodological  courses were  taken  within 
+the  stipulated  period  of  the  programme.  In  this  structure,  prospective  teachers  took  a  number  of  content  courses  as 
+well as the pedagogical courses concurrently. Also, the structure allowed for three types of prospective teachers – the 
+generalist, who are trained to teach all subjects at the elementary level (grades 1 to 6); early childhood educators and 
+the specialist teachers who are usually at the JHS. The model of teacher development is shown in Figure 1. 
+Irrespective of the type of teacher to be produced, the programme design had four features. They are; 1) a number of 
+content courses related to the subjects to be taught at the basic school; 2) methodology courses to equip prospective 
+teachers with instructional skills to be able to handle various topics in the basic school curriculum and at a grade for 
+which  they  are  been  prepared  to  teach;  3)  practicum (teaching  experience)  which  comes  in  two  phases.  The  first 
+phase; often referred to as on-campus teaching practice requires prospective teachers to engage in peer teaching on 
+their  campuses  for  a  semester.  This  peer  teaching  is  done  under  the  supervision of  tutors  on  the  various  CoE 
+campuses  who  are  subject  specialists.  An  assumption  underlying  this  phase  is  to  provide  opportunity  for  the 
+prospective teacher to teach  in  a familiar  environment thereby boosting their self-confidence as teachers. Also, this 
+
+http://jct.sciedupress.com Journal of Curriculum and Teaching Vol. 9, No. 1; 2020 
+Published by Sciedu Press                         89                          ISSN 1927-2677  E-ISSN 1927-2685 
+phase  allows  the  tutors  to  reinforce  what  has  been  taught  in  the  various  courses  (i.e.  content,  methodology, 
+psychology   and   curriculum)   through   the   feedback   they   provide   and   also   enable   the   prospective   teachers 
+modify/develop some professional competencies before going into the basic schools.  
+ 
+Figure 1. The Phases of Teacher Development Model 
+ 
+The  second  phase,  commonly  referred  to  as  off-campus  teaching  practice  or  field  experience,  offers prospective 
+teachers the opportunity to teach in a real classroom with all its complexities. During this phase, prospective teachers 
+are  supervised  by  tutors  from  their  college  as  well  as  experienced  teachers  of  their  placement  schools.  It  is 
+anticipated  that when prospective teachers go through  this model of teacher development, they would  acquire deep 
+knowledge  of  the  content  in  the  various  subject  areas,  become  well-versed  in  methodology  and  also  skilfully 
+integrate  content  knowledge  acquired  and  the  pedagogical  knowledge  for  classroom  instruction.  The  fourth  feature 
+requires  prospective  teachers  to  take  courses  in  literacy  studies  in  areas  such  as  English,  Information  Literacy, 
+Computing and a Ghanaian language (mostly informed by the location of the College). 
+From  the  foregoing,  it  can  be  inferred  that  the  Diploma  in  Basic  Education  programme  covered  all  the  essential 
+knowledge  and  skills  that  a  teacher  requires  to  teach.  However,  there  have  been  criticisms  aimed  at  the  minimum 
+entry qualification of a Diploma to teach (compared to most countries in the world which requires a minimum of a 
+First  degree)  and  its  attendant  inadequate  content  considering  the  credit  requirement  for  the  award  of  a  Diploma. 
+This begs the question, so where do we go from here? 
+ 
+3.  Teacher  Preparation  and  Students’  Achievement:  What  should  be  included  in  the  Teacher  Education 
+Programme?    
+Educational  underachievement  has  been  associated  with  many  factors,  for  example,  socioeconomic  and  language 
+background factors. However, there is increasing evidence to suggest that teacher and teaching quality is a prevailing 
+predictor of students’ achievement (Darling-Hammond,  2000,  2006;  Darling-Hammond  &  Baratz-Snowden,  2005; 
+Ell & Grudnoff, 2013; International Association for the Evaluation of Educational Achievement [IEA], 2012). Over 
+the  years,  researchers  have  defined  quality  teachers  as  being  those  who  form  effective  learning  relationships  with 
+ 
+Practicum  
+Professional  
+courses  
+Peer teaching  
+(campus-based) 
+ 
+School-based teaching 
+(Off campus) 
+ 
+Methods of teaching 
+subject-specific topics 
+Theories of learning 
+Content courses/ Liberal 
+courses  
+Professional  
+teacher 
+ 
+
+http://jct.sciedupress.com Journal of Curriculum and Teaching Vol. 9, No. 1; 2020 
+Published by Sciedu Press                         90                          ISSN 1927-2677  E-ISSN 1927-2685 
+students  and  teach  in  culturally  appropriate  and  responsive  ways,  and  are  able  to  overcome  all  other  influences  on 
+student  achievement  (Ell  &  Grudnoff).  The  authors,  based  on  their  findings,  commented  that  to  improve  student 
+achievement and/or eliminate under achievement, the quality of teaching should be improved. 
+In  order  to  improve  the  quality  of  teaching,  Darling-Hammond  and  Baratz-Snowden  (2005)  outlined  three  general 
+intersecting areas of knowledge that beginning teachers must acquire, and this has implications for what is included 
+in  initial  teacher  education  programmes.  Firstly,  knowledge  of  learners  and  how  they  learn  and  develop  within  a 
+social  context;  secondly,  understanding  the  subject  matter  and  curriculum  goals  (skill  to  be  taught)  in  light  of the 
+social purposes of education; and thirdly, understanding the teaching in light of the content and learners to be taught, 
+as   informed   by   assessment   and   supported   by   a   productive   classroom   environment   (Darling-Hammond   & 
+Baratz-Snowden, p. 5). 
+The  need  to  provide  relevant  knowledge  and  understandings  that  are  contextually  and  pedagogically  appropriate  is 
+indispensable (Bailey et al., 2011; Loughran, Berry, & Mulhall, 2012). Teacher education programmes should reflect 
+what is known about learning and teaching. Since the most important aim of education is to promote student learning, 
+theories and ideas about learning and their application to teaching practice should be an essential part of any teacher 
+education  programme  (Darling-Hammond  &  Bransford,  2005). The  evolving  concept  of  learning  has  moved  from 
+reinforcement of positive learning behaviours and information processing to more active ways by which learners can 
+make  sense  of  new  knowledge  using  socially  mediated  or  negotiated  ways  of  learning  can  be  explored  in  terms  of 
+developing  teachers’  adaptive  expertise (Conner  &  Sliwka,  2014). For  the  above  objectives  to  be  achieved, 
+Darling-Hammond  (2006) described  three  important  components  that  teacher  education  providers  should  be 
+concerned  with.  These  are:  tight  coherence  and  integration  among  papers  and  between  coursework  and  practicum 
+teaching  work  in  schools;  extensive  and  intensively  supervised  teaching  work  integrated  with  coursework  using 
+pedagogies that link theory and practice; and closer, proactive relationships with schools that serve diverse learners 
+effectively  and  develop  and  model  good  teaching  (p.  300).  She  contends  that  schools  of  education  have  to  design 
+programmes  to  help  prospective  teachers  to  understand  teaching  and  learning  so  that  they  can  enact  these 
+understandings in the classroom.  
+Though the Ghana education system is attending well to the qualities (developing understandings of the teaching and 
+learning  processes),  the  issue  of  coherence  and  integration  remains  a  challenge  for  teacher  education  providers 
+Ghana.  There  is  no  specific agreement  about  the  core  content  (subject  matter  knowledge)  amongst  the  different 
+providers  and  the  organisational  and  teaching  arrangements  for  student  learning  experiences.  Teacher  educators 
+continue to have divided opinions over these matters.  
+International  studies  about  effective  approaches  to  teaching  and  learning,  such  as  findings  from  the  OECD 
+Innovative  Learning  Environments  (ILE)  Project (Organisation  for  Economic  Co-operation  and  Development 
+[OECD],  2013) mean  that  adjustments  to  teacher  education are required to accommodate the needs of today’s 
+learners  and  what  we  know  makes  a  difference  to  learning.  Recently,  Conner  and  Sliwka  (2014)  indicated  the 
+implications  of  the  ILE  work  for  initial  teacher  education.  The  authors  argued  that  initial  teacher  education  should 
+adhere to the “seven transversal learning principles” (pp. 165-166) if prospective teachers are to be effective in their 
+learning environments in which they will be expected to teach. 
+As  indicated  earlier  that  a  change  in  ruling  party  has  often  led  to  some  teacher  education,  the  recent  change  in 
+governance  in  2016  provided  another  opportunity  to  review  and  reform  the  educational  system  including  teacher 
+preparation.  A  significant  change  has  been  the  upgrade  of  existing  Diploma-awarding  CoE  into  4-year  degree 
+awarding institutions. This move provided an opportunity to overhaul both the structure and content of the country’s 
+teacher education programmes. Issues such as those raised by Darling-Hammond and Baratz-Snowden (2005) can be 
+critically  reflected  on  in  the  design  of  the  most  recent  efforts  at  teacher  education  in  Ghana.  Issues  such  as  what 
+subject matter content knowledge is needed by a basic education teacher, how to bridge the gap between theory and 
+practice with its attendant apprenticeship of observation (Lortie, 1975) and developing better  relationships between 
+teacher  education  institutions  and  placement  of  schools  need  to  be  attended  to.  Thus,  significant  changes  are 
+imminent in the initial teacher education programmes in Ghana.  
+ 
+4. Proposed Changes in the Teacher Education Programme 
+Concerns  have  been  raised  about  the  quality  of  teaching  taking  place  in  the  Ghanaian  classrooms  as  mirrored  in 
+persistent and continuous underachievement of pupils in the basic education system (MoE, 2017). In view of this, the 
+Government  of  Ghana  through  the  Ministry  of  Education  in  collaboration  with  UKAid  initiated  a  project  called 
+
+http://jct.sciedupress.com Journal of Curriculum and Teaching Vol. 9, No. 1; 2020 
+Published by Sciedu Press                         91                          ISSN 1927-2677  E-ISSN 1927-2685 
+Transforming  Teacher  Education  and  Learning  (T-TEL). The aim of the project is to “transform the delivery of 
+pre-service  teacher  education  in  Ghana  by  improving  the  quality  of  teaching  and  learning  through  support  to  all 
+public Colleges of Education”. This has led to a development of National Teacher Education Curriculum Framework 
+(NTECF) and National Teachers’ Standards (NTS) to guide the development of teacher education programme across 
+the  country  and  also  set  minimum  professional  competencies  in  the  teaching  profession.  These  two  documents, 
+NTECF and NTS, are expected to be used in developing new curricular to replace the current curriculum which has 
+been in place for nearly two decades. Such a move addresses a criticism raised earlier about lack of commonality in 
+the  preparation  of  prospective  teachers  in  the  various  teacher  education  systems  due  to  the  use  of  varied  curricular 
+and philosophies underpinning these programmes. 
+The  NTECF  has  four  pillars  constituting  the  knowledge  leading  to  the  initial  teacher  qualification.  The  proposed 
+weightings for the four pillars are shown  in Table 1. Although they appear as distinct knowledge bases, there is an 
+implicit understanding that these pillars are integrated to prevent any fragmentation in knowledge (Britzman, 1991). 
+ 
+Table 1. Proposed Weighting for the Four Pillars of Initial Teacher Education 
+Pillar Proposed percentage of credit hours 
+K-P3 P4-6 JHS SHS 
+Subject and curriculum Knowledge 25 25 40 60 
+Pedagogic Knowledge 25 25 20 18 
+Literacy Studies: Ghanaian Languages and English 20 20 10 5 
+Supported Teaching in School 30 30 30 17 
+Total  100 100 100 100 
+Source: MoE (2017) 
+ 
+The  NTECF  is  expected  to  be  practice-focused  with  30%  of  the  total  assessment  marks  being  related  to  practical 
+assessments  of  teaching  competences.  Also,  it  will  focus  on  ensuring  that  teachers  are  confident  in  the  use  of 
+learner-centered  approaches,  including  use  of  ICT,  to  encourage  critical  thinking  and  problem  solving.  Teaching 
+practice in schools (supported teaching in the language of the new curriculum), will play a central part in the learning 
+process with student-teachers spending time in partner schools in years 1, 2, 3 and 4, not just in Year 3 as is the case 
+with the current Diploma. The literacy studies in Table 1 covers Ghanaian languages, English and French. Although 
+Ghana is a multilingual country with 86 spoken languages and dialects, nine of the languages are taught as subjects 
+in schools. In addition, French and Arabic are taught as foreign languages. Students have the option to major and/or 
+minor in any of the languages taught in the schools. The NTS provides a set of expectations that should inform all 
+those  involved  in  teacher  education  and  teachers  (pre-service  and  in-service)  about  the  knowledge-based  teachers 
+should possess what they should do with the various knowledge-types and the values to be exhibited both in school 
+and the larger community. The NTS has the following philosophy:  
+Teacher education in Ghana aims to prepare teachers imbued with professional skills, attitudes and values as well as 
+the  spirit  of  inquiry,  innovation  and  creativity  that  will  enable  them  to  adopt  to  changing  conditions;  use  inclusion 
+strategies  and  engage  lifelong  learning.  The  teachers  are  required  to  have  a  passion  for  teaching  in  the  school 
+community but also in the wider community and act as agents of change (MoE, 2017, p.10) 
+The NTS is grouped into three domains, each with its own sub-group: 
+a) Professional values and attitudes. The sub-groups are 1) professional development and 2) community of practice. 
+b)  Professional  knowledge  with  sub-groups  being  1)  knowledge  of educational  framework  and  curriculum,  and  2) 
+knowledge of learners. 
+c) Professional practice with the sub-divisions being 1) managing the learning the learning environment 2) teaching 
+and learning and 3) assessment. 
+From  the  NTS,  what  teachers  are  expected  to  value,  know  and  do  are  incorporated  in  the  three  domains  and 
+sub-divisions  that  constitute  it.  The  domains  intersect  with  each  other  with  the  aim  of  developing  a  teacher 
+competent enough to teach in the Ghanaian classroom at the end their four-year training programme.  
+
+http://jct.sciedupress.com Journal of Curriculum and Teaching Vol. 9, No. 1; 2020 
+Published by Sciedu Press                         92                          ISSN 1927-2677  E-ISSN 1927-2685 
+This reform has led to a number of changes in the teacher development programme which took effect in 2018 with 
+the  intake  of  the  first  batch  of  4-year  degree  students  in  the  CoE.    First  is  the  introduction  of  specialism  at  the 
+pre-tertiary viz; Early grade level (KG -P3), Upper Primary (P4-P6), JHS and SHS. This is a marked change in how 
+teachers  have  been  prepared  over  the  years.  In  the  last  few  years  prospective  teachers  from  the  CoE  could  be 
+categorized  into  three  groups  namely:  generalists  who  were  expected  to  teach  all  school  subjects  at  the  primary 
+school, the specialists including mathematics and science teachers, and early childhood teachers. The introduction of 
+the  four  areas  of  specialism  means  that  prospective  teachers,  ultimately,  will  be  licensed  to  teach  at  very  specific 
+grade-bands within the elementary and middle school levels. Some of the anticipated benefits from such a move are 
+to enable: 1) prospective teachers to acquire deep knowledge within a specified grade-band; 2) extensive knowledge 
+and experiences within the chosen grade-band or specialism (MoE, 2017).  
+Second, the minimum entry requirement for teaching is Bachelors in Basic Education and no longer Diploma. Since 
+October  2018,  all  new  entrants  to  the  CoE  are  admitted  to  pursue    Bachelor  in  Basic  Education  programmes.  The 
+upgrade  from  Diploma  to  Degree  means  an  increase  in  credit  weightings  and  hence,  courses  to  take  thereby 
+providing opportunities for prospective teachers to deepen their content knowledge. Such a move may help address 
+some  of  the  concerns  about  the  adequacy  of  the  content  knowledge  teachers  possess  as  a  proxy  to  the  quality  of 
+teaching. Additionally, there are clearly defined teaching standards to help bench-mark the quality of teaching. Again, 
+the  NTECF  is  intended  to  guide  all  universities  offering  teacher  education  in  their  development  of  programmes  so 
+there  is  a  shared  vision  of  the  kind  of  teacher  Ghana  needs.  While  the  demand  to  follow  a  common  framework  in 
+developing  teacher  education  programmes  may  stifle  curricular  innovations  the  advantage  is  the  near  similarity  in 
+design  thereby  minimizing  any  variations  and  teacher  competencies  as  pertains  in  countries  without  a  national 
+curriculum or framework. It also ensures that the quality of learning a student experiences is not due to the institution 
+his or her teacher graduated from. 
+Furthermore, there is a change in how the field experience component is organized. In the new teacher development 
+model prospective teachers are to engage in what is referred to as supported teaching in school (Pillar 4, see Table 1) 
+throughout the eight semesters of study. This implies that prospective teachers get to familiarize themselves with the 
+professional aspect of teaching while taking various courses at college. That is, student teachers, right from the first 
+year, first semester, will start to acquire teaching experiences through regular school-based practicum to observe and 
+also  co-teach  with  a  more  experienced  in-service teacher.  This  is  in  sharp  contrast  with  the  old  model  of  teacher 
+development  where  supported  teaching  (practicum),  the  on-campus  segment  happens  for  a  semester  during  the 
+second year of the three-year programme with the off-campus occurring for the whole of the third year, which is the 
+final  year  of  the  programme.  Such  a  design  in  learning  to  teach,  if  properly  organised,  can  provide  immediate 
+reinforcement of the theory being learned in the CoE as the prospective teachers visit the schools and come back to 
+campus to share their experiences for the needed theoretical underpinning and possible strategies to address them.  
+Assessment strategies have also changed. In the new framework, there is strong emphasis on formative assessment to 
+support learning. Globally, many teacher education programmes have shifted to criterion-based forms of assessment 
+and  use  of  professional  standards  and  rubrics  as  a  basis  for  formative  assessment  in  teacher  education  due  to 
+standard-driven  reforms (Conner  &  Sliwka,  2014).  Portfolios,  in  which  prospective  teachers  document  and  reflect 
+upon their own learning, have become more common. The NTECF prescribes specific assessment for each pillar of 
+the curriculum. The student teachers are to be assessed within the three domains of NTS and aligned to the pillar of 
+the  curriculum  framework  such  that  at  the  end  of  the  four  year  training  they  would  have  acquired  subject  specific, 
+pedagogical and assessment skills to teach at the age, ability and aptitudes of the learners they are being trained for. 
+At  the  heart  of  the  strategies  for  assessment  is  the  creation  of  a  professional  portfolio  which  should  include:  1) 
+evidence  of  learning from  the  training  institution  in  the  form  of  assignment,  examinations  and  lecture  notes  and  2) 
+evidence of learning from in-service school in the form of lesson plans, study notes, resources, assessment records, 
+learner exercise books, evaluation form from mentors among others. It is expected that prospective teachers who are 
+still  learning  to  teach  would  be  realistically  and  fairly  assessed  against  the  teaching  standards  with  particular 
+emphasis  on  their  creative  and  innovative  skills  as  well  as  their  possession  of  identified  professional  values  and 
+attitudes. 
+The  National  Teaching  Council,  NTC,  has  also  commenced  the  licensing  of  the  teaching  profession.  Once 
+student-teachers have completed their 4-year Bachelor of Education degree, they will then spend one year teaching in 
+the  basic  schools  (pre-tertiary  level),  after  which  they  will  receive  their  license  to  practice  and  achieve  qualified 
+teacher status. 
+ 
+
+http://jct.sciedupress.com Journal of Curriculum and Teaching Vol. 9, No. 1; 2020 
+Published by Sciedu Press                         93                          ISSN 1927-2677  E-ISSN 1927-2685 
+5. Implications and Conclusion 
+Ghana  is  one  of  the  African  countries  whose  learners  perform  exceptionally  poorly  in  international  benchmark 
+assessments with  teacher quality being a concern (Buabeng, Owusu, & Ntow, 2014). The International Association 
+for the Evaluation of Educational Achievement [IEA] (2012) highlights poor quality of teaching and teachers’ poor 
+content  knowledge  as  some of  the  contributing  factors.  Hence,  any  efforts  to  upgrade  the  quality  of  teachers at  the 
+basic  school  level,  as  depicted  by  the  NTECF  and  NTS  should  be  welcome  news.  The  introduction  of  the  NTECF 
+and NTS has the potential to bring about some level of improvement in the quality of teachers that are produced by 
+the various teacher education institutions and classroom instructional practice. Improving the quality of teachers and 
+the  image  of  the  teaching  profession  in  Ghana  is  inevitable.  There  is  the  need  for  a competency-based  approach 
+which  recognises  teaching  as  interplay  of  knowledge,  skills,  values  and  attitudes  to  raise  learning  standard  to  be 
+adopted as captured in the NTS document. We envisage that improved teacher qualification will result in improved 
+knowledge  (CK,  PK  and  PCK)  and  skills  required  for  professional  effectiveness.  Despite  this  stated  enthusiasm, 
+there are some contextual issues which could negatively affect the intended gains from the current reforms.  
+The  first  issue  has  to  do  with  the  capacity  of  tutors  teaching  in  the  various  CoE.  At  the  moment,  not  all  the  tutors 
+have   a   research-based  masters’  degree,  a  minimum  requirement,  to  teach  at  that  level.  This  inadequate 
+research-based preparation of the tutors could affect their ability to supervise project work (long essays) considering 
+that the ‘new’ Ghanaian teacher  is  expected  to  be  a  reflective  practitioner  who  engages  in  small-scale  inquiry  to 
+address local issues. The project works are vital in building the capacity of pre-service teachers to identify and design 
+solutions  to  classroom  problems  by  engaging  in  action  research.  It  is  envisaged  that  prospective  teachers  will  see 
+teaching as a lifelong endeavour where the teacher is constantly seeking solutions to classroom-based challenges by 
+conducting some basic research in their classrooms and schools. To achieve this goal will require tutors who have the 
+expertise to provide support for the teacher trainees so that they are equipped with the necessary research skills.  
+A second issue regarding the tutors’ capacity is whether or not they have the competency to teach  undergraduate 
+level  courses.  All  along,  the  tutors  have  been  teaching  diploma  courses  and  so  with  the  introduction  of  more 
+advanced  topics  in  the  curricular  as  well  as  new  courses  to  the  degree  programme  (due  to  an  increase  in  credit 
+weighting  from  68  credits  to  at  least  165  credits)  they  are  expected  to  have  the  required  academic  background  to 
+effectively teach at that level. For instance, although the tutors possess a Master’s degree, some of them have their 
+degrees in subject areas which  are different from the programme of study at their bachelors which  is referred  to  as 
+‘skirt and blouse’ in Ghana. A possible effect is that the affected tutors may have to rely on their first degree 
+knowledge to teach a bachelor’s degree student which is undesirable. There  is  therefore  a  need  for  intensive  and 
+regular  in-service  training  (INSET)  programmes  to  empower  the  tutors  to  teach  both  the  content  and  philosophies 
+underpinning  the  teaching  of  the  various  area  specializations  and  specific  courses.  Even  for  those  who have  the 
+required master’s degree in their teaching subjects, there is still a need for INSET to enable them teach especially the 
+new courses introduced which they may have forgotten because they were not teaching those topics. 
+A  third  issue  that  should be attended  to has  to  do  with  lesson delivery. We  argue  that this  is where  the bulk  of  the 
+work  is.    Radical  changes  in  teaching  are  called  for  if  the  visions  as  outlined  in  the  NTS  and  NTECF  are  to  be 
+attained.  In  this  regard,  the  content  courses  should  be taught  in  ways  that  would  make  envisioned  and  privileged 
+pedagogy visible to the prospective teachers. The tutors have to model this privileged pedagogy where students are 
+actively involved in the teaching and learning situation so that the prospective teachers have new images of teaching 
+markedly  different  from  what  they  might  have  experienced  as  students  at  the  basic  and  senior  high  school  levels. 
+This calls for the setting up of instructional laboratories which are well-equipped with relevant teaching and learning 
+materials  in  the  institutions  for  teacher  training.  The  teaching  of  pedagogy  courses  should  involve  the  requisite 
+teaching  and  learning  materials  for  the  prospective  teachers  to  see  these  materials  and  learn  how  to  use  them  and 
+even  wean  their students  of  them  as  they  begin  to  think  abstractly.  Also,  the  dual  mode  of  delivery  which  treated 
+content  as  being  separate  from  pedagogy  should  be  discarded.  The  tutors  teaching  the  content  should  see  that  the 
+content  is  embedded  in  the  pedagogy  used  what Britzman  (1991)  refers  to  as  the  separation  of  content  from 
+methodology. 
+The  fourth  critical  issue  has  to  do  with  the  placement  schools  that  will  be  used  during  the  supported  teaching 
+component  of  the  four-year  programme.  Considering  that  a  number  of  schools  in  some  areas  are  hard-to- reach, 
+poorly equipped and with inadequate trained staff (UTDBE pathway), there is a need for careful selection of schools 
+with well-qualified  teachers  to provide mentoring  for the prospective teachers. With the new vision  for teaching as 
+espoused in the NTS, there is a strong need for capacity building for the in-service teachers in the schools of practice. 
+This will ensure that the mentoring provided by the cooperating supervisors (those in the placement schools) to the 
+
+http://jct.sciedupress.com Journal of Curriculum and Teaching Vol. 9, No. 1; 2020 
+Published by Sciedu Press                         94                          ISSN 1927-2677  E-ISSN 1927-2685 
+prospective teachers is complementary and reinforces what has been provided them in their CoE. Otherwise, there is 
+a  strong  possibility  of  these  prospective  teachers  being  counter-socialised  by  the  in-service  teachers  as  they  come 
+face-to-face with the challenging conditions some of them teachers find themselves in. This also raises the issue of: a) 
+how  are  schools  selected  to  serve  as  placement  schools  (partner  schools)  for  the  CoE  students  to  observe  and 
+possibly learn from? b) Who gets to be a mentor in these placement schools, that is, what should be the qualification 
+or  credentials  of  such  mentors? Currently,  there  is  no  official  mentoring  policy  in  place  to  address  these  and  other 
+concerns.  It  appears  that  prospective  teachers  may  find  themselves  in  schools  where  the  mentor  maybe  in  more 
+training than the supposed mentee especially as more and more students have to be placed in schools. 
+Again, as required that all prospective teachers of all the CoE from levels 100 to 400 be on supported teaching every 
+semester,  this  has  the  potential  to  disrupt  the  calendar  of  the  schools  they are  placed.  There  is  therefore  a  need  to 
+ensure that in the quest to provide real classroom context that enables teacher trainees to appreciate the complexity of 
+teaching  thereby  avoiding  the  apprenticeship  of  observation  phenomenon  (Lortie,  1975),  teaching  and  learning 
+activities do not suffer unduly. 
+In  conclusion,  the  current  teacher  education  reform  has  potential  to  transform  teaching  as  envisaged.  However, 
+without  the  right  mechanisms  in  place  such  as  model  schools  for  prospective  teachers  to  learn  best  practices  from, 
+radically  different  pedagogies  being  adopted  by  College  tutors,  and  an  attitudinal  change  by  all  stakeholders,  this 
+reform may well be replaced by another reform in case of a change in government due to the challenges enumerated 
+in this paper. 
+ 
+References 
+Anamuah-Mensah,  J.  (2006).  Teacher  education  and  practice  in  Ghana.  In  T.  R.  Kolawole  &  P.  Kupari  (Eds.), 
+Educational issues for sustainable development in Africa (pp. 28-40). Lasonen Johana: Institute for Educational 
+Research. 
+Archibald, S. (2006). Narrowing in on educational resources that do affect student achievement. Peabody Journal of 
+Education, 81(4), 23-42. https://doi.org/10.1207/s15327930pje8104_2 
+Asare, K. B., & Nti, S. K. (2014). Teacher education in Ghana: A contemporary synopsis and matters arising. SAGE 
+Open, 4(2), 1-8. https://doi.org/10.1177/2158244014529781 
+Bailey,  J.,  Blakeney-Williams, M., Carss, W., Edwards, F., Hāwera, N., & Taylor, M. (2011). Grappling with the 
+complexity  of  the  New  Zealand  curriculum:  Next steps  in  exploring  the  NZC  in  initial  teacher  education. 
+Waikato Journal of Education, 16(3), 125-142. https://doi.org/10.15663/wje.v16i3.40 
+Britzman, D. P. (1991). Decentering discourses in teacher education: Or, the unleashing of unpopular things. Journal 
+of Education, 173(3), 60-80. https://doi.org/10.1177/002205749117300305 
+Buabeng, I., Owusu, K. A., & Ntow, F. D. (2014). TIMSS 2011 science assessment results: A review of Ghana’s 
+performance. Journal of Curriculum and Teaching, 3(2), 1-12. https://doi.org/10.5430/jct.v3n2p1 
+Conner,  L., & Sliwka, A.  (2014).  Implications  of  Research  on  Effective Learning  Environments  for Initial  Teacher 
+Education. European Journal of Education, 49(2), 165-177. https://doi.org/10.1111/ejed.12081 
+Darling-Hammond,  L.  (2000). Teacher  quality  and  student  achievement:  A  review  of  state  policy  evidence. 
+Education policy analysis archives, 8(1), 1-15. https://doi.org/10.14507/epaa.v8n1.2000 
+Darling-Hammond,  L.  (2006).  Constructing  21st-century  teacher  education. Journal  of  Teacher Education,  57(3), 
+300-314. https://doi.org/10.1177/0022487105285962 
+Darling-Hammond,  L.,  &  Baratz-Snowden,  J.  (2005). A  good  teacher  in  every  classroom:  Preparing  the  highly 
+qualified teachers our children deserve. San Fransisco, CA: John Wiley and Sons, Inc. 
+Ell, F., & Grudnoff, L. (2013). The politics of responsibility: Teacher education and “persistent underachievement” 
+in New Zealand. Educational Forum, 77(1), 73-86. https://doi.org/10.1080/00131725.2013.739023 
+International Association for the Evaluation of Educational Achievement [IEA]. (2012). In M. O. Martin, P. Foy, & 
+G.  M.  Stanco  (Eds.), TIMSS  2011  international  results  in  science.  Chestnut  Hill,  MA:  TIMSS  &  PIRLS 
+International Study Center. 
+Lortie, D. C. (1975). Schoolteacher: A sociological study London: University of Chicago Press. 
+Loughran,  J.  J.,  Berry,  A.,  &  Mulhall,  P.  (2012). Understanding and Developing ScienceTeachers’ Pedagogical 
+
+http://jct.sciedupress.com Journal of Curriculum and Teaching Vol. 9, No. 1; 2020 
+Published by Sciedu Press                         95                          ISSN 1927-2677  E-ISSN 1927-2685 
+Content Knowledge (2nd ed.). Boston: Sense Publishers. https://doi.org/10.1007/978-94-6091-821-6 
+Ministry  of  Education.  (2012). Pre-tertiary  teacher  professional  development  and  management  in  Ghana:  Policy 
+framework. Accra: Ghana Education Service. 
+Ministry  of  Education.  (2017). National  teacher  education  curriculum  framework:  The  essential  elements  of  initial 
+teacher education. Accra: Author. 
+Organisation  for  Economic  Co-operation  and  Development  [OECD].  (2013). Innovative  learning  environments   
+Paris: Educational Research and Innovation, OECD Publishing.

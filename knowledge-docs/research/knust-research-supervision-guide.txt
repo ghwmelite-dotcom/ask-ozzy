@@ -1,0 +1,1466 @@
+i
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+GUIDE FOR 
+HIGHER DEGREE
+RESEARCH SUPERVISION
+SCHOOL OF GRADUATE STUDIES
+KWAME NKRUMAH UNIVERSITY OF SCIENCE AND TECHNOLOGY, KUMASI
+
+ii
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+TABLE OF CONTENTS
+    Foreword........................................................................................................III 
+    Acknowledgement.........................................................................................IV
+    Preface............................................................................................................V 
+1. Introduction....................................................................................................1 
+2. Key principles.................................................................................................1 
+3. Responsibilities, activities and quality enhancement..................................2 
+4. Responsibilities of the Graduate student.....................................................6
+    4.1. Pre-enrolment...........................................................................................6
+    4.2. During enrolment......................................................................................6
+    4.3. Post-enrolment..........................................................................................6
+    4.4. Completing the programme.......................................................................9 
+5. Roles and Responsibilities of Supervisors....................................................9
+    5.1 Expert Coaching/Academic........................................................................9
+6. Responsibilities of the School of Graduate Studies...................................12 
+    6.1. The First Year Postgraduate Student......................................................12
+    6.2. The Second Year Postgraduate Student..................................................15
+    6.3. The Third Year Postgraduate Student.....................................................18
+    6.4. The Forth Year Postgraduate Student.....................................................20
+Appendices........................................................................................................24
+   1. Activities and responsibilities of PhD students and Supervisors..............24
+   2. Activities and responsibilities of Masters students and Supervisors........30
+   3. Activities and Responsibilities of School of Graduate Studies (SGS)......38
+   4. Proportion of Work Done...........................................................................45
+   5. Candidates Research Abilities....................................................................45
+   6. Tools, exercises, forms and procedures.....................................................46
+   7. Qualification of Supervisory Team............................................................47
+  8. Maximum Load of Supervisors..................................................................48
+
+iii
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+FOREWORD
+This Guide was derived from a report produced during a workshop 
+that took place at KNUST February 16th -25th, 2016. It was held as 
+part of a Building Stronger Universities II Project (BSU II), being a 
+partnership between KNUST and a Consortium of Danish Universi-
+ties.This specific part of the project represented was by the Depart-
+ment of Science Education, University of Copenhagen.
+The overall objective of this BSU II partnership is to support KNUST 
+in  creating  an  enabling  environment  for  high  quality  and  relevant  
+research. The specific objectives of this program are to (i) Strengthen 
+KNUST’s capacity to deliver quality research and promote postgrad-
+uate education and, (ii) Improve university-wide services and
+facilities that support research.
+A key outcome of BSU II Project is an improved quality of PhD re-
+search processes driven by availability of user friendly protocols and 
+guidelines on PhD planning, and better, healthier supervisor-student 
+relations.
+This guide will contribute to improving PhD studies through the
+integration of supervision aspects into the other protocols. 
+
+iv
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+ACKNOWLEDGEMENT 
+The School of Graduate Studies is grateful for the support from 
+Building Stronger Universities, Phase II (BSU II) project provided by 
+the Danish Ministry of Foreign Affairs.
+
+v
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+PREFACE
+This book contains a set of guidelines which systematizes graduate 
+research at KNUST, the foremost science and technology institution 
+in  Ghana.  The  six  colleges  in  the  university  have  their  written  and  
+unwritten  principles  which  guide  graduate  education,  research  and  
+supervision.  It  was  found  necessary  to  produce  a  single  document  
+which makes a unified statement about higher research degrees at 
+KNUST. 
+To produce the guidelines required broad consultation with the
+colleges in the university. There is a wide variety of disciplines –
+Engineering, Science, Medicine, Art, Architecture, Agriculture,
+Political Science, Humanities and others – in the university and the 
+document  should  represent  this  broad  spectrum  of  programmes.  
+There was, therefore, a workshop of heads of departments and grad-
+uate  coordinators  from  all  the  colleges  to  brainstorm  to  make  the  
+document as all-embracing as possible.
+To facilitate the process of improving higher research degrees, a
+consortium  of  Danish  universities  sponsored  the  workshop  as  part  
+of the project known as Building Stronger Universities II. The over-
+all objective of the BSU II project was to support KNUST to create 
+an enabling environment for high quality and relevant research. The 
+workshop was to strengthen the capacity of KNUST to deliver quali-
+ty research and to promote postgraduate education. This publication, 
+therefore, is a summary of the inputs of the representatives of the six 
+colleges at the workshop.
+The guidelines contain user-friendly protocols for postgraduate edu-
+cation at KNUST. There is a detailed list of responsibilities for gradu-
+ate students, guidelines for healthier supervisor-student relationship, 
+the roles of the department, the head of department and the School 
+of Graduate Studies. There are a number of reports to be written and 
+submitted by the students and the supervisors to make evaluation of 
+
+vi
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+the various graduate programmes easier.
+As the guidelines are implemented in the various colleges, we expect 
+positive and negative feedback. We welcome all the feedback which 
+can be incorporated into this document to make it practical and
+useful for all the colleges.
+
+1
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+1. INTRODUCTION
+As  a  requirement,  all  graduate  students  of  the  Kwame  Nkrumah  
+University of Science and Technology (KNUST) undertake research 
+and  thesis  associated  examinations  before  completion  of  their  pro-
+grammes  of  study.  For  detailed  information  about  the  structure  of  
+higher  research  degree  thesis  preparation  in  KNUST,  refer  to  the  
+Guide for the Preparation and Evaluation of Higher Degree Research 
+Thesis. 
+The quality of the research project depends on a number of factors 
+critical among them is the quality of supervision. This guide has been 
+developed as a resource for higher research degree students and
+supervisors  of  KNUST.  It  outlines  the  key  principles  of  higher  re-
+search degree supervision and as well provides some practical advice 
+that will enable academic staff to best meet the training and support 
+needs of their higher degree research students. The ultimate objective 
+of the guide is to foster a fruitful interaction and cooperation between 
+supervisors and students. 
+2. KEY PRINCIPLES
+The key principle that underpins this guide is “assessment for learn-
+ing”.  In  this  regard,  the  guide  aims  to  improve  students’  learning  
+(formative) through interactive guidance and constructive criticisms. 
+The guide has been prepared in recognition that one does not neces-
+sarily improve performance by being assessed based on summative 
+principles because that only gives an impression of a level.
+To  improve  one’s  performance  –  as  a  learner  or  as  an  institution  –  
+one  must  use  evidence  collected  through  the  assessment  to  decide  
+what should be the next step in the learning process or what should 
+be improved in the institution. Giving and using feedback are central 
+processes  for  improvement  and  quality  enhancement.  For  all  those  
+
+2
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+involved in graduate studies, it is important always to try to include 
+formative aspects. There should therefore be a link between the
+critical process (pointing at problems) and the constructive one
+(suggesting possibilities).
+The  Departments,  supervisors  and  students  should  not  only  focus  
+on  problems  relating  to  development  and  progress  in  the  supervi-
+sion  process,  but  also  give  positive  feedback  that  will  enhance  the  
+process.  The  School  of  Graduate  Studies  has  an  important  role  in  
+securing formalities and establishing appropriate procedures, which 
+should at the same time, be used to implement quality enhancement. 
+Assessment and evaluation are time-consuming, but should be seen 
+as part of teaching and learning. This entails responsibilities, activi-
+ties and quality assurance processes carried out by the stakeholders 
+involved in research higher degree process at KNUST.
+3. RESPOSIBILITIES,  ACTIVITIES AND
+    
+QUALITY ENHANCEMENT
+Graduate education is a complex process involving many actors at 
+different organisational levels. For simplicity, three levels have been 
+identified and presented in the following diagrams: (Fig.1a and Fig 
+1b)
+
+3
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+ 
+Fig. 1a
+Fig. 1b
+Staff
+Other Staff
+
+4
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+At  the  University  level,  the  administration  of  graduate  studies  is  
+managed  by  School  of  Graduate  Studies  that  is  headed  by  a  Dean.  
+The graduate student participates in the supervisors’ professional
+environment together with peers and other staff. This represents the 
+local level.
+The  departmental  level  is  an  important  mediator  between  the  two  
+levels. The Head of Department, as a representative of the Provost of 
+the College, has the direct responsibility for graduate training. This 
+responsibility includes the monitoring of graduate students and
+supervisors, and coordination with the School of Graduate Studies.
+The higher research degree student has the responsibility of working 
+to become a researcher and therefore, all activities should be aimed at 
+achieving this goal. His/Her competence must be expressed in terms 
+of mastery of the subject, research insight, respect for the discipline, 
+capacity for independent research and ability to communicate results 
+and relate them to the broader field. The student has a major respon-
+sibility of acquiring these skills and competences, under the guidance 
+of the supervisor; these responsibilities (see Section 4) can be over-
+whelming. Certain formalities have to be fulfilled in order to obtain 
+the above competences. The student needs to assess his or her own 
+progress using some of the activities listed in the appendices and by 
+engaging in positive dialogue with the supervisors.
+The supervisors of the student are required to provide academic
+guidance and practical support from the inception of the programme 
+to  the  submission  of  the  thesis.  In  order  to  undertake  graduate  su-
+pervision, the academic member should have, at least, an equivalent 
+qualification. Also the supervisors have to know and fulfil the formal 
+responsibilities (see Section 5) and acknowledge that supervision is 
+
+5
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+a  special  form  of  teaching  that  they  have  to  learn.  Supervisors  can  
+learn through a combination of the following:
+   a) from more experienced ones,
+   b) by participating in workshops and
+   c) by attending courses on supervision.
+As with the graduate students, the supervisors have to continuously 
+monitor the supervision process and their own capabilities.
+The  interplay  between  graduate  students  and  the  supervisors  is  of  
+pivotal importance. It is typically in the supervision sessions that the 
+student receives constructive feedback and starts a new learning pro-
+cess towards the goals set up in the research proposal. It is, therefore, 
+important to make these supervision meetings as productive as
+possible (see Appendices for activities for this purpose).
+Appendices 1 and 2 indicate the various activities or responsibilities 
+for  the  graduate  student  (PhD  and  Masters)  and  the  supervisor(s).  
+Each activity addresses a specific responsibility and needs to be
+executed.  It  also  indicates  who  is  responsible  for  the  activity,  who  
+shall receive the results of the activity, and finally the outcome and 
+the consequences of the activity.
+The School of Graduate Studies has developed formalities and
+established approved procedures across the different Colleges in the 
+university  with  the  aim  of  enhancing  the  supervision  process.  This  
+is reflected in the list of responsibilities captured in Section 6 of this 
+Guide. The School of Graduate Studies would use the data it collects 
+to identify problems and suggest ways to solve them. A survey or a 
+bunch of progress reports is at the same time summative evidence of 
+the present state of graduate education and a possibility to pinpoint 
+areas for improvement.
+
+6
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+4. RESPONSIBILITIES OF THE GRADUATE                                    
+STUDENT
+It is important for the postgraduate student to develop the graduate 
+education  culture  through  the  implementation  of  established  activi-
+ties (actions). This covers the pre-enrolment, enrolment and
+post-enrolment activities listed below (Details of the responsibilities 
+are given in Appendices 1&2).
+4.1 Pre-enrolment: Before enrolment, it is expected that the
+potential higher research degree candidate should do the following:
+1.  Contact  the  department  for  discussion  on  the  choice  of  programme                     
+2. Write the research proposal/synopsis.
+3. Complete application procedures (including attending interviews).
+4. Honour all financial commitments to the university and the
+4.2 During enrolment
+The prospective post-graduate candidate should do the following:
+1. Accept the admission and go through all registration processes.
+2.  Agree  on  the  research  topic,  plan,  scope  and  objectives  of  the  work                 
+3. Acquaint himself/herself with state-of-the-art methods in the field           
+4.3 Post-enrolment: The postgraduate candidate is expected to 
+1. Dedicate effort and time to meet the requirements of the program
+2. Undertake courses for the needed competencies.
+in consultation with the supervisor.
+of specialisation.
+engage in the following activities:
+as well as the prospective supervisor. 
+research process.
+
+7
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+3. Take initiative in raising problems and difficulties that impede
+4. Ensure that the obligations to sponsors are met by timely
+5. Be available and accessible to the department and supervisors.
+6. Familiarise themselves with the relevant regulations governing the
+ 
+7. Communicate research findings to others in the academic 
+8. Exhibit some level of ownership of the work and be proactive.
+9. Do independent work but at the same time be consultative.
+10. Liaise regularly with the supervisor(s).
+11. Build good relationships and forge professional networks.
+12. Evaluate progress independently.
+13. Exhibit good conduct.
+14. Display initiative in identifying and resolving problems relating
+15. Manage the work efficiently so as not to place unreasonable
+16. Participate actively in discussions and debates within the depart
+17. Be well-organised and capable of setting and meeting timelines
+18. Acquire any new skills required for the programme.
+their progress.
+submision of reports and by meeting any other requirements.
+degrees and requirements imposed on them by those codes of
+practice
+community.
+to the research.
+demands on supervisors.
+ment and the university in general.
+for various phases of the research.
+programme.
+
+8
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+19. Maintain frequent and regular contact with the supervisors.
+20. Seek and accept in good faith advice from supervisors and
+21. Fulfill tasks required by the supervisors as part of the project.
+22. Produce drafts of self-review documents as part of the reporting
+23. Meet the normal scholarly and professional standards required by 
+24. Start writing the thesis as early as practicable.
+25. Develop adequate knowledge in information technology and
+      research skills.
+26.  Ensure  that  all  written  work  is  of  a  high  standard  of  expression              
+27. Attend seminars and participate in the academic, professional and 
+social life of the department.
+28. Attend conferences, present and publish sections of the work
+      under the guidance of supervisors.
+29. Write and submit progress reports at appointed times.
+30. Attend all prescribed meetings.
+31. Be aware of and learn the local academic culture.
+32. Exhibit initiative in finding sources of funds and grants.
+33. Have a healthy balance of social life and academic work.
+34. Keep and back up research data and all relevant documents
+      securely. 
+35. Get feedback at every stage of the work from the supervisors
+36. Follow the defined communication lines between supervisors 
+advisory panels,
+process.
+their discipline.
+and organisation.
+
+9
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+and other authorities
+4.4 Completing the Programme:
+Postgraduate candidates are expected to go through the following 
+activities to end their programmes: 
+1. Secure appropriate clearances and requirements.
+2. Satisfy all the requirements for graduation.
+3. Publish the required number of papers needed for graduation.
+4. Note and follow through all other requirements for the
+    submission of the thesis.
+Doctoral students are required to refer to Appendix 1 for details of 
+these responsibilities.
+Masters students are also required to refer to Appendix 2 for de-
+tails.
+5. ROLES AND RESPONSIBILITIES OF
+    SUPERVISORS
+5.1 EXPERT COACHING/ACADEMIC: The supervisor(s) are 
+expected to support their postgraduate students in the following: 
+1. Academic guidance and explicit ground rules for the supervision.
+2. Practical support from the inception to the submission of the
+    project.
+3. Constructive feedback on ideas in thesis drafts.
+4. Assistance in the formulation, planning and refining of the
+
+10
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+    research topic.
+5. Introduction of the student to relevant current literature.
+6. Introduction of the student to formal and informal ethical
+    practices.
+7. Advising on the logistics for producing a thesis document.
+8. Consulting on the selection of thesis examiners.
+9. Maintaining close and regular contact with the student and
+    establishing availability through negotiations.
+10. Promoting good interaction and learning among students and
+      staff during seminars and group meetings.
+11. Paying attention to and respecting the views, knowledge and
+      expertise of students.
+12. Keeping informed and educating the student about procedures    
+and issues relating to intellectual property rights.
+13. Advising about resources and funding sources.
+14. Assisting the student to gain access to required working space
+      and essential technical support.
+15.  Supporting  the  student’s  development  in  the  context  of  evolving             
+personal and career goals.
+16. Linking the students to appropriate research, academic and
+      professional networks within and outside the university.
+17.  Demonstrating  genuine  interest  in  the  student’s  well-being  and          
+the research.
+18. Being approachable, responsive, and affirming.
+19. Helping to arrange for presentations at seminars and
+      conferences.
+
+11
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+20. Collaborating with the student leading to joint publications.
+21. Advising on opportunities for relevant experience.
+22. Encouraging academic visibility online.
+Details of the responsibilities of Supervisors are provided in
+Appendices 1&2.
+5.2 CO-SUPERVISORS 
+1. 
+Provide guidance where appropriate, on:
+      i. the nature of the research;
+      ii. the standard expected for particular degrees;
+      iii. the redefinition or reshaping of the research topic; 
+2. Maintain close and regular contact with the candidate and establish       
+3. Respond in a timely manner to queries and when providing
+4. Ensure that the research work and the production of all categories     
+5.Comment in a timely manner on the content and the drafts of the
+6. Provide general support and encouragement to the candidate.
+7. Encourage the candidate to publish the research.
+8. Fulfil other obligations imposed by the University regarding
+Details of Qualification for Supervisors and their maximum load 
+are provided in Appendices 7 and 8 respectively. 
+at the beginning, the basis on which contact will be made.
+feedback on drafts.
+of examinable work are the candidate’s own work.
+examinable work prior to submission.
+postgraduate supervision. 
+
+12
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+6. RESPONSIBILITIES OF THE SCHOOL OF
+ 
+The School of Graduate Studies supervises graduate education in 
+KNUST. This responsibility is carried out through the monitoring of 
+the activities of postgraduate students, supervisors and departments. 
+The following sub-sections outline the responsibilities of the Grad-
+uate School to the students, the supervisors and the departments in 
+the duration of the various graduate programmes.
+Details of the responsibility of the SGS are given in Appendix 3.
+6.1.  The  First  Year  Postgraduate  Student:  This  section  applies  
+to all postgraduate programmes whose duration spans more than a 
+year. If the programme’s duration is one year, then section 6.4
+becomes relevant. 
+The School of Graduate Studies has two main responsibilities
+towards  the  graduate  student.  It  makes  sure  that  graduate  students  
+are  properly  inducted  into  the  university  system  and  also  monitors  
+their activities through the reports they and their supervisors submit 
+through the Heads of  Departments. 
+The  School  of  Graduate  Studies  inducts  graduate  students  into  the  
+university system through the following actions:
+GRADUATE STUDIES
+
+13
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+1. Ensuring the completion of student registration through counter
+2. Assigning examination and student numbers to candidates.
+3. Filing copies of registration slips and reports at the School of   
+4. Demonstrating sensitivity to gender and cultural differences.
+The School of Graduate Studies also monitors the following activi-
+ties of the student:
+5. The courses taken or audited by the student: The report on this 
+6. Submission of completed synopsis 8 weeks after registration: The   
+7. Redefining the research topic: The student consults the supervisor 
+8. Preparation of project plan: The student consults the supervisor    
+9. Availability and flexibility of supervisor:  The  student  writes  this     
+signing registration slips after supervisors have endorsed them.
+Graduate Studies.
+is written by the student, signed by the supervisor and copies are 
+distributed to the Head of the Department and the School of Grad-
+uate  Studies.  (NB: Copies  should  be  kept  by  the  supervisor  and  
+the student.)
+student submits the synopsis to the supervisor and copies are sent 
+to the Head of Department and the School of Graduate Studies.
+and writes a document signed by the candidate and the supervisor. 
+Copies are also sent to the Head of Department and the School of 
+Graduate Studies.
+and  circulates  the  document  to  the  Head  of  Department  and  the      
+School of Graduate Studies
+report and submits it to the Head of Department and the Graduate    
+School. A copy should be made available to the supervisor.
+
+14
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+10. The record of meetings between the student and the supervisor: 
+6.1.1 The Supervisor: The School of Graduate Studies, through
+    reports, ensures and monitors the following activities of the
+    supervisor:
+1. The supervisor completes the registration of the student by
+    countersigning the registration slip.
+2.  Attendance at Seminars: Eighty percent (80%) attendance rate 
+3. Availability of the student: The supervisor prepares this report and 
+4. Semester’s progress report: The supervisor writes this report and    
+5. Preparation for comprehensive examinations: The supervisor 
+for full-time students and 60% for part-time students are expected 
+of all students. This is reported   on by the supervisor and copies 
+are given to the student, the Head of Department and the School of
+Graduate Studies.
+gives copies to the student, the Head of Department and the School 
+of Graduate Studies.
+gives copies to the student, the Head of Department and the School 
+of Graduate Studies.
+takes the student through the departmental document on compre-
+hensive examinations and help the student to prepare for it.
+Reports on this should be sent to the Head of the Department and 
+The student prepares this and the supervisor countersigns.
+Copies should be sent to the office of the Head of  Department and 
+the School of Graduate Studies.
+
+15
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+    the School of Graduate Studies. 
+6. Notification of submission of outcome of comprehensive
+    examinations. 
+7. Discussion of outcome of comprehensive examination to fill in         
+6.1.2  The  Head  of  Department:  The  School  of  Graduate  Studies  
+ensures and monitors the following activities of the heads of depart-
+ments:
+1. Pre-selection of applicants for interview by Departmental Board.
+2. Conduct of interviews of applicants.
+3. Feedback of outcome of interviews to School of Graduate Studies.
+4. A letter from the Head of Department assigning supervisors to
+    students. A copy of this letter must be sent to the School of
+    Graduate Studies.
+5. Letters from the Head of Department to the students informing 
+6. Report of Examiners’ Board Meeting are sent to School of
+    Graduate Studies.
+6.2 The Second Year Postgraduate Student: This section applies 
+to programmes whose duration spans more than two years. If the 
+duration is two years, then section 6.4 of this guide 
+becomes
+applicable.
+them of their supervisors. Copies of these letters must be sent to 
+the School of Graduate Studies.
+
+16
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+The School of Graduate Studies monitors the following activities of 
+the second year post-graduate student:
+1. Completion of registration.
+2. Countersigning of registration slips by supervisors.
+3. Submission of registration slips to the School of Graduate Studies
+4. Review of work plan: This is done in consultation with the
+5. Records of meetings: The student prepares this record which is
+6. Conferences attended and papers presented: The student
+    prepares this report and sends copies to the supervisor, the Head
+7. Number of manuscripts prepared and submitted: The student 
+8. Number of manuscripts submitted to journals: The student 
+9. Number of tutorials conducted in the semester/year: The student 
+signed by the supervisor. Copies are then sent to the Head of
+Department and the School of Graduate Studies.
+supervisor and copies are sent to the Head of Department and the 
+School of Graduate Studies.
+of Department and the School of Graduate Studies.
+prepares this report and sends copies to the supervisor, the Head 
+of Department and the School of Graduate Studies.
+prepares this report and sends copies to the supervisor, the Head 
+of Department and the School of Graduate Studies.
+writes this report which is signed by the supervisor. Copies are 
+sent to the Head of Department and the School of Graduate 
+Studies.
+for filing.
+
+17
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+6.2.1 The Supervisor: The School of Graduate Studies monitors 
+the activities of supervisors of second year students through the 
+following:
+1. Completion of student’s registration by countersigning the
+    registration slips.
+2. Attendance at Seminars: 80% attendance rate for full-time
+   students and 60% for part-time students (are required). This is 
+    the Head of Department and the School of Graduate Studies.
+3. Availability of the student: The supervisor prepares this report
+4. Semester’s progress report: The supervisor writes this report by 
+6.2.2  For Head of Department: The Head of Department moni-
+tors the activities of the second year students and their supervisors 
+through all the reports they submit. The Head, in turn, submits 
+reports to the School of Graduate Studies. 
+6.2.3  The School of Graduate Studies: The School of Graduate 
+Studies monitors the activities of the second year students and their 
+supervisors through the following reports that are submitted:
+1. Registration slips countersigned by supervisors.
+2. Semester’s progress report.
+reported on by the supervisor and copies are given to the student, 
+and gives copies to the student, the Head of Department and the 
+School of Graduate Studies.
+completing the matrices in Appendices 4 and 5, and gives copies 
+to the student, the Head of Department and the School of Gradu-
+ate Studies.
+
+18
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+3. Revised student’s work plan.
+4. Report on conferences attended and papers presented by students.
+5. Checklist to monitor the required assessment forms.
+These reports, when received, should be securely filed. When any 
+report has not been received, the Head of Department should be 
+called to account. 
+6.3 The Third Year Postgraduate Student: This section applies 
+to programmes whose duration spans more than three years. If 
+the duration is three years, then section 6.4 of this guide becomes 
+applicable.
+The School of Graduate Studies monitors the following activities of 
+the third year postgraduate student:
+1. Completion of registration.
+2. Countersigning of registration slips by supervisors.
+3. Submission of registration slips to the School of Graduate Studies 
+4. Review of work plan: This is done in consultation with the
+   supervisor and copies are sent to the Head of Department and the   
+5. Records of meetings: The student prepares each record which is
+   Department and the School of Graduate Studies.
+6. Conferences attended and papers presented: The student
+for filing.
+School of Graduate Studies.
+signed by the supervisor. Copies are then sent to the Head of
+prepares this report and sends copies to the supervisor, the Head 
+of Department and the School of Graduate Studies.
+
+19
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+7. Number of draft manuscripts prepared: The student prepares this 
+8. Number of manuscripts submitted to journals: The student
+    prepares this report and sends copies to the supervisor, the Head of
+9. Number of tutorials conducted in the semester/year: The student 
+    sent to the Head of Department and the School of Graduate School.
+6.3.1 The Supervisor: The School of Graduate Studies monitors the 
+activities of supervisors of third year postgraduate students through 
+the following:
+1. Completion of students’ registration by countersigning the
+    registration slips.
+2. Attendance at Seminars: Eighty percent (80 %) attendance rate 
+3. Availability of the student: The supervisor prepares this report and 
+4. Semester’s progress report: The supervisor writes this report by 
+report and sends copies to the supervisor, the Head of 
+Department and the School of Graduate Studies.
+Department and the School of Graduate School.
+writes this report which is signed by the supervisor. Copies are
+for full-time students and 60 % for part-time students. This is
+reported on by the supervisor and copies are given to the student, 
+the Head of Department and the School of Graduate Studies.
+gives  copies  to  the  student,  the  Head  of  Department  and  the  
+School of Graduate Studies.
+completing the matrices in Appendices 4 and 5, and gives copies 
+to the student, the Head of Department and the School of Graduate 
+Studies.
+
+20
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+6.3.2  Head of Department: The Head of Department monitors the 
+activities of the third year postgraduate students and their supervisors 
+through all the reports they submit. The head, in turn, reports to the 
+School of Graduate Studies. 
+6.3.3  The School of Graduate Studies: 
+The  School  of  Graduate  Studies  monitors  the  activities  of  the  third  
+year postgraduate students and their supervisors through the follow-
+ing reports that are submitted:
+1. Registration slips countersigned by supervisors.
+2. Semester’s progress report.
+3. Revised student’s work plan.
+4. Report on conferences attended and papers presented by students.
+5. Checklist to monitor the required assessment forms.
+These reports, when received, should be securely filed. When any 
+report has not been received, the Head of Department should be 
+called to account. 
+6.4  The  Fourth  Year  Postgraduate  Student:  This  section  of  the  
+guide applies to all postgraduate students in their completion years. 
+The School of Graduate Studies monitors the following activities of 
+the fourth year postgraduate student:
+1. Completion of registration.
+2. Countersigning of registration slips by supervisors.
+3. Submission of registration slips to School of Graduate Studies for
+filing.
+
+21
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+4. Review of work plan: This is done in consultation with the
+5. Records of meetings: The student prepares this record which is     
+    Department and the School of Graduate Studies.
+6. Conferences attended and papers presented: The student prepares 
+    Department and the School of Graduate Studies.
+7. Number of draft manuscripts prepared: The student prepares this 
+8. Number of manuscripts submitted to journals: The student
+9. Number of tutorials conducted in the semester/year: The student 
+10. List of publications: The student prepares the list and distributes
+11. The submission of the final thesis: The student submits the final 
+12. Expected date for mock viva.
+supervisor and copies are sent to the Head of Department 
+and the School of Graduate Studies.
+signed by the supervisor. Copies are then sent to the Head of
+this report and sends copies to the supervisor, the Head of
+report and sends copies to the supervisor, the Head of Department 
+and the School of Graduate Studies.
+prepares this report and sends copies to the supervisor, the Head of
+Department and the School of Graduate Studies.
+writes this report which is signed by the supervisor. Copies are sent 
+to the Head of Department and the School of Graduate Studies.
+copies to the supervisor, the Head of Department and the School 
+of Graduate Studies.
+thesis signed by the supervisor to the Head of Department.
+
+22
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+6.4.1 For Supervisors: The School of Graduate Studies monitors the 
+activities of supervisors of fourth year students through the follow-
+ing:
+1. Completion of students’ registration by countersigning the
+    registration slips.
+2. Attendance at Seminars: 80% attendance rate for full-time
+    students and 60% for part-time students required. This is reported   
+3. Availability of the student: The supervisor prepares this report and 
+4. Semester’s progress report: The supervisor writes this report by 
+5. Expected date for mock viva.
+6. Expected date of submission of thesis for examination.
+7. Identification of potential examiners (external and internal) in  
+6.4.2 Head of Department: The Head of Department monitors the 
+activities of the fourth year postgraduate students and their supervi-
+sors through all the reports submitted. The Head, in turn, reports to 
+the School of Graduate Studies. The Head of Department also iden-
+tifies potential examiners for a fourth year postgraduate student’s 
+thesis in consultation with the student’s supervisor and submit list to 
+School of Graduate Studies.
+completing the matrices in Appendices 4 and 5, and gives copies 
+to the student, the Head of Department and the School of Graduate 
+Studies.
+consultation with Head of Department.
+gives copies to the student, the Head of Department and the School 
+of Graduate Studies.
+on by the supervisor and copies are given to the student, the Head 
+of  Department and the School of Graduate Studies.
+
+23
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+6.4.3 The School of Graduate Studies: The School of
+Graduate Studies monitors the activities of the fourth year postgrad-
+uate students and their supervisors through the following reports 
+that are submitted:
+1. Registration slips countersigned by supervisors.
+2. Semester’s progress report.(See Appendices 4&5)
+3. Revised student’s work plan.
+4. Report on conferences attended and papers presented by students.
+5. Checklist to monitor the required assessment forms.
+6. The receipt of the final thesis which is instantly despatched to
+    internal and external examiners.
+7. The date of the viva voce fixed in consultation with the Head of        
+These reports, when received, should be securely filed. When any 
+report has not been received, the Head of Department should be 
+called to account. 
+NB: Part-time doctoral students will continue to report as a
+continuing student in the fourth year and go through the activities
+listed under section 6.4 when he/she attains the year of completion.
+A postgraduate student who takes an extension due to the inabili-
+ty to complete the studies within the stipulated period is required 
+to observe the activities as a continuing student. Section 6.4
+applies to such a student when he/she attains the completion year.
+Department and the External Examiner(s).
+
+24
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+When
+Responsibility to be addressed
+Activity (tool/ procedure)
+Involves whom
+Who is responsible
+Who shall receive the results
+Which consequences
+Enrollment Phase
+Contact with the Department and prospective supervisor 
+meeting  with the intended supervisor
+HOD,  Supervisor  and student
+HOD
+HOD
+Student obtains a right framework of mind to make the right decision
+Draft research proposal and synopsis 
+Student writes  draft proposal  with supervisor’s  guidance
+Student and supervisor
+Student 
+HOD
+Proposal submitted for consideration; failure to submit proposal/synopsis, means student will not be considered for admission
+Completion of  application procedures
+Student  completes application  with supervisor’s  guidance
+Student and Supervisor 
+Student
+SGS/Administration
+Application submitted for consideration
+M0
+Financial commitments to research and university
+Student pays all fees to the university
+Student (guidance from supervisor)
+Student
+Finance office
+All financial obligations to the university met; Failure student forfeits candidature
+Information on requirements and regulations of programmes
+University provides all the relevant requirements for the programme (Appendix A1/SGS Handbook)
+Student (with guidance from supervisor)
+Supervisor, HOD and SGS
+Student 
+Student is well-informed
+Appendix 1: Activities and responsibilities of PhD students and Supervisors
+Appendices
+
+25
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+M0-M6
+Establishment of communication strategies for supervision
+Supervisor and student  align expectations  (Appendix B1)
+Supervisor and student
+Supervisor
+Student, Supervisor and HOD 
+Agreement on research plan and process
+Work plan developmenta. 
+Scheduled meetings with supervisor
+b. 
+Lecture attendance
+Seminar attendance and presentations
+Supervisor guides student to develop work plan
+Student and Supervisor
+Student and Supervisor
+Supervisor, HOD and SGS
+Acceptable work plan in place.Delayed progression of student
+M0-M48
+Engagement, influence and impact
+Student communicates research findings through conferences, workshops, seminars and policies to governments, organisations and communities
+Student with guidance from supervisor
+Student and supervisor
+Student, Supervisor and University
+University receives international recognitionStudent networksStudent builds competence and skills in presentation and gets exposurePersonal effectiveness of the studentEnhancement of  Supervisor’s recognition
+
+26
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+M0,M5,M13, M17,M21, M25, M29, M33M37, M42
+Completion and submission of  registration slip
+Student submits counter signed  registration slip(Appendix C1)
+Student and Supervisor
+Student
+HOD and SGS
+Student is duly registered.  Failure   to register, student loses studentship (Appendix C 1)
+Establishmentof research focus
+Supervisor listens actively to student(Appendix B2)Student receives feedback from supervisor(Appendix B3)
+Supervisor and student Supervisor and student 
+SupervisorSupervisor and student 
+Supervisor Student
+Appropriate research question and Research focus Agreed
+M12
+Comprehensive examination
+Supervisor guides Student to register SGS courses and specialized courses (Appendix A2)
+Student and Supervisor
+Student, Supervisor and HOD
+HOD and SGS
+Student gains knowledge and cognitive abilities. Fulfils criteria for candidature Delayed progression of student
+Outcome of comprehensive examination
+Supervisor and team discuss outcome of comprehensive examination with student
+Student, Supervisor and HOD
+Supervisor and HOD
+HOD and SGS
+Student becomes a PhD candidate
+
+27
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+M0-M45
+Research process (e.g. relevant literature and appropriate methodology and data analyses)
+Student and supervisor follow the research process (Appendices B2, B3)
+Student with Supervisor’s guidance
+Student
+ Supervisor, HOD and SGS
+Accepted Synopsis produced and project executed
+Enhancement of  quality supervision
+Peers review  supervision practice(Appendix B4)
+Supervisors
+Supervisor
+Supervisor
+Supervisor improves supervision practice
+Supervisor assesses  own supervision practice(Appendix B5)
+Supervisor
+Supervisor
+Supervisor
+Supervisor improves supervision practice
+Student completes General Department-wise questionnaire(Appendix B6)
+Students, HoD
+HoD
+SGS, HoD
+SGS and HoD gain insight in room for improvement
+M0-M48
+Research governance
+Supervisor takes student through professional conduct (e.g. ethics)(Appendix A3)
+Student and Supervisor
+Supervisor and HOD
+Student 
+Student gains appropriate legal requirements of the profession, respect and Confidentiality
+Student manages own research project under supervisors’ guidance, Incl. management of time, outputs, stakeholders, risks
+Student and Supervisor
+Supervisor
+Student 
+Student gains understanding and experience in project management
+
+28
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+M0-M24
+Sponsorship/Research grant
+Supervisor guides student  to search for funding through e sources and adverts
+Student and Supervisor
+Student and Supervisor
+Student,  Supervisor and Department
+Financial support for research
+M6-M48
+Tutorials and demonstrations
+Student is  guided to demonstrate and organize tutorials
+Student and Supervisor
+Student 
+Supervisor  and HOD
+Student  builds skills and  competencies in teaching
+self-assessment prior to each progress report
+Student assesses  student  progress(Appendix B7)
+Student 
+Student 
+Student
+Student becomes aware of own competence level, learning needs and over time competence development
+M6, M12, M18, M24, M30,M36,M42
+Progress report
+Supervisor prepares report on student performance.(Appendix C2)
+Supervisor
+Supervisor
+HOD and SGS
+Department and SGS receive an update on student’s performance.
+Preparation and submission of manuscripts
+Student is guided to prepare manuscripts.Student receives feedback from supervisor(Appendix B3)
+Student and Supervisor
+Supervisor
+Supervisor and Student
+Student builds skills and competencies.Fulfils criteria for thesis submission
+Extension of programme
+Studentv seeks extension with approval from Supervisor(Appendix C3)
+HOD and Supervisor 
+Student 
+Supervisor, HOD and SGS
+Extension is granted
+
+29
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+M45
+Submission of draft thesis
+Student  is guided by Supervisor(Appendix A4)
+Student and Supervisor
+Student
+Supervisor
+Draft thesis prepared and submitted
+M48
+Submission of thesis
+Student submits submission form with approval by Supervisor(Appendix A4)
+Student and Supervisor
+Student
+Supervisor,  HOD and SGS
+Final thesis submitted
+M48
+Mock Examination
+Student prepares and defends thesis before Supervisor and team(Appendix A5)
+Student and Supervisor
+Student and Supervisor
+Department
+Student develops self-confidence, enthusiasm and becomes self-reflective
+M48 -M50
+Thesis Assessment; Oral examinations
+HOD facilitates thesis assessment and oral examination(Appendix A5)
+ HOD, SGS
+HOD and SGS
+SGS and HOD
+Thesis is assessed and oral examination conducted
+M48 -M50
+Revision of thesis
+Student revises the thesis with guidance by supervisor
+Student and Internal Examiner
+Student and Internal examiner
+SGS and HOD
+Submission of revised thesis and Completion of programme
+
+30
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+When
+Responsibility to be addressed
+Activity (tool or procedure)
+Involves who
+Who is responsible
+Who shall receive the results
+Which consequences
+Contact with the Department and prospective supervisor 
+Meeting with the intended supervisor
+HOD, Supervisor and student
+HOD
+HOD
+Student obtains a right framework of mind to make the right decision
+Draft research proposal and synopsis (if applicable)
+Student writes draft proposal with supervisor’s guidance
+Student and supervisor
+Student 
+HOD
+Proposal submitted for consideration; failure to submit proposal/synopsis, means student will not be considered for admission
+Completion of application procedures
+Student completes application with supervisor’s guidance
+Student and Supervisor 
+Student
+SGS
+/
+Application submitted for consideration
+Appendix 2: Activities and responsibilities of Master’s students and Supervisors
+
+31
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+M0
+Financial commitments to research and university
+Student pays all fees to the university
+Student (guidance from supervisor)
+Student
+Finance office
+All financial obligations to the university met; Failure student forfeits candidature
+Information on requirements and regulations of programmes
+University provides all the relevant requirements for the programme (Appendix A1/SGS Handbook)
+Student (with guidance from supervisor)
+Supervisor, HOD and SGS
+Student 
+Student is well-informed
+M0-M6
+Establishment of communication strategies for supervision
+Supervisor and student align expectations  (Appendix B1)
+Supervisor and student
+Supervisor
+Student, Supervisor and HOD 
+Agreement on research plan and process
+Work plan developmentc. 
+Scheduled meetings with supervisor
+d. 
+Lecture attendance
+Seminar attendance and presentations
+Supervisor guides student to develop work plan
+Student and Supervisor
+Student and Supervisor
+Supervisor, HOD and SGS
+Acceptable work plan in place.Delayed progression of student
+
+32
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+M0-M24
+Engagement, influence and impact
+Student communicates research findings through conferences, workshops, seminars and policies to governments, organisations and communities
+Student with guidance from the supervisor
+Student and supervisor
+Student, Supervisor and University
+University receives international recognitionStudent networksStudent builds competence and skills in presentation and gets exposurePersonal effectiveness of the studentEnhancement of Supervisor’s recognition
+M0, M5,M13, M17,M21 
+Completion and submission of registration slip
+Student submits counter signed registration slip(Appendix C1)
+Student and Supervisor
+Student
+HOD and SGS
+Student is duly registered.    Failure   to register, student loses studentship (Appendix C 1)
+
+33
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+Establishment of research focus (if applicable
+Supervisor listens actively to student(Appendix B2)Student receives feedback from supervisor(Appendix B3)
+Supervisor and student Supervisor and student 
+SupervisorSupervisor and student 
+Supervisor Student
+Appropriate research question and Research focus Agreed
+M12
+End of examination
+Student writes the required end of semester examinations
+Student and Lecturers
+Student, Lecturers and 
+HOD and SGS
+Student gains achieved required passes and attain the minimum cumulative weighted average (CWA).Delayed progression of student
+Outcome of comprehensive examination
+Supervisor and team discuss outcome of comprehensive examination with student
+Student, Supervisor and HOD
+Supervisor and HOD
+HOD and SGS
+Student becomes a PhD candidate
+
+34
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+M0-M22
+Research process (e.g. relevant literature and appropriate methodology and data analyses)
+Student and supervisor follow the research process (Appendices B2, B3)
+Student with Supervisor’s guidance
+Student
+ 
+Accepted Synopsis produced and project executed
+Enhancement of quality supervision
+Peers review supervision practice(Appendix B4)
+Supervisors
+Supervisor
+Supervisor
+Supervisor improves supervision practice
+Supervisor assesses own supervision practice(Appendix B5)
+Supervisor
+Supervisor
+Supervisor
+Supervisor improves supervision practice
+Student completes General Department-wise questionnaire(Appendix B6)
+Students, HoD
+HoD
+SGS, HoD
+SGS and HoD gain insight in room for improvement
+
+35
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+M0-M24
+Research governance
+Supervisor takes student through professional conduct (e.g. ethics)(Appendix A3)
+Student and Supervisor
+Supervisor and HOD
+Student 
+Student gains appropriate legal requirements of the profession, respect and Confidentiality
+Student manages own research project under supervisors’ guidance, Incl. management of time, outputs, stakeholders, risks
+Student and Supervisor
+Supervisor
+Student 
+Student gains understanding and experience in project management
+M0-M18
+Sponsorship/Research grant
+Supervisor guides student to search for funding through e sources and adverts
+Student and Supervisor
+Student and Supervisor
+Student, Supervisor and 
+Financial support for research
+
+36
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+M6-M24
+Tutorials and demonstrations
+Student is guided to demonstrate and organize tutorials
+Student and Supervisor
+Student 
+Supervisor and HOD
+Student builds skills and competencies in teaching
+Self-assessment prior to each progress report
+Student assesses student progress(Appendix B7)
+Student 
+Student 
+Student
+Student becomes aware of own competence level, learning needs and over time competence development
+M6, M12, M18, 
+Progress report
+Supervisor prepares report on student performance.(Appendix C2)
+Supervisor
+Supervisor
+HOD and SGS
+Department and SGS receive an update on student’s performance.
+
+37
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+M9-M18
+Preparation and submission of manuscripts
+Student is guided to prepare manuscripts.Student receives feedback from supervisor(Appendix B3)
+Student and Supervisor
+Supervisor
+Supervisor and Student
+Student builds skills and competencies.Fulfils criteria for thesis submission
+Extension of programme
+Student seeks extension with approval from Supervisor(Appendix C3)
+HOD and Supervisor 
+Student 
+Extension is granted
+Submission of draft thesis
+Student is guided by Supervisor(Appendix A4)
+Student and Supervisor
+Student
+Supervisor
+Draft thesis prepared and submitted
+
+38
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+When
+Responsibility to be addressed
+Activity (tool or procedure)
+Involves who
+Who is 
+Who shall receive the results
+Which consequences
+Initiation and completion of admission process
+Advertisement,Sales of admission forms,
+School of Graduate Studies (SGS), Quality Assurance & Planning Unit, Applicants
+Dean, SGS
+Applicants, Heads of Department (HoD), Dean, of SGS, Registry (Academic Section), Head of QAPU
+Programmes advertised and admission forms sold 
+Interview and selection
+HoD
+HoD, Dean, of SGS, Registry (Academic Section), Head of QAPU,Applicants
+Qualified applicants selected and informed through official media
+ 
+Appendix 3: Activities and Responsibilities of School of Graduate Studies (SGS) 
+
+39
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+M0
+Acceptance and registration,Graduation requirements,
+Countersigning of registration slips by Coordinator (Coord)/Supervisors
+SGS, QAPU/UITS, 
+Students/
+Head QAPU/UITS,Department, HoD, SGS
+Students duly registered and informed on the programmes and graduation requirements
+Guidelines for registration and other requirements,Issuance of ID
+Head, QAPU
+Orientation and workshop
+Reports/letters (Correspondence), Seminars
+HoD/Coord
+Students, HoD/ Coord, SGS
+Students informed on their roles and responsibilities, Supervisors updated on their roles and responsibilities
+M1-5
+Receipt of Research topic and proposal/synopsis 
+Reports/letters (Correspondence)
+Students, HoD/ Coord, SGS
+Research proposal writing initiated, Research proposal completed
+Assignment of supervisors
+Reports/letters (Correspondence)
+ HoD
+Students, HoD/ Coord, SGS
+Students assigned to supervisors
+Requisite Courses to be audited
+Reports/letters (Correspondence)
+HoD
+Students, Supervisors, HoD/ Coord, SGS
+Students auditing courses 
+
+40
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+M6-8
+Registration by students [every Semester (6 months)]
+Registration slipsAppendix C1
+Students, 
+Students
+HoD/Coord, SGS
+Students duly registered and in good standing
+Seminars/workshops 
+Progress Report formsAppendix C2
+HoD
+Submission of progress reports
+Assessment/examination of students
+Examination questions/Assessment results 
+HoD
+Examination conducted and submission of marks by College Boards 
+Progress reports(Every 6 months)
+Progress report formsAppendix C2
+HoD
+Submission of progress reports
+Research Ethics approval
+Application forms and approval lettersAppendix C4
+Students, 
+Students, Supervisors, HoD/Coord, SGS
+Ethical approval sought and granted/approved
+
+41
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+M6-8
+Registration by students [every Semester (6 months)]
+Registration slipsAppendix C1
+Students, 
+Students
+HoD/Coord, SGS
+Students duly registered and in good standing
+Seminars/workshops 
+Progress Report formsAppendix C2
+HoD
+Submission of progress reports
+Assessment/examination of students
+Examination questions/Assessment results 
+HoD
+Examination conducted and submission of marks by College Boards 
+Progress reports(Every 6 months)
+Progress report formsAppendix C2
+HoD
+Submission of progress reports
+Research Ethics approval
+Application forms and approval lettersAppendix C4
+Students, 
+Students, Supervisors, HoD/Coord, SGS
+Ethical approval sought and granted/approved
+M9-12
+Seminars/Workshops 
+Seminars, Presentations and Progress report forms 
+Students, 
+HoD/Coord
+Students, Supervisors, HoD/Coord, departmental boards, College boards, SGS
+Progression and improvement of programmes
+Assessment of students
+Examination questions and Results of assessment
+HoD/Coord
+Submission of assessment/ examination results
+Progress reports 
+Progress report formsAppendix C2
+HoD/Coord
+Progress reports submitted
+Comprehensive exams 
+Examination questions and formats/modalitiesAppendix A2 
+HoD/Coord
+Submission of comprehensive exams results
+Enhancement of quality supervision
+General Department-wise questionnaireAppendix B6
+Students, HoD
+HoD/Coord
+HoD, SGS
+SGS and HoD gain insight in room for improvement
+Compilation of questionnaire,Recommendation formshttp://www.learning.ox.ac.uk/media/global/
+HoD, SGS
+SGS
+HoD, SGS
+SGS and HoD gain insight in room for improvement and can act on quality enhancement measures
+
+42
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+M13-17
+Progress reports, Seminars/workshops 
+Progress report forms, Assessment/Evaluation forms Same questions as above
+Students, 
+HoD/Coord
+Students, Supervisors, HoD/Coord, SGS
+Submission of  evaluation reports and 
+M18-24
+Seminars/Workshops 
+Seminars, Presentations and Progress report forms  
+Students, 
+HoD/Coord
+Students, Supervisors, HoD/Coord, SGS
+Submission of evaluation reports and 
+Progress reports
+Progress report formsAppendix C2
+HoD/Coord
+
+43
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+M13-17
+Progress reports, Seminars/workshops 
+Progress report forms, Assessment/Evaluation forms Same questions as above
+Students, 
+HoD/Coord
+Students, Supervisors, HoD/Coord, SGS
+Submission of  evaluation reports and 
+M18-24
+Seminars/Workshops 
+Seminars, Presentations and Progress report forms  
+Students, 
+HoD/Coord
+Students, Supervisors, HoD/Coord, SGS
+Submission of evaluation reports and 
+Progress reports
+Progress report formsAppendix C2
+HoD/Coord
+M25-30
+Seminars/workshops 
+Seminars, Presentations and Progress report forms
+Students, 
+HoD/Coord
+Students, Supervisors, HoD/Coord, SGS
+Submission of  evaluation reports and 
+Progress reports
+Progress  Assessment forms Appendix C2
+HoD/Coord
+M42-48
+Submission of theses
+Thesis submission formsAppendix C5
+Students
+Submission process completed
+Appointment of examiners
+List of Examiners,Letters of appointment 
+HoD
+Examiners appointed
+Submission of theses to examiners
+Letters/Communication (Correspondence), Expedite Mail services (thesis)
+SGS
+Thesis submitted to Examiners
+Extension of Programme
+Extension formsAppendix C3
+SGS
+Programme extension granted/approved 
+
+44
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+M48 - 50
+Submission of thesis assessment reports
+Thesis assessment formsAppendix C6
+SGS
+Students/ Candidates, HoD, Examiners, SGS, Academic Board, Academic affairs Unit 
+Completion of PhD programme, Results of assessment submitted to Academic Board for approval
+Oral examination
+Oral assessment reportsAppendix C7
+SGS
+Oral examination conducted
+Revision of thesis
+Thesis submission forms
+Revised/Final thesis submitted
+Graduation
+Graduation and Exit/Clearance formsAppendix C8
+Candidates graduated
+
+45
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+M48 - 50
+Submission of thesis assessment reports
+Thesis assessment formsAppendix C6
+SGS
+Students/ Candidates, HoD, Examiners, SGS, Academic Board, Academic affairs Unit 
+Completion of PhD programme, Results of assessment submitted to Academic Board for approval
+Oral examination
+Oral assessment reportsAppendix C7
+SGS
+Oral examination conducted
+Revision of thesis
+Thesis submission forms
+Revised/Final thesis submitted
+Graduation
+Graduation and Exit/Clearance formsAppendix C8
+Candidates graduated
+Appendix 4:
+Appendix 5:
+
+46
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+Appendix 6: Tools, exercises, forms and procedures
+A: Procedures
+A1: Requirements for the programme
+A2: Description of purpose, format and requirements for the    
+comprehensive exam
+A3: Description of ethical requirements and responsible conduct of 
+research 
+A4: Description of format and requirements for doctoral thesis
+A5: Description of format and requirements for oral examination
+B: Assessment activities
+B1: Clarifying Expectations and Establishing Good 
+Communication, Oxford Learning Institute 
+B2: Exercise for training active listening
+B3: Guidelines for giving and receiving feedback, Oxford Learning 
+Institute. 
+B4: Collegial help – peer supervision guidelines
+B5: Supervisor’s self-assessment, Oxford Learning Institute
+B6: General Department-wise questionnaire
+B7: Learning needs and competence assessment
+C: Forms
+C1: Registration slip (Please refer to Graduate School Hand Book; 
+pg ???) 
+C2: Progress report form (Kindly refer to Graduate School website)
+C3: Form for applying for extension (Kindly refer to Graduate 
+School website) 
+C4: Ethical approval application form(Kindly refer to Graduate 
+School website)
+C5: Thesis submission form (Kindly refer to Graduate School 
+website)
+C6: Thesis assessment forms (Kindly refer to Graduate School 
+website)
+
+47
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+C7: Oral assessment report format (Kindly refer to Graduate School 
+website)
+C8: Clearance/Exit forms (Kindly refer to Graduate School 
+Handbook)
+Appendix 7: Qualification to Supervisory Team
+• A regularly appointed teacher in the University Teaching        
+Department/ cognate college with post-graduate Department 
+who holds the degree of Ph.D. and five years post-graduate 
+teaching/research experience (excluding his Ph.D. research 
+period) along with published work in reputed and recognized 
+national/international journals to his credit.
+• An eminent scholar who is recognized by the School of Gradu-
+ate Studies.
+• A person employed in an approved institution who fulfils the 
+prescribed qualifications as above.
+• A retired teacher may be permitted to continue to guide Ph.D. 
+students already registered under him/her before retirement.
+
+48
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+Appendix 8: Maximum Load of Supervisors
+SOURCES / REFERENCES
+• http://www.learning.ox.ac.uk/media/global/wwwadminoxacuk/
+localsites/oxfordlearninginstitute/documents/overview/rsv/
+Clarifying_Expectations.pdf 
+• http://www.learning.ox.ac.uk/media/global/wwwadminoxacuk/
+localsites/oxfordlearninginstitute/documents/overview/rsv/
+Guidelines_for_giving_and_receiving_feedback.pdf 
+• http://www.learning.ox.ac.uk/media/global/wwwadminoxacuk/
+localsites/oxfordlearninginstitute/documents/overview/rsv/
+SelfAssessment.pdf 
+* Permitted on when supported by a Professor or an Associate Professor
+as part of the Mentoring Process
+
+49
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
+
+50
+GUIDE FOR HIGHER RESEARCH DEGREE SUPERVISION
