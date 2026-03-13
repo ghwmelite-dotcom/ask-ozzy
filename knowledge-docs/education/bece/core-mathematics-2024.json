@@ -1,0 +1,428 @@
+{
+  "exam_type": "bece",
+  "subject": "Core Mathematics",
+  "year": 2024,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "Two brands of air conditioners S and T cost GH₵ 3,000.00 and GH₵ 4,000.00 respectively. A company budgeted GH₵ 20,000.00 to buy air conditioners. If the company bought 5 units of brand S instead of brand T , how much did it save?",
+      "options": {
+        "A": "GH₵ 1,000.00",
+        "B": "GH₵ 5,000.00",
+        "C": "GH₵ 20,000.00",
+        "D": "GH₵ 15,000.00"
+      },
+      "correct_answer": "C",
+      "explanation": "Cost for buying 5 units of brand S = 5 x GH₵ 3,000.00\r\n\nCost for buying 5 units of brand S = GH₵ 15,000.00\r\n\nCost for 5 units of brand T = 5 x GH₵ 4,000.00\r\n\nCost for 5 units of brand T = GH₵ 20,000.00\r\n\nAmount saved = Cost for buying 5 units of brand T - Cost for buying 5 units of brand S \r\n\nAmount",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "Zalia and Amina shared an amount of money in the ratio 2 : 5. If Amina had GH₵ 150.00 more than Zalia, how much did they share?",
+      "options": {
+        "A": "GH₵ 100.00",
+        "B": "GH₵ 250.00",
+        "C": "GH₵ 450.00",
+        "D": "GH₵ 350.00"
+      },
+      "correct_answer": null,
+      "explanation": "Method I\n\nThe sum of ratios represent the total amount shared\n\nThe difference (larger ratio - smaller ratio) represents how much more\n\nZalia : Amina = 2 : 5\n\nSum of ratios = 2 + 5 = 7\n\nDifference of ratios = 5 - 2 = 3\n\nAmina had 150 more than Zalia.\n\nIf 3 = 150\n\n7 = \r\n 7 x 150 \r\n 3 \r\n\n = 7 x 50 = 35",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "Which of the following is an example of quantitative data?",
+      "options": {
+        "A": "Colour",
+        "B": "Gender",
+        "C": "Marital status",
+        "D": "Length"
+      },
+      "correct_answer": null,
+      "explanation": "Quantitative data is made up of numerical values has numerical properties, and can easily undergo math operations like addition and subtraction.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "In the diagram, P and Q are two sets and U is the universal set.\n\n Use the information to answer the question below \n\nFind P ∩ Q .",
+      "options": {
+        "A": "{ c , d , e }",
+        "B": "{ a , b }",
+        "C": "{ c , b , c , d , e }",
+        "D": "{ f , g , h }"
+      },
+      "correct_answer": "A",
+      "explanation": "the question below \n\nFind P ∩ Q .\n\n A. \r\n\n{ c , d , e }\n\n B. \r\n\n{ a , b }\n\n C. \r\n\n{ c , b , c , d , e }\n\n D. \r\n\n{ f , g , h }\n\n Mark \r\n\n Solution \r\n\n Intersection (∩) are elements that can be found in both sets\n\n P ∩ Q = { c , d , e }",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "In the diagram, P and Q are two sets and U is the universal set.\n\n Use the information to answer the question below \n\nHow many members are in set Q",
+      "options": {
+        "A": "2",
+        "B": "3",
+        "C": "8",
+        "D": "5"
+      },
+      "correct_answer": null,
+      "explanation": "the question below \n\nHow many members are in set Q \n\n A. \r\n\n2\n\n B. \r\n\n3\n\n C. \r\n\n8\n\n D. \r\n\n5\n\n Mark \r\n\n Solution \r\n\n Elements/members of set Q are the ones inside the circle Q .",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "Amadu walked to a point such that he is always the same distance from two villages P and Q .\n\nWhich of the following best describes the locus of Amadu?",
+      "options": {
+        "A": "An arc passing through line PQ",
+        "B": "A circle passing through line PQ",
+        "C": "Straight line PQ",
+        "D": "Perpendicular bisector of line PQ"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "Andrews drew three lines such that the length of the first one is 10 cm, the second is 15 cm longer than the first one and the third is 9 cm less than the second. Find the length of the third line.",
+      "options": {
+        "A": "4 cm",
+        "B": "14 cm",
+        "C": "34 cm",
+        "D": "16 cm"
+      },
+      "correct_answer": null,
+      "explanation": "First length = 10 cm\n\nThe second is 15 cm longer than the first one\n\nSecond length = First length + 15 cm\n\nSecond length = 10 cm + 15 cm\n\nSecond length = 25 cm\n\nThe third is 9 cm less than the second\n\nThird length = Second length - 9 cm\n\nThird length = 25 cm - 9 cm\n\nThird length = 16 cm",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "Find the truth set of 2 x - 4 x .",
+      "options": {
+        "A": "{ x : x \r\n\n{ x : x > -2}",
+        "C": "{ x : x > -10}",
+        "D": "{ x : x Mark"
+      },
+      "correct_answer": null,
+      "explanation": "2 x - 4 x \r\n\n2 x - 3 x x x > \r\n 10 \r\n -1 \r\n\n x > -10",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "The locus of points equidistant from a fixed point is called a",
+      "options": {
+        "A": "chord.",
+        "B": "circle.",
+        "C": "mediator.",
+        "D": "diameter."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "In the diagram, line PQ is parallel to line ST . Find the value of the angle marked x .",
+      "options": {
+        "A": "140°",
+        "B": "220°",
+        "C": "290°",
+        "D": "285°"
+      },
+      "correct_answer": "A",
+      "explanation": "Draw a third parallel line\n\na° = 35° (Vertically opposite angles are the same)\n\na° = b° = 35° (Alternate angles are the same)\n\n140° + d° = 180° (Sum of angles on a straight line is 180°)\n\nd° = 180° - 140°\n\nd° = 40°\n\nc° = d° = 40° (Alternate angles are the same)\n\nb° + c° + x° = 360° (Sum of angles in",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "The diagram shows the graph of a linear relation of the form y = mx + c .\n\n Use the graph to answer the question below \n\nFind the slope of the relation.",
+      "options": {
+        "A": "-2",
+        "B": "-1",
+        "C": "2",
+        "D": "1"
+      },
+      "correct_answer": "A",
+      "explanation": "the question below \n\nFind the slope of the relation.\n\n A. \r\n\n-2\n\n B. \r\n\n-1\n\n C. \r\n\n2\n\n D. \r\n\n1\n\n Mark \r\n\n Solution \r\n\nSlope/Gradient = \r\n Change in Y \r\n Change in X \r\n\n = \r\n Y 2 - Y 1 \r\n X 2 - X 1 \r\n\nPick any two points on the straight line to calculate the slope.\n\nUsing (1,1) and (0,3)\n\nY 2 = 3\r\n\nY",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "The diagram shows the graph of a linear relation of the form y = mx + c .\n\n Use the graph to answer the question below \n\nFind the equation of the relation.",
+      "options": {
+        "A": "y = -2 x + 3",
+        "B": "y = -2 x + 2",
+        "C": "y = 2 x + 3",
+        "D": "y = 2 x - 3"
+      },
+      "correct_answer": null,
+      "explanation": "the question below \n\nFind the equation of the relation.\n\n A. \r\n\n y = -2 x + 3\n\n B. \r\n\n y = -2 x + 2\n\n C. \r\n\n y = 2 x + 3\n\n D. \r\n\n y = 2 x - 3\n\n Mark \r\n\n Solution \r\n\n Steps to find equation of a line",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "Araba is 3 years younger than her sister. If the sum of their ages is 17 years, find Araba's age.",
+      "options": {
+        "A": "7 years",
+        "B": "8 years",
+        "C": "10 years",
+        "D": "9 years"
+      },
+      "correct_answer": "A",
+      "explanation": "Araba is 3 years younger means when you add 3 years to Araba's age, you will get the sister's age\n\nLet x = Araba's age\n\nThe sister's age = x + 3\n\nSum means addition.\n\nIf the sum of their ages is 17 years means when you add their ages, you will get 17\n\nAraba's age + Sister's age = 17\n\n x + x + 3 = 17",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "If the bearing of Q from P is 120°, find the bearing of P from Q .",
+      "options": {
+        "A": "060°",
+        "B": "210°",
+        "C": "300°",
+        "D": "240°"
+      },
+      "correct_answer": null,
+      "explanation": "Note :",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "There are 15 white and 25 black identical balls in a box. If a ball is selected at random from the box, find the probability that it is white.",
+      "options": {
+        "A": "1 \r\n 25",
+        "B": "1 \r\n 15",
+        "C": "3 \r\n 8",
+        "D": "5 \r\n 8"
+      },
+      "correct_answer": null,
+      "explanation": "Probability = \r\n Number of possible selection \r\n Number of samples \r\n\nNumber of white balls = 15\n\nTotal balls = 15 + 25 = 40\n\nP(white) = \r\n 15 \r\n 40 \r\n\n = \r\n 3 \r\n 8 \r\n\n Note : 5 divides 15, 3 times and 40, 8 times",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "The area of a rectangle is 18 cm 2 . If the width is 2 cm, find its perimeter.",
+      "options": {
+        "A": "18 cm",
+        "B": "20 cm",
+        "C": "36 cm",
+        "D": "22 cm"
+      },
+      "correct_answer": null,
+      "explanation": "Perimeter is the sum of all the sides of a shape.\n\nA rectangle has 2 equal lengths and 2 equal widths.\n\n2 x Length + 2 x Width = Perimeter.\n\nArea of a rectangle = Length x Width\n\nArea = 18\r\n\nWidth = 2\r\n\n18 = Length x 2\n\nDivide both sides by 2\n\nLength = \r\n 18 \r\n 2 \r\n\n = 9 cm\r\n\nPerimeter = 2 x 9 cm + ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "Find the interest on GH₵ 400.00 for 2 years at 10% simple interest per annum.",
+      "options": {
+        "A": "GH₵ 8.00",
+        "B": "GH₵ 40.00",
+        "C": "GH₵ 80.00",
+        "D": "GH₵ 60.00"
+      },
+      "correct_answer": null,
+      "explanation": "Simple Interest \r\n\nSimple Interest = \r\n Principal x Time x Rate \r\n 100 \r\n\nSimple Interest = \r\n Principal x Time x Rate \r\n 100 \r\n\nPrincipal = 400\r\n\nTime = 2\r\n\nRate = 10\r\n\nSimple Interest = \r\n 400 x 2 x 10 \r\n 100 \r\n\n = 4 x 2 x 10 = 80\r\n\n Note : the two zeros ( 00 ) in 4 00 and 1 00 cancel each other\n\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "One of the factors of the expression 4 m 2 + 12 m - 8 m - 24 is (4 m - 8). Find the other factor.",
+      "options": {
+        "A": "m - 3",
+        "B": "m + 3",
+        "C": "2 m + 3",
+        "D": "2 m - 3"
+      },
+      "correct_answer": "B",
+      "explanation": "Factorize 4 m 2 + 12 m - 8 m - 24 out\n\n4 m 2 + 12 m - 8 m - 24 = 4 m 2 + 12 m - 8 m - 24\n\n4 m 2 + 12 m - 8 m - 24 = 4 m ( m + 3) - 8)( m + 3)\n\n4 m 2 + 12 m - 8 m - 24 = ( m + 3)( 4 m - 8)\n\nThe other factor = m + 3",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "An article which cost GH₵ 600.00 was sold at a discount of 10%. Find the selling price.",
+      "options": {
+        "A": "GH₵ 60.00",
+        "B": "GH₵ 504.00",
+        "C": "GH₵ 560.00",
+        "D": "GH₵ 540.00"
+      },
+      "correct_answer": "A",
+      "explanation": "The percentage of the initial selling price (cost) is 100%\n\nThe percentage for the new selling price = 100% - 10%\n\nThe percentage for the new selling price = 90%\n\nIf 100% = GH₵ 600\n\n90% = \r\n GH₵ 600 x 90% \r\n 100% \r\n\n = GH₵ 540.00\r\n\n Note :",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "Make m the subject of the relation \r\n 1 \r\n m \r\n\n = \r\n 1 \r\n p \r\n\n + \r\n 1 \r\n r \r\n\n .",
+      "options": {
+        "A": "m = \r\n pr \r\n r + p",
+        "B": "m = \r\n pr \r\n r - p",
+        "C": "m = \r\n r - p \r\n pr",
+        "D": "m = \r\n r + p \r\n pr"
+      },
+      "correct_answer": null,
+      "explanation": "1 \r\n m \r\n\n = \r\n 1 \r\n p \r\n\n + \r\n 1 \r\n r \r\n\nGet rid of the fractions by multiplying both sides of the equation by the L.C.M of the denominators. The L.C.M of m , p and r is m x p x r \n\n m x p x r x \r\n 1 \r\n m \r\n\n = m x p x r x \r\n 1 \r\n p \r\n\n + m x p x r x \r\n 1 \r\n r \r\n\nCancel out\n\n p x r x 1 = m x r x 1 ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "Simplify: 3 x - 2(3 + 2 x ) + x (2 x + 4).",
+      "options": {
+        "A": "2 x 2 + 11 x - 6",
+        "B": "2 x 2 + 3 x - 6",
+        "C": "2 x 2 - 4 x - 6",
+        "D": "2 x 2 + 4 x - 6"
+      },
+      "correct_answer": null,
+      "explanation": "Note : x multiplied by x is x 2 .\n\n3 x - 2(3 + 2 x ) + x (2 x + 4) = 3 x - 2(3 + 2 x ) + x (2 x + 4)\n\n3 x - 2(3 + 2 x ) + x (2 x + 4) = 3 x - 2x3 - 2 x 2 x + x x 2 x + x x 4\n\n3 x - 2(3 + 2 x ) + x (2 x + 4) = 3 x - 6 - 4 x + 2 x 2 + 4 x \n\nGroup like terms\n\n3 x - 2(3 + 2 x ) + x (2 x + 4) = 2 x 2 + 3",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "If the gradient of a straight line is zero, then the line",
+      "options": {
+        "A": "is vertical.",
+        "B": "is horizontal.",
+        "C": "falls to the right.",
+        "D": "rises to the right."
+      },
+      "correct_answer": null,
+      "explanation": "Gradient = \r\n Change in Y \r\n Change in X \r\n\n = \r\n Y 2 - Y 1 \r\n X 2 - X 1 \r\n\nThe gradient will be zero only when the y coordinates are the same for both points. Thus when Y 2 = Y 1 \n\nWhen both points have the same y coordinates, the straight line is horizontal .",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 34,
+      "question_text": "Madam Nancy wants to know which of the teachers in her school is liked best by most of the students. Which of the following methods is most suitable for collecting the data?",
+      "options": {
+        "A": "Experiment",
+        "B": "Database",
+        "C": "Questionnaire",
+        "D": "Observation"
+      },
+      "correct_answer": null,
+      "explanation": "A questionnaire is a set of printed or written questions with a choice of answers, devised for the purposes of a survey or statistical study.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "Mensah packed 1,800 apples into a number of boxes. If each box contained 120 apples, how many boxes were fully packed?",
+      "options": {
+        "A": "15",
+        "B": "16",
+        "C": "18",
+        "D": "17"
+      },
+      "correct_answer": null,
+      "explanation": "Number of boxes = \r\n Total number of apples \r\n Number of apples per box \r\n\nNumber of boxes = \r\n 1800 \r\n 120 \r\n\n = 15\r\n\n Note :",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "The cost of three items at a shop are GH₵ 72.00, GH₵ 1,105.00 and GH₵ 216.00.\n\nIf a customer bought all the three items and received a change of GH₵ 107.00, how much did he initially give the shopkeeper?",
+      "options": {
+        "A": "GH₵ 1,300.00",
+        "B": "GH₵ 1,400.00",
+        "C": "GH₵ 2,000.00",
+        "D": "GH₵ 1,500.00"
+      },
+      "correct_answer": null,
+      "explanation": "Amount initially given = Cost of the three items + change\n\nAmount initially given = GH₵ 72 + GH₵ 1,105 + GH₵ 216 + GH₵ 107\n\nAmount initially given = GH₵ 1,500.00",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 37,
+      "question_text": "Number on die \r\n 1 \r\n 2 \r\n 3 \r\n 4 \r\n 5 \r\n 6 \r\n\n Frequency \r\n 4 \r\n 3 \r\n 3 \r\n 2 \r\n 3 \r\n 5 \r\n\nThe table shows the results when a student tossed a die many times.\n\n Use the information to answer the question below \n\nFind the mode.",
+      "options": {
+        "A": "6",
+        "B": "5",
+        "C": "3",
+        "D": "4"
+      },
+      "correct_answer": null,
+      "explanation": "the question below \n\nFind the mode.\n\n A. \r\n\n6\n\n B. \r\n\n5\n\n C. \r\n\n3\n\n D. \r\n\n4\n\n Mark \r\n\n Solution \r\n\nThe mode is the one which occurs the most/ the one with the highest frequency.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "Number on die \r\n 1 \r\n 2 \r\n 3 \r\n 4 \r\n 5 \r\n 6 \r\n\n Frequency \r\n 4 \r\n 3 \r\n 3 \r\n 2 \r\n 3 \r\n 5 \r\n\nThe table shows the results when a student tossed a die many times.\n\n Use the information to answer the question below \n\nHow many times did the student throw the die?",
+      "options": {
+        "A": "6",
+        "B": "18",
+        "C": "21",
+        "D": "20"
+      },
+      "correct_answer": "D",
+      "explanation": "the question below \n\nHow many times did the student throw the die?\n\n A. \r\n\n6\n\n B. \r\n\n18\n\n C. \r\n\n21\n\n D. \r\n\n20\n\n Mark \r\n\n Solution \r\n\nNumber of times die was thrown = Sum of the frequencies\n\nNumber of times die was thrown = 4 + 3 + 3 + 2 + 3 + 5\n\nNumber of times die was thrown = 20",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "Find the image of the point (-3, 5) when it is rotated through 360° about the origin.",
+      "options": {
+        "A": "(5, -3)",
+        "B": "(-3, 5)",
+        "C": "(-5, 3)",
+        "D": "(-3, -5)"
+      },
+      "correct_answer": null,
+      "explanation": "Rotation through 360° or 0 degree is equivalent to no rotation at all",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

@@ -1,0 +1,654 @@
+{
+  "exam_type": "wassce",
+  "subject": "Integrated Science",
+  "year": 2024,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "The process by which liquid changes into vapour at a particular temperature is known as",
+      "options": {
+        "A": "boiling.",
+        "B": "condensation.",
+        "C": "evaporation.",
+        "D": "melting."
+      },
+      "correct_answer": null,
+      "explanation": "Differences between evaporation and boiling\n\n Evaporation \r\n Boiling \r\n\n Evaporation is the process of vapourization of a liquid at room temperature \r\n Boiling is the process of evaporation of a liquid at the boiling point of the liquid \r\n\n Evaporation takes place at any given temperature \r\n Boiling",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "Which of the following organisms has neither a nucleus nor membrane bound organelles?",
+      "options": {
+        "A": "Bacteria",
+        "B": "Mucor",
+        "C": "Paramecium",
+        "D": "Spirogyra"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "The layer of the atmosphere in which air travel is most convenient is",
+      "options": {
+        "A": "mesosphere.",
+        "B": "stratosphere.",
+        "C": "thermosphere.",
+        "D": "troposphere."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "An agricultural system in which crops and animals are produced on the same piece of land at the same time is termed",
+      "options": {
+        "A": "continuous cropping.",
+        "B": "Mixed cropping.",
+        "C": "mixed farming.",
+        "D": "pastoral farming."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "Cowpea plants are used in crop rotation system of farming so that",
+      "options": {
+        "A": "grazing animals would not destroy the crops.",
+        "B": "nitrates would be added to the soil.",
+        "C": "soil erosion could be checked.",
+        "D": "weeds would be suppressed."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "The angle of reflection of a ray is 40°. Determine the angle between the surface of the mirror and the ray.",
+      "options": {
+        "A": "40°",
+        "B": "50°",
+        "C": "80°",
+        "D": "180°"
+      },
+      "correct_answer": "A",
+      "explanation": "Angle of incidence = Angle of reflection = 40°\n\nAngle between the surface of the mirror and the ray = 90° - 40° = 50°",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "Fluid consists of",
+      "options": {
+        "A": "solid and liquid only.",
+        "B": "liquid and gas only.",
+        "C": "gas and solid only.",
+        "D": "liquid, solid and gas."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "Which of the following compounds is a neutral oxide?",
+      "options": {
+        "A": "CO 2",
+        "B": "NO 2",
+        "C": "MgO",
+        "D": "CO"
+      },
+      "correct_answer": "D",
+      "explanation": "Neutral oxides show neither basic nor acidic properties and hence do not form salts when reacted with acids or bases, e.g., carbon monoxide (CO); nitrous oxide (N 2 O); nitric oxide (NO)",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "For grafting to be successful, the scion and the stock must be of the same",
+      "options": {
+        "A": "size.",
+        "B": "length.",
+        "C": "diameter.",
+        "D": "texture."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "The major cause of pest harvest loss of stored millet in Ghana is",
+      "options": {
+        "A": "bird attack.",
+        "B": "insect attack.",
+        "C": "mechanical injury.",
+        "D": "high humidity."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "Examples of plants with rhizome are",
+      "options": {
+        "A": "ginger and fern.",
+        "B": "onion and ginger.",
+        "C": "yam and Irish potato.",
+        "D": "onion and fern."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "The management practice which makes the transport of farm animals easy is",
+      "options": {
+        "A": "castration.",
+        "B": "dehorning.",
+        "C": "identification.",
+        "D": "quarantine."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "Breeds of fowl which are reared for the purpose of producing meat are called",
+      "options": {
+        "A": "broilers.",
+        "B": "chicks.",
+        "C": "hens.",
+        "D": "layers."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "The set-up used to separate water from ethanol should include",
+      "options": {
+        "A": "separating funnel.",
+        "B": "burette.",
+        "C": "condenser.",
+        "D": "volumetric flask."
+      },
+      "correct_answer": null,
+      "explanation": "Fractional distillation can be used to separate ethanol and water. These two liquids are miscible with each other. This means that they can be mixed together to form a single uniform liquid. Their different boiling points allow them to be separated, as water boils at 100℃ and ethanol boils at 78℃.\n\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "Which of the following statements about sea breeze are correct ? Sea breeze occurs\n\nI. during the day.\r\n\nII. during the night.\r\n\nIII. as a result of convection currents.",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "Mineral salts from the soil pass into the root hair cells by",
+      "options": {
+        "A": "tugor pressure",
+        "B": "active transport",
+        "C": "osmosis",
+        "D": "capillarity"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "Which of the following salts can cause temporary hardness in water?",
+      "options": {
+        "A": "Mg(HCO 3 ) 2",
+        "B": "Fe 2 (SO 4 ) 3",
+        "C": "MgCl 2",
+        "D": "CaSO 4"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "An example of inorganic fertilizer is",
+      "options": {
+        "A": "compost.",
+        "B": "farmyard manure.",
+        "C": "green manure.",
+        "D": "urea."
+      },
+      "correct_answer": null,
+      "explanation": "Urea is a man made fertilizer. Thus it is an example of inorganic fertilizers.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "An example of a wind instrument is",
+      "options": {
+        "A": "flute.",
+        "B": "guitar.",
+        "C": "violin.",
+        "D": "xylophone."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "Which of the following statements about compounds are correct \n\nI. They are products of chemical combination.\r\n\nII. Their constituents are present in fixed ratio by mass\r\n\nIII. Their constituents keep their individual properties",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "The equivalent of 161 K in degree celcius is",
+      "options": {
+        "A": "161 °C",
+        "B": "112 °C",
+        "C": "-112 °C",
+        "D": "-161 °C"
+      },
+      "correct_answer": null,
+      "explanation": "Conversion to Kelvin \r\n\nKelvin = 273 + °C\n\n161 = 273 + °C\n\n°C = 161 - 273\n\n°C = -112",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "Which of the following processes uses solar energy?\n\nI. Drying materials,\r\n\nII. Generation of electricity,\r\n\nIII. Heating of food substances.",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "Turgidity in plants is the result of",
+      "options": {
+        "A": "water entering the cells.",
+        "B": "water leaving the cells.",
+        "C": "the withdrawal of cytoplasm from the cell wall.",
+        "D": "diffusion of materials into the cells."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "Which of the following non-metals conduct electricity?",
+      "options": {
+        "A": "Diamond",
+        "B": "Graphite",
+        "C": "Silicon",
+        "D": "Vanadium"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 31,
+      "question_text": "The main function of ileum in mammals is",
+      "options": {
+        "A": "digestion and assimilation.",
+        "B": "assimilation and absorption.",
+        "C": "digestion and absorption.",
+        "D": "ingestion and digestion."
+      },
+      "correct_answer": null,
+      "explanation": "Functions of ileum\n\nIt connects to the cecum (first part of the large intestine). The ileum helps to further digest food coming from the stomach and other parts of the small intestine. It absorbs nutrients (vitamins, minerals, carbohydrates, fats, proteins) and water from food so they can be used by",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "Living organisms which help to modify the physical and chemical composition of the soil are\n\nI. earthworms.\r\n\nII. lichens.\r\n\nIII. bacteria.",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "The IUPAC name of the compound whose structural formula is illustrated below is",
+      "options": {
+        "A": "2-chloro-3-methylbut-2-ene.",
+        "B": "2-methyl-2-chlorobut-2-ene.",
+        "C": "2-chloro-3-methyl-2-butane.",
+        "D": "2-methyl-2-chloro-2-butyne."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 34,
+      "question_text": "Organic compounds are mostly",
+      "options": {
+        "A": "soluble in water.",
+        "B": "not inflammable.",
+        "C": "covalent.",
+        "D": "ionic."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "Which of the following compounds of the electromagnetic spectrum has the highest frequency?",
+      "options": {
+        "A": "Gamma rays",
+        "B": "Infra-red radiations",
+        "C": "Microwave",
+        "D": "Ultraviolet radiations"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "In mammals, the organ which deaminates excess amino acid to form urea is the",
+      "options": {
+        "A": "kidney",
+        "B": "liver",
+        "C": "pancreas",
+        "D": "spleen"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 37,
+      "question_text": "Maintenance ration provides farm animals with nutrients required for",
+      "options": {
+        "A": "egg production.",
+        "B": "vital body processes.",
+        "C": "growth and development.",
+        "D": "development and maturity."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "Which of the following compounds is a hydrocarbon?",
+      "options": {
+        "A": "C 5 H 8",
+        "B": "C 6 H 12 O 6",
+        "C": "CH 3 CH 2 OH",
+        "D": "CH 3 COCH 3"
+      },
+      "correct_answer": null,
+      "explanation": "A hydrocarbon is any of a class of organic chemicals made up of only the elements carbon (C) and hydrogen (H).",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 40,
+      "question_text": "An example of naturally occurring weak acid is",
+      "options": {
+        "A": "ammonia.",
+        "B": "citric acid.",
+        "C": "hydrochloric acid.",
+        "D": "nitric acid."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 41,
+      "question_text": "The number of electrons present in the outermost shell of an element with atomic number 20 is",
+      "options": {
+        "A": "2",
+        "B": "6",
+        "C": "8",
+        "D": "10"
+      },
+      "correct_answer": "A",
+      "explanation": "Electronic configuration = 2, 8, 8, 2 \n\nThe outermost shell is the last shell hence the last shell has 2 electrons as shown in the electronic configuration.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 42,
+      "question_text": "The neutrons and protons in the nucleus of an atom are collectively called",
+      "options": {
+        "A": "mass number.",
+        "B": "neutrons.",
+        "C": "nucleons.",
+        "D": "atomic number."
+      },
+      "correct_answer": null,
+      "explanation": "Nucleon is the collective term for protons and neutrons. Nucleons are the particles found in the nucleus of atoms.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 43,
+      "question_text": "Energy output in a device is equal to work done",
+      "options": {
+        "A": "by the load.",
+        "B": "on the load.",
+        "C": "by the effort.",
+        "D": "on the effort."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 44,
+      "question_text": "The shape of the lens of the human eye is varied by the action of the",
+      "options": {
+        "A": "iris.",
+        "B": "pupil.",
+        "C": "ciliary muscle.",
+        "D": "suspensory ligament."
+      },
+      "correct_answer": null,
+      "explanation": "The contraction or relaxation of the ciliary muscles enables the lens to change its shape to focus on objects at various distances.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 45,
+      "question_text": "Which of the following organelles is the site for protein synthesis?",
+      "options": {
+        "A": "Golgi body",
+        "B": "Mitochondrion",
+        "C": "Nucleus",
+        "D": "Ribosome"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 46,
+      "question_text": "Fehling's",
+      "options": {
+        "A": "fats.",
+        "B": "starch.",
+        "C": "reducing sugars.",
+        "D": "fatty acids."
+      },
+      "correct_answer": null,
+      "explanation": "is used in the laboratory to test for the presence of\n\n A. \r\n\nfats.\n\n B. \r\n\nstarch.\n\n C. \r\n\nreducing sugars.\n\n D. \r\n\nfatty acids.\n\n Mark",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 47,
+      "question_text": "Which of the following quantities have both magnitude and direction?\n\nI. Displacement\r\n\nII. Speed\r\n\nIII. Momentum",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I , II and III"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 48,
+      "question_text": "Group of organs which form part of the central nervous system are the",
+      "options": {
+        "A": "brain, the eyes and the ears.",
+        "B": "brain and the spinal cord.",
+        "C": "brain, the ears and the spinal cord.",
+        "D": "eyes and the spinal cord."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 49,
+      "question_text": "Proteins are usually made up of",
+      "options": {
+        "A": "sulphur, carbon and nitrogen.",
+        "B": "carbon, hydrogen and nitrogen.",
+        "C": "carbon, hydrogen and oxygen.",
+        "D": "oxygen, carbon and sulphur."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 50,
+      "question_text": "Which of the following characteristics are correct about dairy cattle? They have\n\nI. large udder,\r\n\nII. long logs,\r\n\nIII. wedged body.",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

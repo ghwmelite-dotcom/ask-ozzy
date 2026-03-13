@@ -1,0 +1,654 @@
+{
+  "exam_type": "wassce",
+  "subject": "Social Studies",
+  "year": 2022,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "Social unrest and breakdown of law and order in society are effects of",
+      "options": {
+        "A": "environmental challenges.",
+        "B": "strained family ties.",
+        "C": "cultural practices.",
+        "D": "deviant behaviours."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "Political independence is fully realized when there is a buoyant economy and",
+      "options": {
+        "A": "a dominant political party.",
+        "B": "deficit balance of payment.",
+        "C": "ability to access foreign loans.",
+        "D": "sustainable development."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "Democratic leadership promotes sustainable development because it",
+      "options": {
+        "A": "is an arbitration mechanism in society.",
+        "B": "generates ethnic sentiments and love in politics.",
+        "C": "creates separation of powers of organs of government.",
+        "D": "guarantees accountability and transparency."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "Reliable weather forecasting, improved medical services and efficient transportation systems are examples",
+      "options": {
+        "A": "proper management of the physical environment.",
+        "B": "roles played by science and technology in development.",
+        "C": "efforts towards national integration.",
+        "D": "social services for infrastructural development."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "The process of socialization in every society starts from the",
+      "options": {
+        "A": "community.",
+        "B": "school.",
+        "C": "family.",
+        "D": "church."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "The need for governments to provide more schools, hospitals and other social amenities is that",
+      "options": {
+        "A": "citizens desire to become literates.",
+        "B": "election campaign promises must be fulfilled.",
+        "C": "health issues have become more of international concern.",
+        "D": "there is increase in the population."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "Which of the following factors forms the basis of technological development of a country?",
+      "options": {
+        "A": "Buoyant economy",
+        "B": "Political stability",
+        "C": "Vocational education",
+        "D": "Scientific research"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "The ultimate aim of education is to provide",
+      "options": {
+        "A": "knowledge.",
+        "B": "scientific ideas.",
+        "C": "occupational skills.",
+        "D": "values."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "National economic life is made up of three elements namely",
+      "options": {
+        "A": "agriculture, industry and services.",
+        "B": "manufacturing, agriculture and transport.",
+        "C": "agriculture, mining and industry.",
+        "D": "mining, manufacturing and transport."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "Which of the following statements is true about the activities of man in relation to the environment?",
+      "options": {
+        "A": "Poor farming methods deprive the land of its vegetative cover",
+        "B": "Indiscriminate bush burning ensures livestock rearing",
+        "C": "Surface mining destroys marine life",
+        "D": "Proper waste management promotes family re-union"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "Ghanaians need to perform their responsibilities in order to",
+      "options": {
+        "A": "raise funds for infrastructural development.",
+        "B": "serve in the security services.",
+        "C": "prevent criminal acts.",
+        "D": "promote presidential system of government."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "Any form of material and human capacity used in the production of goods and services best explain",
+      "options": {
+        "A": "resources.",
+        "B": "productivity.",
+        "C": "development.",
+        "D": "utilization."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "The socio-economic well-being of a people is enhanced through",
+      "options": {
+        "A": "governance.",
+        "B": "exchange rate.",
+        "C": "development.",
+        "D": "periodic elections."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "International community consists of all people living",
+      "options": {
+        "A": "within a defined territory.",
+        "B": "in the world.",
+        "C": "together in peace.",
+        "D": "in foreign countries."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "The movement of the youth to the cities for greener pastures",
+      "options": {
+        "A": "weakens their socialization process.",
+        "B": "creates more avenues for employment.",
+        "C": "enhance higher productivity.",
+        "D": "reduces their quest for economic freedom."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "An outstanding obligation of adult-children to their parents is to",
+      "options": {
+        "A": "take care of them in their old age.",
+        "B": "be humble and respectful.",
+        "C": "avoid getting into trouble.",
+        "D": "accept parental control and authority."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "Which of the following options cannot be classified among types of community?",
+      "options": {
+        "A": "Rural community",
+        "B": "Fishing community",
+        "C": "Housing community",
+        "D": "Christian community"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "One way by which the behaviour of children can expose the irresponsibility of their parents is",
+      "options": {
+        "A": "being polite.",
+        "B": "showing excessive humility.",
+        "C": "working hard in school.",
+        "D": "flouting authority."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "Which of the following options describes the age structure of a population?",
+      "options": {
+        "A": "Number of males in the different age groups of the population",
+        "B": "Number of live births in the population",
+        "C": "The proportion of the people that belongs to the different age groups",
+        "D": "The proportion of females to that of males in the population"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "One social characteristics of adolescents is that they",
+      "options": {
+        "A": "attempt to distance themselves from parents.",
+        "B": "become anxious, moody and aggressive.",
+        "C": "increase in weight and height.",
+        "D": "increase in intellectual development."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "Which of the following preparations is needed in selecting a potential spouse?",
+      "options": {
+        "A": "Engagement",
+        "B": "Companionship",
+        "C": "Investigation",
+        "D": "Libation"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "Financial security enables a nation to depend on its own resources for",
+      "options": {
+        "A": "educational reforms.",
+        "B": "development projects",
+        "C": "paying workers.",
+        "D": "political activities."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "The uninterrupted effort to maintain harmonious living and improvement in the quality of life of a people explains the concept of",
+      "options": {
+        "A": "leadership.",
+        "B": "democracy.",
+        "C": "nation building.",
+        "D": "rule of law."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "The commonwealth supports education in Ghana mainly through",
+      "options": {
+        "A": "award of scholarships.",
+        "B": "provision of science equipment.",
+        "C": "free textbook supplies.",
+        "D": "sports and games."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "People can avoid incurring unmanageable debts by\n\nI. considering the payment plan.\r\n\nII. considering the bank's interest rate.\r\n\nIII. taking loans from money lenders.\r\n\nIV. taking loans from suitable banks.",
+      "options": {
+        "A": "I and II only",
+        "B": "III and IV only",
+        "C": "I, II and IV only",
+        "D": "II, III and IV only"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "Ghana's development agenda is faced with the following major challenges except",
+      "options": {
+        "A": "reliance on foreign loans.",
+        "B": "inadequate cash crop production.",
+        "C": "bribery and corruption.",
+        "D": "inadequate foreign exchange."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "In order to ensure sustainability in life, the individual should seek",
+      "options": {
+        "A": "protection of his or her rights.",
+        "B": "political freedom from dictators.",
+        "C": "employment from the government.",
+        "D": "good education and training."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "Which of the following cultural practices serves as a unifying force in Ghana?",
+      "options": {
+        "A": "Festivals",
+        "B": "Trokosi system",
+        "C": "Early marriages",
+        "D": "Female circumcision"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "An entrepreneur can ensure the sustainability of his or her business by",
+      "options": {
+        "A": "maintaining high quality products.",
+        "B": "depending on bank loans.",
+        "C": "selling shares to the public.",
+        "D": "relying on unskilled labour."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "Which of the following responsibilities is not expected of a citizen?",
+      "options": {
+        "A": "Showing respect to the elderly",
+        "B": "Engaging in communal labour",
+        "C": "Determining the market prices of commodities",
+        "D": "Payment of taxes regularly"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "Chastity is a highly cherished virtue in the Ghanaian traditional society because it",
+      "options": {
+        "A": "promotes trust and respect in marriage.",
+        "B": "leads to fertility in women.",
+        "C": "makes the adolescent girl shy.",
+        "D": "encourages safety of pregnancies."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "One way by which the youth can contribute to national development is",
+      "options": {
+        "A": "believing in development theories.",
+        "B": "accepting posting to rural communities.",
+        "C": "organizing cultural festivals.",
+        "D": "establishing community centres."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "One way of fostering good gender relations is by",
+      "options": {
+        "A": "allowing both sexes to choose their friends.",
+        "B": "providing equal opportunities for both sexes.",
+        "C": "admitting more girls into tertiary institutions.",
+        "D": "providing more economic opportunities for girls."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 40,
+      "question_text": "Which of the following measures is put in place to settle quarrels in the society?",
+      "options": {
+        "A": "Litigation",
+        "B": "Arbitration",
+        "C": "Instigation",
+        "D": "Revolution"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 41,
+      "question_text": "An individual's loyalty to a nation is known as",
+      "options": {
+        "A": "national awareness.",
+        "B": "national identity.",
+        "C": "allegiance.",
+        "D": "citizenship."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 43,
+      "question_text": "Attitudes and values relevant to peace building include",
+      "options": {
+        "A": "forgiveness and hardwork.",
+        "B": "tolerance and fairness.",
+        "C": "honesty and purity.",
+        "D": "forgiveness and charity."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 44,
+      "question_text": "An individual can develop his or her capabilities through",
+      "options": {
+        "A": "education and perseverance.",
+        "B": "apprenticeship and anxiety.",
+        "C": "discipline and popularity.",
+        "D": "knowledge and physique."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 45,
+      "question_text": "Which of the following attitudes would employers expect from their employees?",
+      "options": {
+        "A": "Pilfering at the work place",
+        "B": "Malingering at work",
+        "C": "Commitment to duty",
+        "D": "Disloyalty to colleagues"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 46,
+      "question_text": "Which of the following statements is true about self?",
+      "options": {
+        "A": "Ability to create things on one's own initiative",
+        "B": "Good judgement and taking concrete decision",
+        "C": "Absolute willingness to take calculated risk in life",
+        "D": "The totality of the individual's behaviour"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 47,
+      "question_text": "Parent and child conflict can be prevented through",
+      "options": {
+        "A": "family education.",
+        "B": "cordial relationship.",
+        "C": "child pampering.",
+        "D": "family re-union."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 48,
+      "question_text": "Which of the following leadership styles encourages indiscipline in society?",
+      "options": {
+        "A": "Paternalistic",
+        "B": "Autocratic",
+        "C": "Laissez-fair",
+        "D": "Democratic"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 49,
+      "question_text": "Social change is effectively achieved when the people are",
+      "options": {
+        "A": "indoctrinated.",
+        "B": "enlightened.",
+        "C": "politicized.",
+        "D": "organized."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 50,
+      "question_text": "Indiscriminate cutting of trees, water pollution and bush fires",
+      "options": {
+        "A": "result in overcropping and afforestation.",
+        "B": "cause flooding in big towns and cities.",
+        "C": "add aesthetic value to the environment.",
+        "D": "threaten the environment for human survival."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

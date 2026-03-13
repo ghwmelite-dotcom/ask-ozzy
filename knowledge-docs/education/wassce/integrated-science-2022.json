@@ -1,0 +1,669 @@
+{
+  "exam_type": "wassce",
+  "subject": "Integrated Science",
+  "year": 2022,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "Which of the following statements about resistors connected in parallel is correct ? The total resistance is",
+      "options": {
+        "A": "the addition of the resistance.",
+        "B": "less than any one of them.",
+        "C": "equal to the greatest resistance.",
+        "D": "greater than any one of them."
+      },
+      "correct_answer": null,
+      "explanation": "Resistance in parallel Formula \r\n\n 1 \r\n R total \r\n\n = \r\n 1 \r\n R 1 \r\n\n + \r\n 1 \r\n R 2 \r\n\n + \r\n 1 \r\n R 3 \r\n\n + ... \r\n 1 \r\n R n \r\n\nWhen R total is calculated, the result is less than any one of the resistors.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "The pigment in the skin responsible for skin colouration is",
+      "options": {
+        "A": "xanthophyll.",
+        "B": "melanin.",
+        "C": "velamin.",
+        "D": "carotene"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "Which of the following alloys contain copper?\n\nI. Brass\r\n\nII. Bronze\r\n\nIII. Duralumin",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "Brass → Copper and Zinc\n\n Bronze → Copper and Tin\n\n Duralumin is an alloy 95% aluminium, 4% copper, 0.5% manganese and 0.5% magnesium",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "The burdizzo is purposely used for",
+      "options": {
+        "A": "castrating farm animals.",
+        "B": "earthening-up.",
+        "C": "trimming crop plants.",
+        "D": "ear notching farm animals."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "An electrical component that is used to vary electric current is the",
+      "options": {
+        "A": "ammeter.",
+        "B": "voltmeter.",
+        "C": "rheostat.",
+        "D": "amplifier."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "An example of fungal disease of stored grains is",
+      "options": {
+        "A": "damping off.",
+        "B": "soft rot.",
+        "C": "maize smut.",
+        "D": "mould."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "Aluminium is used for making high tension cables because it is\n\nI. light.\r\n\nII. highly conducting.\r\n\nIII. brittle.",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "Which of the following forces is mainly reduced when a lubricant is applied to the moving parts of an engine?",
+      "options": {
+        "A": "Gravitational force",
+        "B": "Magnetic force",
+        "C": "Frictional force",
+        "D": "Centripetal force"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "An instrument that could be used to measure the relative density of an acid is",
+      "options": {
+        "A": "anemometer.",
+        "B": "hydrometer.",
+        "C": "barometer.",
+        "D": "hygrometer."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "The component of air used for welding is",
+      "options": {
+        "A": "O 2 .",
+        "B": "N 2 .",
+        "C": "CO 2 .",
+        "D": "C 2 H 2 ."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "In a step-down transformer,",
+      "options": {
+        "A": "there are more turns in the secondary coil than in the primary.",
+        "B": "the current in the primary coil is more than the current in the secondary coil.",
+        "C": "the voltage of the secondary coil is higher than that of the primary.",
+        "D": "there are more turns in the primary coil than in the secondary."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "One function of water in the germination of seeds is that it",
+      "options": {
+        "A": "causes the seed to produce auxins.",
+        "B": "kills the germs in the seed.",
+        "C": "activates the enzymes to breakdown stored food.",
+        "D": "terminates the period of dormancy."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "An important function of organic matter in the soil is to",
+      "options": {
+        "A": "improve texture of the soil.",
+        "B": "control harmful bacteria in the soil.",
+        "C": "serve as a mulch.",
+        "D": "supply both micro and macro nutrients."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "The gas in the stratosphere that absorbs ultraviolet rays to minimize the heat reaching the earth's surface is",
+      "options": {
+        "A": "carbon (IV) dioxide.",
+        "B": "chlorofluorocarbons.",
+        "C": "oxygen.",
+        "D": "ozone."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "Which of the following substances contribute(s) to the depletion of the ozone layer?\n\nI. Carbon (II) oxide\r\n\nII. Chlorofluorocarbon\r\n\nIII. Carbon (IV) oxide",
+      "options": {
+        "A": "I only",
+        "B": "II only",
+        "C": "I and II only",
+        "D": "II and III only"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "The gas used in the welding torch belongs to the family of",
+      "options": {
+        "A": "alkanoates.",
+        "B": "alkanes.",
+        "C": "alkynes.",
+        "D": "alkenes."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "Which of the following metals is a liquid at room temperature?",
+      "options": {
+        "A": "Lead",
+        "B": "Aluminium",
+        "C": "Silver",
+        "D": "Mercury"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "The essential parts of a flower are the",
+      "options": {
+        "A": "stamen and sepal.",
+        "B": "pistil and stamen.",
+        "C": "stamen and ovule.",
+        "D": "pistil and corolla."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "The blood vessel that carries oxygenated blood to the heart is",
+      "options": {
+        "A": "pulmonary vein.",
+        "B": "pulmonary artery.",
+        "C": "aorta.",
+        "D": "vena cava."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "Addition of an atom of a pentavalent element to a tetravalent element\n\nI. is known as doping.\r\n\nII. forms an n -type semiconductor.\r\n\nIII. forms a p -type semiconductor.",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "Which of the following structures in plants prevents water loss?",
+      "options": {
+        "A": "Phloem",
+        "B": "Mesophyll",
+        "C": "Xylem",
+        "D": "Cuticle"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "The fraction of petroleum distillation used as fuel for heavy duty engine is",
+      "options": {
+        "A": "bitumen.",
+        "B": "diesel.",
+        "C": "gasoline.",
+        "D": "kerosene."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "Members of the same species living in the same place at the same time make up the",
+      "options": {
+        "A": "trophic level.",
+        "B": "ecosystem.",
+        "C": "community.",
+        "D": "population."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "Thinning out means",
+      "options": {
+        "A": "spacing out seedlings in the nursery.",
+        "B": "removing diseased crops from the farm.",
+        "C": "spacing out seedlings when planting.",
+        "D": "removing extra seedlings from a stand."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "Terracing checks soil erosion by",
+      "options": {
+        "A": "alternating strips of grass-covered ground.",
+        "B": "reducing speed of run-off water.",
+        "C": "increasing speed of run-off water.",
+        "D": "increasing slope of water flow."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "The vacuum flask minimizes heat loss by\n\nI. having a vacuum between the two surfaces.\r\n\nII. polishing the two surfaces.\r\n\nIII. using a cork stopper.\r\n\nWhich of the statements above are correct ?",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 31,
+      "question_text": "The radioactive radiation with the least penetration power is",
+      "options": {
+        "A": "alpha particle.",
+        "B": "gamma rays.",
+        "C": "beta particle.",
+        "D": "X-ray."
+      },
+      "correct_answer": null,
+      "explanation": "Penetrating ability: \r\n\nRadioactivity's capacity to penetrate through materials is referred to as its penetrating ability. The capacity to penetrate is proportional to the magnitude of the radioactive particle.\r\n\n Alpha particle:",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "Lime juice tastes sour because it contains",
+      "options": {
+        "A": "acid.",
+        "B": "double salt.",
+        "C": "alkali.",
+        "D": "basic salt."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "Good quality seeds should be",
+      "options": {
+        "A": "free from dirt, weed seeds and pest.",
+        "B": "brightly coloured.",
+        "C": "hard seed coat with small micropyle.",
+        "D": "dressed with recommended chemicals."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 34,
+      "question_text": "Which of the following statements about small scale industry is correct ? It",
+      "options": {
+        "A": "makes use of advanced technology.",
+        "B": "is always capital intensive.",
+        "C": "is always in rural areas.",
+        "D": "operates with minimum input of materials."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "The most important climate factor affecting crop production in West Africa is",
+      "options": {
+        "A": "temperature.",
+        "B": "sunlight.",
+        "C": "rainfall.",
+        "D": "wind."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "Fertilization in flowering plants is known as double because",
+      "options": {
+        "A": "the female nucleus is double penetrated by one male gamete while the other regenerate",
+        "B": "two cotyledons are formed.",
+        "C": "two embryo nucleus are formed.",
+        "D": "one male gamete fertilizes the egg while the second fuses with the polar nuclei."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 37,
+      "question_text": "Which of the following scientists is associated with the study of inheritance?",
+      "options": {
+        "A": "Mendel",
+        "B": "Linnaeus",
+        "C": "Larmarck",
+        "D": "Darwin"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "During thunderstorm, lightning is seen before the sound is heard although both occur at the same time. This is because",
+      "options": {
+        "A": "sounds needs a material medium for propagation.",
+        "B": "light waves are mechanical.",
+        "C": "light travels faster than sound.",
+        "D": "sound waves are longitudinal whereas light waves are transverse."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "In the periodic table, all the elements within the same group have the same",
+      "options": {
+        "A": "number of electrons available for bonding.",
+        "B": "atomic number.",
+        "C": "number of neutrons in the nuclei.",
+        "D": "number of isotopes."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 40,
+      "question_text": "The term used to describe all chemical reactions occurring inside an organism is",
+      "options": {
+        "A": "metabolism.",
+        "B": "condensation.",
+        "C": "oxidation.",
+        "D": "polymerization."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 41,
+      "question_text": "The gas produced when dilute hydrochloric acid reacts with trioxocarbonate (IV) salt is",
+      "options": {
+        "A": "carbon (IV) oxide.",
+        "B": "Carbon (II) oxide.",
+        "C": "hydrogen.",
+        "D": "ammonia."
+      },
+      "correct_answer": null,
+      "explanation": "Example of a trioxocarbonate (IV) salt is calcium carbonate.\n\nThe reaction with hydrochloric acid is shown below:\n\nCaCO 3 + 2HCl → CaCl 2 + CO 2 + H 2 O\n\n Note : CO 2 is carbon (IV) oxide.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 42,
+      "question_text": "The following substance are air pollutants except",
+      "options": {
+        "A": "fertilizer.",
+        "B": "sulphur(Iv) oxide.",
+        "C": "dust.",
+        "D": "exhaust fumes"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 44,
+      "question_text": "DNA testing is used to determine",
+      "options": {
+        "A": "the sex of a baby.",
+        "B": "whether twins will be born.",
+        "C": "the father of a child.",
+        "D": "when a baby is to be born."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 45,
+      "question_text": "One of the advantages of the free range system of poultry is that",
+      "options": {
+        "A": "green feed is always not available.",
+        "B": "birds can exercise their bodies.",
+        "C": "record keeping becomes a challenge.",
+        "D": "elaborate housing is required."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 46,
+      "question_text": "The largest excretory organ of the human body is the",
+      "options": {
+        "A": "liver.",
+        "B": "skin.",
+        "C": "pancreas.",
+        "D": "lungs."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 48,
+      "question_text": "The material used for propagating cassava is the",
+      "options": {
+        "A": "root tuber.",
+        "B": "stem cutting.",
+        "C": "sucker.",
+        "D": "seed."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 49,
+      "question_text": "An example of a corm is",
+      "options": {
+        "A": "yam.",
+        "B": "ginger.",
+        "C": "cocoyam.",
+        "D": "onion."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 50,
+      "question_text": "An electric appliance is rated 60 W. This means the appliance",
+      "options": {
+        "A": "runs on a main voltage of 60 V.",
+        "B": "uses a current of 60 A per second.",
+        "C": "uses 60 J of energy every second.",
+        "D": "has a resistance of 60 W."
+      },
+      "correct_answer": null,
+      "explanation": "Power which is measured in Watts is work done/energy (J) over time (s)\n\nTHEORY QUESTIONS",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

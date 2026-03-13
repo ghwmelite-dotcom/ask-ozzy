@@ -1,0 +1,609 @@
+{
+  "exam_type": "wassce",
+  "subject": "Integrated Science",
+  "year": 2023,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "Which of the following symptoms is an indication of fungal infection in vegetable nursery?",
+      "options": {
+        "A": "Wilting of leaves",
+        "B": "Swellings of stems",
+        "C": "Rotting of stems",
+        "D": "Curling of leaves"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "Which of the following statements about an atoms is correct ?",
+      "options": {
+        "A": "Protons out number electrons in a neutral atom",
+        "B": "The L-shell is closest to the nucleus",
+        "C": "Neutrons are found in the nucleus",
+        "D": "The atomic number is greater than the mass number"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "Carbon (IV) oxide is used to extinguish fires because it",
+      "options": {
+        "A": "is fully oxidized.",
+        "B": "occurs naturally.",
+        "C": "is heavier than air.",
+        "D": "is a reducing agent."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "An athlete weighs 750 N. Determine the athlete's mass.\n\n[g = 10 m s -2 ]",
+      "options": {
+        "A": "750 kg",
+        "B": "375 kg",
+        "C": "75 kg",
+        "D": "7500 kg"
+      },
+      "correct_answer": null,
+      "explanation": "Force/Weight Formula \r\n\nForce/Weight (F) = Mass (m) x Acceleration due to gravity (g)\n\nMass = \r\n Force/Weight (F) \r\n Acceleration due to gravity (g) \r\n\nForce/Weight = 750 N\n\nAcceleration due to gravity = 10 m s -2 \n\nMass = \r\n 750 \r\n 10 \r\n\n = 75 kg",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "An example of a leafy vegetable is",
+      "options": {
+        "A": "cabbage.",
+        "B": "bean.",
+        "C": "okro.",
+        "D": "carrot."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "It is compulsory to wear goggles when handling substances that",
+      "options": {
+        "A": "are poisonous.",
+        "B": "are corrosive.",
+        "C": "are highly flammable.",
+        "D": "emit sparks."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "Excess amino acids in the body undergo the process of",
+      "options": {
+        "A": "digestion.",
+        "B": "detoxification.",
+        "C": "deamination.",
+        "D": "osmosis."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "Which of the following statements about sea breeze is/are correct ? It\n\nI. occurs during the night.\r\n\nII. occurs during the day.\r\n\nIII. blows towards the sea.",
+      "options": {
+        "A": "II only",
+        "B": "I and III only",
+        "C": "I only",
+        "D": "II and III only"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "Nutrient required in large quantities by leafy vegetables is",
+      "options": {
+        "A": "nitrogen.",
+        "B": "calcium.",
+        "C": "potassium.",
+        "D": "phosphorus."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "The most effective way of controlling lice on fowls is by",
+      "options": {
+        "A": "spraying.",
+        "B": "dipping.",
+        "C": "dusting.",
+        "D": "drenching."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "In the vacuum flask, the vacuum between the polished walls minimizes heat transfer by\n\nI. conduction.\r\n\nII. radiation.\r\n\nIII. convection.\r\n\nWhich of the statements above are correct ?",
+      "options": {
+        "A": "I and III only",
+        "B": "II and III only",
+        "C": "I and II only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "The flask is designed to prevent heat loss by conduction, convection and radiation. The inner glass walls are silver coated to reduce emitted radiation. The vacuum between the glass walls prevents heat loss by conduction and convection .",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "Which of the following blood groups in humans does not contain antigen?",
+      "options": {
+        "A": "A",
+        "B": "O",
+        "C": "B",
+        "D": "AB"
+      },
+      "correct_answer": "A",
+      "explanation": "Group O can donate red blood cells to anybody. It's the universal donor.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "Which of the following diseases is caused by vitamin deficiency?",
+      "options": {
+        "A": "Night blindness",
+        "B": "Hypertension",
+        "C": "Tuberculosis",
+        "D": "Dysentery"
+      },
+      "correct_answer": null,
+      "explanation": "Night blindness : Vitamin A deficiency",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "The normal period for a human pregnancy is",
+      "options": {
+        "A": "52 weeks.",
+        "B": "32 weeks.",
+        "C": "28 weeks",
+        "D": "40 weeks"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "Which of the following pairs of crops is grown for their roots?",
+      "options": {
+        "A": "Cocoyam and onion",
+        "B": "Cassava and carrot",
+        "C": "Carrot and shallot",
+        "D": "Cocoyam and shallot"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "The presence of methane and carbon (IV) oxide in the air is the main cause of",
+      "options": {
+        "A": "global warming.",
+        "B": "high and low tides.",
+        "C": "movement of air masses.",
+        "D": "thunder storm."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "Sickle-cell anaemia is an example of",
+      "options": {
+        "A": "sex-linkage.",
+        "B": "blood grouping.",
+        "C": "multiple alleles.",
+        "D": "partial dominance."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "Which of the following statements are correct about semiconductors? They\n\nI. are used to make transistors.\r\n\nII. do not obey Ohm's law.\r\n\nIII. are group (IV) elements.",
+      "options": {
+        "A": "I, II and III",
+        "B": "I and III only",
+        "C": "I and II only",
+        "D": "II and III only"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "An example of a simple machine is",
+      "options": {
+        "A": "sewing machine.",
+        "B": "bicycle.",
+        "C": "wheel and axle.",
+        "D": "car."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "During digestion, rennin in the stomach",
+      "options": {
+        "A": "provides acidic medium.",
+        "B": "emulsifies fat.",
+        "C": "coagulates milk protein.",
+        "D": "digests carbohydrates,"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "It is more advantageous to use solar energy than fossil fuel energy because",
+      "options": {
+        "A": "fossil fuel energy is renewable.",
+        "B": "solar energy causes pollution.",
+        "C": "fossil fuel produces carbon (IV) oxide.",
+        "D": "solar energy is renewable."
+      },
+      "correct_answer": null,
+      "explanation": "Fossil fuels emit carbon dioxide when burnt which is a major greenhouse gas and the primary source of pollution.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "The protoplasm of a cell is made up of",
+      "options": {
+        "A": "cytoplasm and vacuole.",
+        "B": "nucleus and vacuole.",
+        "C": "cytoplasm and nucleus.",
+        "D": "mitochondria and cell membrane."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "Which of the following deductions cannot be made from the symbol 6 12     C ?",
+      "options": {
+        "A": "Mass number of the element",
+        "B": "Atomic number of the element",
+        "C": "Number of neutrons in the nucleus",
+        "D": "Relative atomic mass of the element"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "The size of the pupil of the eye is controlled by the",
+      "options": {
+        "A": "iris.",
+        "B": "conjunctiva.",
+        "C": "cornea.",
+        "D": "lens."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "Which of the following conditions could cause aflatoxin in groundnuts?",
+      "options": {
+        "A": "Growing groundnut in poor soils",
+        "B": "Infection of groundnut plants by rosette disease",
+        "C": "Excessive treatment of harvested pods with chemicals",
+        "D": "Storage of pods of groundnut n humid conditions"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "Crop residue left on farms to conserve soil moisture are referred to as",
+      "options": {
+        "A": "waste materials.",
+        "B": "stable mulch.",
+        "C": "hay.",
+        "D": "silage"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "Ash from burnt plants is widely used in Ghana",
+      "options": {
+        "A": "as bleaching powder.",
+        "B": "for preparing soap.",
+        "C": "for preparing salt.",
+        "D": "for improving soil texture."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "The principle of flotation states that",
+      "options": {
+        "A": "a floating body displaces its own weight of fluid in which it floats.",
+        "B": "a floating body experiences an upward force equal to its weight.",
+        "C": "a body immersed in a fluid does not displace the fluid.",
+        "D": "the upthrust on a floating body exceeds the body's weight."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 34,
+      "question_text": "Which of the following materials is magnetic?",
+      "options": {
+        "A": "Platinum",
+        "B": "Brass",
+        "C": "Cobalt",
+        "D": "Aluminium"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "Biogas is produced from",
+      "options": {
+        "A": "anaerobic fermentation of organic waste.",
+        "B": "aerobic fermentation of organic waste.",
+        "C": "aerobic fermentation of inorganic waste.",
+        "D": "anaerobic fermentation of inorganic waste."
+      },
+      "correct_answer": null,
+      "explanation": "Biogas a renewable fuel that's produced when organic matter, such as food or animal waste, is broken down by microorganisms in the absence of oxygen. This process is called anaerobic digestion.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "The practice whereby shade is gradually removed from seedlings before transplanting is referred to as",
+      "options": {
+        "A": "rogueing.",
+        "B": "hardening off.",
+        "C": "thinning.",
+        "D": "shading off."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 37,
+      "question_text": "The substance formed when carbon (IV) oxide s bubbled through lime water for a long time is",
+      "options": {
+        "A": "Ca(HCO 3 ) 2 .",
+        "B": "Na 2 CO 3 .",
+        "C": "NaHCO 3 .",
+        "D": "CaCO 3 ."
+      },
+      "correct_answer": null,
+      "explanation": "Lime water is calcium hydroxide [Ca(OH) 2 ]\n\nCarbon (IV) oxide is carbon dioxide (CO 2 )\n\nWhen carbon dioxide is passed through lime water, it turns milky due to formation of white precipitate in form of calcium carbonate (CaCO 3 ).\n\nThe reaction is shown below.\n\nCa(OH) 2 +CO 2 →CaCO 3 +H 2 O",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "One advantage of weaning lambs early is that the",
+      "options": {
+        "A": "rams are not able to mate with the ewes easily.",
+        "B": "ewes come on heat within a short period.",
+        "C": "lambs become sexually matured easily.",
+        "D": "mothers grow faster."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "The manufacture of plastics involves the scientific process known as",
+      "options": {
+        "A": "crystallization.",
+        "B": "fermentation.",
+        "C": "vulcanization.",
+        "D": "Polymerization."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 42,
+      "question_text": "Which of the following factors contribute to tidal waves experienced on the sea? The\n\nI. gravitational force of the sun and moon on the sea\r\n\nII. centripetal force created by the rotation of the earth around its axis\r\n\nIII. occurrence of cyclones",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "I, II and III",
+        "D": "II and III only"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 43,
+      "question_text": "Myopia s an eye defect that makes a sufferer to",
+      "options": {
+        "A": "feel dizzy continuously",
+        "B": "view far away objects but not near objects.",
+        "C": "view normally.",
+        "D": "view near objects but not far away objects."
+      },
+      "correct_answer": null,
+      "explanation": "Myopia (nearsightedness) is a common condition that's usually diagnosed before age 20. It affects your distance vision — you can see objects that are near, but you have trouble viewing objects that are farther away.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 45,
+      "question_text": "The weather on earth is determined by changes in temperature, pressure and winds that take place in the",
+      "options": {
+        "A": "thermosphere.",
+        "B": "strastosphere.",
+        "C": "mesophere.",
+        "D": "troposphere."
+      },
+      "correct_answer": null,
+      "explanation": "The troposphere is the lowest layer of Earth's atmosphere. Most of the mass (about 75-80%) of the atmosphere is in the troposphere. Most types of clouds are found in the troposphere, and almost all weather occurs within this layer.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 47,
+      "question_text": "Which of the following statements about wind are correct ?\n\nI. It is an air mass\r\n\nII. It moves from an area of high pressure to an area of low pressure\r\n\nIII. It moves from an area of low pressure to an area of high pressure",
+      "options": {
+        "A": "I, II and III",
+        "B": "II and III only",
+        "C": "I and III only",
+        "D": "I and II only"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 49,
+      "question_text": "Which of the following combinations of elements do all carbohydrates contain?",
+      "options": {
+        "A": "Sulphur, carbon, hydrogen and oxygen",
+        "B": "Carbon, phosphorus, oxygen and hydrogen",
+        "C": "Carbon, hydrogen and nitrogen",
+        "D": "Carbon, hydrogen and oxygen"
+      },
+      "correct_answer": null,
+      "explanation": "The general formula for carbohydrates is Cx(H 2 O)y.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 50,
+      "question_text": "Setts are planting materials used for the cultivation of",
+      "options": {
+        "A": "ginger.",
+        "B": "pineapple.",
+        "C": "radish.",
+        "D": "yam."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

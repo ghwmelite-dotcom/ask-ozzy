@@ -1,0 +1,459 @@
+{
+  "exam_type": "bece",
+  "subject": "English Language",
+  "year": 2020,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "Seth has bought and ............ a loaf of bread.",
+      "options": {
+        "A": "ate",
+        "B": "eats",
+        "C": "eaten",
+        "D": "eating"
+      },
+      "correct_answer": null,
+      "explanation": "Has eaten",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "My mum and............ visited Joseph.",
+      "options": {
+        "A": "I",
+        "B": "myself",
+        "C": "me",
+        "D": "ourselves"
+      },
+      "correct_answer": "A",
+      "explanation": "Use I before a verb when you are the subject of the sentence as in the above sentence.... and I . example, Kofi and I like gardening, Adjei and I love action movies, My brother and I visited etc.\n\nUse me after a verb, as in:\r\n\nHe gave me a lift home,\r\n\nShe gave Kofi and me a lift home,\r\n\nShe sends A",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "The tiger............ in wait for its prey.",
+      "options": {
+        "A": "lie",
+        "B": "lain",
+        "C": "laid",
+        "D": "lay"
+      },
+      "correct_answer": null,
+      "explanation": "... laid in wait",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "It's about time we......... studying hard.",
+      "options": {
+        "A": "start",
+        "B": "should start",
+        "C": "started",
+        "D": "are starting"
+      },
+      "correct_answer": "A",
+      "explanation": "it's about time is often followed by the past tense .\n\nIn this case the past tense of start which is started . So the correct answer is started .\n\n Example , It's about time that our country invested in education.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "Ben now wishes he............ his studies early.",
+      "options": {
+        "A": "began",
+        "B": "begun",
+        "C": "begins",
+        "D": "has begun"
+      },
+      "correct_answer": null,
+      "explanation": "The past tense of begin is began . Anytime that wish(es) is used, its followed by the past tense.\n\nA wish about the present uses a simple past main verb. Example : He wishes he understood the lesson.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "This is exactly............ our mum tried to make you understand.",
+      "options": {
+        "A": "all what",
+        "B": "all that",
+        "C": "something that",
+        "D": "something which"
+      },
+      "correct_answer": "A",
+      "explanation": "The correct is all that and not all what. All what is colloquial (informal).",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "Would you rather we ...... tomorrow?",
+      "options": {
+        "A": "should leave",
+        "B": "are leaving",
+        "C": "leave",
+        "D": "left"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "She is my........... sister.",
+      "options": {
+        "A": "senior",
+        "B": "elder",
+        "C": "older",
+        "D": "matured"
+      },
+      "correct_answer": null,
+      "explanation": "Don't say: Ama is my senior sister.\n\n Say: Ama is my elder sister.\n\n Don't say: Adjei is my junior brother.\n\n Say: Adjei is my younger brother.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "We cannot make tea because we have........... sugar left.",
+      "options": {
+        "A": "little and little are used for uncountable nouns and a few and few for countable nouns . Sugar is uncountable and so either a little or very little is the possible answer.\n\nVery little or very few means hardly any or not enough. Since it wasn't possible to make the tea, the appropriate answer is very little since there wasn't enough to make the tea.",
+        "B": "very little",
+        "C": "a few",
+        "D": "very few"
+      },
+      "correct_answer": "B",
+      "explanation": "A little and little are used for uncountable nouns and a few and few for countable nouns . Sugar is uncountable and so either a little or very little is the possible answer.\n\nVery little or very few means hardly any or not enough. Since it wasn't possible to make the tea, the appropriate answer is v",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "You should not tell.......... about our plans.",
+      "options": {
+        "A": "no other",
+        "B": "nobody",
+        "C": "any other",
+        "D": "anyone"
+      },
+      "correct_answer": null,
+      "explanation": "We don’t use nobody, no one, nothing, nowhere after no, not, never or other words which have a negative meaning (hardly, seldom). We use anyone, anybody, anything, anywhere",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "The leader........... suffer alone.",
+      "options": {
+        "A": "needs not",
+        "B": "need not",
+        "C": "needs not to",
+        "D": "need not to"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "The flower pot is made.......... clay.",
+      "options": {
+        "A": "with",
+        "B": "by",
+        "C": "of",
+        "D": "in"
+      },
+      "correct_answer": "B",
+      "explanation": "Made by identifies the person or process that made something. Made by John Boye , made by distillation .\n\n Made of tells us the substance that something is composed of. This table is made of wood .",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "Let's go out and play,..........?",
+      "options": {
+        "A": "will you",
+        "B": "shall we",
+        "C": "can you",
+        "D": "would you"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "Sarah would have passed her examination........... she studied hard.",
+      "options": {
+        "A": "should",
+        "B": "had",
+        "C": "has",
+        "D": "could"
+      },
+      "correct_answer": "B",
+      "explanation": "the would have means she didn't pass her exams. She would had passed if she had studied hard",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "The four brothers haven't seen........... since June last year.",
+      "options": {
+        "A": "theirself",
+        "B": "each another",
+        "C": "themselves",
+        "D": "each other"
+      },
+      "correct_answer": "D",
+      "explanation": "We use the reciprocal pronouns each other and one another when two or more people do the same thing.\n\nPeter and Mary helped each other .\r\n\n= Peter helped Mary and Mary helped Peter.\r\n\nWe sent one another Christmas cards.\r\n\n= We sent them a Christmas card and they sent us a Christmas card.\r\n\nThey did",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "Celia shook with fright.",
+      "options": {
+        "A": "excitement",
+        "B": "cheerfulness",
+        "C": "hope",
+        "D": "fear"
+      },
+      "correct_answer": "D",
+      "explanation": "Synonyms (nearest in meaning) for fright \n\nConsternation, dismay, horror, panic, trepidation, alarm, dread, fear, quaking, scare, shiver, shock, terror, cold sweat, trepidity\n\n Antonyms (opposite in meaning) for fright \n\nCalm, confidence, contentment, happiness, bravery, calmness, courage, beauty, f",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "The radio is a potent medium of communication",
+      "options": {
+        "A": "fast",
+        "B": "necessary",
+        "C": "powerful",
+        "D": "sound"
+      },
+      "correct_answer": null,
+      "explanation": "Synonyms (nearest in meaning) for potent \n\nCompelling, dominant, dynamic, great, impressive, influential, persuasive, robust, strong, useful, vigorous, stiff, almighty, authoritative, ball of fire, cogent, commanding\r\n, convincing, efficacious, forcible, full-bodied, go-getter, gutsy, lusty, mighty,",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "Trading is a lucrative economic activity.",
+      "options": {
+        "A": "profitable",
+        "B": "legitimate",
+        "C": "desirable",
+        "D": "cherished"
+      },
+      "correct_answer": "A",
+      "explanation": "Synonyms (nearest in meaning) for lucrative \n\nAdvantageous, cost effective, fruitful, good, money-making, profitable, worthwhile, fatness, gainful, high-income, in the black, paying, remunerative, sweet\n\n Antonyms (opposite in meaning) for lucrative \n\nPoorly paid, unprofitable",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "The scarcity of doctors is a matter of public concern.",
+      "options": {
+        "A": "weakness",
+        "B": "shortage",
+        "C": "suffering",
+        "D": "indiscipline"
+      },
+      "correct_answer": null,
+      "explanation": "Synonyms (nearest in meaning) for scarcity \n\nDearth, drought, famine, inadequacy, insufficiency, lack, paucity, shortage, exiguity, infrequency, rareness, rarity, scantiness, sparsity, stringency, uncommonness, want\n\n Antonyms (opposite in meaning) for scarcity \n\nAbundance, enough, excess, plenty, s",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "My twin brother is very inquisitive.",
+      "options": {
+        "A": "curious",
+        "B": "brilliant",
+        "C": "friendly",
+        "D": "talkative"
+      },
+      "correct_answer": "A",
+      "explanation": "Synonyms (nearest in meaning) inquisitive \n\nAnalytical, curious, nosy, big-eyed, challenging, forward, impertinent, inquiring, inquisitorial, interested, intrusive, investigative, meddlesome, meddling, peering, personal, poking, presumptuous, probing, prying, questioning, scrutinizing, searching, si",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "I'm going to make you eat your words. \n\n That means that you will.........",
+      "options": {
+        "A": "become shocked",
+        "B": "be punished",
+        "C": "admit you are wrong",
+        "D": "face the consequences of your actions"
+      },
+      "correct_answer": null,
+      "explanation": "Eat your words be forced to admit that what you have said before was wrong\n\n Example : Nick told everyone that he'd be picked for the team, but when he wasn’t chosen he had to eat his words.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "Those children were born with a silver spoon in their mouth. This means that the children were \r\nborn.............",
+      "options": {
+        "A": "with their mouth full of silver.",
+        "B": "in good health",
+        "C": "in happy homes",
+        "D": "in wealth and luxury"
+      },
+      "correct_answer": null,
+      "explanation": "born with a silver spoon \nBorn into a wealthy family.\n\n Examples \n\nWe may both be wealthy now, but I was not born with a silver spoon . I had nothing when I was young, and all of my fortune is down to my own hard work.\n\nEveryone who attends that university was born with a silver spoon , so I just do",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "The driver passed out soon after the accident occurred. This means that the driver..........",
+      "options": {
+        "A": "ran away",
+        "B": "died",
+        "C": "fainted",
+        "D": "vomited"
+      },
+      "correct_answer": null,
+      "explanation": "Pass out \n\nTo fall asleep, faint, or lose consciousness.\n\n Examples \n\nHe passed out as soon as he saw the blood.\n\nThey gave me so much to drink that I passed out cold by 10 PM.\n\nI've been up since 5 AM, so I'm just going to go pass out after dinner.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "Susan was on edge after that incident. This means that she was.............",
+      "options": {
+        "A": "confused",
+        "B": "surprised",
+        "C": "nervous",
+        "D": "unhappy"
+      },
+      "correct_answer": null,
+      "explanation": "On edge \n\nAnxious, nervous and tense\n\n Example \n\nA: \"Why is Carrie pacing?\" B: \"She's waiting for the doctor to call with her test results, so she's been on edge all day.\"",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "We were taken to the police station like a lamb to the slaughter. This means that we were taken there.............",
+      "options": {
+        "A": "with our clothes removed",
+        "B": "without resistance",
+        "C": "with difficulty",
+        "D": "in a violent manner"
+      },
+      "correct_answer": null,
+      "explanation": "Like a lamb to the slaughter \n\nIf someone goes somewhere like a lamb to the slaughter , they go there quietly and obediently because they have not realized that it will be dangerous or unpleasant, or because they are powerless.\n\n Example \n\nHis young bride walked down the aisle like a lamb to the sla",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "These simple rules were infringed.",
+      "options": {
+        "A": "observed",
+        "B": "violated",
+        "C": "changed",
+        "D": "formulated"
+      },
+      "correct_answer": null,
+      "explanation": "Antonyms (opposite in meaning) for infringe \n\nGive, obey, receive, comply, discharge, observe\n\n Synonyms (nearest in meaning) for infringe \n\nBreach, contravene, disobey, encroach, impose, intrude, meddle, offend, trespass, borrow, break, crash, entrench, infract, invade, lift, obtrude, pirate, presu",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "His expressions are rather colloquial.",
+      "options": {
+        "A": "informal",
+        "B": "archaic",
+        "C": "formal",
+        "D": "modern"
+      },
+      "correct_answer": null,
+      "explanation": "Antonyms (opposite in meaning) for colloquial \n\nCorrect, formal, standard, stilted\n\n Synonyms(nearest in meaning) for colloquial \n\nConversational, vernacular, chatty, common, demotic, dialectal, everyday, idiomatic, jive, popular, street",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "The visitor's timidity surprised us.",
+      "options": {
+        "A": "hostility",
+        "B": "sincerity",
+        "C": "boldness",
+        "D": "carelessness"
+      },
+      "correct_answer": null,
+      "explanation": "Antonyms (opposite in meaning) for timidity \n\nAudacity, boldness, guts, nerve, stoutheartedness\n\n Synonyms (nearest in meaning) for timidity \n\nBashfulness, quiet, reserve",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "Opaque ballot boxes are no longer used in elections.",
+      "options": {
+        "A": "covered",
+        "B": "transparent",
+        "C": "painted",
+        "D": "dark"
+      },
+      "correct_answer": "B",
+      "explanation": "Antonyms (opposite in meaning) for opaque \n\nBright, clear, intelligent, light, luminous, smart, sparkling, sunny, thin, vivacious, crystal-clear, easy, lucid, translucent, transparent, unambiguous, unclouded, understandable\n\n Synonyms (nearest in meaning) for opaque \n\nBlurred, cloudy, dirty, dull, f",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "Dave walked briskly to the meeting.",
+      "options": {
+        "A": "slowly",
+        "B": "carefully",
+        "C": "reluctantly",
+        "D": "clumsily"
+      },
+      "correct_answer": null,
+      "explanation": "Antonyms (opposite in meaning) for briskly \n\nListlessly, slowly, sluggishly\n\n Synonyms (nearest in meaning) for briskly \n\nNimbly, rapidly, vigorously, brusquely, enthusiastically, in a lively manner, promptly, quickly\n\nTHEORY QUESTIONS",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

@@ -1,0 +1,564 @@
+{
+  "exam_type": "wassce",
+  "subject": "Core Mathematics",
+  "year": 2020,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 2,
+      "question_text": "If X = { x : x Y = { y : y is a factor of 24} are subsets of µ = {1, 2, 3, ......, 10}, find X ∩ Y .",
+      "options": {
+        "A": "{1, 2, 3, 4, 6, 8}",
+        "B": "{2, 3, 4, 6, 8}",
+        "C": "{1, 2, 3, 4, 6}",
+        "D": "{2, 3, 4, 6}"
+      },
+      "correct_answer": null,
+      "explanation": "µ = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}\n\n x : x x is such that x is less than 7.\n\n X = {1, 2, 3, 4, 5, 6}\n\n Note : since X is a subset of the universal set (µ), members of X should be found in the universal set (µ)\n\n y : y is a factor of 24 is read as y is such that y is a factor of 24.\n\n Y = {1, 2, 3, ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "-3 \r\n 2 \r\n x 16 \r\n -3 \r\n 4 \r\n ] \r\n 1 \r\n 3",
+      "options": {
+        "A": "1 \r\n 4",
+        "B": "3 \r\n 8",
+        "C": "9 \r\n 16",
+        "D": "3 \r\n 4"
+      },
+      "correct_answer": null,
+      "explanation": "[ ( \r\n 16",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "Find the least value of x which satisfies the equation 4 x = 7 (mod 9)",
+      "options": {
+        "A": "4",
+        "B": "5",
+        "C": "6",
+        "D": "7"
+      },
+      "correct_answer": "A",
+      "explanation": "The least is 9 dividing the number 1 time with a remainder of 7\n\n4 x = 9 x 1 + 7\n\n4 x = 9 + 7\n\n4 x = 16\n\nDivide both sides by 4\n\n x = \r\n 16 \r\n 4 \r\n\n = 4",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "Express 1 + 2 log 10 3 in the form log 10 q",
+      "options": {
+        "A": "log 10 6",
+        "B": "log 10 9",
+        "C": "log 10 19",
+        "D": "log 10 90"
+      },
+      "correct_answer": null,
+      "explanation": "Notes",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "If 101 two + 12 y = 23 five , find the value of y .",
+      "options": {
+        "A": "5",
+        "B": "6",
+        "C": "7",
+        "D": "8"
+      },
+      "correct_answer": "A",
+      "explanation": "Change each of the bases to base 10.\n\n101 two = 1 x 2 2 + 0 x 2 1 + 1 x 2 0 \n\n Note : any number raised to the power 0 is 1 .\n\n101 two = 4 + 0 + 1\n\n101 two = 5\n\n12 y = 1 x y 1 + 2 x y 0 \n\n12 y = y + 2\n\n23 five = 2 x 5 1 + 3 x 5 0 \n\n23 five = 10 + 3\n\n23 five = 13\n\nSubstitute the values of each of the",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "An amount of ₦ 550,000.00 was realized when a principal, x was saved at 2% simple interest for 5 years. Find the value of x .",
+      "options": {
+        "A": "₦ 500,000.00",
+        "B": "₦ 490,000.00",
+        "C": "₦ 480,000.00",
+        "D": "₦ 470,000.00"
+      },
+      "correct_answer": null,
+      "explanation": "Total amount = Principal + Interest\n\n Simple Interest \r\n\nSimple Interest = \r\n Principal x Time x Rate \r\n 100 \r\n\nPrincipal = x \n\nTime = 5\n\nRate = 2\n\nSimple Interest = \r\n x x 5 x 2 \r\n 100 \r\n\n = \r\n 10x \r\n 100 \r\n\n = \r\n x \r\n 10 \r\n\nTotal amount = 550,000\n\nSubstitute the total amount and the interest into ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "Given that \r\n 3 + 5 \r\n 5 \r\n\n = x + y \r\n 15 \r\n , find the value of ( x + y )",
+      "options": {
+        "A": "1 \r\n 5",
+        "B": "1 \r\n 1 \r\n 5",
+        "C": "1 \r\n 2 \r\n 5",
+        "D": "1 \r\n 3 \r\n 5"
+      },
+      "correct_answer": null,
+      "explanation": "Simplify the left hand side and compare with the right hand side to determine the values of x and y .\n\n 3 + 5 \r\n 5 \r\n\n = \r\n 3 + 5 \r\n 5 \r\n\nDivide each of the expression at the numerator by the denominator \r\n 5 \r\n\n 3 + 5 \r\n 5 \r\n\n = \r\n 3 \r\n 5 \r\n\n + \r\n 5 \r\n 5 \r\n\n 3 + 5 \r\n 5 \r\n\n = \r\n 3 \r\n 5 \r\n\n + 1\r\n\nGet",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "Solve 3 x - 2 y = 10 and x + 3 y = 7.",
+      "options": {
+        "A": "x = 4, y = 1",
+        "B": "x = 1, y = 4",
+        "C": "x = -1, y = -4",
+        "D": "x = -4, y = 1"
+      },
+      "correct_answer": null,
+      "explanation": "3 x - 2 y = 10 ----------- eqn 1 \n\n x + 3 y = 7 ------------ eqn 2 \n\nIn order to get rid of x , multiply ----- eqn 2 by 3\n\n3 x + 9 y = 21 ----------- eqn 3 \n\nSubtract ---- eqn 1 from ---- eqn 3 \n\n9 y - - 2 y = 11\n\n Note : - - = + or -(-) = +\n\n9 y + 2 y = 11\n\n11 y = 11\n\nDivide both sides by 11\n\n y = ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "The implication x ⇒ y is equivalent to",
+      "options": {
+        "A": "~ y ⇒ ~ x .",
+        "B": "y ⇒ ~ x .",
+        "C": "~ x ⇒ ~ y .",
+        "D": "y ⇒ x ."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "The first of a Geometric Progression (G.P) is 3 and the 5th term is 48. Find the common ratio.",
+      "options": {
+        "A": "5 = 3 x r 5 - 1",
+        "B": "8",
+        "C": "4",
+        "D": "2"
+      },
+      "correct_answer": "B",
+      "explanation": "Th nth term is given by a n = ar n - 1 \n\nWhere a = first term, r = common ratio\n\n a = 3\n\na 5 = 3 x r 5 - 1 \n\na 5 = 3 r 4 \n\nBut a 5 = 48\n\n3 r 4 = 48\n\nDivide both sides by 3\n\n r 4 = \r\n 48 \r\n 3 \r\n\n r 4 = 16\n\n16 = 2 x 2 x 2 x 2 = 2 4 \n\n r 4 = 2 4 \n\nSince the powers are the same, the bases are also the s",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "Solve: \r\n 1 \r\n 3 \r\n\n (5 - 3 x ) \r\n 2 \r\n 5 \r\n\n (3 - 7 x ).",
+      "options": {
+        "A": "x \r\n -7 \r\n 27",
+        "B": "x > \r\n -7 \r\n 27",
+        "C": "x \r\n 7 \r\n 22",
+        "D": "x > \r\n 7 \r\n 22"
+      },
+      "correct_answer": null,
+      "explanation": "1 \r\n 3 \r\n\n (5 - 3 x ) \r\n 2 \r\n 5 \r\n\n (3 - 7 x )\r\n\nGet rid of the fractions by multiplying both sides by the L.C.M of the denominators (3 and 5).\n\nThe L.C.M of 3 and 5 is 15\n\n15 x \r\n 1 \r\n 3 \r\n\n (5 - 3 x ) \r\n 2 \r\n 5 \r\n\n (3 - 7 x )\r\n\n5(5 - 3 x ) x )\n\n25 - 15 x x )\n\n25 - 15 x x \n\n- 15 x + 42 x x x \r\n -7 ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "Make m the subject of the relation k = \r\n\n m - y \r\n m + 1 \r\n\n .",
+      "options": {
+        "A": "m = \r\n y - k 2 \r\n 1 - k 2",
+        "B": "m = \r\n y - k 2 \r\n k 2 + 1",
+        "C": "m = \r\n y + k 2 \r\n 1 - k 2",
+        "D": "m = \r\n y + k 2 \r\n k 2 + 1"
+      },
+      "correct_answer": null,
+      "explanation": "k = \r\n\n m - y \r\n m + 1 \r\n\nSquare both sides to get rid of the square root.\n\n k 2 = \r\n\n m - y \r\n m + 1 \r\n\nGet rid of the fraction by multiplying both sides by the denominator m + 1\n\n k 2 x ( m + 1) = m - y \n\n mk 2 + k 2 = m - y \n\n y + k 2 = m - mk 2 \n\nFactorize m out.\n\n y + k 2 = m (1 - k 2 )\n\nDivide",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "Given that x is directly proportional to y and inversely proportional to z , x = 15 when y = 10 and z = 4, find the equation connecting x , y and z .",
+      "options": {
+        "A": "x = \r\n 3y \r\n 2z",
+        "B": "x = \r\n 3y \r\n z",
+        "C": "x = \r\n 12y \r\n z",
+        "D": "x = \r\n 6y \r\n z"
+      },
+      "correct_answer": null,
+      "explanation": "x is directly proportional to y \n\n x ∝ y \n\n x is inversely proportional to z \n\n x ∝ \r\n 1 \r\n z \r\n\nCombining the two, x ∝ \r\n y \r\n z \r\n\nIntroduce a constant k to remove the proportionality constant.\n\n x = k x \r\n y \r\n z \r\n\nSubstitute the known values and solve for the constant k \n\n x = 15\r\n\n y = 10\r\n\n z",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "In the diagram, PQ // SR . Find the value of x .",
+      "options": {
+        "A": "68",
+        "B": "57",
+        "C": "46",
+        "D": "34"
+      },
+      "correct_answer": "A",
+      "explanation": "Draw an imaginary third parallel line.\n\n∠ QPO = ∠ TOP = x ° (Alternate angles)\n\n∠ RSO = ∠ TOS = 68° (Alternate angles)\n\n x ° + 68° + 246° = 360° (Sum of angles at centre)\n\n x ° + 314° = 360°\n\n x ° = 360° - 314°\n\n x ° = 46°\n\n x = 46",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "Find the equation of the line parallel to 2 y = 3( x - 2) and passes through the point (2, 3).",
+      "options": {
+        "A": "y = \r\n -2 \r\n 3 \r\n\n x",
+        "B": "y = \r\n 3 \r\n 2 \r\n\n x",
+        "C": "y = \r\n 2 \r\n 3 \r\n\n x - 2",
+        "D": "y = \r\n 3 \r\n 2 \r\n\n x - 3"
+      },
+      "correct_answer": null,
+      "explanation": "To be parallel, two lines must have the same gradient.\n\nFor a general equation of a line, y = mx + c \n\n m = gradient and c = y intercept.\n\nExpress the given equation to be in the form y = mx + c and compare to find the value of m , the gradient.\n\n2 y = 3( x - 2)\n\n2 y = 3 x - 6\n\nDivide both sides by ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "The expresson \r\n 5x + 3 \r\n 6x(x + 1) \r\n\n will be undefined when x equals",
+      "options": {
+        "A": "{-3, 0}.",
+        "B": "{-3, -1}.",
+        "C": "{0, -1).",
+        "D": "{0, 1}."
+      },
+      "correct_answer": null,
+      "explanation": "An expression is undefined when the denominator equals 0 .\n\n6x(x + 1) = 0\n\nx + 1 = 0\n\n x = -1\n\n6 x = 0\n\n x = \r\n 0 \r\n 6 \r\n\n = 0\r\n\n{0, -1}",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "Simplify:",
+      "options": {
+        "A": "b \r\n\n -",
+        "B": "a \r\n\n -",
+        "C": "b \r\n\n =",
+        "D": "a - b + c \r\n ab"
+      },
+      "correct_answer": "A",
+      "explanation": "a \r\n b \r\n\n - \r\n b \r\n a \r\n\n - \r\n c \r\n b \r\n\n = \r\n a \r\n b \r\n\n - \r\n b \r\n a \r\n\n - \r\n c \r\n b \r\n\n a \r\n b \r\n\n - \r\n b \r\n a \r\n\n - \r\n c \r\n b \r\n\n = \r\n a x a - b x b - a x c \r\n ab \r\n\n a \r\n b \r\n\n - \r\n b \r\n a \r\n\n - \r\n c \r\n b \r\n\n = \r\n a 2 - b 2 - ac \r\n ab",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "In the diagram, XZY is an equilateral triangle of side 6 cm and T is the midpoint of XY .\n\nFind tan (∠ XZT ).",
+      "options": {
+        "A": "x",
+        "B": "3",
+        "C": "3 \r\n 2",
+        "D": "1 \r\n 3"
+      },
+      "correct_answer": "A",
+      "explanation": "The midpoint divides XY into two equal lengths, 3 cm each.\n\n SOHCAHTOA \r\n\n SOHCAHTOA is a mnemonic that gives us an easy way to remember the three main trigonometric ratios. They are sine (sin), cosine (cos) and tangent (tan).\n\nSOH\n\nsin(θ) = \r\n Opposite \r\n Hypothenuse \r\n\nCAH\n\ncos(θ) = \r\n Adjacent \r\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "Fati buys milk at ₦ x per tin and sells each at a profit of ₦ y . If she sells 10 tins of milk, how much does she receive from the sales?",
+      "options": {
+        "A": "₦ 10( x + y )",
+        "B": "₦ (10 x + y )",
+        "C": "₦ ( x + 10 y )",
+        "D": "₦ ( xy + 10)"
+      },
+      "correct_answer": null,
+      "explanation": "Selling Price = Cost Price + Profit\n\nSelling Price of each = ₦ ( x + y )\n\nFor the 10 tins, selling price = 10 x ₦ ( x + y )\n\nAmount received for the 10 tins = ₦ 10( x + y )",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "If tan y is positive and sin y is negative, in which quadrant would y lie?",
+      "options": {
+        "A": "Second only",
+        "B": "Third only",
+        "C": "First and second only",
+        "D": "First and third only"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "The dimensions of a rectangular base of a right pyramid are 9 cm by 5 cm. If the volume of the pyramid iis 105 cm 3 , how high is the pyramid?",
+      "options": {
+        "A": "7 cm",
+        "B": "8 cm",
+        "C": "6 cm",
+        "D": "10 cm"
+      },
+      "correct_answer": null,
+      "explanation": "Volume of a pyramid \r\n\nVolume = \r\n 1 \r\n 3 \r\n\n x Base area x Height\r\n\nBase area = Length x Breadth\n\nLet h = the height of the pyramid.\n\nVolume = \r\n 1 \r\n 3 \r\n\n x 9 x 5 x h \r\n\nVolume = 15 h \n\nBut the volume = 105\n\n15 h = 105\n\nDivide both sides by 15\n\n h = \r\n 105 \r\n 15 \r\n\n = 7\r\n\nThe height is 7 cm",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "Each interior angle of a regular polygon is 168°. Find the number of sides of the polygon.",
+      "options": {
+        "A": "18",
+        "B": "24",
+        "C": "36",
+        "D": "30"
+      },
+      "correct_answer": "A",
+      "explanation": "Interior angle of a regular polygon \r\n\nInterior angle of a regular polygon = \r\n (n - 2) x 180° \r\n n \r\n\nWhere n = number of sides of the regular polygon.\n\n168 = \r\n (n - 2) x 180° \r\n n \r\n\n168 x n = ( n - 2) x 180\n\n168 n = 180 n - 360\n\n360 = 180 n - 168 n \n\n360 = 12 n \n\nDivide both sides by 12.\n\n n = \r",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "In the diagram, MN // PQ , ∠ MNP = 2 x and ∠ NPQ = (3 x - 50°). Find the value of ∠ NPQ .",
+      "options": {
+        "A": "100°",
+        "B": "120°",
+        "C": "150°",
+        "D": "200°"
+      },
+      "correct_answer": "A",
+      "explanation": "∠ MNP = ∠ NPQ = 2 x = (3 x - 50°) (Alternate angles)\n\n2 x = (3 x - 50°)\n\n2 x = 3 x - 50°\n\n50° = 3 x - 2 x \n\n50° = x \n\n x = 50°\n\n∠ NPQ = 2 x = 2 x 50° = 100°\n\n Alternatively ,\n\n∠ NPQ = 3 x - 50°\n\n∠ NPQ = 3 x 50° - 50°\n\n∠ NPQ = 150° - 50°\n\n∠ NPQ = 100°",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 31,
+      "question_text": "The length of an arc of a circle of radius 3.5 cm is 1 \r\n 19 \r\n 36 \r\n\n cm. Calculate, correct to the nearest degree, the angle subtended by the arc at the centre of the circle.\r\n\n[Take π = \r\n 22 \r\n 7 \r\n\n ]",
+      "options": {
+        "A": "22°",
+        "B": "25°",
+        "C": "36°",
+        "D": "55°"
+      },
+      "correct_answer": null,
+      "explanation": "Length of an arc \r\n\nLength of an arc = \r\n θ \r\n 360 \r\n\n x 2 x π x radius\r\n\nWhere θ = angle subtended by the arc at the centre of the circle\n\nLength of the arc = 1 \r\n 19 \r\n 36 \r\n\n cm = \r\n 1 x 36 + 19 \r\n 36 \r\n\n cm = \r\n 55 \r\n 36 \r\n\n cm\r\n\nπ = \r\n 22 \r\n 7 \r\n\nRadius = 3.5 cm\n\n 55 \r\n 36 \r\n\n = \r\n θ \r\n 360 \r\n\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "In the diagram, PU // SR , PS // TR , QS // UR . | UR | = 15 cm, | SR | = 8 cm, | PS | = 10 cm and area of ∆ SUR = 24 cm 2 . Calculate the area of PTRS .",
+      "options": {
+        "A": "120 cm 2",
+        "B": "80 cm 2",
+        "C": "48 cm 2",
+        "D": "40 cm 2"
+      },
+      "correct_answer": null,
+      "explanation": "PTRS is a parallelogram.\n\n Area of a parallelogram \r\n\nArea = base x height\n\nSince line PU is parallel to line SR the height of PTRS is the same as the height of ∆ SUR \n\n Area of a triangle \r\n\nArea = \r\n 1 \r\n 2 \r\n\n x base x height\r\n\nLet h = the height of ∆ SUR \n\nBase of ∆ SUR = 8 cm\n\nArea of ∆ SUR = 2",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "In the diagram, PQR is a circle with centre O . If ∠ OPQ = 48°, find the value of m .",
+      "options": {
+        "A": "42°",
+        "B": "68°",
+        "C": "90°",
+        "D": "96°"
+      },
+      "correct_answer": null,
+      "explanation": "OP = OQ (Both are radius)\n\nSince two sides of ∆ OPQ are the same (isosceles), the base angles are the same.\n\n∠ OPQ = ∠ OQP = 48°\n\nSum of two opposite interior angles of a triangle is equal to it's angle exterior.\n\n m = ∠ OPQ + ∠ OQP \n\n m = 48° + 48° = 96°",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 34,
+      "question_text": "The pie chart shows the population of men, women and children in a city. If the population of the city is 1,800,000, how many men are there?",
+      "options": {
+        "A": "250,000",
+        "B": "355,000",
+        "C": "600,000",
+        "D": "845,000"
+      },
+      "correct_answer": null,
+      "explanation": "360° represents the total population of the city.\n\nSum of all the angles should be 360°\n\nAngle of sector for men = 360° - (120° + 169°)\n\nAngle of sector for men = 71°\n\nIf 360° = 1,800,000\n\n71° = \r\n 1800000 x 71° \r\n 360° \r\n\n = 355000",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "The mean of the numbers 15, 21, 17, 26, 18 and 29 is 21. Calculate the standard deviation.",
+      "options": {
+        "A": "0",
+        "B": "5",
+        "C": "6",
+        "D": "9"
+      },
+      "correct_answer": "A",
+      "explanation": "Standard Deviation \r\n\nσ = \r\n\n Σ ( x i - µ ) 2 \r\n N \r\n\nΣ( x i - µ) 2 = (15 - 21) 2 + (21 - 21) 2 + (17 - 21) 2 + (26 - 21) 2 + (18 - 21) 2 + (29 - 21) 2 \n\nΣ( x i - µ) 2 = 36 + 0 + 16 + 25 + 9 + 64\n\nΣ( x i - µ) 2 = 150\n\n N = 6\n\nσ = \r\n\n 150 \r\n 6 \r\n\n = 5",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "In the diagram, O is the centre of the circle. SOQ is a diameter and ∠ SRP = 37°.\n\nFind ∠ PSQ .",
+      "options": {
+        "A": "37°",
+        "B": "53°",
+        "C": "65°",
+        "D": "127°"
+      },
+      "correct_answer": "A",
+      "explanation": "Notes: \n\nAngles subtended by the diameter (or semi-circle) is 90°.\n\n∠ QPS = 90°\n\nAngles subtended by the same arc are the same.\n\nFrom arc SP ,\n\n∠ PRS = ∠ PQS = 37° (Angles subtended by the same arc)\n\n∠ PQS + ∠ QPS + ∠ PSQ = 180° (Sum of angles in a triangle)\n\n37° + 90° + ∠ PSQ = 180°\n\n127° + ∠ PSQ =",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 41,
+      "question_text": "In the diagram, PQ is a straight line. If m = \r\n 1 \r\n 2 \r\n\n ( x + y + z ), find the value of m .",
+      "options": {
+        "A": "100°",
+        "B": "90°",
+        "C": "60°",
+        "D": "45°"
+      },
+      "correct_answer": null,
+      "explanation": "m = \r\n 1 \r\n 2 \r\n\n ( x + y + z ) ------- eqn 1 \r\n\n x + y + m + z = 180° (Sum of angles on a straight line is 180°)\n\n x + y + z = 180° - m \n\nSubstitute ( x + y + z ) = 180° - m into ----- eqn 1 \n\n m = \r\n 1 \r\n 2 \r\n\n (180° - m )\r\n\nGet rid of the fraction by multiplying both sides by the denominator (2).",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 43,
+      "question_text": "In the diagram, O is the centre of the circle, PQ and RS are tangents to the circle.\n\nFind the value of ( m + n ).",
+      "options": {
+        "A": "60°",
+        "B": "75°",
+        "C": "90°",
+        "D": "120°"
+      },
+      "correct_answer": "C",
+      "explanation": "Method I\n\n Drawing a third parallel line .\n\n∠ QUT = ∠ UTO = m ° (Alternate angles)\n\n∠ SVT = ∠ VTO = n ° (Alternate angles)\n\n∠ UTV = ∠ UTO + ∠ VTO = m ° + n °\n\nAngles subtended by the diameter (or semi-circle) is 90°.\n\n∠ UTV is being subtended by a diameter hence ∠ UTV = 90°\n\n∠ UTV = m ° + n ° = 90°\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 44,
+      "question_text": "In the diagram, O is the centre of the circle. If ∠ NLM = 74°, ∠ LMN = 39° and ∠ LOM = x , find the value of x .",
+      "options": {
+        "A": "106°",
+        "B": "113°",
+        "C": "126°",
+        "D": "134°"
+      },
+      "correct_answer": null,
+      "explanation": "Central angle is twice any inscribed angle subtended by the same arc.\n\n∠ LOM = 2 x ∠ LNM \n\n∠ LNM = \r\n ∠ LOM \r\n 2 \r\n\n = \r\n x \r\n 2 \r\n\n∠ LNM + ∠ NLM + ∠ LMN = 180° (Sum of angles in a triangle)\n\n∠ LNM = \r\n x \r\n 2 \r\n\n∠ NLM = 74°\n\n∠ LMN = 39°\n\n x \r\n 2 \r\n\n + 74 + 39 = 180\r\n\nGet rid of the fraction by mult",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 45,
+      "question_text": "Which of the following is not a sufficient condition for two triangles to be congruent?",
+      "options": {
+        "A": "AAS",
+        "B": "SSS",
+        "C": "SAS",
+        "D": "SSA"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 47,
+      "question_text": "The interquartile range of a distribution is 7. If the 25th percentile is 16, find the upper quartile.",
+      "options": {
+        "A": "9",
+        "B": "23",
+        "C": "30",
+        "D": "35"
+      },
+      "correct_answer": null,
+      "explanation": "Upper quartile - Lower quartile (25th percentile) = Interquartile range\n\nLower quartile (25th percentile) = 16\n\nInterquartile range = 7\n\nUpper quartile - 16 = 7\r\n\nUpper quartile = 7 + 16 \r\n\nUpper quartile = 23",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 48,
+      "question_text": "The graphs of the equations y = 2 x + 5 and y = 2 x 2 + x - 1 are shown.\n\n Use the information to answer the question below \n\nFind the points of intersection of the two graphs.",
+      "options": {
+        "A": "(2.0, 7.5) and (-1.5, 2.5)",
+        "B": "(2.0, 8.0) and (-1.5, 2.5)",
+        "C": "(2.0, 8.5) and (-1.5, 2.0)",
+        "D": "(2.0, 9.0) and (-1.5, 2.0)"
+      },
+      "correct_answer": null,
+      "explanation": "the question below \n\nFind the points of intersection of the two graphs.\n\n A. \r\n\n(2.0, 7.5) and (-1.5, 2.5)\n\n B. \r\n\n(2.0, 8.0) and (-1.5, 2.5)\n\n C. \r\n\n(2.0, 8.5) and (-1.5, 2.0)\n\n D. \r\n\n(2.0, 9.0) and (-1.5, 2.0)\n\n Mark \r\n\n Solution \r\n\n Each small grid on the x axis = \r\n Interval on the x axis \r\n 10 ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 49,
+      "question_text": "The graphs of the equations y = 2 x + 5 and y = 2 x 2 + x - 1 are shown.\n\n Use the information to answer the question below \n\nIf x = -2.5, what is the value of y on the curve?",
+      "options": {
+        "A": "y = 9.5",
+        "B": "y = 9.0",
+        "C": "y = 8.5",
+        "D": "y = 8.0"
+      },
+      "correct_answer": null,
+      "explanation": "the question below \n\nIf x = -2.5, what is the value of y on the curve?\n\n A. \r\n\n y = 9.5\n\n B. \r\n\n y = 9.0\n\n C. \r\n\n y = 8.5\n\n D. \r\n\n y = 8.0\n\n Mark \r\n\n Solution \r\n\n Each small grid on the x axis = \r\n Interval on the x axis \r\n 10 \r\n\n Each small grid on the x axis = \r\n 1 \r\n 10 \r\n\n = 0.1\r\n\n Each small gr",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 50,
+      "question_text": "If ( x + 2) is a factor of x 2 + px - 10, find the value of p .",
+      "options": {
+        "A": "-7",
+        "B": "7",
+        "C": "-3",
+        "D": "3"
+      },
+      "correct_answer": null,
+      "explanation": "If ( x + a ) is a factor, then when you substitute - a into the equation, you should get 0 .\n\nSince ( x + 2) is a factor of x 2 + px - 10, substituting -2 into x 2 + px - 10 should give 0 .\n\n(-2) 2 + p (-2) - 10 = 0\n\n4 - 2 p - 10 = 0\n\n-6 = 2 p \n\nDivide both sides by 2\n\n p = \r\n -6 \r\n 2 \r\n\n = -3\r\n\nTHE",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

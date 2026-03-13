@@ -1,0 +1,413 @@
+{
+  "exam_type": "bece",
+  "subject": "Core Mathematics",
+  "year": 2022,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "Express 108 as a product of prime factors.",
+      "options": {
+        "A": "m x a n = a m + n \n\nThus if the bases are the same and are multiplying, you can add the powers",
+        "B": "2 3 x 3 2",
+        "C": "2 x 3 4",
+        "D": "2 3 x 3"
+      },
+      "correct_answer": null,
+      "explanation": "Prime number is a number that is divisible only by itself and 1 (e.g. 2, 3, 5, 7, 11)\n\nTo express a number as a product of prime factors express the number as a multiple of prime numbers and simplify in a form of indexes\n\n108 = 2 x 54\n\n108 = 2 x 2 x 27\n\n108 = 2 x 2 x 3 x 9\n\n108 = 2 x 2 x 3 x 3 x 3\n\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "Which of the following is not a quadrilateral?",
+      "options": {
+        "A": "Rhombus",
+        "B": "Parallelogram",
+        "C": "Rectangle",
+        "D": "Triangle"
+      },
+      "correct_answer": "A",
+      "explanation": "A quadrilateral is a four-sided two-dimensional shape. Examples : square, rectangle, rhombus, trapezium, parallelogram and kite.\n\nTriangle on the other hand has three sides and three angles also known as trigon. The root word \" tri \" means \" three \" and the root word \" quad \" means \" four \". Hence, ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "Solve: 5 x - (7 x - 3) ≤ 9.",
+      "options": {
+        "A": "x ≥ -3",
+        "B": "x ≤ -3",
+        "C": "x ≥ -6",
+        "D": "x ≤ 3"
+      },
+      "correct_answer": null,
+      "explanation": "Expand the bracket\n\n- (7 x - 3) = -1 x (7 x - 3)\n\nApply a ( b - c ) = a x b + a x - c \n\n-1 x (7 x - 3) = -1 x 7 x -1 x - 3\n\n- x - = + hence -1 x - 3 = + 3\n\n-1 x (7 x - 3) = -1 x 7 x -1 x - 3 = - 7 x + 3\n\n5 x - (7 x - 3) ≤ 9\n\n5 x - 7 x + 3 ≤ 9\n\nSimplify\n\n-2 x ≤ 9 - 3\n\n-2 x ≤ 6\n\nDivide both sides by -",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "The point S (4, 3) is reflected in the y -axis, Find the coordinates of the image of S .",
+      "options": {
+        "A": "(-3,4)",
+        "B": "(4,-3)",
+        "C": "(3,-4)",
+        "D": "(-4,3)"
+      },
+      "correct_answer": null,
+      "explanation": "Reflection in axis \n\n Reflection in the x axis \n\nThe rule for a reflection over the x -axis is ( x , y )→( x , − y ).\n\nIn the reflection in the x , y is negative \n\n Reflection in the y axis \n\nThe rule for a reflection over the y -axis is ( x , y )→(− x , y ).\n\n Reflection in the line y = x : \n\nThe r",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "Solve:",
+      "options": {
+        "A": "4",
+        "B": "C.",
+        "D": "0"
+      },
+      "correct_answer": null,
+      "explanation": "Get rid of the denominator (2) by multiplying each part of the equation by 2\n\n2 x ( x -1) = 1( x +2)\n\nExpand the bracket\n\n2 x x - 1 x 2 = 1 x x + 1 x 2\n\n2 x - 2 = x + 2\n\n2 x - x = 2+2\n\n x = 4",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "The longest chord of a circle is the",
+      "options": {
+        "A": "segment.",
+        "B": "sector.",
+        "C": "circumference.",
+        "D": "diameter."
+      },
+      "correct_answer": null,
+      "explanation": "The chord of a circle can be defined as the line segment joining any two points on the circumference of the circle.\n\n Diameter is the longest chord of a circle which passes through centre joining the two points on the circumference of a circle.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "Factorize completely xy - xm - my + m 2 .",
+      "options": {
+        "A": "( m - y )( x - m )",
+        "B": "( x - m )( y - m )",
+        "C": "( m - y )( m - x )",
+        "D": "( y - m )( m - x )"
+      },
+      "correct_answer": null,
+      "explanation": "Group them and factorize like terms out\n\n xy - xm - my + m 2 \n\n x ( y - m ) - m ( y - m )\n\n NOTE \n\n- x - = + and + = - x -\n\n m 2 = - m x - m \n\n x ( y - m ) - m ( y - m )\n\n( x - m )( y - m )",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "Given that P (3,-2) and Q (-2,4) are points in a plane, find the gradient of the line joining P to Q .",
+      "options": {
+        "A": "- 6 &frasl; 5",
+        "B": "6 &frasl; 5",
+        "C": "5 &frasl; 6",
+        "D": "- 5 &frasl; 6"
+      },
+      "correct_answer": null,
+      "explanation": "Gradient of a line = change in y / change in x =( y 2 - y 1 )/( x 2 - x 1 )\n\nThe general point of a line is in the form ( x , y ), thus the first cordinate is x and the second cordinate is y \n\n P (3,-2) and Q (-2,4)\n\n y 2 = 4 and y 1 = -2\n\n x 2 = -2 and x 1 = 3\n\nGradient = (4--2)/(-2-3)\n\n-- = +\n\nGra",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "The rule of mapping is x &rarr; 2 x 2 - 1. What number does x = 2 map to?",
+      "options": {
+        "A": "9",
+        "B": "8",
+        "C": "7",
+        "D": "3"
+      },
+      "correct_answer": null,
+      "explanation": "Substitute x by 2 in the equation and solve for the expression\n\n x &rarr; 2 x 2 - 1\n\n2(2) 2 - 1 = 2 x 4 - 1 = 8 - 1 = 7 \n\n NOTE: x 2 = x x x \n\n(2) 2 = 2 2 = 2 x 2 = 4",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": ", find x when a = 2, b = -4 and c = -2.",
+      "options": {
+        "A": "0",
+        "B": "8",
+        "C": "4",
+        "D": "16"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "Arrange the following fractions from the lowest to the highest:",
+      "options": {
+        "A": "¼ , &frac35; , &frac23;",
+        "B": "&frac23; , ¼ , &frac35;",
+        "C": "&frac23; , &frac35; , ¼",
+        "D": "&frac35; , ¼ , &frac23;"
+      },
+      "correct_answer": null,
+      "explanation": "Make sure each of the fractions have the same denominator\n\n Steps",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "In the diagram, AB is parallel to DE , angle ABC = 81 o and angle DCE = 20 o .\n\n Use the information to answer the equestion below: \n\nWhat is the value of x ?",
+      "options": {
+        "A": "A. 20 o",
+        "B": "61 o",
+        "C": "81 o",
+        "D": "101 o"
+      },
+      "correct_answer": "C",
+      "explanation": "the equestion below: \n\nWhat is the value of x ?\n\n A. \r\n\nA. 20 o \n\n B. \r\n\n61 o \n\n C. \r\n\n81 o \n\n D. \r\n\n101 o \n\n Mark \r\n\n Solution \r\n\nYou have to use the property of alternate angles of parallel lines\n\n Alternate angles are equal: \n\nSometimes called Z angles\n\nWe can often spot interior alternate angles",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "In the diagram, AB is parallel to DE , angle ABC = 81 o and angle DCE = 20 o .\n\n Use the information to answer the equestion below: \n\nFind the value of y .",
+      "options": {
+        "A": "20 o",
+        "B": "81 o",
+        "C": "79 o",
+        "D": "101 o"
+      },
+      "correct_answer": "B",
+      "explanation": "the equestion below: \n\nFind the value of y .\n\n A. \r\n\n20 o \n\n B. \r\n\n81 o \n\n C. \r\n\n79 o \n\n D. \r\n\n 101 o \n\n Mark \r\n\n Solution \r\n\nYou have to use the property of alternate angles of parallel lines\n\n Alternate angles are equal: \n\nSometimes called Z angles\n\nWe can often spot interior alternate angles by d",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "Adjoa travelled 12km due north and 5km due east. How much far was she from her starting point?",
+      "options": {
+        "A": "60km",
+        "B": "17km",
+        "C": "13km",
+        "D": "7km"
+      },
+      "correct_answer": null,
+      "explanation": "The Cardinal Point \n\nWe can draw the diagram below from the above information\n\nWe can apply pythagoras theorem to calculate how far she was from her starting point\n\n NOTE: the c is the longest part or the side faceing the right angle (90 o )\n\nWe can redraw our diagram to:\n\nNow solve for the value of",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "Which of the following is the largest set?",
+      "options": {
+        "A": "{Whole numbers}",
+        "B": "{Composite}",
+        "C": "{Natural numbers}",
+        "D": "{Integers}"
+      },
+      "correct_answer": null,
+      "explanation": "Whole numbers \n\nWhole numbers is a collection of all the basic counting numbers and 0. In mathematics, counting numbers are called natural numbers. So, we can define the whole number as a collection of all natural numbers and 0. Whole numbers also include all positive integers along with zero.\n\n Com",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "Expand: (2 a - b )( a - b )",
+      "options": {
+        "A": "2 a 2 + 3 ab - b",
+        "B": "2 a 2 - 3 ab - b 2",
+        "C": "2 a 2 + 3 ab + b",
+        "D": "2 a 2 - 3 ab + b 2"
+      },
+      "correct_answer": null,
+      "explanation": "a x a = a 2 \n\n- x - = +\n\n- a x - a = + a 2 \n\n(2 a - b )( a - b ) = 2 a ( a - b ) - b ( a - b )\n\n2 a ( a - b ) - b ( a - b ) = 2 a x a - 2 a x b - b x a + b x b \n\n2 a ( a - b ) - b ( a - b ) = 2 a 2 - 2 ab - ab + b 2 \n\n2 a ( a - b ) - b ( a - b ) = 2 a 2 - 3 ab + b 2",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "The stem and leaf plot shows the weights (kg) of cocoa bags weighed in a week.\n\n Use the information to answer the question below: \n\n Stem \r\n Leaf \r\n\n 4 \r\n 0,5,7,9 \r\n\n 5 \r\n 1,3,4,5,7,8 \r\n\n 6 \r\n 0,2,3,4,4,4,4,5,6,8 \r\n\n 7 \r\n 1,2,3,4,5,8,8,9 \r\n\n 8 \r\n 2,3,5,6,9 \r\n\n 9 \r\n 4,5 \r\n\nHow many bags of cocoa were weighed in the week?",
+      "options": {
+        "A": "35",
+        "B": "29",
+        "C": "6",
+        "D": "41"
+      },
+      "correct_answer": "A",
+      "explanation": "the question below: \n\n Stem \r\n Leaf \r\n\n 4 \r\n 0,5,7,9 \r\n\n 5 \r\n 1,3,4,5,7,8 \r\n\n 6 \r\n 0,2,3,4,4,4,4,5,6,8 \r\n\n 7 \r\n 1,2,3,4,5,8,8,9 \r\n\n 8 \r\n 2,3,5,6,9 \r\n\n 9 \r\n 4,5 \r\n\nHow many bags of cocoa were weighed in the week?\n\n A. \r\n\n35\n\n B. \r\n\n29\n\n C. \r\n\n6\n\n D. \r\n\n41\n\n Mark \r\n\n Solution \r\n\nWrite the numbers in a",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "The stem and leaf plot shows the weights (kg) of cocoa bags weighed in a week.\n\n Use the information to answer the question below: \n\n Stem \r\n Leaf \r\n\n 4 \r\n 0,5,7,9 \r\n\n 5 \r\n 1,3,4,5,7,8 \r\n\n 6 \r\n 0,2,3,4,4,4,4,5,6,8 \r\n\n 7 \r\n 1,2,3,4,5,8,8,9 \r\n\n 8 \r\n 2,3,5,6,9 \r\n\n 9 \r\n 4,5 \r\n\nWhat is the median weight of the bags of cocoa?",
+      "options": {
+        "A": "62 kg",
+        "B": "65 kg",
+        "C": "61 kg",
+        "D": "68 kg"
+      },
+      "correct_answer": null,
+      "explanation": "the question below: \n\n Stem \r\n Leaf \r\n\n 4 \r\n 0,5,7,9 \r\n\n 5 \r\n 1,3,4,5,7,8 \r\n\n 6 \r\n 0,2,3,4,4,4,4,5,6,8 \r\n\n 7 \r\n 1,2,3,4,5,8,8,9 \r\n\n 8 \r\n 2,3,5,6,9 \r\n\n 9 \r\n 4,5 \r\n\nWhat is the median weight of the bags of cocoa?\n\n A. \r\n\n62 kg\n\n B. \r\n\n65 kg\n\n C. \r\n\n61 kg\n\n D. \r\n\n68 kg\n\n Mark \r\n\n Solution \r\n\nWrite the ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "The stem and leaf plot shows the weights (kg) of cocoa bags weighed in a week.\n\n Use the information to answer the question below: \n\n Stem \r\n Leaf \r\n\n 4 \r\n 0,5,7,9 \r\n\n 5 \r\n 1,3,4,5,7,8 \r\n\n 6 \r\n 0,2,3,4,4,4,4,5,6,8 \r\n\n 7 \r\n 1,2,3,4,5,8,8,9 \r\n\n 8 \r\n 2,3,5,6,9 \r\n\n 9 \r\n 4,5 \r\n\nWhat is the modal weight of the bags of cocoa?",
+      "options": {
+        "A": "68 kg",
+        "B": "60 kg",
+        "C": "64 kg",
+        "D": "65 kg"
+      },
+      "correct_answer": null,
+      "explanation": "the question below: \n\n Stem \r\n Leaf \r\n\n 4 \r\n 0,5,7,9 \r\n\n 5 \r\n 1,3,4,5,7,8 \r\n\n 6 \r\n 0,2,3,4,4,4,4,5,6,8 \r\n\n 7 \r\n 1,2,3,4,5,8,8,9 \r\n\n 8 \r\n 2,3,5,6,9 \r\n\n 9 \r\n 4,5 \r\n\nWhat is the modal weight of the bags of cocoa?\n\n A. \r\n\n68 kg\n\n B. \r\n\n60 kg\n\n C. \r\n\n64 kg\n\n D. \r\n\n65 kg\n\n Mark \r\n\n Solution \r\n\nWrite the n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "For what value of x is 3 x = 81?",
+      "options": {
+        "A": "2",
+        "B": "27",
+        "C": "4",
+        "D": "9"
+      },
+      "correct_answer": "C",
+      "explanation": "Convert the 81 to 3 y , where y is the power that will produce 81\n\n81 = 3 x 3 x 3 x 3\n\nFrom the law of indices, a b x a c = a b+c \n\n81 = 3 x 3 x 3 x 3 = 3 1+1+1+1 = 3 4 \n\nNow replace 81 by 3 4 in the equation\n\n3 x = 81\n\n3 x = 3 4 \n\nSince the bases are the same, the powers are also the same\n\nHence x ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "Simplify: -15 - (-20) + (-10).",
+      "options": {
+        "A": "-45",
+        "B": "-5",
+        "C": "-25",
+        "D": "5"
+      },
+      "correct_answer": "D",
+      "explanation": "-(-) = -1 x - = +\n\n+(-) = +1 x - = - \n\n-15 - (-20) + (-10) = -15 + 20 - 10\n\n-15 - (-20) + (-10) = -15 - 10 + 20\n\n-15 - (-20) + (-10) = -25 + 20\n\n-15 - (-20) + (-10) = -5",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "What is the probability that a number greater than 5 shows up when a die is thrown?",
+      "options": {
+        "A": "5/6",
+        "B": "1/6",
+        "C": "2/3",
+        "D": "1/3"
+      },
+      "correct_answer": null,
+      "explanation": "Samples = {1,2,3,4,5,6}\n\nNumber of samples = 6\n\nSamples of numbers greater than 5 = {6}\n\nNumber of samples of number greater than 5 = 1\n\nProbability = 1/6",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "Given that 117(12+18) = 117(15+ k ), find the value of k",
+      "options": {
+        "A": "15",
+        "B": "- 15",
+        "C": "-30",
+        "D": "30"
+      },
+      "correct_answer": "A",
+      "explanation": "Since the number outside the bracket are the same in both sides of the equation, the values inside the bracket are also the same\n\nThus if a x b = a x c , implies that b = c \n\n12+18 = 15+ k \n\n30 = 15 + k \n\n30 - 15 = k \n\n15 = k",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 37,
+      "question_text": "If a trader made a profit of 10% in selling a shirt for GH₵ 44.00, find the cost price",
+      "options": {
+        "A": "GH₵ 39.60",
+        "B": "GH₵ 38.50",
+        "C": "GH₵ 48.40",
+        "D": "GH₵ 40.00"
+      },
+      "correct_answer": null,
+      "explanation": "Profit Percentage = Profit/Cost Price x 100\n\nSelling Price = Cost Price + Profit\n\nProfit = Selling Price - Cost Price\n\nLet x = Cost Price\n\nProfit = Selling Price - x \n\nSelling Price = 44\n\nProfit = 44 - x \n\nProfit Percentage = Profit/Cost Price x 100\n\nProfit Percent = 10%\n\nMultiply both sides of the ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "Express 15 : 12 in the form 1 : n .",
+      "options": {
+        "A": "1 : 0.8",
+        "B": "1 : 12",
+        "C": "1 : 15",
+        "D": "1 : 1.2"
+      },
+      "correct_answer": null,
+      "explanation": "Since the first part of the ratio 1 : n is 1 , divide each parts of the ratio of 15 : 12 by 15 (15/15 = 1)\n\n15/15 : 12/15 = 1:0.8",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "The ratio of farmers to children in a village is 13 : 11. If there were 312 farmers in the village, how many children were there?",
+      "options": {
+        "A": "264",
+        "B": "143",
+        "C": "48",
+        "D": "169"
+      },
+      "correct_answer": null,
+      "explanation": "13 for farmers and 11 for children\n\nFarmers = 312\n\nLet x = number of children\n\n13 = 312\n\n11 = x \n\nCross multiply and solve for the value of x \n\n13 x x = 312 x 11\n\nDivide both sides by 13\n\n x = (312 x 11)/13\n\n13 goes into 312, 24 times\n\n x = 24 x 11\n\n x = 264",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 40,
+      "question_text": "The volume of a cylinder is 40&Pi; cm 3 . If the height of the cylinder is 10 cm, find the base radius",
+      "options": {
+        "A": "1 cm",
+        "B": "4 cm",
+        "C": "2 cm",
+        "D": "3 cm"
+      },
+      "correct_answer": null,
+      "explanation": "Volume of a cylinder = &Pi;r 2 h\n\nVolume = 40&Pi; and height = 10\n\n40&Pi; = &Pi;r 2 x 10\n\n40&Pi; = 10&Pi;r 2 \n\nDivide both sides by 10&Pi;\n\n4 = r 2 \n\nTake square root of both sides\n\n r = 2\n\nTHEORY QUESTIONS",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

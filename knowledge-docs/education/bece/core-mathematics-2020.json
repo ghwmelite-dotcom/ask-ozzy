@@ -1,0 +1,502 @@
+{
+  "exam_type": "bece",
+  "subject": "Core Mathematics",
+  "year": 2020,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "Simplify",
+      "options": {
+        "A": "⅓",
+        "B": "½",
+        "C": "⅙",
+        "D": "⅔"
+      },
+      "correct_answer": null,
+      "explanation": "Step 1 \n\n Find the least common multiple (LCM) \n\nLCM for 4, 3 and 12 is 12 , thus\n\n Multiples of 4 \n\n4,8, 12 ,16,20,24,28,32,36,40,44,48\n\n Multiples of 3 \n\n3,6,9, 12 ,15,18,21,24,27,30,33,36\n\n Multiples of 12 \n\nMultiples of 12 are numbers 12 can divide without a remainder (Simply the multiplication ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "Given that N = { x : x is a factor of 18} and \r\n M = { x : x is a multiple of 12}, find N ∩ M .",
+      "options": {
+        "A": "{1,2,3,6}",
+        "B": "{1,2,3,6,12}",
+        "C": "{2,3,6,12,18}",
+        "D": "{}"
+      },
+      "correct_answer": null,
+      "explanation": "x : x is read as x is such that x is ...\n\n N contains the list of factors of 18. A factor is a number or algebraic expression\r\nthat divides another number or expression evenly, thus no remainder.\r\n\nFactors of 18 are 1,2,3,6,9 and 18 itself\n\n Thus \n\n1x18 = 18\n\n2x9 = 18\n\n3x6 = 18\n\nHence 1,2,3,6,9 and ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "Which property of arithmetic is used in a ( x + y ) = ax + ay .",
+      "options": {
+        "A": "+ b = b + a \r\n\nThe commutative property of multiplication is:",
+        "B": "Commutative",
+        "C": "Distributive",
+        "D": "Initiative"
+      },
+      "correct_answer": null,
+      "explanation": "Associative Property \n\nThis property states that when three or more are added (or multiplied), the sum (or the ) is the same regardless of the grouping of the (or the multiplicands).\n\nAssociative property gets its name from the word \"Associate\" and it refers to grouping of numbers.\n\nGrouping means t",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "Subtract (7 x -3) from (5-3 x ).",
+      "options": {
+        "A": "10 x -8",
+        "B": "4 x -8",
+        "C": "8-10 x",
+        "D": "2-10 x"
+      },
+      "correct_answer": null,
+      "explanation": "Subtract (7 x -3) from (5-3 x ) ⇒ (5-3 x ) - (7 x -3)\n\n(5-3 x ) - (7 x -3) = (5-3 x ) - 1(7 x -3)\n\n NOTE: Every number is multiplied by 1 which is the same number or has no effect, thus - (7 x -3) = - 1(7 x -3)\n\nApplying the distributive property, a ( x + y ) = a x x + a x y \n\n⇒ - 1(7 x -3) = -1x7 x",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "The cost of 12 note books is GH&#x20B5; 54.84. Find the cost of one note book.",
+      "options": {
+        "A": "GH&#x20B5; 5.57",
+        "B": "GH&#x20B5; 4.67",
+        "C": "GH&#x20B5; 4.57",
+        "D": "GH&#x20B5; 3.57"
+      },
+      "correct_answer": null,
+      "explanation": "Let x be the cost of one book\n\n12 books = 54.84\n\n1 book = x \n\nCross multiplying the equations\n\n⇒ 12 x x = 1 x 54.84\n\nDivide both sides by 12\n\n⇒ x = 54.84 / 12\n\n⇒ x = 4.57\n\n Thus \n\nTo simplify the fraction, change the decimal number to a form which has 10 raised to the power by moving the decimal pos",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "Which of the following inequalities is represented on the number line?",
+      "options": {
+        "A": "-2>y>2",
+        "B": "-2≤ y \r\n\n-2 ≥ y > 2",
+        "D": "-2 Mark"
+      },
+      "correct_answer": null,
+      "explanation": "Plotting inequalities on number lines \n\nInequalities can be represented on a number line.\n\nUse a hollow dot for:\r\n\nUse a solid dot for:\r\n\n&#x2264; and &#x2265;\r\n\n Example \n\nThis shows x is greater than or equal to : -1\n\n x &#x2265; -1\n\n Example \n\nThis shows x is less than : 2\n\n x < 2\n\n Example \n\nThi",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "Simplify: (2ab 2 ) 2 x 3a 3 b.",
+      "options": {
+        "A": "6a 4 b 5",
+        "B": "12a 3 b 4",
+        "C": "12a 6 b 4",
+        "D": "12a 5 b 5"
+      },
+      "correct_answer": null,
+      "explanation": "Concepts",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "Which of the following polygons does not have a line of symmetry?",
+      "options": {
+        "A": "Kite",
+        "B": "Isosceles triangle",
+        "C": "Trapezium",
+        "D": "Rhombus"
+      },
+      "correct_answer": "C",
+      "explanation": "A line of symmetry is a line that cuts a shape exactly in half.\n\nThis means that if you were to fold the shape along the line, both halves would match exactly. Equally, if you were to place a mirror along the line, the shape would remain unchanged.\n\nThe shape which it is not possible to divide into ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "Vera is 11 years old and her brother is 9 years old. They shared 60 oranges in\r\nthe ratio of their ages. How many more oranges does Vera get?",
+      "options": {
+        "A": "6",
+        "B": "27",
+        "C": "34",
+        "D": "39"
+      },
+      "correct_answer": "A",
+      "explanation": "Each person's share from the ratio is calculated as:\r\n\n(The ratio / Sum of ratios) x Total being shared\r\n\nVera:Brother = 11:9\n\nSum of ratios = 11+9 = 20\n\nVera's share = (11/20) x 60 = 11 x 3 = 33\n\n NOTE: 20 goes into 60, 3 times and the 3 multiplies the 11 at the top and the result is 33\n\nBrother's ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "If ( x -3) 2 = 16, find the positive value of x",
+      "options": {
+        "A": "1",
+        "B": "3",
+        "C": "4",
+        "D": "7"
+      },
+      "correct_answer": "A",
+      "explanation": "Get rid of the square by taking square root of both sides of the equation\n\n( x -3) 2 = 16\n\n√( x -3) 2 = √16\n\n√( x -3) 2 = x -3\n\n√16 = 4\n\n NOTE: √a = a ½ \n\n⇒ √( x -3) 2 = ( x -3) 2x½ = ( x -3) 1 = ( x -3) = x -3\n\n( x -3) 2 = 16\n\n⇒ x -3 = 4\n\n⇒ x = 4+3 = 7",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "Find the image of the point (-2,3) under a reflection in the y -axis.",
+      "options": {
+        "A": "reflection of a point over the line y = x is shown.\n\nThe rule for a reflection in the line y = x is ( x , y )→( y , x ), thus you simply switch their positions.\n\n Reflection in the line y =− x :",
+        "B": "(-3,2)",
+        "C": "(2,3)",
+        "D": "(3,2)"
+      },
+      "correct_answer": null,
+      "explanation": "The rule for y -axis reflection is ( x , y )→(− x , y ), thus reflection in the y -axis , the x is negated .\n\n⇒ (-2,3) reflected in the y -axis will be -(-2),3 but -- = +, hence (2,3)\n\nA reflection is a transformation representing a flip of a figure. Figures may be reflected in a point, a line, or a",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "What fraction of 3 weeks is 18 days?",
+      "options": {
+        "A": "&frac16;",
+        "B": "6&frasl;7",
+        "C": "1&frasl;7",
+        "D": "9&frasl;11"
+      },
+      "correct_answer": null,
+      "explanation": "Fraction of a total is calculated as the value of what fraction is being calculated over the total\n\nThus fraction of a value = value/total, then you simplify the fraction.\n\nBefore you calculate the fraction, make sure they are of the same units. If one is in a different unit, change the other so the",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "What is the median of the following numbers:\r\n\n4,16,13,18,3,20,6,7,15,2,10,12?",
+      "options": {
+        "A": "7",
+        "B": "10",
+        "C": "11",
+        "D": "12"
+      },
+      "correct_answer": null,
+      "explanation": "The median is the middle score in a set of given numbers.\n\nThe mean is the arithmetic average of a set of given numbers.\n\nThe mode is the most frequently occurring score in a set of given numbers.\n\n Median \n\nThe median is the middle score of a distribution. To calculate the median\r\n\n* Arrange your n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "If w/3 = 3(w-1)-1, find the value of w.",
+      "options": {
+        "A": "3⁄2",
+        "B": "5⁄4",
+        "C": "3⁄5",
+        "D": "1⁄2"
+      },
+      "correct_answer": null,
+      "explanation": "Get rid of the fraction by multiplying each side of the equation by the LCM of the denominators (3,1 and 1)\n\nThus 3(w-1) = 3(w-1)/1 (every number is being divided by 1 which has no effect on the number)\n\n-1 = -1/1\n\nHence the denominators are 3,1 and 1 and the LCM is 3\n\nMultiply both sides of the equ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "Use the diagram below to answer the question below \n\nFind the value of x .",
+      "options": {
+        "A": "68 o",
+        "B": "75 o",
+        "C": "112 o",
+        "D": "124 o"
+      },
+      "correct_answer": null,
+      "explanation": "the question below \n\nFind the value of x .\n\n A. \r\n\n68 o \n\n B. \r\n\n75 o \n\n C. \r\n\n112 o \n\n D. \r\n\n124 o \n\n Mark \r\n\n Solution \r\n\n Concepts \n\nA triangle which has two of its sides equal is called an isosceles triangle \n\n Properties of Isosceles Triangle",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "Use the diagram below to answer the question below \n\nFind the value of y .",
+      "options": {
+        "A": "68 o",
+        "B": "75 o",
+        "C": "112 o",
+        "D": "124 o"
+      },
+      "correct_answer": null,
+      "explanation": "the question below \n\nFind the value of y .\n\n A. \r\n\n68 o \n\n B. \r\n\n75 o \n\n C. \r\n\n112 o \n\n D. \r\n\n124 o \n\n Mark \r\n\n Solution \r\n\n Concepts \n\nA triangle which has two of its sides equal is called an isosceles triangle \n\n Properties of Isosceles Triangle",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "The pie chart shows the household budget of a family.\n\n Use the information to answer the question below \n\nFind the angle for INSURANCE AND TAXES.",
+      "options": {
+        "A": "45 o",
+        "B": "54 o",
+        "C": "60 o",
+        "D": "72 o"
+      },
+      "correct_answer": "C",
+      "explanation": "the question below \n\nFind the angle for INSURANCE AND TAXES.\n\n A. \r\n\n45 o \n\n B. \r\n\n54 o \n\n C. \r\n\n60 o \n\n D. \r\n\n72 o \n\n Mark \r\n\n Solution \r\n\n NOTE: The pie chart is in percentage (%) and not in degree ( o ).\n\nSince its in percentage, the sum of all the percentages should add up to 100% (Thus percenta",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "The pie chart shows the household budget of a family.\n\n Use the information to answer the question below \n\nIf the family's income was GH₵ 40,000.00, how much was spent on clothing?",
+      "options": {
+        "A": "GH₵ 1,600.00",
+        "B": "GH₵ 2,000.00",
+        "C": "GH₵ 3,200.00",
+        "D": "GH₵ 4,400.00"
+      },
+      "correct_answer": null,
+      "explanation": "the question below \n\nIf the family's income was GH₵ 40,000.00, how much was spent on clothing?\n\n A. \r\n\nGH₵ 1,600.00\n\n B. \r\n\nGH₵ 2,000.00\n\n C. \r\n\nGH₵ 3,200.00\n\n D. \r\n\nGH₵ 4,400.00\n\n Mark \r\n\n Solution \r\n\n Formula \n\nValue of a fraction or percentage of a total = fraction or percentage x the total\n\nThus",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "If 480 pupils in a school are boys representing 80% of the school's enrolment. Find the total number of pupils in the school.",
+      "options": {
+        "A": "384",
+        "B": "540",
+        "C": "600",
+        "D": "864"
+      },
+      "correct_answer": "C",
+      "explanation": "Percentage = Value/Total x 100\n\n Value here is the number of boys (480)\n\nThe percentage is 80\n\nLet x = total number of pupils in the school\n\n⇒ 80 = 480/ x x 100\n\nGet rid of the x dividing (fraction) by multiplying both sides of the equation by x \n\n⇒ 80 x x = 480 x 100\n\nDivide both sides of the equat",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "What is the rule for the mapping?",
+      "options": {
+        "A": "x → 3 x 2 -1",
+        "B": "x → 5 x 2 -3",
+        "C": "x → x 2 +1",
+        "D": "x → 4 x -2"
+      },
+      "correct_answer": null,
+      "explanation": "Substitute the value of x in each of the rule to see which one gives you the corresponding y value in all the cases\n\nOnly x → x 2 +1 gives the corresponding y values\n\nThus when x = 1 → 1 2 +1 = 1+1 = 2 \n\nWhen x = 2 → 2 2 +1 = 4+1 = 5 \n\nWhen x = 3 → 3 2 +1 = 9+1 = 10 \n\nWhen x = 4 → 4 2 +1 = 16+1 = 17",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "Find the value of t in the diagram.",
+      "options": {
+        "A": "12",
+        "B": "8",
+        "C": "4",
+        "D": "3"
+      },
+      "correct_answer": "A",
+      "explanation": "Concept \n\nSide C is always the side opposite to the right angle □\n\n⇒ 5 2 + t 2 = 13 2 \n\n25+ t 2 = 169\n\n t 2 = 169 - 25\n\n t 2 = 144\n\nTake the square root of both sides to get rid of the power 2\n\n√ t 2 = √144\n\n t = 12\n\n NOTE: The result of a square root is simply the number when multiplied by itself w",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "Solve: 4 x = 32.",
+      "options": {
+        "A": "2½",
+        "B": "3½",
+        "C": "5",
+        "D": "7"
+      },
+      "correct_answer": "C",
+      "explanation": "Make sure both sides of the equation are in the same base\n\n4 and 32 can both be expressed in base 2\n\nApplying the law of indices, a b x a c = a b+c , thus you add the powers if they are multiplying and the bases are the same\n\n4 = 2 x 2 = 2 1 x 2 1 = 2 1+1 = 2 2 \n\n32 = 2 x 2 x 2 x 2 x 2 = 2 1+1+1+1+1",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "Find the equation of the straight line passing through the points (-3,5) and (6,8)",
+      "options": {
+        "A": "y = &frac13; x",
+        "B": "y = &frac13; x +6",
+        "C": "y = &frac13; x -10",
+        "D": "y = &frac13; x +14"
+      },
+      "correct_answer": null,
+      "explanation": "Equation of a straight line, y = m x + c \n\nwhere m is the gradient of the line\n\n m = change in y / change in x =( y 2 - y 1 )/( x 2 - x 1 )\n\n NOTE: The first coordinate represents the x-axis and the second the y-axis\n\nThus in (-3,5), x = -3 and y = 5\n\nIn (6,8), x = 6 and y = 8\n\n⇒ The gradient of the",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 31,
+      "question_text": "There are 15 females in a debating club. If the ratio of females to males is 3:2, how many members are in the club?",
+      "options": {
+        "A": "6",
+        "B": "10",
+        "C": "22",
+        "D": "25"
+      },
+      "correct_answer": null,
+      "explanation": "Members in the club = No. of females + No. of males\n\n Concept \n\nNo. of A : No. of B = Ratio of A:B\n\n⇒ No. of females : No. of males = 3:2\n\nNo. of females = 15\n\n⇒ 15: No. of males = 3:2\n\nExpress the : as fractions\n\n⇒ 15/No. of males = 3/2\n\nCross multiply (The numerator from one side multiplies the de",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "If P 1 (4,-5) is the image of P ( x , y ) translated by r = ( -2 3 ), find the values of x and y .",
+      "options": {
+        "A": "(-6,8)",
+        "B": "(-6,-8)",
+        "C": "(6,-8)",
+        "D": "(6,8)"
+      },
+      "correct_answer": null,
+      "explanation": "Translation \n\nA translation moves a shape up, down or from side to side but it does not change its appearance in any other way.\n\nTranslation is an example of a transformation. A transformation is a way of changing the size or position of a shape.\n\nEvery point in the shape is translated the same dist",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "If 2 y = 1-3 x 2 +4 x , find y when x = -1",
+      "options": {
+        "A": "-3",
+        "B": "-½",
+        "C": "½",
+        "D": "3"
+      },
+      "correct_answer": "A",
+      "explanation": "Concept \n\n- x - = + (When a negative number [-] multiplies another negative number[-], the sign becomes positive [+])\n\n- x + = - (When a negative number [-] multiplies a positive number [+], the sign becomes negative [-])\n\n a 2 = a x a \n\n2 y = 1-3 x 2 +4 x \n\nWhen x = -1, substitute x by -1\n\n2 y = 1-",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 34,
+      "question_text": "Given that p = {1,2,3,4,5,6,7,8,9,10,11,12}, what is the probability of selecting a prime number from the set?",
+      "options": {
+        "A": "&frac23;",
+        "B": "7&frasl;12",
+        "C": "½",
+        "D": "5&frasl;12"
+      },
+      "correct_answer": null,
+      "explanation": "Concept \n\nProbability = No. of possible outcomes / No. of sample space\n\nNo. of sample space (Total numbers in the set or under examination) = 12\n\nWe have to list the prime numbers of the set p and count them to get the No. of possible outcomes\n\nA prime is a number that is greater than 1 and divisibl",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "Solve: 3 - (3 x +4) ≤ -4",
+      "options": {
+        "A": "x ≤ 1",
+        "B": "x ≥ 1",
+        "C": "x ≥ 1&frac23;",
+        "D": "x Mark"
+      },
+      "correct_answer": null,
+      "explanation": "3 - (3 x +4) ≤ -4\n\n Concept \n\na(b+c) = axb+axc\n\n-a(b+c) = -a x b + -axc\n\n-(a+b) = -1(a+b) = -1xa + -1xb\n\n⇒ - (3 x +4) = -1(3 x +4) = -1 x 3 x + -1x4 = -3 x -4\n\n3 - (3 x +4) ≤ -4\n\n⇒ 3 - 3 x -4 ≤ -4\n\n⇒ 3 -4 - 3 x ≤ -4\n\n⇒ -1 - 3 x ≤ -4\n\nMoving the - 3 x to the right side of the equation and the -4 to t",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "Two sides of a rectangle are 10 cm and 6 cm. Calculate the area of a square with the same perimeter as that of the rectangle.",
+      "options": {
+        "A": "16 cm 2",
+        "B": "30 cm 2",
+        "C": "60 cm 2",
+        "D": "64 cm 2"
+      },
+      "correct_answer": null,
+      "explanation": "Perimeter is the sum of the length of the shape. A rectangle has two equal sides. Hence the total length (Perimeter) of a rectangle = 2L + 2B, where L = Length and B = Breadth\n\n⇒ The perimeter of the rectangle = 2 x 10 + 2x6 = 20+12 = 32\n\nA square has all 4 sides equal. Hence the perimeter of a squa",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 37,
+      "question_text": "Make n the subject of the relation",
+      "options": {
+        "A": "n = x ( y +1)",
+        "B": "n = y ( x +1)",
+        "C": "D."
+      },
+      "correct_answer": null,
+      "explanation": "Get rid of the fraction by multiplying both sides of the equation by the LCM of the denominators (1 and x ). The LCM is x \n\n NOTE: y = y/1 (Every number or letter is being divided by 1)\n\n⇒ y x x = n - x \n\nMove the x at the right to the left in order for n to stand alone (the subject)\n\n⇒ yx + x = n \n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "Expand and simplify: ( a -2)(2 a +3)",
+      "options": {
+        "A": "( b + c ) = a x ( b + c ) = a x b + a x c \n\n⇒ ( a - 2)(2 a +3) = a x (2 a +3) - 2 x (2 a +3)",
+        "B": "2 a 2 + 7 a - 6",
+        "C": "2 a 2 - a - 6",
+        "D": "2 a 2 - 12 a + 6"
+      },
+      "correct_answer": null,
+      "explanation": "Concept \n\n( a + b )( c + d ) = a x ( c + d ) + b x ( c + d )\n\n a ( b + c ) = a x ( b + c ) = a x b + a x c \n\n⇒ ( a - 2)(2 a +3) = a x (2 a +3) - 2 x (2 a +3)\n\n a x (2 a +3) = a x 2 a + a x 3 = 2 a 2 + 3 a \n\n NOTE: a x a = a 1 x a 1 = a 1+1 = a 2 \n\n-2(2 a +3) = -2 x 2 a + -2 x 3 = -4 a - 6\n\n⇒ ( a - 2",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "Simplify 2 2 x 2 7 ÷ 2 4",
+      "options": {
+        "A": "b x a c = a b+c",
+        "B": "2 5",
+        "C": "2 11",
+        "D": "2 13"
+      },
+      "correct_answer": null,
+      "explanation": "Concept \n\n a b x a c = a b+c \n\n a b ÷ a c = a b-c \n\n⇒ 2 2 x 2 7 ÷ 2 4 = 2 2+7 ÷ 2 4 \n\n⇒ 2 2 x 2 7 ÷ 2 4 = 2 9 ÷ 2 4 \n\n⇒ 2 2 x 2 7 ÷ 2 4 = 2 9 - 4 \n\n⇒ 2 2 x 2 7 ÷ 2 4 = 2 5",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 40,
+      "question_text": "If P = {7,11,13} and Q = {9,11,13}, find P ∪ Q",
+      "options": {
+        "A": "{7,9,11,13}",
+        "B": "{7,9}",
+        "C": "{11,13}",
+        "D": "{9,13}"
+      },
+      "correct_answer": null,
+      "explanation": "Union (∪) is the arrangement from the lowest to the highest of the elements in both sets. If an element occurs in both sets, its written only once \n\n P = {7,11,13} and Q = {9,11,13}\n\n⇒ P ∪ Q = {7,9,11,13}\n\nTHEORY QUESTIONS",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

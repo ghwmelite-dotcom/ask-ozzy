@@ -1,0 +1,654 @@
+{
+  "exam_type": "wassce",
+  "subject": "Integrated Science",
+  "year": 2021,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "Natural fats are composed of",
+      "options": {
+        "A": "carbon, hydrogen and oxygen.",
+        "B": "carbon, hydrogen and nitrogen.",
+        "C": "carbon, oxygen and nitrogen.",
+        "D": "hydrogen, oxygen and nitrogen,"
+      },
+      "correct_answer": null,
+      "explanation": "Fats consist of the monomers or smaller molecules, glycerol and fatty acid. These molecules are composed of the chemical elements hydrogen, carbon, and oxygen.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "Ash from burnt plant material can be used to prepare local soap because it contains",
+      "options": {
+        "A": "potassium chloride.",
+        "B": "potassium hydroxide.",
+        "C": "hydrogen sulphide.",
+        "D": "ammonia."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "Excessive amount of nitrogen in the soil leads to",
+      "options": {
+        "A": "proper growth of plants.",
+        "B": "increased photosynthesis in plants.",
+        "C": "delayed maturity of crops.",
+        "D": "well-developed stems of crops."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "The SI unit of electric charge is",
+      "options": {
+        "A": "ampere.",
+        "B": "coulomb.",
+        "C": "ohm.",
+        "D": "volt."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "Which of the following gases is a greenhouse gas?",
+      "options": {
+        "A": "Nitrous oxide",
+        "B": "Ozone",
+        "C": "Sulphur dioxide",
+        "D": "Carbon dioxide"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "The instrument most suitable for the measurement of the thickness of a sheet of paper is",
+      "options": {
+        "A": "Vernier callipers.",
+        "B": "micrometer screw gauge.",
+        "C": "metre rule.",
+        "D": "engineers callipers."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "Which of the following indicators can measure pH values?",
+      "options": {
+        "A": "Litmus",
+        "B": "Methyl orange",
+        "C": "Phenolphthalein",
+        "D": "Universal indicator"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "The main function of the rumen is to",
+      "options": {
+        "A": "act as a chamber of digestion.",
+        "B": "absorb excess water.",
+        "C": "produce digestive juices.",
+        "D": "serve as storage chamber."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "The fibrous mesocarp of coconut aids its dispersal by",
+      "options": {
+        "A": "explosion.",
+        "B": "insects.",
+        "C": "water.",
+        "D": "wildlife."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "Which of the following radiations are particles?\n\nI. Alpha\r\n\nII. Beta\r\n\nIII. Gamma",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "Which of the following practices reduces the speed of run-off along sloped lands?",
+      "options": {
+        "A": "Mulching",
+        "B": "Strip cropping",
+        "C": "Mixed cropping",
+        "D": "Manuring"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "Methods of reducing friction in machines include\n\nI. use of ball bearings\r\n\nII. use of lubricants\r\n\nIII. use of cooling agents\r\n\nWhich of the following statements above are correct ?",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "Leguminous fodder crops are included in pastures to ensure that animals are supplied with",
+      "options": {
+        "A": "minerals.",
+        "B": "vitamins.",
+        "C": "lipids.",
+        "D": "proteins."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "Which of the following pollutants affect weather conditions?\n\nI. Sulphur dioxide\r\n\nII. Ozone\r\n\nIII. CFC",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "Fresh tomato seeds only germinate after they dry up. This may be due to",
+      "options": {
+        "A": "unstable pH.",
+        "B": "absence of hormones.",
+        "C": "hard testa.",
+        "D": "the presence of inhibitors."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "In the reflex arc, the",
+      "options": {
+        "A": "sensory nerve sends stimulus to the spinal cord.",
+        "B": "motor neurone receives the stimulus.",
+        "C": "intermediate neurone transmits impulse from the sensory neurone to the motor neurone.",
+        "D": "sensory neurone receives impulse from the motor neurone via the intermediate neurone."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "Which of the following activities best describe soil conservation?\n\nI. Ensuring presence of water in the soil.\r\n\nII. Maintaining nutrient in the soil.\r\n\nIII. Practicing crop rotation on the soil.\r\n\nIV. Protecting the structure of the soil.",
+      "options": {
+        "A": "I and II only",
+        "B": "I, II and III only",
+        "C": "I, II and IV only",
+        "D": "I, III and IV only"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "Oil dipped on the surface of water bodies kills mosquito larvae through",
+      "options": {
+        "A": "dehydration",
+        "B": "poisoning",
+        "C": "starvation",
+        "D": "suffocation"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "Alkanoic acid + alkanol ⇋ H 2 SO 4 alkyl alkanoate + water\n\n Use the equation above to answer the question below \n\nThe reaction is called",
+      "options": {
+        "A": "hydrolysis.",
+        "B": "hydration.",
+        "C": "dehydration.",
+        "D": "esterification."
+      },
+      "correct_answer": "B",
+      "explanation": "the question below \n\nThe reaction is called\n\n A. \r\n\nhydrolysis.\n\n B. \r\n\nhydration.\n\n C. \r\n\ndehydration.\n\n D. \r\n\nesterification.\n\n Mark",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "Alkanoic acid + alkanol ⇋ H 2 SO 4 alkyl alkanoate + water\n\n Use the equation above to answer the question below \n\nThe H 2 SO 4 is acting as",
+      "options": {
+        "A": "catalyst.",
+        "B": "enzyme.",
+        "C": "drying agent",
+        "D": "dehydrating agent."
+      },
+      "correct_answer": null,
+      "explanation": "the question below \n\nThe H 2 SO 4 is acting as\n\n A. \r\n\ncatalyst.\n\n B. \r\n\nenzyme.\n\n C. \r\n\ndrying agent\n\n D. \r\n\ndehydrating agent.\n\n Mark",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "In which of the following applications is cooling by evaporation used?\n\nI. Temperature regulation in humans\r\n\nII. Cooling of water in an alcohol clay pot\r\n\nIII. Cooling by an air conditioner",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "The earthworm is important to the farmer because it",
+      "options": {
+        "A": "improves soil structure.",
+        "B": "improves soil texture.",
+        "C": "destroys soil pathogen.",
+        "D": "reduces amount of air in the soil."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "Which of the following blood types are safe to use for a person with type B blood?\n\nI. A\r\n\nII. B\r\n\nIII. O",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "O is a universal donor and all blood groups can receive blood group O . Blood group B can take blood from B group.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "Smoke is a mixture of",
+      "options": {
+        "A": "liquid and gas.",
+        "B": "gases.",
+        "C": "solid and gas.",
+        "D": "solid, liquid and gas."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 31,
+      "question_text": "Which of the following crops is a fruit vegetable?",
+      "options": {
+        "A": "Cabbage",
+        "B": "Carrot",
+        "C": "Cucumber",
+        "D": "Onion"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "The elements in bronze are",
+      "options": {
+        "A": "copper and zinc.",
+        "B": "copper and lead.",
+        "C": "copper and nickel.",
+        "D": "copper and tin."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "The acrosome in the sperm cell",
+      "options": {
+        "A": "serves as a source of nutrients for the sperm.",
+        "B": "facilitates the penetration of the sperm into the egg cell.",
+        "C": "provides energy required by the sperm to swim.",
+        "D": "carries the genetic material from the father to the foetus."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 34,
+      "question_text": "Which of the following pollutants cause(s) acid rain?\n\nI. CO 2 \r\n\nII. NO 2 \r\n\nIII. SO 3",
+      "options": {
+        "A": "I only",
+        "B": "II only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "Acid rain is caused by the release of Sulphur oxides (SO 2 and SO 3 ) and nitrogen oxides into the atmosphere, where they react with water, oxygen, and other chemicals to become sulfuric and nitric acid respectively.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "The part of the human ear that helps to balance pressure between the ear and the atmosphere is",
+      "options": {
+        "A": "cochlea.",
+        "B": "Eustachian tube.",
+        "C": "pinna.",
+        "D": "malleus."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "Digestion of food is completed in the",
+      "options": {
+        "A": "small intestine.",
+        "B": "large intestine.",
+        "C": "stomach.",
+        "D": "liver."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "Which of the following unit(s) is/are derived?\n\nI. Ohm\r\n\nII. Volt\r\n\nIII. Ampere",
+      "options": {
+        "A": "I only",
+        "B": "I and II only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "When anaerobic respiration and aerobic respiration are compared, the energy yield",
+      "options": {
+        "A": "are the same.",
+        "B": "is less in anaerobic respiration",
+        "C": "is less in aerobic respiration.",
+        "D": "cannot be compared."
+      },
+      "correct_answer": null,
+      "explanation": "Aerobic processes produce up to 38 ATP per glucose. Anaerobic processes yield only 2 ATP per glucose",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 40,
+      "question_text": "An example of a unisexual flower is",
+      "options": {
+        "A": "Hibiscus .",
+        "B": "Pride of Barbados.",
+        "C": "flamboyant.",
+        "D": "watermelon."
+      },
+      "correct_answer": null,
+      "explanation": "Unisexual flowers : Coconut flowers, Papaya, Watermelon, Cucumber, Maize, White mulberry, Musk melon,Castor bean, Marrow, Luffa, Snake gourd, Bitter gourd, Tapioca, Pumpkin, American holly, Birch, Pine, Gopher purge, Tungoil bean.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 41,
+      "question_text": "Which of the following materials is non-magnetic?",
+      "options": {
+        "A": "Brass",
+        "B": "Steel",
+        "C": "Nickel",
+        "D": "Cobalt"
+      },
+      "correct_answer": null,
+      "explanation": "Materials that can be magnetized, which are also the ones that are strongly attracted to a magnet, are called ferromagnetic (or ferrimagnetic). These include the elements iron, nickel and cobalt and their alloys, some alloys of rare-earth metals, and some naturally occurring minerals such as lodesto",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 42,
+      "question_text": "Plastics have become important substitutes for metals n manufacturing industries because of their\n\nI. anti-rust properties.\r\n\nII. relative cheapness.\r\n\nIII. ability to be moulded into shapes.\r\n\nWhich of the statements above are correct ?",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 43,
+      "question_text": "Species, genus and family are examples of",
+      "options": {
+        "A": "binomial classification.",
+        "B": "taxa.",
+        "C": "phyla.",
+        "D": "genera."
+      },
+      "correct_answer": null,
+      "explanation": "A taxon (plural taxa ) is a unit of classification. The examples of taxa at different hierarchical levels are species, followed by genus, family, order, class, phylum (in animals) or division (in plants), and kingdom, in ascending order.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 44,
+      "question_text": "The correct order in which food moves through the digestive system of a fowl is",
+      "options": {
+        "A": "crop → proventriculus → gizzard → duodenum.",
+        "B": "crop → gizzard → proventriculus → duodenum.",
+        "C": "proventriculus → gzzard → crop → duodenum.",
+        "D": "proventriculus → crop → gizzard → duodenum."
+      },
+      "correct_answer": null,
+      "explanation": "DIGESTIVE SYSTEM OF A FOWL",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 45,
+      "question_text": "If the genotype of the parents are Aa and Aa, the offsprint most probably will be",
+      "options": {
+        "A": "1 \r\n 2 \r\n\n AA and \r\n 1 \r\n 2 \r\n\n aa.",
+        "B": "all Aa.",
+        "C": "1 \r\n 4 \r\n\n AA, \r\n 1 \r\n 2 \r\n\n Aa and \r\n 1 \r\n 4 \r\n\n aa.",
+        "D": "3 \r\n 4 \r\n\n AA and \r\n 1 \r\n 4 \r\n\n aa."
+      },
+      "correct_answer": null,
+      "explanation": "There are 2 out of 4 (half) Aa , 1 out of 4 of AA and 1 out of 4 of aa",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 46,
+      "question_text": "Sound waves travel fastest in",
+      "options": {
+        "A": "gas.",
+        "B": "liquid.",
+        "C": "solid.",
+        "D": "vacuum."
+      },
+      "correct_answer": null,
+      "explanation": "Sound wave travels fastest in solids, less in liquids and least in gases. It cannot travel in vacuum as it is a mechanical wave which require material medium for propagation.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 47,
+      "question_text": "Which of the following properties of carbon dioxide is useful in fire fighting?\n\nI. It does not support combustion.\r\n\nII. It is heavier than air.\r\n\nIII. It does not produce toxic compounds.",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 48,
+      "question_text": "Pricking of yam is done to",
+      "options": {
+        "A": "prevent vegetative growth.",
+        "B": "encourage development of clusters of tubers.",
+        "C": "prevent hardening of tubers.",
+        "D": "prevent disease infestation."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 49,
+      "question_text": "An example of a wind instrument is",
+      "options": {
+        "A": "xylophone.",
+        "B": "guitar.",
+        "C": "flute.",
+        "D": "cymbals."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 50,
+      "question_text": "Which of the following descriptions best fit the structure of the incisor in humans?",
+      "options": {
+        "A": "Sharp and pointed",
+        "B": "Sharp and chiseled",
+        "C": "Flat and cusped",
+        "D": "Pointed and chiseled"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

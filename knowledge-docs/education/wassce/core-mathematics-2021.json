@@ -1,0 +1,518 @@
+{
+  "exam_type": "wassce",
+  "subject": "Core Mathematics",
+  "year": 2021,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 2,
+      "question_text": "Simplify: (11 two ) 2",
+      "options": {
+        "A": "1001 two",
+        "B": "1101 two",
+        "C": "101 two",
+        "D": "10001 two"
+      },
+      "correct_answer": null,
+      "explanation": "Method I\n\nA number raised to the power 2 (square) means the number multiplied by itself.\n\n 1 \r\n 1 \r\n\n 1 \r\n 1 \r\n\n x \r\n 1 \r\n 1 \r\n\n 1 \r\n 1 \r\n\n + \r\n 1 \r\n 1 \r\n\n 1 \r\n 0 \r\n 0 \r\n 1 \r\n\n Note : 2 in base two is 10 .\n\nMethod II\n\nChange the binary (base two) to base 10 and simplify and change the result back to",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "Solve: \r\n 2 2x + 1 \r\n = 32",
+      "options": {
+        "A": "13",
+        "B": "24",
+        "C": "12",
+        "D": "11"
+      },
+      "correct_answer": "B",
+      "explanation": "Before you can simplify a power in an equation, ensure that both the left and the right have the same base.\n\nExpress the 32 to base 2 .\n\n32 = 2 x 2 x 2 x 2 x 2 = 2 5 \n\nSolve: \r\n 2 2x + 1 \r\n = 2 5 \r\n\nSince the bases are the same, you can equate the powers.\n\n 2x + 1 \r\n = 5\r\n\nGet rid of the square root",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "If log 10 2 = m and log 10 3 = n , find log 10 24 in terms of m and n .",
+      "options": {
+        "A": "3 m + n",
+        "B": "m + 3 n",
+        "C": "4 mn",
+        "D": "3 mn"
+      },
+      "correct_answer": null,
+      "explanation": "24 = 8 x 3\n\n8 = 2 x 2 x 2 = 2 3 \n\n24 = 2 3 x 3\n\nlog 10 24 = log 10 2 3 x 3\n\nFrom law of logarithm,",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "Find the 5 th term of the sequence 2, 5, 10, 17....?",
+      "options": {
+        "A": "22",
+        "B": "24",
+        "C": "36",
+        "D": "26"
+      },
+      "correct_answer": null,
+      "explanation": "The rule of the sequence is n 2 + 1\n\nWhere n is the number of term.\n\nWhen n = 1 → 1 2 + 1 = 1 + 1 = 2\n\nWhen n = 2 → 2 2 + 1 = 4 + 1 = 5\n\nWhen n = 3 → 3 2 + 1 = 9 + 1 = 10\n\nWhen n = 4 → 4 2 + 1 = 16 + 1 = 17\n\nWhen n = 5 → 5 2 + 1 = 25 + 1 = 26",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "If P = {-3 x Q = {-1 x x is a real number, find P ∩ Q .",
+      "options": {
+        "A": "{-1 ≤ x ≤ 1}",
+        "B": "{-3 x \r\n\n{-3 ≤ x ≤ 1}",
+        "D": "{-1 x Mark"
+      },
+      "correct_answer": null,
+      "explanation": "P = {-3 x x and x is less than 1\n\n P = {-2, -1, 0}\n\n Q = {-1 x x and x is less than 3.\n\n Q = {0, 1, 2)\n\n Intersection (∩) are elements that can be found in both sets\n\n P ∩ Q = {0}\n\n P ∩ Q = {-1 x x and x is less than 1 which is true for the 0 . -1 is less than 0 and 0 is also less than 1.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "Factorize 6 pq - 3 rs - 3 ps + 6 qr .",
+      "options": {
+        "A": "3( r - p )( s - 2 q )",
+        "B": "3( r - p )(2 q + s )",
+        "C": "3( p - r )(2 q - s )",
+        "D": "3( p + r )(2 q - s )"
+      },
+      "correct_answer": null,
+      "explanation": "6 pq - 3 rs - 3 ps + 6 qr = 6 pq - 3 rs - 3 ps + 6 qr \n\n6 pq - 3 rs - 3 ps + 6 qr = 6 pq + 6 qr - 3 rs - 3 ps \n\n6 pq - 3 rs - 3 ps + 6 qr = 6 q ( p + r ) - 3 s ( r + p )\n\n6 pq - 3 rs - 3 ps + 6 qr = 6 q ( p + r ) - 3 s ( p + r )\n\n6 pq - 3 rs - 3 ps + 6 qr = (6 q - 3 s )( p + r )\n\n6 pq - 3 rs - 3 ps ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "What number should be subtracted from the sum of 2 \r\n 1 \r\n 6 \r\n\n and 2 \r\n 7 \r\n 12 \r\n\n to give 3 \r\n 1 \r\n 4 \r\n\n ?",
+      "options": {
+        "A": "1 \r\n 1 \r\n 2",
+        "B": "1 \r\n 1 \r\n 6",
+        "C": "1 \r\n 2",
+        "D": "1 \r\n 3"
+      },
+      "correct_answer": "A",
+      "explanation": "Change the mixed fractions to improper fractions.\n\n2 \r\n 1 \r\n 6 \r\n\n = \r\n 2 x 6 + 1 \r\n 6 \r\n\n = \r\n 12 + 1 \r\n 6 \r\n\n = \r\n 13 \r\n 6 \r\n\n2 \r\n 7 \r\n 12 \r\n\n = \r\n 2 x 12 + 7 \r\n 12 \r\n\n = \r\n 24 + 7 \r\n 12 \r\n\n = \r\n 31 \r\n 12 \r\n\n3 \r\n 1 \r\n 4 \r\n\n = \r\n 4 x 3 + 1 \r\n 4 \r\n\n = \r\n 12 + 1 \r\n 4 \r\n\n = \r\n 13 \r\n 4 \r\n\nLet x the num",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "Mensah is 5 years old and Joyce is thrice as old as Mensah. In how many years will Joyce be twice as old as Mensah?",
+      "options": {
+        "A": "3 years",
+        "B": "10 years",
+        "C": "5 years",
+        "D": "15 years"
+      },
+      "correct_answer": null,
+      "explanation": "Mensah's age now = 5\n\n Thrice means 3 times (3 x ).\n\nJoyce's age now = 3 x Mensah's age\n\nJoyce's age now = 3 x 5\n\nJoyce's age now = 15\n\nLet y years in the future that Joyce will be twice as old as Mensah.\n\nIn y years, Mensah will be (5 + y ) years.\n\nIn y years, Joyce will be (15 + y ) years.\n\nIn y y",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "If 16 x 2 ( x + 1) = 4 x x 8 (1 − x ) , find the value of x .",
+      "options": {
+        "A": "-4",
+        "B": "4",
+        "C": "1",
+        "D": "-1"
+      },
+      "correct_answer": "B",
+      "explanation": "To solve for the x , make sure each of the numbers has the same base in order for you to equate the powers.\n\nThe lowest base is 2, hence express all the numbers to base 2.\n\n16 = 2 x 2 x 2 x 2 = 2 4 \n\n4 = 2 x 2 = 2 2 \n\n8 = 2 x 2 x 2 = 2 3 \n\n16 x 2 ( x + 1) = 4 x x 8 (1 − x ) \n\n2 4 x 2 ( x + 1) = 2 2 ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "The circumference of a circular track is 9 km. A cyclist rides round it a number of times and stops after covering a distance of 302 km. How far is the cyclist from the starting point?",
+      "options": {
+        "A": "5 km",
+        "B": "6 km",
+        "C": "7 km",
+        "D": "3 km"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "Simplify: 2 \r\n 7 \r\n - \r\n 14 \r\n 7 \r\n\n + \r\n 7 \r\n 21",
+      "options": {
+        "A": "x",
+        "B": "3 \r\n 21",
+        "C": "7 21 \r\n 3",
+        "D": "21 \r\n 21"
+      },
+      "correct_answer": "A",
+      "explanation": "a \r\n x \r\n a \r\n = a \r\n\nGet rid of the denominator surds by multiplying the numerator and the denominator by the surd.\n\n2 \r\n 7 \r\n - \r\n 14 \r\n 7 \r\n\n + \r\n 7 \r\n 21 \r\n\n = 2 \r\n 7 \r\n - \r\n 14 \r\n 7 \r\n\n + \r\n 7 \r\n 21 \r\n\n2 \r\n 7 \r\n - \r\n 14 \r\n 7 \r\n\n + \r\n 7 \r\n 21 \r\n\n = 2 \r\n 7 \r\n - \r\n 14 \r\n 7 \r\n\n x \r\n 7 \r\n 7 \r\n\n + \r\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "If 4 x + 2 y = 16 and 6 x -2 y = 4, find the value of ( y - x ).",
+      "options": {
+        "A": "8",
+        "B": "2",
+        "C": "4",
+        "D": "6"
+      },
+      "correct_answer": "A",
+      "explanation": "4 x + 2 y = 16 ----- eqn 1\n\n6 x -2 y = 4 ----- eqn 2\n\nGet rid of y . eqn 1 + eqn 2\n\n10 x + 0 = 20\n\n10 x = 20\n\nDivide both sides by 10\n\n x = \r\n 20 \r\n 10 \r\n\n = 2\r\n\nSubstitute x = 2 into ----- eqn 1\n\n4 x 2 + 2 y = 16\n\n8 + 2 y = 16\n\n2 y = 16 - 8\n\n2 y = 8\n\nDivide both sides by 2.\n\n y = \r\n 8 \r\n 2 \r\n\n = 4\r",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "In the diagram, ∠ABC and ∠BCD are right angles, ∠BAD = t and ∠EDF = 70°. Find the value of t .",
+      "options": {
+        "A": "70°",
+        "B": "165°",
+        "C": "140°",
+        "D": "110°"
+      },
+      "correct_answer": "A",
+      "explanation": "Right angle means 90°\n\nSum of angles of a regular polygon = ( n - 2) x 180°\n\nNumber of sides ( n ) of the polygon = 4\n\nSum of angles of a regular polygon = (4 - 2) x 180°\n\nSum of angles of a regular polygon = 2 x 180°\n\nSum of angles of a regular polygon = 360°\n\n∠ADC = ∠EDF = 70°\n\n90° + 90° + t + 70°",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "The sum of the interior angles of a regular polygon with k sides is (3 k - 10) right angles.\n\nFind the size of the exterior angle.",
+      "options": {
+        "A": "60°",
+        "B": "40°",
+        "C": "90°",
+        "D": "120°"
+      },
+      "correct_answer": "C",
+      "explanation": "Interior angles of a regular polygon \r\n\nSum of interior angles = ( n - 2) x 180°\n\nWhere n = the number of sides of the polygon.\n\n n = k .\n\nSum of interior of regular polygon with k sides = ( k - 2) x 180\n\nBut the sum is given as (3 k - 10) x 90°\n\n Note : right angle = 90°\n\n( k - 2) x 180 = (3 k - 10",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "Make U the subject of the relation: x = \r\n 2U - 3 \r\n 3U + 2 \r\n\n.",
+      "options": {
+        "A": "U = \r\n 2x + 3 \r\n 3x + 2",
+        "B": "U = \r\n 2x + 3 \r\n 3x - 2",
+        "C": "U = \r\n 2x - 3 \r\n 3x - 2",
+        "D": "U = \r\n 2x + 3 \r\n 2 - 3x"
+      },
+      "correct_answer": null,
+      "explanation": "x = \r\n 2U - 3 \r\n 3U + 2 \r\n\nGet rid of the fraction by multiplying each sides by the denominator (3 U + 2).\n\n x x (3 U + 2) = 2 U - 3\n\n3 xU + 2 x = 2 U - 3\n\n3 xU - 2 U = -2 x - 3\n\nFactorize U out.\n\n U (3 x - 2) = -2 x - 3\n\nDivide both sides by (3 x - 2).\n\n U = \r\n -2x - 3 \r\n 3x - 2 \r\n\nFactorize (-1) o",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "The height of an equilateral triangle is 10 \r\n 3 \r\n cm.\r\n\nCalculate its perimeter.",
+      "options": {
+        "A": "20 cm",
+        "B": "60 cm",
+        "C": "40 cm",
+        "D": "30 cm"
+      },
+      "correct_answer": null,
+      "explanation": "Equilateral triangle has all three sides equal .\n\nWhen you divide it, you will get two equal right angle triangles with base length being half of the side of the equilateral triangle.\n\nLet x = the side of the equal lateral triangle.\n\nFrom Pythagorean theorem,\n\nThe hypothenuse ( c ) is the longest si",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "Find The quadratic Equation whose roots are -2 q And 5 q .",
+      "options": {
+        "A": "x 2 + 3 qx + 10 q 2",
+        "B": "x 2 - 3 qx + 10 q 2",
+        "C": "x 2 - 3 qx - 10 q 2",
+        "D": "3 x 2 + 3 qx - 10 q 2"
+      },
+      "correct_answer": null,
+      "explanation": "If α and β are the roots, then\n\n( x - α)( x - β) = 0\n\n( x - (-2 q ))( x - 5 q ) = 0\n\n Note : -- = + or -(-) = +\n\n( x + 2 q )( x - 5 q ) = 0\n\n x ( x - 5 q ) + 2 q ( x - 5 q ) = 0\n\n x 2 - 5 qx + 2 qx - 10 q 2 = 0\n\n x 2 - 3 qx - 10 q 2 = 0",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "If tan θ = \r\n 3 \r\n 4 \r\n\n , 180° θ θ .",
+      "options": {
+        "A": "- \r\n 4 \r\n 5",
+        "B": "3 \r\n 5",
+        "C": "2 = 25\n\nTake the square root of both sides.",
+        "D": "- \r\n 3 \r\n 5"
+      },
+      "correct_answer": null,
+      "explanation": "SOHCAHTOA \r\n\n SOHCAHTOA is a mnemonic that gives us an easy way to remember the three main trigonometric ratios. They are sine (sin), cosine (cos) and tangent (tan).\n\nSOH\n\nsin(θ) = \r\n Opposite \r\n Hypothenuse \r\n\nCAH\n\ncos(θ) = \r\n Adjacent \r\n Hypothenuse \r\n\nTOA\n\ntan(θ) = \r\n Opposite \r\n Adjacent \r\n\nThe ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "If \r\n 2 \r\n (x - 3) \r\n\n - \r\n 3 \r\n (x - 2) \r\n\n = \r\n p \r\n (x - 3)((x - 2) \r\n\n , find p .",
+      "options": {
+        "A": "-(5 x - 13)",
+        "B": "(13 - x )",
+        "C": "(5 - x )",
+        "D": "-( x + 5)"
+      },
+      "correct_answer": null,
+      "explanation": "2 \r\n (x - 3) \r\n\n - \r\n 3 \r\n (x - 2) \r\n\n = \r\n 2 \r\n (x - 3) \r\n\n - \r\n 3 \r\n (x - 2) \r\n\n 2 \r\n (x - 3) \r\n\n - \r\n 3 \r\n (x - 2) \r\n\n = \r\n 2 x (x - 2) - 3 x (x - 3) \r\n (x - 3)((x - 2) \r\n\n 2 \r\n (x - 3) \r\n\n - \r\n 3 \r\n (x - 2) \r\n\n = \r\n 2x - 4 - 3x + 9 \r\n (x - 3)((x - 2) \r\n\n 2 \r\n (x - 3) \r\n\n - \r\n 3 \r\n (x - 2) \r\n\n = ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "The diagonal of a rhombus are 12 cm and 5 cm.\n\nCalculate its perimeter.",
+      "options": {
+        "A": "26 cm",
+        "B": "24 cm",
+        "C": "2 = 42.25\n\nTake square root of both sides.",
+        "D": "34 cm"
+      },
+      "correct_answer": null,
+      "explanation": "12 cm = 6 cm + 6 cm (Diagonals meet at the center)\n\n5 cm = 2.5 cm + 2.5 cm\n\nFrom Pythagorean theorem,\n\nThe hypothenuse ( c ) is the longest side. The side facing the right-angle (∟)\n\nc 2 = 2.5 2 + 6 2 \n\nc 2 = 42.25\n\nTake square root of both sides.\n\nc =",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "In the diagram, △ XYZ is produced to T . If | XY | = | ZY | and ∠ XYT = 40°, find ∠ XZT .",
+      "options": {
+        "A": "110°",
+        "B": "130°",
+        "C": "140°",
+        "D": "180°"
+      },
+      "correct_answer": "C",
+      "explanation": "Isosceles triangles (triangle with two sides equal) have the base angles the same.\n\n∠ YXZ = ∠ XZY \n\nLet ∠ YXZ = ∠ XZY = x \n\n x + x + 40° = 180° (Sum of angles in a triangle)\n\n2 x = 180° - 40°\n\n2 x = 140°\n\nDivide both sides by 2.\n\n x = \r\n 140° \r\n 2 \r\n\n = 70°\r\n\n∠ YXZ = ∠ XZY = 70°\n\n∠ XZY + ∠ XZT = 180",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "Which of the following is not an exterior angle of a regular polygon?",
+      "options": {
+        "A": "66°",
+        "B": "72°",
+        "C": "24°",
+        "D": "15°"
+      },
+      "correct_answer": "A",
+      "explanation": "Exterior angle of a regular polygon \r\n\nExterior angle of a regular polygon = \r\n 360° \r\n n \r\n\nWhere n is the number of sides of the regular polygon.\n\nExterior angle of a regular polygon or not\n\nExterior angle of a regular polygon x n = 360°\n\n n = \r\n 360° \r\n Exterior angle of a regular polygon \r\n\nIf n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "From a point T , a man moves 12 km due West and then moves 12 km due South to another point Q .\n\nCalculate the bearing of T from Q .",
+      "options": {
+        "A": "225°",
+        "B": "315°",
+        "C": "045°",
+        "D": "135°"
+      },
+      "correct_answer": null,
+      "explanation": "Since two sides are equal, the right angle is isosceles and the base angles are the same.\n\nBase angle = \r\n 180 - 90 \r\n 2 \r\n\n = 45°\r\n\nBearing starts from the north clockwise . If the angle is less than 100°, begin with a 0 .",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "In the diagram, O is the centre of the circle PQRS , ∠ PQR = 72° and OR // PS . Find ∠ OPS .",
+      "options": {
+        "A": "18°",
+        "B": "108°",
+        "C": "54°",
+        "D": "36°"
+      },
+      "correct_answer": null,
+      "explanation": "Note :",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 34,
+      "question_text": "Find the value of ( x + y ) in the diagram.",
+      "options": {
+        "A": "= y = 70° (Vertically opposite angles)",
+        "B": "= 70°",
+        "C": "= 35 (Vertically opposite angles)",
+        "D": "70°"
+      },
+      "correct_answer": "B",
+      "explanation": "b + 110 = 180 (Sum of angles on a straight line)\n\n b = 180 - 110\n\n b = 70°\n\n a = b = 70° (Alternate angles)\n\n a = y = 70° (Vertically opposite angles)\n\n c = 35 (Vertically opposite angles)\n\n c = d = 35 (Alternate angles)\n\n x + d = 180 (Sum of angles on a straight line)\n\n x + 35 = 180\n\n x = 180 - 35\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "In the diagram, MP is a tangent to the circle NQR , ∠ PNQ = 64° and | RQ | = | RN | .\n\nFind the angle marked t .",
+      "options": {
+        "A": "58°",
+        "B": "68°",
+        "C": "115°",
+        "D": "130°"
+      },
+      "correct_answer": "A",
+      "explanation": "Apply the alternate segment theorem.\n\n∠ QRN = 64°\n\nThe base angles of isosceles triangles (triangle with two sides equal) are the same.\n\n∠ RQN = ∠ RNQ \n\nLet ∠ RQN = ∠ RNQ = x \n\n x + x + 64 = 180 (Sum of angles of a triangle)\n\n2 x = 180 - 64\n\n2 x = 116\n\nDivide both sides by 2.\n\n x = \r\n 116 \r\n 2 \r\n\n =",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 37,
+      "question_text": "In the diagram, PQRS is a circle. find the value of x .",
+      "options": {
+        "A": "50°",
+        "B": "30°",
+        "C": "80°",
+        "D": "100°"
+      },
+      "correct_answer": null,
+      "explanation": "In cyclic quadrilateral, the opposite angles add up to 180°\n\n x + ( x + y ) = 180\n\n x + x + y = 180\n\n2 x + y = 180 ----- eqn 1\n\n(2 y - 30) + x = 180\n\n2 y - 30 + x = 180\n\n x + 2 y = 180 + 30\n\n x + 2 y = 210 ----- eqn 2\n\nGet rid of y .\n\neqn 1 x 2\n\n4 x + 2 y = 360 ----- eqn 3\n\neqn 3 - eqn 2\n\n3 x = 150\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "Given that sin x = \r\n 3 \r\n 5 \r\n\n , 0° ≤ x ≤ 90°, evaluate (tan x + 2 cos x ).",
+      "options": {
+        "A": "1 \r\n 20",
+        "B": "2 = 16\n\nTake the square root of both sides.",
+        "C": "1 \r\n 11 \r\n 20",
+        "D": "2 \r\n 7 \r\n 20"
+      },
+      "correct_answer": null,
+      "explanation": "SOHCAHTOA \r\n\n SOHCAHTOA is a mnemonic that gives us an easy way to remember the three main trigonometric ratios. They are sine (sin), cosine (cos) and tangent (tan).\n\nSOH\n\nsin(θ) = \r\n Opposite \r\n Hypothenuse \r\n\nCAH\n\ncos(θ) = \r\n Adjacent \r\n Hypothenuse \r\n\nTOA\n\ntan(θ) = \r\n Opposite \r\n Adjacent \r\n\nThe ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 40,
+      "question_text": "In the diagram EC is a diameter of circle ABCDE . If ∠ ABC = 158°, find ∠ ADE .",
+      "options": {
+        "A": "22°",
+        "B": "112°",
+        "C": "90°",
+        "D": "68°"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 42,
+      "question_text": "XY is a line segment with the coordinates X (-8, -12) and Y ( p , q ). If the midpoint of XY is (-4, -2), find the coordinates of Y .",
+      "options": {
+        "A": "(0, 4)",
+        "B": "(4, 10)",
+        "C": "(-6, -10)",
+        "D": "(0, 8)"
+      },
+      "correct_answer": null,
+      "explanation": "For a midpoint between two points A( x 1 , y 1 ) and B( x 2 , y 2 ),\n\nMidpoint x coordinate = \r\n x 1 + x 2 \r\n 2 \r\n\nMidpoint y coordinate = \r\n y 1 + y 2 \r\n 2 \r\n\n Calculating the midpoint of X (-8, -12) and Y ( p , q ) \n\nMidpoint of XY x coordinate = \r\n -8 + p \r\n 2 \r\n\nMidpoint of XY y coordinate = \r\n ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 43,
+      "question_text": "Five hundred tickets were sold for a concert. Tickets for adults and children were sold at $4.50 and $3.00, respectively.\n\nIf the total receipts for the concerts was $1987.50, how many tickets for adults were sold?",
+      "options": {
+        "A": "325",
+        "B": "235",
+        "C": "175",
+        "D": "400"
+      },
+      "correct_answer": null,
+      "explanation": "Let n = number of adults sold to and m = number of children sold to.\n\n Five hundred tickets were sold for a concert implies that when you add the number of adults and children, you should get 500\n\n n + m = 500 ------- eqn 1 \n\nTotal tickets sold = number of adults x cost for adult + number of childre",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 45,
+      "question_text": "The pie chart represents the distribution of fruits on display in a shop. If there are 60 apples on display, how many oranges are there?",
+      "options": {
+        "A": "80",
+        "B": "270",
+        "C": "120",
+        "D": "90"
+      },
+      "correct_answer": "A",
+      "explanation": "The sum of all the angles is 360° \n\nAngle of sector for orange = 360° - (100° + 80° + 60°)\n\nAngle of sector for orange = 360° - 240°\n\nAngle of sector for orange = 120°\n\nThe quantity for apple is known to be 60.\n\nThe angle of sector for apple is 80°\n\nIf 80° = 60\n\n120° = \r\n 60 x 120° \r\n 80° \r\n\n = 90\r\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 49,
+      "question_text": "The equation of a line is given as 3 x - 5 y = 7. Find its gradient (slope).",
+      "options": {
+        "A": "3 \r\n 5",
+        "B": "- \r\n 3 \r\n 5",
+        "C": "- \r\n 5 \r\n 3",
+        "D": "5 \r\n 3"
+      },
+      "correct_answer": "A",
+      "explanation": "The general equation of a line is y = m x + c \n\nWhere m is the gradient or slope and c is the y -intercept.\n\nExpress the given equation to be in the form of the general equation of a line and compare to find m .\n\n3 x - 5 y = 7\n\n3 x - 7 = 5 y \n\nDivide both sides by 5\n\n 3 \r\n 5 \r\n\n x - \r\n 7 \r\n 5 \r\n\n = ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 50,
+      "question_text": "For what value of x is \r\n 4 - 2x \r\n x + 1 \r\n\n undefined?",
+      "options": {
+        "A": "-2",
+        "B": "-1",
+        "C": "1",
+        "D": "2"
+      },
+      "correct_answer": "B",
+      "explanation": "A function is undefined when the denominator is 0 .\n\n x + 1 = 0\n\n x = 0 - 1\n\n x = -1\n\nTHEORY QUESTIONS",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

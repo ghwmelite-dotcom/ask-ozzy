@@ -1,0 +1,639 @@
+{
+  "exam_type": "wassce",
+  "subject": "Integrated Science",
+  "year": 2020,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "Ozone layer depletion results in",
+      "options": {
+        "A": "melting of ice at the poles.",
+        "B": "increase in number of storms.",
+        "C": "skin cancer in humans.",
+        "D": "loss of productive farmland."
+      },
+      "correct_answer": null,
+      "explanation": "Ozone depletion can cause increased amounts of UV radiation to reach the Earth which can lead to more cases of skin cancer, cataracts, and impaired immune systems. Too much exposure to UV is believed to be contributing to the increase in melanoma, the most fatal of all skin cancers.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "Which of the following factors can affect the boiling and freezing points of water?",
+      "options": {
+        "A": "Surface tension",
+        "B": "Adhesive forces",
+        "C": "Impurities",
+        "D": "Density"
+      },
+      "correct_answer": "C",
+      "explanation": "The boiling point of a liquid depends on pressure, vapour pressure and molecular weight.\n\nFactors affecting boiling point\n\n Pressure: Boiling point increases as the pressure increases. If external pressure is lower than the atmospheric pressure then the boiling point is less than the normal boiling ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "Purple-leaf colouration in plants is a symptom of deficiency in",
+      "options": {
+        "A": "magnesium.",
+        "B": "nitrogen.",
+        "C": "phosphorus.",
+        "D": "potassium."
+      },
+      "correct_answer": "A",
+      "explanation": "Phosphorus is crucial for key components like DNA, RNA, and cellular membrane functions. It is also a key element in the adenosine triphosphate (ATP) system, the \"energy currency\" of plants. Phosphorus deficiency in plants can result in leaf discoloration or reddening. The old leaves of these plants",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "Which of the following diseases in humans is caused by bacteria?",
+      "options": {
+        "A": "Hepatis B",
+        "B": "Herpes",
+        "C": "Chlamydia",
+        "D": "Prostate"
+      },
+      "correct_answer": "B",
+      "explanation": "Hepatitis B is an infection of the liver caused by the hepatitis B virus . The infection can be acute (short and severe) or chronic (long term). Hepatitis B can cause a chronic infection and puts people at high risk of death from cirrhosis and liver cancer.\r\n\n Herpes is a common virus that causes so",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "The part of the human ear responsible for amplification of sound is",
+      "options": {
+        "A": "cochlea.",
+        "B": "ossicles.",
+        "C": "sacculus.",
+        "D": "utriculus."
+      },
+      "correct_answer": null,
+      "explanation": "The middle ear \n\nThe ossicles are actually tiny bones — the smallest in the human body. The three bones are named after their shapes: the malleus (hammer), incus (anvil) and stapes (stirrup). The ossicles further amplify the sound.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "The general formula of alkyne is",
+      "options": {
+        "A": "C n H 2n+2",
+        "B": "C n H 2n",
+        "C": "C n H 2n-2",
+        "D": "C n H n"
+      },
+      "correct_answer": null,
+      "explanation": "Alkynes are hydrocarbons having a triple bond between the carbon atoms and their general formula is C n H 2n-2 \n\nFor ethyne (first member), molecular formula will be:\n\nn = 2\n\nC 2 H 2 x 2 - 2 = C 2 H 4 - 2 \n\n Ethyne = C 2 H 2",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "Which of the following bones is present in the forelimb of man?",
+      "options": {
+        "A": "Femur",
+        "B": "Radius",
+        "C": "Ribs",
+        "D": "Sternum"
+      },
+      "correct_answer": null,
+      "explanation": "The forelimb comprises the humerus, radius, ulna, carpals, metacarpals, and phalanges.\n\nEach limb is made of 30 bones.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "Minerals included in the layer ration for egg shell formation are calcium and",
+      "options": {
+        "A": "magnesium.",
+        "B": "nitrogen.",
+        "C": "phosphorus.",
+        "D": "potassium."
+      },
+      "correct_answer": null,
+      "explanation": "Phosphorus plays a significant role in egg- shell formation. Eggshells contain very little phosphorus (calcium : phosphorus in eggshell is approximately 100 : 1), but this element inter- acts with calcium during bone formation.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "Carrot is a good source of which of the following vitamins?",
+      "options": {
+        "A": "Vitamin A",
+        "B": "Vitamin B complex",
+        "C": "Vitamin C",
+        "D": "Vitamin D"
+      },
+      "correct_answer": "A",
+      "explanation": "Carrots are second only to sweet potatoes as an excellent source of beta carotene (vitamin A).\n\n Vitamin A is needed for healthy skin, bones and teeth as well as to fight sickness.\n\n Carrots are a fair source of B vitamins, like niacin and B6 , which help our bodies use energy from foods.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "The major reason why relative atomic mass of some elements is not a whole number is the existence of",
+      "options": {
+        "A": "isomerism.",
+        "B": "allotropy.",
+        "C": "isotopy.",
+        "D": "isotonism."
+      },
+      "correct_answer": null,
+      "explanation": "The atomic masses of some elements are in fraction instead of whole numbers. This is due to the existence of isotopes having different mass number .\n\nThe isotopes of an element have different atomic mass and the percentage of these isotopes vary in nature.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "Which energy transformation occurs in a light emitting diode?",
+      "options": {
+        "A": "Light energy to chemical energy",
+        "B": "Chemical energy to heat energy",
+        "C": "Electrical energy to heat energy",
+        "D": "Electrical energy to light energy"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "Which of the following characteristics are associated with local breeds of fowl?\n\nI. Resistant to diseases\r\n\nII. High foraging ability\r\n\nIII. Susceptible to adverse weather conditions",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "I and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "Foraging is searching for wild food resources. It affects an animal's fitness because it plays an important role in an animal's ability to survive and reproduce",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "Temporary hardness of water is removed by heating because",
+      "options": {
+        "A": "it is caused by insoluble salts.",
+        "B": "the salts causing the hardness become soluble.",
+        "C": "calcium hydrogen trioxocarbonate (IV) in water is decomposed by heat.",
+        "D": "calcium trioxocarbonate (IV) is produced."
+      },
+      "correct_answer": null,
+      "explanation": "Temporary hardness of water is due to the presence of bicarbonates of magnesium and calcium.\n\nIt can be removed by boiling the water when soluble bicarbonates are converted into soluble carbonates which can be removed by filtration.\n\nThis is shown by reactions below:",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "Examples of continuous variation include:\n\nI. weight,\r\n\nII. rhesus factor,\r\n\nIII. sickle cell.",
+      "options": {
+        "A": "I only",
+        "B": "I and II only",
+        "C": "I and III only",
+        "D": "II and III only"
+      },
+      "correct_answer": null,
+      "explanation": "Variation is the differences between individuals of the same species, caused by genetic and environmental factors.\n\nA characteristic that changes gradually over a range of values shows continuous variation \n\nExamples of continuous variation includes: height, arm span, weight, head circumference at b",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "The number of protons in an ion with a charge of +3 is 13. How many electrons are present in the neutral atom?",
+      "options": {
+        "A": "10",
+        "B": "13",
+        "C": "16",
+        "D": "20"
+      },
+      "correct_answer": null,
+      "explanation": "In a neutral atom , the number of protons equals the number of electrons.\n\nNumber of protons = 13 = Number electrons",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "Metals are normally used as electrical wires because they are",
+      "options": {
+        "A": "brittle.",
+        "B": "ductile.",
+        "C": "elastic.",
+        "D": "malleable."
+      },
+      "correct_answer": null,
+      "explanation": "The physical property of a metal that can be drawn into the thin wire is called ductility or ductility is the property of metal associated with the ability to be hammered thin or stretched into wire without breaking.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "One advantage of male circumcision is that, it",
+      "options": {
+        "A": "allows for easy penetration in the vagina.",
+        "B": "keeps the penis free from germs.",
+        "C": "makes the man sexually active.",
+        "D": "makes the man sexually inactive."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "Organic manures are preferred to inorganic manures because, they are",
+      "options": {
+        "A": "easy to apply.",
+        "B": "readily available to plants.",
+        "C": "relatively cheap.",
+        "D": "toxic to plants."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "The diagram below illustrates a ray of light incident on a plane mirror MM ' .\n\nThe value of α is",
+      "options": {
+        "A": "40°",
+        "B": "50°",
+        "C": "80°",
+        "D": "100°"
+      },
+      "correct_answer": "A",
+      "explanation": "Angle of incidence (α) equals the angle of reflection ( r )\n\n r + 40° = 90° (right angle)\n\n r = 90° - 40°\n\n r = 50°\n\nα = r = 50°",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "In which of the following processes is plant nutrient in the soil lost through gravity?",
+      "options": {
+        "A": "Capillarity",
+        "B": "Erosion",
+        "C": "Evaporation",
+        "D": "Leaching"
+      },
+      "correct_answer": null,
+      "explanation": "Leaching occurs when the air spaces in the soil become filled with water and gravity begins to move water downward. The percolating water carries any soluble salts that are present in the soil.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "In which of the following blood vessels in the mammalian body would high levels of urea be found?",
+      "options": {
+        "A": "Hepatic artery",
+        "B": "Hepatic vein",
+        "C": "Pulmonary artery",
+        "D": "Pulmonary vein"
+      },
+      "correct_answer": "B",
+      "explanation": "The hepatic vein is connected to the liver. It transports the deoxygenated blood with urea away from the liver to the inferior vena cava. That's why the hepatic vein contains the highest concentration of urea.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "Land breeze occurs when",
+      "options": {
+        "A": "cool wind blows across the land during the day.",
+        "B": "warm air rises up from the sea during the day.",
+        "C": "cool wind blows across the sea at night.",
+        "D": "warm air rises up from the land during the day."
+      },
+      "correct_answer": null,
+      "explanation": "Land breeze occurs when cool air from the land replace the hot air over the sea during the night.\n\n Sea breeze occurs when cool air from the sea replace the hot air over the land.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "The following statements are characteristics of large-scale industries except",
+      "options": {
+        "A": "volumes of products turned out are large.",
+        "B": "many people are involved in its operation.",
+        "C": "capital investment is large.",
+        "D": "space of operation is limited."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "Muscles are mostly made up of",
+      "options": {
+        "A": "proteins.",
+        "B": "starch.",
+        "C": "fibre.",
+        "D": "cellulose."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "Determine the volume of water required to change the concentration of 100 cm 3 HCl from 0.5 mol dm -3 to 0.1 mol dm -3 .",
+      "options": {
+        "A": "100 cm 3",
+        "B": "200 cm 3",
+        "C": "1 = 0.5 mol dm -3 \n\nV 1 = 100 cm 3",
+        "D": "500 cm 3"
+      },
+      "correct_answer": null,
+      "explanation": "The initial and final moles are the same. Thus the mole doesn't change but only the concentration changes.\n\nInitial molarity = Final molarity\n\nMoles = Concentration x Volume\n\nC 1 x V 1 = C 2 x V 2 \n\nC 1 = 0.5 mol dm -3 \n\nV 1 = 100 cm 3 \n\nC 2 = 0.1 mol dm -3",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 31,
+      "question_text": "Which of the following statements are functions of soil air?\n\nI. It is for respiration of plant roots.\r\n\nII. It is for respiration of soil fauna.\r\n\nIII. It is for seed germination.",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "Soil fauna includes earthworms, collembolans, mites, nematodes, and protozoa. Microorganisms in the soil and requires oxygen (air) to survive.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "Digestion of food is completed in the",
+      "options": {
+        "A": "small intestine.",
+        "B": "large intestine.",
+        "C": "stomach.",
+        "D": "rectum."
+      },
+      "correct_answer": null,
+      "explanation": "Digestion begins in the mouth, when you chew and swallow, and is completed in the small intestine.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "Transistors can be used as\n\nI. amplifiers.\r\n\nII. switches.\r\n\nIII. temperature controls.\r\n\nWhich of the statements above is/are true ?",
+      "options": {
+        "A": "I only",
+        "B": "II only",
+        "C": "I and II only",
+        "D": "II and III only"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 34,
+      "question_text": "Sedimentary rocks are not resistant to weathering because, they",
+      "options": {
+        "A": "are formed from molten matter.",
+        "B": "formed from other rocks.",
+        "C": "have lines of weakness between mineral aggregates.",
+        "D": "have lines of weakness between strata."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "The reaction represented by the equation\n\nRCOOH + R ' OH ⇋ RCOOR ' + H 2 O is an example of",
+      "options": {
+        "A": "esterification.",
+        "B": "hydrolysis.",
+        "C": "neutralization.",
+        "D": "oxidation."
+      },
+      "correct_answer": null,
+      "explanation": "Esterification is the process of combining an organic acid (RCOOH) with an alcohol (ROH) to form an ester (RCOOR) and water",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "All the following crops require staking as a cultural practice except",
+      "options": {
+        "A": "cowpea.",
+        "B": "cucumber.",
+        "C": "tomato.",
+        "D": "yam."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 37,
+      "question_text": "Which of the following lights will combine with red light to give white light?",
+      "options": {
+        "A": "Cyan",
+        "B": "Green",
+        "C": "Magenta",
+        "D": "Yellow"
+      },
+      "correct_answer": null,
+      "explanation": "In additive color mixing, red light combined with cyan light, which is composed of green and blue light, will produce white light if combined in the right proportions and intensities.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "Which of the following organelles is called the power house of the cell ?",
+      "options": {
+        "A": "Golgi complex",
+        "B": "Mitochondrion",
+        "C": "Nucleus",
+        "D": "Endoplasmic reticulum"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "The IUPAC name of the compound Mg(HCO 3 ) 2 is",
+      "options": {
+        "A": "magnesium hydrogen trioxocarbonate (III).",
+        "B": "magnesium hydrogen trioxocarbonate (IV).",
+        "C": "magnesium hydrogen trioxocarbonate (V).",
+        "D": "magnesium hydrogen trioxocarbonate (II)."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 40,
+      "question_text": "Which of the following brooder house equipment confines day-old chicks?",
+      "options": {
+        "A": "Feed trough",
+        "B": "Chick guard",
+        "C": "Hover",
+        "D": "Liter"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 41,
+      "question_text": "Symbiotic association in the root nodules occurs in",
+      "options": {
+        "A": "cocoyam.",
+        "B": "millet.",
+        "C": "rice.",
+        "D": "soya bean."
+      },
+      "correct_answer": null,
+      "explanation": "Root nodules are found in leguminous plants as a result of symbiotic association with bacteria Rhizobium.\n\nPlants cannot take atmospheric nitrogen directly. These bacteria fix atmospheric nitrogen to ammonia, which can be taken up by plants and utilized in the synthesis of essential macromolecules s",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 42,
+      "question_text": "The method of fertilizer application which is most labour intensive and time-consuming is the",
+      "options": {
+        "A": "broadcasting method.",
+        "B": "drilling method.",
+        "C": "foliar method.",
+        "D": "ring method."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 44,
+      "question_text": "The best way of storing yam tubers is",
+      "options": {
+        "A": "burying them in the soil.",
+        "B": "keeping them in silos.",
+        "C": "packing them on wooden platforms and in barns.",
+        "D": "leaving them in the mounds for long periods."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 45,
+      "question_text": "Blood pressure is highest at",
+      "options": {
+        "A": "pulmonary veins.",
+        "B": "vena cava.",
+        "C": "aorta.",
+        "D": "ventricular diastole."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 46,
+      "question_text": "The main constituent of natural gas is",
+      "options": {
+        "A": "ethane.",
+        "B": "helium.",
+        "C": "methane.",
+        "D": "nitrogen."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 47,
+      "question_text": "The SI unit of light intensity is",
+      "options": {
+        "A": "ampere.",
+        "B": "candela.",
+        "C": "kilogram.",
+        "D": "kelvin."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 49,
+      "question_text": "The male and female sex cells are collectively called",
+      "options": {
+        "A": "foetus.",
+        "B": "gamete.",
+        "C": "seed.",
+        "D": "zygote."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

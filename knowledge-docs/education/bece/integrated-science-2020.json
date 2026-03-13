@@ -1,0 +1,519 @@
+{
+  "exam_type": "bece",
+  "subject": "Integrated Science",
+  "year": 2020,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "Which of the following parts of the tooth is embedded in the jaw bone?",
+      "options": {
+        "A": "Gum",
+        "B": "Neck",
+        "C": "Root",
+        "D": "Crown"
+      },
+      "correct_answer": "B",
+      "explanation": "A tooth consists of three main parts, the crown, the root and the neck.\n\nThe crown is the part of tooth that shows above the gum.\n\nThe root is the part buried in the jawbone.\n\nThe point where the crown and the root meet is the neck of the tooth.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "Which part of the human body stores sperms temporarily ?",
+      "options": {
+        "A": "Epididymis",
+        "B": "Scrotum",
+        "C": "Prostate gland",
+        "D": "Sperm duct"
+      },
+      "correct_answer": "A",
+      "explanation": "Testes , produces sperm and cells which produce male sex hormone,testosterone\n\n Scrotum ,contains the testes\n\n Epididymis ,temporarily stores sperms\n\n Sperm duct(vas deferens) , carries sperms from epididymis to penis during ejaculation\n\n Prostate gland ,secretes seminal fluid which contains the enz",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "An advantage of soft water over hard water is that soft water",
+      "options": {
+        "A": "is good for formation of strong bones in humans",
+        "B": "prevents heart diseases",
+        "C": "has a pleasant smell",
+        "D": "saves a lot of soap when used in washing"
+      },
+      "correct_answer": null,
+      "explanation": "Water which does not lather readily with soap is called hard water \n\nHardness of water is caused by the presence of dissolved salts of calcium ion, magnesium ion or iron(III) ion in water\n\nWater which lather readily with soap is called soft water .\n\nSoft water does not contain calcium ion,magnesium ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "Which of the following processes removes carbon from the atmosphere?",
+      "options": {
+        "A": "Respiration",
+        "B": "Burning",
+        "C": "Decomposition",
+        "D": "Photosynthesis"
+      },
+      "correct_answer": "B",
+      "explanation": "Respiration \n\nThe chemical breakdown of organic food substances such as glucose in the living cells to release energy with or without molecular oxygen.\n\n Burning \n\nCombustion, or burning,is a high-temperature exothermic redox chemical reaction between a fuel (the reductant) and an oxidant, usually a",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "Which of the following statement(s) is/are true of a shadow? A shadow is formed\r\n\n I. by a transparent object,\r\n\n II. by an opaque object,\r\n\n III. on a screen.",
+      "options": {
+        "A": "I only",
+        "B": "II only",
+        "C": "I and III only",
+        "D": "II and III only"
+      },
+      "correct_answer": null,
+      "explanation": "How Shadows Are Formed \n\nAn opaque object blocks the light falling on it. This creates an area of darkness on the side of the object away from the source of light.\n\nA translucent object also creates a faint area of darkness.\n\nAn area of darkness formed by an opaque object obstructing light is called",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "Which of the following diseases results from malnutrition?",
+      "options": {
+        "A": "Scurvy",
+        "B": "Measles",
+        "C": "Malaria",
+        "D": "Gonorrhoea"
+      },
+      "correct_answer": null,
+      "explanation": "Malnutrition \n\n Malnutrition is a condition that occurs when one is not obtaining enough nutrients .\n\nA condition which occurs when there is a deficiency of certain vital nutrients in a person's diet\n\n Some deficiency diseases and their causes \n\n Disease \r\n Cause \r\n\n Rickets \r\n Lack of vitamin D or ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "The chemical formula of an aluminium sulphide is Al y S 3 .Determine the value of y",
+      "options": {
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "4"
+      },
+      "correct_answer": "B",
+      "explanation": "When writing the chemical formula, the element(s) or compound(s) exchange their valencies.The sulphur has that of the aluminium element's valency (3) and so the value of y will also be the valency for sulphur\n\nThe atomic number for sulphur is 16 so on the electronic configuration, sulphur will have ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "Which of the following sources of energy is/are renewable?\r\n\n I. Wind\r\n\n II. Coal\r\n\n III. Crude oil",
+      "options": {
+        "A": "I only",
+        "B": "I and II only",
+        "C": "II and III only",
+        "D": "I,II and III"
+      },
+      "correct_answer": null,
+      "explanation": "Renewable Energy \n\nRenewable energy is defined as energy that is produced by natural resources—such as sunlight, wind, rain, waves, tides, and geothermal heat—that are naturally replenished within a time span of a few years.\n\nA renewable energy source means energy that is sustainable - something tha",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "Soils are describe as heavy because they",
+      "options": {
+        "A": "have high water holding capacity.",
+        "B": "contain a lot of stones",
+        "C": "have large air spaces",
+        "D": "are difficult to till"
+      },
+      "correct_answer": null,
+      "explanation": "Clay has the smallest particle size of any soil type, \r\n with individual particles being so small that they can only\r\n be viewed by an electron microscope due to that, they have slow permeability\r\n resulting in a very large water-holding capacity. Because the \r\n soil particles are small and close to",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "An example of a legume is",
+      "options": {
+        "A": "groundnut.",
+        "B": "millet",
+        "C": "sorghum",
+        "D": "sweet potato"
+      },
+      "correct_answer": null,
+      "explanation": "A legume is a plant in the family Fabaceae.Legumes produce a botanically \r\n unique type of fruit – a simple dry fruit that develops from a\r\n simple carpel and usually dehisces (opens along a seam) on two \r\n sides.They are characterized by having a legume-type of fruit \r\n (or pod) and compound, stipu",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "The process used to separate a mixture of iron filings and sulphur is",
+      "options": {
+        "A": "magnetic attraction",
+        "B": "sublimation",
+        "C": "distillation",
+        "D": "evaporation"
+      },
+      "correct_answer": null,
+      "explanation": "By magnetization we can separate sulfur and iron fillings. Take a magnet \r\n near to the mixture it will attract iron fillings and the remaining thing will be sulfur.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "The colour of a soil profile determines the",
+      "options": {
+        "A": "depth at which implements are set",
+        "B": "drainage ability of the soil",
+        "C": "fertility of the soil",
+        "D": "type of tool to use"
+      },
+      "correct_answer": null,
+      "explanation": "Color is an important physical property of soils that allows us to know\r\n some of its most important characteristics, such as mineral composition, age and soil processes, chemical alteration, carbon accumulation, the presence of hurrified organic matter. The soil may be black, red, yellow or coppere",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "The end-product of digestion of fats and oils is",
+      "options": {
+        "A": "amino acid",
+        "B": "glucose",
+        "C": "maltose",
+        "D": "fatty acid and glycerol"
+      },
+      "correct_answer": null,
+      "explanation": "The digestion of certain fats begins in the mouth, where lingual lipase breaks down short chain lipids into diglycerides. The presence of fat in the small intestine produces hormones that stimulate the release of pancreatic lipase from the pancreas, and bile from the liver, to enable the breakdown o",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "The unit of potential difference",
+      "options": {
+        "A": "ampere",
+        "B": "watt",
+        "C": "ohm",
+        "D": "volt"
+      },
+      "correct_answer": "D",
+      "explanation": "Unit of potential difference is joule per coulomb, given the name volt (V) after Alessandro Volta. The familiar term voltage is the common name for electric potential difference. Keep in mind that whenever a voltage is quoted, it is understood to be the potential between two points.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "One similarity of physical and chemical changes is that both",
+      "options": {
+        "A": "are easily reversible",
+        "B": "result in change of state of matter",
+        "C": "produce no change in mass",
+        "D": "are accompanied by great heat change"
+      },
+      "correct_answer": null,
+      "explanation": "Physical and chemical changes are similar because matter experiences a change in state, Physical \r\n changes are different because matter remains the same substance, just in a different state,\r\n whereas chemical changes change the matter. A chemical change results from a chemical reaction, \r\n while a",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "Which of the following elements is a macro-nutrient?",
+      "options": {
+        "A": "Copper",
+        "B": "Manganese",
+        "C": "Zinc",
+        "D": "Sulphur"
+      },
+      "correct_answer": null,
+      "explanation": "Nutrients that plants require in larger amounts are called macronutrients. About half of the essential elements are \r\n considered macronutrients: carbon, hydrogen, oxygen, nitrogen, phosphorus, potassium, calcium, magnesium, and sulphur.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "The process by which metabolic wastes are removed from the body is called",
+      "options": {
+        "A": "respiration",
+        "B": "excretion",
+        "C": "ingestion",
+        "D": "egestion"
+      },
+      "correct_answer": null,
+      "explanation": "Excretion involves the separation and elimination of metabolic waste products from the body. Various organs are involved in this process: \r\n the lungs, gills, skin, etc. The kidneys and their ducts are the major full-time excretory organs and comprise the excretory system.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "The part of the flower that produces pollen grains is the",
+      "options": {
+        "A": "stamen",
+        "B": "filament",
+        "C": "petal",
+        "D": "anther"
+      },
+      "correct_answer": "D",
+      "explanation": "pollen is produced by the anthers of the stamens in flowers. In gymnosperms, it is formed in the microsporophylls of the microstrobili\r\n (male pollen cones). Pollen consists of one or more vegetative cells and a reproductive cell. A pollen grain itself is not the male gamete.\r\n In angiosperms or the",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "Which of the following statement(s) about pressure in fluids is/are correct? Pressure\n\nI. decreases with depth\n\nII. increases with depth\n\nIII. does not depend on the area",
+      "options": {
+        "A": "I only",
+        "B": "II only",
+        "C": "I and II only",
+        "D": "II and III only"
+      },
+      "correct_answer": null,
+      "explanation": "The pressure in a liquid is different at different depths. Pressure increases as the depth increases. The pressure in a liquid is due to the weight\r\n of the column of water above. Since the particles in a liquid are tightly packed, this pressure acts in all directions. For example, the pressure\r\n ac",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "The mode of heat transfer in which no material is involved is known as",
+      "options": {
+        "A": "conduction",
+        "B": "convection",
+        "C": "expansion",
+        "D": "radiation"
+      },
+      "correct_answer": "D",
+      "explanation": "Radiation is the process in which heat is transmitted one place to other directly without intervening\r\n medium. We get radiation of sun without an intervening medium",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "Which of the following factors are used to describe a fertile soil?\n\nI. Amount of organic matter\n\nII. Color\n\nIII. Texture",
+      "options": {
+        "A": "I and II only",
+        "B": "I only and III only",
+        "C": "II and III only",
+        "D": "I,II and III only"
+      },
+      "correct_answer": null,
+      "explanation": "Soil fertility refers to the ability of soil to sustain agricultural plant growth, i.e. to provide plant habitat and result in sustained and consistent yields of high quality. Soil factors: Soil moisture, color, soil air, soil temperature, soil mineral matter, inorganic and organic components, micro",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "The major charge carriers in p-type semiconductors are",
+      "options": {
+        "A": "anions",
+        "B": "electrons",
+        "C": "holes",
+        "D": "neutral"
+      },
+      "correct_answer": "B",
+      "explanation": "Holes and electrons are the two types of charge carriers responsible for current in semiconductor materials. A hole is the absence of an electron in a particular place in an atom. In P-type semiconductor material, holes are the majority carriers and electrons are the minority carriers while in N-typ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "The dry season in Ghana is mainly from",
+      "options": {
+        "A": "January to March",
+        "B": "April to June",
+        "C": "July to September",
+        "D": "October to December"
+      },
+      "correct_answer": null,
+      "explanation": "The dry season is the period where there is very little or no rainfall. In the southern part of Ghana, the dry season occurs between November to February. The period is much longer in the Northern part which occurs between November to June.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "The practice that excess branches of growing plants are removed is termed",
+      "options": {
+        "A": "mulching",
+        "B": "pruning",
+        "C": "thinning",
+        "D": "staking"
+      },
+      "correct_answer": null,
+      "explanation": "Pruning is a horticultural, arboricultural and silvicultural practice involving the selective removal of certain parts of a plant, \r\n such as branches, buds, or roots.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "Which of the following soil type has the highest capillarity?",
+      "options": {
+        "A": "Clay",
+        "B": "Loam",
+        "C": "Sand",
+        "D": "Silt"
+      },
+      "correct_answer": "A",
+      "explanation": "One of the problems with clay soil is its slow permeability resulting in a very large water-holding capacity. Because the soil particles are small\r\n and close together, it takes water much longer to move through clay soil than it does with other soil types. Clay particles then absorb this water,\r\n e",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "Which of the following farming practices promote soil erosion\n\nI. Alley cropping\n\nII. Bush burning\n\nIII. Over grazing",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "Alley cropping is a specific practice in which trees or shrubs and agricultural crops are grown in alternate rows \r\n The trees are commonly pruned to limit the shading of the agricultural crop. \r\n Alley cropping can also contribute to nutrient cycling and erosion control.\r\n\n Bush burning is the remo",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 31,
+      "question_text": "The nearest planet to the sun in the solar system is",
+      "options": {
+        "A": "Earth",
+        "B": "Mars",
+        "C": "Mercury",
+        "D": "Venus"
+      },
+      "correct_answer": "C",
+      "explanation": "Mercury is the smallest planet in our solar system and nearest to the Sun, Mercury is only slightly larger than Earth's Moon.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "In which of the following devices is electrical energy transformed into light energy",
+      "options": {
+        "A": "Electric bell",
+        "B": "Fluorescent tube",
+        "C": "Lantern",
+        "D": "Radio"
+      },
+      "correct_answer": null,
+      "explanation": "A fluorescent lamp, or fluorescent tube, is a low-pressure mercury-vapor gas-discharge lamp that uses fluorescence to produce visible light.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "An example of a semi-metal is",
+      "options": {
+        "A": "silicon",
+        "B": "carbon",
+        "C": "beryllium",
+        "D": "D. argon"
+      },
+      "correct_answer": null,
+      "explanation": "A semi-metal is a material with a very small overlap between the bottom of the conduction band and the top of the valence band.\r\n According to electronic band theory, solids can be classified as insulators, semiconductors, semimetals, or metals.\r\n The semimetals or metalloids are listed as boron, si",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 34,
+      "question_text": "The elements in the periodic table are arranged according to their",
+      "options": {
+        "A": "atomic number",
+        "B": "atomic mass",
+        "C": "mass number",
+        "D": "neutron number"
+      },
+      "correct_answer": null,
+      "explanation": "The periodic table is the arrangement of element in order of atomic number, usually in rows, so that elements with similar atomic structure \r\n (and hence similar chemical properties) appear in vertical columns.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "Which of the following states of matter are fluids\n\nI. Solid\n\nII. Liquid\n\nIII. Gas",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "A fluid is matter that flows when a force is applied to it. All gases and all liquids are fluids.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 37,
+      "question_text": "When an unknown",
+      "options": {
+        "A": "Sodium chloride solution",
+        "B": "Sodium hydroxide solution",
+        "C": "Hydrochloric acid",
+        "D": "Calcium nitrate solution"
+      },
+      "correct_answer": "C",
+      "explanation": "reacted with magnesium, a gas was produced. Which of the following solutions could be the unknown solution\n\n A. \r\n\nSodium chloride solution\n\n B. \r\n\nSodium hydroxide solution\n\n C. \r\n\nHydrochloric acid\n\n D. \r\n\nCalcium nitrate solution\n\n Mark \r\n\n Solution \r\n\nWhen Hydrochloric acid react with magnesium ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "Which of the following statements about acids correct \n\nI. They react with the calcium carbonate to give a gas\n\nII. They turn red litmus paper blue\n\nIII. They react with reactive metals to give a gas\n\nIV. They turn blue litmus paper red",
+      "options": {
+        "A": "I, II and IV only",
+        "B": "I, II and III only",
+        "C": "II, III and IV only",
+        "D": "D. I, III and IV"
+      },
+      "correct_answer": null,
+      "explanation": "An acid is a substance that donates protons (in the Brønsted-Lowry definition) or accepts a pair of valence electrons to form a bond \r\n (in the Lewis definition). acid, any substance that in water solution tastes sour, changes the color of certain indicators (e.g., reddens blue litmus paper), reacts",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "The structure which enables a fish to breate in water is",
+      "options": {
+        "A": "buccal cavity",
+        "B": "gills",
+        "C": "swim bladder",
+        "D": "lungs"
+      },
+      "correct_answer": "B",
+      "explanation": "Fish gills are organs that allow fish to breathe underwater. Most fish exchange gases like oxygen and carbon dioxide using gills \r\n that are protected under gill covers on both sides of the pharynx. Gills are tissues that are like short threads, protein structures called filaments",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

@@ -1,0 +1,744 @@
+{
+  "exam_type": "wassce",
+  "subject": "English Language",
+  "year": 2021,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "Hard work lifts one from poverty to ......",
+      "options": {
+        "A": "affluence",
+        "B": "development",
+        "C": "generosity",
+        "D": "happiness"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "Koby's business which was flourishing up to last week is now ......",
+      "options": {
+        "A": "closing",
+        "B": "declining",
+        "C": "degrading",
+        "D": "vanishing"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "Nowadays, computerized services are taking the place of ...... operations.",
+      "options": {
+        "A": "daily",
+        "B": "efficient",
+        "C": "electrical",
+        "D": "manual"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "The king encouraged all his subjects not to be ...... by recent happenings.",
+      "options": {
+        "A": "cautioned",
+        "B": "controlled",
+        "C": "disheartened",
+        "D": "surprised"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "The eyewitness's account is only superficial and not ......",
+      "options": {
+        "A": "accurate",
+        "B": "complex",
+        "C": "instructive",
+        "D": "profound"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "The advantages of reconciliation far outweigh living in ......",
+      "options": {
+        "A": "disharmony",
+        "B": "indifference",
+        "C": "opposition",
+        "D": "violence"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "The poor family cannot afford sumptuous meals, they have to make do with ...... ones.",
+      "options": {
+        "A": "available",
+        "B": "frugal",
+        "C": "unpalatable",
+        "D": "unbalanced"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "The sea which was turbulent an hour ago is now ......",
+      "options": {
+        "A": "calm",
+        "B": "cool",
+        "C": "deep",
+        "D": "motionless"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "It is advisable to avoid apathy and embrace ......",
+      "options": {
+        "A": "bravery",
+        "B": "enthusiasm",
+        "C": "leniency",
+        "D": "satisfaction"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "Ama seldom goes to school because she is ...... afraid of meeting her class teacher.",
+      "options": {
+        "A": "always",
+        "B": "never",
+        "C": "quite",
+        "D": "sometimes"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "Many people are prone ...... conflicting emotions.",
+      "options": {
+        "A": "by",
+        "B": "from",
+        "C": "to",
+        "D": "with"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "You were not supposed to ...... this secret to the police.",
+      "options": {
+        "A": "discuss",
+        "B": "display",
+        "C": "divulge",
+        "D": "disseminate"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "The project was ...... for lack of funds.",
+      "options": {
+        "A": "abandoned",
+        "B": "forgotten",
+        "C": "downtrodden",
+        "D": "rejected"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "The country produces oil in ...... quantities for export.",
+      "options": {
+        "A": "abundant",
+        "B": "commercial",
+        "C": "profuse",
+        "D": "trading"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "There is no point in acquiring a gadget unless one means to use it, ......?",
+      "options": {
+        "A": "doesn't there",
+        "B": "is there",
+        "C": "isn't there",
+        "D": "there is"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "Good businessmen have a keen eye ...... profit.",
+      "options": {
+        "A": "around",
+        "B": "for",
+        "C": "on",
+        "D": "over"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "John, the king's eldest son, is indisputably the ...... to the throne.",
+      "options": {
+        "A": "claimant",
+        "B": "guard",
+        "C": "heir",
+        "D": "owner"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "Poor feeding has caused children of this village to suffer from ......",
+      "options": {
+        "A": "convulsion",
+        "B": "malaria",
+        "C": "malnutrition",
+        "D": "malfunction"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "I told you before the match started that my team would ...... yours.",
+      "options": {
+        "A": "beat",
+        "B": "lose",
+        "C": "score",
+        "D": "win"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "The teacher expects every student to respect ......",
+      "options": {
+        "A": "himself",
+        "B": "oneself",
+        "C": "ourselves",
+        "D": "themselves"
+      },
+      "correct_answer": null,
+      "explanation": "The term every is used to denote all the members of a group of people/ objects.\n\nSECTION III \n\n Choose from the alternatives lettered A to D one which is nearest in meaning to the underlined word or expression in each sentence .",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "Mary succeeded through perseverance .",
+      "options": {
+        "A": "accomplishment",
+        "B": "inspiration",
+        "C": "knowledge",
+        "D": "persistence"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "The weather has been serene all day.",
+      "options": {
+        "A": "calm",
+        "B": "great",
+        "C": "friendly",
+        "D": "intense"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "Bribery and corruption are inimical to Ghana's economic advancement.",
+      "options": {
+        "A": "unavoidable",
+        "B": "negative",
+        "C": "harmful",
+        "D": "common"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "Mama is sceptical about Juli's story that she saw a snake at the kitchen.",
+      "options": {
+        "A": "amazed",
+        "B": "concerned",
+        "C": "doubtful",
+        "D": "terrified"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "The student's response further infuriated his already angry teacher.",
+      "options": {
+        "A": "challenged",
+        "B": "enraged",
+        "C": "frightened",
+        "D": "moved"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "The sale of drugs is restricted to adults",
+      "options": {
+        "A": "confined",
+        "B": "controlled",
+        "C": "extended",
+        "D": "limited"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "The thief's attempts to defend himself proved futile",
+      "options": {
+        "A": "abortive",
+        "B": "risky",
+        "C": "senseless",
+        "D": "uncertain"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "The headmaster reprimanded John for bullying the new boy.",
+      "options": {
+        "A": "insulted",
+        "B": "rebuked",
+        "C": "reported",
+        "D": "punished"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "Many people were unable to cope with escalating medical expenses.",
+      "options": {
+        "A": "expanding",
+        "B": "heightening",
+        "C": "rising",
+        "D": "striking"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 31,
+      "question_text": "In spite of severe criticisms, he stood his ground. This means that he",
+      "options": {
+        "A": "made remarkable progress.",
+        "B": "reasoned sensibly.",
+        "C": "remained firm.",
+        "D": "remained on the ground."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "The job seekers were told to keep their fingers crossed. This means they were to",
+      "options": {
+        "A": "crosscheck their documents",
+        "B": "hope for the best.",
+        "C": "pray for success.",
+        "D": "revise their notes thoroughly."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "Kofi had his heart in his mouth when he met the interview panel. This means that Kofi",
+      "options": {
+        "A": "felt quite indifferent.",
+        "B": "lost his voice completely.",
+        "C": "was more than ready.",
+        "D": "was very anxious."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 34,
+      "question_text": "The police's prompt intervention nipped last week's crisis in the bud. This means that",
+      "options": {
+        "A": "no one was willing to be part of the crisis.",
+        "B": "the demonstrators were chased away.",
+        "C": "the crisis was averted.",
+        "D": "the demonstrators decided to obey the police's orders."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "The king's birthday party was attended by the cream of society. This means that",
+      "options": {
+        "A": "all his subjects attended the party.",
+        "B": "only invited guests attended the party.",
+        "C": "all other kings attended the party.",
+        "D": "the most important people were at the party."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "Amina's friends decided to send her to Coventry. This means that",
+      "options": {
+        "A": "Amina was sent to a convent.",
+        "B": "her friends decided to forgive her.",
+        "C": "her friends decided to ignore her.",
+        "D": "she was to be sent away."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 37,
+      "question_text": "The headmaster played the ostrich when he got reports of malpractices in the examination hall. This means that he",
+      "options": {
+        "A": "became vigilant.",
+        "B": "behaved like an ostrich.",
+        "C": "denied the reports.",
+        "D": "ignored the problem."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "Mavis said she would not attend the classes because she smelt a rat. This means that she",
+      "options": {
+        "A": "felt insecure.",
+        "B": "was disturbed by the smell of a rat.",
+        "C": "was suspicious.",
+        "D": "was very angry."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "The criminals will be made to face the music. This means that they will be",
+      "options": {
+        "A": "arrested and imprisoned.",
+        "B": "brought before the law.",
+        "C": "deprived of all music.",
+        "D": "reconsidered on appeal."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 40,
+      "question_text": "The students were asked to obey the rules to the letter. This means that they were to obey the rules",
+      "options": {
+        "A": "according to the letters.",
+        "B": "as and when requested.",
+        "C": "in every detail.",
+        "D": "only in part."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 41,
+      "question_text": "Choose from the options provided, the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "autocracy",
+        "B": "democracy",
+        "C": "oligarchy",
+        "D": "theocracy"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 42,
+      "question_text": "Choose from the options provided, the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "kind",
+        "B": "process",
+        "C": "system",
+        "D": "variety"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 43,
+      "question_text": "Choose from the options provided, the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "non-aggressive",
+        "B": "non-conforming",
+        "C": "non-committal",
+        "D": "non-governmental"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 44,
+      "question_text": "Choose from the options provided, the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "alliances",
+        "B": "combinations",
+        "C": "mergers",
+        "D": "talks"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 45,
+      "question_text": "Choose from the options provided, the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "collaboration",
+        "B": "conformity",
+        "C": "consent",
+        "D": "corroboration"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 46,
+      "question_text": "Choose from the options provided, the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "allowances",
+        "B": "compensations",
+        "C": "concessions",
+        "D": "options"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 47,
+      "question_text": "Choose from the options provided, the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "aspirations",
+        "B": "desires",
+        "C": "interests",
+        "D": "views"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 48,
+      "question_text": "Choose from the options provided, the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "factors",
+        "B": "indices",
+        "C": "points",
+        "D": "reasons"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 49,
+      "question_text": "Choose from the options provided, the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "collaborative",
+        "B": "singular",
+        "C": "unilateral",
+        "D": "unique"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 50,
+      "question_text": "Choose from the options provided, the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "avenue",
+        "B": "method",
+        "C": "process",
+        "D": "rule"
+      },
+      "correct_answer": null,
+      "explanation": "three questions in all: one question from section A and all the questions in Sections B and C .\n\nSECTION A \n\nESSAY\n\n Answer one question only from this section .\n\n All questions carry equal marks . Your answer should not be less than 450 words .\n\n You are advised to spend about 50 minutes on this se",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

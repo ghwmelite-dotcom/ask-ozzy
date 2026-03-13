@@ -1,0 +1,444 @@
+{
+  "exam_type": "bece",
+  "subject": "Integrated Science",
+  "year": 2024,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "Which of the following sources of energy is non-renewable?\n\nI. Coal\r\n\nII. Solar\r\n\nIII. Wind\r\n\nIV. Uranium-236",
+      "options": {
+        "A": "I, II and III only",
+        "B": "II, III and IV only",
+        "C": "I and IV only",
+        "D": "II and III only"
+      },
+      "correct_answer": null,
+      "explanation": "A renewable source can replenish itself at the rate it is used, while a non-renewable source has a limited supply.\n\nRenewable sources include timber, wind, and solar while non-renewable sources include coal and natural gas.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "The building block of a material with the smallest unit of matter that retains the properties of an element is",
+      "options": {
+        "A": "an ion.",
+        "B": "an atom.",
+        "C": "a molecule.",
+        "D": "a proton."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "Oil from a mechanic workshop accidentally spilled into a pool of water which was breeding mosquitoes.\n\nAfter sometime, the pool of water was no longer breeding mosquitoes.\n\nWhich control method may have been deployed?",
+      "options": {
+        "A": "Biological control",
+        "B": "Chemical control",
+        "C": "Environmental control",
+        "D": "Genetic control"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "Grasshopper management is crucial because of all the following reasons except",
+      "options": {
+        "A": "damage to crops.",
+        "B": "incomplete metamorphosis.",
+        "C": "ecosystem disruption.",
+        "D": "livestock harm."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "Which of the following sets of devices operate on the principle of magnetism?",
+      "options": {
+        "A": "Loudspeakers, compass, alarms",
+        "B": "Loudspeakers, alarms, LCD TV",
+        "C": "Compass, loudspeakers, LCD TV",
+        "D": "Compass, loudspeakers, LCD TV"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "Which of the following elements has four electron shells?",
+      "options": {
+        "A": "19 K",
+        "B": "13 Al",
+        "C": "15 P",
+        "D": "5 B"
+      },
+      "correct_answer": "A",
+      "explanation": "Electronic Configurations\n\n 19 K = 2, 8, 8, 1\n\n 13 Al = 2, 8, 3\n\n 15 P = 2, 8, 5\n\n 5 B = 2, 3\n\nOnly Potassium ( 19 K) has four electron shells",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "Canned foods and drinks have expiry dates on them. The hazard involved in taking an expired drink is",
+      "options": {
+        "A": "food poisoning.",
+        "B": "impaired hearing.",
+        "C": "poor circulation of blood.",
+        "D": "suffocation."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "Two unknown",
+      "options": {
+        "A": "Car battery fluid",
+        "B": "Salt solution",
+        "C": "Baking soda",
+        "D": "Orange juice"
+      },
+      "correct_answer": "C",
+      "explanation": "s labelled A and B were brought to a JHS 3 class. It was observed that in solution A , red litmus paper changed colour to blue, whiles in solution B , red litmus paper retained its colour. What could be the content of solution A ?\n\n A. \r\n\nCar battery fluid\n\n B. \r\n\nSalt solution\n\n C. \r\n\nBaking soda\n\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "The portion of air which acts as a solvent is",
+      "options": {
+        "A": "oxygen.",
+        "B": "carbon (IV) oxide.",
+        "C": "nitrogen.",
+        "D": "an inert gas."
+      },
+      "correct_answer": null,
+      "explanation": "Since the concentration of nitrogen (N2) is maximum in air (78%). Hence, the solvent is Nitrogen gas and other gases like Oxygen and other gases act as solute.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "When a stick is dipped into a pool of water, it appears to",
+      "options": {
+        "A": "be longer than its length.",
+        "B": "ben away from the surface.",
+        "C": "be seen straight in the water.",
+        "D": "bend towards the surface."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "Which of the following electrical appliances can convert electrical energy to heat energy?\n\nI. Electric iron\r\n\nII. Kettle\r\n\nIII. Water heater",
+      "options": {
+        "A": "I, II and III",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I and II only"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "The consequences of the greenhouse effect on humans include\n\nI. flooding of coastal cities\r\n\nII. desertification of fertile areas\r\n\nIII. increased number of storms\r\n\nIV. increased use of fossil fuels",
+      "options": {
+        "A": "I, II, III and IV",
+        "B": "II and III only",
+        "C": "I, II and III only",
+        "D": "I and II only"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "Cockroaches in a cupboard were killed after an insecticide had been sprayed. The insecticide reached the cockroaches by the process of",
+      "options": {
+        "A": "osmosis.",
+        "B": "absorption.",
+        "C": "diffusion.",
+        "D": "radiation."
+      },
+      "correct_answer": null,
+      "explanation": "Diffusion is the net movement of anything (for example, atoms, ions, molecules, energy) generally from a region of higher concentration to a region of lower concentration .",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "Which of the following nursery beds is suitable for a flood prone area?",
+      "options": {
+        "A": "Plain bed",
+        "B": "Sunken bed",
+        "C": "Raised bed",
+        "D": "Flat bed"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "Which of the following natural cycles directly involves the sun?\n\nI. Carbon cycle\r\n\nII. Water cycle\r\n\nIII. Nitrogen cycle",
+      "options": {
+        "A": "I, II and III",
+        "B": "I and II only",
+        "C": "II and III only",
+        "D": "I only"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "The primary purpose of respiration in man is to\n\nI. take in oxygen.\r\n\nII. release carbon dioxide.\r\n\nIII. regulate body temperature.",
+      "options": {
+        "A": "I, II and III",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I and II only"
+      },
+      "correct_answer": null,
+      "explanation": "Aerobic respiration takes place in the mitochondria and requires oxygen and glucose, and produces carbon dioxide, water, and energy.\n\nThe chemical equation is C 6 H 12 O 6 + 6O 2 → 6CO 2 + 6H 2 O (glucose + oxygen -> carbon dioxide + water)",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "Nitrogen deficiency in soils causes",
+      "options": {
+        "A": "poor seed formation.",
+        "B": "yellowing of leaves.",
+        "C": "purple colouration.",
+        "D": "fruit drop."
+      },
+      "correct_answer": null,
+      "explanation": "Slow growth and uniform yellowing of older leaves are usually the first symptoms of nitrogen (N) deficiency. Nitrogen-deficient plants produce smaller than normal fruit, leaves, and shoots.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "An electric bulb is rated 0.5 A, 120 V. Determine the power produced when the bulb is turned on.",
+      "options": {
+        "A": "60 kW",
+        "B": "60 W",
+        "C": "30 kW",
+        "D": "30 W"
+      },
+      "correct_answer": null,
+      "explanation": "Electric Power Formula \r\n\nPower = Current(I) x Potential Difference/Voltage(V)\n\nP = IV\n\nCurrent (I) = 0.5 A = \r\n 1 \r\n 2 \r\n\nPotential Difference/Voltage(V) = 120V\n\nPower = \r\n 1 \r\n 2 \r\n\n x 120 W = 60 W",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "The following processes are chemical changes except",
+      "options": {
+        "A": "crumpling of paper.",
+        "B": "burning of wood.",
+        "C": "mixing of an acid and a base.",
+        "D": "rusting of iron."
+      },
+      "correct_answer": null,
+      "explanation": "For chemical change , new substances are formed and the process is mostly irreversible.\n\n Only crumpling of paper is physical change since no substance is formed. Crumpled paper is still paper.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "Which of the following statements best describes the term green economy ? It includes",
+      "options": {
+        "A": "reduced ecological services.",
+        "B": "loss of biodiversity.",
+        "C": "reduced carbon emissions.",
+        "D": "degrading the environment."
+      },
+      "correct_answer": null,
+      "explanation": "A green economy is defined as low carbon, resource efficient and socially inclusive. In a green economy, growth in employment and income are driven by public and private investment into such economic activities, infrastructure and assets that allow reduced carbon emissions and pollution, enhanced en",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "The energy transformation that occurs when sodium hydroxide is dissolved in water is",
+      "options": {
+        "A": "heat to potential energy.",
+        "B": "chemical to light energy.",
+        "C": "chemical to heat energy.",
+        "D": "heat to kinetic energy."
+      },
+      "correct_answer": null,
+      "explanation": "The dissolution of sodium hydroxide in water is accompanied by the release of an amount of heat because the solvation of hydroxide ions and sodium ions is highly exothermic.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "Digestion of rice in humans starts from the",
+      "options": {
+        "A": "stomach.",
+        "B": "gullet.",
+        "C": "mouth.",
+        "D": "colon."
+      },
+      "correct_answer": null,
+      "explanation": "Rice is a carbohydrate/starch and digestion of starch starts from the mouth .\n\nThe salivary enzyme amylase begins the breakdown of food starches into maltose, a disaccharide.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "Chlorophyll helps plants absorb energy from the sun as they undergo the process of photosynthesis. It is located in a structure called",
+      "options": {
+        "A": "chloroplast.",
+        "B": "mitochondrion.",
+        "C": "vacuole.",
+        "D": "nucleus."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "An electrical engineer was in your school to replace a 20 W bulb with a 50 W bulb.\n\n Use this information to answer the question below \n\nThe unit inscribed on the bulb measures its",
+      "options": {
+        "A": "energy.",
+        "B": "workdone.",
+        "C": "power.",
+        "D": "electricity."
+      },
+      "correct_answer": null,
+      "explanation": "the question below \n\nThe unit inscribed on the bulb measures its\n\n A. \r\n\nenergy.\n\n B. \r\n\nworkdone.\n\n C. \r\n\npower.\n\n D. \r\n\nelectricity.\n\n Mark \r\n\n Solution \r\n\n Note : the S.I unit of power is watts (W)",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 31,
+      "question_text": "An electrical engineer was in your school to replace a 20 W bulb with a 50 W bulb.\n\n Use this information to answer the question below \n\nThe 50 W bulb is likely to\n\nI. increase the brightness in the room.\r\n\nII. increase the amount of electricity consumed.\r\n\nIII. destroy the habitat of pests.",
+      "options": {
+        "A": "I, II and III",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I and II only"
+      },
+      "correct_answer": "B",
+      "explanation": "the question below \n\nThe 50 W bulb is likely to\n\nI. increase the brightness in the room.\r\n\nII. increase the amount of electricity consumed.\r\n\nIII. destroy the habitat of pests.\r\n\n A. \r\n\nI, II and III\n\n B. \r\n\nI and III only\n\n C. \r\n\nII and III only\n\n D. \r\n\nI and II only\n\n Mark \r\n\n Solution \r\n\nThe high",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "The following devices work based on the principle of pressure in fluids except",
+      "options": {
+        "A": "siphons.",
+        "B": "flutes.",
+        "C": "drinking straws.",
+        "D": "water pumps."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "In making ornaments and jewellery, non-reactive metals are preferred because they",
+      "options": {
+        "A": "are corrosive.",
+        "B": "are attractive.",
+        "C": "do not retain their lustre.",
+        "D": "do not react with atmospheric oxygen."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "The simplest way of making well water suitable for laundry is by",
+      "options": {
+        "A": "adding copper sulphate.",
+        "B": "filtering.",
+        "C": "boiling .",
+        "D": "adding chlorine."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "Which of the following pairs of energy sources is environmentally friendly?",
+      "options": {
+        "A": "Coal and thermal energy",
+        "B": "Wind and biogas",
+        "C": "Wind and coal",
+        "D": "Biogas and thermal energy"
+      },
+      "correct_answer": null,
+      "explanation": "Renewable energy sources are environmentally friendly.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

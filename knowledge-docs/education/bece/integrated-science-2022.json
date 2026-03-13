@@ -1,0 +1,534 @@
+{
+  "exam_type": "bece",
+  "subject": "Integrated Science",
+  "year": 2022,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "The energy transformation that takes place in a solar cell is",
+      "options": {
+        "A": "light to chemical.",
+        "B": "light to electrical.",
+        "C": "electrical to heat.",
+        "D": "electrical to light."
+      },
+      "correct_answer": null,
+      "explanation": "Light energy is converted into electrical energy.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "All flowering plants end their life cycle with",
+      "options": {
+        "A": "seed formation.",
+        "B": "seed development.",
+        "C": "seed dispersal.",
+        "D": "seed germination."
+      },
+      "correct_answer": null,
+      "explanation": "A flowering plant is simply a plant that produces flowers, and these flowers turn into fruits.\n\nFlowering plants go through several stages: Germination, Pollination, Fertilization, and Dispersal.\n\nThe final stage in a flowering plant life cycle is seed dispersal .",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "Soil texture is a term used to describe the",
+      "options": {
+        "A": "amount of water soil can hold.",
+        "B": "arrangement of soil particles in a given soil.",
+        "C": "properties of soil, silt and clay in a sample of soil.",
+        "D": "mixture of all soil particles."
+      },
+      "correct_answer": null,
+      "explanation": "Soil texture (such as loam, sandy loam or clay) refers to the proportion of sand, silt and clay sized particles that make up the mineral fraction of the soil.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "Which of the following processes is an example of a physical change?",
+      "options": {
+        "A": "Fermentation of food",
+        "B": "Respiration",
+        "C": "Magnetization of iron",
+        "D": "Lighting a match"
+      },
+      "correct_answer": null,
+      "explanation": "Physical changes: \n\nThe substance involved in a physical change is structurally identical before and after the change. Texture, shape, temperature, and a change in the state of matter are examples of physical changes.\n\nMagnetization of iron is a physical change as it is a temporary change.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "An example of a storage pest is",
+      "options": {
+        "A": "yam beetle.",
+        "B": "capsid.",
+        "C": "army worm.",
+        "D": "weevil."
+      },
+      "correct_answer": null,
+      "explanation": "A storage pest is an insect or other animal that damages or destroys stored food or other stored valuable organic matter.\n\nGrain borers, weevils and Angoumois grain moths are able to feed on whole, healthy grains, they are considered storage pests",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "The solid component found on the filter paper and the liquid component that flows into a container during filtration are respectively called",
+      "options": {
+        "A": "filtrate and residue.",
+        "B": "condensate and residue.",
+        "C": "residue and filtrate.",
+        "D": "residue and condensate"
+      },
+      "correct_answer": null,
+      "explanation": "The solid that remains on the filter paper is called the residue , and the liquid that passes through the filter paper is called the filtrate",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "The ion that causes hardness in water is",
+      "options": {
+        "A": "CO 3 2- .",
+        "B": "Mg 2+ .",
+        "C": "Na + .",
+        "D": "OH - ."
+      },
+      "correct_answer": null,
+      "explanation": "Calcium (Ca 2+ ) and magnesium (Mg 2+ ) are the causes the hardness of water.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "Which of the following substances are matter?\n\nI. Hydrogen\n\nII. Air\n\nIII. Stone",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "Matter is Anything that can be weighed and takes up space. Therefore, the matter has both mass and volume. The cosmos is made up of a wide variety of substances and forms of stuff. Physical properties like color or mass.\r\nChemical properties like how one form of matter interacts with another type of",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "The main reason for staking tomato is to ensure",
+      "options": {
+        "A": "bigger fruit development.",
+        "B": "air circulation on the farm.",
+        "C": "upright growth of the plant.",
+        "D": "that fruits do not get rotten."
+      },
+      "correct_answer": null,
+      "explanation": "Staking tomatoes provides support to help keep plants off the ground while assisting in their upward growth habit.\n\nBecause many diseases and insects start at the ground level, using a structured system to keep them away from ground contact is prudent.\n\nStaking can also be used to prevent the fruit ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "Which of the following statements about clayey soil is not true? It",
+      "options": {
+        "A": "swells when dry and shrinks when wet.",
+        "B": "has high water retention.",
+        "C": "is difficult to plough when dry",
+        "D": "is compact when dry."
+      },
+      "correct_answer": null,
+      "explanation": "Clayey soil rather swells when wet and shrinks when dry",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "It is not advisable to use old electrical gadgets because they",
+      "options": {
+        "A": "are not efficient.",
+        "B": "are dangerous.",
+        "C": "produce sparks.",
+        "D": "waste energy."
+      },
+      "correct_answer": null,
+      "explanation": "Old devices use much more energy than new models",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "Which of the following planets are closer to the sun than the Earth?",
+      "options": {
+        "A": "Venus and Mars",
+        "B": "Venus and Mercury",
+        "C": "Mercury and Mars",
+        "D": "Venus and Saturn"
+      },
+      "correct_answer": null,
+      "explanation": "Venus and Mercury are more closer to the sun, Mars & Saturn are far away from the sun but more closer to the Earth",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "Which of the following statements about pressure in liquids is/are correct ?\n\nI. Pressure in liquids at the same level acts equally in all directions.\n\nII. Pressure in liquids depend on the area of the liquid.\n\nIII. Pressure in liquids decreases with depth.",
+      "options": {
+        "A": "I only",
+        "B": "II only",
+        "C": "I and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "Pascal's law states that pressure in liquids is transmitted equally in all directions.\n\nPressure in liquids does not depend on the surface area.\n\nThe pressure exerted by a liquid increases with depth.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "Soil depletion is not caused by",
+      "options": {
+        "A": "erosion.",
+        "B": "afforestation.",
+        "C": "leaching.",
+        "D": "illegal mining."
+      },
+      "correct_answer": null,
+      "explanation": "Afforestation is the process of introducing trees and tree seedlings to an area that has previously not been forested. Afforestation can be done through tree planting and seeding, naturally or artificially.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "What force makes a ripe mango fall from a tree?",
+      "options": {
+        "A": "Force of tension",
+        "B": "Magnetic force",
+        "C": "Electrostatic force",
+        "D": "Gravitational force"
+      },
+      "correct_answer": null,
+      "explanation": "Gravitational force \n\nThe force due to which any matter is attracted towards the centre of the Earth is known as the force of gravity . The mango fell due to the force of gravity of Earth.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "Urea is a good source of",
+      "options": {
+        "A": "phosphorus in the soil.",
+        "B": "calcium in the soil.",
+        "C": "sodium in the soil.",
+        "D": "nitrogen in the soil."
+      },
+      "correct_answer": null,
+      "explanation": "Urea and fertilizers containing urea are excellent sources of nitrogen for crop production.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "Which of the following statements are reasons for conserving energy?\n\nI. Insufficient production of energy\n\nII. Increasing demand of energy\n\nIII. Limiting production of carbon (IV) oxide",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "NOTE: One must still conserve energy even when demand of energy is not high. Conversation will ensure that the resources used for the generation of the energy is reserved for future generations",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "Which of the following bodies are natural sources of light?\n\nI. Moon\n\nII. Sun\n\nIII. Glow Worm",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "A natural source of light is light that occurs naturally without the involvement of humans.\n\nNatural sources of light can come from either an object or a living species.\n\nExamples include the Sun , stars, lightning, jellyfish, fireflies, glowworms , angler fish, etc.\n\n Note \n\nThe moon is not a natur",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "Which of the following characteristics is/are of the image formed in a pinhole camera? The image is\n\nI. inverted.\n\nII. virtual.\n\nIII. diminished.",
+      "options": {
+        "A": "I only",
+        "B": "II and III only",
+        "C": "I and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "Characteristics of image formed in a pinhole camera \n\n(i) The image formed is real because it is visible on the screen\n\n(ii) It is inverted \n\n(iii) It is generally smaller/diminished than the size of the object",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "The floor of a room has length 20 m and breadth 15 m. Determine the area of the floor.",
+      "options": {
+        "A": "35 m 2",
+        "B": "200 m 2",
+        "C": "250 m 2",
+        "D": "300 m 2"
+      },
+      "correct_answer": null,
+      "explanation": "Area of a rectangle = Length x Breadth\n\nArea of the floor = 20 m x 15 m = 300 m 2",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "Rainfall is a result of",
+      "options": {
+        "A": "low pressure.",
+        "B": "strong wind.",
+        "C": "cold wind.",
+        "D": "low humidity."
+      },
+      "correct_answer": null,
+      "explanation": "When the pressure is low, the air is free to rise into the atmosphere where it cools and condenses.\n\nThis condensation forms clouds made of water droplets and ice crystals around dust particles in the sky. Eventually the water vapor in the clouds condenses and falls as rain.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "An example of a first class lever is",
+      "options": {
+        "A": "bottle opener.",
+        "B": "crow bar.",
+        "C": "wheel barrow.",
+        "D": "fishing rod."
+      },
+      "correct_answer": null,
+      "explanation": "First Class Lever \n\nA first-class lever has the fulcrum/pivot in the middle and the load and effort on each side of the fulcrum.\n\n Examples of a first class lever \n\nPliers, scissors, a crow bar, a claw hammer, a see-saw and a weighing balance.\n\n Second Class Lever \n\nIn second class levers the load i",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "Green plants have the ability to make their own food hence they are known as",
+      "options": {
+        "A": "producers.",
+        "B": "parasites.",
+        "C": "consumers.",
+        "D": "decomposers."
+      },
+      "correct_answer": null,
+      "explanation": "Green plants are called producers because they can prepare their own food by a process called photosynthesis.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "The periodic table is an arrangement of elements according to increasing",
+      "options": {
+        "A": "atomic number.",
+        "B": "mass number.",
+        "C": "nucleon number.",
+        "D": "neutron number."
+      },
+      "correct_answer": null,
+      "explanation": "In periodic table, the elements are listed in order of increasing atomic number . The atomic number is the number of protons in the nucleus of an atom.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "The ovary, style and stigma are collectively known as the",
+      "options": {
+        "A": "stamen.",
+        "B": "pistil.",
+        "C": "fruit.",
+        "D": "stem."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "An atom 23 11 X forms bond by losing one electron, the charge on the ion formed is",
+      "options": {
+        "A": "-1",
+        "B": "-2",
+        "C": "+1",
+        "D": "+2"
+      },
+      "correct_answer": "C",
+      "explanation": "When an atom loses an electron it has positive charge (Cation) and gain negative charge (Anion)\n\nSince the atomic number is 11, the atom in question is Sodium (Na). Sodium has +1 charge (Na +1 = Na + ) when it loses an electron during the bond.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 31,
+      "question_text": "The hard outer surface of a tooth is called",
+      "options": {
+        "A": "root.",
+        "B": "dentine.",
+        "C": "cement.",
+        "D": "enamel."
+      },
+      "correct_answer": null,
+      "explanation": "Root \n\nThe root is the part of the tooth that extends into the bone and holds the tooth in place. It makes up approximately two-thirds of the tooth.\n\n Enamel \n\nThe enamel is the outermost layer of a tooth. As the hardest tissue in your body, it helps to protect teeth from bacteria. It also provides ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "People who travel in space are called",
+      "options": {
+        "A": "geologists.",
+        "B": "astronauts.",
+        "C": "space shuttlers.",
+        "D": "astronomist."
+      },
+      "correct_answer": null,
+      "explanation": "Geologist : scientist who study the Earth: its history, nature, materials and processes.\n\n Astronaut : a person who has been trained for travelling in space",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "The practice of growing cowpea and maize on a piece of land at the same time is known as",
+      "options": {
+        "A": "mixed farming.",
+        "B": "mixed cropping.",
+        "C": "land rotation.",
+        "D": "crop rotation."
+      },
+      "correct_answer": null,
+      "explanation": "Mixed Cropping \n\nWhen two or more crops are grown on the same land simultaneously (at the same time), it is known as mixed cropping\n\n Mixed Farming \n\nGrowing crops as well as livestock , animal husbandry,etc all on same farm or land.\n\n Crop Rotation \n\nThe practice of planting different crops across ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "Which of the following instruments can be used to measure the diameter of a circle?",
+      "options": {
+        "A": "A metre-rule",
+        "B": "A thermometer",
+        "C": "An ammeter",
+        "D": "A string"
+      },
+      "correct_answer": null,
+      "explanation": "Metre-rule is used to measure length. Diameter of a circle is a length.\n\n Thermometer is used to measure temperature\n\n Ammeter is used for measuring either direct (DC) or alternating (AC) electric current, in amperes.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "When gases are heated they",
+      "options": {
+        "A": "melt.",
+        "B": "sublime.",
+        "C": "decrease in volume.",
+        "D": "decrease in intermolecular forces"
+      },
+      "correct_answer": null,
+      "explanation": "When a particle is heated \n\nThe intermolecular forces are the attractions between the molecules when temperature increases it develops more distance between molecules and because of this attraction decreases, resulting intermolecular force decreases.\n\nIntermolecular forces decreases on heating as th",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 37,
+      "question_text": "The shoot system of a flowering plant develops from the",
+      "options": {
+        "A": "radicle.",
+        "B": "plumule.",
+        "C": "cotyledon.",
+        "D": "endosperm."
+      },
+      "correct_answer": null,
+      "explanation": "A shoot or seedling originates from the plumule of the seed’s embryo.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "The diagram below is an illustration of a transistor.\n\nThe arrow shows the direction of:",
+      "options": {
+        "A": "electron movement.",
+        "B": "hole movement.",
+        "C": "electron and hole movement.",
+        "D": "negative charge movement."
+      },
+      "correct_answer": null,
+      "explanation": "The arrow in the symbol indicates the direction of flow of conventional current (electron movement)",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "Digestion of protein begins in the stomach and ends in the",
+      "options": {
+        "A": "large intestine.",
+        "B": "small intestine.",
+        "C": "appendix.",
+        "D": "caecum."
+      },
+      "correct_answer": "B",
+      "explanation": "Mechanical digestion of protein begins in the mouth and continues in the stomach and small intestine . Chemical digestion of protein begins in the stomach and ends in the small intestine .",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 40,
+      "question_text": "Which of the following substances is a compound?",
+      "options": {
+        "A": "Copper",
+        "B": "Diamond",
+        "C": "Sucrose",
+        "D": "Sulphur"
+      },
+      "correct_answer": null,
+      "explanation": "Copper and sulphur are elements. Diamond is made up of only carbon elements so can't be classified as a compound because compounds are made up of two or more different elements.\n\nSucrose (C 12 H 22 O 11 ) is simply the chemical name for sugar and is a compound that consists of various elements i.e. ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

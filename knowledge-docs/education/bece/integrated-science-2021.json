@@ -1,0 +1,534 @@
+{
+  "exam_type": "bece",
+  "subject": "Integrated Science",
+  "year": 2021,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "Which of the following substances is a compound?",
+      "options": {
+        "A": "Oxygen",
+        "B": "Magnesium",
+        "C": "Water",
+        "D": "Sodium"
+      },
+      "correct_answer": "A",
+      "explanation": "A compound consists of two or more different elements chemically combined in a fixed ratio. Oxygen, magnesium and sodium are all elements but water is a compound made up of hydrogen and oxygen (H 2 O)",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "An atom of an element has a neutral charge because the",
+      "options": {
+        "A": "Protons and electrons are the same particles.",
+        "B": "Proton number and electron number are the same.",
+        "C": "Neutron number and proton number are equal.",
+        "D": "Electron number and neutron number are equal."
+      },
+      "correct_answer": null,
+      "explanation": "Neutral Atom : have a charge balance, which means that they have an equal number of protons and electrons.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "Which of the following organisms is an ecto-parasite of animals?",
+      "options": {
+        "A": "Fleas",
+        "B": "Tapeworm",
+        "C": "Liver fluke",
+        "D": "Roundworm"
+      },
+      "correct_answer": null,
+      "explanation": "Ectoparasite : parasites that live on the surfaces of host organisms or in the skin and do not invade the inner body\n\n Examples of ectoparasites \n\nFleas, head lice and bed bugs\n\n Endoparasite \n\n Endoparasites are parasites which live inside a host and generally inhabit areas such as the gut, lungs, ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "An atom has 20 nucleons and 9 protons. What is its neutron number?",
+      "options": {
+        "A": "9",
+        "B": "10",
+        "C": "11",
+        "D": "12"
+      },
+      "correct_answer": null,
+      "explanation": "Nucleon = Proton + Neutron\n\nNeutron = Nucleon - Proton\n\nNeutron = 20 - 9 = 11",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "Which of the following statements about aerobic and anaerobic respiration is not correct?",
+      "options": {
+        "A": "Water is produced as a by-product in anaerobic respiration.",
+        "B": "Alcohol or lactic acid is produced in anaerobic respiration.",
+        "C": "No oxygen is required in anaerobic respiration",
+        "D": "Very little energy is released in anaerobic respiration."
+      },
+      "correct_answer": null,
+      "explanation": "Differences between aerobic and anaerobic respirations\n\n Aerobic Respiration \r\n Anaerobic Respiration \r\n\n Oxygen is present when this form of respiration takes place \r\n Oxygen is absent when this form of respiration takes place \r\n\n Gases are exchanged in this form of respiration \r\n Gases are not exc",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "An aluminium cube of side 2 m has a mass 24 kg. Determine the density of the aluminium.",
+      "options": {
+        "A": "3 kg m -3",
+        "B": "12 kg m -3",
+        "C": "24 kg m -3",
+        "D": "48 kg m -3"
+      },
+      "correct_answer": null,
+      "explanation": "Density = Mass / Volume\n\nVolume = Length x Breadth x Height\n\nBreadth = Height = Length for cube\n\nVolume of a cube = Length x Length x Length = Length 3 \n\nVolume of the aluminium = 2 3 = 2 x 2 x 2 = 8 m 3 \n\nDensity = 24 kg/ 8 m 3 = 3 kg m -3",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "An example of the process of osmosis is",
+      "options": {
+        "A": "Selective reabsorption",
+        "B": "Absorption of digested food",
+        "C": "The spread of petrol scent",
+        "D": "Gaseous exchange in living things"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "What is the systematic name of the compound CO?",
+      "options": {
+        "A": "Carbon (I) oxide",
+        "B": "Carbon (II) oxide",
+        "C": "Carbon dioxide",
+        "D": "Carbon (IV) oxide"
+      },
+      "correct_answer": null,
+      "explanation": "CO (carbon mono oxide) systematic name is carbon (II) oxide",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "Which of the following methods can be used to prevent iron from rusting?\n\nI. Painting\r\n\nII. Alloying\r\n\nIII. Keeping the iron in a desiccator\r\n\nIV. Keeping iron in a moist environment",
+      "options": {
+        "A": "I and II only",
+        "B": "II and IV only",
+        "C": "I, II and III only",
+        "D": "II, III and IV only"
+      },
+      "correct_answer": null,
+      "explanation": "Methods of preventing rusting",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "The proper way of maintaining soil structure and fertility is termed as soil",
+      "options": {
+        "A": "conservation",
+        "B": "depletion",
+        "C": "profile",
+        "D": "erosion"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "The instrument that can be used to measure accurately the mass of a substance is",
+      "options": {
+        "A": "bean balance.",
+        "B": "spring balance.",
+        "C": "eureka can.",
+        "D": "measuring cylinder."
+      },
+      "correct_answer": null,
+      "explanation": "Mass is always measured using a beam balance. A spring balance gives different readings at different places on earth because it measures the weight not mass.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "Which of the following chemical symbols can be used to remove permanent hardness of water?",
+      "options": {
+        "A": "NaHCO 3",
+        "B": "Na 2 CO 3",
+        "C": "Ca(HCO 3 ) 2",
+        "D": "CaCO 3"
+      },
+      "correct_answer": null,
+      "explanation": "Permanent hardness of water is due to dissolved salts of chlorides and sulphates of calcium and magnesium which can be removed by adding sodium carbonate (Na2CO3) (washing soda or soda ash) which reacts with these dissolved salts to form insoluble carbonates that can be removed by filtration and the",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "Which of the following chemical symbols is that of an element with seven electrons in the outermost shell?",
+      "options": {
+        "A": "20 Ca",
+        "B": "17 Cl",
+        "C": "10 Ne",
+        "D": "16 S"
+      },
+      "correct_answer": null,
+      "explanation": "Electronic configuration for Chlorine ( 17 Cl) is 2,8, 7 . As you can see the last shell (outermost shell) has 7 electrons",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "Which of the following statements about the base of a transistor are correct ? The base is\n\nI. made very thin\r\n\nII. made very wide\r\n\nIII. responsible for activating the transistor \r\n\nIV. made of n-type semiconductor",
+      "options": {
+        "A": "I and III only",
+        "B": "II and IV only",
+        "C": "I, III and IV only",
+        "D": "II, III and IV only"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "Which of the following instruments is connected in parallel across a resistor in an electrical circuit?",
+      "options": {
+        "A": "Ammeter",
+        "B": "Voltmeter",
+        "C": "Ohmmeter",
+        "D": "Galvanometer"
+      },
+      "correct_answer": null,
+      "explanation": "Voltmeter: is used to measure the potential difference between two points in an electrical circuit and its connected in parallel in an electric circuit\n\n Ammeter: is used to measure the electric current in an electric circuit and it is connected in series in an electric circuit\n\n Galvanometer : is u",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "Which of the following fruits is dispersed by water?",
+      "options": {
+        "A": "Coconut",
+        "B": "Mango",
+        "C": "Maize",
+        "D": "Cocoa"
+      },
+      "correct_answer": "A",
+      "explanation": "Coconut is dispersed by water\n\nLighter and hollow seeds like that of coconut and lotus can float in water and travel long distances in this manner.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "Which of the following activities are cultural practices in vegetable production?\n\nI. Application of fertilizer\r\n\nII. Harvesting\r\n\nIII. Mulching",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "Cultural Practices in vegetation production",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "The function of the white blood cells in humans is to",
+      "options": {
+        "A": "produce haemoglobin.",
+        "B": "ensure blood clot during an injury.",
+        "C": "produce antibodies to engulf disease-causing organisms.",
+        "D": "produce digestive enzymes."
+      },
+      "correct_answer": null,
+      "explanation": "White blood cells produce antibodies to fight the infection and help with other immune responses.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "Mosquito pupa breathes through tubes called",
+      "options": {
+        "A": "trachea.",
+        "B": "siphon.",
+        "C": "lungs.",
+        "D": "gills."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "An advantage of practicing organic farming is that it",
+      "options": {
+        "A": "increases soil fertility.",
+        "B": "reduces pest infestation.",
+        "C": "reduces toxicity levels in plants.",
+        "D": "increases resistance to plant disease."
+      },
+      "correct_answer": null,
+      "explanation": "Organic Farming\n\nOrganic farming can be defined as an agricultural process that uses biological fertilizers and pest control acquired from animal or plant waste.\n\nAdvantages of organic farming",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "Which of the following planets is at the center of the solar system?",
+      "options": {
+        "A": "Earth",
+        "B": "Venus",
+        "C": "Mars",
+        "D": "Sun"
+      },
+      "correct_answer": null,
+      "explanation": "The Sun is the only star in our solar system. It is the center of our solar system, and its gravity holds the solar system together.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "Determine the potential energy of a block of mass 2 kg placed on a building 10 m tall. [g = 10 ms -2 ]",
+      "options": {
+        "A": "20 J",
+        "B": "50 J",
+        "C": "100 J",
+        "D": "200 J"
+      },
+      "correct_answer": null,
+      "explanation": "Potential energy = mass x acceleration due to gravity x height\n\nP.E = mgh\n\nP.E = 2 x 10 x 10 J = 200 J",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "Which of the following organisms attacks crops in storage?",
+      "options": {
+        "A": "Crickets",
+        "B": "Grasshoppers",
+        "C": "Millipedes",
+        "D": "Weevils"
+      },
+      "correct_answer": null,
+      "explanation": "A storage pest is an insect or other animal that damages or destroys stored food or other stored valuable organic matter.\n\nGrain borers, weevils and Angoumois grain moths are able to feed on whole, healthy grains, they are considered storage pests",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "One of the properties of acids is that they",
+      "options": {
+        "A": "turn wet blue litmus paper red.",
+        "B": "have no effect on blue litmus paper.",
+        "C": "turn wet red litmus paper blue.",
+        "D": "are neutral to litmus paper."
+      },
+      "correct_answer": null,
+      "explanation": "Testing for acid\n\n Blue litmus paper will turn red in acid solutions and red litmus blue in base solutions.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "The instrument used to measure potential difference across a resistor is",
+      "options": {
+        "A": "ammeter.",
+        "B": "barometer.",
+        "C": "hydrometer.",
+        "D": "voltmeter."
+      },
+      "correct_answer": null,
+      "explanation": "Voltmeter: is used to measure the potential difference between two points in an electrical circuit and its connected in parallel in an electric circuit",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "Which of the following elements is a macro-nutrient of plants?",
+      "options": {
+        "A": "Copper",
+        "B": "Manganese",
+        "C": "Molybdenum",
+        "D": "Sulphur"
+      },
+      "correct_answer": null,
+      "explanation": "Macro-nutrients are required by plants in large amounts and micronutrients are required in trace amounts .\n\n Macro-nutrients \r\n Micro-nutrients",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "When an atom loses an electron, the ion formed is called",
+      "options": {
+        "A": "an anion.",
+        "B": "a cation.",
+        "C": "a molecule.",
+        "D": "a compound."
+      },
+      "correct_answer": null,
+      "explanation": "Ion : is a charged atom or a group of atoms which possesses an electric charge.\n\n Cation : The ion formed when an atom loses electron(s) is known as cation e.g. Na + , Mg 2+\n\n Anion : The ion formed when an atom gains electron(s) is known as anion e.g Cl - , O 2-",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 31,
+      "question_text": "Which of the following chemical equations is balanced?",
+      "options": {
+        "A": "H 2 + Cl 2 &rarr; HCl",
+        "B": "K 2 O &rarr; K + O 2",
+        "C": "Mg + O 2 &rarr; MgO",
+        "D": "2Na + Cl 2 &rarr; 2NaCl"
+      },
+      "correct_answer": null,
+      "explanation": "Number of Na at left = 2 (2 x 1) and at the right = 2 (2 x 1)\r\n\nNumber of Cl at left = 2 and at the right = 2 (2 x 1)\r\n\nSince the number of elements at each side of the equation is the same, the equation is balanced",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "Purple colouration of leaves of plant is a major symptom of deficiency in",
+      "options": {
+        "A": "Calcium",
+        "B": "Nitrogen",
+        "C": "Potassium",
+        "D": "Phosphorus"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "Which of the following diseases is not a deficiency diseases?",
+      "options": {
+        "A": "Scurvy",
+        "B": "Cholera",
+        "C": "Beriberi",
+        "D": "Goiter"
+      },
+      "correct_answer": "B",
+      "explanation": "Cholera : is an acute diarrheal illness caused by infection of the intestine with Vibrio cholerae bacteria.\n\nDeficiency Diseases\n\nDeficiency diseases are diseases that are caused by the lack of certain essential nutrients in one's diet over a prolonged period of time.\n\n Nutrient \r\n Disease \r\n\n Vitam",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 34,
+      "question_text": "In an experiment to determine the various particle sizes of soil sedimentation, the particle above clay suspension are",
+      "options": {
+        "A": "Loam",
+        "B": "Organic",
+        "C": "Gravels",
+        "D": "Silt"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "Heat from the sun by\n\nI. Conduction\r\n\nII. Convention\r\n\nIII. Radiation",
+      "options": {
+        "A": "I only",
+        "B": "II only",
+        "C": "III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "Radiation : is the transfer of heat energy through space by electromagnetic radiation.\n\n Conduction : is the transfer of heat energy from one substance to another or within a substance\n\n Convection : is the transfer of heat energy in a fluid.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 37,
+      "question_text": "Which of the following machines are complex machines?\n\nI. Tractor\r\n\nII. Mist blower\r\n\nIII. Sewing machine",
+      "options": {
+        "A": "I and II only",
+        "B": "I and III only",
+        "C": "II and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "A complex machine is a combination of two or more simple machines. Examples : Tractors, Cars, Mist blower, Sewing machines & Mower",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "Calcium oxide and water reacts to form calcium hydroxide. The formula for the product is",
+      "options": {
+        "A": "Ca 2 OH",
+        "B": "Ca(OH) 2",
+        "C": "CaH 2 O",
+        "D": "Ca(H 2 O) 2"
+      },
+      "correct_answer": null,
+      "explanation": "CaO + H 2 O &rarr; Ca(OH) 2",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 40,
+      "question_text": "If a soil is smooth and sticky, it means that the soil has a large amount of",
+      "options": {
+        "A": "Clay",
+        "B": "Loam",
+        "C": "Sand",
+        "D": "Silt"
+      },
+      "correct_answer": null,
+      "explanation": "Clay soil is smooth when dry and sticky when wet\n\nTHEORY QUESTIONS",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

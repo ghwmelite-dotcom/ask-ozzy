@@ -1,0 +1,459 @@
+{
+  "exam_type": "bece",
+  "subject": "English Language",
+  "year": 2023,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "All work and no play makes Jack a dull boy, ......?",
+      "options": {
+        "A": "shan't it",
+        "B": "isn't it",
+        "C": "doesn't it",
+        "D": "can't it"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "You cannot swim in the sea, ...... you?",
+      "options": {
+        "A": "couldn't",
+        "B": "can",
+        "C": "don't",
+        "D": "did"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "It is no use ...... over spilt milk.",
+      "options": {
+        "A": "cry",
+        "B": "of crying",
+        "C": "crying",
+        "D": "to cry"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "Some of the pineapples are ...... sour to be eaten.",
+      "options": {
+        "A": "more so",
+        "B": "more too",
+        "C": "much too",
+        "D": "much so"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "......, learners must behave well.",
+      "options": {
+        "A": "The last but not least",
+        "B": "The last but not the least",
+        "C": "Last but not least",
+        "D": "Last but not the least"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "Where ...... Asana and Betty spending their next holidays?",
+      "options": {
+        "A": "is",
+        "B": "are",
+        "C": "were",
+        "D": "was"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "The messenger did not ...... anyone in the house.",
+      "options": {
+        "A": "meet",
+        "B": "met",
+        "C": "meets",
+        "D": "meeting"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "She lives in her ...... house.",
+      "options": {
+        "A": "father-in-laws'",
+        "B": "fathers-in-laws'",
+        "C": "father's-in-law's",
+        "D": "father-in-law's"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "Their sister wore a ...... to the party.",
+      "options": {
+        "A": "beautiful silk pink dress",
+        "B": "silk pink beautiful dress",
+        "C": "pink beautiful silk dress",
+        "D": "beautiful pink silk dress"
+      },
+      "correct_answer": null,
+      "explanation": "Adjective Order",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "It was ...... late to go out alone.",
+      "options": {
+        "A": "too",
+        "B": "very",
+        "C": "much",
+        "D": "so"
+      },
+      "correct_answer": null,
+      "explanation": "Too goes with to \r\n\nSo goes with that",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "This is the boy ...... rescued us.",
+      "options": {
+        "A": "whose",
+        "B": "which",
+        "C": "whom",
+        "D": "who"
+      },
+      "correct_answer": "C",
+      "explanation": "Who vs Whom\n\nIf in doubt, reword the clause to see which personal pronoun you need: he/him, she/her, etc. Then replace that pronoun with who or whom, using the following rule:\r\n\nUse WHO for he, she, they, we:\r\n\nThe people who just boarded the plane are in a rock band.\r\n\n(Reword: They just boarded th",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "The nurse made me ...... a lot of water.",
+      "options": {
+        "A": "drink",
+        "B": "drank",
+        "C": "drunk",
+        "D": "to drink"
+      },
+      "correct_answer": null,
+      "explanation": "Causative Verb (make)\n\nSubject + make (any tense) + object (always person) + base form of verb .\n\nShe made me take up this course. I was never up for this.\n\nThe police made them surrender and reveal their plans.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "It is not easy to identify ...... voice it was.",
+      "options": {
+        "A": "who",
+        "B": "whom",
+        "C": "who's",
+        "D": "whose"
+      },
+      "correct_answer": "A",
+      "explanation": "Who's vs Whose\n\nwho + is or who + has = who’s.\r\n\nExample: Who’s hungry?\r\n\n Whose is the possessive form of the pronoun who. Use it when you’re asking (or declaring) to whom something belongs.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "Neither the parents nor the child ..... at home yesterday.",
+      "options": {
+        "A": "are",
+        "B": "is",
+        "C": "were",
+        "D": "was"
+      },
+      "correct_answer": "B",
+      "explanation": "Neither nor and Either or\n\nWhen we use either…or and neither…nor, we present a choice between two different options. The suggestion is that one of these options will complete the action, so when we have a choice between two singular objects, the verb can only be done by one of them. Hence, though we",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "Her clothes would look better if she ...... them.",
+      "options": {
+        "A": "will wash",
+        "B": "washes",
+        "C": "washed",
+        "D": "would wash"
+      },
+      "correct_answer": null,
+      "explanation": "The sentence is a conditional sentence that talks about an unreal situation in the present. In such cases, we use the past simple tense in the if-clause and 'would' + base verb in the main clause.\n\nSECTION B\n\n Choose from the alternatives lettered A to D the one which is nearest in meaning to the un",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "We will not allow him to dampen our spirits.",
+      "options": {
+        "A": "suppress",
+        "B": "break",
+        "C": "destroy",
+        "D": "lower"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "The commotion at the stadium was avoidable.",
+      "options": {
+        "A": "trouble",
+        "B": "confusion",
+        "C": "issue",
+        "D": "violence"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "What transpired between them remains a secret.",
+      "options": {
+        "A": "manifested",
+        "B": "translated",
+        "C": "existed",
+        "D": "happened"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "Lance only talks about trivial matters.",
+      "options": {
+        "A": "unimportant",
+        "B": "unpleasant",
+        "C": "unacceptable",
+        "D": "unexciting"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "The robbers ransacked the house.",
+      "options": {
+        "A": "torched",
+        "B": "destroyed",
+        "C": "invaded",
+        "D": "looted"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "I was informed at the eleventh hour about his decision to leave town. This means that I heard it",
+      "options": {
+        "A": "very late.",
+        "B": "at eleven o'clock.",
+        "C": "immediately.",
+        "D": "in good time."
+      },
+      "correct_answer": null,
+      "explanation": "The eleventh hour\n\nThe last moment or almost too late",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "We tried all we could to amuse her but she kept a straight face . This means that she",
+      "options": {
+        "A": "straight face",
+        "B": "looked straight ahead.",
+        "C": "refused to laugh.",
+        "D": "cried all the more."
+      },
+      "correct_answer": "A",
+      "explanation": "A straight face\n\nA blank or serious facial expression, especially when trying not to laugh.\n\n Example : My father kept a straight face when he joked.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "When we went to Nina's house, we were told that she had gone away bag and baggage . This means that Nina had gone away",
+      "options": {
+        "A": "leaving all her children.",
+        "B": "leaving all her belongings.",
+        "C": "without informing anyone.",
+        "D": "with all her belongings."
+      },
+      "correct_answer": null,
+      "explanation": "Bag and baggage\n\nAll of one's belongings, especially with reference to departing with them; completely, totally. For example, The day he quit his job, John walked out, bag and baggage.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "Samantha's main problem is that she can see no further than her nose . This means that Samantha",
+      "options": {
+        "A": "to be short-sighted; have myopia",
+        "B": "is easily deceived.",
+        "C": "has a long nose.",
+        "D": "cannot think"
+      },
+      "correct_answer": null,
+      "explanation": "See no further than the end of one's nose\n\na. to be short-sighted; have myopia\r\n\nb. to lack insight or foresight",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "When he lost his job, Yaro was left to sink or swim . This means that Yaro",
+      "options": {
+        "A": "had to find another job.",
+        "B": "shouted for help.",
+        "C": "had to survive on his own.",
+        "D": "was depressed."
+      },
+      "correct_answer": null,
+      "explanation": "Sink or swim\n\nIf you are left to sink or swim, you are given no help so that you succeed or fail completely by your own efforts: My employer gave me no help when I started my new job - I was just left to sink or swim.\n\nSECTION D\n\n From the list of words lettered A to D , choose the one that is most ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "She accidentally tore her dress.",
+      "options": {
+        "A": "intentionally",
+        "B": "willingly",
+        "C": "carelessly",
+        "D": "foolishly"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "The story was written in simple language.",
+      "options": {
+        "A": "foreign",
+        "B": "strange",
+        "C": "local",
+        "D": "complex"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "The arrogant storekeeper lost all his customers.",
+      "options": {
+        "A": "respectful",
+        "B": "obedient",
+        "C": "modest",
+        "D": "sympathetic"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "We finished several projects last year.",
+      "options": {
+        "A": "initiated",
+        "B": "concluded",
+        "C": "stopped",
+        "D": "organized"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "The unfavourable weather affected their health.",
+      "options": {
+        "A": "beautiful",
+        "B": "pleasant",
+        "C": "cool",
+        "D": "promising"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

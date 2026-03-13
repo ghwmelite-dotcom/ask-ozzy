@@ -1,0 +1,579 @@
+{
+  "exam_type": "wassce",
+  "subject": "Core Mathematics",
+  "year": 2022,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "Find the number of even integers between 11 and 97.",
+      "options": {
+        "A": "43",
+        "B": "44",
+        "C": "45",
+        "D": "53"
+      },
+      "correct_answer": "A",
+      "explanation": "Even numbers are number divisible by 2 without a remainder.\n\nSet of even integers between 11 and 97 = {12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86,88,80,92,94,96}\r\n\nThe total number of elements in the set = 43\n\nAlternate Solution\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "Find the values of x for which \r\n 1 \r\n 2 x 2 -13x + 15 \r\n\n is not defined.",
+      "options": {
+        "A": "5, \r\n 3 \r\n 2",
+        "B": "1, \r\n 13 \r\n 15",
+        "C": "2, 15",
+        "D": "13, 15"
+      },
+      "correct_answer": null,
+      "explanation": "For the equation to be undefined, the denominator must be 0 .\n\n2 x 2 - 13 x + 15 = 0\n\nSolve for the value of x \n\n2 x 15 = 30\n\nTwo numbers when multiplied the result will be 30 and when added the result will be - 13.\n\nThe numbers are -10 and - 3.\n\nExpress - 13 x as -10 x - 3 x \n\n2 x 2 - 10 x - 3 x + ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "In the diagram P , Q , R , S are points on the circle. If ∠ PQS = 32 o and ∠ PRQ = 61 o , find ∠ QPS .",
+      "options": {
+        "A": "32 o",
+        "B": "61 o",
+        "C": "87 o",
+        "D": "93 o"
+      },
+      "correct_answer": null,
+      "explanation": "Inscribed angles subtended by the same are equal.\n\n∠ PSQ = ∠ PRQ = 61 o \n\nSum of angles in are triangle is 180 o \n\n∠ QPS + ∠ PSQ + ∠ PQS = 180 o \n\n∠ QPS + 61 + 32 = 180\n\n∠ QPS + 93 = 180\n\n∠ QPS = 180 - 93\n\n∠ QPS = 87 o",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "The bearing of a point P from a point Q is 065 o . What is the bearing of Q from P ?",
+      "options": {
+        "A": "115 o",
+        "B": "155 o",
+        "C": "245 o",
+        "D": "295 o"
+      },
+      "correct_answer": null,
+      "explanation": "Bearing of Q from P = 90 o + 90 o + 65 o \n\nBearing of Q from P = 245 o",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "Find the truth set of (3 + x )(1 - x ) > 9 - x 2 .",
+      "options": {
+        "A": "1 \r\n 4",
+        "B": "2 \r\n 5",
+        "C": "3 \r\n 5",
+        "D": "3 \r\n 4"
+      },
+      "correct_answer": null,
+      "explanation": "(3 + x )(1 - x ) > 9 - x 2 \n\nExpand the bracket\n\n3(1 - x ) + x (1 - x ) > 9 - x 2 \n\n3 - 3 x + x - x 2 > 9 - x 2 \n\n3 - 2 x - x 2 > 9 - x 2 \n\n- x 2 cancels each other at both sides of the equation.\n\n3 - 2 x > 9\r\n\n- 2 x > 9 - 3\r\n\n- 2 x > 6\r\n\nDivide both sides by - 2. When dividing by a negative, the si",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "Simplify: \r\n 1 \r\n 2 \r\n\n ( x -1)- \r\n 1 \r\n 3 \r\n\n ( \r\n 1 \r\n 2 \r\n\n x -1).",
+      "options": {
+        "A": "1 \r\n 6 \r\n\n ( x -1)",
+        "B": "1 \r\n 6 \r\n\n (2 x +1)",
+        "C": "1 \r\n 6 \r\n\n (2 x -1)",
+        "D": "1 \r\n 6 \r\n\n (1-2 x )"
+      },
+      "correct_answer": null,
+      "explanation": "1 \r\n 2 \r\n\n ( x -1)- \r\n 1 \r\n 3 \r\n\n ( \r\n 1 \r\n 2 \r\n\n x -1)\r\n\nExpand the brackets\n\n 1 \r\n 2 \r\n\n ( x -1)- \r\n 1 \r\n 3 \r\n\n ( \r\n 1 \r\n 2 \r\n\n x -1) = \r\n x \r\n 2 \r\n\n - \r\n 1 \r\n 2 \r\n\n - \r\n x \r\n 6 \r\n\n + \r\n 1 \r\n 3 \r\n\n Note : - x - = +\n\n- \r\n 1 \r\n 3 \r\n\n x - 1 = \r\n 1 \r\n 3 \r\n\nThe Least Common Multiples (L.C.M) of the den",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "Given that 4 x + 6 y = 5 and 2 x + 4 y = 3, find the value of ( x + 2 y )",
+      "options": {
+        "A": "-1 \r\n 1 \r\n 2",
+        "B": "-1",
+        "C": "1",
+        "D": "1 \r\n 1 \r\n 2"
+      },
+      "correct_answer": "C",
+      "explanation": "Method I\n\n4 x + 6 y = 5 --- eqn (1)\r\n\n2 x + 4 y = 3 --- eqn (2)\r\n\nMultiply equation 2 by 2 to eliminate x \n\n2 x x 2 + 4 y x 2 = 3 x 2\r\n\n4 x + 8 y = 6 --- eqn (3)\r\n\nEquation 3 - Equation 1\n\n2 y = 1\n\nDivide both sides by 2\n\n y = \r\n 1 \r\n 2 \r\n\nSubtitute y = \r\n 1 \r\n 2 \r\n\n in equation 1\r\n\n4 x + 6 x \r\n 1 \r",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "Simplify \r\n 9 - x 2 \r\n 3x - x 2 \r\n\n , where x ≠ 3",
+      "options": {
+        "A": "3-x \r\n x",
+        "B": "3+x \r\n x",
+        "C": "3 \r\n x",
+        "D": "x-3 \r\n x"
+      },
+      "correct_answer": "C",
+      "explanation": "9 - x 2 \r\n 3x - x 2 \r\n\n9 - x 2 is a difference of two square.\n\n a 2 - b 2 = ( a + b )( a - b )\n\n9 = 3 x 3 = 3 2 \n\n9 - x 2 = 3 2 - x 2 \n\n3 2 - x 2 = (3+ x )(3- x )\n\n 9 - x 2 \r\n 3x - x 2 \r\n\n = \r\n (3+x)(3-x) \r\n 3x - x 2 \r\n\nFactorize x out in the denominator.\n\n 9 - x 2 \r\n 3x - x 2 \r\n\n = \r\n (3+x)(3-x) \r\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "Given that P ∝ \r\n v 2 \r\n x \r\n\n and x ∝ vt express P in terms of v and t .",
+      "options": {
+        "A": "P ∝ \r\n t \r\n v",
+        "B": "P ∝ \r\n v \r\n t",
+        "C": "P ∝ vt",
+        "D": "P ∝ \r\n 1 \r\n vt"
+      },
+      "correct_answer": null,
+      "explanation": "P ∝ \r\n v 2 \r\n x \r\n\nReplace x by vt \n\n P ∝ \r\n v 2 \r\n vt \r\n\n v 2 = v x v \n\n P ∝ \r\n v x v \r\n vt \r\n\nThe v cancel each other.\n\n P ∝ \r\n v \r\n t",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "Find the value of y in the diagram.",
+      "options": {
+        "A": "30 o",
+        "B": "21 o",
+        "C": "20 o",
+        "D": "10 o"
+      },
+      "correct_answer": null,
+      "explanation": "Vertically opposite angles are the same.\n\nSum of angles in a triangle is 180 o \n\n3 y + 2 y + 3 y + 12 = 180\r\n\n8 y = 180 - 12\r\n\n8 y = 168\r\n\nDivide both sides by 8\n\n y = \r\n 168 \r\n 8 \r\n\n y = 21 o",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "If 23 x = 1111 two , find the value of x .",
+      "options": {
+        "A": "0 = 1 (Every number raised to the power 0 is 1",
+        "B": "6",
+        "C": "7",
+        "D": "8"
+      },
+      "correct_answer": "D",
+      "explanation": "If you convert each of them to base 10, you should get the same value since they are equal.\n\n2 x x 1 + 3 x x 0 = 1 x 2 3 + 1 x 2 2 + 1 x 2 1 + 1 x 2 0 \n\n a 0 = 1 (Every number raised to the power 0 is 1\n\n a 1 = a (Every number to the power 1 is the same number)\n\n2 x x + 3 x 1 = 1 x 8 + 1 x 4 + 1 x 2",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "Dina and Rose were given GH₵ 875.08 to be shared in the ratio 3:2 respectively. If Rose shared her part of the money between Efua and Ama in the ratio 1:2 respectively, how much was Ama's share?",
+      "options": {
+        "A": "GH₵ 116.68",
+        "B": "GH₵ 175.02",
+        "C": "GH₵ 233.35",
+        "D": "GH₵ 340.32"
+      },
+      "correct_answer": "C",
+      "explanation": "The sum of the ratio represents the entire money shared.\n\nSum of ratios = 3 + 2\r\n\nSum of ratios = 5\r\n\nRose's ratio is 2.\n\nIf 5 = GH₵ 875.08\r\n\n2 = \r\n GH₵ 875.08 x 2 \r\n 5 \r\n\n = GH₵ 350.032\r\n\nRose's share = GH₵ 350.032\n\nSum of Efua's and Ama's ratios = 1 + 2\r\n\nSum of Efua's and Ama's ratios = 3\r\n\nAma's",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "y - 2 , find y .",
+      "options": {
+        "A": "- b = \r\n 1",
+        "B": "- \r\n 4 \r\n 5",
+        "C": "1",
+        "D": "-4"
+      },
+      "correct_answer": "C",
+      "explanation": "9 = 3 x 3 = 3 2 \r\n\n27 = 3 x 3 x 3 = 3 3 \r\n\n a - b = \r\n 1 \r\n a b \r\n\n 1 \r\n 27 \r\n\n = \r\n 1 \r\n 3 3 \r\n\n = 3 -3 \r\n\n3 2( y + 1) = 3 -3( y - 2) \n\nSince the bases are the same, the powers are also the same.\n\n2( y + 1) = -3( y - 2)\r\n\n2 y + 2 = -3 y + 6\r\n\n Note : - x - = +\r\n\n-3 x -2 = + 6\r\n\n2 y + 2 = -3 y + 6\r\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "The graph of y = x 2 + 4 x - 6 is drawn and a linear graph is drawn on the axes such that the intersection of the two graphs gives the",
+      "options": {
+        "A": "x = 1",
+        "B": "x = -1",
+        "C": "y = 1",
+        "D": "y = 1"
+      },
+      "correct_answer": "C",
+      "explanation": "to the equation x 2 + 4 x - 7 = 0. Find the equation for the linear graph.\n\n A. \r\n\n x = 1\n\n B. \r\n\n x = -1\n\n C. \r\n\n y = 1\n\n D. \r\n\n y = 1\n\n Mark \r\n\n Solution \r\n\nSubstitute y = x 2 + 4 x - 6 into x 2 + 4 x - 7 = 0\n\n-7 = -6 - 1\n\n x 2 + 4 x - 7 = 0\r\n\n x 2 + 4 x - 6 - 1 = 0\r\n\nBut x 2 + 4 x - 6 = y \n\n y - ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "The interior angle of a regular polygon is twice the exterior angle. How many sides has the polygon?",
+      "options": {
+        "A": "5",
+        "B": "6",
+        "C": "8",
+        "D": "9"
+      },
+      "correct_answer": "B",
+      "explanation": "Exterior angle = \r\n 360 \r\n No of sides \r\n\nLet x = exterior angle\n\nInterior angle = 2 x the exterior angle\r\n\nInterior angle = 2 x x \r\n\nInterior angle + Exterior angle = 180 o \n\n2 x + x = 180 o \r\n\n3 x = 180 o \r\n\nDivide both sides by 3\n\n x = \r\n 180 \r\n 3 \r\n\n x = 60 o \n\nThe exterior angle = 60 o \n\n60 = \r",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "Metuh is nine times as old as his cousin, Fafa. In six years time, he will be five times as old as Fafa. Find Fafa's present age.",
+      "options": {
+        "A": "5 years",
+        "B": "6 years",
+        "C": "7 hears",
+        "D": "8 years"
+      },
+      "correct_answer": null,
+      "explanation": "Let x = Fafa's present age.\n\nMetuh is nine times as old as Fafa → Metuh's present age = 9 x Fafa's present age.\n\nMetuh's present age = 9 x x \n\nIn six year's time, Metuh's age will be 9 x + 6\n\nIn six year's time, Fafa's age will be x + 6\n\n In six years time, he will be five times as old as Fafa \n\n9 x",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "If A = \r\n 1 \r\n 2",
+      "options": {
+        "B": "= a + b \r\n\n 2A",
+        "A": "= \r\n 1 \r\n 2",
+        "C": "a = \r\n 2A",
+        "D": "a ="
+      },
+      "correct_answer": "D",
+      "explanation": "A = \r\n 1 \r\n 2 \r\n\n b ( a + b )\r\n\nGet rid of the fraction by multiplying both sides by 2\n\n2 x A = 1 x b ( a + b )\r\n\n2A = b ( a + b )\r\n\nDivide both sides by b \n\n 2A \r\n b \r\n\n = a + b \r\n\n 2A \r\n b \r\n\n - b = a",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "If \r\n x + y \r\n 5 \r\n\n = \r\n x - y \r\n 3 \r\n\n , find x : y",
+      "options": {
+        "A": "5:3",
+        "B": "4:1",
+        "C": "3:5",
+        "D": "1:4"
+      },
+      "correct_answer": null,
+      "explanation": "x + y \r\n 5 \r\n\n = \r\n x - y \r\n 3 \r\n\nCross multiply. The numerator at the left side multiplies the denominator at the right then equal to then the numerator at the right also multiplies the denominator at the left.\n\n3 x ( x + y ) = 5 x ( x - y )\r\n\n3 x + 3 y = 5 x - 5 y \r\n\n3 y + 5 y = 5 x - 3 x \r\n\n8 y =",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "Find the equation of the line passing through P (4,1) and parallel to 2 x + 5 y = -10.",
+      "options": {
+        "A": "5 x + 2 y = 13",
+        "B": "5 x - 2 y = 10",
+        "C": "2 x - 5 y = 10",
+        "D": "2 x + 5 y = 13"
+      },
+      "correct_answer": null,
+      "explanation": "Concept\n\nParallel lines have the same gradient.\n\nThe general equation of a line is given as y = mx + b\r\n\n m = slope/gradient\r\n\n b = y - intercept\r\n\nDetermine the gradient/slope in the given equation.\n\n2 x + 5 y = -10\n\nMake y the subject\n\n5 y = -2 x - 10\n\nDivide both sides by 5\n\n y = - \r\n 2 \r\n 5 \r\n\n ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "The exterior angles of a quadrilateral are 61°,76°, ( x + 10)° and (2 x + 45)°.\n\nFind the value of x .",
+      "options": {
+        "A": "45",
+        "B": "60",
+        "C": "66",
+        "D": "56"
+      },
+      "correct_answer": "A",
+      "explanation": "Concept\n\nSum of exterior angles of any polygon = 360°\n\n61° + 76° + ( x + 10)° + (2 x + 45)° = 360°\r\n\n61 + 76 + x + 10 + 2 x + 45 = 360\r\n\n3 x + 192 = 360\r\n\n3 x = 360 - 192\r\n\n3 x = 168\r\n\nDivide both sides by 3\n\n x = \r\n 168 \r\n 3 \r\n\n x = 56",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "The shadow of a vertical pole is 50 cm. If the height of the pole is 2 m, find, correct to the nearest degree, the angle of elevation of the sun from the ground level.",
+      "options": {
+        "A": "45°",
+        "B": "56°",
+        "C": "60°",
+        "D": "76°"
+      },
+      "correct_answer": null,
+      "explanation": "Tan(θ) = \r\n Opposite \r\n Adjacent \r\n\nTan(θ) = \r\n 2",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "Consider the following statements:\n\n M: Helena studies hard ;\r\n\n N: Helena passes her examination .\r\n\nIf M ⇒ N",
+      "options": {
+        "A": "If Helena does not study hard, then she will pass her examination.",
+        "B": "If Helena does not study hard, then she will not pass her examination.",
+        "C": "If Helena passes her examination, then she had not studied hard.",
+        "D": "If Helena does not pass her examination, then she had not studied hard."
+      },
+      "correct_answer": null,
+      "explanation": "Note : M ⇒ N means M implies N .",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 31,
+      "question_text": "Given that 6log( x + 4) = log64, find the value of x .",
+      "options": {
+        "A": "4",
+        "B": "2",
+        "C": "-2",
+        "D": "-4"
+      },
+      "correct_answer": "A",
+      "explanation": "logb c = clogb\n\n64 = 2 x 2 x 2 x 2 x 2 x 2 = 2 6 \n\n6log( x + 4) = log64\n\n6log( x + 4) = log2 6 \r\n\n6log( x + 4) = 6log2\r\n\nCompare the left side and the right side.\n\n x + 4 = 2\r\n\n x = 2 - 4\r\n\n x = -2",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "If the area of the trapezium MNOP is 300 cm 2 , find the value of x .",
+      "options": {
+        "A": "15 cm",
+        "B": "12 cm",
+        "C": "10 cm",
+        "D": "20 cm"
+      },
+      "correct_answer": null,
+      "explanation": "The area of the trapezium is the summation of the area of the triangle and the rectangle.\n\nArea of triangle = \r\n 1 \r\n 2 \r\n\n x base x height\r\n\nArea of a rectangle = Length x Breadth\n\nBase of the triangle = 24 - 16 = 8\n\nHeight of the triangle = x \r\n\nBreadth of rectangle = x \r\n\n300 = \r\n 1 \r\n 2 \r\n\n x 8 ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 34,
+      "question_text": "Find the 11 th term of \r\n 1 \r\n 4 \r\n\n , \r\n 5 \r\n 8 \r\n\n ,1, 1 \r\n 3 \r\n 8 \r\n\n , ... .",
+      "options": {
+        "A": "= \r\n 1 \r\n 4",
+        "B": "6",
+        "C": "4",
+        "D": "= common difference"
+      },
+      "correct_answer": "A",
+      "explanation": "The sequence is linear.\n\nCommon difference = \r\n 5 \r\n 8 \r\n\n - \r\n 1 \r\n 4 \r\n\n = 1 - \r\n 5 \r\n 8 \r\n\n = 1 \r\n 3 \r\n 8 \r\n\n - 1 = \r\n 3 \r\n 8 \r\n\nU n = a + ( n - 1) d \n\nWhere n = n th term, \r\n\n a = first term\r\n\n d = common difference\r\n\n a = \r\n 1 \r\n 4 \r\n\n d = \r\n 3 \r\n 8 \r\n\nU 11 = \r\n 1 \r\n 4 \r\n\n + (11 - 1) x \r\n 3 \r\n ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "In a class of 30 students, 18 takes Mathematics, 5 take both Mathematics and Biology and 8 take neither Mathematics nor Biology. Find the number of students that take Biology.",
+      "options": {
+        "A": "6",
+        "B": "8",
+        "C": "9",
+        "D": "13"
+      },
+      "correct_answer": "A",
+      "explanation": "Let M represent Mathematics\r\n\n B represent Biology\r\n\n x represent students that take only Biology\r\n\n13 + 5 + x + 8 = 30\r\n\n26 + x = 30\r\n\n x = 30 - 26\r\n\n x = 4\r\n\nNumber of students that take Biology = 5 + 4 = 9",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "In the diagram, MN // PQ . Find the value of ( x + y ).",
+      "options": {
+        "A": "90°",
+        "B": "60°",
+        "C": "40°",
+        "D": "30°"
+      },
+      "correct_answer": null,
+      "explanation": "The angle adjacent to 110° is (180 - 110)° (Angles on a straight line sum up to 180°)\n\n( x + 4 y )° = The angle adjacent to 110° (Alternate angles are the same)\n\n( x + 4 y )° = (180 - 110)°\r\n\n x + 4 y = 70 ------ (equation 1)\r\n\n( x + 4 y )° = (2 x + y )°(Vertically opposite angles are the same).\n\nSi",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "The length of a rectangular lawn is 3 cm longer than the width. If the perimeter is 42 cm, find the width.",
+      "options": {
+        "A": "6 cm",
+        "B": "9 cm",
+        "C": "12 cm",
+        "D": "15 cm"
+      },
+      "correct_answer": null,
+      "explanation": "Perimeter is the summation of all the dimension of the boundaries of a shape.\n\nLet w = the width of the rectangular lawn.\n\nLength is 3 cm longer than the width → Length = w + 3\n\nPerimeter = 2( w + 3) + 2 w \n\nBut perimeter of the rectangular lawn = 42\n\n2( w + 3) + 2 w = 42\r\n\n2 x w + 2 x 3 + 2 w = 42\r",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "Given that p = x - \r\n 1 \r\n x \r\n\n and q = x 2 + \r\n 1 \r\n x 2 \r\n\n , express q in terms of p .",
+      "options": {
+        "A": "q = ( p 2 + 2)",
+        "B": "q = ( p - 2) 2",
+        "C": "q = ( p + 2) 2",
+        "D": "q = ( p 2 - 2)"
+      },
+      "correct_answer": null,
+      "explanation": "p = x - \r\n 1 \r\n x \r\n\nEvery number is divisible by 1\n\n x = \r\n x \r\n 1 \r\n\n p = \r\n x \r\n 1 \r\n\n - \r\n 1 \r\n x \r\n\n p = \r\n x x x - 1 \r\n x \r\n\n p = \r\n x 2 - 1 \r\n x \r\n\nSquare both sides of the equation.\n\n p 2 = ( \r\n x 2 - 1 \r\n x \r\n\n ) 2 \r\n\n( x 2 - 1) 2 = ( x 2 - 1) x ( x 2 - 1)\r\n\n( x 2 - 1) 2 = x 2 ( x 2 - 1) - ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 41,
+      "question_text": "If y varies as the square of x , y = 3 when x = \r\n 2 \r\n , find the value of y when x = 2",
+      "options": {
+        "A": "2",
+        "B": "4",
+        "C": "5",
+        "D": "6"
+      },
+      "correct_answer": "A",
+      "explanation": "y ∝ x 2 \n\nRemove the proportionality by introducing a constant.\n\n y = kx 2 \n\nSubtitute the known values to solve for the constant k \n\n y = 3 when x = \r\n 2 \r\n\n3 = k x \r\n ( 2 ) 2 \r\n\nWhen you square a square root, the square cancels out the square root.\n\n3 = k x 2\n\nDivide both sides by 2\n\n k = \r\n 3 \r\n ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 42,
+      "question_text": "In the diagram, O is the centre of the circle PQR , | PS | = | PQ | and ∠ RQS = 23 o . Find the value of x .",
+      "options": {
+        "A": "23 o",
+        "B": "38 o",
+        "C": "46 o",
+        "D": "67 o"
+      },
+      "correct_answer": "A",
+      "explanation": "Angles subtended by the diameter (or semi-circle) is 90 o .\n\n∠ PQR = 90 o \n\n∠ PQS + ∠ RQS = ∠ PQR = 90 o \n\n∠ RQS = 23 o \n\n∠ PQS + 23 o = 90 o \n\n∠ PQS = 90 o - 23 o \n\n∠ PQS = 67 o \n\nSince triangle PQS is isosceles triangle, the base angles are the same.\n\n∠ PQS = ∠ PSQ = 67 o \n\nSum of angles in a tria",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 43,
+      "question_text": "The mass of some market women in kg are: 83, 47, 62, 49, 55, 72, 58 and 62.\n\n Use the information to answer the question below \n\nFind the range.",
+      "options": {
+        "A": "21",
+        "B": "36",
+        "C": "46",
+        "D": "52"
+      },
+      "correct_answer": "B",
+      "explanation": "the question below \n\nFind the range.\n\n A. \r\n\n21\n\n B. \r\n\n36\n\n C. \r\n\n46\n\n D. \r\n\n52\n\n Mark \r\n\n Solution \r\n\nRange = Largest Value - Smallest Value\n\nRange = 83 - 47\n\nRange = 36",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 44,
+      "question_text": "The mass of some market women in kg are: 83, 47, 62, 49, 55, 72, 58 and 62.\n\n Use the information to answer the question below \n\nFind the mean.",
+      "options": {
+        "A": "45",
+        "B": "55",
+        "C": "61",
+        "D": "71"
+      },
+      "correct_answer": "B",
+      "explanation": "the question below \n\nFind the mean.\n\n A. \r\n\n45\n\n B. \r\n\n55\n\n C. \r\n\n61\n\n D. \r\n\n71\n\n Mark \r\n\n Solution \r\n\nMean = \r\n Sum of numbers \r\n Number of numbers \r\n\nMean = \r\n 83 + 47 + 62 + 49 + 55 + 72 + 58 + 62 \r\n 8 \r\n\nMean = \r\n 488 \r\n 8 \r\n\n = 61",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 45,
+      "question_text": "Evaluate tan 30 o - 2sin 60 o",
+      "options": {
+        "A": "x",
+        "B": "2 3 \r\n 3",
+        "C": "3 \r\n 3 \r\n\n - 1",
+        "D": "3 \r\n 3"
+      },
+      "correct_answer": "A",
+      "explanation": "Tan 30 o = \r\n 1 \r\n 3 \r\n\nsin 60 o = \r\n 3 \r\n 2 \r\n\ntan 30 o - 2sin 60 o = \r\n 1 \r\n 3 \r\n\n - 2 x \r\n 3 \r\n 2 \r\n\n Note : The 2 dividing \r\n 3 \r\n cancels the 2 multiply.\r\n\ntan 30 o - 2sin 60 o = \r\n 1 \r\n 3 \r\n\n - \r\n 3 \r\n\nEvery number is being divided by 1.\n\n 3 \r\n = \r\n 3 \r\n 1 \r\n\ntan 30 o - 2sin 60 o = \r\n 1 \r\n 3 \r",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 47,
+      "question_text": "The probabilities of three independent events X , Y and Z occurring are \r\n 1 \r\n 2 \r\n\n , \r\n 2 \r\n 3 \r\n\n and \r\n 1 \r\n 4 \r\n\n respectively. What is the probability that only events X and Z are occurring?",
+      "options": {
+        "A": "1 \r\n 24",
+        "B": "3 \r\n 24",
+        "C": "1 \r\n 8",
+        "D": "3 \r\n 4"
+      },
+      "correct_answer": null,
+      "explanation": "P( X ) = \r\n 1 \r\n 2 \r\n\nP( Y ) = \r\n 2 \r\n 3 \r\n\nP( Z ) = \r\n 1 \r\n 4 \r\n\nP( only X and Z ) = P( X ) x P( Z ) x P( Y not occurring)\n\nProbability of not occurring = 1 - Probability of occurring\n\nP( Y not occurring) = 1 - \r\n 2 \r\n 3 \r\n\nEvery number is being divided by 1\n\nP( Y not occurring) = \r\n 1 \r\n 1 \r\n\n - \r",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 48,
+      "question_text": "One side of a rectangle is 8 cm and the diagonal is 10 cm. Calculate the area of the rectangle.",
+      "options": {
+        "A": "60 cm 2",
+        "B": "48 cm 2",
+        "C": "40 cm 2",
+        "D": "24 cm 2"
+      },
+      "correct_answer": null,
+      "explanation": "Let the length of the rectangle = 8 cm and b cm be the breadth.\n\nFrom Pythagorean theorem,\n\nThe hypothenuse ( c ) is the longest side. The side facing the right-angle (∟)\n\nThe 10 cm is the hypothenuse, since it's facing the right-angle and also the longest side.\n\n10 2 = 8 2 + b 2 \n\n100 = 64 + b 2 \n\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 49,
+      "question_text": "In the diagram, EFGH are points on a circle centre P . If ∠ EFG = 142 o and ∠ FGP = 63 o , find ∠ FEP .",
+      "options": {
+        "A": "63 o",
+        "B": "76 o",
+        "C": "79 o",
+        "D": "89 o"
+      },
+      "correct_answer": "A",
+      "explanation": "Central angle is twice any inscribed angle subtended by the same arc.\n\n∠ EPG = 2 x ∠ EFG \n\n∠ EPG = 2 x 142 o \n\n∠ EPG = 284 o \n\n∠ EPG + x = 360 o (Sum of angles of a circle)\n\n284 o + x = 360 o \n\n x = 360 o - 284 o \n\n x = 76 o \n\nSum of interior angles of a quadrilateral is 360 o \n\n Note : sum of inter",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 50,
+      "question_text": "In the diagram PQ is the diameter of circle PQR with centre O and RS meets PQ at S .\n\nIf ∠ RQP = 64 o and ∠ RSQ = 36 o , find ∠ PRS .",
+      "options": {
+        "A": "22 o",
+        "B": "18 o",
+        "C": "16 o",
+        "D": "10 o"
+      },
+      "correct_answer": null,
+      "explanation": "Angles subtended by the diameter (or semi-circle) is 90 o .\n\n∠ PRQ = 90 o \n\n∠ PRQ = ∠ QRS + ∠ PRS \n\n∠ PRS = ∠ PRQ - ∠ QRS \n\n∠ PRS = 90 o - ∠ QRS \n\n36 o + 64 o + ∠ QRS = 180 o (sum of angles in a triangle)\n\n100 o + ∠ QRS = 180 o \n\n∠ QRS = 180 o - 100 o \n\n∠ QRS = 80 o \n\n∠ PRS = 90 o - 80 o \n\n∠ PRS = 1",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

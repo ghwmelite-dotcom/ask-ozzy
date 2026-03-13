@@ -1,0 +1,594 @@
+{
+  "exam_type": "wassce",
+  "subject": "Core Mathematics",
+  "year": 2024,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "The sum of the interior angles of a polygon is 1260°. Find the number of sides.",
+      "options": {
+        "A": "9",
+        "B": "6",
+        "C": "7",
+        "D": "8"
+      },
+      "correct_answer": "B",
+      "explanation": "Interior angles of a regular polygon \r\n\nSum of interior angles = ( n - 2) x 180°\n\nWhere n = number of sides of the regular polygon.\n\nSum of interior angles = 1260°\n\n( n - 2) x 180° = 1260°\n\n( n - 2) x 180 = 1260\n\nDivide both sides by 180\n\n n - 2 = \r\n 1260 \r\n 180 \r\n\n n - 2 = 7\n\n n = 7 + 2\n\n n = 9",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "Regina is 34 years old and her daughter is 5 years. In n years, Regina will be twice as old as her daughter. Find the value of n .",
+      "options": {
+        "A": "23",
+        "B": "30",
+        "C": "29",
+        "D": "24"
+      },
+      "correct_answer": "D",
+      "explanation": "Regina's age now = 34.\n\nIn n years time, Regina will be (34 + n ) years.\n\nDaughter's age now = 5.\n\nIn n years time, the daughter will be (5 + n ) years.\n\nIn n years, Regina will be twice as old as her daughter\n\n Twice means 2 times (2 x)\n\nRegina's age in n years time = 2 x daughter's age in n years ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "Make x the subject of the relation y = \r\n\n px \r\n r \r\n - r 2 x \r\n .",
+      "options": {
+        "A": "x = \r\n r y 2 \r\n p - r 3",
+        "B": "x = \r\n p - r 3 \r\n r y 2",
+        "C": "x = \r\n ry \r\n p - r 3",
+        "D": "x = \r\n y 2 \r\n p - r 2"
+      },
+      "correct_answer": null,
+      "explanation": "y = \r\n\n px \r\n r \r\n - r 2 x \r\n\nGet rid of the square root by squaring both sides of the equation.\n\n y 2 = \r\n\n px \r\n r \r\n - r 2 x \r\n\nFactorize x out.\n\n y 2 = x ( \r\n\n p \r\n r \r\n - r 2 \r\n )\r\n\nEvery number is being divided by 1\n\n r 2 = \r\n r 2 \r\n 1 \r\n\n y 2 = x ( \r\n\n p \r\n r \r\n - \r\n r 2",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "Seven men complete a certain work schedule in 6 days. How long will it take two of the men to complete the same work schedule f they work at the same rate?",
+      "options": {
+        "A": "42 days",
+        "B": "35 days",
+        "C": "21 days",
+        "D": "14 days"
+      },
+      "correct_answer": null,
+      "explanation": "The more the workers, the lesser the time.\n\nHence time ( t ) is inversely proportional to the number of workers ( w ).\n\n t ∝ \r\n 1 \r\n w \r\n\nRemove the proportionality by introducing a constant ( k ).\n\n t = k x \r\n 1 \r\n w \r\n\nUse the known information to solve for k \n\n7 workers used 6 days.\n\n6 = k x \r\n 1",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "If cos y is negative and sin y is negative, in which quadrant would y lie?",
+      "options": {
+        "A": "First",
+        "B": "Fourth",
+        "C": "Third",
+        "D": "Second"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "The volume of a cone s 264 cm 3 . If the base radius is 6 cm, find the height.\n\n[Take π = \r\n 22 \r\n 7 \r\n\n ]",
+      "options": {
+        "A": "5 cm",
+        "B": "8 cm",
+        "C": "7 cm",
+        "D": "6 cm"
+      },
+      "correct_answer": null,
+      "explanation": "Volume of a cone \r\n\nVolume = π x r 2 x \r\n h \r\n 3 \r\n\nWhere r = the radius and h = the height of the cone.\n\nVolume = 264 cm 3 \n\nRadius ( r ) = 6 cm\n\nπ = \r\n 22 \r\n 7 \r\n\n264 = \r\n 22 \r\n 7 \r\n\n x 6 2 x \r\n h \r\n 3 \r\n\n264 = \r\n 22 x 36 x h \r\n 7 x 3 \r\n\nGet rid of the fraction by multiplying both sides by the den",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "Find the value of x for which \r\n 2x - 1 \r\n x 2 + 2x + 1 \r\n\n is not defined.",
+      "options": {
+        "A": "1 \r\n 2",
+        "B": "1",
+        "C": "2",
+        "D": "-1"
+      },
+      "correct_answer": "B",
+      "explanation": "For a relation to be not defined/undefined, the denominator must be equal to 0 \n\n x 2 + 2 x + 1 = 0\n\nExpress 2 x as two numbers when you multiply you will get c (1) and when you add you will get b (2)\n\n1 x 1 = 1 and 1 + 1 = 2 hence the number is 1\n\n x 2 + x + x + 1 = 0\n\n x ( x + 1) + 1( x + 1) = 0\n\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "The range of a sample of 10 numbers is 5 and the largest value is 50. What is the least value?",
+      "options": {
+        "A": "40",
+        "B": "60",
+        "C": "55",
+        "D": "45"
+      },
+      "correct_answer": null,
+      "explanation": "Range \r\n\nRange = Largest value - Least value\n\nRange = 5\n\nLargest value = 50\n\n50 - Least = 5\n\n50 - 5 = Least\n\n45 = Least",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "The mean of ten numbers is 16. When another number, k , is added, the mean becomes 18.\n\nFind the value of k .",
+      "options": {
+        "A": "38",
+        "B": "32",
+        "C": "34",
+        "D": "36"
+      },
+      "correct_answer": null,
+      "explanation": "Mean \r\n\nMean = \r\n Sum of items \r\n Number of items \r\n\nMean = 16\n\nNumber of numbers = 10\n\n Sum of numbers \r\n 10 \r\n\n = 16\r\n\nGet rid of the fraction by multiplying both sides by the denominator 10.\n\nSum of numbers = 16 x 10 = 160\n\nWhen k is added, the new sum = 160 + k and the number of numbers become 1",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "The probability that John and James pass an examination are \r\n 3 \r\n 4 \r\n\n and \r\n 3 \r\n 5 \r\n\n respectively.\r\n\nFind the probability that both will fail.",
+      "options": {
+        "A": "1 \r\n 10",
+        "B": "11 \r\n 20",
+        "C": "9 \r\n 20",
+        "D": "3 \r\n 10"
+      },
+      "correct_answer": null,
+      "explanation": "P(Both fail) = P(John fail) and P(James fail)\n\nAnd means multiplication (x)\n\nP(Both fail) = P(John fail) x P(James fail)\n\nProbability of not = 1 - Probability of is\n\nP(John pass) = \r\n 3 \r\n 4 \r\n\nP(John fail) = 1 - P(John pass)\n\nP(John fail) = 1 - \r\n 3 \r\n 4 \r\n\nEvery number is being divided by 1.\n\n1 = ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "The diagonals of a rhombus are 12 cm and 16 cm.\n\nFind the perimeter.",
+      "options": {
+        "A": "42 cm",
+        "B": "24 cm",
+        "C": "2 = 100\n\nTake square root of both sides.",
+        "D": "40 cm"
+      },
+      "correct_answer": null,
+      "explanation": "From Pythagorean theorem,\n\nThe hypothenuse ( c ) is the longest side. The side facing the right-angle (∟)\n\n c 2 = 6 2 + 8 2 \n\n c 2 = 100\n\nTake square root of both sides.\n\n c = \r\n 100 \r\n = 10 cm\r\n\nPerimeter is the sum of all the sides of a shape.\n\nThe perimeter of the rhombus = c + c + c + c \n\nThe pe",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "In the diagram PQR is a circle with centre O and ∠ OQR = 42°.\n\nFind ∠ QPR .",
+      "options": {
+        "A": "42°",
+        "B": "48°",
+        "C": "54°",
+        "D": "56°"
+      },
+      "correct_answer": "A",
+      "explanation": "OR = OQ = Radius\n\n∆ RQO is an isosceles triangle.\n\nIsosceles triangle has the base angles the same.\n\n∠ ORQ = ∠ OQR = 42°\n\n∠ ROQ + 42° + 42° = 180° (sum of angles of a triangle)\n\n∠ ROQ + 84 = 180\n\n∠ ROQ = 180 - 84\n\n∠ ROQ = 96°\n\n Central Angle \r\n\nCentral angle is twice any inscribed angle subtended by",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "Solve: x (3 x + 4) = 4.",
+      "options": {
+        "A": "x = \r\n 2 \r\n 3 \r\n\n or x = - 2",
+        "B": "x = - \r\n 2 \r\n 3 \r\n\n or x = 2",
+        "C": "x = \r\n 2 \r\n 3 \r\n\n or x = 2",
+        "D": "x = - \r\n 2 \r\n 3 \r\n\n or x = - 2"
+      },
+      "correct_answer": null,
+      "explanation": "x (3 x + 4) = 4\n\nExpand the bracket.\n\n3 x x x + 4 x x = 4\n\n3 x 2 + 4 x = 4\n\n3 x 2 + 4 x - 4 = 0\n\n Notes:",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "If P = {-2, 0, 2, 4, 6} and Q = {-3, -1, 0, 2, 3, 5}, find the set P ∩ Q.",
+      "options": {
+        "A": "{}",
+        "B": "{-3, -1, 3, 5}",
+        "C": "{-2, 4, 6}",
+        "D": "{0, 2}"
+      },
+      "correct_answer": null,
+      "explanation": "Intersection (∩) are elements that can be found in both sets\n\nP = {-2, 0 , 2 , 4, 6}\n\nQ = {-3, -1, 0 , 2 , 3, 5}\n\nP ∩ Q = {0, 2}",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "An office equipment depreciates at 15% per annum. If the cost is GH₵ 1,200.00 when new, find the value after three years.",
+      "options": {
+        "A": "= 1200 x 0.85 3",
+        "B": "GH₵ 867.95",
+        "C": "GH₵ 736.95",
+        "D": "GH₵ 876.00"
+      },
+      "correct_answer": null,
+      "explanation": "Method I\n\n Depreciation \r\n\n A = P (1 - r ) n \n\nWhere A = value at end of the n years\n\n P = Initial amount\n\n r = rate of depreciation\n\n P = 1200\n\n r = \r\n 15 \r\n 100 \r\n\n = 0.15\r\n\n n = 3\n\n A = 1200(1 - 0.15) 3 \n\n A = 1200(0.85) 3 \n\n A = 1200 x 0.85 3 \n\n A = 736.95\n\n∴ value at the end of three years = GH",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "Calculate the value of t in the diagram.",
+      "options": {
+        "A": "35°",
+        "B": "175°",
+        "C": "75°",
+        "D": "40°"
+      },
+      "correct_answer": "A",
+      "explanation": "Draw an imaginary parallel line to cut t .\n\n t = ∠ CGE + ∠ EGJ \n\n∠ ACD = ∠ BCG = 35° (Vertically opposite angles)\n\n∠ CGE = ∠ BCG = 35° (Alternate angles)\n\n∠ HJG + ∠ IJG = 180° (Angles on a straight line)\n\n∠ HJG = 140°\n\n140° + ∠ IJG = 180°\n\n∠ IJG = 180° - 140°\n\n∠ IJG = 40°\n\n∠ EGJ = IJG = 40° (Alterna",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "Given that 6 ⊗ 7 = y (modulo 8), find the value of y .",
+      "options": {
+        "A": "2",
+        "B": "5",
+        "C": "4",
+        "D": "3"
+      },
+      "correct_answer": "A",
+      "explanation": "⊗ means multiplication\n\n6 x 7 = 42\n\n42 ÷ 8 = 5 remainder 2 (42 = 5 x 8 + 2)\n\nThe remainder is the modulo, hence 42 modulo 8 is 2 .\n\n∴ y = 2",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "Given the statements p and q , the statement p ∨ q is false only if",
+      "options": {
+        "A": "p is false and q is true.",
+        "B": "p is true and q is true.",
+        "C": "p is false and q is false.",
+        "D": "p is true and q is false."
+      },
+      "correct_answer": null,
+      "explanation": "∧ is used to represent logical AND and ∨ is used to represent logical OR \n\nWith ∨ , the statement is true if any is true and false if both are false .",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "y \r\n 1 \r\n 2 \r\n 3 \r\n 4 \r\n\n x \r\n 0 \r\n 2 \r\n 4 \r\n 6 \r\n\nThe table describes the relation y = mx + c where m and c are constants.\n\n Use the information to answer the question below \n\nWhat is the gradient of the equation of the line?",
+      "options": {
+        "A": "1 \r\n 2",
+        "B": "-2",
+        "C": "2",
+        "D": "1"
+      },
+      "correct_answer": "A",
+      "explanation": "the question below \n\nWhat is the gradient of the equation of the line?\n\n A. \r\n\n 1 \r\n 2 \r\n\n B. \r\n\n-2\n\n C. \r\n\n2\n\n D. \r\n\n1\n\n Mark \r\n\n Solution \r\n\nGradient = \r\n Change in Y \r\n Change in X \r\n\n = \r\n Y 2 - Y 1 \r\n X 2 - X 1 \r\n\nPick any two points from the table to calculate the gradient.\n\nUsing the first tw",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "y \r\n 1 \r\n 2 \r\n 3 \r\n 4 \r\n\n x \r\n 0 \r\n 2 \r\n 4 \r\n 6 \r\n\nThe table describes the relation y = mx + c where m and c are constants.\n\n Use the information to answer the question below \n\nFind the equation of the line described in the table.",
+      "options": {
+        "A": "y = 2 x",
+        "B": "2 y = x + 2",
+        "C": "y = x",
+        "D": "y = x + 1"
+      },
+      "correct_answer": "C",
+      "explanation": "the question below \n\nFind the equation of the line described in the table.\n\n A. \r\n\n y = 2 x \n\n B. \r\n\n2 y = x + 2\n\n C. \r\n\n y = x \n\n D. \r\n\n y = x + 1\n\n Mark \r\n\n Solution \r\n\n Equation of a line \r\n\n y - y 1 = m ( x - x 1 )\n\nWhere m = gradient of the line.\n\nGradient = \r\n Change in Y \r\n Change in X \r\n\n = ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "The second term of a Geometric Progression (G.P) is 9. If the fourth term is 81, find the common ratio.",
+      "options": {
+        "A": "n = ar n-1 \n\nSecond term = 9\n\n n = 2\n\nar 2-1 = 9\n\nar = 9 ------ eqn 1 \n\nFourth term = 81\n\n n = 4\n\nar 4-1 = 81\n\nar 3 = 81 ----- eqn 2 \n\nGet rid of a by dividing ----- eqn 2 by ----- eqn 1",
+        "B": "1",
+        "C": "2",
+        "D": "3"
+      },
+      "correct_answer": "B",
+      "explanation": "Geometric Progression (G.P) \r\n\nTerms of an infinite G.P. can be written as a, ar, ar 2 , ar 3 , ……ar n-1 \n\nWhere a is the first term and r is the common ratio.\n\nThe nth term (a n ) is calculated as ar n-1 \n\nCommon ratio = \r\n a n \r\n a n - 1 \r\n\na n = ar n-1 \n\nSecond term = 9\n\n n = 2\n\nar 2-1 = 9\n\nar = ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "In the diagram, ∆ PQR is similar to ∆ PWY . WY || QR , | QR | = 15 cm, | WY | = 6 cm and | WP | = 4 cm.\n\nFind | WQ | .",
+      "options": {
+        "A": "6 cm",
+        "B": "12 cm",
+        "C": "10 cm",
+        "D": "8 cm"
+      },
+      "correct_answer": "A",
+      "explanation": "The ratio of the corresponding sides of the larger and smaller ∆s are the same.\n\n |PR| \r\n |PY| \r\n\n = \r\n |QR| \r\n |WY| \r\n\n = \r\n |PQ| \r\n |PW| \r\n\n | PQ | = | PW | + | WQ | \n\n | WQ | = | PQ | - | PW | \n\nUse the known sides to find the | PQ | \n\n |QR| \r\n |WY| \r\n\n = \r\n |PQ| \r\n |PW| \r\n\n 15 cm \r\n 6 cm \r\n\n = \r",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "The diameter of a bicycle wheel is 21 cm. If the wheel makes 8 complete revolutions, what will be the total distance covered by the wheel?\n\n[Take π = \r\n 22 \r\n 7 \r\n\n ]",
+      "options": {
+        "A": "132 cm",
+        "B": "1,386 cm",
+        "C": "1,056 cm",
+        "D": "528 cm"
+      },
+      "correct_answer": null,
+      "explanation": "Distance covered in one complete revolution = the circumference of the wheel\n\nDistance covered in the 8 complete revolutions = 8 x the circumference of the wheel\n\nCircumference = 2 x π x radius\n\nDistance covered in the 8 complete revolutions = 8 x 2 x π x radius\n\nRadius = \r\n Diameter \r\n 2 \r\n\n = \r\n 2",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 31,
+      "question_text": "Find the value of x in the diagram.",
+      "options": {
+        "A": "16",
+        "B": "44",
+        "C": "36",
+        "D": "28"
+      },
+      "correct_answer": "C",
+      "explanation": "Sum of exterior angles of a polygon = 360°\n\n3 x + 2 x + x + 10 + 4 x + 50 + 20 = 360\n\n10 x + 80 = 360\n\n10 x = 360 - 80\n\n10 x = 280\n\nDivide both sides by 10\n\n x = \r\n 280 \r\n 10 \r\n\n = 28",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "The interior angles of a triangle are ( y + 10)°, (2 y - 40)° and (3 y - 90)°.\n\nWhich of the following accurately describes the triangle?",
+      "options": {
+        "A": "isosceles triangle",
+        "B": "right-angled triangle",
+        "C": "equilateral triangle",
+        "D": "scalene triangle"
+      },
+      "correct_answer": null,
+      "explanation": "Find the value of y in order to calculate each angles to determine the type of triangle.\n\nAngles of the triangle are ( y + 10)°, (2 y - 40)° and (3 y - 90)°\n\nSum of interior angles of a triangle is 180°\n\n y + 10 + 2 y - 40 + 3 y - 90 = 180\n\n6 y - 120 = 180\n\n6 y = 180 + 120\n\n6 y = 300\n\nDivide both si",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "Given that sin A = \r\n 3 \r\n 5 \r\n\n , 0° ≤ A ≤ 90°, find the value of (tan A - cos A)",
+      "options": {
+        "A": "- \r\n 1 \r\n 20",
+        "B": "2 = 16\n\nTake square root of both sides.",
+        "C": "- \r\n 3 \r\n 20",
+        "D": "1 \r\n 20"
+      },
+      "correct_answer": null,
+      "explanation": "Draw the right-angled triangle and determine the third side.\n\nsin A = \r\n 3 \r\n 5 \r\n\n SOHCAHTOA \r\n\n SOHCAHTOA is a mnemonic that gives us an easy way to remember the three main trigonometric ratios. They are sine (sin), cosine (cos) and tangent (tan).\n\nSOH\n\nsin(θ) = \r\n Opposite \r\n Hypothenuse \r\n\nCAH\n\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 34,
+      "question_text": "Simplify: 3 log x + log y - 2 log z .",
+      "options": {
+        "A": "log ( x 3 yz 2 )",
+        "B": "log ( \r\n 3xy \r\n 2z \r\n\n )",
+        "C": "log ( \r\n 3xy \r\n z 2 \r\n\n )",
+        "D": "log ( \r\n x 3 y \r\n z 2 \r\n\n )"
+      },
+      "correct_answer": null,
+      "explanation": "Notes:",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "The area of a square parcel of land is 256 m 2 . A rectangular field of length 20 m has the same perimeter as the parcel of land.\n\nFind the area of the field.",
+      "options": {
+        "A": "square has the same lengths (L) for all 4 sides.\n\nPerimeter of a square = L + L + L + L = 4 L \n\nArea of a square = Length ( L ) x Length ( L ) = L 2 \n\nArea of the square parcel of land = 256 m 2 \n\n L 2 = 256\n\nTake square root of both sides.\n\n L = \r\n 256 \r\n = 16 m\r\n\nPerimeter of the square parcel of land = 4 L \n\nPerimeter of the square parcel of land = 4 x 16 m = 64 m\n\nThe rectangular field has the same perimeter.\n\nPerimeter of the rectangular field = 64 m\n\nRectangle has two of the lengths equal and two of the breadth equal.\n\nPerimeter of a rectangle = Length( L ) + Length( L ) + Breadth( B ) + Breadth ( B )\n\nPerimeter of a rectangle = L + L + B + B \n\nPerimeter of a rectangle = 2 L + 2 B \n\nPerimeter of the rectangular field = 64 m\n\nThe length of the rectangular field = 20 m\n\n2 x 20 m + 2 B = 64 m\n\n40 m + 2 B = 64 m\n\n2 B = 64 m - 40 m\n\n2 B = 24 m\n\nDivide both sides by 2.",
+        "B": "400 m 2",
+        "C": "320 m 2",
+        "D": "240 m 2"
+      },
+      "correct_answer": null,
+      "explanation": "Perimeter is the sum of all the sides of a shape.\n\nA square has the same lengths (L) for all 4 sides.\n\nPerimeter of a square = L + L + L + L = 4 L \n\nArea of a square = Length ( L ) x Length ( L ) = L 2 \n\nArea of the square parcel of land = 256 m 2 \n\n L 2 = 256\n\nTake square root of both sides.\n\n L = ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 37,
+      "question_text": "Mr. Abban invested $1,200.00 for 3 years at 5% per annum compound interest.\n\nFind the interest earned at the end of three years.",
+      "options": {
+        "A": "= P (1 + r) t \n\n P = $1,200\n\n r = \r\n 5 \r\n 100 \r\n\n = 0.05\r\n\n t = 3",
+        "B": "$1,389.15",
+        "C": "$1,380.00",
+        "D": "$180.00"
+      },
+      "correct_answer": "B",
+      "explanation": "Method I\n\n Compound Interest \r\n\n A = P (1 + \r\n r \r\n n \r\n\n ) nt \r\n\nWhere\r\n\n A = amount\r\n\n P = principal\r\n\n r = rate of interest\r\n\n n = number of times interest is compounded per year\r\n\n t = time (in years)\r\n\n n = 1 (compounded once every year)\n\n A = P (1 + r) t \n\n P = $1,200\n\n r = \r\n 5 \r\n 100 \r\n\n = 0",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "In the diagram PR is tangent to the circle at Q . The centre of the circle is O and ∠ QOS = 108°.\n\n Use the information to answer the question below \n\nFind ∠ OSQ .",
+      "options": {
+        "A": "72°",
+        "B": "18°",
+        "C": "36°",
+        "D": "42°"
+      },
+      "correct_answer": "A",
+      "explanation": "the question below \n\nFind ∠ OSQ .\n\n A. \r\n\n72°\n\n B. \r\n\n18°\n\n C. \r\n\n36°\n\n D. \r\n\n42°\n\n Mark \r\n\n Solution \r\n\n | OS | = | OQ | = Radius of the circle\n\n∆ QOS is an isosceles triangle hence the base angles are the same.\n\n∠ OSQ = ∠ OQS \n\n∠ QOS + ∠ OSQ + ∠ OQS = 180°(Sum of angles of a triangle)\n\n108° + ∠ OS",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "In the diagram PR is tangent to the circle at Q . The centre of the circle is O and ∠ QOS = 108°.\n\n Use the information to answer the question below \n\nFind ∠ SQR .",
+      "options": {
+        "A": "36°",
+        "B": "72°",
+        "C": "54°",
+        "D": "42°"
+      },
+      "correct_answer": "C",
+      "explanation": "the question below \n\nFind ∠ SQR .\n\n A. \r\n\n36°\n\n B. \r\n\n72°\n\n C. \r\n\n54°\n\n D. \r\n\n42°\n\n Mark \r\n\n Solution \r\n\nFrom alternate segment theorem,\n\nDraw an imaginary angle subtended by the arc QS \n\nFrom the alternate segment theorem, ∠ QTS = ∠ SQR \n\n Central Angle \r\n\nCentral angle is twice any inscribed angle",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 42,
+      "question_text": "Mr. Amuzu sold his car through an agent who charged 9% commission on the selling price.\n\nIf Amuzu received GH₵ 236,600.00 after the sale, find the selling price of the car.",
+      "options": {
+        "A": "GH₵ 238,400.00",
+        "B": "GH₵ 248,000.00",
+        "C": "GH₵ 260,000.00",
+        "D": "GH₵ 273,000.00"
+      },
+      "correct_answer": "C",
+      "explanation": "Percentage for selling price = 100%\n\nPercentage received = 100% - Commission%\n\nPercentage received = 100% - 9%\n\nPercentage received = 91%\n\nAmount received = GH₵ 236,600\n\nIf 91% = GH₵ 236,600\n\n100% = \r\n GH₵ 236,600 x 100% \r\n 91% \r\n\n = GH₵ 260,000\r\n\n∴ Selling price = GH₵ 260,000.00",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 43,
+      "question_text": "The diagram shows a triangle MNP inscribed in a circle. MQ is a tangent to the circle at M .\n\nFind ∠ MPN .",
+      "options": {
+        "A": "49°",
+        "B": "131°",
+        "C": "73°",
+        "D": "58°"
+      },
+      "correct_answer": "B",
+      "explanation": "From alternate segment theorem,\n\n∠ MNP = ∠ QMP = 73°\n\n∠ MNP + ∠ MPN + ∠ PMN = 180°(Sum of angles in a triangle)\n\n73° + ∠ MPN + 58° = 180°\n\n∠ MPN + 131° = 180°\n\n∠ MPN = 180° - 131°\n\n∠ MPN = 49°",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 44,
+      "question_text": "In an examination taken by 120 students, 90 passed Mathematics, 40 passed Science and 5 failed both subjects.\n\n Use the information to answer the question below \n\nHow many students passed Science only",
+      "options": {
+        "A": "15",
+        "B": "75",
+        "C": "25",
+        "D": "20"
+      },
+      "correct_answer": "A",
+      "explanation": "the question below \n\nHow many students passed Science only \n\n A. \r\n\n15\n\n B. \r\n\n75\n\n C. \r\n\n25\n\n D. \r\n\n20\n\n Mark \r\n\n Solution \r\n\n U = {Students}\n\n n ( U ) = 120\n\n M = {Students who passed Mathematics}\n\n n ( M ) = 90\n\n S = {Students who passed Science}\n\n n ( S ) = 40\n\nLet x = number of students who pas",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 45,
+      "question_text": "In an examination taken by 120 students, 90 passed Mathematics, 40 passed Science and 5 failed both subjects.\n\n Use the information to answer the question below \n\nFind the probability that a student selected at random passed only one subject.",
+      "options": {
+        "A": "1 \r\n 6",
+        "B": "19 \r\n 24",
+        "C": "5 \r\n 6",
+        "D": "7 \r\n 24"
+      },
+      "correct_answer": null,
+      "explanation": "the question below \n\nFind the probability that a student selected at random passed only one subject.\n\n A. \r\n\n 1 \r\n 6 \r\n\n B. \r\n\n 19 \r\n 24 \r\n\n C. \r\n\n 5 \r\n 6 \r\n\n D. \r\n\n 7 \r\n 24 \r\n\n Mark \r\n\n Solution \r\n\n U = {Students}\n\n n ( U ) = 120\n\n M = {Students who passed Mathematics}\n\n n ( M ) = 90\n\n S = {Student",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 46,
+      "question_text": "In the diagram, PR is a diameter of the circle PQS with centre O .\n\nFind the value of ∠ PQS .",
+      "options": {
+        "A": "37°",
+        "B": "90°",
+        "C": "55°",
+        "D": "45°"
+      },
+      "correct_answer": "B",
+      "explanation": "PS = RS \n\n∆ PSR is an isosceles triangle.\n\nIsosceles triangles have the base angles the same.\n\n∠ SPR = ∠ SRP \n\n Angle subtended by a diameter \r\n\nAngle subtended by a diameter is 90°.\n\n∠ PSR = 90°\n\n∠ SPR + ∠ SRP + ∠ PSR = 180° (Sum of angles in a triangle)\n\n∠ SPR + ∠ SRP + 90° = 180°\n\n∠ SPR + ∠ SRP =",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 48,
+      "question_text": "Find the product of 124 seven and 23 seven .",
+      "options": {
+        "A": "3125 seven",
+        "B": "3215 seven",
+        "C": "3211 seven",
+        "D": "3115 seven"
+      },
+      "correct_answer": null,
+      "explanation": "Product means multiplication .\n\nChange the numbers to base 10 and multiply and change it back to base seven.\n\n124 seven = 1 x 7 2 + 2 x 7 1 + 4 x 7 0 \n\n124 seven = 67\n\n23 seven = 2 x 7 1 + 3 x 7 0 \n\n23 seven = 17\n\n124 seven x 23 seven = 67 x 17\n\n124 seven x 23 seven = 1139\n\n1139 base 10 to base 7\n\n ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 49,
+      "question_text": "Given that m = 5, n = 3 and r = 2, evaluate \r\n ( m 2 - n 2 ) + r 2 \r\n m 2 + ( n 2 - r 2 )",
+      "options": {
+        "A": "1 \r\n 3",
+        "B": "4 \r\n 3",
+        "C": "1",
+        "D": "2 \r\n 3"
+      },
+      "correct_answer": null,
+      "explanation": "( m 2 - n 2 ) + r 2 \r\n m 2 + ( n 2 - r 2 ) \r\n\n = \r\n ( m 2 - n 2 ) + r 2 \r\n m 2 + ( n 2 - r 2 ) \r\n\nWhen m = 5, n = 3 and r = 2\n\n ( m 2 - n 2 ) + r 2 \r\n m 2 + ( n 2 - r 2 ) \r\n\n = \r\n ( 5 2 - 3 2 ) + 2 2 \r\n 5 2 + ( 3 2 - 2 2 ) \r\n\n ( m 2 - n 2 ) + r 2 \r\n m 2 + ( n 2 - r 2 ) \r\n\n = \r\n 25 - 9 + 4 \r\n 25 + 9 ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 50,
+      "question_text": "Three boys of ages 2, 4 and 10 shared 32 oranges in the ratio of their ages. What was the least share?",
+      "options": {
+        "A": "4",
+        "B": "10",
+        "C": "8",
+        "D": "6"
+      },
+      "correct_answer": "A",
+      "explanation": "Ratios = 2 : 4 : 10\n\n2 divides all.\n\nRatios = 1 : 2 : 5\n\nSum of ratios represents the total oranges shared.\n\nThe smallest ratio represents the least share.\n\nSum of ratios = 1 + 2 + 5 = 8\n\nThe smallest ratio = 1\n\nIf 8 = 32\n\n1 = \r\n 1 x 32 \r\n 8 \r\n\n = 4\r\n\n∴ The least share is 4\n\nTHEORY QUESTIONS",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

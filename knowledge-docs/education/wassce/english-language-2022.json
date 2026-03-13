@@ -1,0 +1,759 @@
+{
+  "exam_type": "wassce",
+  "subject": "English Language",
+  "year": 2022,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "Long John fell from affluence to ...... due to his recklessness.",
+      "options": {
+        "A": "misery",
+        "B": "penury",
+        "C": "liability",
+        "D": "starvation"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "Billy said he would do only ...... business and stay away from illegal ones.",
+      "options": {
+        "A": "legitimate",
+        "B": "profitable",
+        "C": "justifiable",
+        "D": "commercial"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "FIFA advised all referees to be impartial and not ......",
+      "options": {
+        "A": "biased",
+        "B": "considerate",
+        "C": "careless",
+        "D": "intolerant"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "New security features on the currency notes differentiate the fake from the ...... ones.",
+      "options": {
+        "A": "old",
+        "B": "genuine",
+        "C": "normal",
+        "D": "clear"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "Though the workers think the manager is callous , he is really ......",
+      "options": {
+        "A": "considerate",
+        "B": "powerful",
+        "C": "frank",
+        "D": "effective"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "The team was hailed when it triumphed but ...... when it lost the cup.",
+      "options": {
+        "A": "abandoned",
+        "B": "charged",
+        "C": "booed",
+        "D": "heckled"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "Older people prefer the serenity of the countryside to the ...... in the city",
+      "options": {
+        "A": "crowding",
+        "B": "aggression",
+        "C": "turmoil",
+        "D": "bustle"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "While some people laud the government for constructing roads, others ...... it.",
+      "options": {
+        "A": "favour",
+        "B": "castigate",
+        "C": "pacify",
+        "D": "proclaim"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "Though Mansa has an ...... smile, her behaviour is repulsive .",
+      "options": {
+        "A": "enduring",
+        "B": "elusive",
+        "C": "alluring",
+        "D": "amicable"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "While Peter was dismissed for being negligent , his brother was promoted for being ......",
+      "options": {
+        "A": "obedient",
+        "B": "realistic",
+        "C": "humble",
+        "D": "meticulous"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "The president ...... the criminal libel law.",
+      "options": {
+        "A": "repealed",
+        "B": "cancelled",
+        "C": "tabled",
+        "D": "vetoed"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "The government said the measures were meant to ...... inflation.",
+      "options": {
+        "A": "arrest",
+        "B": "defeat",
+        "C": "check",
+        "D": "fight"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "The doctor ...... the disease as measles.",
+      "options": {
+        "A": "diagnosed",
+        "B": "discovered",
+        "C": "investigated",
+        "D": "examined"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "One of the feuding factions has ...... its claim to the throne.",
+      "options": {
+        "A": "repealed",
+        "B": "revised",
+        "C": "altered",
+        "D": "renounced"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "Akos was reduced ...... tears when she lost the election.",
+      "options": {
+        "A": "by",
+        "B": "to",
+        "C": "into",
+        "D": "with"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "Her new novel is ...... interesting than the previous one.",
+      "options": {
+        "A": "more so",
+        "B": "much more",
+        "C": "much so",
+        "D": "so much"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "He had hardly stepped out of the house ...... the news arrived.",
+      "options": {
+        "A": "as",
+        "B": "and",
+        "C": "then",
+        "D": "when"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "You dare not complain, ......?",
+      "options": {
+        "A": "dare you",
+        "B": "isn't it",
+        "C": "will you",
+        "D": "you dare"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "Delanyo and ...... went through hard times in school.",
+      "options": {
+        "A": "her",
+        "B": "him",
+        "C": "I",
+        "D": "me"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "I wouldn't have married you ..... for your humility.",
+      "options": {
+        "A": "but",
+        "B": "however",
+        "C": "if not",
+        "D": "nevertheless"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "Araba was voted the most outstanding speaker at the conference.",
+      "options": {
+        "A": "remarkable",
+        "B": "conspicuous",
+        "C": "persuasive",
+        "D": "respected"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "Many indigenous songs were composed by anonymous musicians.",
+      "options": {
+        "A": "unpopular",
+        "B": "unprofessional",
+        "C": "archaic",
+        "D": "unknown"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "All the members gave their candid opinion on the matter.",
+      "options": {
+        "A": "certain",
+        "B": "kind",
+        "C": "frank",
+        "D": "strong"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "At last, the infamous armed robber has been caught by the police.",
+      "options": {
+        "A": "callous",
+        "B": "notorious",
+        "C": "dangerous",
+        "D": "popular"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "We won the match because our defence was impregnable .",
+      "options": {
+        "A": "experienced",
+        "B": "powerful",
+        "C": "unbeatable",
+        "D": "determined"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "He could not be trusted because of his erratic behaviour.",
+      "options": {
+        "A": "inflexible",
+        "B": "extravagant",
+        "C": "unstable",
+        "D": "unfriendly"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "Some bosses are fond of harassing their staff.",
+      "options": {
+        "A": "fighting",
+        "B": "mocking",
+        "C": "intimidating",
+        "D": "condemning"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "The congregation disliked the haughty manner in which the minister spoke.",
+      "options": {
+        "A": "commanding",
+        "B": "harsh",
+        "C": "arrogant",
+        "D": "insulting"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "The man was despondent when the judge sentenced his son to jail",
+      "options": {
+        "A": "deserted",
+        "B": "angered",
+        "C": "alarmed",
+        "D": "dejected"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "The teacher didn't like it when his students tried to mimic him.",
+      "options": {
+        "A": "paint",
+        "B": "mock",
+        "C": "imitate",
+        "D": "portray"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 31,
+      "question_text": "Suley's sudden success seems to have gone into his head. This means that he has become",
+      "options": {
+        "A": "intolerant.",
+        "B": "disrespectful.",
+        "C": "uncontrollable.",
+        "D": "proud."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "After the captain was dismissed from the team, he decided to keep his distance. This means that he",
+      "options": {
+        "A": "decided to travel.",
+        "B": "avoided company.",
+        "C": "became hostile.",
+        "D": "became lonely."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "Though the man felt the wife was not telling the truth, he decided to give her the benefit of the doubt. This means that he",
+      "options": {
+        "A": "decided to try her for some time.",
+        "B": "presumed that she was innocent.",
+        "C": "lost trust in her.",
+        "D": "doubted her statement."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 34,
+      "question_text": "Adamu was admired because he had his heart in the right place. This means that he was",
+      "options": {
+        "A": "humorous.",
+        "B": "happy and healthy.",
+        "C": "kind and generous.",
+        "D": "submissive."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "Kafui's attack on me in public touched a raw nerve. This means that",
+      "options": {
+        "A": "Kafui physically assaulted me.",
+        "B": "Kafui upset me.",
+        "C": "I resented what he said.",
+        "D": "I was exposed to ridicule."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "The winner rewarded all those who stood by him during the election. This means that he rewarded those who",
+      "options": {
+        "A": "saved him.",
+        "B": "comforted him.",
+        "C": "supported him.",
+        "D": "respected him."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 37,
+      "question_text": "The player was in two minds about playing for his country. This means that he",
+      "options": {
+        "A": "was called up the second time.",
+        "B": "had doubts about his chances of being selected.",
+        "C": "had played twice for his country.",
+        "D": "couldn't decide whether to play or not."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "The forecast is that trade will pick up in the next few months after the slump. This means that",
+      "options": {
+        "A": "business will thrive soon.",
+        "B": "trading will peak.",
+        "C": "trading will commence.",
+        "D": "business will not suffer."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "The worker's salary is nothing to write home about. This means that it",
+      "options": {
+        "A": "should be kept secret.",
+        "B": "is paid to the bank.",
+        "C": "is very low.",
+        "D": "has not been paid."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 40,
+      "question_text": "Ayeley kept her cards close to her chest. This means that Ayeley",
+      "options": {
+        "A": "was crafty.",
+        "B": "was selfish.",
+        "C": "cheated in the game.",
+        "D": "kept her plans secret."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 41,
+      "question_text": "Choose from the options provided, the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "privilege",
+        "B": "right",
+        "C": "duty",
+        "D": "benefit"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 42,
+      "question_text": "Choose from the options provided, the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "crusades",
+        "B": "meetings",
+        "C": "conventions",
+        "D": "rallies"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 43,
+      "question_text": "Choose from the options provided, the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "compete",
+        "B": "campaign",
+        "C": "contest",
+        "D": "lobby"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 44,
+      "question_text": "districts",
+      "options": {
+        "A": "constituencies",
+        "B": "localities",
+        "C": "assemblies",
+        "D": "districts"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 45,
+      "question_text": "Choose from the options provided, the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "propaganda",
+        "B": "manifesto",
+        "C": "constitution",
+        "D": "message"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 46,
+      "question_text": "Choose from the options provided, the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "projection",
+        "B": "vision",
+        "C": "proposals",
+        "D": "activities"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 47,
+      "question_text": "Choose from the options provided, the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "affidavit",
+        "B": "agreement",
+        "C": "undertaking",
+        "D": "oath"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 48,
+      "question_text": "Choose from the options provided, the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "term",
+        "B": "period",
+        "C": "duration",
+        "D": "time"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 49,
+      "question_text": "Choose from the options provided, the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "capable",
+        "B": "permitted",
+        "C": "competent",
+        "D": "eligible"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 50,
+      "question_text": "Choose from the options provided, the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "electorate",
+        "B": "citizens",
+        "C": "masses",
+        "D": "people"
+      },
+      "correct_answer": null,
+      "explanation": "three questions in all: one question from section A and all the questions in Sections B and C .\n\nSECTION A \n\nESSAY\n\n Answer one question only from this section .\n\n All questions carry equal marks . Your answer should not be less than 450 words .\n\n You are advised to spend about 50 minutes on this se",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

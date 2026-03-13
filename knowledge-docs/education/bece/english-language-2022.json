@@ -1,0 +1,459 @@
+{
+  "exam_type": "bece",
+  "subject": "English Language",
+  "year": 2022,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "If the family house had been maintained properly, it ....... collapsed.",
+      "options": {
+        "A": "will not have",
+        "B": "has not",
+        "C": "had not",
+        "D": "would not have"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "She bakes bread as a means ........ making an extra income.",
+      "options": {
+        "A": "for",
+        "B": "in",
+        "C": "to",
+        "D": "of"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "Deon said he heard the parrot .....",
+      "options": {
+        "A": "sing",
+        "B": "sang",
+        "C": "sung",
+        "D": "to sing"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "People who live in unhygienic environments easily ... Cholera.",
+      "options": {
+        "A": "catch",
+        "B": "attract",
+        "C": "capture",
+        "D": "contract"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "There is ... water in the fridge.",
+      "options": {
+        "A": "a few",
+        "B": "few",
+        "C": "a lot",
+        "D": "a little"
+      },
+      "correct_answer": "B",
+      "explanation": "A few/few are used for countable nouns and a little/little for uncountable nouns",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "Remy looks forward to .... Jane at the party.",
+      "options": {
+        "A": "seeing",
+        "B": "see",
+        "C": "have been seeing",
+        "D": "be seeing"
+      },
+      "correct_answer": null,
+      "explanation": "Note that the expression to look forward to is always followed by a gerund (a verb ending in -ing). e.g I look forward to meeting you. I look forward to hearing from you.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "The students did not give any reason ...... being late",
+      "options": {
+        "A": "to",
+        "B": "of",
+        "C": "for",
+        "D": "in"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "What ..... Kwadwo and Adwoa doing when you left the shop?",
+      "options": {
+        "A": "are",
+        "B": "were",
+        "C": "was",
+        "D": "is"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "Selfish people always consider .... first.",
+      "options": {
+        "A": "herself",
+        "B": "ourselves",
+        "C": "myself",
+        "D": "themselves"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "Enyonam asked her friend to ..... her a pen.",
+      "options": {
+        "A": "lend",
+        "B": "spare",
+        "C": "borrow",
+        "D": "excuse"
+      },
+      "correct_answer": "A",
+      "explanation": "Borrow means to take something from another person , knowing you will give it back to them.\n\n Lend means to give something to another person expecting to get it back.\n\nThe sentence was referring to the friend hence lend is the correct answer since the friend is the one lending the pen.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "The accident occurred ...... the driver's mistakes.",
+      "options": {
+        "A": "from",
+        "B": "on",
+        "C": "through",
+        "D": "by"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "I know you are ......, Esi.",
+      "options": {
+        "A": "taller",
+        "B": "tallest",
+        "C": "the taller",
+        "D": "the tall"
+      },
+      "correct_answer": "A",
+      "explanation": "One when tall and when two people taller and three or more being compare tallest . The speaker is comparing his/her height with Esi, thus two people hence taller is the suitable option.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "Akesi's mother was not satisfied ... his",
+      "options": {
+        "A": "in",
+        "B": "to",
+        "C": "with",
+        "D": "on"
+      },
+      "correct_answer": null,
+      "explanation": ".\n\n A. \r\n\nin\n\n B. \r\n\nto\n\n C. \r\n\nwith\n\n D. \r\n\non\n\n Mark",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "I have been in this country ....... three years.",
+      "options": {
+        "A": "through",
+        "B": "within",
+        "C": "for",
+        "D": "since"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "Their gardener was ..... old to work.",
+      "options": {
+        "A": "even",
+        "B": "so",
+        "C": "too",
+        "D": "very"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "Her ambition is to own a private jet.",
+      "options": {
+        "A": "target",
+        "B": "joy",
+        "C": "plan",
+        "D": "desire"
+      },
+      "correct_answer": "D",
+      "explanation": "Ambition : a strong desire or what drives a person to do or achieve something.\n\nThe nearest in meaning could be drive, determination, desire, enterprise, initiative, eagerness, motivation, enthusiasm, zeal, commitment, a sense of purpose, longing, yearning, hankering, get-up-and-go",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "Have you enough money to buy a house?",
+      "options": {
+        "A": "plenty",
+        "B": "much",
+        "C": "sufficient",
+        "D": "full"
+      },
+      "correct_answer": null,
+      "explanation": "Enough : as much or as many as required\n\nThe nearest in meaning could be sufficient, adequate, ample, abundant",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "Mr Nunyah slaughtered some of his bulls.",
+      "options": {
+        "A": "killed",
+        "B": "treated",
+        "C": "examined",
+        "D": "castrated"
+      },
+      "correct_answer": null,
+      "explanation": "Slaughter : kill (animals) for food\n\nThe nearest in meaning could be kill or butcher",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "Soraya is very lively today.",
+      "options": {
+        "A": "smart",
+        "B": "active",
+        "C": "friendly",
+        "D": "serious"
+      },
+      "correct_answer": "B",
+      "explanation": "Lively : full of life and energy; active and outgoing.\n\nThe nearest in meaning could be energetic, active, animated, vigorous, dynamic, full of life, outgoing, spirited, high-spirited, vivacious, enthusiastic, vibrant, buoyant, exuberant, effervescent, cheerful",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "The welfare of their students should be the concern of teachers.",
+      "options": {
+        "A": "wealth",
+        "B": "happiness",
+        "C": "well-being",
+        "D": "growth"
+      },
+      "correct_answer": "B",
+      "explanation": "Welfare : the health, happiness, and fortunes of a person or group.\n\nThe nearest in meaning could be well-being, health, good health, happiness, comfort, security, safety, protection, prosperity, profit, good, success, fortune, good fortune, advantage, interest\n\nSECTION C\n\n In each of the following ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "Paul shed crocodile tears when his friend failed the exam. This means that Paul",
+      "options": {
+        "A": "was genuinely sorry for his friend.",
+        "B": "felt very sad but did not cry.",
+        "C": "pretended he was sorry for his friend.",
+        "D": "cried uncontrollably."
+      },
+      "correct_answer": null,
+      "explanation": "Shed crocodile tears : to pretend to be sorry for somebody/something",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "When the old woman heard the sound of the gun-shots, her hair stood on end . This means that the old woman",
+      "options": {
+        "A": "started crying.",
+        "B": "became inactive.",
+        "C": "was frightened.",
+        "D": "was worried."
+      },
+      "correct_answer": null,
+      "explanation": "Hair stood on end : to cause fright or terror in someone.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "That tailor always takes pains over his sewing. This means that the tailor",
+      "options": {
+        "A": "does his sewing with great care.",
+        "B": "finds sewing very painful.",
+        "C": "is not happy sewing.",
+        "D": "is often ill and cannot sew."
+      },
+      "correct_answer": null,
+      "explanation": "Take pains : To expend/spend a lot of time, effort, and care doing something",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "These herbs grow here in leaps and bounds . This means that the herbs grow",
+      "options": {
+        "A": "gradually and in small numbers.",
+        "B": "in big circular heaps.",
+        "C": "in both cold and hot weather.",
+        "D": "quickly and greatly."
+      },
+      "correct_answer": null,
+      "explanation": "In leaps and bounds : with startlingly rapid progress.\n\n Similar : rapidly, swiftly, quickly, speedily, at an amazing rate, exponentially",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "Kim is full of himself . This means that Kim is",
+      "options": {
+        "A": "arrogant.",
+        "B": "dangerous.",
+        "C": "greedy.",
+        "D": "quarrelsome."
+      },
+      "correct_answer": null,
+      "explanation": "Full of oneself : to be very proud, arrogant or conceited, and think only of yourself\n\nSECTION D\n\n From the list of words lettered A to D , choose the one that is most nearly opposite in meaning to the word underlined in each sentence.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "Evans wakes up early because he does not sleep much.",
+      "options": {
+        "A": "often",
+        "B": "at home",
+        "C": "late",
+        "D": "on his bed"
+      },
+      "correct_answer": null,
+      "explanation": "Opposite of early is late",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "Dora was exhausted after the exercise.",
+      "options": {
+        "A": "A. cheerful",
+        "B": "active",
+        "C": "refreshed",
+        "D": "strong"
+      },
+      "correct_answer": null,
+      "explanation": "Exhausted means tired. If you are not tired, then you are active",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "The demolition of the bridge surprised everyone.",
+      "options": {
+        "A": "construction",
+        "B": "creation",
+        "C": "erection",
+        "D": "relocation"
+      },
+      "correct_answer": null,
+      "explanation": "Demolition means destruction and opposite of destruction is construction.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "They said the film was ancient but I found it",
+      "options": {
+        "A": "relaxing.",
+        "B": "modern.",
+        "C": "difficult.",
+        "D": "interesting."
+      },
+      "correct_answer": null,
+      "explanation": "Ancient means long ago or past. The opposite is modern which means current or recent or present times",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "The animal will perish under this condition.",
+      "options": {
+        "A": "graze",
+        "B": "survive",
+        "C": "starve",
+        "D": "remain"
+      },
+      "correct_answer": null,
+      "explanation": "Perish means die. The opposite of die is survive\n\nTHEORY QUESTIONS",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

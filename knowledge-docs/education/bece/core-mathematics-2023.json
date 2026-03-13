@@ -1,0 +1,399 @@
+{
+  "exam_type": "bece",
+  "subject": "Core Mathematics",
+  "year": 2023,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 2,
+      "question_text": "What is the value of 3 x 2 + 2 x - 7 when x = -3?",
+      "options": {
+        "A": "-40",
+        "B": "-33",
+        "C": "14",
+        "D": "26"
+      },
+      "correct_answer": null,
+      "explanation": "3 x 2 + 2 x - 7\n\nSubstitute x = -3 into the expression\n\n3(-3) 2 + 2(-3) - 7\n\n- x - = +\n\n a 2 = a x a \n\n(-3) 2 = - 3 x -3 = 9\n\n3(-3) 2 + 2(-3) - 7 = 3 x -3 x -3 + 2 x -3 - 7\n\n3(-3) 2 + 2(-3) - 7 = 3 x 9 - 6 - 7\n\n3(-3) 2 + 2(-3) - 7 = 27 - 13\n\n3(-3) 2 + 2(-3) - 7 = 14",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "Find the image of the point S (-2,2) when it is reflected in the y -axis.",
+      "options": {
+        "A": "(2,-2)",
+        "B": "(2,2)",
+        "C": "(-2,-2)",
+        "D": "(-2,2)"
+      },
+      "correct_answer": null,
+      "explanation": "y-axis as mirror/reflection in y-asis\n\n ( \r\n\n x \r\n\n y \r\n\n ) \r\n\n → \r\n\n ( \r\n\n -x \r\n\n y \r\n\n ) \r\n\nThus the x is negated.\n\n ( \r\n\n -2",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "What is the actual bearing of S 25 o E ?",
+      "options": {
+        "A": "035 o",
+        "B": "065 o",
+        "C": "115 o",
+        "D": "155 o"
+      },
+      "correct_answer": null,
+      "explanation": "The 25 o is at the south between the south and the east.\n\nBetween each cardinal point is 90 o .\n\nThe angle from the east to the S 25 o E = 90 - 25 = 65\n\nBearing starts from the north. Hence the bearing of S 25 o E is from the north to the S 25 o E line.\n\nBearing = 90 + 65 = 155 o",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "Given that m =",
+      "options": {
+        "B": "2 \r\n\n - t \r\n\nGet rid of the fraction by multiplying both sides of the equation by the denominator (2)\n\n2 x m = b - 2 x t \r\n\n2 m = b - 2 t \r\n\n2 m + 2 t = b \r\n\n2 t = b - 2 m \r\n\nDivide both sides by 2 so that t can stand alone.\n\n t =",
+        "A": "t =",
+        "C": "t = \r\n 2b - m \r\n 2",
+        "D": "t ="
+      },
+      "correct_answer": "A",
+      "explanation": "m = \r\n b \r\n 2 \r\n\n - t \r\n\nGet rid of the fraction by multiplying both sides of the equation by the denominator (2)\n\n2 x m = b - 2 x t \r\n\n2 m = b - 2 t \r\n\n2 m + 2 t = b \r\n\n2 t = b - 2 m \r\n\nDivide both sides by 2 so that t can stand alone.\n\n t = \r\n b - 2m \r\n 2",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "Expand ( x - 2)( x + 4).",
+      "options": {
+        "A": "x 2 + 2 x - 8",
+        "B": "x 2 + 2 x + 8",
+        "C": "x 2 - 4 x - 8",
+        "D": "x 2 - x - 8"
+      },
+      "correct_answer": null,
+      "explanation": "( x - 2)( x + 4)\n\nTake each express in the first bracket to multiply each expression in the second bracket and simplify the expressions.\n\n( x - 2)( x + 4) = x ( x + 4) - 2( x + 4)\r\n\n( x - 2)( x + 4) = x x x + x x 4 - 2 x x - 2 x 4\r\n\n( x - 2)( x + 4) = x 2 + 4 x - 2 x - 8\r\n\n( x - 2)( x + 4) = x 2 + 2",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "If n ( E ) = 15, n ( F ) = 20 and n ( E ∩ F ) = 6, find n ( E ∪ F ).",
+      "options": {
+        "A": "21",
+        "B": "26",
+        "C": "29",
+        "D": "35"
+      },
+      "correct_answer": null,
+      "explanation": "E only = 15 - 6 = 9\r\n\n F only = 20 - 6 = 14\r\n\n n ( E ∪ F ) is the addition of all the numbers in the rectangle.\n\n n ( E ∪ F ) = 9 + 6 + 14 = 29",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "Tony shared \r\n 2 \r\n 3 \r\n\n of his plot of land equally among his three sons. What fraction of the plot did each get?",
+      "options": {
+        "A": "2 \r\n 9",
+        "B": "1 \r\n 3",
+        "C": "1 \r\n 2",
+        "D": "5 \r\n 9"
+      },
+      "correct_answer": null,
+      "explanation": "Method I\n\nLet x = the total land\n\nOf means multiplication\n\nTony shared \r\n 2 \r\n 3 \r\n\n of his plot of land\r\n\nLand shared = \r\n 2 \r\n 3 \r\n\n x x = \r\n 2x \r\n 3 \r\n\nPlot of land received by each = \r\n 2x \r\n 3 \r\n\n ÷ 3\r\n\nEvery number is divisible by 1.\n\n3 = \r\n 3 \r\n 1 \r\n\nPlot of land received by each = \r\n 2x \r\n 3",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "Araba and Ama share 20 oranges in such a way that Ama receives 12 oranges. Find the ratio of Araba's share to that of Ama.",
+      "options": {
+        "A": "2:5",
+        "B": "3:5",
+        "C": "3:2",
+        "D": "2:3"
+      },
+      "correct_answer": null,
+      "explanation": "Total oranges shared = 20\r\n\nAma's share = 12\r\n\nAraba's share = 20 - 12\r\n\nAraba's share = 8\r\n\nAraba:Ama = 8:12\r\n\nAraba:Ama = 2:3\r\n\n Note : 4 divides 8, 2 times and 12, 3 times.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "Solve: 3( x - 2) - \r\n x \r\n 3 \r\n\n + 6 > 0.",
+      "options": {
+        "A": "x < 0",
+        "B": "x > 0",
+        "C": "x > 3",
+        "D": "x > \r\n 1 \r\n 8"
+      },
+      "correct_answer": "B",
+      "explanation": "3( x - 2) - \r\n x \r\n 3 \r\n\n + 6 > 0\n\nGet rid of the fraction by multiplying both sides of the inequality by the denominator (3).\n\n3 x 3( x - 2) - 3 x \r\n x \r\n 3 \r\n\n + 3 x 6 > 3 x 0\r\n\n9( x - 2) - x + 18 > 3 x 0\r\n\n9 x x -2 x 9 - x > 0 - 18\r\n\n9 x - 18 - x >-18\r\n\n9 x - x > -18 + 18\r\n\n8 x > 0\r\n\nDivide both ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "The stem and leaf plot shows the marks scored by students in a French test. Use the information to answer the question below .\n\n Stem \r\n Leaf \r\n\n 2 \r\n 0 2 5 7 8 \r\n\n 3 \r\n 2 7 9 \r\n\n 4 \r\n 3 5 5 5 \r\n\n 5 \r\n 4 6 6 8 \r\n\n 6 \r\n 3 5 7 \r\n\n 7 \r\n 0 6 \r\n\nWhat is the modal mark?",
+      "options": {
+        "A": "35",
+        "B": "45",
+        "C": "56",
+        "D": "76"
+      },
+      "correct_answer": "A",
+      "explanation": "the question below .\n\n Stem \r\n Leaf \r\n\n 2 \r\n 0 2 5 7 8 \r\n\n 3 \r\n 2 7 9 \r\n\n 4 \r\n 3 5 5 5 \r\n\n 5 \r\n 4 6 6 8 \r\n\n 6 \r\n 3 5 7 \r\n\n 7 \r\n 0 6 \r\n\nWhat is the modal mark?\n\n A. \r\n\n35\n\n B. \r\n\n45\n\n C. \r\n\n56\n\n D. \r\n\n76\n\n Mark \r\n\n Solution \r\n\nThe modal mark is the mark which appeared the most. Observe the leaf in ea",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "The stem and leaf plot shows the marks scored by students in a French test. Use the information to answer the question below .\n\n Stem \r\n Leaf \r\n\n 2 \r\n 0 2 5 7 8 \r\n\n 3 \r\n 2 7 9 \r\n\n 4 \r\n 3 5 5 5 \r\n\n 5 \r\n 4 6 6 8 \r\n\n 6 \r\n 3 5 7 \r\n\n 7 \r\n 0 6 \r\n\nHow many students took the test?",
+      "options": {
+        "A": "20",
+        "B": "21",
+        "C": "22",
+        "D": "27"
+      },
+      "correct_answer": "A",
+      "explanation": "the question below .\n\n Stem \r\n Leaf \r\n\n 2 \r\n 0 2 5 7 8 \r\n\n 3 \r\n 2 7 9 \r\n\n 4 \r\n 3 5 5 5 \r\n\n 5 \r\n 4 6 6 8 \r\n\n 6 \r\n 3 5 7 \r\n\n 7 \r\n 0 6 \r\n\nHow many students took the test?\n\n A. \r\n\n20\n\n B. \r\n\n21\n\n C. \r\n\n22\n\n D. \r\n\n27\n\n Mark \r\n\n Solution \r\n\nThe leaf represents each mark. Hence count how many leaves to det",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "The stem and leaf plot shows the marks scored by students in a French test. Use the information to answer the question below .\n\n Stem \r\n Leaf \r\n\n 2 \r\n 0    2    5    7    8 \r\n\n 3 \r\n 2    7    9 \r\n\n 4 \r\n 3    5    5    5 \r\n\n 5 \r\n 4    6    6    8 \r\n\n 6 \r\n 3    5    7 \r\n\n 7 \r\n 0    6 \r\n\nFind the median mark.",
+      "options": {
+        "A": "45",
+        "B": "47",
+        "C": "54",
+        "D": "76"
+      },
+      "correct_answer": "A",
+      "explanation": "the question below .\n\n Stem \r\n Leaf \r\n\n 2 \r\n 0    2    5    7    8 \r\n\n 3 \r\n 2    7    9 \r\n\n 4 \r\n 3    5    5    5 \r\n\n 5 \r\n 4    6    6    8 \r\n\n 6 \r\n 3    5    7 \r\n\n 7 \r\n 0    6 \r\n\nFind the median mark.\n\n A. \r\n\n45\n\n B. \r\n\n47\n\n C. \r\n\n54\n\n D. \r\n\n76\n\n Mark \r\n\n Solution \r\n\nThe median is the middle number",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "Which of the following is an even prime number?",
+      "options": {
+        "A": "2",
+        "B": "1",
+        "C": "4",
+        "D": "8"
+      },
+      "correct_answer": "A",
+      "explanation": "Even number : number divisible by 2 \n\n Prime number : is a natural number greater than 1 that has only two factors (1 and the number itself).\n\n 2 is an even number because it can divide itself to obtain 1 and it is also a prime number because no other number can divide it except 1 and itself.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "If 2 n - 5 = \r\n 1 \r\n 2 \r\n\n n , find the value of n .",
+      "options": {
+        "A": "1 \r\n 3",
+        "B": "1 \r\n 2",
+        "C": "2 \r\n 1 \r\n 2",
+        "D": "3 \r\n 1 \r\n 3"
+      },
+      "correct_answer": "B",
+      "explanation": "2 n - 5 = \r\n 1 \r\n 2 \r\n\n n \r\n\nGet rid of the fraction by multiplying both sides of the equation by the denominator (2).\n\n2 x 2 n - 2 x 5 = 2 x \r\n 1 \r\n 2 \r\n\n n \r\n\n4 n - 10 = 1 x n \r\n\n4 n - 10 = n \r\n\n4 n - n = 10\r\n\n3 n = 10\r\n\nDivide both sides by 3 so that n can stand alone\n\n n = \r\n 10 \r\n 3 \r\n\n = 3 \r\n ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "Find the simple interest on GH₵ 350.00 for 4 years at 5% per annum.",
+      "options": {
+        "A": "GH₵ 20.00",
+        "B": "GH₵ 35.00",
+        "C": "GH₵ 70.00",
+        "D": "GH₵ 140.00"
+      },
+      "correct_answer": "B",
+      "explanation": "Simple Interest = \r\n Principal x Time x Rate \r\n 100 \r\n\nPrincipal = GH₵ 350.00\r\n\nTime = 4 years\r\n\nRate = 5\r\n\nSimple Interest = \r\n GH₵ 350 x 4 x 5 \r\n 100 \r\n\nSimple Interest = \r\n GH₵ 350 x 20 \r\n 100 \r\n\nSimple Interest = \r\n GH₵ 350 \r\n 5 \r\n\n Note : 20 divides itself once and 100, 5 times.\n\nSimple Interes",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "Given that 1 kilometre = \r\n 5 \r\n 8 \r\n\n mile, what is 240 miles in kilometres?",
+      "options": {
+        "A": "150 km",
+        "B": "190 km",
+        "C": "384 km",
+        "D": "390 km"
+      },
+      "correct_answer": null,
+      "explanation": "If \r\n 5 \r\n 8 \r\n\n = 1 kilometre\r\n\n240 mile = 1 kilometre x 240 mile ÷ \r\n 5 \r\n 8 \r\n\n mile\r\n\nChange the division sign to multiplication and reciprocate the fraction.\n\n240 mile = 1 kilometre x 240 x \r\n 8 \r\n 5 \r\n\n240 mile = 1 kilometer x 48 x 8\n\n5 divides itself once and 240, 48 times.\n\n240 mile = 384 ki",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "John walks for 22 \r\n 1 \r\n 2 \r\n\n minutes and runs 7 \r\n 1 \r\n 2 \r\n\n minutes to school. What percentage of the total time does he spend walking?",
+      "options": {
+        "A": "25%",
+        "B": "30%",
+        "C": "33%",
+        "D": "75%"
+      },
+      "correct_answer": null,
+      "explanation": "Change the mixed fractions to improper fractions.\n\n22 \r\n 1 \r\n 2 \r\n\n = \r\n 22 x 2 + 1 \r\n 2 \r\n\n22 \r\n 1 \r\n 2 \r\n\n = \r\n 44 + 1 \r\n 2 \r\n\n22 \r\n 1 \r\n 2 \r\n\n = \r\n 45 \r\n 2 \r\n\n7 \r\n 1 \r\n 2 \r\n\n = \r\n 7 x 2 + 1 \r\n 2 \r\n\n7 \r\n 1 \r\n 2 \r\n\n = \r\n 14 + 1 \r\n 2 \r\n\n7 \r\n 1 \r\n 2 \r\n\n = \r\n 15 \r\n 2 \r\n\nTotal time spent to school = \r\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "Kobby is 5 years older than his brother. If Kobby is 13 years old, how old is his brother?",
+      "options": {
+        "A": "7 years",
+        "B": "8 years",
+        "C": "10 years",
+        "D": "18 years"
+      },
+      "correct_answer": null,
+      "explanation": "Since Kobby is 5 years older than his brother, his brother's age is 5 years less than that of Kobby's age.\n\nKobby is 13 years now.\n\nBrother's age = 13 - 5\r\n\nBrother's age = 8",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "Find the rule for the mapping:\n\n x \r\n 1 \r\n 2 \r\n 3 \r\n 4 \r\n 5 \r\n\n ↓ \r\n ↓ \r\n ↓ \r\n ↓ \r\n ↓ \r\n ↓ \r\n\n y \r\n 4 \r\n 2 \r\n 0 \r\n -2 \r\n -4",
+      "options": {
+        "A": "y = 2 x + 2",
+        "B": "y = -2 x + 2",
+        "C": "y = 4 x",
+        "D": "y = -2 x + 6"
+      },
+      "correct_answer": null,
+      "explanation": "Note : If the mapping has equal interval (difference) for the y and x interval of 1, you can use the general linear sequence formula to find the rule of the mapping.\n\nU n = U 1 + ( n -1) d \n\nIn the mapping, U n = y and n = x and U 1 , the first value of y \n\nU 1 = 4\n\n y = 4 + ( x -1)d\n\nThe d is the i",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "Simplify: ( x - 1) 2 - 1.",
+      "options": {
+        "A": "x 2 - 2 x",
+        "B": "x 2 + 2 x",
+        "C": "x 2 - 2 x - 1",
+        "D": "x 2 - 2 x + 1"
+      },
+      "correct_answer": "A",
+      "explanation": "a 2 = a x a \n\n( x - 1) 2 = ( x - 1) x ( x - 1)\n\nExpand the bracket by taking each expressions in the first bracket to multiply the second bracket and simplify.\n\n( x - 1) 2 = x x ( x - 1) - 1 x ( x - 1)\r\n\n( x - 1) 2 = x x x - 1 x x - 1 x x - 1 x -1\r\n\n( x - 1) 2 = x 2 - x - x + 1\r\n\n Note : - x - = +\n\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "In the diagram, AB is parallel to CD , Angle AGE is 80 o , angle CFG = 5 k and angle CFE = r .\n\n Use the information to answer the question below .\n\nWhat is the value of r ?",
+      "options": {
+        "A": "16 o",
+        "B": "20 o",
+        "C": "80 o",
+        "D": "160 o"
+      },
+      "correct_answer": "C",
+      "explanation": "the question below .\n\nWhat is the value of r ?\n\n A. \r\n\n16 o \n\n B. \r\n\n20 o \n\n C. \r\n\n80 o \n\n D. \r\n\n160 o \n\n Mark \r\n\n Solution \r\n\n r = 80 o (Corresponding angles)\n\nCORRESPONDING ANGLES",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "In the diagram, AB is parallel to CD , Angle AGE is 80 o , angle CFG = 5 k and angle CFE = r .\n\n Use the information to answer the question below .\n\nFind the value of k",
+      "options": {
+        "A": "16 o",
+        "B": "20 o",
+        "C": "80 o",
+        "D": "160 o"
+      },
+      "correct_answer": "C",
+      "explanation": "the question below .\n\nFind the value of k \n\n A. \r\n\n16 o \n\n B. \r\n\n20 o \n\n C. \r\n\n80 o \n\n D. \r\n\n160 o \n\n Mark \r\n\n Solution \r\n\n r = 80 o (Corresponding angles)\n\nCORRESPONDING ANGLES\n\n r + 5 k = 180 (Sum of angles on a straight line is 180)\r\n\nBut r = 80\r\n\n80 + 5 k = 180\r\n\n5 k = 180 - 80\r\n\n5 k = 100\r\n\nDiv",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "Factorize 2 pq + 6 p -6 q - 18.",
+      "options": {
+        "A": "2( p - 3)( q - 3)",
+        "B": "2( p + 3)( q + 3)",
+        "C": "2( p - 3)( q + 3)",
+        "D": "2( p + 3)( q - 3)"
+      },
+      "correct_answer": null,
+      "explanation": "2 pq + 6 p -6 q - 18\n\nBring out the common terms.\n\n6 p = 2 p x 3\r\n\n18 = 3 x 6\r\n\n2 pq + 2 p x 3 -6 q - 3 x 6\n\n2 p ( q + 3) - 6( q + 3)\r\n\n(2 p - 6)( q + 3)\r\n\nFactorize (2 p - 6) further\n\n2 p - 6\r\n\n6 = 2 x 3\r\n\n2 p -3 x 2\r\n\n2( p - 3)\r\n\n(2 p - 6)( q + 3) = 2( p - 3)( q + 3)",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "Cement and sand were mixed in the ratio 2:5. How many kilograms of cement was contained in the 35 kg of the mixture?",
+      "options": {
+        "A": "7 kg",
+        "B": "10 kg",
+        "C": "14 kg",
+        "D": "88 kg"
+      },
+      "correct_answer": null,
+      "explanation": "Cement:Sand = 2:5\n\nTotal ratios = 2 + 5 = 7\n\nRatio for cement = 2\n\nIf 7 = 35 kg\r\n\n2 = \r\n 2 x 35 kg \r\n 7 \r\n\n = 2 x 5 kg = 10 kg",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "Simplify: \r\n 5 7 x 5 -4 \r\n 5 3 \r\n\n .",
+      "options": {
+        "A": "m",
+        "B": "1",
+        "C": "5",
+        "D": "25"
+      },
+      "correct_answer": "A",
+      "explanation": "Law of multiplication of indices\n\n a m x a n = a m + m \n\nLaw of division of indices\n\n a m \r\n a n \r\n\n = a m - n \r\n\n a 0 = 1\n\n 5 7 x 5 -4 \r\n 5 3 \r\n\n = \r\n 5 7+-4 \r\n 5 3 \r\n\n 5 7 x 5 -4 \r\n 5 3 \r\n\n = \r\n 5 7-4 \r\n 5 3 \r\n\n 5 7 x 5 -4 \r\n 5 3 \r\n\n = \r\n 5 3 \r\n 5 3 \r\n\n = 1\r\n\n Note : 5 3 divides 5 3 once.\n\nAlterna",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "The height of a cylinder is 5 cm and the radius 7 cm. Find the volume of the cylinder.\n\n[Take &pi; = \r\n 22 \r\n 7 \r\n\n ]",
+      "options": {
+        "A": "770 cm 3",
+        "B": "700 cm 3",
+        "C": "154 cm 3",
+        "D": "110 cm 3"
+      },
+      "correct_answer": null,
+      "explanation": "Volume of a cylinder = &pi; r 2 h \r\n\nWhere r = radius, h = height\r\n\n&pi; = \r\n 22 \r\n 7 \r\n\n r 2 = r x r \r\n\n r = 7 cm\r\n\n h = 5 cm\r\n\nVolume of a cylinder = \r\n 22 \r\n 7 \r\n\n x 7 cm x 7 cm x 5 cm\r\n\nVolume of a cylinder = 22 x 1 cm x 7 cm x 5 cm\n\nVolume of a cylinder = 770 cm 3",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

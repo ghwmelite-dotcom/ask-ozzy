@@ -1,0 +1,444 @@
+{
+  "exam_type": "bece",
+  "subject": "English Language",
+  "year": 2021,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "Can I borrow your ............ Hat?",
+      "options": {
+        "A": "blue new straw",
+        "B": "new blue straw",
+        "C": "new straw blue",
+        "D": "straw new blue"
+      },
+      "correct_answer": null,
+      "explanation": "Adjective Order",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "She will not give us ........... more money.",
+      "options": {
+        "A": "any",
+        "B": "even",
+        "C": "much",
+        "D": "little"
+      },
+      "correct_answer": "A",
+      "explanation": "Any is used when the exact number or amount of something is not known, or when it's not important. Any is also used to refer to an indefinite quantity or number. Any is also used in negative sentences.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "You would be hungry if you ..... to eat.",
+      "options": {
+        "A": "are refusing",
+        "B": "refuse",
+        "C": "refused",
+        "D": "were refusing"
+      },
+      "correct_answer": null,
+      "explanation": "would + if should be followed by a past tense",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "You have seen them, .... you?",
+      "options": {
+        "A": "did",
+        "B": "didn't",
+        "C": "had",
+        "D": "haven't"
+      },
+      "correct_answer": null,
+      "explanation": "Have goes with haven't",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "Habib goes to school ......... train.",
+      "options": {
+        "A": "by",
+        "B": "in",
+        "C": "on",
+        "D": "with"
+      },
+      "correct_answer": null,
+      "explanation": "We travel/go by ...",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "She does not like ........ letters.",
+      "options": {
+        "A": "to be writing",
+        "B": "to write",
+        "C": "write",
+        "D": "writing"
+      },
+      "correct_answer": null,
+      "explanation": "When hate,like, love, prefer are used, the verb that follows has ing",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "You will be ill if you ....... raw meat.",
+      "options": {
+        "A": "ate",
+        "B": "eat",
+        "C": "had eaten",
+        "D": "have eaten"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "It was done according .......... the rules.",
+      "options": {
+        "A": "by",
+        "B": "of",
+        "C": "to",
+        "D": "with"
+      },
+      "correct_answer": null,
+      "explanation": "According to the rules",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "............... the challenges, we succeeded.",
+      "options": {
+        "A": "As such",
+        "B": "However",
+        "C": "In spite of",
+        "D": "Nevertheless"
+      },
+      "correct_answer": "C",
+      "explanation": "Despite or in spite of the challenges. Despite and in spite of mean \"notwithstanding\", \"even though\",\"regardless of\"",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "My brother, with his wife and children,........... travelling to Salaga next weekend",
+      "options": {
+        "A": "are",
+        "B": "is",
+        "C": "was",
+        "D": "were"
+      },
+      "correct_answer": "B",
+      "explanation": "There is comma after my brother, which means that the one speaking is referring to only the brother hence the singular (is) is used and not are .",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "It is high time we ...... the journey.",
+      "options": {
+        "A": "are starting",
+        "B": "shall start",
+        "C": "start",
+        "D": "started"
+      },
+      "correct_answer": null,
+      "explanation": "Whenever high time is used, its followed by a verb in the past tense . E.g. It is high time we left, it is high time we went etc.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "I prefer oranges ........... mangoes.",
+      "options": {
+        "A": "on",
+        "B": "than",
+        "C": "to",
+        "D": "for"
+      },
+      "correct_answer": "C",
+      "explanation": "The preposition for prefer is to . He/she prefers .... to .....",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "His aunt ....... spoke to us lives in Tamale.",
+      "options": {
+        "A": "that",
+        "B": "which",
+        "C": "who",
+        "D": "whom"
+      },
+      "correct_answer": "C",
+      "explanation": "When to use who or whom \n\n Who : should be used to refer to the subject of a sentence.\n\n Whom should be used to refer to the object of a verb or preposition.\n\nThe subject in a sentence refers to the person or thing carrying out an action. In this example the aunt is the subject since she was the one",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "Araba couldn't resist ....... the food while on the fire.",
+      "options": {
+        "A": "by opening",
+        "B": "open",
+        "C": "to open",
+        "D": "opening"
+      },
+      "correct_answer": null,
+      "explanation": "When couldn't is used, the second verb must be in the ing form. E.g I couldn't resist shar ing it. I couldn't stop laugh ing .",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "My neighbour, ............ dog barks every night, has left town.",
+      "options": {
+        "A": "which",
+        "B": "who",
+        "C": "who's",
+        "D": "whose"
+      },
+      "correct_answer": "B",
+      "explanation": "This is possession (the neighbor owns a dog) so whose and not who , possessive pronoun ( whose ) is the correct answer\n\nSECTION B\n\n Choose from the alternatives lettered A to D the one which is nearest in meaning to the underlined word in each sentence.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "The chosen poems are very relatable",
+      "options": {
+        "A": "preferred",
+        "B": "selected",
+        "C": "prescribed",
+        "D": "given"
+      },
+      "correct_answer": null,
+      "explanation": "Chosen nearest in meaning : select, pick, pick out, opt for, plump for, go for, take, settle on, decide on, fix on, come down in favour of, vote for, single out, hand-pick, set, designate, determine, specify, appoint, name, nominate, adopt, espouse",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "Arming the police does not halt crime.",
+      "options": {
+        "A": "avoid",
+        "B": "prevent",
+        "C": "stop",
+        "D": "suspend"
+      },
+      "correct_answer": "C",
+      "explanation": "Halt nearest in meaning: stop, come to a halt, come to a stop, come to a standstill, come to rest, pull up, draw up, stand still, draw to a stand, cease, finish",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "All the lax rules have been cancelled.",
+      "options": {
+        "A": "mild",
+        "B": "previous",
+        "C": "weak",
+        "D": "wrong"
+      },
+      "correct_answer": "A",
+      "explanation": "Lax: not sufficiently strict, severe, or careful.\n\n Mild: not severe, serious, or harsh\n\n Lax nearest in meaning :mild,slack, slipshod, negligent, neglectful, remiss, careless, heedless, unmindful, inattentive, slapdash, offhand, casual, easy-going, lenient, permissive, soft, liberal, non-restrictiv",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "The youth should be ruled by the fundamental ideals of courtesy.",
+      "options": {
+        "A": "essential",
+        "B": "known",
+        "C": "popular",
+        "D": "realistic"
+      },
+      "correct_answer": null,
+      "explanation": "Fundamental nearest in meaning :basics, essentials, rudiments, foundations, basic principles, first principles, preliminaries, crux, essence, core, nucleus, heart, base",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "The porter could not endure his insults",
+      "options": {
+        "A": "accept",
+        "B": "agree",
+        "C": "approve",
+        "D": "bear"
+      },
+      "correct_answer": null,
+      "explanation": "Endure nearest in meaning: , undergo, go through, live through, experience, meet, encounter, cope with, deal with, face, face up to, handle, suffer, tolerate, put up with, brave, bear, withstand, sustain, weather, become reconciled to, reconcile oneself to, become resigned to, get used to, become ac",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "Azara burn her fingers when she took sides with her friend. This means that Azara",
+      "options": {
+        "A": "got herself into trouble",
+        "B": "hated her friend",
+        "C": "showed how brave she was",
+        "D": "supported her friend"
+      },
+      "correct_answer": null,
+      "explanation": "To burn one's finger : to harm oneself; to suffer consequences of one's actions.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "Gil held her tongue on sensitive political issues. This means that she",
+      "options": {
+        "A": "bit her tongue",
+        "B": "kept silent",
+        "C": "maintained her stand",
+        "D": "refused to laugh"
+      },
+      "correct_answer": null,
+      "explanation": "To hold one's tongue : remain silent",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "The project is in the pipeline . This means that it is",
+      "options": {
+        "A": "being dealt with",
+        "B": "being suspended",
+        "C": "No longer pursued",
+        "D": "stuck in the pipe"
+      },
+      "correct_answer": null,
+      "explanation": "In the pipeline : in the process of being planned or developed.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "Ammon has always kept his enemies at arm's length . This means that he",
+      "options": {
+        "A": "abused them",
+        "B": "shunned them",
+        "C": "threatened them",
+        "D": "trusted them"
+      },
+      "correct_answer": null,
+      "explanation": "At arm's length : avoid/shun intimacy or close contact.\n\nSECTION D\n\n From the list of words lettered A to D , choose the one that is most nearly opposite in meaning to the word underlined in each sentence.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "That shop has been temporarily closed down.",
+      "options": {
+        "A": "constantly",
+        "B": "deliberately",
+        "C": "legally",
+        "D": "permanently"
+      },
+      "correct_answer": null,
+      "explanation": "Opposite of temporary is permanent",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "He normally alights at the station.",
+      "options": {
+        "A": "A. ascends",
+        "B": "boards",
+        "C": "enters",
+        "D": "joins"
+      },
+      "correct_answer": null,
+      "explanation": "Opposite of alight is board",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "Abeiku feels unsafe in his house",
+      "options": {
+        "A": "afraid",
+        "B": "rejected",
+        "C": "secure",
+        "D": "unhappy"
+      },
+      "correct_answer": null,
+      "explanation": "Opposite of unsafe is secure",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "The audience laughed at his funny stories.",
+      "options": {
+        "A": "cheerful",
+        "B": "humourless",
+        "C": "familiar",
+        "D": "peculiar"
+      },
+      "correct_answer": null,
+      "explanation": "Anything funny is humourous and so if not funny then humourless",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "The prefect rebuked the student for his rude behaviour",
+      "options": {
+        "A": "defended",
+        "B": "justified",
+        "C": "pardoned",
+        "D": "praised"
+      },
+      "correct_answer": null,
+      "explanation": "Opposite of rebuke/condemn/disapprove is praise\n\nTHEORY QUESTIONS",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

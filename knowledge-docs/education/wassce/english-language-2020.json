@@ -1,0 +1,759 @@
+{
+  "exam_type": "wassce",
+  "subject": "English Language",
+  "year": 2020,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "Geraldine is very courteous but her brother, Gerald is unbelievably .......",
+      "options": {
+        "A": "arrogant.",
+        "B": "impolite.",
+        "C": "snobbish.",
+        "D": "haughty"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "Whilst Lydia became ...... in the course of the context, Lena was confident .",
+      "options": {
+        "A": "assuring",
+        "B": "boastful",
+        "C": "incensed",
+        "D": "jittery"
+      },
+      "correct_answer": null,
+      "explanation": "Jittery means nervous.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "We thought Jane was the instigator of the take-over; it turned out that she was rather the ......",
+      "options": {
+        "A": "accomplice",
+        "B": "troubleshooter",
+        "C": "advisor",
+        "D": "cool-head"
+      },
+      "correct_answer": null,
+      "explanation": "Instigator is a person who brings about or initiates something.\n\n accomplice is a person who helps another commit a crime.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "When they appeared before the disciplinary committee, Rex was unrepentant but Ray was ......",
+      "options": {
+        "A": "sober",
+        "B": "reformed",
+        "C": "remorseful",
+        "D": "quiet"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "Mama that what I had done was smart but Dad said it was ......",
+      "options": {
+        "A": "dumb",
+        "B": "lame",
+        "C": "wicked",
+        "D": "rough"
+      },
+      "correct_answer": null,
+      "explanation": "Dumb means not showing or having good judgment or intelligence stupid or foolish.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "Even though Joyce was praised for what she had done, her opponents ...... her.",
+      "options": {
+        "A": "admonished",
+        "B": "mocked",
+        "C": "warned",
+        "D": "provoked"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "Instead of being gentle with the frightened child, Tom was rather ......",
+      "options": {
+        "A": "brisk.",
+        "B": "firm.",
+        "C": "brash.",
+        "D": "harsh."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "I felt very agitated yet I maintained a ...... demeanour.",
+      "options": {
+        "A": "brave",
+        "B": "calm",
+        "C": "strict",
+        "D": "gentle"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "Adding much salt to food at table is ...... to the heart not beneficial .",
+      "options": {
+        "A": "hurtful",
+        "B": "abusive",
+        "C": "injurious",
+        "D": "offensive"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "The sound from Larry's record was ...... rather than audible .",
+      "options": {
+        "A": "muffled",
+        "B": "peaceful",
+        "C": "noisy",
+        "D": "blurred"
+      },
+      "correct_answer": null,
+      "explanation": "Muffle is to make a sound quieter and less clear.\n\nSECTION II \n\n From the words lettered A to D , choose the one that best completes each of the following sentences .",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "We shall overcome ...... how difficult it is.",
+      "options": {
+        "A": "no matter",
+        "B": "irrespective",
+        "C": "not looking",
+        "D": "despite"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "Jemima will be here ...... a minute.",
+      "options": {
+        "A": "on",
+        "B": "by",
+        "C": "in",
+        "D": "to"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "The ambulance sped ...... the hill.",
+      "options": {
+        "A": "downwards",
+        "B": "down",
+        "C": "between",
+        "D": "upward"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "You ...... a scratch on your neck the last time we met.",
+      "options": {
+        "A": "are having",
+        "B": "were having",
+        "C": "had",
+        "D": "have"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "He ...... they should be punished immediately.",
+      "options": {
+        "A": "is thinking",
+        "B": "think",
+        "C": "has thought",
+        "D": "thinks"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "...... midnight, Tom fell asleep.",
+      "options": {
+        "A": "By",
+        "B": "Until",
+        "C": "During",
+        "D": "On"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "Elorm and Jacob were then ...... war with each other.",
+      "options": {
+        "A": "into",
+        "B": "with",
+        "C": "at",
+        "D": "in"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "Though Tay had heard their cries for help, he ...... them.",
+      "options": {
+        "A": "has ignored",
+        "B": "ignores",
+        "C": "is ignoring",
+        "D": "ignored"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "Ali and Maria are good friends; they seldom ......",
+      "options": {
+        "A": "have argument",
+        "B": "will argue",
+        "C": "argue",
+        "D": "argued"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "Kennedy and Portia ...... live in Accra",
+      "options": {
+        "A": "used to",
+        "B": "use to",
+        "C": "once",
+        "D": "then"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "Mother's message was motivational ; it gingered the children to work hard.",
+      "options": {
+        "A": "aspirational",
+        "B": "sensational",
+        "C": "inspirational",
+        "D": "devotional"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "I have a hunch that the programme will not go well.",
+      "options": {
+        "A": "conviction",
+        "B": "suspicion",
+        "C": "revelation",
+        "D": "notion"
+      },
+      "correct_answer": null,
+      "explanation": "Hunch : a feeling or guess based on intuition rather than fact.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "Desmond admonished his people not to go to war.",
+      "options": {
+        "A": "reproved",
+        "B": "threatened",
+        "C": "inspired",
+        "D": "warned"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "Parliamentary proceedings have been adjourned until January.",
+      "options": {
+        "A": "annulled",
+        "B": "scheduled",
+        "C": "suspended",
+        "D": "abolished"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "What the professor said was alien to all his students.",
+      "options": {
+        "A": "offensive",
+        "B": "pleasing",
+        "C": "unfamiliar",
+        "D": "fantastic"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "The unwholesome practice is anathema to decent people.",
+      "options": {
+        "A": "a danger",
+        "B": "a curse",
+        "C": "a taboo",
+        "D": "a malady"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "When Joanita was declared winner, pandemonium broke out.",
+      "options": {
+        "A": "catastrophe",
+        "B": "chaos",
+        "C": "riots",
+        "D": "demonstrations"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "The subject of sanitation was accentuated at the meeting because of its importance.",
+      "options": {
+        "A": "emphasized",
+        "B": "mentioned",
+        "C": "considered",
+        "D": "analysed"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "When the wild dog attacked the puppies, Cecil throttled it.",
+      "options": {
+        "A": "stifled",
+        "B": "gagged",
+        "C": "strangled",
+        "D": "caged"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "Little Simon was given a drug to suppress his hyperactivity.",
+      "options": {
+        "A": "crush",
+        "B": "conquer",
+        "C": "restrict",
+        "D": "control"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 31,
+      "question_text": "Ever since Uche disgraced my niece in public, she has kept him at arm's length. This means that my niece",
+      "options": {
+        "A": "doesn't want to get close to Uche.",
+        "B": "has broken ties with Uche.",
+        "C": "calls Uche frequently.",
+        "D": "hates everything that Uche does."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "If Seth really wants to be helped, he has to put his cards on the table. This means that Seth",
+      "options": {
+        "A": "has to write a detailed application to offices.",
+        "B": "has to be truthful, honest and frank.",
+        "C": "needs to be more sociable.",
+        "D": "needs to reach out to everybody."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "We consider the day our daughter first went to school as a red-letter day. This means that we believe the day to be",
+      "options": {
+        "A": "of importance and therefore should be celebrated.",
+        "B": "a very sad one for our daughter.",
+        "C": "full of danger and uncertainties.",
+        "D": "when she would start her scholarship."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 34,
+      "question_text": "When the officer challenged the order, the commander hit the ceiling. This means that the commander was",
+      "options": {
+        "A": "surprised.",
+        "B": "worried.",
+        "C": "very angry.",
+        "D": "embarrassed."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "News of the chief's death spread like wildfire. This means that the news",
+      "options": {
+        "A": "made the people feel uncomfortable.",
+        "B": "was disseminated in a haphazard manner.",
+        "C": "reached many people within a short time.",
+        "D": "produced fiery reactions from all angles."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "It looks like Selina got out of bed on the wrong side. This means that Selina",
+      "options": {
+        "A": "woke up very late.",
+        "B": "felt weak and unwell.",
+        "C": "did not sleep well.",
+        "D": "was in a very bad mood."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 37,
+      "question_text": "James developed cold feet when he met the Manager to discuss his transfer. This means that James",
+      "options": {
+        "A": "suddenly felt feverish and sick.",
+        "B": "had second thoughts about what he wanted to do.",
+        "C": "became nervous and unable to talk.",
+        "D": "decided to change his mind."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "The priest's death was a bolt from the blue. This means that the priest",
+      "options": {
+        "A": "died suddenly and unexpectedly.",
+        "B": "was killed by unknown assailants.",
+        "C": "died under mysterious circumstances.",
+        "D": "died peacefully and quietly."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "Anne is two-faced in her interactions with her friends. This means that Anne is",
+      "options": {
+        "A": "courteous.",
+        "B": "self-centred.",
+        "C": "hypocritical.",
+        "D": "accommodating."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 40,
+      "question_text": "When Joe got there, he decided to strike while the iron was hot. This means that Joe",
+      "options": {
+        "A": "attacked the people he met there.",
+        "B": "finished all his work in good time.",
+        "C": "took daring decisions.",
+        "D": "took advantage of the situation."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 41,
+      "question_text": "Choose the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "damages",
+        "B": "blemishes",
+        "C": "challenges",
+        "D": "defects"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 42,
+      "question_text": "Choose the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "flowing",
+        "B": "oozing",
+        "C": "falling",
+        "D": "dripping"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 43,
+      "question_text": "Choose the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "inner",
+        "B": "guest",
+        "C": "master",
+        "D": "big"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 44,
+      "question_text": "Choose the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "outflow",
+        "B": "leakage",
+        "C": "trickling",
+        "D": "filtering"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 45,
+      "question_text": "Choose the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "repair",
+        "B": "sealing",
+        "C": "mending",
+        "D": "blockade"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 46,
+      "question_text": "Choose the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "technician",
+        "B": "mason",
+        "C": "plumber",
+        "D": "worker"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 47,
+      "question_text": "Choose the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "rafters",
+        "B": "sheets",
+        "C": "thatches",
+        "D": "beams"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 48,
+      "question_text": "Choose the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "ceiling",
+        "B": "top",
+        "C": "chimney",
+        "D": "attic"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 49,
+      "question_text": "Choose the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "soaked",
+        "B": "spread",
+        "C": "seeped",
+        "D": "sopped"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 50,
+      "question_text": "Choose the word that is most suitable to fill the gap.",
+      "options": {
+        "A": "side",
+        "B": "phase",
+        "C": "area",
+        "D": "line"
+      },
+      "correct_answer": null,
+      "explanation": "three questions in all: one question from section A and all the questions in Sections B and C .\n\nSECTION A \n\nESSAY\n\n Answer one question only from this section .\n\n All questions carry equal marks . Your answer should not be less than 450 words .\n\n You are advised to spend about 50 minutes on this se",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

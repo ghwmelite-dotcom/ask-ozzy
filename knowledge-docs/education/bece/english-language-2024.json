@@ -1,0 +1,609 @@
+{
+  "exam_type": "bece",
+  "subject": "English Language",
+  "year": 2024,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "If Azameti had won gold, Ghanaians ......",
+      "options": {
+        "A": "will have jubilated",
+        "B": "will jubilate",
+        "C": "would have jubilated",
+        "D": "would jubilate"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "We were served a ...... meal at that cozy restaurant.",
+      "options": {
+        "A": "Spanish delicious spicy",
+        "B": "delicious spicy Spanish",
+        "C": "delicious Spanish spicy",
+        "D": "spicy Spanish delicious"
+      },
+      "correct_answer": null,
+      "explanation": "Adjective Order",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "Ali's parents have not bought ...... of the two recommended books.",
+      "options": {
+        "A": "any",
+        "B": "none",
+        "C": "neither",
+        "D": "either"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "Adwoa's daughter is allergic ...... dust.",
+      "options": {
+        "A": "about",
+        "B": "against",
+        "C": "with",
+        "D": "to"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "Dauda saw the thief ...... out of the shop.",
+      "options": {
+        "A": "was running",
+        "B": "is running",
+        "C": "run",
+        "D": "ran"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "Konlaan suggested that it was time they ...... for the meeting",
+      "options": {
+        "A": "have to leave",
+        "B": "left",
+        "C": "had to leave",
+        "D": "leave"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "Last Wednesday, it rained heavily ...... the match was played.",
+      "options": {
+        "A": "and",
+        "B": "so",
+        "C": "for",
+        "D": "yet"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "You haven't met each other before, ...... you?",
+      "options": {
+        "A": "hadn't",
+        "B": "have",
+        "C": "haven't",
+        "D": "had"
+      },
+      "correct_answer": "B",
+      "explanation": "Negative goes with positive question \n\nHaven't → have",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "At my last interview, I faced ...... panel.",
+      "options": {
+        "A": "seven-members'",
+        "B": "a seven-member",
+        "C": "a seven-member's",
+        "D": "seven-members"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "Which of the ...... fragrance(s) is milder?",
+      "options": {
+        "A": "two",
+        "B": "one",
+        "C": "most",
+        "D": "all"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "Last month, there was ......",
+      "options": {
+        "A": "an eclipse of a sun",
+        "B": "the eclipse of a sun",
+        "C": "an eclipse of the sun",
+        "D": "the eclipse of the sun"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "Among the participants for the competition, Eugenia got here ...... early.",
+      "options": {
+        "A": "very",
+        "B": "only",
+        "C": "often",
+        "D": "most"
+      },
+      "correct_answer": null,
+      "explanation": "Most early means earliest",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "Afida's aunt, ...... lives in Tamale spoke to us very courteously.",
+      "options": {
+        "A": "who",
+        "B": "whom",
+        "C": "that",
+        "D": "which"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "\"I will keep my word\", promised Kende.\n\n The correct reported speech for the sentence above is",
+      "options": {
+        "A": "Kende promise to keep her word.",
+        "B": "Kende is promising to keep her word.",
+        "C": "Kende promises to keep her word.",
+        "D": "Kende promised to keep her word."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "For winning the first position in the Essay Competition, the school gave Linda a laptop.\n\n The correct passive form of the sentence above is \n\nFor winning the first position in the Essay Competition, Linda ...... given a laptop by the school.",
+      "options": {
+        "A": "is",
+        "B": "has been",
+        "C": "was",
+        "D": "is being"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "Little Asabea wondered why her grandfather walked so slowly.",
+      "options": {
+        "A": "was saddened that",
+        "B": "felt frustrated that",
+        "C": "was curious about why",
+        "D": "thought about why"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "We're so excited because Amuzu's proposal has been accepted.",
+      "options": {
+        "A": "suggestion",
+        "B": "offer",
+        "C": "opinion",
+        "D": "view"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "Mama said, \"You can only fight off bullies if you are assertive \".",
+      "options": {
+        "A": "muscular",
+        "B": "strong",
+        "C": "smart",
+        "D": "bold"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "The rampant destruction of property must be checked.",
+      "options": {
+        "A": "common",
+        "B": "regular",
+        "C": "unpleasant",
+        "D": "uncontrolled"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "The salient points of the topic have been thoroughly discussed.",
+      "options": {
+        "A": "highlighted",
+        "B": "chosen",
+        "C": "important",
+        "D": "interesting"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "The chief advised his subjects not to allow anger to get the better of them .\n\nThis means that they should not let anger ...... them.",
+      "options": {
+        "A": "divide",
+        "B": "sadden",
+        "C": "control",
+        "D": "deceive"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "\"Do not be such a wet blanket , Afua. Your brother needs all the support you can give him\", Auntie Araba chided her daughter.\n\nThis means that Afua ...... her brother.",
+      "options": {
+        "A": "didn't care about",
+        "B": "couldn't wash for",
+        "C": "was too weak to help",
+        "D": "liked to discourage"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "Asua had to eat his words when Asante Kotoko lost to Tano Bofoakwa FC.\n\nThis means that Asuo ......",
+      "options": {
+        "A": "admitted that he was wrong",
+        "B": "denied everything he had said",
+        "C": "became very ashamed",
+        "D": "lost his appetite"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "The fraudster was paid back in his own coins \n\nThis means that he was ......",
+      "options": {
+        "A": "given a hot chase",
+        "B": "swindled",
+        "C": "punished",
+        "D": "given new coins"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "Yaaba hit the nail on the head when she told us that we could only succeed through hardworking.\n\nThis means that Yaaba ......",
+      "options": {
+        "A": "was a good hairdresser",
+        "B": "told us the truth",
+        "C": "tried to deceive us",
+        "D": "showed that she disliked us"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "Due to ongoing road construction, our shops have been temporarily closed down.",
+      "options": {
+        "A": "permanently",
+        "B": "legally",
+        "C": "deliberately",
+        "D": "constantly"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "Some exercises may seem easy in theoretical terms but can be really difficult in ...... aspects",
+      "options": {
+        "A": "practical",
+        "B": "natural",
+        "C": "logical",
+        "D": "actual"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "It is good to get a cure for a disease, but it is better to ...... the disease.",
+      "options": {
+        "A": "prevent",
+        "B": "protect",
+        "C": "avoid",
+        "D": "counter"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "It is hard to tell when this began or where it will ......",
+      "options": {
+        "A": "fall",
+        "B": "cease",
+        "C": "reside",
+        "D": "remain"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "Regions with abundant rainfall are different from those having ...... moisture.",
+      "options": {
+        "A": "unpredictable",
+        "B": "scanty",
+        "C": "uncertain",
+        "D": "reduced"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 31,
+      "question_text": "Choose from the options A to D , the word that is most suitable to fill the gap",
+      "options": {
+        "A": "register",
+        "B": "compiled",
+        "C": "present",
+        "D": "attendance"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "Choose from the options A to D , the word that is most suitable to fill the gap",
+      "options": {
+        "A": "motions",
+        "B": "ideas",
+        "C": "decisions",
+        "D": "intentions"
+      },
+      "correct_answer": null,
+      "explanation": "A motion is a proposal that is put before a meeting for discussion and a decision. If a motion is passed it becomes a resolution. Resolutions are binding and should be recorded in the minutes of the meeting.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "Choose from the options A to D , the word that is most suitable to fill the gap",
+      "options": {
+        "A": "declare",
+        "B": "call",
+        "C": "recommend",
+        "D": "move"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 34,
+      "question_text": "Choose from the options A to D , the word that is most suitable to fill the gap",
+      "options": {
+        "A": "approved",
+        "B": "seconded",
+        "C": "upheld",
+        "D": "supported"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "Choose from the options A to D , the word that is most suitable to fill the gap",
+      "options": {
+        "A": "adjourned",
+        "B": "postponed",
+        "C": "deferred",
+        "D": "shifted"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "Those two are arch rivals.",
+      "options": {
+        "A": "splash",
+        "B": "patch",
+        "C": "path",
+        "D": "spark"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 37,
+      "question_text": "Prosper is the new chef .",
+      "options": {
+        "A": "chord",
+        "B": "chair",
+        "C": "shield",
+        "D": "scheme"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "Lariba sprang to her feet.",
+      "options": {
+        "A": "sprayed",
+        "B": "struck",
+        "C": "slew",
+        "D": "splashed"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "Whole grains are healthier than polished ones.",
+      "options": {
+        "A": "Gill",
+        "B": "Goal",
+        "C": "Gaul",
+        "D": "Gaol"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 40,
+      "question_text": "The heir to the British throne was the Duke of Cornwall.",
+      "options": {
+        "A": "here",
+        "B": "hail",
+        "C": "air",
+        "D": "hew"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

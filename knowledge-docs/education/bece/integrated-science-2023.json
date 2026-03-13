@@ -1,0 +1,564 @@
+{
+  "exam_type": "bece",
+  "subject": "Integrated Science",
+  "year": 2023,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "The very hard greenish-black deposit around the corners of the teeth is known as",
+      "options": {
+        "A": "gum disease.",
+        "B": "plaque.",
+        "C": "caries.",
+        "D": "cavity."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "When equal amount of water is poured on dry soil samples, the increase in weight per unit amount of soil would be highest in",
+      "options": {
+        "A": "gravel.",
+        "B": "clayey soil.",
+        "C": "sandy soil.",
+        "D": "loamy soil."
+      },
+      "correct_answer": null,
+      "explanation": "Clayey soil has the highest water holding capacity hence will have the highest weight (weight of the dry soil sample + weight of water absorbed).",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "The following practices are cultural practices in crop production except",
+      "options": {
+        "A": "nursing.",
+        "B": "pest control.",
+        "C": "mulching.",
+        "D": "weeding."
+      },
+      "correct_answer": null,
+      "explanation": "Cultural practices of vegetable crop production\n\nThese are practices that are carried out after planting vegetable crops on the field up to the time of harvesting.\n\nThey include the following:",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "An example of a mixture is",
+      "options": {
+        "A": "sodium sulphate.",
+        "B": "hydrogen chloride.",
+        "C": "ammonia.",
+        "D": "salt solution"
+      },
+      "correct_answer": null,
+      "explanation": "Mark \r\n\n Solution \r\n\n Only salt solution is a mixture (mixture of salt and water). The rest are all compounds.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "Which of the following statements about acids are correct ?\n\nI. They turn red litmus paper blue.\r\n\nII. They can be neutralized by bases.\r\n\nIII. Citrus fruits contains acids.",
+      "options": {
+        "A": "I and II only",
+        "B": "II and III only",
+        "C": "I and III only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "Acids turn blue litmus paper red and not the other way round. Statement I is false.\n\nRemember the acronym when you are confused. BAR . B for blue and A for acid and R for red. BAR acronym simply means for A cids ( A ), B lue litmus paper turns R ed.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "The practice of reducing the number of seedlings per stand for better growth is known as",
+      "options": {
+        "A": "earthing up.",
+        "B": "filling in.",
+        "C": "pricking out.",
+        "D": "thinning out."
+      },
+      "correct_answer": null,
+      "explanation": "Thinning out : This is the removal of some plants from the area grown with seeds. This is done mainly to make room for the seeds to grow well.\n\n Earthing up : is a farming technique that involves mounding soil around the base of a plant, usually a crop. This technique has been used for centuries in ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 8,
+      "question_text": "How many atoms are present in H 2 O 2 ?",
+      "options": {
+        "A": "5",
+        "B": "4",
+        "C": "3",
+        "D": "2"
+      },
+      "correct_answer": "D",
+      "explanation": "2 hydrogen atoms and 2 oxygen atoms making 4 atoms.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "Which of the following electronic components is not made of semi-conductors?",
+      "options": {
+        "A": "Capacitor",
+        "B": "Diode",
+        "C": "LED",
+        "D": "Transistor"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "Steam changes to liquid by a process called",
+      "options": {
+        "A": "evaporation.",
+        "B": "condensation.",
+        "C": "melting.",
+        "D": "boiling."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "Which of the following body shapes facilitates movement in a fluid?",
+      "options": {
+        "A": "Rectangular",
+        "B": "Spherical",
+        "C": "Streamline",
+        "D": "Triangular"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "Stirring of soil on vegetable beds is to\r\n\nI. improve aeration of soil.\r\n\nII. increase activities of soil organisms.\r\n\nIII. increase water penetration in the soil.\r\n\nIV. reduce weed growth.",
+      "options": {
+        "A": "I and II only",
+        "B": "I, III and IV only",
+        "C": "II, III and IV only",
+        "D": "I, II and IV only"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 13,
+      "question_text": "The base of the N-P-N transistor normally",
+      "options": {
+        "A": "is a p-type semi conductor.",
+        "B": "is an n-type semi conductor.",
+        "C": "is undoped semi conductor.",
+        "D": "have electrons as majority charge carriers."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "One benefit of technology to industrialization is",
+      "options": {
+        "A": "increase in cost of production.",
+        "B": "reduction in skillful labour.",
+        "C": "provision of machinery.",
+        "D": "environmental pollution."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "Contour ploughing is normally practiced on",
+      "options": {
+        "A": "hard-rocky lands",
+        "B": "muddy lands.",
+        "C": "non-fertile lands.",
+        "D": "sloppy lands."
+      },
+      "correct_answer": null,
+      "explanation": "Contour ploughing is practiced generally on sloppy lands to prevent soil erosion.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "Which of the following pairs of structures are present in animal cells?",
+      "options": {
+        "A": "Mitochondrion and Chloroplast",
+        "B": "Nucleus and chloroplast",
+        "C": "Vacuole and nucleus",
+        "D": "Cell wall and mitochondrion"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "Artificial satellites can be used for\r\n\nI. communication.\r\n\nII. oil and gas exploration.\r\n\nIII. meteorological studies.",
+      "options": {
+        "A": "I only",
+        "B": "II only",
+        "C": "I and II only",
+        "D": "I, II and III"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "The image formed by a plane mirror is always",
+      "options": {
+        "A": "real.",
+        "B": "magnified.",
+        "C": "inverted.",
+        "D": "virtual."
+      },
+      "correct_answer": null,
+      "explanation": "Characteristics of an image formed by a plane mirror\n\nThe image:",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "The following practices are principles in crop production except",
+      "options": {
+        "A": "land selection.",
+        "B": "pests and diseases control.",
+        "C": "seed planting.",
+        "D": "harvesting and processing."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "Which of the following pairs of elements is in the same period in the periodic table?",
+      "options": {
+        "A": "5 B and 13 Al",
+        "B": "1 H and 3 Li",
+        "C": "4 Be and 5 B",
+        "D": "11 Na and 19 K"
+      },
+      "correct_answer": null,
+      "explanation": "Note : the question asked of period which is the horizontal list and not a group which is the vertical list",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "The daily variation of atmospheric conditions is called",
+      "options": {
+        "A": "climate.",
+        "B": "weather.",
+        "C": "season.",
+        "D": "humidity."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "To test for starch in a green leaf, it is usually boiled to",
+      "options": {
+        "A": "isolate the starch.",
+        "B": "kill the leaf.",
+        "C": "make the leaf soft.",
+        "D": "extract the chlorophyll."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "The following effects are as a result of soil erosion except",
+      "options": {
+        "A": "increase in bushfires.",
+        "B": "weakening support of plants.",
+        "C": "loss of important minerals to plants.",
+        "D": "weakening of support of buildings."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "The following products, X,Y,Z and W have masses 0.05 kg, 50 mg, 500 g and 0.05 g respectively.\n\n Use this information to answer the question below .\n\nIf all the products have equal volumes, which of the product (s) would have the highest density?",
+      "options": {
+        "A": "X",
+        "B": "Y",
+        "C": "Z",
+        "D": "W and X"
+      },
+      "correct_answer": "A",
+      "explanation": "the question below .\n\nIf all the products have equal volumes, which of the product (s) would have the highest density?\n\n A. \r\n\nX\n\n B. \r\n\nY\n\n C. \r\n\nZ\n\n D. \r\n\nW and X\n\n Mark \r\n\n Solution \r\n\nDensity = \r\n Mass \r\n Volume \r\n\nIf the volume is constant (the same), the higher the mass, the higher the density",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "The following products, X,Y,Z and W have masses 0.05 kg, 50 mg, 500 g and 0.05 g respectively.\n\n Use this information to answer the question below .\n\nWhich of the products have the same mass?",
+      "options": {
+        "A": "Y and W",
+        "B": "X and Y",
+        "C": "Y and Z",
+        "D": "X and W"
+      },
+      "correct_answer": null,
+      "explanation": "the question below .\n\nWhich of the products have the same mass?\n\n A. \r\n\nY and W\n\n B. \r\n\nX and Y\n\n C. \r\n\nY and Z\n\n D. \r\n\nX and W\n\n Mark \r\n\n Solution \r\n\nConvert all the masses to the same unit and pick the product with the highest mass.\n\nLet's change all the masses to grams (g)\n\nTo change kilogram (kg",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "Which of the following ions is formed by the loss of 2 electrons?",
+      "options": {
+        "A": "Ca 2+",
+        "B": "S 2-",
+        "C": "K +",
+        "D": "F -"
+      },
+      "correct_answer": null,
+      "explanation": "Cations are positively charged and they lose electrons. The number of positive charges in the superscript indicates the number of electrons lost. Calcium (Ca) has 2 positive charges which indicates the lost of 2 electrons.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "The farming system that makes the most effective use of land is",
+      "options": {
+        "A": "crop rotation.",
+        "B": "land rotation.",
+        "C": "mixed cropping.",
+        "D": "mixed farming."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "An example of a natural source of light is",
+      "options": {
+        "A": "lantern.",
+        "B": "moon.",
+        "C": "glow worm.",
+        "D": "torchlight."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "The SI unit that is derived is",
+      "options": {
+        "A": "kg.",
+        "B": "k.",
+        "C": "Pa.",
+        "D": "s."
+      },
+      "correct_answer": null,
+      "explanation": "Derived unit is a unit obtained from the base/fundamental unit. Pa is a unit for pressure which is obtained from kg⋅m −1 ⋅s −2",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 31,
+      "question_text": "The grouping together of many stars is known as",
+      "options": {
+        "A": "comet.",
+        "B": "astronomy.",
+        "C": "solar-system.",
+        "D": "galaxy."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "Anemometer is an instrument for measuring.",
+      "options": {
+        "A": "relative humidity.",
+        "B": "rainfall amount.",
+        "C": "wind direction.",
+        "D": "wind speed."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 34,
+      "question_text": "Which of the following statements distinguishes arteries from veins?",
+      "options": {
+        "A": "Arteries have relatively narrow lumen while veins have relatively wide lumen.",
+        "B": "Arteries transport blood to the heart while veins carry blood away from the heart.",
+        "C": "Arteries carry deoxygenated blood while veins carry oxygenated blood.",
+        "D": "Arteries have valves while veins do not have valves."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "The element used in the manufacturing of electronic components is",
+      "options": {
+        "A": "sodium.",
+        "B": "fluorine.",
+        "C": "silicon.",
+        "D": "neon."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "Which of the following factors has the greatest influence on vegetable crop production?",
+      "options": {
+        "A": "Availability of labour",
+        "B": "Nearness to market",
+        "C": "Source of water",
+        "D": "Presence of pest"
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 37,
+      "question_text": "The brightest of all the planets is",
+      "options": {
+        "A": "Mars.",
+        "B": "Saturn.",
+        "C": "Uranus.",
+        "D": "Venus."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "The use of separating funnel is most appropriate for separating which of the following mixtures?",
+      "options": {
+        "A": "Sulphur and water",
+        "B": "Water and sodium chloride",
+        "C": "Vegetable oil and kerosene",
+        "D": "Water and vegetable oil"
+      },
+      "correct_answer": null,
+      "explanation": "Vegetable oil and water are immiscible, which forms two separate layers. So, they can be separated by using a separating funnel",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "When a ray of light travels from a dense medium into a denser medium, it",
+      "options": {
+        "A": "bends towards the normal.",
+        "B": "bends away from the normal.",
+        "C": "is parallel to the incident ray.",
+        "D": "is perpendicular to the incident ray."
+      },
+      "correct_answer": null,
+      "explanation": "",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 40,
+      "question_text": "The two main particles in the nucleus of an atom are",
+      "options": {
+        "A": "neutrons and protons.",
+        "B": "neutrons and electrons.",
+        "C": "shells and neutrons.",
+        "D": "electrons and protons."
+      },
+      "correct_answer": null,
+      "explanation": "THEORY QUESTIONS",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

@@ -1,0 +1,428 @@
+{
+  "exam_type": "bece",
+  "subject": "Core Mathematics",
+  "year": 2021,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 1,
+      "question_text": "If A = {1, 3, 5, 7, 9, 11, 13, 15} and B = {3, 6, 9, 12, 15}, find n(A∩B).",
+      "options": {
+        "A": "= {1, 3, 5, 7, 9, 11, 13, 15}",
+        "B": "5",
+        "C": "10",
+        "D": "15"
+      },
+      "correct_answer": "A",
+      "explanation": "Intersection (∩) are elements you can find in both sets.\n\n n in n(A∩B) means the number of elements. So you count how many elements are in A∩B once you are done finding the elements.\n\nA = {1, 3, 5, 7, 9, 11, 13, 15}\r\n\n B = {3, 6, 9, 12, 15}\r\n\nAs you can see 3, 9 and 15 are the only elements that can",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 2,
+      "question_text": "If P = {4, 8, 12, 16, 20}, Q = {16, 4, 12, k , 20} and P = Q , find the value of k .",
+      "options": {
+        "A": "20",
+        "B": "16",
+        "C": "8",
+        "D": "4"
+      },
+      "correct_answer": "A",
+      "explanation": "Since the set P is equal to the set Q , thus P = Q , it means all the elements in P is in Q and all the elements in Q is also in P . So you simply have to find which element is in P but not in Q .\n\n P = {4, 8, 12, 16, 20}\n\n Q = {16, 4, 12, k , 20}\n\nSince the elements of P are arranged from the small",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 3,
+      "question_text": "Express 7352.4658 correct to three significant figures.",
+      "options": {
+        "A": "7352465.8",
+        "B": "7352.47",
+        "C": "7350",
+        "D": "735"
+      },
+      "correct_answer": "D",
+      "explanation": "The significant digits of a number are the digits that have meaning or contribute to the value of the number. Sometimes they are also called significant figures.\n\n Which digits are significant? \n\nThere are some basic rules that tell you which digits in a number are significant:\r\n\n• All non-zero digi",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "Find the difference between the values of (2 d ) 2 and 2 d 2 , when d = 3.",
+      "options": {
+        "A": "0",
+        "B": "18",
+        "C": "24",
+        "D": "54"
+      },
+      "correct_answer": null,
+      "explanation": "Difference in mathematics means subtraction .\n\n Product means multiplication .\n\n Sum means addition .\n\nHence difference between (2 d ) 2 and 2 d 2 implies (2 d ) 2 - 2 d 2 \n\n NOTE: In (2 d ) 2 the square (2) is affecting both 2 and d since they are both in a bracket but in 2 d 2 , the square (2) onl",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 5,
+      "question_text": "Find the image of p (-3, 5) when rotated through 360 o about the origin.",
+      "options": {
+        "A": "rotation of −270∘ is equivalent to a rotation of 90∘, (360-270) and therefore results in a point with coordinates (−𝑦,𝑥)\r\n\n 9",
+        "B": "(-3, -5)",
+        "C": "(-3, 5)",
+        "D": "(-5, -3)"
+      },
+      "correct_answer": null,
+      "explanation": "Property: Rotations by Multiples of 90 Degrees about the Origin \n\nFor a point with coordinates (𝑥,𝑦),the following is true:\n\n POINT # \r\n\n RULE \r\n\n 1\r\n\n A rotation of 90 degrees results in a point with coordinates (−𝑦,𝑥)\r\n\n 2\r\n\n A rotation of 180 degrees results in a point with coordinates (−𝑥,−",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 7,
+      "question_text": "Find the next two terms of the sequence: 2, 5, 10, 17, ....., ......",
+      "options": {
+        "A": "24, 35",
+        "B": "26, 35",
+        "C": "26, 37",
+        "D": "27, 38"
+      },
+      "correct_answer": null,
+      "explanation": "First determine the type of the sequence \n\nA sequence is an enumerated collection of objects in which repetitions are allowed and order matters.\n\n Types of Sequences",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "Kofi and Ama shared an amount of GH₵ 3,000.00 in the ratio 2:3. Find the amount received by Kofi.",
+      "options": {
+        "A": "GH₵ 1,000.00",
+        "B": "GH₵ 1,200.00",
+        "C": "GH₵ 1,500.00",
+        "D": "GH₵ 1,800.00"
+      },
+      "correct_answer": null,
+      "explanation": "Kofi’s ratio is 2 and Ama’s ratio is 3 from the Kofi : Ama = 2:3\n\nSum of ratios = 2 + 3 = 5\n\n NOTE: 5 goes into 30, 6 times then you multiply 2 by 600 to get the 1,200\n\n ASSIGNMENT \n\nCalculate the amount received by Ama\n\n SOLUTION \n\nAma received 1,800. Alternatively you can subtract 1200 (Amount rec",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "If 2 x – 1 = 5, find the value of x .",
+      "options": {
+        "A": "3",
+        "B": "4",
+        "C": "5",
+        "D": "6"
+      },
+      "correct_answer": "C",
+      "explanation": "Solve for the value of x (Make x the subject)\n\n2 x – 1 = 5\r\n\n2 x = 5 + 1\r\n\n2 x = 6\r\n\nDivide both sides by 2\n\n2 x /2 = 6/2\n\n x = 3\n\n NOTE: When negative crosses the equal to sign, it becomes positive, hence the -1 becomes +1 when it moves to the right hand side.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "The area of a rectangle is 18 cm 2 . If one of its sides is 2cm long, find its perimeter.",
+      "options": {
+        "A": "18 cm",
+        "B": "20 cm",
+        "C": "22 cm",
+        "D": "36 cm"
+      },
+      "correct_answer": null,
+      "explanation": "Area of a rectangle = length x breadth \n\n= L x B\n\nLet L = 2 and B = ?\n\nFrom the question the area is 18cm 2 \n\nL x B = 18\n\nBut L = 2\n\n2 x B = 18\n\nDivide both sides by 2 \n\nPerimeter of a rectangle = L + L + B + B\n\n= 2L + 2B\n\nL = 2 and B = 9\n\nPerimeter = 2 x 2 + 2 x 9\n\n= 4 + 18\n\n= 22 cm",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "On a map, 1⁄3 cm represents 5km. If two towns A and B are 18 cm apart on the map, what is the actual distance between them?",
+      "options": {
+        "A": "27 km",
+        "B": "30 km",
+        "C": "240 km",
+        "D": "270 km"
+      },
+      "correct_answer": null,
+      "explanation": "1⁄3 = 5 km\n\n18 cm = ?\n\nLet 18 cm = x km and cross multiply to solve for the value of x \n\n1⁄3 x x = 5 x 18\n\n Applying the principles of multiplying fractions \n\nEvery number is being divided by 1 hence x = x /1\n\n1⁄3 x x = 5 x 18\n\nGet rid of the fraction by multiplying both sides of the equation by the",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 15,
+      "question_text": "What is the rule for the above mapping?",
+      "options": {
+        "A": "y = x + 4",
+        "B": "y = 3 x + 2",
+        "C": "y = 4 x + 1",
+        "D": "y = 5 x + 1"
+      },
+      "correct_answer": null,
+      "explanation": "Check if the mapping is a linear/arithmetic sequence by finding the difference between each consecutive value of y . A linear sequence has the common difference between consecutive numbers the same\n\nIf it is linear, use the equation of linear formula to find the rule of the mapping\n\n y 2 - y 1 = 9 -",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "Find x when y = 37 for the above mapping",
+      "options": {
+        "A": "6",
+        "B": "7",
+        "C": "8",
+        "D": "9"
+      },
+      "correct_answer": "B",
+      "explanation": "Find the rule of the mapping first\n\nCheck if the mapping is a linear/arithmetic sequence by finding the difference between each consecutive value of y . A linear sequence has the common difference between consecutive numbers the same\n\nIf it is linear, use the equation of linear formula to find the r",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "Esi bought a television set for GH₵ 1,500.00. If she sold it at a profit of 20%, find the selling price.",
+      "options": {
+        "A": "GH₵ 1,200.00",
+        "B": "GH₵ 1,500.00",
+        "C": "GH₵ 1,750.00",
+        "D": "GH₵ 1,800.00"
+      },
+      "correct_answer": null,
+      "explanation": "Profit = Selling Price - Cost Price\n\n Profit percent (%) is the amount of the profit expressed in terms of percentage. The profit is based on the cost price, hence the formula\r\nto profit % is (Profit/Cost Price) x 100\n\nBut profit = Selling Price - Cost Price\n\nHence profit % = ([Selling Price-Cost Pr",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 18,
+      "question_text": "In the diagram, line AB is parallel to line PD . Find the value of x .",
+      "options": {
+        "A": "20 o",
+        "B": "80 o",
+        "C": "100 o",
+        "D": "120 o"
+      },
+      "correct_answer": "A",
+      "explanation": "Properties \n\n Alternate Angles \n\n Alternate angles are equal\n\nFrom the diagram above, angle DCB and angle OBA are alternate angles\n\nHence angle DCB = OBA \n\n Sum of angles in triangle \n\nSum of angles in a triangle add up to 180 o \n\nA o + B o + C o = 180 o \n\nFrom the diagram in the question, angle x o",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "Find the simple interest on GH₵ 600.00 which was saved for 8 months at 5% per annum.",
+      "options": {
+        "A": "GH₵ 20.00",
+        "B": "GH₵ 40.00",
+        "C": "GH₵ 45.00",
+        "D": "GH₵ 240.00"
+      },
+      "correct_answer": null,
+      "explanation": "Principal is the amount invested or loan taken\n\n Time is the duration of the investment or the time for the loan to be paid. Its mostly in years (annum). If you are given months or weeks, convert to years\n\n Rate is the percentage rate (%) that will be used to calculate the interest earned on the inv",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "Priscila's age i k years while Mary's age is b years. If Mary is 15 years older than Priscila, Which of the following statements is correct ?",
+      "options": {
+        "A": "2 k + b = 15",
+        "B": "= k + 15\n\nNow let 15 be alone at the right hand side of the equation, thus move the k to the left hand side. Its positive(+) so it becomes negative (-)",
+        "C": "k - b = 15",
+        "D": "2 b + k = 15"
+      },
+      "correct_answer": null,
+      "explanation": "Priscila's age = k \n\nMary's age = b \n\nMary is 15 years older than Priscila. This means that if you add 15 years to Priscila's age, you will get Mary's age or if you subtract 15 years from Mary's age you will get Priscila's age.\n\nMary's age = Priscila's age + 15\n\n b = k + 15\n\nNow let 15 be alone at t",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "What is the Highest Common Factor (HCF) of 24, 32 and 64?",
+      "options": {
+        "A": "4",
+        "B": "6",
+        "C": "8",
+        "D": "16"
+      },
+      "correct_answer": "A",
+      "explanation": "A factor is a number that fits exactly into another number. For example, 2 is a factor of 4 because 2 goes into 4, 2 times\n\nThe highest common factor is the largest whole number which is shared by given numbers.\n\nTo find the highest common factor, list the factors of all the numbers and select the h",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 23,
+      "question_text": "Factorize: 3 ax + 6 a - x - 2",
+      "options": {
+        "A": "(3 a +1)( x +2)",
+        "B": "(3 a +1)( x -2)",
+        "C": "3 a ( x -2)",
+        "D": "(3 a -1)( x +2)"
+      },
+      "correct_answer": "A",
+      "explanation": "Let's group them \n\n The 3 ax + 6 a Group \n\nBring out which numbers or letters are common in both expressions\n\nYou can see 3 can go into 6, hence 3 is common\n\n a also appeared at both sides, hence a is also common\n\n3 a ( x +2)\n\n The - x - 2 Group \n\n- x = -1 x x \n\n-2 = -1 x 2\n\nHence - x - 2 = -1 x x -",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "Simplify",
+      "options": {
+        "A": "10 y + 3",
+        "B": "10 y - 3",
+        "C": "D."
+      },
+      "correct_answer": null,
+      "explanation": "Find the L.C.M of 1 and 4 and use it to divide the entire expression to simplify\n\nThe L.C.M of 1 and 4 is 4, hence divide the entire expression by 4\n\n NOTE: - x - = +, hence -1 x -3 = + 3\n\nIn -1(2 y -3), the -1 multiplies everything in the bracket\n\n Principle : a ( b + c ) = a x b + a x c \n\n a ( b -",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 27,
+      "question_text": "If the median of the numbers 9,10,12, x , 20 and 25 is 14, find the value of x .",
+      "options": {
+        "A": "14",
+        "B": "16",
+        "C": "18",
+        "D": "22"
+      },
+      "correct_answer": null,
+      "explanation": "Median is the middle number or the average of the middle numbers when two numbers happen to be in the middle of an ordered numbers.\n\n12 and x happens to be in the middle and so the median is the average (the sum of the numbers divided by 2) of 12 and x \n\nThe median is therefore calculated as:\n\nNow c",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "Expand (7 r - 5)(3 r +4).",
+      "options": {
+        "A": "21 r 2 + 13 r - 20",
+        "B": "21 r 2 - 13 r - 20",
+        "C": "21 r 2 - 43 r - 20",
+        "D": "21 r 2 + 43 r - 20"
+      },
+      "correct_answer": null,
+      "explanation": "Expand simply means multiply and simplify\n\n Principle \n\n( a + b )( c + d ) = a ( c + d )+ b ( c + d )\n\n( a - b )( c + d ) = a ( c + d )- b ( c + d )\n\n(7 r -5)(3 r +4) = 7 r (3 r +4)-5(3 r +4)\n\n7 r (3 r +4)-5(3 r +4) = 7 r x3 r + 7 r x 4 - 5x3 r -5x4\n\n7 r x3 r + 7 r x 4 - 5x3 r -5x4 = 21 r 2 + 28 r -",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 31,
+      "question_text": "If the average of 5,6,7 and x is 8, find the value of x",
+      "options": {
+        "A": "12",
+        "B": "14",
+        "C": "16",
+        "D": "24"
+      },
+      "correct_answer": null,
+      "explanation": "Sum of observations (numbers) = 5+6+7+ x \n\nTotal number of observations (numbers) = how many numbers are in the observation. In this case 4 , thus (5,6,7 and x )\n\nEvery number is divisible by 1\n\nRe-write the equation\n\nSimplify like terms and cross multiply to solve for the value of x \n\n1 x (18+ x ) ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "An amount of GH₵ 375,000.00 was needed to build a clinic for a community of twelve towns. Each community contributed GH₵ 25,000.00.\r\nIf the District Assembly also contributed GH₵ 30,500.00, how much more is needed to build the clinic?",
+      "options": {
+        "A": "GH₵ 44,500.00",
+        "B": "GH₵ 45,500.00",
+        "C": "GH₵ 35,500.00",
+        "D": "GH₵ 75,000.00"
+      },
+      "correct_answer": null,
+      "explanation": "Amount Left = Total Amount Needed - (Amount contributed by the 12 towns + Amount contributed by the district assembly\n\nEach (Each and every) community contributed GH₵ 25,000.00, to get the total amount contributed by the communities, you have to multiply the amount contributed by each by 12 (Total n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "Which property of arithmetic is shown in the equation (6 + x ) + 5 = 6 + ( x + 5)",
+      "options": {
+        "A": "Commutative",
+        "B": "Associative",
+        "C": "Closure",
+        "D": "Distributive"
+      },
+      "correct_answer": "B",
+      "explanation": "Commutative Property \n\nStates that changing the order of addends does not change the sum.\n\nFor example, 3 + 5 = 5 + 3, thus three plus five equals five plus 3.\n\n Associative Property \n\nStates that changing the grouping of addends does not change the sum.\n\nFor example, (2 + 5) + 1 = 2 + (5 + 1), thus",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 36,
+      "question_text": "Given that x = 4, y = 7, evaluate 2 xy + 3( x + y )",
+      "options": {
+        "A": "79",
+        "B": "89",
+        "C": "99",
+        "D": "109"
+      },
+      "correct_answer": null,
+      "explanation": "x = 4, y = 7\n\n2 xy + 3( x + y ) = 2 x 4 x 7 + 3(4+7)\n\n2 xy + 3( x + y ) = 56 + 3(11)\n\n2 xy + 3( x + y ) = 56 + 3 x 11\n\n2 xy + 3( x + y ) = 56 + 33 = 89",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 37,
+      "question_text": "Simplify\n\n.",
+      "options": {
+        "A": "-1",
+        "B": "0",
+        "C": "1",
+        "D": "2"
+      },
+      "correct_answer": null,
+      "explanation": "Applying the indices principle \n\nThe expression can therefore be rewritten as:\n\n Cancel out",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "Given that x = 8, what type of angle is (9 x + 8) o ?",
+      "options": {
+        "A": "Straight angle",
+        "B": "Obtuse angle",
+        "C": "Acute angle",
+        "D": "Right angle"
+      },
+      "correct_answer": null,
+      "explanation": "x = 8\n\n(9 x + 8) o = (9 x 8 + 8) o \n\n(9 x + 8) o = (72 + 8) o \n\n(9 x + 8) o = (80) o \n\n80 o is less than 90 o , hence the angle is acute",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 40,
+      "question_text": "Simplify 3(5 a 2 + 2 c ) - 2 a (1 - 3 a ) - 6 c .",
+      "options": {
+        "A": "( b + c ) = a x b + a x c",
+        "B": "13 a 2 - 2 a - 12 c",
+        "C": "13 a 2 - 2 a",
+        "D": "21 a 2 - 2 a"
+      },
+      "correct_answer": null,
+      "explanation": "Expand the brackets first\n\n Concept \n\n a ( b + c ) = a x b + a x c \n\n a ( b - c ) = a x b - a x c \n\n3(5 a 2 + 2 c ) = 3 x 5 a 2 + 3 x 2 c \n\n3(5 a 2 + 2 c ) = 15 a 2 + 6 c \n\n- 2 a (1 - 3 a ) = - 2 a x 1 - 2 a x - 3 a \n\n NOTE: - x - = + and a x a = a 2 \n\n- 2 a (1 - 3 a ) = - 2 a + 6 a 2 \n\n3(5 a 2 + 2 ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}

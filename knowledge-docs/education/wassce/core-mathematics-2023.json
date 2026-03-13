@@ -1,0 +1,533 @@
+{
+  "exam_type": "wassce",
+  "subject": "Core Mathematics",
+  "year": 2023,
+  "paper": 1,
+  "source": "kuulchat.com",
+  "questions": [
+    {
+      "question_number": 5,
+      "question_text": "Find the value of x .",
+      "options": {
+        "A": "3",
+        "B": "8",
+        "C": "6",
+        "D": "5"
+      },
+      "correct_answer": "A",
+      "explanation": "Gradient = \r\n Change in Y \r\n Change in X \r\n\n = \r\n Y 2 - Y 1 \r\n X 2 - X 1 \r\n\nY 2 = 4\r\n\nY 1 = 6\r\n\nX 2 = x \r\n\nX 1 = 3\r\n\nGradient = \r\n 4 - 6 \r\n x - 3 \r\n\nGradient = \r\n -2 \r\n x - 3 \r\n\nBut gradient = - \r\n 2 \r\n 5 \r\n\n = \r\n -2 \r\n 5 \r\n\n -2 \r\n x - 3 \r\n\n = \r\n -2 \r\n 5 \r\n\nSince the numerator at the left and right ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 4,
+      "question_text": "Given that x 2 - 11 x + m is a perfect square, find the value of m .",
+      "options": {
+        "A": "= 1",
+        "B": "= -11",
+        "C": "121 \r\n 4",
+        "D": "121"
+      },
+      "correct_answer": "A",
+      "explanation": "If a polynomial ax 2 + bx + c is a perfect square if b 2 = 4 ac \n\nFor the polynomial x 2 - 11 x + m \n\n a = 1\r\n\n b = -11\r\n\n c = m \r\n\nSince the polynomial x 2 - 11 x + m is a perfect square, b 2 = 4 ac \n\n(-11) 2 = 4 x 1 x m \n\n121 = 4 m \n\nDivide both sides by 4\n\n m = \r\n 121 \r\n 4",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 6,
+      "question_text": "In a hall, there are 175 persons. 12% are children, 56 are men and the rest are women. If one person is selected at random from the hall, find the probability that a woman is selected.",
+      "options": {
+        "A": "3 \r\n 25",
+        "B": "11 \r\n 25",
+        "C": "8 \r\n 25",
+        "D": "14 \r\n 25"
+      },
+      "correct_answer": null,
+      "explanation": "Number from a percentage = Percentage x Total number\n\n% means over 100\n\n12% are children\n\nTotal number of persons = 175\n\nNumber of children = \r\n 12 \r\n 100 \r\n\n x 175\r\n\nNumber of children = 21\n\nNumber of women = Total number of persons - children - men\n\nNumber of women = 175 - 21 - 56\n\nNumber of women",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 9,
+      "question_text": "If log x = 2 - 3log 2, find the value of x .",
+      "options": {
+        "A": "5 \r\n 2",
+        "B": "2 \r\n 5",
+        "C": "2 \r\n 25",
+        "D": "25 \r\n 2"
+      },
+      "correct_answer": null,
+      "explanation": "log x = 2 - 3log 2\n\nGroup the logs\n\nlog x + 3log 2 = 2\n\nFrom law of logarithms\n\n n log m = log m n \n\n3log 2 = log 2 3 \n\nlog x + log 2 3 = 2\n\nFrom law of logarithms\n\nLogA + LogB = Log A x B\n\nlog ( x x 2 3 ) = 2\n\n2 3 = 2 x 2 x 2 = 8\n\nlog ( x x 8) = 2\n\nlog 8 x = 2\n\nFrom law of logarithms\n\nlog a b = c →",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 10,
+      "question_text": "The graph of y = x 2 - 5 x + k passes through the point (3, 1). Find the value of k .",
+      "options": {
+        "A": "2",
+        "B": "3",
+        "C": "7",
+        "D": "5"
+      },
+      "correct_answer": "A",
+      "explanation": "y = x 2 - 5 x + k \n\nFrom the point (3, 1), x = 3 and y = 1\n\nSubstitute the values of x and y into the equation and solve for k \n\n1 = 3 2 - 5 x 3 + k \n\n1 = 3 x 3 - 15 + k \n\n1 = 9 - 15 + k \n\n1 = -6 + k \n\n1 + 6 = k \n\n7 = k \n\n∴ k = 7",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 11,
+      "question_text": "Find the value of x in the diagram.",
+      "options": {
+        "A": "41",
+        "B": "37",
+        "C": "35",
+        "D": "31"
+      },
+      "correct_answer": "C",
+      "explanation": "The sum of all the exterior angles of a polygon is always 360 o \n\nWhen you sum all the exterior angles, you should get 360 o \n\n(2 x + 5) 0 + (2 x ) 0 + ( x - 20) 0 + ( x ) 0 + (3 x + 10) 0 + ( x + 15) 0 = 360 0 \n\n2 x + 5 + 2 x + x - 20 + x + 3 x + 10 + x + 15 = 360\n\n10 x + 10 = 360\n\n10 x = 360 - 10\n",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 12,
+      "question_text": "In the diagram, p + q = 250 o . Find the angle marked s .",
+      "options": {
+        "A": "70 o",
+        "B": "110 o",
+        "C": "290 o",
+        "D": "250 o"
+      },
+      "correct_answer": "D",
+      "explanation": "Sum of angles on a straight line is 180 o \n\n p + ∠ BAC = 180 o \n\n∠ BAC = 180 o - p \n\n q + ∠ BCA = 180 o \n\n∠ BCA = 180 o - q \n\nSum of interior angles of a triangle is 180 o \n\n s + ∠ BAC + ∠ BCA = 180 o \n\n s + (180 o - p ) + (180 o - q ) = 180 o \n\n s + 180 o - p + 180 o - q = 180 o \n\n s + 180 o + 180 ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 14,
+      "question_text": "Find the mean of ( x + y ), (2 x + 3 y ), (2 x - 2 y ) and (3 x - 2 y ).",
+      "options": {
+        "A": "4 x",
+        "B": "x",
+        "C": "2 x",
+        "D": "3 x"
+      },
+      "correct_answer": "B",
+      "explanation": "Mean = \r\n Sum of numbers \r\n Number of numbers \r\n\nMean = \r\n (x + y) + (2x + 3y) + (2x - 2y) + (3x - 2y) \r\n 4 \r\n\nMean = \r\n x + y + 2x + 3y + 2x - 2y + 3x - 2y \r\n 4 \r\n\nGroup like terms\n\nMean = \r\n x + 2x + 2x + 3x + y + 3y - 2y - 2y \r\n 4 \r\n\nMean = \r\n 8x + 0 \r\n 4 \r\n\nMean = \r\n 8x \r\n 4 \r\n\n = 2 x",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 16,
+      "question_text": "In the diagram, MNPQ is a circle, centre O . ∠ MQN = 43 o and ∠ QNP = 57 o .\n\nFind the value of y .",
+      "options": {
+        "A": "70 o",
+        "B": "90 o",
+        "C": "80 o",
+        "D": "100 o"
+      },
+      "correct_answer": "C",
+      "explanation": "Inscribed angles subtended by the same arc are equal.\n\n∠ PMQ = ∠ QNP = 57 o \n\n∠ MPN = ∠ MQN = 43 o \n\nSum of interior angles of a triangle is 180 o \n\n57 o + ∠ MPN + ∠ PON = 180 o \n\n∠ MPN = 43 o \n\n57 o + 43 o + ∠ PON = 180 o \n\n100 o + ∠ PON = 180 o \n\n∠ PON = 180 o - 100 o \n\n∠ PON = 80 o \n\nSum of angle",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 17,
+      "question_text": "Describe the locus, l in the diagram.",
+      "options": {
+        "A": "Locus of points equidistant from x and z .",
+        "B": "Locus of points equidistant from x and y .",
+        "C": "Locus of points equidistant from xy and zy .",
+        "D": "Locus of points equidistant from zx and zy ."
+      },
+      "correct_answer": null,
+      "explanation": "In geometry, a locus (plural: loci) is a set of all points whose location satisfies or is determined by one or more specified conditions.",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 19,
+      "question_text": "Abudu can do a piece of work in 6 days and Efah can do the same work in 3 days. What fraction of the work can both do together in a day?",
+      "options": {
+        "A": "1 \r\n 3",
+        "B": "1 \r\n 8",
+        "C": "2 \r\n 3",
+        "D": "1 \r\n 2"
+      },
+      "correct_answer": "A",
+      "explanation": "Abudu takes 6 days to complete work.\n\nFraction of work done by Abudu in a day = \r\n 1 \r\n 6 \r\n\nEfah takes 3 days to complete the same work.\n\nFraction of work completed by Efah in a day = \r\n 1 \r\n 3 \r\n\nFraction of work done by both in a day is the sum of fractions of work done by each.\n\nFraction of work",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 20,
+      "question_text": "If P = { x : 1 ≤ x ≤ 6} and Q = { x : 2 x x ∈ R , find P ∩ Q .",
+      "options": {
+        "A": "{ x : 2 ≤ x \r\n\n{ x : 2 ≤ x ≤ 6}",
+        "C": "{ x : 2 x ≤ 6}",
+        "D": "{ x : 2 x Mark"
+      },
+      "correct_answer": null,
+      "explanation": "P = { x : 1 ≤ x ≤ 6}\n\nRead as x is such that 1 is less than or equal to x and x is less than or equal to 6.\n\n P = {1, 2, 3, 4, 5, 6}\n\n Q = { x : 2 x x is such that 2 is less than x and x is less than 9.\n\n Q = {3, 4, 5, 6, 7, 8}\n\n Intersection (∩) are elements that can be found in both sets\n\n( P ∩ Q ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 21,
+      "question_text": "Given that p 2 + q 2 + r 2 = 50, p = 5 and \r\n q \r\n = 2, find the positive value of r .",
+      "options": {
+        "A": "5",
+        "B": "3",
+        "C": "4",
+        "D": "2"
+      },
+      "correct_answer": "A",
+      "explanation": "p 2 + q 2 + r 2 = 50\n\n p = 5\n\n q \r\n = 2\r\n\nSquare both sides to get rid of the square root.\n\n q = 2 2 = 4\n\nSubstitute the known values into the equation.\n\n p 2 + q 2 + r 2 = 50\n\n5 2 + 4 2 + r 2 = 50\n\n25 + 16 + r 2 = 50\n\n41 + r 2 = 50\n\n r 2 = 50 - 41\n\n r 2 = 9\n\nTake the square root of both sides to ge",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 22,
+      "question_text": "If \r\n 1 \r\n 2 \r\n\n and -3 are the roots of px 2 + qx + r = 0, find the values of p , q and r .",
+      "options": {
+        "A": "p = 2, q = -5, r = 3",
+        "B": "p = 2, q = 5, r = 3",
+        "C": "p = 2, q = 5, r = -3",
+        "D": "p = -2, q = 5, r = 3"
+      },
+      "correct_answer": null,
+      "explanation": "If a and b are the roots, ( x - a )( x - b ) = 0\n\nFor the roots \r\n 1 \r\n 2 \r\n\n and -3,\r\n\n( x - \r\n 1",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 24,
+      "question_text": "Badu is four times as old as Juliet. In 10 years Badu will be twice as old as Juliet. Find Juliet's age.",
+      "options": {
+        "A": "3 years",
+        "B": "6 years",
+        "C": "5 years",
+        "D": "8 years"
+      },
+      "correct_answer": null,
+      "explanation": "Let y = Juliet's age.\n\nBadu is four times as old as Juliet\n\nBadu's age = 4 x Juliet's age\n\nBadu's age = 4 x y \n\nBadu's age = 4 y \n\nBadu's age 10 years time = Badu's age now + 10 years.\n\nBadu's age 10 years time = 4 y + 10\n\nJuliet's age in 10 years time = Juliet's age now + 10\n\nJuliet's age in 10 yea",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 25,
+      "question_text": "When the point (4, 5) is rotated through an angle in the anticlockwise direction about the origin, its image is (-5, 4). What is the angle of rotation?",
+      "options": {
+        "A": "90 o",
+        "B": "270 o",
+        "C": "180 o",
+        "D": "300 o"
+      },
+      "correct_answer": "A",
+      "explanation": "Rotation through 90 o anticlockwise\n\nWhen rotating a point 90 o anticlockwise(counterclockwise) about the origin our point A(x,y) becomes A'(-y,x).\n\nIn other words, switch x and y and make y negative\n\nRotation through 270 o anticlockwise\n\nWhen rotating a point 270 o anticlockwise(counterclockwise) a",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 26,
+      "question_text": "Find the value of x in the diagram.",
+      "options": {
+        "A": "= 35 o (Alternate angles)",
+        "B": "= c (Alternate angles)\n\n130 o + c = 180 o (Sum of angles on a straight line)",
+        "C": "= 50 o",
+        "D": "85 o"
+      },
+      "correct_answer": "C",
+      "explanation": "Alternate Angles\n\nProject the parallel lines to see which angles are alternate anges.\n\n x = a + b \n\n a = 35 o (Alternate angles)\n\n b = c (Alternate angles)\n\n130 o + c = 180 o (Sum of angles on a straight line)\n\n c = 180 o - 130 o \n\n c = 50 o \n\n b = 50 o \n\n x = a + b \n\n x = 35 o + 50 o \n\n x = 85 o",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 28,
+      "question_text": "Determine the least value of x such that 7 + x = 3 (mod 8).",
+      "options": {
+        "A": "3",
+        "B": "4",
+        "C": "5",
+        "D": "6"
+      },
+      "correct_answer": "A",
+      "explanation": "Modulo is a math operation that finds the remainder when one integer is divided by another.\n\nThe least number which a modulo is obtained is the remainder + the mod.\n\nThe least number in which the 3 (remainder) is obtained is 3 + 8 = 11\n\n⇒ 7 + x = 11\n\n x = 11 - 7\n\n x = 4",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 29,
+      "question_text": "If \r\n 4m + 3n \r\n 4m - 3n \r\n\n = \r\n 5 \r\n 2 \r\n\n , find the ratio of m : n .",
+      "options": {
+        "A": "4 : 7",
+        "B": "4 : 3",
+        "C": "3 : 4",
+        "D": "7 : 4"
+      },
+      "correct_answer": null,
+      "explanation": "4m + 3n \r\n 4m - 3n \r\n\n = \r\n 5 \r\n 2 \r\n\nMethod I\n\nThe numerator at the left equals the numerator at the right and the denominator at the left equals the denominator at the right.\n\n4 m + 3 n = 5 ---- eq. 1\n\n4 m - 3 n = 2 ---- eq. 2\n\nLet's get rid of n by adding --- eq. 1 and 2\n\n8 m = 7\n\nDivide both sid",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 30,
+      "question_text": "Yakubu received 12 \r\n 1 \r\n 2 \r\n\n % of the sales made in a certain mouth. If the amount he received was $35,000.00, what was the total sales made?",
+      "options": {
+        "A": "$245,000.00",
+        "B": "$140,000.00",
+        "C": "$315,000.00",
+        "D": "$280,000.00"
+      },
+      "correct_answer": null,
+      "explanation": "The total sales is 100%\n\nChange the mixed fraction to improper fraction\n\n12 \r\n 1 \r\n 2 \r\n\n % = \r\n 2 x 12 + 1 \r\n 2 \r\n\n % = \r\n 24 + 1 \r\n 2 \r\n\n % = \r\n 25 \r\n 2 \r\n\n %\r\n\nIf \r\n 25 \r\n 2 \r\n\n % = $35,000.00\r\n\n100% = $35,000.00 x 100% ÷ \r\n 25 \r\n 2 \r\n\n %\r\n\n% cancels each other.\n\nReciprocate the fraction at the r",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 31,
+      "question_text": "The angle of elevation of the top of a vertical pole from a point, P on a level ground is 60°. The distance from P to the foot of the pole is 55 m. Find the height of the pole.",
+      "options": {
+        "A": "55 \r\n 2 \r\n\n m",
+        "B": "55 \r\n 3 \r\n m",
+        "C": "55 3 \r\n 3 \r\n\n m",
+        "D": "55 3 \r\n 2 \r\n\n m"
+      },
+      "correct_answer": null,
+      "explanation": "Let the height of the pole = h \n\n SOHCAHTOA \r\n\n SOHCAHTOA is a mnemonic that gives us an easy way to remember the three main trigonometric ratios. They are sine (sin), cosine (cos) and tangent (tan).\n\nSOH\n\nsin(θ) = \r\n Opposite \r\n Hypothenuse \r\n\nCAH\n\ncos(θ) = \r\n Adjacent \r\n Hypothenuse \r\n\nTOA\n\ntan(θ)",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 32,
+      "question_text": "The ratio of girls to boys in a certain committee is 5 : 2. If there are 35 members in the committee, how many more boys must be added to the committee to have the ratio of girls to boys as 5 : 4?",
+      "options": {
+        "A": "20",
+        "B": "10",
+        "C": "15",
+        "D": "5"
+      },
+      "correct_answer": "B",
+      "explanation": "The sum of ratios represents the total members\n\n5 + 2 represents Total members\n\n7 represents the total members of the committee\n\nThe ratio for girls is 5 and that of boys is 2.\n\nTotal members is 35\n\nIf 7 = 35\n\n5 = \r\n 35 x 5 \r\n 7 \r\n\n = 25\r\n\n∴ there are 25 girls\n\nIf 7 = 35\n\n2 = \r\n 35 x 2 \r\n 7 \r\n\n = 10",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 33,
+      "question_text": "Find the values of x for which \r\n x + 1 \r\n 3 x 2 - 12 \r\n\n is not defined.",
+      "options": {
+        "A": "x = 2, -4",
+        "B": "x = 4, -4",
+        "C": "x = -2, 2",
+        "D": "x = 0, 2"
+      },
+      "correct_answer": null,
+      "explanation": "For any equation to be not defined (undefined), the denominator must be 0 .\n\n x + 1 \r\n 3 x 2 - 12 \r\n\nFor the equation to be not defined, 3 x 2 - 12 = 0\n\n3 x 2 - 12 = 0\n\nDivide both sides by 3\n\n x 2 - 4 = 0\n\n x 2 = 4\n\nTake square root of both sides.\n\n x = \r\n 4 \r\n = ± 2, thus -2 or 2\r\n\n Note :",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 34,
+      "question_text": "Given that tan x = \r\n 12 \r\n 5 \r\n\n , find the value of (sin x cos x )",
+      "options": {
+        "A": "165 \r\n 60",
+        "B": "169 \r\n 65",
+        "C": "2 = 169\n\nTake the square root of both sides.",
+        "D": "65 \r\n 169"
+      },
+      "correct_answer": null,
+      "explanation": "SOHCAHTOA \r\n\n SOHCAHTOA is a mnemonic that gives us an easy way to remember the three main trigonometric ratios. They are sine (sin), cosine (cos) and tangent (tan).\n\nSOH\n\nsin(θ) = \r\n Opposite \r\n Hypothenuse \r\n\nCAH\n\ncos(θ) = \r\n Adjacent \r\n Hypothenuse \r\n\nTOA\n\ntan(θ) = \r\n Opposite \r\n Adjacent \r\n\nThe ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 35,
+      "question_text": "Consider these two statements:\n\nP: N is an odd number\n\nQ: N is a prime number greater than 2.\n\nExpress \"If N is not an odd number then N is not a prime number greater than 2\" in symbolic form.",
+      "options": {
+        "A": "~P ⇒ Q",
+        "B": "~P ^ ~Q",
+        "C": "P ⇒ ~Q",
+        "D": "~P ⇒ ~Q"
+      },
+      "correct_answer": null,
+      "explanation": "Negation , ~ symbol means not \n\n Conjunction , ∧ symbol means and \n\n Implication , ⇒ symbol means implies , if ... , then ...",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 38,
+      "question_text": "In the diagram, MOP is the diameter of the circle MNP centre O . ∠ NMP = (2 x )° and ∠ EPM = (5 x + 18)°. Find the value of x .",
+      "options": {
+        "A": "72°",
+        "B": "24°",
+        "C": "48°",
+        "D": "18°"
+      },
+      "correct_answer": null,
+      "explanation": "Angles subtended by the diameter (or semi-circle) is 90°.\n\n∠ MNP = 90°\n\nSum of angles on a straight line is 180°\n\n(5 x + 18)° + ∠ NPM = 180°\n\n5 x + 18 + ∠ NPM = 180\n\n∠ NPM = 180 - 5 x - 18\n\n∠ NPM = 162 - 5 x \n\n∠ NPM + ∠ MNP + ∠ NMP = 180° (sum of angles in a triangle)\n\n162 - 5 x + 90 + 2 x = 180\n\n16",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 39,
+      "question_text": "The height of a square base pyramid is thrice the length of a side of its base. If the base area is 324 cm 2 , find the volume of the pyramid.",
+      "options": {
+        "A": "17,496 cm 3",
+        "B": "5,832 cm 3",
+        "C": "324 cm 3",
+        "D": "972"
+      },
+      "correct_answer": null,
+      "explanation": "Volume of a square base pyramid = \r\n Area of base x height \r\n 3 \r\n\nArea of a square = Length x Length = L 2 \n\nArea of the base = 324 cm 2 \n\n L 2 = 324\n\nTake square root of both sides.\n\n L = \r\n 324 \r\n = 18 cm\r\n\nThe height of a square base pyramid is thrice the length of a side of its base\n\nHeight = 3",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 40,
+      "question_text": "If 4 x = \r\n 1 \r\n 1024 \r\n\n , find the value of x",
+      "options": {
+        "A": "-10",
+        "B": "-5",
+        "C": "8",
+        "D": "4"
+      },
+      "correct_answer": "B",
+      "explanation": "4 x = \r\n 1 \r\n 1024 \r\n\nExpress both the left and the righ sides to be in the same base.\n\n1024 = 4 x 4 x 4 x 4 x 4 = 4 5 \n\n4 x = \r\n 1 \r\n 4 5 \r\n\nFrom indices, \r\n 1 \r\n a b \r\n\n = a - b \r\n\n4 x = 4 -5 \n\nSince the bases are the same, the powers are also the same.\n\n x = -5",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 41,
+      "question_text": "In the diagram, O is the centre of the circle WXY . | WX | = | XZ | and ∠ ZXY = 26°. Find ∠ XYZ .",
+      "options": {
+        "A": "62°",
+        "B": "42°",
+        "C": "52°",
+        "D": "32°"
+      },
+      "correct_answer": null,
+      "explanation": "Angles subtended by the diameter (or semi-circle) is 90°.\n\n∠ YXW = 90°\n\n26° + ∠ ZXW = ∠ YXW = 90°\n\n26° + ∠ ZXW = 90°\n\n∠ ZXW = 90° - 26°\n\n∠ ZXW = 64°\n\nBase angles of isosceles triangle are the same.\n\n∠ WZX = ∠ XWZ \n\n∠ WZX + ∠ XWZ + ∠ ZXW = 180°(Sum of interior angles of a triangle)\n\n∠ WZX + ∠ XWZ + 6",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 43,
+      "question_text": "In the first year, Mr. Kwakye's annual salary was $1,560.00. His salary was increased each year by a constant value, y until it was $13,980.00 in the 13th year. Calculate the value of y .",
+      "options": {
+        "A": "$955.38",
+        "B": "$1,230.00",
+        "C": "$1,129.09",
+        "D": "$1,035.00"
+      },
+      "correct_answer": null,
+      "explanation": "First year = $1,560\n\nSecond year = $1,560 + y \n\nThird year = $1,560 + y + y \n\nFourth year = $1,560 + y + y + y \n\nThis is a linear sequence: $1,560,$1,560 + y , $1,560 + 2 y $1,560 + 3 y ,...,$13,980\n\nThe value of the nth term of a linear sequence is given by U 1 + ( n -1) d \n\nWhere U 1 = the first t",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 44,
+      "question_text": "Given that \r\n 16 \r\n 9 \r\n\n , x , 1, y is a Geometric Progression (G.P), find the value of xy .",
+      "options": {
+        "A": "9 \r\n 16",
+        "B": "25 \r\n 12",
+        "C": "2",
+        "D": "1"
+      },
+      "correct_answer": "D",
+      "explanation": "Geometric Progression (G.P) is a type of sequence where each succeeding term is produced by multiplying each preceding term by a fixed number, which is called a common ratio.\n\nWhen each succeeding terms is divided by the preceding terms, the result (common ratio) is the same.\n\n x ÷ \r\n 16 \r\n 9 \r\n\n = ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 46,
+      "question_text": "The lines 3 x + 2 y = 4 and y = 2 x - 5 intersect at a point P ( x , y ). Find the coordinates of P .",
+      "options": {
+        "A": "(2, 1)",
+        "B": "(-2, 1)",
+        "C": "(2, -1)",
+        "D": "(-2, -1)"
+      },
+      "correct_answer": null,
+      "explanation": "At the point of intersection, the y and x values are the same.\n\n3 x + 2 y = 4\n\n2 y = -3 x + 4\n\nDivide both sides by 2\n\n y = \r\n -3x \r\n 2 \r\n\n + \r\n 4 \r\n 2 \r\n\n y = \r\n -3x \r\n 2 \r\n\n + 2 ---- eq. 1\r\n\n y = 2 x - 5 ---- eq. 2\n\neq. 1 = eq. 2\n\n -3x \r\n 2 \r\n\n + 2 = 2 x - 5\r\n\nGet rid of the fraction by multiplyin",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 47,
+      "question_text": "Make u the subject of the relation \r\n t \r\n s + u \r\n\n = \r\n s \r\n t - u \r\n\n.",
+      "options": {
+        "A": "u = s - t",
+        "B": "u = t - s",
+        "C": "u = ts",
+        "D": "u = t + s"
+      },
+      "correct_answer": null,
+      "explanation": "t \r\n s + u \r\n\n = \r\n s \r\n t - u \r\n\nCross multiply\n\n t x ( t - u ) = s x ( s + u )\n\n t 2 - tu = s 2 + su \n\n t 2 - s 2 = tu + su \n\n t 2 - s 2 = u ( t + s )\n\nDivide both sides by ( t + s )\n\n u = \r\n t 2 - s 2 \r\n t + s \r\n\nFrom difference of two squares, a 2 - b 2 = ( a + b )( a - b )\n\n u = \r\n (t + s)(t - ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 48,
+      "question_text": "Number of subjects \r\n 1 \r\n 2 \r\n 3 \r\n 4 \r\n 5 \r\n 6 \r\n 7 \r\n 8 \r\n\n Number of students \r\n 2 \r\n 1 \r\n 4 \r\n 3 \r\n 8 \r\n 5 \r\n 4 \r\n 3 \r\n\nThe table shows the number of subjects registered by a class of students for an examination.\n\n Use the information to answer the question below \n\nCalculate the mean of the distribution.",
+      "options": {
+        "A": "2",
+        "B": "3",
+        "C": "8",
+        "D": "5"
+      },
+      "correct_answer": "A",
+      "explanation": "the question below \n\nCalculate the mean of the distribution.\n\n A. \r\n\n2\n\n B. \r\n\n3\n\n C. \r\n\n8\n\n D. \r\n\n5\n\n Mark \r\n\n Solution \r\n\n Number of subjects ( x ) \r\n Number of students ( f ) \r\n fx \r\n\n 1 \r\n 2 \r\n 1 x 2 = 2 \r\n\n 2 \r\n 1 \r\n 2 x 1 = 2 \r\n\n 3 \r\n 4 \r\n 3 x 4 = 12 \r\n\n 4 \r\n 3 \r\n 4 x 3 = 12 \r\n\n 5 \r\n 8 \r\n 5 x ",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    },
+    {
+      "question_number": 49,
+      "question_text": "Number of subjects \r\n 1 \r\n 2 \r\n 3 \r\n 4 \r\n 5 \r\n 6 \r\n 7 \r\n 8 \r\n\n Number of students \r\n 2 \r\n 1 \r\n 4 \r\n 3 \r\n 8 \r\n 5 \r\n 4 \r\n 3 \r\n\nThe table shows the number of subjects registered by a class of students for an examination.\n\n Use the information to answer the question below \n\nFind the median.",
+      "options": {
+        "A": "2",
+        "B": "5",
+        "C": "3",
+        "D": "8"
+      },
+      "correct_answer": "A",
+      "explanation": "the question below \n\nFind the median.\n\n A. \r\n\n2\n\n B. \r\n\n5\n\n C. \r\n\n3\n\n D. \r\n\n8\n\n Mark \r\n\n Solution \r\n\nThe median is the middle number of an ordered distribution. If there are two numbers at the middle, add the two numbers and divide the sum by 2.\n\nSum of number of students (frequencies) = 2 + 1 + 4 +",
+      "difficulty": "medium",
+      "marks": null,
+      "topic": null
+    }
+  ]
+}
