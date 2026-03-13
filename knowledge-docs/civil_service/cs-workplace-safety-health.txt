@@ -1,0 +1,1587 @@
+i 
+ 
+THE GHANA CIVIL SERVICE 
+ 
+ 
+ 
+ 
+WORKPLACE SAFETY AND HEALTH RESPONSE 
+STRATEGY  
+ 
+ 
+ 
+ 
+ 
+ 
+    
+ 
+ 
+ 
+ 
+      
+ 
+ 
+
+ii 
+ 
+ACKNOWLEDGEMENTS 
+The  Office  of  the  Head  of  the  Civil  Service  acknowledges the  efforts  of  all  individuals and 
+organizations who contributed to the development of this document. It is important to mention the 
+Ministry of Employment and Labour Relations, Ministry of Finance, Ministry of Education, Ministry 
+of  Health  (Ghana  Health  Service),  Department  of  Factories  Inspectorate,) and  the  Reforms 
+Coordinating Unit, OHCS for their enormous support in the preparation of the document. We also 
+acknowledge the inputs  from  the Civil  Service  Committee  on  Administrative Reforms towards  the 
+finalization of the document. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+iii 
+ 
+FOREWORD 
+The outbreak of the novel Coronavirus also known as COVID-19 caught the entire nation and the 
+Ghana Civil Service in particular unawares. The Ghana Civil Service, therefore, had to deal with the 
+challenges  imposed  by  the  outbreak  unprepared  and  on  the  spur of  the  moment.  The  immediate 
+response  to  the  pandemic  was the  issuance  of  circulars  to  managers  of  the  Civil  Service  to  adopt 
+flexible work arrangements and ensure social distancing at meetings, workshops and seminars. The 
+circulars were also to help curtail the spread of the COVID-19 at the workplace.  
+As a result of the unpreparedness of the Service to deal with the pandemic, it had to depend on and 
+react  to  directives  issued  by  the WHO  and  the Office  of  the  President.  Many  of  the  flexible  work 
+arrangements  imposed  by  organizations  of  the  Civil  Service  were  not supported  by  any  IT 
+arrangements to ensure that staff continued to work from home. This resulted in a massive loss of 
+working  hours  and considerable inactivity  in  the  Civil  Service.  For  many in  the Civil  Service,  the 
+staff  rotation  schedules  imposed  by  the  organizations  were  synonymous with holidays.  Supervisors 
+also had the challenge of following up on work assignments due to unstable and unreliable internet 
+connectivity. In view of these challenges, among others, organizations in the Civil Service are behind 
+schedule  in  the  implementation  of  their annual work  plans.  This  impacts  negatively on  service 
+delivery to the general public. The Civil Service has learnt its lessons from the COVID-19 pandemic 
+and intends to put in place proactive measures (including a business continuity plan) to turn the tide 
+in the event of future outbreaks of public health threats such as COVID-19.  
+The  Ghana  Civil  Service  Workplace  Safety  and Health  Response Strategy (WSHRS) has  therefore 
+been developed as a proactive framework to provide guidelines to Civil Service organizations for the 
+management of public health threats at the workplace. This is to ensure that such outbreaks do not 
+interfere unduly with service delivery to the general public in circumstances similar to COVID-19. 
+I  take  this  opportunity  to  entreat  workers,  clients,  visitors  and  management  of  all  Civil  Service 
+Organizations to  implement  the recommendations  outlined in this Strategy to make  the workplace 
+safe and guarantee continuity of work at all times. 
+ 
+NANA AGYEKUM DWAMENA 
+
+iv 
+ 
+Table of Contents 
+ACKNOWLEDGEMENTS ................................................................................................................................. ii 
+FOREWORD .................................................................................................................................................. iii 
+EXECUTIVE SUMMARY ................................................................................................................................. vi 
+LIST OF ACRONYMS ..................................................................................................................................... vii 
+1.0. Introduction ...................................................................................................................................... 1 
+2.0. Background ....................................................................................................................................... 1 
+3.0. Objectives of this Strategy ................................................................................................................ 2 
+4.0. Applicability ....................................................................................................................................... 2 
+5.0. Relevant Legislation and National Policies ....................................................................................... 2 
+6.0. Conceptual Framework ..................................................................................................................... 3 
+7.0. Workplace Health Risk Assessment and Profile ................................................................................ 4 
+8.0. Roles and Responsibilities ................................................................................................................. 5 
+9.0. Practical Prevention and Mitigation Measures or Protocols ............................................................ 5 
+9.1. Maintenance of Social and Physical Distancing ............................................................................ 6 
+9.2. Flexible Work Arrangements and Digitization of Operational Procedures .................................. 6 
+9.2.1. Staff Rotation/ Flexible Working Arrangements ....................................................................... 6 
+9.2.2. Digitization of Operational Procedures..................................................................................... 7 
+9.3. Practicing Good Hygiene and Waste Management at the Workplace ............................................. 7 
+9.4. Office Ventilation and Use of Air-conditioners ................................................................................. 8 
+9.5. Provision and Use of Personal Protective Equipment (PPEs) ........................................................... 8 
+9.6. Establishing Organizational Facilities for Quarantine ....................................................................... 9 
+9.7. Awareness Creation, Communication and Training ......................................................................... 9 
+9.8. Social Protection and Livelihood Support Schemes ........................................................................ 10 
+10.0. Key Assumptions ......................................................................................................................... 10 
+11.0. Financing the Strategy ................................................................................................................ 11 
+12.0. Implementation Plan: Ghana Civil Service Workplace Safety and Health Response Strategy ... 12 
+13.0. Monitoring and Evaluation ......................................................................................................... 21 
+14.0. Review of the strategy document ............................................................................................... 22 
+15.0. Conclusion ................................................................................................................................... 22 
+ANNEX 1: ROLES AND RESPONSIBLITIES OF STAKEHOLDERS...................................................................... 23 
+
+v 
+ 
+ANNEX 2: STAKEHOLDER ANALYSIS ............................................................................................................ 27 
+
+vi 
+ 
+EXECUTIVE SUMMARY 
+ 
+This Civil Service Workplace Safety and Health Response Strategy (WSHRS) has been developed to 
+give impetus to existing legislations, national policies and international protocols for the promotion 
+and  enforcement  of  safety  standards  and  public  health  measures  in the  event  of  emergencies.  The 
+Strategy has  the objective of protecting workers,  clients  and  persons  who  visit  Civil  Service 
+organizations during the   outbreak   of   public   health emergencies.  The Strategy also  aims  at 
+minimizing  disruptions  whiles  ensuring  continuity  of service  delivery  in  the  event  of  public  health 
+outbreaks such as COVID-19.  
+The Strategy takes  into  account  lessons  learnt  in  efforts at  addressing the challenges  posed  by 
+COVID-19. The Strategy empowers  the  management  of  organizations  in  the Civil  Service  to 
+develop  organization-specific  safety  and  health  profiles  and  identify  risks  generally  associated  with 
+their work. These safety and health profiles should be subjected to the specific nature of any public 
+health  threat  that  may  arise  at  the workplace. Depending on  the  nature  of  the  outbreak, the  risk 
+levels of Ministries and Departments should be determined and categorized for appropriate action. 
+This  determination  is  expected  to  be  done  through  a  risk  assessment that should be  conducted  by 
+professionals. 
+The  results  of  the  risk  assessment should then inform  Service-Wide  Workplace  Safety  and  Health 
+Response work plans to be developed and implemented by the Institutions. Such work plans should 
+contain specific activities to be carried out in terms of sensitization for workers, clients and visitors. 
+They should also  inform  the procurement  and  distribution  of  personal  protective  equipment, 
+implementation  of  flexible  work  arrangements,  social  and  physical  distancing,  the  establishment  of 
+facilities for holding rooms and quarantine etc. 
+This  Strategy requires  the  commitment  of  management,  workers,  clients  and  visitors  for  effective 
+implementation and achievement of the strategic objectives. 
+ 
+ 
+
+vii 
+ 
+LIST OF ACRONYMS 
+ 
+AIDS       Acquired Immune Deficiency Syndrome 
+CSO                                Civil Service Organization 
+DFI                                 Department of Factories Inspectorate 
+DPs                                 Development Partners 
+GHS                                Ghana Health Service 
+IEC                                 Information Education and Communication 
+MD                                  Ministry and Department 
+MERS       Middle East Respiratory Syndrome 
+MOC                               Ministry of Communication 
+MOGCSP                       Ministry of Gender Children and Social Protection                              
+MOH                              Ministry of Health 
+H1N1       Hemagglutinin 1 Neuraminidases 1 
+NGO                               Non-Governmental Organization 
+NITA                              National Information Technology Agency 
+OHCS                             Office of the Head of the Civil Service 
+PPE                                 Personal Protective Equipment 
+SARS       Severe Acute Respiratory Syndrome 
+WSHRS                          Workplace Safety and Health Response Strategy 
+                             
+ 
+ 
+ 
+ 
+
+1 
+ 
+1.0. Introduction 
+The  Ghana  Civil  Service  is  the  main  agency  through  which  the  Executive  arm  of  Government 
+operates in  the  country.  In  accordance  with  article  190  of  the  1992  Constitution,  the  Civil  Service 
+forms part of the Public Services of Ghana. The Civil Service Law, 1993 (PNDCL 327) establishes 
+the Ghana Civil Service to perform a strategic function in supporting the government to formulate 
+and implement policies for national development through its Ministries and Departments. 
+The  Civil  Service  Act,  PNDCL 327 also establishes  the  Office  of the  Head  of the Civil  Service 
+(OHCS) as  a Central Management  Agency  for  the  entire  Civil Service. As  part  of  the OHCS 
+functions to review and facilitate the implementation of human resource policies and guidelines, the 
+Ghana Civil Service Workplace Safety and Health Response Strategy has been developed.  
+The WSHRS will   serve   as   a   proactive   framework   to   provide   guidelines   to Ministries   and 
+Departments for  the  management  of  safety  and  health  responses to  emerging  threats at  the 
+workplace. The  Civil  Service  is  committed  to  providing  a  safe  working  environment  for  all  its 
+employees  and  clients  from public  health  threats and also to ensure  that  outbreaks  such  as  the 
+COVID-19 pandemic do not interfere unduly with productivity and service delivery. 
+2.0. Background 
+Throughout history, pandemics and epidemics have ravaged the world in varying degrees. They have 
+occasionally changed the course of history for better or for worse. Such diseases include the Circa of 
+China  (3000  BC),  the  plague  of  Athens  (430  BC), the  Bubonic  Plague  (541 AD)  and  the  Antonine 
+plague  of  the  Roman  Empire.  In  more  recent  times  we  have  had  the  Black  Death  (1346)  which 
+killed  half  the  population  of  Europe,  the  flu  pandemic  (1889),  the  Spanish  Flu  (1918), Acquired 
+Immune  Deficiency  Syndrome  (AIDS), Severe  Acute  Respiratory  Syndrome  (SARS), Middle  East 
+Respiratory  Syndrome  (MERS), Hemagglutinin  1  Neuraminidass 1 (H1N1),  Ebola,  Zika  etc.  The 
+Spanish  Flu  in  particular  affected  about five hundred million  (500million)  people  and  a  substantial 
+number  lost  their  lives.    Pandemics  and  epidemics  are  therefore  dreaded  diseases  that  have  the 
+potential of causing havoc to humanity and must be handled with the seriousness they deserve. 
+Most,  unfortunately,  are hard  to  predict  with  accuracy  as they  mostly  strike  unexpectedly. This 
+Strategy has   therefore   been developed   to   serve   as   a   standardized   framework   to   guide   all 
+organizations of the   Ghana   Civil   Service in   the planning,   preparation,   implementation  and 
+
+2 
+ 
+monitoring of interventions or  protocols  to  prevent  and/contain  public  health emergencies.  The 
+Strategy provides standardized provisions or recommended courses of action to mitigate the impact 
+of pandemics/epidemics on service delivery in the Civil Service. 
+3.0. Objectives of this Strategy 
+The objects of this Strategy are to: 
+1. Protect workers of the Ghana Civil Service and their families, clients and visitors in the event 
+of any public health threat. 
+2. Contain the  spread  of  any  public  health  threat  within  the  machinery  of  the  Ghana  Civil 
+Service. 
+3. Manage disruptions to service delivery, maintain productivity and client satisfaction. 
+4. Provide rehabilitation, social protection and livelihood support to victims and their families 
+or dependents.   
+5. Address issues of stigmatization     
+4.0. Applicability 
+This Strategy applies to all organizations in the Ghana Civil Service. 
+It  provides  systems  and  processes  that  Civil  Service  organisations  are  required  to  put  in  place  to 
+mitigate the effects of Public Health Threats.   
+5.0. Relevant Legislation and National Policies 
+The following are the relevant existing laws and policy frameworks that support the objects of this 
+Strategy: 
+1. The 1992 Constitution  
+2. The Civil Service Law, 1993 (PNDCL 327)  
+3. Factories, Offices and Shops Act, 1970 (Act 328) 
+4. Labour Act, 2003 (Act 651) 
+5. Public Health Act, 2012 (Act 851) 
+6. Workmen’s Compensation Act, 1987 (PNDCL 187) 
+7. Right to Information ACT, 2019 (Act 989) 
+
+3 
+ 
+8. National Employment Policy, 2015 
+9. Ghana National Social Protection Policy, 2016 
+10. National Gender Strategy, 2015  
+11. Disability Act, 2006 (715) 
+These laws and policy frameworks make broad provisions for the maintenance of safe and healthy 
+environments  at  the  workplace  and  the  delivery  of  support  to  cushion  those  who  fall  victim to 
+workplace risks and hazards. 
+6.0. Conceptual Framework 
+Figure 1: Civil Service Workplace Safety & Health Response Cycle 
+ 
+Figure  1  shows  that  Civil  Service  organizations will have  to  develop  specific  organizational  Health 
+and  Safety  Profiles  that  identify  general  risks  and  hazards  in  the  event  of  an  outbreak  of  a  health 
+threat based on the peculiar work processes and arrangements that exist. In  the event of a specific 
+outbreak,  a  risk  assessment should be  conducted  by  a health  and  safety  professional  taking  into 
+consideration  the  nature  of  the  outbreak,  work  processes,  structure  of  the  workplace, and  age 
+distribution  of  staff,  the  general  health  status  of  staff  and  their  level  of  resistance  as  well  as  the 
+potential impact on service delivery. 
+
+4 
+ 
+The  identified  risks should be  categorized  on a scale  of  low  to  high  risks.  Based  on  the  risk 
+assessment  report,  a  specific  work plan  to  guide  the  implementation  of  general  and  specific 
+measures  or  protocols should be  developed  to  contain  the  spread,  prevent  further  transmission, 
+provide  rehabilitation  support,  extend  social  protection  support  to  victims  and  their  families/ 
+dependents  and  maintain  service  delivery.  In  the  course  of  implementing  these  measures,  they 
+should  be  monitored, evaluated,  reviewed  and  lessons  incorporated  into  the  organizational  health 
+and safety profiles. 
+7.0. Workplace Health Risk Assessment and Profile 
+To foresee and anticipate possible risks or threats to health and safety at the workplace and develop 
+an appropriate  response,  organizations  in  the  Ghana  Civil  Service  should  undertake  organization-
+specific  health  and  safety  profiles  which  should 
+be updated periodically. 
+The  purpose  of  the  organization-specific  health 
+and  safety  profiles  is  to  document  risks  and 
+hazards   that   make   a   specific   Civil   Service 
+organization  susceptible  to  the  outbreak  of  a 
+public health threat.  
+The   organization-specific   health   and   safety 
+profiles should identify risks and hazards within 
+Ministries and Departments and categorize them 
+on a scale of low to high risk for the attention of 
+management, workers and other stakeholders. 
+Organizations  in  the  Ghana  Civil  Service  should  prepare  and  update  their  workplace  health  and 
+safety profiles by conducting risk assessments. The risk assessments should be done by a health and 
+safety  expert  or  professional  with  considerable  experience  in  the  area.  The  risk  assessment  should 
+consider the following, among others: 
+i. work processes and procedures,  
+ii. ergonomics and physical hazards 
+iii. production lines and value chains,  
+Box 1: Categorization of risks 
+High  risk: Workers  in  this  category  are 
+those  who  come  into  contact  with  known, 
+unknown  or  suspected  sources  of  threat 
+very frequently and can easily contract and 
+transmit to others. 
+Medium  risk: Workers  in  this  category 
+are   those   who   come   into   contact   with 
+known,  unknown  or  suspected  sources  of 
+threat    less    frequently    but    can    easily 
+contract and transmit to others. 
+Low risk: Workers in this category seldom 
+come  into  contact  with  known,  unknown 
+or  suspected  sources  of  threat  and  may 
+contract and transmit to others. 
+ 
+
+5 
+ 
+iv. Chemicals used in the workplace for cleaning and disinfection. 
+v. mode of workers’ transportation to and from the workplace, 
+vi. residential areas of workers,  
+vii. categories of workers at the workplace, 
+viii. contact with clients and visitors,  
+ix. the age group of workers, 
+x. health status/conditions of workers and their resistance to the threat, 
+xi. travel history of workers, clients and visitors, 
+xii. Hygiene and waste management practices of the organization. 
+The health and safety profiles should serve as blueprints for the development and implementation of 
+workplace health and safety work plans. 
+8.0. Roles and Responsibilities 
+The development and implementation of a Workplace Safety and Health Response work plan is the 
+responsibility of management and workers in the Civil Service. Clients and other visitors of the Civil 
+Services  should  play  complementary  roles  by  supporting  and  complying  with  the  measures  or 
+protocols  that  should  be  instituted  by  Civil  Service  organizations  in  response  to  health  and 
+workplace safety during emergencies similar. 
+The roles and responsibilities of stakeholders are depicted in annex 1 
+ 
+9.0. Practical Prevention and Mitigation Measures or Protocols 
+All Civil Service organisations must designate health and safety focal person(s) for training in basic 
+emergency measures.  Such  persons  will  serve  as  the  first  point  of  contact  for  workers  of  the 
+organisation in emergency health situations. In the event of an outbreak of a public health threat at 
+any Civil Service organization, persons suspected to be infected must be sent to an already identified 
+holding room for quarantine while awaiting the arrival of professional health personnel. Thereafter, 
+management,  workers,  clients  and  visitors  of  that  organization should comply  with  the  following 
+standardized protocols: 
+
+6 
+ 
+9.1. Maintenance of Social and Physical Distancing 
+Management  of  Civil  Service  organizations  should 
+impose  social  and  physical  distancing  measures in 
+line  with  the  Ministry  of  Health/Ghana  Health 
+Service guidelines. This  includes  suspension  of  all 
+"in-person"   meetings,   staff   durbars,   workshops 
+and   training   that   are   usually   organized   at   the 
+workplace.  
+After an initial assessment has been conducted and 
+the   nature   of   the   threat   has   been   identified, 
+analyzed and understood, an appropriate 
+mandatory  social/physical  distancing  between  staff,  visitors  and  clients  may  be  imposed  to  enable 
+continuous interaction and service delivery. 
+ 
+9.2. Flexible Work Arrangements and Digitization of Operational Procedures 
+In  line  with the  social  and  physical  distancing  measures  imposed  at  the  workplace,  management 
+should also consider and implement non-traditional or flexible working arrangements to enable staff 
+to comply strictly with the social and physical distancing measures. This includes: 
+9.2.1. Staff Rotation/ Flexible Working Arrangements 
+The  objective  is  to  reduce  the  number  of  workers  at  the  workplace  and  specifically  in  the  various 
+offices  at  a  particular  point  in  time. 
+Depending  on  the size  of  the offices, 
+rooms with   more   than   two   (2) 
+workers could adopt  a  staff  rotation 
+schedule  that  should  ensure  that  not 
+more  than  two  (2)  workers  are  in  the 
+office     at     any     point     in     time. 
+Social/physical   distancing   measures 
+must    be respected    at    all    times. 
+Depending     on     the     nature of 
+Box 3: What are the Staff Rotation and Flexible Work 
+Arrangement? 
+Staff  rotation  is  a  technique  used  by  some  managers  to 
+reshuffle  workers  on  duty  within  particular  periods  and 
+in-between  working  hours. Flexible work arrangement 
+refers  to  work  schedules  that  allow  workers  to  choose 
+where they do their work, when to start work and when to 
+finish within some agreed periods. This allows workers to 
+work outside the traditional working environment without 
+stress. Typically, workers choose to work from home. 
+Box 2: What is Social/Physical Distancing? 
+In  public  health,  social  distancing,  also  called 
+physical    distancing,    is    a    set    of    non-
+pharmaceutical    interventions    or    measures 
+intended  to  prevent  the  spread  of  a  contagious 
+disease   by   maintaining   a   physical   distance 
+between  people  and  reducing  the  number  of 
+times people come into close contact with each 
+other. 
+
+7 
+ 
+operations and the calibre of  the workers  in  question (whether  top,  middle, senior  management  or 
+operational staff and the workload of the organization), staff rotation working arrangements may be 
+adopted. 
+Variations of the staff  rotation  arrangement  may  also  be  adopted  by  the  same  Civil  Service 
+organization depending  on exigencies  of  specific  departments,  agencies,  directorates,  divisions  or 
+units. 
+The staff rotation arrangements or flexible working hours should be imposed to reduce the negative 
+impact of the health threat on organizational productivity and service delivery. 
+Management and supervisors should ensure that workers who are rotated in-between working hours 
+are  assigned  to  work  as  required  during  normal  working  hours  and  effectively  supervised  through 
+ICT and digitized platforms. 
+ 
+9.2.2. Digitization of Operational Procedures 
+In  anticipation of future  outbreaks  and  in  line  with  existing  social/physical  distancing  protocols, 
+organizations  in  the  Civil  Service  should  take  steps  to  steadily  invest  in  the  digitization  of  work 
+processes and procedures. This is also to support flexible work arrangements that may be imposed 
+in the event of an outbreak of a public health threat in any organization of the Service. 
+ 
+9.3. Practicing 
+Good 
+Hygiene and 
+Waste 
+Management 
+at the 
+Workplace 
+In  the  event  of  an  outbreak 
+similar to COVID-19, 
+organizations  in   the   Ghana 
+Civil   Service should ensure 
+Box 4: 11 Tips of Good Workplace Hygiene  
+1. Place hand sanitizers and soaps in washroom and vantage 
+points to encourage the culture of handwashing. 
+2. Ensure the provision of running water 
+3. Set up a schedule for regular cleaning. 
+4. Clean and open windows to allow in good levels of 
+natural light. 
+5. Set up a waste disposal system. 
+6. Clean communal areas regularly. 
+7. Organize regular hygiene and safety talks. 
+8. Allow workers sick days off. 
+9. Ensure clean air at all times. 
+10. Provide protective clothing to staff depending on the 
+nature of the task. 
+11. Address hygiene problems quickly. 
+ 
+
+8 
+ 
+that consumables and good hygiene facilities are available to workers, visitors and clients. Logistics 
+such  as clean running  water, paper  towels, detergents,  washing  basins,  sanitizers  and  other 
+disinfectants, face/nose masks as well as waste disposal containers should be provided for workers, 
+visitors and clients by management to prevent the spread of any such virus or bacteria.   
+The  offices  and  other  surfaces  at  the  workplace should be  cleaned at appropriate time intervals  to 
+ensure that the virus or bacteria are removed and the spread curtailed. 
+Good hygiene in the workplace is the responsibility of all. Workers who detect a breach of any good 
+hygiene protocol should inform management quickly for the necessary action to be taken. 
+ 
+9.4. Office Ventilation and Use of Air-conditioners 
+Management should ensure that workplaces are well-ventilated at all times. For medium or high-risk 
+jobs  or  work  tasks,  it  is  recommended  for  management  to  ensure  increased  levels  of  ventilation 
+according to WHO standards through natural aeration or artificial ventilation, preferably without re-
+circulation. In the case of air re-circulation, filters should be cleaned regularly. 
+ 
+9.5. Provision and Use of Personal Protective Equipment (PPEs)  
+Management should ensure that appropriate personal protective equipment is provided for workers 
+who  may be exposed  to  public 
+health  risk  or  safety  hazard  while 
+at  work  except  where  and  to  the 
+extent   that   such risk   has   been 
+adequately   controlled   by    other 
+means which  are  equally  or  more 
+effective.   
+Management  should  prioritize  the 
+distribution    of    such    personal 
+protective  equipment to  workers 
+Box 5: What are Personal Protective Equipment 
+(PPEs)?  
+Personal Protective Equipment consists of 
+garments,  goggles,  nose  mask,  gloves,  gown  or 
+coverall, head cover, rubber boots, helmets, shields, 
+among   others   worn   by   workers   in   hazardous 
+environments  to  protect  them  from  infections  and 
+transmitting infections to others. 
+
+9 
+ 
+and  clients according  to the  level  of  risk  of  exposure  and  transmission potential. In  other  words, 
+workers and  clients who  are  categorized  to  have a high  risk  of  exposure  should  be provided  with 
+PPE before those in other categories of risk of exposure and transmission. 
+ 
+9.6. Establishing Organizational Facilities for Quarantine  
+In the event of an outbreak at the workplace, the suspected case should be quarantined in a holding 
+room immediately in  pre-determined 
+locations before  the  arrival  of  the 
+appropriate health authorities. 
+Management  of  organizations  in  the 
+Civil  Service  should  therefore  ensure 
+that holding centres  or  facilities  have 
+been provided for immediate 
+quarantine  of suspected cases.  The 
+infected   person(s) who   could   be 
+workers,  clients  or  visitors should  be 
+handed  over  to professional health 
+authorities    and    their    families    or 
+dependents appropriately informed to also observe self-isolation. 
+ 
+9.7. Awareness Creation, Communication and Training 
+Information  is  very  critical for the  assessment  of  risks,  diagnosis  and  detection  of  cases,  treatment 
+and  the  development of organizational  work plans and implementation  of measures.  Management 
+should therefore  take requisite steps  to  establish  effective  communication  channels,  develop 
+Information  Education  and  Communication (IEC) Materials  and  facilitate  communication  and 
+awareness  creation. Management should make  available  all  the  necessary  logistics to  ensure  swift 
+sharing  of  information  at  all  times.  Management  should also  put  in  place  mechanisms  to  monitor 
+feedback   from   workers,   clients   and   visitors   with   regard   to   the   information   that   has   been 
+disseminated concerning a particular outbreak and the measures that have been put in place to curb 
+Box 6: What is the difference between holding 
+room, isolation and quarantine? 
+Holding room refers to a designated area or room 
+where suspected infected individuals are kept till 
+confirmatory test is done  
+• Quarantine refers to the restriction of movement 
+or  separation  of  healthy  individuals  who  may  have 
+been  exposed  to  the  virus,  from  the  rest  of  the 
+population,    with    the    objective    of    monitoring 
+symptoms and early detection of cases 
+• Isolation  refers  to  the separation  of  infected 
+patients from healthy individuals. 
+
+10 
+ 
+its spread and impact on the organization. Management should ensure that the necessary training has 
+been conducted for all categories of workers. 
+Management  is  obliged  to present information in  languages that  are  easily  understood  by all 
+categories   of   workers,   particularly persons   with   disability.   Management   should   ensure   that 
+information  is  provided in  formats  (including  braille) that  meet  the  needs  of  all  categories  of 
+workers, clients and visitors. 
+Training, orientations and information dissemination programmes or events should be conducted in 
+a manner that adheres to any mitigation protocols that may be imposed such as social distancing, use 
+of PPEs, good office hygiene, among others. 
+ 
+9.8. Social Protection and Livelihood Support Schemes 
+In   line   with   lessons   learnt from COVID-19,   Government,   through   the   Service   and   other 
+stakeholders, should  institute  comprehensive  social  protection  schemes  and  livelihood  support 
+programmes to support victims first, organizations should develop and implement social protection 
+schemes for staff who are affected by an outbreak of any public health threat at the workplace. Civil 
+Service  Organizations should  liaise  with  the  appropriate  Departments  for  effective  implementation 
+of social protection schemes. In addition, management should forge partnerships with existing state 
+social protection and livelihood support schemes for the benefit of workers and their families.  
+The  aim  of  the  social  protection  and  livelihood  support  schemes  is  to  minimize  or  eliminate  the 
+direct impact of any such epidemic/pandemic on the living standards of workers and their families.  
+10.0. Key Assumptions 
+The effective implementation of this Strategy is based on the following key assumptions: 
+1. Organizations will  mainstream  recommendations  and  interventions  in  their  annual  budget 
+allocations. 
+2. Budget allocations will be released on time.  
+3. Management, Workers,  Clients,  Visitors  and all  other  stakeholders  will  play  their  respective 
+roles. 
+
+11 
+ 
+4. Relevant  Central  Management  Agencies  (CMA) will  effectively  play  its supportive  and 
+coordination roles. 
+5. Information sharing will be a priority to all stakeholders. 
+11.0. Financing the Strategy 
+Organizations in the Civil Service should mainstream the implementation of this Strategy into their 
+annual  work plans.  The  specific  activities  that  should  be  implemented  at  the  organizational  level 
+should therefore be funded by annual budget releases from the Ministry of Finance. 
+In  addition,  organizations may  leverage  their  relationship  with Development  Partners and the 
+Private  Sector  to  mobilize  adequate  funds  for  the  implementation  of  their  Workplace  Safety and 
+Health Response Work plans. 
+The  Office  of  the  Head  of the Civil  Service  may  also  leverage  its  position  to  attract  funding  from 
+diverse  sources  to  address  specific  strategic  implementation  challenges that  its  organisations  may 
+face. 
+
+12 
+ 
+12.0. Implementation  Plan:  Ghana  Civil  Service  Workplace  Safety and  Health Response 
+Strategy 
+Policy Objective 1: To protect workers of the Ghana Civil Service, their families and clients 
+from any public health threat that may arise. 
+Table 2 
+No. Key Activity Expected 
+Output 
+MOV Timeframe Responsibility 
+Y1 Y2 Y3 Y4 
+1. Develop organization-
+specific  safety  and  health 
+profiles for all the entities 
+in     the     Ghana Civil 
+Service. 
+Organizati
+on-specific 
+Safety  and 
+Health 
+Profiles 
+developed 
+Safety  and 
+Health 
+Profiles. 
+    Lead: MDs 
+Collaborating: OHCS, 
+DFI, GHS, The 
+Presidency, DPs. 
+2. Consolidate 
+organization-specific 
+safety  and  health  profiles 
+into   a   Composite   Civil 
+Service Safety and Health 
+Profile. 
+Composite 
+Civil 
+Service 
+Safety  and 
+Health 
+Profile 
+developed 
+Civil 
+Service 
+Safety  and 
+Health 
+Profile 
+    Lead: OHCS 
+Collaborating: MDs, 
+DFI,  
+GHS,    The    Presidency, 
+DPs. 
+3. Develop Information, 
+Education & 
+Communication (IEC) 
+Material   based   on   the 
+safety and health profiles. 
+IEC 
+Materials 
+developed. 
+Samples 
+IECs 
+Materials 
+    Lead: MDs 
+Collaborating: OHCS, 
+DFI, GHS, The 
+Presidency, DPs. 
+4. Disseminate 
+organization-specific  and 
+Civil  Service-Wide  Safety 
+and   Health   Profiles   to 
+key stakeholders, 
+Safety  and 
+Health 
+Profiles 
+disseminat
+ed. 
+HR 
+Reports 
+    Lead: MDs 
+Collaborating: OHCS, 
+DFI, GHS, The 
+Presidency, DPs. 
+
+13 
+ 
+No. Key Activity Expected 
+Output 
+MOV Timeframe Responsibility 
+Y1 Y2 Y3 Y4 
+particularly those at risk. 
+5.  Develop standardized 
+preventive     safety     and 
+health  protocols  to  guide 
+all   organizations   in   the 
+Ghana Civil Service.  
+Standardiz
+ed 
+Preventive 
+Safety  and 
+Health 
+Protocols 
+(PSHP) 
+developed 
+Standardiz
+ed      Civil 
+Service 
+PSHP 
+Protocols 
+    Lead: MOH/GHS 
+Collaborating: OHCS, 
+MDs, DFI, The 
+Presidency, DPs. 
+6. Train  Civil  Service  Staff  
+to adhere to the 
+standardized    preventive 
+safety and health 
+protocols 
+Staff 
+trained   on 
+Preventive 
+Safety  and 
+Health 
+Protocols 
+(PSHP) 
+Reports     Lead: MOH/GHS 
+Collaborating: OHCS, 
+MDs   
+7. Conduct periodic 
+inspection of the 
+standardized    preventive 
+safety and health 
+protocols    in    all    Civil 
+Service organizations. 
+Periodic 
+inspection
+s 
+conducted. 
+Inspectio
+n Reports. 
+    Lead: DFI, GHS, 
+Collaborating: OHCS, 
+MDs,    The    Presidency, 
+DPs and MOH/GHS 
+ 
+
+14 
+ 
+Policy  Objective  2:  To  contain  the  spread  of  any  public  health  threat  such  as  COVID-19 
+within the machinery of the Ghana Civil Service. 
+No Key Activity Expected Output MOV Timeframe Responsibility 
+Y1 Y2 Y3 Y4 
+1.  Establish workplace 
+safety and health(WSH) 
+team/committee/ 
+taskforce 
+WSH Teams/ 
+Committee/ 
+Taskforce 
+established. 
+WSH 
+Activity 
+Reports. 
+    Lead: MDs 
+Collaborating: 
+OHCS, DFI, GHS, 
+The Presidency, DPs. 
+2.  Conduct specific risk 
+assessments in the 
+event of an outbreak in 
+an organization or the 
+entire Civil Service. 
+Risk Assessments 
+conducted. 
+Risk 
+Assessme
+nt 
+Reports. 
+    Lead: MDs 
+Collaborating: 
+OHCS, DFI, GHS, 
+The Presidency, DPs. 
+3.  Develop IEC materials 
+based on the results of 
+the risk assessment. 
+ 
+IEC Materials on 
+risk assessment 
+developed  
+IEC 
+Materials 
+    Lead: MDs 
+Collaborating: 
+OHCS, DFI, GHS, 
+The Presidency, DPs. 
+4.  Develop safety and 
+health protocols, 
+measures and 
+restriction concerning 
+that particular 
+outbreak.  
+Safety and health 
+protocols and 
+restrictions 
+developed. 
+WSH 
+Team/ 
+Committe
+e/ 
+Taskforce 
+Reports  
+    Lead: MDs 
+Collaborating: 
+OHCS, DOC, GHS, 
+The Presidency, DPs. 
+5.  Disseminate IEC 
+Materials to all 
+stakeholders, 
+particularly those at 
+risk. 
+IEC Materials 
+disseminated. 
+Reports     Lead: DFI, 
+MOH/GHS 
+Collaborating: 
+OHCS, MDs, The 
+Presidency, DPs. 
+6.  Impose safety and 
+health protocols, 
+measures and 
+Safety and health 
+protocols, measures 
+and restrictions 
+WSH 
+Reports 
+    Lead: The Presidency 
+Collaborating: 
+OHCS, DFI, 
+
+15 
+ 
+No Key Activity Expected Output MOV Timeframe Responsibility 
+Y1 Y2 Y3 Y4 
+restrictions. imposed. MOH/GHS, MDs, 
+DPs. 
+7.  Develop 
+comprehensive 
+organization-specific or 
+Civil Service-Wide 
+Workplace Safety and 
+Health Response Work 
+plans. 
+WSHR Work plans 
+developed. 
+WSHR 
+Work 
+plans 
+    Lead: MDs 
+Collaborating: 
+OHCS, DFI, GHS, 
+The Presidency, DPs. 
+8.  Implement Workplace 
+Safety and Health 
+Response Work plans 
+WSHR Work plan 
+implemented. 
+MDA 
+Reports. 
+    Lead: MDs 
+Collaborating: 
+OHCS, DFI, GHS, 
+DPs. 
+ 
+ 
+9. Procure and distribute 
+logistics and personal 
+protective equipment 
+to all persons at risk. 
+PPEs and other 
+logistics distributed. 
+MDA 
+Reports 
+    Lead: MDs 
+Collaborating: 
+OHCS, DFI, GHS, 
+The Presidency, DPs. 
+ 
+ 
+9.  Provide facilities and 
+quarantine centres to 
+hold suspected cases. 
+Quarantine facilities 
+provided. 
+MDA 
+Reports 
+    Lead: MDs 
+Collaborating: 
+OHCS, DFI, GHS, 
+DPs. 
+10.  Train staff on the 
+effective use of 
+personal protective 
+equipment, logistics 
+Staff trained on the 
+use of PPEs and 
+other logistics. 
+ Reports.     Lead:  MDs 
+Collaborating: 
+OHCS, DFI and 
+GHS. 
+
+16 
+ 
+No Key Activity Expected Output MOV Timeframe Responsibility 
+Y1 Y2 Y3 Y4 
+and facilities. 
+11.  Educate clients and 
+visitors on the effective 
+use of personal 
+protective equipment, 
+logistics and facilities.  
+Clients and visitors 
+educated on the use 
+of PPEs and other 
+logistics. 
+ Reports.     Lead: MDs 
+Collaborating: 
+OHCS, DFI, GHS 
+12.  Install logistics and 
+equipment at vantage 
+points for the use of 
+staff, clients and 
+visitors. 
+Logistics and 
+Equipment 
+installed. 
+ Reports     Lead: MDs 
+Collaborating: 
+OHCS, DFI, GHS,  
+13.  Coordinate the 
+implementation of all 
+Workplace Safety and 
+Health Responses. 
+Implementation of 
+WSHR work plan 
+coordinated across 
+the service. 
+OHCS 
+Reports. 
+    Lead: OHCS, DFI, 
+GHS, LD 
+Collaborating: MDs 
+The Presidency 
+14.  Review Workplace 
+Safety and Health 
+Responses. 
+WSHR work plans 
+reviewed. 
+MD 
+Reports 
+    Lead: MDs 
+Collaborating: 
+OHCS, DFI, GHS, 
+The Presidency, DPs. 
+15.  Regular fumigation and 
+disinfection 
+Request to 
+institutions  
+MD 
+Reports 
+    Lead: MDs 
+Collaborating: 
+OHCS, DFI, and 
+GHS. 
+ 
+
+17 
+ 
+Policy  Objective  3:  To prevent disruptions in  service  delivery,  maintain  productivity  and 
+client satisfaction. 
+N
+o 
+Key Activity Expected 
+Output 
+MOV Timeframe Timeframe 
+Y1 Y2 Y3 Y4 
+1. Enforce  the  use  of  existing 
+digitized     work     platforms 
+such  as  the  Government  of 
+Ghana     Smart     Workplace 
+Portal 
+The use of 
+existing  digitized 
+work    platforms 
+enforced. 
+Reports     Lead: OHCS  
+Collaborating: 
+MOC/NITA, 
+MDs, The 
+Presidency, DPs. 
+2. Evaluate  work  processes  or 
+procedures  in  Civil  Service 
+organizations   to   determine 
+those that can be digitized. 
+Civil Service 
+work    processes 
+evaluated for 
+digitization.  
+Evaluati
+on 
+Report 
+    Lead: 
+MOC/NITA 
+Collaborating: 
+OHCS,  MDs,    The 
+Presidency, DPs. 
+3. Develop a Consolidated 
+Civil Service Work Processes 
+Digitization Plan in line with 
+the development of the MDs 
+operational manuals. 
+Civil Service 
+Work   Processes 
+Digitization 
+(CSWPD) Plan. 
+Consolid
+ated 
+CSWPD 
+Plan 
+    Lead: OHCS  
+Collaborating: 
+MDs, 
+MOC/NITA,   The 
+Presidency, DPs. 
+4. Coordinate    implementation 
+of   the   Consolidated   Civil 
+Service Work Processes 
+Digitization Plan. 
+Implementation 
+of   Consolidated 
+Digitization 
+Plans 
+coordinated. 
+Coordin
+ation 
+Reports 
+    Lead: OHCS  
+Collaborating: 
+MDs,  MOC/NITA 
+The Presidency, 
+DPs. 
+5. Procure     and     install     IT 
+solutions  for  the  digitization 
+of work processes or 
+procedures. 
+IT Solutions 
+installed  
+ Reports     Lead: MDs 
+Collaborating: 
+OHCS, 
+MOC/NITA,   The 
+Presidency, DPs. 
+6. Train  staff  on  the  use  of  IT 
+solutions     about     digitized 
+Staff   trained   to 
+use IT Solutions 
+Training 
+Reports 
+    Lead: MDs 
+Collaborating: 
+
+18 
+ 
+N
+o 
+Key Activity Expected 
+Output 
+MOV Timeframe Timeframe 
+Y1 Y2 Y3 Y4 
+work processes or 
+procedures. 
+OHCS, 
+MOC/NITA,   The 
+Presidency, DPs. 
+7. Provide   stable   and   reliable 
+internet connectivity to 
+support  the  operation  of  all 
+IT solutions. 
+Stable and 
+reliable   internet 
+connectivity 
+provided. 
+ Reports     Lead: MDs, 
+MOC/NITA 
+Collaborating: 
+OHCS, The 
+Presidency, and 
+DPs. 
+ 
+8. Evaluate  the  effectiveness  of 
+digitized work platforms and 
+effect corrections. 
+Digitized   Work 
+Platforms 
+evaluated. 
+Evaluati
+on 
+Report 
+    Lead: MDs, 
+MOC/NITA, 
+Collaborating: 
+OHCS, The 
+Presidency, DPs. 
+9. Develop  responsive flexible 
+work arrangements for staff. 
+Flexible Work 
+Arrangements 
+developed. 
+ Reports     Lead: MDs 
+Collaborating: 
+OHCS, 
+MOC/NITA, DPs. 
+10. Organise    orientations    and 
+training  for  staff  on  flexible 
+work arrangements.  
+Workers 
+trained/ 
+oriented on 
+flexible work 
+arrangements. 
+ Reports     Lead: MDs 
+Collaborating: 
+OHCS, 
+MOC/NITA DPs. 
+9. Develop information sharing 
+materials on. 
+IEC Materials 
+on Flexible  
+ Reports.     Lead: MDs 
+Collaborating: 
+ 
+ flexible   work   arrangements 
+and   disseminate   to   clients 
+Work 
+Arrangements 
+     OHCS, 
+MOC/NITA DPs 
+
+19 
+ 
+N
+o 
+Key Activity Expected 
+Output 
+MOV Timeframe Timeframe 
+Y1 Y2 Y3 Y4 
+and visitors disseminated. 
+10. Institute effective 
+supervision and 
+communication  channels  for 
+flexible work arrangements. 
+Effective 
+communication 
+and   supervision 
+channels 
+established. 
+MD 
+Reports. 
+    Lead: MDs 
+Collaborating: 
+OHCS, 
+MOC/NITA, DPs. 
+11. Provide transportation 
+services for staff to minimize 
+exposure to the infection.  
+Transportation 
+Services 
+Provided. 
+MD 
+Reports. 
+    Lead: MDs 
+Collaborating: 
+OHCS, The 
+Presidency, DPs. 
+12. Evaluate  the  effectiveness  of 
+the flexible work 
+arrangements for each of the 
+categories of workers. 
+Flexible Work 
+Arrangements 
+evaluated. 
+MD 
+Reports. 
+    Lead: MDs 
+Collaborating: 
+OHCS, 
+MOC/NITA, DPs. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+20 
+ 
+Policy  Objective  4:  To  provide  rehabilitation,  social  protection  and  livelihood  support  to 
+victims and their families or dependents.      
+No Key Activity Expected 
+Output 
+MOV Timeframe Responsibility 
+Y1 Y2 Y3 Y4 
+1. Facilitate the 
+hospitalization of 
+persons  who  fall  victim 
+at the workplace. 
+Victims 
+hospitalized. 
+Hospital 
+Records. 
+    Lead: MDs 
+Collaborating: 
+OHCS, GHS. 
+2. Pay cost of 
+hospitalization for 
+workers who fall victim 
+at the workplace 
+Cost of 
+hospitalization  
+paid 
+Receipts 
+of Bills 
+paid./ 
+Account 
+records. 
+    Lead: MDs 
+Collaborating: 
+OHCS, GHS, The 
+Presidency, DPs. 
+3. Develop and implement 
+comprehensive 
+rehabilitation plans for 
+victims at the workplace. 
+Comprehensive 
+Rehab Plans 
+developed and 
+implemented. 
+Compre
+hensive 
+Rehab 
+Plans/ 
+Reports 
+    Lead: MDs 
+Collaborating: 
+OHCS, GHS, The 
+Presidency, DPs. 
+4. Develop income support 
+packages    as    part    of 
+existing institutional 
+welfare systems. 
+Income  support 
+packages 
+accessible to 
+workers and 
+their families. 
+Reports/ 
+Account 
+Records. 
+    Lead: The 
+Presidency 
+Collaborating: 
+OHCS,  MoGCSP,  
+DPs. 
+5. Link  workers  and  their 
+families  to  existing  state 
+social protection 
+programmes,     including 
+livelihood support 
+schemes. 
+State social 
+protection 
+schemes and 
+livelihood 
+support 
+programs 
+accessed. 
+Reports/ 
+List of 
+beneficia
+ries 
+    Lead: MDs 
+Collaborating: 
+OHCS,   MoGCSP  
+The Presidency, 
+DPs. 
+
+21 
+ 
+13.0. Monitoring and Evaluation 
+Organizations in  the  Civil  Service should develop  their  Monitoring  and  Evaluation  Frameworks  to 
+track  progress  towards  the  achievement  of  the  objectives  outlined  in  this Strategy.  The  various 
+organizational-level   Monitoring   and   Evaluation   Frameworks should   be   consolidated   into   a 
+Composite Civil Service M&E Framework to be used by the Office of the Head of the Civil Service 
+in its coordination responsibilities for the implementation of this Strategy. 
+The  organizational-level  and  Composite Civil  Service  M&E  Frameworks  should  focus  on  tracking 
+the following core indicators in addition to other operational level ones: 
+1. Number of reported cases 
+2. The number of workplace transmissions. 
+3. The number of organizations with quarantine facilities or holding rooms. 
+4. The number of deaths. 
+5. The number of active cases. 
+6. The number of persons vaccinated by category of workers. 
+7. Percentage change in productivity levels. 
+8. The number of organizations with a full complement of logistics. 
+9. The   number   of   organizations   with installed   IT   solutions   to   support   flexible   work 
+arrangements. 
+10. The  number  of  workers  provided  with  PPEs  disaggregated  by  organizations,  gender, and 
+level of exposure to the risk. 
+11. Availability of appropriate waste disposal containers: 
+a) Number of waste bins that are foot-operated and in good order   
+b) Number of waste bins lined with appropriate colour-coded liner/bag 
+12. Number of toilet facilities with a regular source of water 
+Data on these indicators should be collected at prescribed intervals and reported to management for 
+further  analysis  and  necessary  action.  Management should make  adequate  provisions  for  the  team, 
+committee, task  force  or  other  specialized  professionals  to  collect,  collate  and  prepare  reports  on 
+these indicators.  
+
+22 
+ 
+The M&E results should be the primary source of information for the review of existing measures, 
+interventions  and  protocols.  The  indicators  should  be  reviewed  periodically based  on  their 
+usefulness to the information sharing and communication strategy. 
+14.0. Review of the strategy document 
+From time to time, in consultation with the OHCS, this strategy document will be reviewed and 
+revised as required. This should take place at least once in four years. 
+15.0. Conclusion  
+The WSHRS serves as a proactive framework to provide guidelines to Ministries and Departments 
+for  the  management  of  safety  and  health  responses  to  emerging  threats  at  the  workplace. The 
+Strategy therefore commits the Civil Service to continually improve the health and safety of its staff 
+and  any  other  person  affected  by  its  activities. The  OHCS  will  continue  to  work  closely  with  the 
+various  Ministries  and  Departments  to  ensure  effective  monitoring  of  the  implementation  of  the 
+Workplace Safety and Health Response Strategy.   
+ 
+ 
+ 
+
+23 
+ 
+ANNEX 1: ROLES AND RESPONSIBLITIES OF STAKEHOLDERS  
+No. Stakeholders Roles and Responsibilities Remarks 
+1.  The Presidency i. Provide     national     policy     direction     to 
+emergency  health  response  for  all  Public 
+Service Organizations. 
+ii. Provide    specialized    support    by    making 
+services  of  specialized  agencies  available  to 
+Civil   Service   organizations   exposed   to   a 
+health threat. 
+iii. Support    Civil    Service    organizations    to 
+eliminate obstacles for effective 
+implementation  of  workplace  health  work 
+plans/ measures/ protocols. 
+iv. Support resource mobilization and 
+disbursement. 
+ 
+2.  Ministry of Health/Ghana 
+Health Service 
+v. Provide  specialized  services  and  technical 
+support  to  mitigate  the  spread  of  any  public 
+health threat.  
+vi. Assist  in  the  establishment  and  operation  of 
+holding rooms and quarantine facilities. 
+vii. Train Civil Service Staff on workplace health 
+and safety protocols. 
+ 
+3.  The Civil Service Council i. Review  and  approve  the  Strategy  document 
+for implementation 
+ii. Receive   implementation   and   monitoring 
+reports    and    recommend    options    for 
+improvement.  
+iii. Liaise with relevant stakeholders to facilitate 
+the effective  implementation  of  the  Strategy 
+document  
+ 
+
+24 
+ 
+4.  Management    of    Civil    Service 
+Organizations 
+This refers to Officers 
+responsible  for  taking  decisions 
+of  strategic  importance  for  the 
+various Ministries/ Departments.  
+  
+i. Hire     or     procure     a     public     health/ 
+occupational safety/ risk assessment 
+professional   to   conduct   an   organization-
+specific  risk  assessment/  profile. Support 
+the  development  of  workplace  safety  and 
+health response work plans. 
+ii. Establish    workplace    safety    and    health 
+response team/ committee/ task force. 
+iii. Provide   logistical   support   to   workplace 
+health   and   safety   teams/   committees   to 
+function. 
+iv. Review  and  approve  workplace  safety  and 
+health response work plan. 
+v. Facilitate    the    procurement    of    personal 
+protective equipment. 
+vi. Fund   the   implementation   of   workplace 
+health response work plans. 
+vii. Establish    workplace    safety    and    health 
+response communication channels. 
+viii. Commission  monitoring  and  evaluation  of 
+workplace    safety    and    health    response 
+programmes/ activities/ events. 
+ix. Forge  partnerships  with  other  organizations 
+or  authorities  within  and  outside  the  Civil 
+Service to support implementation, 
+monitoring  and  evaluation  of  the  workplace 
+safety   and   health   response   work   plans/ 
+measures/ protocols. 
+x. Provide space for the installation of facilities 
+within    the    organization for    immediate 
+quarantine. 
+The 
+Department of 
+Factories 
+Inspectorate 
+and the 
+Occupational 
+Health and 
+Environment 
+Unit    of    the 
+GHS   may   be 
+consulted    for 
+professional 
+assistance. 
+
+25 
+ 
+xi. Take  immediate  action  in  consultation  with 
+the  Head  of  Civil  Service  and  the  Public 
+Services  Commission  to  forestall  the  spread 
+of a health threat. 
+xii. Provide   regular   feedback   or   situational 
+report  to   the  Head  of  Civil  Service  for 
+further directives. 
+xiii. Facilitate regular health screening for staff. 
+xiv. Supervise regular or periodic 
+fumigation/disinfection of offices and office 
+environment 
+xv. Where feasible, provide or make 
+arrangement  for  special  transportation  for 
+staff. 
+xvi. Facilitate  the  provision  of  social  protection 
+services  for  affected  staff  and  their  families 
+or dependents. 
+5.  The    staff    of    Ministries    and 
+Departments 
+i. Comply  with  the  request  to  see  designated 
+health  practitioners  recommended  by  the 
+organization. 
+ii. Comply  with  all  directives  by  management 
+for curtailment of the spread of the threat or 
+risk. 
+iii. Nominate  representatives  to  be  part  of  the 
+workplace health response team/ 
+committee/ task force. 
+iv. Report  any  staff  or  visitor  who  refuses  to 
+comply    with    the    preventive    measures/ 
+protocols. 
+v. Adhere  to  changes  in  work  processes  or 
+arrangements   without   any   reduction   in 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+26 
+ 
+normal productivity levels. 
+vi. Deliver work   outputs   in   a   timely   and 
+efficient manner. 
+ 
+ 
+6.  CLOGSAG/CLOGLAC(Civil 
+and Local Service Staff of Ghana 
+Ladies Club) 
+i. Protect   the   identity   of   informants   who 
+provide information on emergent threats.  
+ii. Undertake periodic sensitization and 
+awareness creation  
+iii. Establish  a  standing  “health  and  safety 
+committee” to advocate for compliance with 
+health and safety protocols 
+ 
+7.  Clients/ Visitors i. Comply  with  measures  or  protocols  put  in 
+place  at  the  workplace  to  curtail  the  spread 
+of a health threat. 
+ii. Follow instructions by designated emergency 
+health response staff at all times. 
+iii. Report any violation of protocols by staff or 
+visitor to the immediate senior officer. 
+iv. Pay attention to safety orientations. 
+v. Respect flexible work arrangements and visit 
+plans accordingly. 
+ 
+8.  Development Partners/ 
+CSO/FBO/NGO’s 
+i. Support the development and 
+implementation   of   workplace   safety   and 
+health response work plans. 
+ii. Support  collaborative  workplace  health  and 
+safety research efforts.  
+iii. Provide support in terms of PPE’s 
+iv. Support office digitization initiatives 
+ 
+ 
+
+27 
+ 
+ANNEX 2: STAKEHOLDER ANALYSIS  
+No. Stakeholders Concerns/Risk Mitigation Actions 
+1.  The 
+Presidency 
+i. Disruptions in  the  delivery  of 
+political promises. 
+ii. Fall in national revenue. 
+iii. Exposure    of    the    general 
+public to threat. 
+i. Provide   policy   direction   to   the   fight 
+against the spread. 
+ii. Provide  support for  the implementation 
+of     Workplace     Safety     and     Health 
+Response. 
+iii. Ensure   timely   release   of   funds   to 
+implement work digitization plans. 
+iv. Impose  general measures  in  line  with 
+global and MoH protocols. 
+2.  Civil Service 
+Council 
+i. Inability   to   deliver   on   set 
+targets  
+ii. Unproductive Civil Service   
+i. Provide     policy     direction     for the 
+implementation of WSHR work plans 
+ii. Provide support for  the implementation 
+of WSHR work plans. 
+3.  Office   of   the 
+Head  of  Civil 
+Service 
+i. Loss of productivity. 
+iii. Disruptions in service 
+delivery. 
+i. Coordinate implementation of 
+Workplace  Safety  and  Health  Response 
+(WSHR)  
+ii. Support   digitization   of  work   in   Civil 
+Service Organisations. 
+4.  Management iv. Non-use of Personal 
+Protective Equipment by 
+workers, clients and visitors. 
+v. Poor   supervision   of   flexible 
+work arrangements. 
+vi. Fall   in   demand   for   some 
+services  
+i. Impose disciplinary actions. 
+ii. Effective supervision by supervisors. 
+iii. Investment in  ICT  solutions  to  support 
+flexible work arrangements. 
+5.  CLOGSAG i. The   unwillingness   of   some 
+Civil  Service  organizations  to 
+adhere   to   health   and   safety 
+protocols/guidelines 
+i. The  continuous  advocacy  for  adherence 
+to protocols 
+ii. The pursuit of legal action (if possible) 
+
+28 
+ 
+No. Stakeholders Concerns/Risk Mitigation Actions 
+6.  Clients and 
+Visitors 
+i. Non-access to services. 
+ii. Unsafe office environments. 
+ 
+i. Ensure effective information sharing. 
+ii. Provide     preventive     guidelines     and 
+precautions. 
+iii. Provide logistics at vantage points. 
+7.  CSO’s 
+/FBO’s/NG
+O’s 
+i. Breaks  in  the  implementation 
+of  MOUs  with  Ministries  and 
+Departments 
+ 
+i. Support the provision of PPEs. 
+ii. Support    implementation    of    WSHR 
+plans. 
+iii. Support office digitization plans. 
+8.  Development 
+Partners 
+i. Breaks  in  the  implementation 
+of cooperation agreements 
+i. Support the provision of PPEs. 
+ii. Support   implementation   of   WSHR 
+plans. 
+iii. Support office digitization plans.

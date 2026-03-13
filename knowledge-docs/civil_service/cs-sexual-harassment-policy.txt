@@ -1,0 +1,759 @@
+i 
+ 
+[Date] 
+ 
+ 
+THE GHANA CIVIL 
+SERVICE 
+ 
+ 
+ 
+SEXUAL HARASSMENT POLICY 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+OCTOBER 2021 
+
+ii 
+ 
+ 
+Table of Contents 
+FOREWORD ............................................................................................................................................... iv 
+1.0. INTRODUCTION ........................................................................................................................... 1 
+1.1. Policy Brief and Purpose ................................................................................................................ 1 
+1.2. Objectives of the Policy ................................................................................................................. 2 
+1.3. Application and Scope of the Policy ............................................................................................... 2 
+1.4. Policy Statement ............................................................................................................................. 3 
+1.5. Guiding Principles .......................................................................................................................... 3 
+2.0. DEFINITION OF SEXUAL HARASSMENT ................................................................................. 4 
+2.1. Forms of sexual harassment ........................................................................................................... 4 
+2.2. Unwelcome conduct ...................................................................................................................... 6 
+2.3. Assumptions .................................................................................................................................. 6 
+3.0. IMPLEMENTATION OF THE POLICY ........................................................................................ 6 
+3.1. Sensitization and Dissemination ..................................................................................................... 6 
+3.2. The Sexual Harassment Committee ................................................................................................ 7 
+3.2.1. Functions of the Sexual Harassment Committee .................................................................... 7 
+3.2.2. Qualification of Members of the Committees ......................................................................... 7 
+3.2.3. Membership of the Sexual Harassment Committee ................................................................ 7 
+3.2.4. Tenure of Office of members of the Sexual Harassment Committee ...................................... 8 
+3.2.5. Meetings of the Sexual Harassment Committee ...................................................................... 8 
+3.2.6. Reporting relationship of the Committee ................................................................................ 9 
+4.0. COMPLAINT PROCEDURES ........................................................................................................ 9 
+4.1. Informal Approach ........................................................................................................................ 9 
+4.2. Formal Approach ......................................................................................................................... 10 
+4.3. Procedure for investigation .......................................................................................................... 10 
+4.4. Rights of the Complainant............................................................................................................ 11 
+4.5. Rights of the Respondent ............................................................................................................. 11 
+
+iii 
+ 
+4.6. Right to Representation ................................................................................................................ 11 
+4.7. Duty to Cooperate ....................................................................................................................... 11 
+4.8. Malicious Accusation or Unfounded Complaint ........................................................................... 12 
+5.0. EVIDENCE .................................................................................................................................... 12 
+6.0. OBSTRUCTION OF THE PROCESS ........................................................................................... 12 
+6.1. Withdrawal of a Filed Complaint .................................................................................................. 12 
+6.2. Conflict of Interest ....................................................................................................................... 12 
+6.3. Complaints against a Member of the Committee .......................................................................... 13 
+7.0. ACTIONS TO BE TAKEN ............................................................................................................ 13 
+7.1. Record of Proceedings ................................................................................................................. 13 
+7.2. Investigation Time Frame ............................................................................................................ 13 
+8.0. SANCTIONS .................................................................................................................................. 13 
+9.0. APPEAL .......................................................................................................................................... 14 
+10.0. NON-RETALIATION ................................................................................................................... 15 
+11.0. CONFIDENTIALITY .................................................................................................................... 15 
+12.0. REFERRAL FOR COUNSELLING AND OTHER SUPPORT SYSTEMS .................................. 15 
+13.0. OBLIGATION OF MANAGEMENT AND STAFF ..................................................................... 15 
+14.0. MONITORING AND EVALUATION ......................................................................................... 17 
+15.0. PREVENTING SEXUAL HARASSMENT ................................................................................... 17 
+16.0. REVIEW OF POLICY .................................................................................................................... 18 
+17.0. DEFINITION OF TERMS ............................................................................................................ 19 
+ 
+ 
+ 
+
+iv 
+ 
+FOREWORD  
+The  Civil  Service  is  mandated  by  the  1992  Constitution  of  Ghana  and  the  Civil  Service  Act,  1993 
+(PNDCL  327):  to  perform  a  strategic  function  in  supporting  the  government  to  formulate  and 
+implement  policies  for  national  development.  This  can  only  be  achieved  by  creating  a  safe  and 
+healthy working environment devoid of intimidation and harassment.  
+The Civil Service has an obligation and duty to care for and provide a safe working environment to 
+its  employees,  job  applicants,  clients  and  all  stakeholders  to  ensure  that  everyone  is  aware  of  their 
+rights  to  equality,  human  dignity,  privacy,  security  of  person  and  fair  labour  practice.  The  Civil 
+Service  is  also  responsible  for  ensuring  that  no individual  perpetrates sexual  harassment  while 
+carrying  out  their  work,  whether  at  their  offices,  conferences,  meetings  and  that  the  highest 
+standards of behaviour are observed and practised all the time.  
+This  policy  is  intended  to  prevent sexual  harassment  and  to  clearly  set  out  the  procedures  to  be 
+followed when sexual harassment is witnessed or occurs. Anyone who has been subjected to sexual 
+harassment has a right to lodge a grievance, and to expect that the Civil Service will take appropriate 
+and  decisive  action. The  Service commits  itself  to  addressing  as  a  matter  of  urgency  all  cases  of 
+alleged sexual harassment and to ensuring that fair procedures are followed throughout the process 
+within clear pre-determined time frames.   
+The Civil Service takes a zero-tolerance approach against sexual harassment  and sexual harassment 
+in any form will not be permitted or condoned. Civil Service staff are therefore expected to respect 
+one another’s integrity, dignity, privacy and their right to equity in the workplace at all times and to 
+note that the Service views sexual harassment in any form extremely serious and disciplinary action 
+including summary dismissal may result after following due process. The Civil Service will take the 
+necessary  steps  to  ensure that  no  worker  terminates  his  or  her  employment because  no  action was 
+taken against an incidence of sexual harassment. 
+ 
+ 
+                 
+NANA KWASI AGYEKUM-DWAMENA 
+HEAD OF THE CIVIL SERVICE 
+ 
+ 
+
+1 
+ 
+1.0. INTRODUCTION  
+The Ghana Civil Service in accordance with article 190 of the 1992 Constitution, forms part of the 
+Public Services of Ghana. The Civil Service Act, 1993 (PNDC Law 327) establishes the Ghana Civil 
+Service to perform a strategic function in supporting the Government to formulate and implement 
+policies for national development through Sector Ministries and implementing Departments. 
+According to the Domestic Violence and Victim Support Unit report (2010-2016), girls in Ghana are 
+over 100 times more likely to be abused. The reports indicate that the number of rape cases keeps 
+increasing. For example, rape cases increased from 288 in 2010 to 322 in 2015. This is reflective of 
+women’s case in general in the country. The number could be higher since many victims remain 
+silent because of shame, guilt and fear, particularly of stigmatization and intimidation (UN Women, 
+2016).  More  seriously  is  the  limited  number  of  cases  in  which  perpetrators  are  convicted  (Monree 
+and Monree 2013). In all the cases less than 5% of perpetrators were convicted.  
+Whilst  this  number  does  not specifically  pertain  to  the  Civil  Service,  it  is  reflective  of  what  is 
+happening in the general Ghanaian context which includes the Ghana Civil Service.  
+Civil Service Code of Conduct stipulates as follows:  
+ A Civil  Service  staff shall  not  exploit  his/her relationship  with  another  officer/person  to 
+gain  advantage  of  him/her,  sexually,  or  confer  undue  favours  on  him/her, for  sexual  and 
+other purposes.  
+ A Civil Service staff shall refrain from engaging in sexual affairs in Government offices, or in 
+any criminal sexual acts or malpractices anywhere.           
+ Sexual harassment by a Civil Service staff of his/her opposite sex may take such forms as for 
+instance, exerting subtle pressure, or threatening punitive action, or giving favours to cause 
+the opposite sex to yield to one’s sexual desires.  
+The  document provides a  framework  for  ensuring  that  reported  cases  are  dealt  with  seriously, 
+expeditiously, with the necessary level of respect, dignity and confidentiality. 
+ 
+1.1. Policy Brief and Purpose 
+The Sexual  Harassment  Policy  of  the  Civil  Service  aims  at  safeguarding  employees  of  both  sexes 
+from  unwanted  sexual  advances,  and  to  provide  them  with  guidelines  to  report  incidents.  It  also 
+explains how the Civil Service handles complaints, takes action against offenders, and assists victims 
+to recover. 
+The  OHCS  is  committed  to  a  work  environment  in  which  all  individuals  are  treated  with  dignity, 
+respect and decency. Every person has the right to work in a professional atmosphere that promotes 
+equal  employment  opportunities and  prohibits  unlawful  and  discriminatory  practices,  including 
+
+2 
+ 
+harassment,  intimidation,  oppression  and  exploitation.  Therefore,  the  OHCS  expects  that  all 
+relationships among persons in the office or work settings will be professional and free of prejudice 
+and harassment. 
+This  policy  aims  to  ensure  that  all Civil  Service  staff can  work  in  an  environment  free  from 
+harassment, intimidation, exploitation and oppression. The Civil Service will make every reasonable 
+effort to ensure  that all concerned are familiar with the policy and are aware that any complaint in 
+violation of the policy will be investigated and resolved appropriately. 
+Through education and enforcement of this policy, the Civil Service will seek to prevent, correct and 
+discipline behavior that violates this Policy. 
+ 
+1.2. Objectives of the Policy  
+The objectives of the Policy are to: 
+a. Identify and  eliminate,  as  much  as  possible, what  constitutes  sexual  harassment or  sexual 
+misconduct in the Civil Service.  
+b. Prevent sexual harassment and misconduct through education and awareness creation.  
+c. Investigate  allegations  and  reports  of  incidents  of  sexual  harassment  and  sexual  misconduct  in 
+the Civil Service. 
+d. Provide  appropriate  disciplinary  measures  in  accordance  with  this  policy  and  other  related 
+regulations when a violation of the policy occurs.  
+e. Ensure that victims of sexual harassment and sexual misconduct, a person against whom sexual 
+harassment  or  sexual  misconduct  allegation  is  made  until  guilt  is  proven  or  anyone  who 
+participates in the investigation does not face victimization, retaliation or stigmatization. 
+ 
+1.3. Application and Scope of the Policy 
+This policy applies to the following:  
+a. All employees of the Civil Service and those working in Civil Service Organisations (i.e. Casual 
+Workers,  Interns,  National Service  Personnel,  Special  Assistants  etc). Anyone  who  falls  in  the 
+above-mentioned category  who  sexually  harasses  another  person  on  the  premises  of  any  Civil 
+Service Organisation will be sanctioned in accordance with this policy.  
+b. All other   persons,   regardless   of   their   position, (including   applicants   for   employment, 
+contractors, members, suppliers and any other third party) who visit or attend any Civil Service 
+premises  and/or  functions  and/or  events  hosted  by  the  Service. A  non-staff  who  sexually 
+
+3 
+ 
+harasses another  person  or  engages  in  sexual  misconduct  on  the  premises  of  any  Civil  Service 
+Organisation will be reported to the Police for action.   
+It should be noted that, all forms of sexual harassment and sexual misconduct involving officers or 
+staff  of  the Civil  Service are  prohibited,  whether  they  occur  within  the  premises  of a  Civil  Service 
+Organisation or  outside,  including  at  social  events,  on  business  trips,  at  training  sessions  or 
+conferences sponsored by either the Civil Service or any other organization.  
+ 
+1.4. Policy Statement  
+The  Civil  Service  shall  not  accept  or  tolerate  sexual  harassment  in  its  workplace  or  in  any  work-
+related location outside the workplace, such as during official trips, meetings and work-related social 
+events. 
+ 
+1.5. Guiding Principles 
+The  Sexual  Harassment  Policy  of  the  Civil  Service  is  underpinned  by  the  following  guiding 
+principles 
+a. Equality and Freedom from Discrimination 
+Article 17(2) of the 1992 Constitution of Ghana provides that: 
+A person shall not be discriminated against on grounds of gender, race, colour, ethnic origin, religion, creed or social or 
+economic status. 
+ 
+b. Respect for human dignity 
+Article 15(1) also provides that: 
+The dignity of the individual shall be inviolable. 
+Sexual  harassment  constitutes  discrimination  and  a  violation  of  the  dignity  of  the  individual.  It  is 
+illegal and prohibited under Ghanaian law.  
+All Civil Service staff, and other persons given lawful access to the Civil Service, are prohibited from 
+engaging in any of the practices prohibited in this policy. 
+ 
+ 
+
+4 
+ 
+2.0. DEFINITION OF SEXUAL HARASSMENT   
+Sexual  harassment  shall  be  considered  as an unwelcome,  offensive  or  persistent  sexual  advance, 
+requests  for  sexual  favours  and  other  verbal  or  physical  conduct  of  a  sexual nature which  makes  a 
+person feel offended, humiliated or intimidated.  
+Sexual  Harassment  can  be  categorized  into  two  (2)  types:  tangible  employment  action  and  hostile 
+work environment.   
+Tangible  employment  action  involves  some  type  of  monetary  loss  for  the  employee  or  significant 
+changes in workload or work assignment.  It requires that the threat of job detriment or promise of 
+job  benefit  actually  results  in  some  sort  of  employment  related  action  such  as  termination, 
+promotion, demotion, or reassignment to a considerable different job or duties.   
+A  hostile  work  environment  occurs  when  actions  of  another  person  creates  an  adverse  or  hostile 
+working conditions for an employee, or interferes with the employee’s work performance through 
+severe or pervasive words or deeds because of the employee’s gender. 
+Sexual harassment may take place both inside or outside of work premises, and includes, but is not 
+limited to when - 
+ A person  undertakes  or  attempts  to  influence  the  process  of  employment,  promotion, 
+training,  discipline,  dismissal,  salary  increment  or  other benefit  of  an  employee  or  job 
+applicant in exchange for sexual favours which creates a hostile, intimidating or humiliating 
+environment for the recipient. 
+ Sexual conduct unreasonably interferes with a person’s work performance or creates an 
+intimidating or hostile working environment.  
+ it involves one  or  more  incidents  and actions  constituting  harassment,  which may  be 
+physical, verbal or non-verbal  
+ 
+2.1. Forms of sexual harassment  
+Sexual harassment may take the following forms: 
+a. Physical Contact 
+This may take the form of:  
+i. Unwanted physical  contact  including  pinching,  stroking,  kissing,  hugging,  fondling,  or 
+inappropriate touching. 
+ii. Physical violence, including sexual assault or rape. 
+iii. Attempted acts in paragraph i and ii.  
+
+5 
+ 
+b. Verbal conduct 
+Verbal  forms  of  sexual  harassment  include  socially  and  culturally  inappropriate  and  unwelcome 
+conduct including 
+i. Comments on a worker’s appearance, age and private life. 
+ii. Sexual comments, stories and jokes about a person’s dress or physique made in the presence 
+of that person or towards that person. 
+iii. Sexual advances. 
+iv. Repeated and unwanted social invitations for dates or physical intimacy.  
+v. Insults based on the sex of the worker.  
+vi. enquiries about a person’s sex life and sexual habits, 
+vii. Condescending or paternalistic remarks. 
+viii. The use of job-related threats or rewards to solicit sexual favours. 
+ 
+c. Non-verbal conduct  
+This form of sexual harassment includes unwelcome gestures including  
+i. Suggestive body language, indecent exposure, lascivious looks and repeated winks 
+ii. Display of sexually explicit or sexually-suggestive pictures, screen savers, posters and objects 
+within the office premises or on a computer or other office equipment. 
+iii. Display  of  pornographic  materials  within  the  office  premises  or  on  a  computer  or  other 
+office equipment.  
+iv. Sending sexually explicit e-mails, text messages or notes etc. 
+v. Sexually-suggestive gestures such as whistling and leering 
+It  is  important  to  note  that  this  list  is  not  exhaustive  and  that  sexual  harassment  can  include  any 
+conduct of a sexual nature which is unwanted and unwelcome by the recipient.   
+ 
+d. Psychological sexual behaviour 
+i. Repeated unwanted social invitations for dinner, drinks, outings, movies, etc; 
+ii. Offering or expecting sexual favours, implicitly or explicitly; 
+
+6 
+ 
+iii. Requiring/requesting either explicitly or implicitly that a subordinate wear revealing and/or 
+suggestive clothing that make them feel uncomfortable; and 
+iv. Giving an employee gifts which makes them feel uncomfortable or to elicit sexual favours. 
+ 
+2.2. Unwelcome conduct 
+a. There are different ways in which an employee may indicate that sexual conduct is unwelcome, 
+including non-verbal conduct such as walking away or not responding to the perpetrator. 
+b. Previous consensual participation in sexual conduct does not necessarily mean that the conduct 
+continues to be welcome. 
+c. Where  a  complainant  has  difficulty  in  indicating  to  the  perpetrator  that  the  conduct  is 
+unwelcome, the complainant may seek the assistance and intervention of another person such as 
+a co-worker, supervisor etc who he or she trusts.  
+ 
+2.3. Assumptions  
+The policy considers the following assumptions:  
+a. The victim as well as the harasser may be a woman or a man.  The victim does not have to be of 
+the opposite sex.  
+b. The harasser can be the victim’s supervisor in another area, a co-worker, or a non-opposite sex 
+c. The  victim  does  not  have  to  be  the  person  harassed  but  could  be  anyone  affected  by  the 
+offensive conduct. 
+d. The harasser’s conduct must be unwelcome; therefore, it is helpful for the victim to inform the 
+harasser directly that the conduct is unwelcome and must stop. 
+e. Sexual harassment  is  a  manifestation  of  power  relationships (vertically/horizontally) and  often 
+occurs  within  unequal  relationships  at  the  workplace,  for  example  between Directors  or  Heads 
+and Staff within the Ministry, Department, Directorate or Unit. 
+ 
+3.0. IMPLEMENTATION OF THE POLICY  
+The policy will be implemented in the Ministries and Departments through the following. 
+3.1. Sensitization and Dissemination  
+To  ensure  that  Civil  Service  Staff  are  well  informed,  promote  compliance  and  familiarity  with 
+reporting procedures of the Policy, the following measures shall be adopted:  
+
+7 
+ 
+a. Ministries  and  Departments  shall  ensure  that  the  Policy  is  widely  disseminated  in  all  available 
+forms  to  all  staff  and  relevant  persons. This  can  also  be  implemented  as  part  of  the NACAP 
+activities for the Institutions.  
+b. All  new  employees  must  be  trained  on  the  content  of  the  policy,  especially  as  part  of  their 
+orientation or induction into the Civil Service.  
+c. The Civil Service Training Institutions and Heads of Ministries / Departments shall ensure that 
+the policy is made part of the refresher training course for Civil Service staff on regular basis.  
+ 
+3.2. The Sexual Harassment Committee  
+All Ministries / Departments shall have a Sexual Harassment Committee which will be responsible 
+for handling all sexual harassment issues.  
+ 
+3.2.1. Functions of the Sexual Harassment Committee 
+The Sexual Harassment Committee is responsible for the following:  
+ Receive and keep records of all sexual harassment complaints submitted by a complainant; 
+ Investigate all sexual harassment complaints; 
+ submit the Investigative Report on the outcome of investigations into the complaints to the 
+Chief Director or Head of Department for onward submission to the Civil Service Council, 
+through the Head of the Civil Service;  
+ keep record of the findings and recommendations of the Civil Service Council.: and 
+ submit  to  the  Chief  Director or  Head  of  Department,  annual  reports  on  all  the  cases  of 
+sexual harassment which occur in the Ministry or Department respectively.  
+ 
+3.2.2. Qualification of Members of the Committees 
+All  members  of  the  Sexual  Harassment  Committee  shall  have  high  moral  character  and  proven 
+integrity,  gender  sensitivity  and  technical  competency  to  handle  sexual  harassment  and  sexual 
+misconduct complaints in accordance with the laid down procedures in this policy. 
+ 
+3.2.3. Membership of the Sexual Harassment Committee 
+a. There  is  established  by  this  policy  a five-member  Sexual  Harassment  Committee  which 
+comprises: 
+
+8 
+ 
+i. The  Head  of  Human  Resource  Directorate  of  the  Ministry  as  Chairman  (whether  in  the 
+Ministry or Department) 
+ii. One Director in the Ministry or Department  
+iii. The representative of CLOGSAG in the Ministry or Department  
+iv. One State Attorney from the Attorney General’s Department  
+v. A member (Civil Service staff from the sector) nominated by the Chief Director / Head of 
+Department.  
+b. The Chairman shall appoint a staff to be the secretary at Committee meetings  
+c. In  the  situation  where  the  issue  occurs  in  a  Department,  the  head  of  Department  shall  seek 
+approval from the Chief Director before the committee commences sitting. 
+ 
+3.2.4. Tenure of Office of members of the Sexual Harassment Committee 
+Members  of  the  Committee  shall  hold  office  for  a  period  of  two (2) years  and  are  eligible  for  re-
+appointment for another term only.  
+ 
+3.2.5. Meetings of the Sexual Harassment Committee 
+a. The Sexual Harassment Committee shall meet regularly for the dispatch of business at the time 
+and place as the chairperson shall determine. 
+b. The  quorum  for  meetings  of  the  Sexual  Harassment  Committee  is four members  of  the 
+Committee and must include the CLOGSAG representative. 
+c. A  member  of  the  Sexual  Harassment  Committee  may  at  any  time  resign  from  office  by  letter 
+addressed to the Chief Director or Head of Department. 
+d. A member of the Sexual Harassment Committee who is absent from three consecutive meetings 
+of the Committee without reasonable excuse ceases to be a member of the Committee. 
+e. The Chief Director or head of Department may by a letter addressed to a member of the Sexual 
+Harassment Committee, revoke the appointment of that member. 
+f. Where a member of the Sexual Harassment Committee is for a sufficient reason unable to act as 
+a member, the chairperson shall determine whether the inability will result in the declaration of a 
+vacancy. 
+g. Where a vacancy occurs -  
+i. under paragraph c, d or e  
+
+9 
+ 
+ii. as a result of a declaration of a vacancy under paragraph f; 
+iii. by reason of the posting or transfer of a member; 
+iv. by reason of [the resignation or] termination of appointment of a member; or 
+v. by reason of the death of a member  
+[the chairperson shall immediately inform Chief Director or head of Department who shall 
+appoint another person to fill the vacancy]. 
+h. A  meeting  of  the  Sexual  Harassment  Committee  shall  be  chaired  by  the  chairperson  of  the 
+Committee  and  in  the  absence  of  the  chairperson,  a  member  of  the  Committee  elected  by  the 
+members present from among their number shall chair the meeting. 
+ 
+3.2.6. Reporting relationship of the Committee  
+The Committee shall report to the Chief Director or Head of Department as the case may be.  
+ 
+4.0. COMPLAINT PROCEDURES 
+The following guidelines shall apply in handling sexual harassment complaints:  
+When reporting sexual harassment employees, may choose to:  
+a. Allow the matter to be handled informally or  
+b. Adopt the formal procedure – Sexual Harassment Committee. 
+c. If not satisfied, the complainant could proceed to the Civil Service Council.  
+d. Press separate criminal or civil charges in their personal capacities, against an alleged perpetrator. 
+e. The employee (victim) should be under no duress to accept one or the other.  
+A complainant should at all times exhaust all internal mechanisms before proceeding to an external 
+body.  
+ 
+4.1. Informal Approach  
+a. Where an employee or any other person described in the policy (1.3) feels that he or she is being 
+or  has  been  sexually  harassed,  such  a  member  may  attempt to  resolve  the  matter  directly  with 
+the  alleged  offender  by  advising  that  the  sexually  harassing  behaviour  is  unwelcome,  must  be 
+stopped, or must not occur again.  
+
+10 
+ 
+b. A Complainant may choose to ask another person whom he or she trusts to intervene on their 
+behalf.  The  person  who  is  asked  to  intervene  may  provide  advice  or  counselling  to  the  parties 
+involved.  This  shall  be  on  a  strictly  confidential  basis  and  only  on  the  specific  request  of  the 
+Complainant.  
+c. In situations where counselling has previously taken place and there is a blatant refusal to change 
+by the harasser after informing him or her, or the sexual harassment or sexual misconduct that is 
+considered severe or extreme, such as attempted rape, rape, sexual battery, sexual assault with a 
+weapon and non- consensual anal copulation, a complainant shall adopt a formal approach.  
+ 
+4.2. Formal Approach   
+In order to maintain a harassment free work environment, any person who believes he/she has been 
+the victim of harassment by an employee or representative or any person with knowledge or belief 
+of  conduct  which  may  constitute  such  harassment  or  bias  towards  an  employee  or  representative 
+MUST report the alleged conduct immediately. 
+a. A  victim  can  approach  any  member  of the  Sexual  Harassment  Committee  to  lodge  a verbal 
+complaint or present a written complaint.  
+b. The  committee  member  who  receives a  complaint  of  sexual  harassment  or  sexual  misconduct 
+shall: 
+i. immediately record the dates, times and facts of the incident(s); 
+ii. ascertain the views of the victim as to what outcome the victim expects; 
+iii. ensure  that  the  victim  understands the procedures  for  dealing  with  the  complaint and 
+assured of his or her rights; 
+iv. discuss  and  agree  on  the  next  steps  being  the  lodging  of  either  an  informal  complaint  or  a   
+formal complaint, on the understanding that choosing to resolve the matter informally does 
+not preclude the victim from pursuing a formal complaint if the victim is not satisfied with 
+the outcome; 
+v. keep a confidential record of all discussions; and 
+vi. respect  the  choice  of  the  victim in respect of the victim’s preferable choice of complaint 
+procedure. 
+c. The  representative  who  initially  received  the  complaint  will  refer  the  matter  to  the  Sexual 
+Harassment Committee to instigate a formal investigation. 
+ 
+4.3. Procedure for investigation 
+
+11 
+ 
+The sexual Harassment Committee in carrying out its work shall 
+a. interview the victim and the alleged harasser separately; 
+b. interview other relevant third parties separately; 
+c. decide whether or not the incident of sexual harassment or sexual misconduct took place; 
+d. produce a report of the investigations, detailing the findings and recommendations; 
+e. if the harassment took place, refer the case to the Civil Service Council; 
+f. ensure  that  the  recommendations  are  implemented until the  sexual  harassment  or  sexual 
+misconduct has stopped.  
+g. if the Committee cannot determine that the sexual harassment or sexual misconduct took place, 
+the Committee may still make recommendations to ensure proper functioning of the workplace; 
+h. keep the record of investigations and of all actions taken confidential; and 
+i. ensure  that formal investigations begin  within 10 working days  after  the  complaint  has  been 
+made and concluded within 30 working days after commencement of investigations. 
+ 
+4.4. Rights of the Complainant 
+A person,  identified  under  this  policy, who  claims  to  be  a  victim  of  sexual  harassment  and/or 
+misconduct  in  violation  of  this  Policy  is  entitled  to  pursue  the  matter  and  utilize  the  procedures 
+described under this Policy for redress.  The complainant shall not be reprimanded, retaliated against 
+or  discriminated  against  for  initiating  an  inquiry  or  complaint  in  good  faith  into  the  alleged  sexual 
+harassment or sexual misconduct. 
+ 
+4.5. Rights of the Respondent 
+A  person  against  whom  a  complaint  is  made  shall  be  presumed  innocent  of  the  charge  unless  and 
+until there is a final finding of culpability by the Sexual Harassment Committee to the charge. 
+ 
+4.6. Right to Representation 
+A  complainant  and  the  respondent  in  sexual  harassment  or  sexual  misconduct  have  the  right  to 
+representation by counsel before the Sexual Harassment Committee or any other body.  
+ 
+4.7. Duty to Cooperate 
+
+12 
+ 
+Parties must cooperate with investigations into sexual harassment or sexual misconduct. Refusal or 
+failure without just cause by a party to cooperate with an investigation or to impede or frustrate an 
+investigation may result in disciplinary action against the party. 
+ 
+4.8. Malicious Accusation or Unfounded Complaint 
+False accusations  of  sexual  harassment  or  sexual  misconduct  could  have  a  serious  impact  on  the 
+reputation  and  integrity  of  individuals.  As  such,  malicious  accusations  will  be  treated  seriously.  
+Anyone who is found to have made a deliberately malicious complaint or allegation against another 
+person shall be subject to formal disciplinary action under the appropriate procedure.  
+ 
+5.0. EVIDENCE 
+The following may be considered as evidence for the hearing of the matter: 
+a. Witness statements (if any). 
+b. Any  other  documents,  audio-visual  recordings,  electronic  communication  including  but  not 
+limited to e-mails, phone texts and WhatsApp messages. 
+c. Expert or technical advice. 
+d. Medical evidence, including Deoxyribonucleic acid (DNA) test results, [if appropriate]. 
+ 
+6.0. OBSTRUCTION OF THE PROCESS 
+6.1. Withdrawal of a Filed Complaint 
+A Complainant may withdraw a complaint lodged with the Sexual Harassment Committee any time 
+after lodging and during the process of the investigation. In such a case, the Complainant shall state 
+in writing the reasons for the withdrawal of the complaint. 
+The case  may  however  be  investigated if  it  is  brought  to  the  attention  of  the  Civil  Service  Council 
+even where a Respondent refuses to respond to the allegations or participate in the enquiry. 
+ 
+6.2. Conflict of Interest 
+Members of the Sexual Harassment Committee shall declare any interest they may have in a matter 
+whenever  a  complaint  is  filed  before  the  Committee.    Where  any  interest  declared  may  affect  the 
+outcome of the case, the member should recuse himself/herself. 
+ 
+
+13 
+ 
+6.3. Complaints against a Member of the Committee 
+If a complaint of sexual harassment is made against a member of the Sexual Harassment Committee, 
+he or she shall not take part in any of the processes of the Committee relating to the investigation of 
+the said complaint. 
+ 
+7.0. ACTIONS TO BE TAKEN 
+7.1. Record of Proceedings 
+The Sexual Harassment Committee's record of proceedings on a particular matter shall give details 
+of the enquiry by the Civil Service Council.  This includes:  
+a. a statement of the allegations,  
+b. the positions of the parties,  
+c. a summary of the evidence,  
+d. findings of fact,  
+e. a  determination  by  the Sexual  Harassment  Committee  as  to  whether  this  Policy  has  been 
+violated,  
+f. sanctions recommended, where applicable, and 
+g. Other  recommendations  to  restore  or  improve  the  relationship  between  the  parties  where  no 
+finding of guilt is established against the respondent shall be included in the report.   
+ 
+7.2. Investigation Time Frame 
+Investigations  into  a  complaint  of  sexual  harassment  or  sexual  misconduct  shall  begin  within 10 
+working   days   after   the   complaint   has   been   made,   and   concluded   within   30   days   after 
+commencement of investigations. The Committee, prior to the end of the investigation period, may 
+in writing and with reasons request for extension of time (for a maximum of additional 10 working 
+days) from the Chief Director where it is not possible to complete the investigation within 30 days.   
+ 
+8.0. SANCTIONS 
+The  Civil  Service  Council  shall  approve  and  sanction  punitive  measures where  a  Respondent  has 
+been found to have engaged in behaviour that can be characterized as sexual harassment or sexual 
+misconduct.  
+
+14 
+ 
+Staff who violate this Policy shall face any of the sanctions outlined in Section 77 of the Civil Service 
+Act, 1993 (Act 327).  
+ 
+(1) The penalties specified in this  section may be imposed in disciplinary proceedings in respect of 
+misconduct or unsatisfactory service: 
+a. dismissal,  that  is  termination  of appointment  with  forfeiture  of  retirement  benefits  where 
+applicable, 
+b. removal,  that  is  termination  of  appointment  with  or  without  a  reduction  in  retirement 
+benefits where applicable, 
+c. reduction  in  status,  that  is  removal  from  one  grade  to  another  grade  with an  immediate 
+reduction in salary, 
+d. surcharge, 
+e. reduction  in  salary,  that  is  an  immediate  adjustment  of  salary  to  a  lower  point  in  the  salary 
+scale attached to the post in question, 
+f. deferment of increment, that is a postponement of the date on which the next increment is 
+due, with corresponding postponements in subsequent years, 
+g. stoppage of increment, that is non-payment for a specified period of an increment otherwise 
+due, 
+h. suspension from duty with consequent loss of pay and allowances for a period not exceeding 
+fourteen days, 
+i. reprimand. 
+(2) In  accordance  with  the  Civil  Service  Act,  1993  (Act  327), dismissal,  removal  and  reduction  in 
+status are major penalties and all other penalties are minor penalties. 
+ 
+9.0. APPEAL 
+a. If the Complainant or Respondent is dissatisfied with the outcome of the investigations and/or 
+the decision of the Sexual Harassment, the complainant may appeal to the Civil Service Council.  
+b. Where  the  complainant  is  dissatisfied  with  the  decisions  of  the  Civil  Service  Council  the 
+complainant may appeal to a Court of competent jurisdiction.   
+ 
+
+15 
+ 
+10.0. NON-RETALIATION 
+During the process of investigation of a complaint, retaliation from either party or third parties shall 
+be  monitored  by  the  Sexual  Harassment  Committee.  A  person  who  is  subjected  to  retaliation 
+including  threats,  intimidation,  reprisals,  or  adverse  employment  or  educational  actions  for  having 
+made  a  complaint  of  sexual  harassment  or  sexual  misconduct  in  good  faith,  or  who  assisted 
+someone  with  a  report  of  sexual  harassment  or  sexual  misconduct,  or who  participated  in  any 
+manner in an investigation or resolution of a report of sexual harassment or sexual misconduct, may 
+make  a  report  of  retaliation  under  these  procedures.  The  report  of  retaliation  shall  be  treated  as  a 
+report of sexual harassment and misconduct and will be subject to the same procedures. 
+ 
+11.0. CONFIDENTIALITY 
+The  Sexual  Harassment  Committee  shall  maintain  confidentiality  of  all  complaints  made  to  the 
+Committee and of all the proceedings of the Committee.  Parties in an investigation, including their 
+representatives shall be advised that maintaining confidentiality is essential to protect the integrity of 
+the investigation. 
+ 
+12.0. REFERRAL FOR COUNSELLING AND OTHER SUPPORT SYSTEMS 
+In  appropriate  cases,  the  Committee  may  request  that  either  party  to  the  case  seeks  counselling  or 
+support. The  Committee  may,  at  the  request  of  a  party  to  a  complaint,  refer  that  party  for 
+counselling or support. 
+Additionally, the Civil Service will  provide victims of sexual harassment the following support: 
+ Guidance  from  the  Human  Resources  and  Administration  Department  to  explore  their 
+options. 
+ Access to in-house counseling (psycho-social support). 
+ Compassionate leave (in appropriate cases). 
+ 
+13.0. OBLIGATION OF MANAGEMENT AND STAFF 
+Chief  Directors  and  Heads  of  Departments  as  well  as  all  Civil  Service  staff  shall  ensure  that  the 
+sexual harassment policy outlined in this document is regularly monitored to ensure compliance and 
+adherence. 
+ 
+ 
+
+16 
+ 
+a. Management Obligation 
+ Management    (OHCS,    Chief    Directors,    Departmental    and    Regional    and    District 
+Coordinating  Directors,  and  Supervisors)  shall  ensure  that  all  newly-recruited  staff  are 
+trained on the sexual harassment policy and institute refresher trainings to existing staff. 
+ Management shall create an organizational culture in which all staff are treated equally, and 
+employees  are  encouraged  to  treat  one  another  with  respect  and  sexual  harassment  is 
+rejected unequivocally. 
+ Management  shall  provide  directives  to  protect  individuals  reporting  breaches  and/or 
+possible breaches of this policy. Procedures and mechanisms for safeguarding confidentiality 
+of staff shall be instituted. 
+ Management  shall  ensure  every  staff  is  aware  of  requirements  and  standards  of  behavior 
+under the policy.  
+ Management shall ensure that policy is enforced and apply appropriate sanctions where there 
+is a breach.  
+ Management  shall  ensure  that  all  employees,  upon  appointment,  sign  a  sexual  harassment 
+agreement indicating that they will abide by the policy.  
+ 
+b. Staff Obligations 
+ Staff must familiarize themselves with this policy and seek clarification, support and training 
+in order to comply with the policy. 
+ Staff must comply with this policy and any other related policies. Further, staff must be able 
+to  demonstrate  that  they  are  making  every  reasonable  effort  to  comply  with  relevant 
+standards. 
+ Staff  must  treat  one  another  with  respect  and  unequivocally  reject  sexual  harassment, 
+holding each other accountable to high standards within the workplace.  
+ In the event of a breach or foreseeable breach of the policy by colleague, staff should report 
+to  his  or  her  supervisor  who  shall  report  the  matter  to  the  Human  Resources  and 
+Administration Department or Ethics & Compliance Unit. Where the breach is on the part 
+of  a  management  personnel,  staff  should  bring  it  to  the  attention  of  a  Chief  Director  or 
+Head of Civil Service. 
+ 
+
+17 
+ 
+14.0. MONITORING AND EVALUATION 
+The  Civil  Service recognizes the  importance  of  monitoring  this  Sexual  Harassment  Policy  and  will 
+ensure that it anonymously collects statistics and data as to how the Policy is applied and whether or 
+not the Policy is effective. 
+Chief  Directors  and  Heads  of  Departments will  report  on  compliance  with  this  Policy.  The  report 
+shall  include  the  number  of  incidents,  how  they  were  dealt  with,  and  the  recommendations  made.  
+The  report  will  be  done  on an  annual  basis  and  will  be  used  to  evaluate  the  effectiveness of  this 
+Policy and make any changes needed.  
+The  Sexual  Harassment  Committee  established  under  this  Policy  shall  adopt  appropriate  means  of 
+monitoring  and  evaluating  the  effectiveness  of  this Policy  and  may  adopt  any  of  the  following 
+means: 
+ Questionnaires completed by employees, 
+ Feedback from victims or those who work with the complaint procedure 
+ 
+15.0. PREVENTING SEXUAL HARASSMENT 
+The Civil Service commits to implementing the following steps to create a workplace that prevents 
+and deters sexual harassment: 
+a. Enforce  the  conduct  of  annual  training  on  sexual  harassment  for  all  staff  and,  in  line  with 
+international  best  practice,  include  an  overview  of  the  law,  a  review  of  the  Sexual  Harassment 
+policy,  code  of  conduct  and  training,  how  to  intervene  to  prevent  sexual  harassment,  how  to 
+contribute  to  a  culture  in  which  all  staff  are  treated  as  equals  and  employees  treat  one  another 
+with  respect  and  unambiguously  reject  sexual  harassment,  holding  each  other  accountable  to 
+high standards within the workplace; 
+b. Include  an  adherence  to  the  Civil  Service  values,  including  sexual  harassment,  commitment  to 
+gender equality and non-discrimination in performance reviews 
+c. Include a question in exit interviews on staff experience with sexual harassment; 
+d. Publicize a whistle-blowing email address web page where any staff and non-staff members can 
+report any incidences of concern; 
+e. Ensure that all Ministries and Departments have posters and other materials visible on the walls 
+that convey our commitment to preventing sexual harassment and promoting equality; and  
+f. All staff, interns, fellows, consultants etc will be expected to sign the Code of Good Conduct to 
+confirm that they have read and will abide by the Sexual Harassment policy. 
+ 
+
+18 
+ 
+ 
+16.0. REVIEW OF POLICY 
+This Policy shall be reviewed every five (5) years. 
+ 
+ 
+ 
+ 
+ 
+
+19 
+ 
+17.0. DEFINITION OF TERMS 
+Committee:   Sexual  Harassment  Committee  established  by the  Ministry  or  Department to 
+investigate and address sexual harassment and sexual misconduct complaints under this Policy. 
+Complainant:  A person who has filed a complaint under this Policy. 
+Designated  staff  member: A  person,  who  is  either  a  member  of  the  Sexual  Harassment 
+Committee   or   a   non-member,   appointed   by   the   Sexual   Harassment   Committee   to   receive 
+complaints on sexual harassment. 
+Hostile Environment:  Situations and /or influences created within the work environment, which 
+are  sufficiently  severe  or  pervasive  that  they  alter  the  conditions  of  employment  in  such  a  manner 
+that a reasonable person would find it intimidating, uncomfortable or offensive. 
+Importunate:  Persistent or pressing, often annoyingly. 
+Leering:   To look or smile in a way that suggests unpleasantly lustful or malicious intent. 
+Policy:   Civil Service Sexual Harassment Policy. 
+Respondent:   A person whose alleged conduct is the subject of a complaint 
+Sexual Advance: A welcome or unwelcome gestures made towards another person with the aim of 
+gaining some sort of sexual favor or gratification. 
+Sexual  Abuse:    Forceful  engagement  of another  person  in  sexual  contact  which  includes  sexual 
+conduct that humiliates or degrades the other person or otherwise violates another person’s sexual 
+integrity. 
+Sexual  Assault: This  refers  to  a  situation  where  an  individual  has  or  attempts  to  have  sexual 
+intercourse  or  contact  with  another  individual  without  the  latter’s  consent.    Consent  achieved 
+through  the  use  or  threat  of  force  or  coercion  or  as  a  result  of  incapacitation  is  not  classified  as 
+consent.  
+Sexual Intimidation:  This includes the following situations: 
+ Threatening to sexually assault an individual. 
+ Indecent exposure. 
+ Stalking  in  or  outside  of  cyberspace.    Stalking  refers  to  the  situation  where  an  individual 
+directs unwelcome attention of various sorts to another such that a reasonable person would 
+begin  to  fear  for  his  or  her  safety  or  wellbeing.    Such  unwelcome  attention  could  include: 
+following  a  person;  leaving  messages  or  items  at  locations  that  the  person  is  known  to 
+frequent;   making   harassing   phone   calls;   sending   messages   either   by   snail   mail   or 
+electronically; vandalizing the property of another. 
+
+20 
+ 
+REFERENCES 
+LAWS 
+ The 1992 Constitution of the Republic of Ghana [Article (88)], article 88 
+ Civil Service Act, 1993 (PNDCL 327) 
+ Labour Act, 2003 (Act 651) 
+ Civil Service Code of Conduct 
+ Civil Service Employee Handbook  
+ 
+SEXUAL HARASSMENT POLICIES OF OTHER INSTITUTIONS 
+ Draft Sexual  Harassment  Policy, Office  of  the  Attorney  General  and  Ministry  of  Justice, 
+2019  
+ Goldfields Sexual Harassment Policy, 2019 
+ University of Ghana, Sexual Harassment and Misconduct Policy, 2017 
+ University of Ghana Anti-Sexual Harassment Policy, 2010 
+ 
+WEBSITE  
+www.ilo.org

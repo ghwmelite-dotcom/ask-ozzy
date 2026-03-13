@@ -110,5 +110,124 @@
     "url": "https://www.euacademic.org/BookUpload/9.pdf",
     "source": "European Academic Research",
     "category": "research"
+  },
+  {
+    "id": "civil-service-code-of-conduct",
+    "title": "Civil Service Code of Conduct",
+    "url": "https://ohcs.gov.gh/wp-content/uploads/2025/06/Civil-Service-Code-of-Conduct.pdf",
+    "source": "Office of the Head of Civil Service, Ghana",
+    "category": "civil_service"
+  },
+  {
+    "id": "cs-onboarding-orientation-policy",
+    "title": "Policy on Onboarding and Orientation for the Ghana Civil Service",
+    "url": "https://ohcs.gov.gh/wp-content/uploads/2025/04/POLICY-ON-ONBOARDING-AND-ORIENTATION-FOR-THE-GHANA-CIVIL-SERVICE.pdf",
+    "source": "Office of the Head of Civil Service, Ghana",
+    "category": "civil_service"
+  },
+  {
+    "id": "cs-sexual-harassment-policy",
+    "title": "Civil Service Sexual Harassment Policy",
+    "url": "https://ohcs.gov.gh/wp-content/uploads/2024/10/CS-Sexual-Harassment-Policy-PDF.pdf",
+    "source": "Office of the Head of Civil Service, Ghana",
+    "category": "civil_service"
+  },
+  {
+    "id": "cs-workplace-safety-health",
+    "title": "Civil Service Workplace Safety and Health Response Strategy",
+    "url": "https://ohcs.gov.gh/wp-content/uploads/2024/10/CIVIL-SERVICE-WORKPLACE-SAFETY-AND-HEALTH-RESPONSE-STRATEGY-DOCUMENT.pdf",
+    "source": "Office of the Head of Civil Service, Ghana",
+    "category": "civil_service"
+  },
+  {
+    "id": "cs-training-policy-guidelines",
+    "title": "Ghana Civil Service Training Policy and Guidelines for Implementation",
+    "url": "https://ohcs.gov.gh/wp-content/uploads/2024/10/GHANA-CIVIL-SERVICE-TRAINING-POLICY-AND-GUIDELINES-FOR-TIMPLEMENTATION.pdf",
+    "source": "Office of the Head of Civil Service, Ghana",
+    "category": "civil_service"
+  },
+  {
+    "id": "cs-study-leave-guidelines",
+    "title": "Guidelines on Study Leave for the Ghana Civil Service",
+    "url": "https://ohcs.gov.gh/wp-content/uploads/2024/10/GUIDELINES-ON-STUDY-LEAVE-PDF-VERSION-MARCH-2017-REVIEW-1.pdf",
+    "source": "Office of the Head of Civil Service, Ghana",
+    "category": "civil_service"
+  },
+  {
+    "id": "cs-performance-agreement-framework",
+    "title": "Performance Agreement Framework for the Ghana Civil Service",
+    "url": "https://ohcs.gov.gh/wp-content/uploads/2024/10/PERFORMANCE_AGREEMENT_-_Final_Document.pdf",
+    "source": "Office of the Head of Civil Service, Ghana",
+    "category": "civil_service"
+  },
+  {
+    "id": "ohcs-client-service-charter",
+    "title": "OHCS Client Service Charter",
+    "url": "https://ohcs.gov.gh/wp-content/uploads/2024/10/OHCS-Client-Service-Charter.pdf",
+    "source": "Office of the Head of Civil Service, Ghana",
+    "category": "civil_service"
+  },
+  {
+    "id": "cs-conditions-of-service",
+    "title": "Conditions of Service for the Ghana Civil Service",
+    "url": "https://ohcs.gov.gh/wp-content/uploads/2024/10/INDUCTION-2018-CONDITIONS-OF-SERVICE.pdf",
+    "source": "Office of the Head of Civil Service, Ghana",
+    "category": "civil_service"
+  },
+  {
+    "id": "cs-rules-and-regulations",
+    "title": "Civil Service Rules and Regulations",
+    "url": "https://ohcs.gov.gh/wp-content/uploads/2024/10/INDUCTION-CIVIL-SERVICE-RULES-AND-REGULATIONS-_0.pdf",
+    "source": "Office of the Head of Civil Service, Ghana",
+    "category": "civil_service"
+  },
+  {
+    "id": "ohcs-smtdp-2022-2025",
+    "title": "OHCS Sector Medium Term Development Plan 2022-2025",
+    "url": "https://ohcs.gov.gh/wp-content/uploads/2024/10/Published_OHCS-SMTDP_2022-2025.pdf",
+    "source": "Office of the Head of Civil Service, Ghana",
+    "category": "civil_service"
+  },
+  {
+    "id": "cs-performance-appraisal-guide",
+    "title": "The Performance Management System and Staff Appraisal in the Civil Service",
+    "url": "https://ohcs.gov.gh/wp-content/uploads/2024/10/Induction-2020-The-Performance-Management-System-Appraisal.pdf",
+    "source": "Office of the Head of Civil Service, Ghana",
+    "category": "civil_service"
+  },
+  {
+    "id": "cs-records-management",
+    "title": "Overview of Public Records Management in the Civil Service",
+    "url": "https://ohcs.gov.gh/wp-content/uploads/2024/10/Induction-2020-An-Overview-of-the-Public-Records-Management.pdf",
+    "source": "Office of the Head of Civil Service, Ghana",
+    "category": "civil_service"
+  },
+  {
+    "id": "cs-administrative-writing",
+    "title": "Administrative Writing Skills for the Civil Service",
+    "url": "https://ohcs.gov.gh/wp-content/uploads/2024/10/Induction-2020-Administrative-Writing.pdf",
+    "source": "Office of the Head of Civil Service, Ghana",
+    "category": "civil_service"
+  },
+  {
+    "id": "cs-ethical-leadership",
+    "title": "Ethical Leadership in the Civil Service",
+    "url": "https://ohcs.gov.gh/wp-content/uploads/2024/10/INDUCTION-2018-ETHICAL-LEADERSHIP.pdf",
+    "source": "Office of the Head of Civil Service, Ghana",
+    "category": "civil_service"
+  },
+  {
+    "id": "cs-entrance-exam-guidelines-2023",
+    "title": "Guidelines for the 2023 Civil Service Online Graduate Entrance Examination",
+    "url": "https://ohcs.gov.gh/wp-content/uploads/2024/10/2023-civil-service-online-examination-guidelines-1.pdf",
+    "source": "Office of the Head of Civil Service, Ghana",
+    "category": "civil_service"
+  },
+  {
+    "id": "cs-2024-annual-performance-report",
+    "title": "2024 Civil Service Annual Performance Report",
+    "url": "https://ohcs.gov.gh/wp-content/uploads/2025/05/2024-Civil-Service-Annual-Performance-Report.pdf",
+    "source": "Office of the Head of Civil Service, Ghana",
+    "category": "civil_service"
   }
 ]
