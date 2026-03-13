@@ -383,6 +383,11 @@ async function logUserAudit(c: any, actionType: string, queryPreview?: string, m
 
 // ─── Productivity Tracking ────────────────────────────────────────────
 
+const VALID_STAT_COLUMNS = new Set([
+  "messages_sent", "research_reports", "analyses_run",
+  "meetings_processed", "workflows_completed", "documents_generated",
+]);
+
 const PRODUCTIVITY_MULTIPLIERS: Record<string, { column: string; minutes: number }> = {
   chat: { column: "messages_sent", minutes: 2 },
   research: { column: "research_reports", minutes: 30 },
@@ -399,7 +404,7 @@ async function trackProductivity(c: any, statType: string) {
     const userId = c.get("userId");
     const today = new Date().toISOString().split("T")[0];
     const multiplier = PRODUCTIVITY_MULTIPLIERS[statType];
-    if (!multiplier) return;
+    if (!multiplier || !VALID_STAT_COLUMNS.has(multiplier.column)) return;
 
     await c.env.DB.prepare(
       `INSERT INTO productivity_stats (user_id, stat_date, ${multiplier.column}, estimated_minutes_saved)
@@ -1257,22 +1262,29 @@ Start with these warm-up questions: ${brief.starter_questions.join(' | ') || 'N/
         // Post-response verification in background
         c.executionCtx.waitUntil((async () => {
           try {
-            if (requiresFullVerification(agentCategory)) {
+            if (requiresFullVerification(agentCategory) && retrievedContexts.length > 0) {
+              const citationReport = parseCitations(toolResult.response, retrievedContexts);
+              const generatedForVerify = {
+                text: toolResult.response,
+                claims: citationReport.citations.map(ct => ct.source),
+                citations_used: citationReport.citations.map(ct => ct.source),
+                raw: toolResult.response,
+              };
               const vResult = await Promise.race([
-                verify(toolResult.response, retrievedContexts, agentCategory, c.env),
+                verify(generatedForVerify, retrievedContexts, c.env),
                 new Promise<never>((_, reject) => setTimeout(() => reject(new Error('verification timeout')), 10000)),
               ]);
-              if (vResult && !vResult.is_supported) {
-                await c.env.DB.prepare(
-                  "INSERT INTO hallucination_events (id, request_id, agent_type, claim, source_checked, verdict) VALUES (?, ?, ?, ?, ?, ?)"
-                ).bind(generateId(), requestId, agentCategory, toolResult.response.substring(0, 500), 'tool-response', 'unsupported').run().catch(() => {});
+              if (vResult.overall === 'FAIL') {
+                await adjudicate(generatedForVerify, vResult, c.env, requestId, agentCategory, toolResult.response.substring(0, 500));
               }
             }
-          } catch {}
+          } catch (e: any) {
+            log("error", "Tool-use post-response verification failed", { error: e?.message });
+          }
         })());
 
         // Record gateway metrics
-        c.executionCtx.waitUntil(recordGatewayMetrics(agentCategory, 0, 0, c.env).catch(() => {}));
+        c.executionCtx.waitUntil(recordGatewayMetrics(c.env, agentCategory, false, false, 0, 0).catch(() => {}));
 
         // Update student profile for tutor agents
         if (isTutorAgent && studentProfile) {
@@ -1280,7 +1292,9 @@ Start with these warm-up questions: ${brief.starter_questions.join(' | ') || 'N/
             const outcome = toolResult.response.length > 100 ? 'correct' : 'skipped';
             const updatedProfile = updateSessionScore(studentProfile, outcome as any);
             await saveStudentProfile(conversationId, updatedProfile, c.env);
-          } catch {}
+          } catch (e: any) {
+            log("error", "Student profile update failed", { error: e?.message });
+          }
         }
 
         return c.json({ response: toolResult.response, request_id: requestId, tools_used: toolResult.toolsUsed });

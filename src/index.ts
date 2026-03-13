@@ -1804,6 +1804,10 @@ export default {
     try {
       const GNEWS_BASE = "https://gnews.io/api/v4";
       const apiKey = env.GNEWS_API_KEY;
+      if (!apiKey) {
+        console.error("GNEWS_API_KEY not configured, skipping discover refresh");
+        return;
+      }
 
       const topicFetches = [
         { category: "ghana", url: `${GNEWS_BASE}/top-headlines?country=gh&lang=en&max=20&apikey=${apiKey}` },

@@ -2150,6 +2150,9 @@ adminContent.post("/api/admin/discover/refresh", adminMiddleware, async (c) => {
 
   const GNEWS_BASE = "https://gnews.io/api/v4";
   const apiKey = env.GNEWS_API_KEY;
+  if (!apiKey) {
+    return c.json({ error: "GNEWS_API_KEY not configured" }, 500);
+  }
 
   const topicFetches = [
     { category: "ghana", url: `${GNEWS_BASE}/top-headlines?country=gh&lang=en&max=20&apikey=${apiKey}` },
