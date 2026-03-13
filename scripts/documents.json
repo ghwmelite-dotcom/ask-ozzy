@@ -68,5 +68,47 @@
     "url": "https://ppa.gov.gh/wp-content/uploads/2019/01/FINAL-MANUAL-PPB.pdf",
     "source": "Public Procurement Authority, Ghana",
     "category": "procurement_law"
+  },
+  {
+    "id": "waec-core-mathematics-syllabus",
+    "title": "WAEC Core Mathematics Syllabus",
+    "url": "https://waecsyllabus.com/download/ssce/GENERAL%20MATHEMATICS%20OR%20MATHEMATICS%20(CORE).pdf",
+    "source": "West African Examinations Council",
+    "category": "education"
+  },
+  {
+    "id": "waec-english-language-syllabus",
+    "title": "WAEC English Language Syllabus",
+    "url": "https://waecsyllabus.com/download/ssce/ENGLISH%20LANGUAGE.pdf",
+    "source": "West African Examinations Council",
+    "category": "education"
+  },
+  {
+    "id": "waec-integrated-science-syllabus",
+    "title": "WAEC Integrated Science Syllabus",
+    "url": "https://www.larnedu.com/wp-content/uploads/2015/03/WASSCE-WAEC-INTEGRATED-SCIENCE-TEACHING-SYLLABUS.pdf",
+    "source": "West African Examinations Council",
+    "category": "education"
+  },
+  {
+    "id": "waec-social-studies-syllabus",
+    "title": "WAEC Social Studies Syllabus",
+    "url": "https://waecsyllabus.com/download/ssce/SOCIAL%20STUDIES%20(NEW).pdf",
+    "source": "West African Examinations Council",
+    "category": "education"
+  },
+  {
+    "id": "apa-7th-edition-guide",
+    "title": "APA 7th Edition Publication Manual Summary Guide",
+    "url": "https://www.fanshawelibrary.com/wp-content/uploads/2020/09/APA-7th-Edition-LLC-2020.pdf",
+    "source": "Fanshawe College Library Learning Commons",
+    "category": "research"
+  },
+  {
+    "id": "research-methodology-guide",
+    "title": "Research Methodology Guide",
+    "url": "https://www.euacademic.org/BookUpload/9.pdf",
+    "source": "European Academic Research",
+    "category": "research"
   }
 ]
