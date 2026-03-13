@@ -1,0 +1,362 @@
+[
+  {
+    "id": "wassce-core-maths-2024",
+    "exam_type": "wassce",
+    "subject": "Core Mathematics",
+    "subject_slug": "core-maths",
+    "year": 2024,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "wassce-core-maths-2023",
+    "exam_type": "wassce",
+    "subject": "Core Mathematics",
+    "subject_slug": "core-maths",
+    "year": 2023,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "wassce-core-maths-2022",
+    "exam_type": "wassce",
+    "subject": "Core Mathematics",
+    "subject_slug": "core-maths",
+    "year": 2022,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "wassce-core-maths-2021",
+    "exam_type": "wassce",
+    "subject": "Core Mathematics",
+    "subject_slug": "core-maths",
+    "year": 2021,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "wassce-core-maths-2020",
+    "exam_type": "wassce",
+    "subject": "Core Mathematics",
+    "subject_slug": "core-maths",
+    "year": 2020,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "wassce-english-2024",
+    "exam_type": "wassce",
+    "subject": "English Language",
+    "subject_slug": "english",
+    "year": 2024,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "wassce-english-2023",
+    "exam_type": "wassce",
+    "subject": "English Language",
+    "subject_slug": "english",
+    "year": 2023,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "wassce-english-2022",
+    "exam_type": "wassce",
+    "subject": "English Language",
+    "subject_slug": "english",
+    "year": 2022,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "wassce-english-2021",
+    "exam_type": "wassce",
+    "subject": "English Language",
+    "subject_slug": "english",
+    "year": 2021,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "wassce-english-2020",
+    "exam_type": "wassce",
+    "subject": "English Language",
+    "subject_slug": "english",
+    "year": 2020,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "wassce-int-science-2024",
+    "exam_type": "wassce",
+    "subject": "Integrated Science",
+    "subject_slug": "int-science",
+    "year": 2024,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "wassce-int-science-2023",
+    "exam_type": "wassce",
+    "subject": "Integrated Science",
+    "subject_slug": "int-science",
+    "year": 2023,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "wassce-int-science-2022",
+    "exam_type": "wassce",
+    "subject": "Integrated Science",
+    "subject_slug": "int-science",
+    "year": 2022,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "wassce-int-science-2021",
+    "exam_type": "wassce",
+    "subject": "Integrated Science",
+    "subject_slug": "int-science",
+    "year": 2021,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "wassce-int-science-2020",
+    "exam_type": "wassce",
+    "subject": "Integrated Science",
+    "subject_slug": "int-science",
+    "year": 2020,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "wassce-social-studies-2024",
+    "exam_type": "wassce",
+    "subject": "Social Studies",
+    "subject_slug": "social-studies",
+    "year": 2024,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "wassce-social-studies-2023",
+    "exam_type": "wassce",
+    "subject": "Social Studies",
+    "subject_slug": "social-studies",
+    "year": 2023,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "wassce-social-studies-2022",
+    "exam_type": "wassce",
+    "subject": "Social Studies",
+    "subject_slug": "social-studies",
+    "year": 2022,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "wassce-social-studies-2021",
+    "exam_type": "wassce",
+    "subject": "Social Studies",
+    "subject_slug": "social-studies",
+    "year": 2021,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "wassce-social-studies-2020",
+    "exam_type": "wassce",
+    "subject": "Social Studies",
+    "subject_slug": "social-studies",
+    "year": 2020,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-core-maths-2024",
+    "exam_type": "bece",
+    "subject": "Core Mathematics",
+    "subject_slug": "core-maths",
+    "year": 2024,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-core-maths-2023",
+    "exam_type": "bece",
+    "subject": "Core Mathematics",
+    "subject_slug": "core-maths",
+    "year": 2023,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-core-maths-2022",
+    "exam_type": "bece",
+    "subject": "Core Mathematics",
+    "subject_slug": "core-maths",
+    "year": 2022,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-core-maths-2021",
+    "exam_type": "bece",
+    "subject": "Core Mathematics",
+    "subject_slug": "core-maths",
+    "year": 2021,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-core-maths-2020",
+    "exam_type": "bece",
+    "subject": "Core Mathematics",
+    "subject_slug": "core-maths",
+    "year": 2020,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-english-2024",
+    "exam_type": "bece",
+    "subject": "English Language",
+    "subject_slug": "english",
+    "year": 2024,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-english-2023",
+    "exam_type": "bece",
+    "subject": "English Language",
+    "subject_slug": "english",
+    "year": 2023,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-english-2022",
+    "exam_type": "bece",
+    "subject": "English Language",
+    "subject_slug": "english",
+    "year": 2022,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-english-2021",
+    "exam_type": "bece",
+    "subject": "English Language",
+    "subject_slug": "english",
+    "year": 2021,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-english-2020",
+    "exam_type": "bece",
+    "subject": "English Language",
+    "subject_slug": "english",
+    "year": 2020,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-int-science-2024",
+    "exam_type": "bece",
+    "subject": "Integrated Science",
+    "subject_slug": "int-science",
+    "year": 2024,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-int-science-2023",
+    "exam_type": "bece",
+    "subject": "Integrated Science",
+    "subject_slug": "int-science",
+    "year": 2023,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-int-science-2022",
+    "exam_type": "bece",
+    "subject": "Integrated Science",
+    "subject_slug": "int-science",
+    "year": 2022,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-int-science-2021",
+    "exam_type": "bece",
+    "subject": "Integrated Science",
+    "subject_slug": "int-science",
+    "year": 2021,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-int-science-2020",
+    "exam_type": "bece",
+    "subject": "Integrated Science",
+    "subject_slug": "int-science",
+    "year": 2020,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-social-studies-2024",
+    "exam_type": "bece",
+    "subject": "Social Studies",
+    "subject_slug": "social-studies",
+    "year": 2024,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-social-studies-2023",
+    "exam_type": "bece",
+    "subject": "Social Studies",
+    "subject_slug": "social-studies",
+    "year": 2023,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-social-studies-2022",
+    "exam_type": "bece",
+    "subject": "Social Studies",
+    "subject_slug": "social-studies",
+    "year": 2022,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-social-studies-2021",
+    "exam_type": "bece",
+    "subject": "Social Studies",
+    "subject_slug": "social-studies",
+    "year": 2021,
+    "paper": "1",
+    "url": "local"
+  },
+  {
+    "id": "bece-social-studies-2020",
+    "exam_type": "bece",
+    "subject": "Social Studies",
+    "subject_slug": "social-studies",
+    "year": 2020,
+    "paper": "1",
+    "url": "local"
+  }
+]
