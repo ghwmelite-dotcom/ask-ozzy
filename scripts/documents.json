@@ -1,0 +1,72 @@
+[
+  {
+    "id": "constitution-1992",
+    "title": "Constitution of the Republic of Ghana, 1992",
+    "url": "https://constitutionnet.org/sites/default/files/Ghana%20Constitution.pdf",
+    "source": "Parliament of Ghana",
+    "category": "legal"
+  },
+  {
+    "id": "procurement-act-663",
+    "title": "Public Procurement Act, 2003 (Act 663)",
+    "url": "https://ppa.gov.gh/wp-content/uploads/2019/01/Public-Procurement-Act-2003-Act-663.pdf",
+    "source": "Public Procurement Authority, Ghana",
+    "category": "procurement_law"
+  },
+  {
+    "id": "pfm-act-921",
+    "title": "Public Financial Management Act, 2016 (Act 921)",
+    "url": "https://www.mofep.gov.gh/sites/default/files/acts/PUBLIC-FINANCIAL-MANAGEMENT-ACT-2016.pdf",
+    "source": "Ministry of Finance, Ghana",
+    "category": "financial_admin"
+  },
+  {
+    "id": "financial-admin-act-654",
+    "title": "Financial Administration Act, 2003 (Act 654)",
+    "url": "https://ghalii.org/akn/gh/act/2003/654/eng@2003-10-31/source.pdf",
+    "source": "Ghana Legal Information Institute",
+    "category": "financial_admin"
+  },
+  {
+    "id": "data-protection-act-843",
+    "title": "Data Protection Act, 2012 (Act 843)",
+    "url": "https://nita.gov.gh/wp-content/uploads/2017/12/Data-Protection-Act-2012-Act-843.pdf",
+    "source": "National Information Technology Agency, Ghana",
+    "category": "legal"
+  },
+  {
+    "id": "labour-act-651",
+    "title": "Labour Act, 2003 (Act 651)",
+    "url": "https://www.gipc.gov.gh/wp-content/uploads/2023/05/LABOUR-ACT-2003-ACT-651.pdf",
+    "source": "Ghana Investment Promotion Centre",
+    "category": "legal"
+  },
+  {
+    "id": "civil-service-act-pndcl-327",
+    "title": "Civil Service Act, 1993 (PNDCL 327)",
+    "url": "https://new-ndpc-static1.s3.amazonaws.com/pubication/Civil+Service+Act+1993.pdf",
+    "source": "National Development Planning Commission, Ghana",
+    "category": "civil_service"
+  },
+  {
+    "id": "ssnit-omnibus-guide",
+    "title": "SSNIT Omnibus Guide",
+    "url": "https://www.ssnit.org.gh/wp-content/uploads/2023/08/SSNIT-Omnibus.pdf",
+    "source": "Social Security and National Insurance Trust, Ghana",
+    "category": "hr"
+  },
+  {
+    "id": "civil-service-admin-instructions",
+    "title": "Civil Service Administrative Instructions",
+    "url": "https://ohcs.gov.gh/wp-content/uploads/2024/10/CIVIL-SERVICE-ADMINISTRATIVE-INSTRUCTIONS.pdf",
+    "source": "Office of the Head of Civil Service, Ghana",
+    "category": "civil_service"
+  },
+  {
+    "id": "ppa-procurement-manual",
+    "title": "Public Procurement Manual",
+    "url": "https://ppa.gov.gh/wp-content/uploads/2019/01/FINAL-MANUAL-PPB.pdf",
+    "source": "Public Procurement Authority, Ghana",
+    "category": "procurement_law"
+  }
+]
