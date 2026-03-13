@@ -1,0 +1,1729 @@
+1
+Data Protection Act, 2012
+Data Protection Act, 2012
+Section
+ARRANGEMENT OF SECTIONS
+Data Protection Commission
+1.Establishment ofData Protection Commission
+2.Object ofthe Commission
+3.Functions ofthe Commission
+4.Governing body ofthe Commission
+5.Tenure ofoffice ofmembers
+6.Meetings ofthe Board
+7.Disclosure ofinterest
+8.Establishment ofcommittees
+9.Allowances
+10.Ministerial directives
+Administration
+11.Appointment ofExecutive Director
+12.Functions ofthe Executive Director
+13.Appointment ofother staff
+Finances ofthe Commission
+14.Funds ofthe Commission
+15.Accounts and audit
+16.Annual report and other reports
+Application ofprinciples ofdata protection
+17.Privacy ofthe individual
+18.Processing ofpersonal data
+19.Minimality
+20.Consent, justificationand objection
+21.Collection ofpersonal data
+22.Collection ofdata for specific purpose
+23.Data subject to be madeaware ofpurpose ofcollection
+24.Retention ofrecords
+25.Further processing to be compatible with purpose ofcollection
+26.Quality ofinformation
+27.Registration ofdata controller
+
+Data Protection Act, 2012
+28.Securitymeasures
+29.Data processed by data processor or an authorised person
+30.Data processor to comply with security measures
+31.Notification ofsecurity compromises
+32.Access to personal information
+33.Correction ofpersonal data
+34.Manner ofaccess
+Rights ofdata subjects and others
+35.Right ofaccess to personal data
+36.Credit bureau as data controller
+Processing ofspecial personal data
+37.Processing ofspecial personal data prohibited
+38.Exemptionrelatedtoreligiousorphilosophicalbeliefsofdatasubject
+39.Right to prevent  processing ofpersonal data
+40.Right to prevent processing ofpersonal data for direct marketing
+41.Rights in relation to automated decision-taking
+42.Rights in relation toexempt manual data
+43.Compensation for failure to comply
+44.Rectification, blocking, erasure and destruction ofpersonal data
+45.Application ofthe Act
+Data Protection Register
+46.Establishment ofData ProtectionRegister
+47.Application for registration
+48.Rightto refuse registration
+49.Grant ofregistration
+50.Renewal ofregistration
+51.Removal fromRegister
+52.Cancellation ofregistration
+53.Processing ofpersonal data without registration prohibited
+54.Access by the public
+55.Duty tonotify changes
+56.Failure to register
+
+Data Protection Act, 2012
+57.Assessable processing
+58.Appointment ofdata protection supervisors
+59.Fees
+Exemptions
+60.National security
+61.Crime and taxation
+62.Health, education and socialwork
+63.Regulatory activity
+64.Journalism, literature and art
+65.Research, history and statistics
+66.Disclosurerequiredbylawormadeinconnectionwithalegal
+proceeding
+67.Domestic purposes
+68.Confidential references given by data controller
+69.ArmedForces
+70.Judicial appointments and honours
+71.Public service or ministerial appointment
+72.Examination marks
+73.Examination scripts
+74.Professional privilege
+Enforcement
+75.Enforcement notice
+76.Cancellation ofenforcementnotice
+77.Request for assessment
+78.Determination by the Commission
+79.Restrictiononenforcementincaseofprocessingforspecialpurposes
+80.Failure to comply with notice
+81.Authorised officers
+Records obtained under data subject’s right ofaccess
+82.Conditional request for personal data prohibited
+83.Demand for health records
+Information provided to Commission
+84.Disclosure ofinformation
+85.Confidentialityofinformation
+
+Miscellaneous andgeneral provisions
+86.General dutiesofthe Commission
+87.International co-operation
+88.Prohibition to purchase, obtain or disclose personal data
+89.Prohibition ofsale ofpersonal data
+90.Credit bureau
+91.Application to the State
+92.Transmission ofnotices by electronic or othermeans
+93.Service ofnotices by the Commission
+94.Regulations
+95.General penalties
+96.Interpretation
+97.Transitional provisions
+98.Repeal and savings
+99.Commencement
+SCHEDULE
+THEEIGHTHUNDREDANDFORTY-THIRD
+
+ACT
+OF THE PARLIAMENT OF
+THE REPUBLICOF  GHANA
+ENTITLED
+DATAPROTECTIONACT,2012
+ANACTtoestablishaDataProtectionCommission,toprotecttheprivacy  of
+the  individual  and  personal  data  by  regulating  the  processing  of  personal
+information, to providethe process to obtain, hold, use or disclose personal
+information and for related matters.
+DATEOFASSENT: 10th May, 2012
+PASSEDbyParliament and assented to by the President:
+Data Protection Commission
+Establishment ofData Protection Commission
+1.(1)ThereisestablishedbythisActaDataProtectionCommission. (2)
+Wherethereishindrancetotheacquisitionofproperty,thepropertymay
+beacquiredfortheCommissionundertheStateProperty
+andContractsAct,1960(C.A.6)ortheStateLandsAct,1962(Act125)
+and the costs shall be borne by the Commission.
+Object ofthe Commission
+2.The object ofthe Commission is to
+(a)protecttheprivacyoftheindividualandpersonaldataby
+regulating the processing ofpersonal information, and
+(b)providetheprocesstoobtain,hold,useordisclosepersonal
+information.
+
+Functions ofthe Commission
+3.To achieve the object, the Commission shall
+(a)implementandmonitorcompliancewiththeprovisionsof this
+Act;
+(b)maketheadministrativearrangementsitconsidersappropriate for
+the discharge ofits duties;
+(c)investigateanycomplaintunderthisActanddetermineit in the
+manner the Commission considers fair; and
+(d)keep and maintain the Data ProtectionRegister.
+Governing body oftheCommission
+4.(1)ThegoverningbodyoftheCommissionisaBoardconsistingof
+(a)a chairperson;
+(b)one representative from the following:
+(i)NationalCommunicationsAuthoritynotbelowthe
+rank ofa Director;
+(ii)CommissiononHumanRightsandAdministrative
+JusticenotbelowtherankofaDeputyCommissioner;
+(iii)MinistryofCommunicationsnotbelowtherankof
+a Director;
+(iv)NationalInformationTechnologyAgencynotbelow
+the rank ofa Director;
+(v)BankofGhananotbelowthelevelofDeputy
+Governor; and
+(vi)StatisticalServicenotbelowtherankofaDirector;
+(c)one representative elected by the IndustryForum;
+(d)twootherpersonsnominatedbythePresidentatleastone
+ofwhom is awoman; and
+(e)the ExecutiveDirector ofthe Commission.
+(2)ThemembersoftheBoardshallbeappointedbythePresident in
+accordance with article 70 ofthe Constitution.
+(3)TheBoardshallensuretheproperandeffectiveperformanceof the
+functions ofthe Commission.
+Tenure ofoffice ofmembers
+5.(1)AmemberoftheBoardshallholdofficeforaperiodnotexceeding
+threeyearsandiseligibleforre-appointmentbutamembershall
+not be appointed for more than two terms.
+(2)Subsection(1)doesnotapplytotheExecutiveDirectorofthe
+Commission.
+(3)AmemberoftheBoardmayatanytimeresignfromofficein writing
+addressed to the President through the Minister.
+(4)AmemberoftheBoard,otherthantheExecutiveDirector whois
+absentfromthreeconsecutivemeetingsoftheBoardwithoutsufficient  cause
+ceases to be a member ofthe Board.
+
+(5)ThePresidentmaybyletteraddressedtoamemberrevokethe
+appointment ofthat member.
+(6)WhereamemberoftheBoardis,forasufficientreason,unabletoactas
+amember,theMinistershalldeterminewhethertheinabilitywould result in the
+declaration ofavacancy.
+(7)Where there is avacancy
+(a)under subsection (3) or (4) or section 7 (2);
+(b)as a result ofa declaration under subsection (6); or
+(c)byreason ofthe death ofa member
+theMinistershallnotifythePresidentofthevacancyandthePresident shall
+appoint a person to fill thevacancy.
+Meetings ofthe Board
+6.(1)The Board shallmeet at leastonceeverythree months forthe despatch
+ofbusiness at the times and in the places determined by the chairperson.
+(2)The chairperson shall at the request in writing ofnot less thanone-third
+ofthemembershipoftheBoardconveneanextra-ordinarymeetingofthe
+Boardattheplaceandtimedeterminedbythechairperson.
+(3)ThequorumatameetingoftheBoardissevenmembersof  the
+Board or agreaternumber determined by the Board in respect ofan important
+matter.
+(4)The  chairperson  shall  preside  at  meetings  ofthe  Board  and  in  the
+absenceofthe  chairperson,a  member  ofthe  Board  electedby  the  members
+present from among theirnumber shall preside.
+(5)MattersbeforetheBoardshallbedecidedbyamajorityofthe
+memberspresentandvotingandintheeventofanequalityofvotes,the
+personpresiding shall have a castingvote.
+(6)TheBoardmayco-optapersontoattendaBoardmeetingbut that
+person shall notvote on a matter for decision at the meeting.
+Disclosure ofinterest
+7.(1)A  member  ofthe  Board  who  has  an  interest  in  a  matterfor
+consideration
+(a)shalldisclosethenatureoftheinterestandthedisclosure  shall
+formpartoftherecordoftheconsideration ofthe matter; and
+(b)shallnotparticipateinthedeliberationsoftheBoardin respect
+ofthat matter.
+(2)AmemberceasestobeamemberoftheBoardifthatmember has
+an interest on a matter before the Board and
+
+(a)fails to disclose that interest; or
+(b)participatesinthedeliberationsoftheBoardinrespectof
+the matter.
+Establishment ofcommittees
+8.(1)TheBoardmayestablishcommitteesconsistingofmembersof  the
+Board or non-members or both to perform a function.
+(2)AcommitteeoftheBoardmaybechairedbyamemberofthe
+Board.
+(3)Section 7 applies to members ofcommittees ofthe Board.
+Allowances
+9.Members oftheBoard and members ofa committee oftheBoard shallbe
+paidtheallowancesapprovedbytheMinisterinconsultationwith the Minister
+responsible for Finance.
+Ministerial directives
+10.TheMinistermaygivedirectivestotheBoardonmattersofpolicy.
+Administration
+Appointment ofExecutive Director
+11.(1)ThePresidentshall,inaccordancewitharticle195ofthe
+Constitution,appoint an Executive Director for the Commission.
+(2)TheExecutiveDirectorshallholdofficeonthetermsand
+conditions specified in the letter ofappointment.
+(3)TheExecutiveDirectorshallbeapersonofhighmoral
+character and integrity with therelevantqualificationsandexperience related
+to the functions ofthe Commission.
+Functions ofthe Executive Director
+12.(1)The Executive Director is responsible for
+(a)thedaytodayadministrationoftheaffairsoftheCommis-sion and
+is answerable to the Board in the performance of functions under
+this Act, and
+(b)theimplementation ofthe decisions ofthe Board.
+(2)TheExecutiveDirectorshallperformanyotherfunctions
+determined by the Board.
+(3)TheExecutiveDirectormaydelegateafunctiontoanofficerofthe
+Commissionbutshallnotberelievedoftheultimateresponsibility  for  the
+performance ofthe delegated function.
+Appointment ofother staff
+13.(1)ThePresidentshallinaccordancewitharticle195ofthe
+ConstitutionappointfortheCommissionotherstaffthatarenecessaryforthe
+proper and effective performance ofits functions.
+(2)Otherpublicofficersmaybetransferredorsecondedtothe
+
+Commission or may otherwise give assistance to it.
+(3)TheCommissionmayengagetheservicesof  advisersand
+consultants on the recommendation ofthe Board.
+Finances ofthe Commission
+Funds ofthe Commission
+14.The funds ofthe Commission include
+(a)moneys approved byParliament;
+(b)donationsandgrantstotheCommissionforitsactivities under
+this Act;
+(c)moneysthataccruetotheCommissionintheperformance  ofits
+functions;and
+(d)anyothermoneysthatareapprovedbytheMinister
+responsible for Finance.
+Accounts and audit
+15.(1)TheBoardshallkeepbooksofaccountsandproperrecordsin relation
+to them in the form approved by theAuditor-General.
+(2)TheBoardshallsubmittheaccountsoftheCommissionto  the
+Auditor-General  for  audit  within  three  months  after  the  end  ofthe  financial
+year.
+(3)TheAuditor-General  shall,  not  later  than  three  months  after  the
+receiptoftheaccounts,audittheaccountsandforwardacopyofthe  audit
+report to the Minister.
+Annual report and other reports
+16.(1)TheBoardshallwithinonemonthafterthereceiptoftheauditreport,
+submitanannualreporttotheMinistercoveringtheactivitiesand theoperations
+oftheCommissionfortheyeartowhichthereportrelates.
+(2)TheannualreportshallincludethereportoftheAuditor-General.
+(3)The Minister shall, within one month after the receipt ofthe annual
+report,  submitthe  report  toParliamentwithastatement  that  the  Minister
+considers necessary.
+(4)The Board shall also submit to the Minister any other reports which
+the Minister may require in writing.
+Application ofdata protection principles
+Privacy ofthe individual
+17.Apersonwhoprocessesdatashalltakeintoaccounttheprivacy ofthe
+individual by applying the following principles:
+(a)accountability,
+(b)lawfulness ofprocessing,
+(c)specification ofpurpose,
+(d)compatibilityoffurtherprocessingwithpurposeofcol-
+lection,
+
+(e)quality ofinformation,
+(f)openness,
+(g)data security safeguards, and
+(h)data subject participation.
+Processing ofpersonal data
+18.(1)Apersonwhoprocessespersonaldatashallensurethatthe
+personal datais processed
+(a)without infringing the privacy rights ofthe data subject;
+(b)in a lawful manner; and
+(c)in a reasonable manner.
+(2)Adatacontrollerorprocessorshallinrespectofforeigndata
+subjectsensurethatpersonaldataisprocessedincompliancewithdata
+protectionlegislationoftheforeignjurisdictionofthatsubjectwhere
+personal data originating from that jurisdictionis sent to this country for
+processing.
+Minimality
+19.Personaldatamayonlybeprocessedifthepurposeforwhichit is to be
+processed, is necessary, relevant and notexcessive.
+Consent, justification and objection
+20.(1)Apersonshallnotprocesspersonaldatawithoutthepriorcon-sentof
+thedatasubjectunlessthepurposeforwhichthepersonaldatais processed is
+(a)necessaryforthepurposeofacontracttowhichthedata subject
+is a party;
+(b)authorised or required by law;
+(c)to protect a legitimate interest ofthe data subject;
+(d)necessaryfortheproperperformanceofastatutoryduty;
+or
+(e)necessarytopursuethelegitimateinterestofthedatacon-troller
+or a third party to whom the data is supplied.
+(2)Unlessotherwiseprovidedbylaw,adatasubjectmayobjectto  the
+processing ofpersonal data.
+(3)Whereadatasubjectobjectstotheprocessingofpersonaldata,  the
+person who processes the personal data shall stop the processing of the personal
+data.
+Collection ofpersonal data
+21.(1)Apersonshallcollectpersonaldatadirectlyfromthedatasubject.
+(2)Despitesubsection(1),personaldatamaybecollectedindirectly where:
+(a)the data is contained in a public record;
+(b)the data subject has deliberately made the data public;
+(c)thedatasubjecthasconsentedtothecollectionofthe
+information from another source;
+(d)thecollectionofthedatafromanothersourceisnotlikely to
+
+prejudice a legitimate interest ofthe data subject;
+(e)thecollectionofthedatafromanothersourceisnecessary: (i)for
+theprevention,detection,investigation,prosecution or
+punishmentofan offence or breach oflaw;
+(ii)fortheenforcementofalawwhichimposesapecuniary
+penalty;
+(iii)fortheenforcementofalawwhichconcernsrevenue
+collection;
+(iv)for the conduct ofproceedings before any court ortribunal
+thathavecommencedorarereasonably contemplated;
+(v)for the protection ofnational security; or
+(vi)fortheprotectionoftheinterestsofaresponsibleor  third
+partyto whom the information is supplied;
+(f)compliancewouldprejudicealawfulpurposeforthe
+collection; or
+(g)compliance is not reasonably practicable.
+Collection ofdata for specific purpose
+22.Adatacontrollerwhocollectspersonaldatashallcollectthedatafor  a
+purposewhichisspecific,explicitlydefinedandlawfulandis related to the
+functions or activity ofthe person.
+Data subject to be madeaware ofpurpose ofcollection
+23.Adatacontrollerwhocollectsdatashalltakethenecessarysteps  to
+ensurethatthedatasubjectisawareofthepurposeforthecollection ofthe
+data.
+Retention ofrecords
+24.(1)Subjecttosubsections(2)and(3),adatacontrollerwhorecords
+personaldatashallnotretainthepersonaldataforaperiodlongerthan  is
+necessary to achieve the purpose for which the datawas collected and processed
+unless
+(a)theretentionoftherecordisrequiredorauthorisedbylaw,
+(b)theretentionoftherecordisreasonablynecessaryfora
+lawful purpose related to a function or activity,
+(c)retentionoftherecordisrequiredbyvirtueofacontract between
+the parties to the contract, or
+(d)the data subject consents to the retention ofthe record.
+(2)Subsection(1)doesnotapplytorecordsofpersonaldata retained for
+(a)historical,
+(b)statistical, or
+(c)research purposes.
+
+(3)Apersonwhoretainsrecordsforhistorical,statisticalorresearch
+purposes  shallensure  that  the  records  that  contain  the  personal  data  are
+adequately protected against access or use for unauthorised purposes.
+(4)Apersonwhousesarecordofthepersonaldataofadatasubject to make
+a decision about the data subject shall
+(a)retaintherecordforaperiodrequiredorprescribedbylaw or a code
+ofconduct, or
+(b)wherethereisnolaworcodeofconductthatprovidesfor  the
+retention period, retain the record for a period which willaffordthe
+datasubjectanopportunitytorequestaccess to the record.
+(5)A data controller shall destroy ordelete a record ofpersonal data or
+de-identify the record at theexpiry ofthe retention period.
+(6)Thedestructionordeletionofarecordofpersonaldatashallbe done
+in a manner that prevents its reconstruction in an intelligible form.
+Furtherprocessing to be compatible with purpose ofcollection
+25.(1)Where a data controller holdspersonaldata collected incon-nection
+with a specific purpose, further processing ofthe personal data shall be for that
+specific purpose.
+(2)A person whoprocesses data shall take into account
+(a)therelationshipbetweenthepurposeoftheintendedfurther
+processing and the purpose for which the datawas collected,
+(b)the nature ofthe data concerned,
+(c)the manner in which the data has beencollected,
+(d)theconsequencesthatthefurtherprocessingislikelytohave for the
+data subject, and
+(e)thecontractualrightsandobligationsbetweenthedatasubject
+and the person who processes the data.
+(3)Thefurtherprocessingofdataisconsideredtobecompatible with
+the purpose ofcollection where
+(a)thedatasubjectconsentstothefurtherprocessingofthe
+information,
+(b)thedataispubliclyavailableorhasbeenmadepublicbythe person
+concerned,
+(c)further processing is necessary
+(i)fortheprevention,detection,investigation,prosecu-
+tion or punishmentfor an offence or breach oflaw, (ii)for
+theenforcementofalawwhichimposesapecuni-
+ary penalty,
+(iii)fortheenforcementoflegislationthatconcernspro-tection
+ofrevenue collection,
+(iv)for the conduct ofproceedings before any court ortribunal
+
+thathavecommencedorarereasonably contemplated, or
+(v)for the protection ofnational security;
+(d)thefurtherprocessingofthedataisnecessarytopreventor
+mitigate a serious and imminent threat to
+(i)public health or safety, or
+(ii)thelifeorhealthofthedatasubjectoranotherindividual;
+(e)thedataisusedforhistorical,statisticalorresearchpurposesand
+the person responsible for the processing ensures that
+(i)thefurtherprocessingiscarriedoutsolelyforthe
+purpose for which the datawas collected, and
+(ii)thedataisnotpublishedinaformlikelytoreveal  the
+identity ofthe datasubject; or
+(f)thefurtherprocessingofthedataisinaccordancewiththis
+Act.
+Quality ofinformation
+26.Adatacontrollerwhoprocessespersonaldatashallensurethatthe
+dataiscomplete,accurate,uptodateandnotmisleadinghaving regardto the
+purpose for the collection or processing ofthe personal data.
+Registration ofdata controller
+27.(1)Adatacontrollerwhointendstoprocesspersonaldatashall
+register with the Commission.
+(2)A  data  controller  who  intends  to  collect  personal  data  shall ensure
+that the data subject isaware of
+(a)the nature ofthe data being collected;
+(b)thenameandaddressofthepersonresponsibleforthe
+collection;
+(c)the purpose for which thedata is required for collection;
+(d)whetherornotthesupplyofthedatabythedatasubjectis
+discretionary or mandatory;
+(e)the consequences offailure to provide the data;
+(f)theauthorisedrequirementforthecollectionoftheinforma-
+tion or the requirement by law for its collection;
+(g)the recipients ofthe data;
+(h)the nature or category ofthe data; and
+(i)theexistenceoftherightofaccesstoandtherighttorequest
+rectification ofthe data collected before thecollection.
+(3)Wherethedataiscollectedfromathirdparty,thedatasubjectshall
+begiventheinformationspecifiedinsubsection(2)beforethecol-lectionof
+thedataorassoonaspracticableafterthecollectionofthedata.
+(4)Subsection(2),shallnotapplyinthefollowingsituationswhere  it  is
+necessary:
+(a)toavoidthecompromiseofthelawenforcementpowerofa
+public body responsible for the prevention, detection, investigation,
+prosecution or punishmentofan offence;
+(b)fortheenforcementofalawwhichimposesapecuniary penalty;
+(c)fortheenforcementoflegislationwhichconcernsrevenue
+
+collection;
+(d)forthepreparationorconductofproceedingsbeforeacourt  or
+tribunal    that    havebeen    commenced    orarereasonably
+contemplated;
+(e)for the protection ofnational security;
+(f)toavoid the prejudice ofa lawful purpose;
+(g)toensurethatthedatacannotbeusedinaforminwhich the data
+subject is identified;or
+(h)becausethedataistobeusedforhistorical,statisticalor research
+purposes.
+Security measures
+28.(1)A data controller shall take the necessary steps to secure the integrity
+ofpersonaldatainthepossessionorcontrolofapersonthroughtheadoptionof
+appropriate,reasonable,technicalandorganisationalmeasures to prevent
+(a)loss of, damage to, or unauthorised destruction; and
+(b)unlawfulaccesstoorunauthorisedprocessingofpersonal
+data.
+(2)Togiveeffecttosubsection(1),thedatacontrollershalltake
+reasonablemeasures to
+(a)identifyreasonablyforeseeableinternalandexternalrisks to
+personal data under that person’s possessionor control;
+(b)establishandmaintainappropriatesafeguardsagainstthe
+identified risks;
+(c)regularlyverifythatthesafeguardsareeffectivelyimplemented;
+and
+(d)ensurethatthesafeguardsarecontinuallyupdatedin
+response to new risks or deficiencies. (3)A data
+controller shall observe
+(a)generallyacceptedinformationsecuritypracticesandpro
+cedure,
+and
+(b)specific industry or professionalrules and regulations.
+Data processedby data processor or an authorised person
+29.(1)Adataprocessororapersonwhoprocessespersonaldataon
+behalfofa data controller shall
+(a)processthedataonlywiththepriorknowledgeorauthorisation of
+the data controller, and
+(b)treatthepersonaldatawhichcomestotheknowledgeof the data
+processor or the other person as confidential.
+(2)Adataprocessororapersonwhoprocessespersonaldataon behalf
+ofadata controller shall not disclose the data unless
+(a)required by law, or
+(b)in the course ofthe discharge ofa duty.
+Data processor to comply with security measures
+30.(1)Adatacontrollershallensurethatadataprocessorwhoprocesses
+
+personaldataforthedatacontroller,establishesandcomplieswiththe security
+measures specified under this Act.
+(2)Theprocessingofpersonaldataforadatacontrollerbyadata
+processor shall be governed by a written contract.
+(3)Acontractbetweenadatacontrollerandadataprocessorshallrequire
+thedataprocessortoestablishandmaintaintheconfidentialityandsecurity
+measures necessary to ensure the integrity ofthe personal data.
+(4)Where  adata  processor  is  not  domiciled  in  thiscountry,  thedata
+controllershallensurethatthedataprocessorcomplieswiththerelevant laws
+ofthis country.
+Notification ofsecurity compromises
+31.(1)Wheretherearereasonablegroundstobelievethatthe
+personaldataofadatasubjecthasbeenaccessedoracquiredbyan
+unauthorisedperson,thedatacontrollerorathirdpartywhoprocessesdata
+under the authority ofthe data controller shall notify the
+(a)Commission, and
+(b)the data subject
+ofthe unauthorised access or acquisition.
+(2)Thenotificationshallbemadeassoonasreasonablypracticableafter
+the discovery ofthe unauthorised access or acquisition ofthe data. (3)The
+datacontrollershalltakestepstoensuretherestorationof
+the integrity ofthe information system.
+(4)The data controller shall delay notification to the data subjectwhere
+thesecurityagenciesortheCommissioninformthedatacontrollerthat
+notification will impede a criminal investigation.
+(5)The notification to a data subject shall be communicated by
+(a)registeredmailtothelastknownresidentialorpostaladdress
+ofthe data subject;
+(b)electronicmailtothelastknownelectronicmailaddressof the
+data subject;
+(c)placementinaprominentpositiononthewebsiteofthe
+responsible party;
+(d)publication in the media; or
+(e)any other manner that the Commission may direct.
+(6)  Anotificationshallprovidesufficientinformationtoallow the data
+subject  to  take  protective  measures  against  the  consequences  ofunauthorised
+access or acquisition ofthe data.
+(7)Theinformationshallinclude,ifknowntothedatacontroller,the
+identityoftheunauthorisedpersonwhomayhaveaccessedoracquired  the
+personal data.
+(8)Where the Commission hasgrounds to believe that publicitywould
+
+protect a data subject who is affected by the unauthorised access oracquisition
+ofdata,the  Commission  may  directthe  datacontroller  topubliciseinthe
+specifiedmanner,thefactofthecompromisetotheintegrityorconfidentialityof
+the personal data.
+Access to personal information
+32.(1)Adatasubjectwhoprovidesproofofidentitymayrequesta data
+controller to
+(a)confirmatreasonablecosttothedatasubjectwhetheror not the
+datacontroller holdspersonal dataabout that data subject,
+(b)giveadescriptionofthepersonaldatawhichisheldbythe party
+includingdataabouttheidentityofathirdpartyora category ofa
+third party who has or has had access to the information, and
+(c)correctdataheldonthedatasubjectbythedatacontroller.
+(2)The request shall be made
+(a)within a reasonable time;
+(b)after the payment ofthe prescribed fee, ifany;
+(c)in a reasonable manner and format; and
+(d)in a form that isgenerally understandable.
+Correction ofpersonal data
+33.(1)A data subject may request a data controller to
+(a)correctordeletepersonaldataaboutthedatasubjectheldbyor
+underthecontrolofthedatacontrollerthatis  inac-curate,
+irrelevant,excessive,outofdate,incomplete,misleading    or
+obtained unlawfully, or
+(b)destroyordeletearecordofpersonaldataaboutthedata subject
+held by the data controller that the data controller no longer has the
+authorisation to retain.
+(2)Onreceiptoftherequest,thedatacontrollershallcomplywith  the
+request or provide the datasubject with credibleevidence in support ofthe data.
+(3)Where the data controller and the data subject are unable to reachan
+agreementandifthedatasubjectmakesarequest,thedatacon-troller  shall
+attach to the record an indication that a request for the data has been made but
+has not been complied with.
+(4)Where  the  data  controller  complies  with  the  request,  the  data
+controller  shall  inform  each  person  to  whom  the  personal  data  has  been
+disclosed ofthe correction made.
+(5)The data controller shall notify the data subject ofthe action taken as
+a result ofthe request.
+Manner ofaccess
+34.Theprovisionsofanylegislationrelatingtotherighttoinformation of
+anydatasubjectshallbeadditionaltodatasubjectrightsunderthisAct.
+
+Rights ofdata subjects and others
+Right ofaccess to personal data
+35.(1)A data controller shall
+(a)informanindividualwhoisthedatasubjectoftheprocessing
+oftheindividual’spersonaldatabythedatacontrolleroranother
+persononbehalfofthedatacontroller;
+(b)give to the data subject, a description of
+(i)thepersonaldataofwhichthatindividualisthedata
+subject;
+(ii)thepurposeforwhichthedataisbeingoristobe
+processed; and
+(iii)therecipientorclassofrecipientstowhomthedata
+may be disclosed;
+(c)communicate in an intelligible form to the data subject
+(i)informationwhichconstitutespersonaldataof
+whichthat individual is the subject;
+(ii)informationwhichisavailabletothedatacontroller
+as to the source ofthe data; and
+(d)informtheindividualwhoisthedatasubjectofthelogic  or
+rationalebehindthedecisionthatwasmadebasedontheprocessing
+wherethe processingconstitutesthe solebasis for the taking ofa
+decision which significantly affects that individual.
+(2)Wherethedataconstitutesatradesecret,theprovisionofdata related
+to the logic or rationale involved in anydecision taken does not apply.
+(3)Adatacontrollershallnotcomplywitharequestundersubsec-tion (1)
+unless the data controller is supplied with the data that the datacontrollermay
+reasonablyrequiretoidentifythepersonmakingthe request andto locate the
+data which that  person seeks.
+(4)Where a data controller is unable to comply with the request without
+disclosing data related to another individual who may be identi-fied from the
+information, the data controller shall not comply with therequest unless
+(a)theotherindividualconsentstothedisclosureofthedata
+to the person who makes the request, or
+(b)itisreasonableinallthecircumstancestocomplywiththe request
+without the consent ofthe other individual.
+(5)Areferencetodatarelatedtoanotherindividualinsubsection(4)
+includesareferencetodatawhichidentifiesthatindividualasthesource ofthe
+data requested.
+(6)A  data  controller  shall  not  rely  on  subsection  (4)(b)  to  fail  to
+communicatetheinformationsoughtthatmaybecommunicatedwithout  the
+disclosure ofthe identity ofthe individual concerned.
+(7)Thedatacontrollermaymakethecommunicationundersubsection(6)
+
+byomittingordeletingthenamesorotheridentifyingparticulars ofthe other
+individual.
+(8)Forthepurposesofsubsection(4)(b),todeterminewhetherit  is
+reasonabletocomplywiththerequestwithouttheconsentoftheother
+individual concerned, regard shall be had in particular, to
+(a)any duty ofconfidentialityowed to theother  individual,
+(b)anystepstakenbythedatacontrollertoseektheconsent ofthat
+other individual,
+(c)whethertheotherindividualiscapableofgivingconsent, and
+(d)anyexpress refusal ofconsent by the other individual.
+(9)Anindividualwhomakesarequestunderthissectionmay specify
+that the request is limited to personal data ofany description.
+(10)Subjecttosubsection(5),adatacontrollershallcomplywith a
+request under this section promptly and in anyeventwithin forty days from the
+date ofreceipt ofthe request.
+(11)   Where   the   commission   is   satisfiedon   the   application   or   a
+complainant  in  relation  to  matters  under  subsections  (1)  to  (10)  that  the  data
+controllerhasfailedto comply with therequest, the Commission may order the
+data controller to comply with the request.
+(12)Theobligationimposedonadatacontrollertoprovidethedatasubject
+withinformationundersection20to26isfulfilledbysupplying the data subject
+with a copy ofthe data in permanent form.
+(13)Whereadatacontrollerhaspreviouslycompliedwitharequestbya
+datasubject,thedatacontrollershallnotcomplywithasubsequentrequest
+whichisidenticalorsimilarunlessareasonableintervalhaselapsedbetweenthe
+timeofcompliancewiththepreviousrequestandthemaking ofthe new request.
+(14)For thepurposes ofsubsection(13), to determine whether a request
+for  data  by  a  data  subject  to  a  data  controller  has  been  made  at  a  reasonable
+interval, regardshall be had to
+(a)the nature ofthe data,
+(b)the purpose for which the data is processed, and
+(c)the frequency with which the data is altered.
+(15)Thedatawhichissuppliedpursuanttoarequestmaytakeinto account
+anamendmentordeletionmadebetweenthetimeoftherequest and the time
+when the data is supplied.
+(16)For the purposes ofthis section another individual may be identified
+from the data disclosed ifthat individual can be identified
+(a)from that data, or
+(b)fromthatdataandanyotherdatawhichinthereasonable
+beliefofthedatacontrollerarelikelytobein,orcomeinto
+
+thepossessionofthedatasubjectwhomadetherequest.
+Credit bureau as data controller
+36.(1)Wherethedatacontrollerisacreditbureauwithinthemeaning
+oftheCreditReportingAct,2007(Act726)arequestforinformation
+byadatasubjectshallinadditiontotherequirementsspecifiedunderthe
+CreditReporting Act, be subject to this section.
+(2)Adatasubjectwhomakesarequestforinformationfroma
+datacontrollermaylimittherequesttopersonaldatarelevanttothedata
+subject’s
+(a)financial standing,
+(b)historyfortheperiodwhichprecedestwelvemonthsafter
+the date ofthe request,
+andshallbeconsideredtohavelimitedtherequestofthedatasubject
+unless the request shows a contrary intention.
+(3)Anindividualshallnotrequestinformationwhichisheldbeyond
+theretentionperiodspecifiedinsection30oftheCreditReportingAct,2007(Act
+726)unlessthecreditbureauhasprovidedtheinformation  to  third  parties
+beyond the retention period.
+(4)Where a data controller receives a request from a data subject under
+this section, the obligationto supply information shall include anobligationto
+providethedatasubjectwithastatementinaformpro-vided byRegulations
+which deal with the rights ofa  data subject
+(a)under the CreditReporting Act, 2007 (Act 726);
+(b)toseeklegalredressagainstacreditbureausetoutunder
+the CreditReporting Act, 2007 (Act 726); and
+(c)toenableacreditbureauwhichactsasadatacontrollerorprocessor
+toacknowledgeitsobligationstocomplywiththisAct.
+Processing ofspecial personal data
+Processing ofspecial personaldata prohibited
+37.(1)UnlessotherwiseprovidedbythisAct,apersonshallnotprocess
+personal data which relates to
+(a)achildwhoisunderparentalcontrolinaccordancewith the law,
+or
+(b)thereligiousorphilosophicalbeliefs,ethnicorigin,race, trade
+union membership, political opinions, health, sexual life or
+criminal behavior ofan individual.
+(2)A data controller may process special personal data in accor-dance
+with this Act  where
+(a)processing is necessary, or
+(b)the data subjectconsents to theprocessing.
+
+(3)Theprocessingofspecialpersonaldataisnecessarywhereit is
+fortheexerciseorperformanceofarightoranobligationconferredor imposed
+by law on an employer.
+(4)Specialpersonaldatashallnotbeprocessedunlesstheprocess-
+ingisnecessaryfortheprotectionofthevitalinterestsofthedatasubject
+where
+(a)itisimpossibleforconsenttobegivenbyoronbehalfof the data
+subject,
+(b)thedatacontrollercannotreasonablybeexpectedtoobtain
+the consent ofthe data subject, or
+(c)consentbyoronbehalfofthedatasubjecthasbeenunrea-sonably
+withheld.
+(5)Specialpersonaldatashallnotbeprocessedunlesstheprocess-ing is
+carried outfor the protection ofthelegitimate activities ofa body or association
+which
+(a)is established for non-profit purposes,
+(b)existsforpolitical,philosophical,religiousortradeunion
+purposes;
+(c)relatestoindividualswhoaremembersofthebodyoras-sociation
+orhaveregularcontactwiththebodyorassocia-tion in connection
+with its purposes, and
+(d)doesnotinvolvedisclosureofthepersonaldatatoathird  party
+without the consent ofthe data subject.
+(6)Theprocessingofspecialpersonaldatashallbepresumedto  be
+necessary where it is required
+(a)forthepurposeoforinconnectionwithalegalproceeding,
+(b)to obtain legal advice,
+(c)for the establishment,exercise or defence oflegal rights,
+(d)in the course ofthe administrationofjustice, or
+(e)for medical purposes and the processing is
+(i)undertaken by a health professional, and
+(ii)pursuanttoadutyofconfidentialitybetween
+patient and health  professional.
+(7)In   this   section,   “medical   purposes”   includes   the   purposes   of
+preventive medicine, medical diagnosis, medical research, provision of careand
+treatmentandthemanagementofhealthcareservicesbyamedicalor  dental
+practitioner or a legally recognised traditional healer.
+(8)Apersonshallnotprocessspecialpersonaldatainrespectof race or
+ethnic origin unless the processing ofthe special personal data is(a)
+necessaryfortheidentificationandeliminationofdiscriminatory practices, and
+(b)carriedoutwithappropriatesafeguardsfortherightsand freedoms
+ofthe data subject.
+(9)The Minister may in consultation with the Commission by legislative
+
+instrument prescribe further conditions which may be taken by a data controller
+for the maintenance ofappropriate safeguards for the rightsand freedoms ofa
+data subject related to processing ofspecial personal data.
+Exemption related to religious or philosophical beliefs ofdata subject
+38.(1)Theprohibitiononprocessingofpersonaldatawhichrelates tothe
+religiousorphilosophicalbeliefsofadatasubjectdoesnotapply  ifthe
+processing is carried out by
+(a)aspiritualorreligiousorganisationorabranchoftheor-
+ganisationandtheprocessingisinrespectofpersonswho  are
+members ofthe organisation,
+(b)aninstitutionfoundedonreligiousorphilosophicalprinciples and
+the processingis
+(i)withrespecttothemembers,employeesorother persons
+belonging to the institution,
+(ii)consistent with the objects ofthe institution,and
+(iii)necessary to achieve theaims and principles ofthe
+institution.
+(2)Anindividualwhobelievesthatdataisbeingprocessedunder subsection
+(1) may at any time by notice in writing to a data controller requireadata
+controllertoprovide particularsofdataprocessedunder thisexemption.
+Right to prevent processing ofpersonal data
+39.(1)An individual shall atany time by notice in writingto adata controller
+requirethedatacontrollertoceaseornotbeginprocessingfor  a  specified
+purpose  or  in  a  specifiedmanner,  personal  data  which  causes  or  is  likely  to
+cause unwarranted damage or distress to the individual.
+(2)Adatacontrollershallwithintwenty-onedaysafterreceiptof a notice
+inform the individual in writing
+(a)thatthedatacontrollerhascompliedorintendstocomply with
+the notice ofthe data subject,or
+(b)ofthe reasons for non-compliance.
+(3)WheretheCommissionissatisfiedthatthecomplainantis justified,
+the Commission may order the data controller to comply.
+Right to prevent processing ofpersonal data for direct marketing
+40.(1)Adatacontrollershallnotprovide,use,obtain,procureor
+provideinformationrelatedtoadatasubjectforthepurposesofdirect
+marketing without the prior written consent ofthe datasubject.
+(2)A  data  subject  is  entitled  at  any  time  by notice  in  writing  to  a  data
+controller to require the data controller not to process personal data ofthat data
+subject for the purposes ofdirect marketing.
+
+(3)WheretheCommissionissatisfiedon  acomplaintby  apersonwho
+has given notice in subsection (1), that the data controller has failed tocomply
+withthenotice,theCommissionmayorderthatdatacontroller to comply with
+the notice.
+(4)Inthissection“directmarketing”includesthecommunication  by
+whatever means ofany advertising or marketing material which is directed to
+particular individuals.
+Rights in relation to automated decision-taking
+41.(1)Anindividualisentitledatanytimebynoticeinwritingtoa
+datacontrollertorequirethedatacontrollertoensurethatanydecision
+takenbyoronbehalfofthedatacontrollerwhichsignificantlyaffects
+thatindividualisnotbasedsolelyontheprocessingbyautomaticmeans
+ofpersonal data in respect ofwhich that individual is the data subject.
+(2)Despitetheabsenceof anotice,where adecisionwhich
+significantly affects an individual is based solely on that processing
+(a)thedatacontrollershallassoonasreasonablypracticable  notify
+the individualthat the decisionwas taken on that basis, and
+(b)theindividualisentitled,bynoticeinwritingtorequirethedata
+controllertoreconsiderthedecisionwithintwenty-onedaysafter
+receiptofthenotificationfromthedatacontroller.
+(3)The datacontroller shall within twenty-one days after receipt ofthe
+notice,inform  theindividualinwriting  ofthestepsthat  thedata  controller
+intends to take to comply with the notice.
+(4)This section does not apply to a decision made
+(a)inthecourseofconsideringwhethertoenterintoacontract with the
+data subject,
+(b)with a view to entering into the contract,
+(c)in the course ofthe performance ofthe contract,
+(d)forapurposeauthorisedorrequiredbyorunderanenact-
+ment, or
+(e)in other circumstances prescribed by the Minister.
+(5)Where the Commission is satisfied on a complaint by a data subject
+thatapersontakingadecisionhasfailedtocomply,theCommis-sion may order
+the data controller to comply.
+(6)An order forcompliance under subsection (5) shall not affect the rights
+ofa person other than the data subject or the data controller.
+Rights in relation toexempt manual data
+42.(1)Adatasubjectisentitledatanytimebynoticeinwritingto
+require a datacontroller
+(a)torectify,block,eraseordestroyexemptmanualdatawhichis
+inaccurate or incomplete, or
+(b)toceasetoholdexemptmanualdatainamannerwhichis
+
+incompatible  with  the  legitimate  purposes  pursued  by  the  data
+controller.
+(2)Anoticeundersubsection(1)shallstatethereasonsforbelievingthat
+the data
+(a)is inaccurate or incomplete, or
+(b)isheldinamannerwhichisincompatiblewiththelegitimate
+purposes pursued by that data controller.
+(3)WheretheCommissionissatisfiedonacomplaintbyapersonwho
+has given notice that the data controller has failed to comply with the notice,
+the Commission shall give appropriatedirectionto the data controller to comply
+with the notice.
+(4)Forthepurposesofthissection,personaldataisincompleteif the data
+is ofthe kind that its incompletenesswould constitute a contra-vention ofdata
+protection principles provided in this Act.
+Compensation for failure to comply
+43.(1)Whereanindividualsuffersdamageordistressthroughthe
+contravention  by  a  data  controller  ofthe  requirements  ofthis  Act,  that
+individual is entitled to compensation from the data controller for the damage
+or distress.
+(2)Inproceedingsagainstapersonunderthissection,itisa de-fenceto
+provethatthepersontookreasonablecareinallthecircumstancesto comply with
+the requirements ofthis Act.
+Rectification, blocking, erasure and destruction ofpersonal data
+44.(1)WheretheCommissionissatisfiedonacomplaintofadata subject
+thatpersonaldataonthatdatasubjectisinaccurate,theCommission may order
+the data controller to
+(a)rectify,
+(b)block,
+(c)erase, or
+(d)destroy the data.
+(2)Subsection (1) applies whether or not the data is an accurate recordof
+informationreceivedorobtainedbythedatacontrollerfromthe data subject or
+a third party.
+(3)Where  the  data  is  an  accurate  record  ofthe  information,  the
+Commission may make an order requiring thedata controller to supplement the
+statement ofthe true facts which the Commission considers appropriate.
+(4)Wherethedatacomplainedofhasbeenrectified,blocked
+
+supplemented,erasedordestroyed,thedatacontrollerisrequiredto
+notifythirdpartiestowhomthedatahasbeenpreviouslydisclosedof
+the rectification, blocking, supplementation,erasure or destruction.
+(5)Todeterminewhetheritisreasonablypracticabletorequire  the
+notification, the Commission shall haveregard, in particular, to thenumber of
+persons to be notified.
+Application ofthe Act
+45.(1)Exceptasotherwiseprovided,thisActappliestoadatacontrol-ler in
+respect ofdata where
+(a)thedatacontrollerisestablishedinthiscountryandthedata  is
+processed in this country,
+(b)thedatacontrollerisnotestablishedinthiscountrybutuses
+equipment or a data processor carrying on business in this country
+to process the data, or
+(c)processingisinrespectofinformationwhichoriginatespartly or
+wholly from this country.
+(2)A data controller who isnot incorporated in this country shall register
+as anexternal company.
+(3)For  the  purposes  ofthis  Act  the  following  are  to  be  treated  as
+established in this country:
+(a)an individual who is ordinarily resident in this country;
+(b)a body incorporated under the laws ofthis country;
+(c)apartnership,personsregisteredundertheRegistrationofBusiness
+NamesAct,1962(Act151)andtheTrustees(Incorporation) Act,
+1962 (Act 106);
+(d)anunincorporatedjointventureorassociationoperatingin part or
+in whole in this country;  and
+(e)anypersonwhodoesnotfallwithinparagraphs(a),(b),(c)or(d)but
+maintainsanoffice,branchoragencythroughwhich  business
+activities are carried out in this country.
+(4)ThisActdoesnotapplytodatawhichoriginatesexternallyandmerely
+transits through this country.
+Data Protection Register
+Establishment ofData ProtectionRegister
+46.(1)ThereisestablishedbythisActaregisterofdatacontrollersto be
+known as the Data ProtectionRegister.
+(2)The Commission shall keep and maintain theRegister.
+
+(3)A data controller shall register with the Commission.
+Application for registration
+47.(1)Anapplicationforregistrationasadatacontrollershallbemade
+in  writing  to  the  Commissionand  the  applicant  shall  furnish  the  following
+particulars:
+(a)the businessname and address ofthe applicant;
+(b)thenameandaddressofthecompany’srepresentativewherethe
+company is anexternal company;
+(c)adescriptionofthepersonaldatatobeprocessedandthe
+categoryofpersonswhosepersonaldataaretobecollected;
+(d)anindicationastowhethertheapplicantholdsorislikely to hold
+special personal data;
+(e)a description ofthe purpose forwhich the personal data is being
+or isto be processed;
+(f)adescriptionofarecipienttowhomtheapplicantintends to
+disclose the personal data;
+(g)thenameordescriptionofthecountrytowhichtheappli-cant
+may transfer the data;
+(h)theclassofpersonsorwherepracticablethenamesofpersonswhose
+personal data is held by the applicant;
+(i)ageneraldescriptionofmeasurestobetakentosecurethe data;
+and
+(j)any other information that the Commission may require.(2)An
+applicantwhoknowinglysuppliesfalseinformationin
+supportofan
+applicationforregistrationasadatacontrollercommitsan
+offenceand  is  liable  onsummary  conviction  toa  fine  ofnot  more  than  one
+hundred and fifty penalty units or aterm ofimprisonment ofnot more than
+oneyear or to both.
+(3)Where a data controller intends to keep personal data for two ormore
+purposes the Commission shall make separateentriesfor each purpose in the
+Register.
+Right to refuse registration
+48.(1)TheCommissionshallnotgrantanapplicationforregistration under
+this Act where
+(a)theparticularsprovidedforinclusioninanentryinthe
+Register are insufficient;
+(b)theappropriatesafeguardsfortheprotectionoftheprivacyofthe
+
+datasubjecthavenotbeenprovidedbythedatacontroller; and
+(c)intheopinionoftheCommission,thepersonmakingthe
+application   for   registration   does   not   merit   thegrant   ofthe
+registration.
+(2)Where the Commission refuses an application for registration asadata
+controller,theCommissionshallinformtheapplicantinwriting within fourteen
+days
+(a)ofits decision and the reasons for the refusal, and
+(b)theapplicantmayapplyforjudicialreviewtotheHighCourt against
+the refusal.
+(3)A  refusal  ofan  application  for  registrationis  not  a  bar  to  re-
+application.
+Grant ofregistration
+49.(1)The Commission shall
+(a)registeranapplicantifitissatisfiedthattheapplicanthas satisfied
+the conditions required for registration, and
+(b)providetheapplicantwithacertificationofregistrationupon
+approval ofthe application.
+(2)Theapplicantshallpaytheprescribedfeeuponregistration.
+Renewal ofregistration
+50.A registration shall be renewedevery twoyears.
+Removal fromRegister
+51.The Commission may at therequest ofthe person to whom an entryin
+theRegisterrelates,removethatperson’snamefromtheRegisterat any time.
+Cancellation ofregistration
+52.TheCommission hasthepowertocancelaregistrationforgood cause.
+Processing ofpersonal datawithout registration prohibited
+53.AdatacontrollerwhohasnotbeenregisteredunderthisActshall  not
+process personal data.
+Accessby the public
+54.(1)TheCommissionshallprovidefacilitiestomaketheinformation
+containedintheRegisteravailableforinspectionbymembersofthepublic. (2)
+TheCommissionshallsupplyamemberofthepublicwitha
+dulycertifiedmanualorelectroniccopyoftheparticularscontainedinan
+entry made in theRegister on payment ofthe prescribed fee.
+
+Dutyto notify changes
+55.Apersoninrespectofwhomanentryasadatacontrollerisincluded
+in  theRegister  shall  notify  the  Commission  ofchanges  in  the  registered
+particulars within fourteen days.
+Failure to register
+56.A person who fails to registeras a data controller but processes personal
+datacommitsanoffenceandisliableonsummaryconviction to a fine ofnot
+more than two hundred and fifty penalty units or  a term ofimprisonment of
+not more than twoyears or to both.
+Assessable processing
+57.(1)TheMinistermaybyExecutiveInstrumentspecifyactionswhich
+constituteassessableprocessingiftheMinisterconsiderstheassessable
+processing likely to
+(a)causesubstantialdamageorsubstantialdistresstoadata subject,
+or
+(b)otherwisesignificantlyprejudicetheprivacyrightsofadatasubject;
+(2)Onreceiptofanapplicationforregistration,theCommission shall
+consider
+(a)whethertheprocessingtowhichthenotificationrelatesis
+assessable, or
+(b)iftheassessableprocessingcomplieswiththeprovisionsof this
+Act.
+(3)The Commission shall within twenty-eight days from the day
+ofreceiptoftheapplication,informthedatacontrollerwhethertheprocessing
+is likely to comply with the provisions ofthis Act.
+(4)TheCommissionmayextendtheinitialperiodbyafurther period
+whichdoesnotexceedfourteendaysorotherperiodthattheCommission may
+specify.
+(5)Theassessableprocessinginrespectofwhichanotificationhasbeen
+given to theCommission shall not be carried on unless
+(a)the period oftwenty-eight days has elapsed, or
+(b)beforetheendofthatperiod,thedatacontrollerreceivesa notice
+from the Commission under subsection (3).
+(6)Adatacontrollerwhocontravenesthissectioncommitsanof-fence
+andisliableonsummaryconvictiontoafineofnotmorethantwo hundredand
+fiftypenaltyunitsortoatermofimprisonmentofnotmore than twoyears or
+to both.
+
+Appointment ofdata protection supervisors
+58.(1)Adatacontrollermayappointacertifiedandqualifieddata
+supervisor to act as a data protection supervisor.
+(2)Thedataprotectionsupervisorisresponsibleforthemonitoring ofthe
+data controller’s compliance with the provisions ofthis Act.
+(3)Thissectionissubjecttotheexemptionsormodificationsspeci-fied in
+the authorisation.
+(4)An authorisation under this section may
+(a)imposeadutyonadataprotectionsupervisorinrelationto the
+Commission, and
+(b)conferafunctionontheCommissioninrelationtoadata
+protection supervisor.
+(5)A  data  protection  supervisor  may  be  an  employee  ofthe  data
+controller.
+(6)The  Commission  shall  provide  the  criteria  for  qualification  to  be
+appointed as  a data protection supervisor.
+(7)Apersonshallnotbeappointedasadataprotectionsupervisorunless
+the person satisfies the criteria set by the Commission.
+Fees
+59.TheMinistermaybyRegulationsprescribefeesforthepurposeof
+sections 49, 50 and 54.
+Exemptions
+National security
+60.(1) The processing of personal data is exempt from the provisions of this
+Act for the purposes of
+(a)public order,
+(b)public safety,
+(c)public morality,
+(d)national security, or
+(e)public interest.
+(2)Subjecttoarticle18(2)oftheConstitution,acertificatesigned
+by the Minister is prima facieevidence ofexemption from the provisions ofthis
+Act.
+(3)Acertificatemaybymeansofageneraldescriptionidentify the
+personal data to which it applies.
+(4)Apersonwhoisdirectlyaffectedbytheissueofacertificate under
+this section may apply for judicial review at the High Court.
+Crime and taxation
+61.(1)Theprocessingofpersonaldataisexemptfromtheprovisions
+ofthis Act for the purposes of
+(a)the preventionor detection ofcrime,
+(b)the apprehension or prosecution ofan offender, or
+
+(c)theassessmentorcollectionofataxordutyorofan
+imposition ofa similar nature.
+(2)Personaldataisexemptfromthenon-disclosureprovisionsin any
+case inwhich
+(a)thedisclosureisforapurposementionedinsubsection(1), and
+(b)theapplicationofthoseprovisionsinrelationtothedisclo-sureis
+likelytoprejudiceanyofthemattersmentionedin that subsection.
+Health, education and socialwork
+62.Personaldataonthefollowingsubjectsshallnotbedisclosed
+except where the disclosure is required by law:
+(a)personaldatawhichrelatestothephysical,mentalhealth
+or mental condition ofthe data subject,
+(b)personaldatainrespectofwhichthedatacontrollerisan
+educationalinstitutionandwhichrelatestoapupilatthe
+institution,or
+(c)personal data ofsimilar description.
+Regulatory activity
+63.(1)TheprovisionsofthisActdonotapplytotheprocessingof
+personal data forprotection ofmembers ofthe public
+(a)against loss or malpractice in the provision of
+(i)banking,
+(ii)insurance,
+(iii)investment,
+(iv)other financial services, or
+(v)management ofa body corporate;
+(b)againstdishonestyormalpracticeintheprovision   of
+professional services;
+(c)againstthemisconductormismanagementintheadministration of
+a non-profit making entity;
+(d)tosecurethehealth,safetyandwelfareofpersonsatwork;
+or
+(e)toprotectnon-workingpersonsagainsttherisktohealth or safety
+arising out ofor in connection with the action of persons atwork.
+(2)Theprocessingofpersonaldataisexemptfromthesubject
+information  provisions  ofthis  Act  ifit  is  for  the  discharge  ofa  function
+conferred by orunder an enactment on
+(a)Parliament,
+(b)a local government authority,
+(c)theadministrationofpublichealthorpublicfinancingof
+healthcare,prevention,controlofdiseaseandthemonitoring and
+eradication ofdisease .
+Journalism,literature and art
+64.(1)A person shall not process personal data unless
+
+(a)theprocessingisundertakenbyapersonforthepublication  ofa
+literary or artistic material;
+(b)thedatacontrollerreasonablybelievesthatpublication
+would be in the public interest; and
+(c)thedatacontrollerreasonablybelievesthat,inallthe
+circumstances,compliancewiththeprovisionisincompatible with
+the special purposes.
+(2)Subsection(1)doesnotexemptadatacontrollerfromcompliance with
+the data principles related to
+(a)lawful processing,
+(b)minimality,
+(c)further processing,
+(d)information quality, and
+(e)security safeguards.
+(3)Forthepurposesofsubsection(1)(b),inconsideringwhether the data
+controller  believes  that  the  publicationwould  be  in  the  public  interestoris
+reasonable,regardmaybehadtothecompliancebythedata controller with any
+code ofpractice which is
+(a)relevant to the publication in question, and
+(b)designatedbytheMinisterforpurposesofthissubsection.
+Research, history and statistics
+65.(1)Thefurtherprocessingofpersonaldataforaresearchpurpose
+incompliancewiththerelevantconditionsisnottoberegardedasincompatible
+with the purposes for which the datawas obtained.
+(2)Personaldatawhichisprocessedforresearchpurposesin
+compliance with the relevant conditions may be kept indefinitely.
+(3)Personaldatawhichisprocessedonlyforresearchpurposesisexempt
+from the provisions ofthis Act if
+(a)thedataisprocessedincompliancewiththerelevantcondi-tions,
+and
+(b)theresultsoftheresearchorresultingstatisticsarenotmadeavailable
+inaformwhichidentifiesthedatasubjectorany ofthem.
+(4)Personaldataisnottobetreatedas  processedotherwisethan  for
+research purposes merely because the data is disclosed
+(a)to any person for research purposes only,
+(b)tothedatasubjectorapersonactingonbehalfofthedata
+subject,
+(b)attherequestorwiththeconsentofthedatasubjectora
+person acting on behalfofthe data subject ,or
+(d)incircumstancesinwhichthepersonmakingthedisclosure  has
+reasonablegrounds  to  believe  that  the  disclosure  falls  within  this
+section.
+
+Disclosurerequiredbylawormadeinconnectionwithalegalproceeding
+66.Personaldataisexemptfromtheprovisionsonnon-disclosurewhere
+thedisclosureisrequiredbyorunderanenactment,anyruleoflaworby
+the order ofa court.
+Domestic purposes
+67.Personaldatawhichisprocessedbyanindividualonlyforthepurposeof
+thatindividual’spersonal,familyorhouseholdaffairsisexempt from the
+data protection principles.
+Confidential references givenby data controller
+68.Personal data isexempt from the dataprotection principles ifit consists
+ofareferencegivenin confidenceby thedatacontrollerforthe purposes of
+(a)education, training or employment ofthe data subject,
+(b)the appointmentto an office ofthe data subject, or
+(c)the provision ofany service by the data subject.
+ArmedForces
+69.Personal  dataisexempt  from  the  subject  information  provisions  where
+the application ofthe provisions is likely to prejudice the combat effectiveness
+ofthe ArmedForces oftheRepublic.
+Judicial appointments and honours
+70.Personal data processed to
+(a)assess a person’s suitabilityfor judicial office, or
+(b)confer a national honour,
+isexempt from the subject information provisions ofthis Act.
+Public service or ministerialappointment
+71.The   Minister   may   by   legislative   instrument   makeRegulations   to
+prescribeexemptionsfromthesubjectinformationprovisionsofpersonal
+data processed to assess a person’s suitabilityfor
+(a)employment by the government, or
+(b)anyofficetowhichappointmentsaremadebythePresident.
+Examination marks
+72.PersonaldataisexemptfromtheprovisionsofthisActifitrelates  to
+examination marks processed by a data controller
+(a)todeterminetheresultsofanacademic,professionalorother
+examination  or  to  enable  the  results  oftheexamination  to  be
+determined, or
+(b)in consequence ofthe determination ofthe results.
+
+Examination scripts
+73.Personaldatawhichconsistsofinformationrecordedbycandidates during
+anacademic,professionalorotherexaminationisexemptfromthe provisions of
+this Act.
+Professional privilege
+74.Personaldataisexemptfromthesubjectinformationprovisions ifit
+consists ofinformation in respect ofwhich aclaim to professional privilegeor
+confidentialitybetweenclientandaprofessionaladvisercould be maintained in
+legal proceedings.
+Enforcement
+Enforcement notice
+75.(1)WheretheCommissionissatisfiedthatadatacontrollerhas
+contravenedoriscontraveninganyofthedataprotectionprinciples,the
+Commissionshallservethedatacontrollerwithanenforcementnoticeto
+require that data controller to do any ofthe following:
+(a)totakeorrefrainfromtakingthestepsspecifiedwithinthe  time
+stated in the notice,
+(b)torefrainfromprocessinganypersonaldataorpersonal data of
+a description specified in the notice; or
+(c)torefrainfromprocessingpersonaldataorpersonaldataof  a
+descriptionspecifiedinthenoticeforthepurposesspecified or in
+the manner specified after the time specified.
+(2)Indecidingwhethertoserveanenforcementnotice,theCom-mission
+shall consider whether the contravention has caused or is likely to cause damage
+or distress to any person.
+(3)Anenforcementnoticeissuedinrespectofacontravention ofa
+provision ofthis Act may also require the data controller to rectify, block,
+eraseordestroyotherdataheldbythedatacontrollerandwhich containsan
+expressionofopinionwhichappearstotheCommissionto be based on the
+inaccurate data.
+(4)Where
+(a)anenforcementnoticerequiresthedatacontrollertorectify,
+block, erase or destroy personal data, or
+(b)theCommissionissatisfiedthatpersonaldatawhichhas been
+rectified, blocked,erased or destroyedwas processed in contravention of
+any ofthe data protection principles,
+theCommissionmayrequirethe
+datacontrollertonotifyathirdpartyto
+whomthedatahasbeendisclosedoftherectification,blocking,erasure
+or destruction.
+(5)An enforcement notice shall contain a statement ofthe data protection
+principle  which  the  Commission  is  satisfied  has  been  contra-vened  and  the
+reasons for that conclusion.
+(6)Subjecttothissection,anenforcementnoticeshallnotrequire anyof
+theprovisionsofthenoticetobecompiledwithbeforetheendof  theperiod
+
+withinwhichanappealmaybebroughtagainstthenoticeand,iftheappealis
+brought,thenoticemaynotbecompliedwithpendingthe  determination  or
+withdrawal ofthe appeal.
+(7)Despitesubsection(6),theCommissionmayinexceptional
+circumstances order that the notice apply immediately.
+Cancellation ofenforcement notice
+76.TheCommissionmayonitsownmotionoronanapplication
+madebyapersononwhomanoticeisserved,cancelorvarythenotice
+to that person.
+Request for assessment
+77.(1)Apersonwhoisaffectedbytheprocessingofanypersonaldata
+mayonthatperson’sownbehalforonbehalfofanotherpersonrequest
+theCommissiontomakeanassessmentastowhethertheprocessingisin
+compliance with the provisions ofthis Act.
+(2)On receiving a request, the Commission may make an assessment in
+the manner that the Commission considers appropriate.
+(3)The Commission may consider the following in determining whether
+an assessment is appropriate:
+(a)theextenttowhichtherequestappearstotheCommission to raise
+a matter ofsubstance;
+(b)any undue delay in making the request; and
+(c)whetherornotthepersonmakingtherequestisentitledtomakean
+applicationinrespectofthepersonaldatainquestion.
+(4)TheCommissionshallnotpublishthereportofanyfinding
+(a)the request is accompanied with the prescribed fee, or
+(b)theCommissionwaivespaymentbasedonprovenpecuniary
+challenges ofthe applicant.
+(5)WheretheCommissionfindsthattheprocessingbyadata
+controlleris
+contrarytotheprovisionsofthisAct,theCommissionshallissuean
+informationnoticetothedatacontrollerspecifyingthecontravention,andgive
+thedatacontrollernoticetoceaseprocessingpersonaldata.
+Determinationby the Commission
+78.(1)WhereatanytimeitappearstotheCommissionthatpersonal
+data
+(a)isbeingprocessedinamannerinconsistentwiththeprovisions of
+this Act, or
+(b)isnotbeingprocessedwithaviewtothepublicationbya
+personofajournalistic,literaryorartisticmaterialwhich
+has not previously been published by the data controller
+the Commission may make a determination in writing to that effect.
+(2)TheCommissionshallgiveanoticeofthedeterminationto the
+data controller.
+
+Restriction on enforcement in case ofprocessing for special purposes
+79.(1)TheCommissionshallnotserveanenforcementnoticeona
+datacontrollerinrelationtotheprocessingofpersonaldataundersec
+tion78
+(1)(a)unlessadeterminationhasbeenmadebytheCommission.
+(2)TheCommissionshallnotserveaninformationnoticeona data
+controllerinrelationtotheprocessingofpersonaldataundersection
+78 (1)(b)unless a determination has been made by the Commission.
+Failure to comply with notice
+80.(1)Apersonwhofailstocomplywithanenforcementnoticeoran
+informationnoticecommitsanoffenceandisliableonsummaryconvictionto
+afineofnotmorethanonehundredandfiftypenaltyunitsortoa
+term ofimprisonment ofnot more than oneyear or to both.
+(2)A person who, in compliance with an information notice,
+(a)makesastatementwhichthatpersonknowstobefalsein
+a material respect,or
+(b)recklesslymakesastatementwhichisfalseinamaterial
+respect
+commitsanoffenceandisliableonsummaryconvictiontoafineofnot
+morethanonehundredandfiftypenaltyunitsortoatermofimprisonment
+ofnot more than oneyear or to both.
+(3)Itisadefenceforapersonchargedwithanoffenceundersub-section
+(1) toprove that, thatpersonexercisedduediligence tocomply with the notice
+in question.
+Authorised officers
+81.(1)TheBoardmayinwritingauthoriseanofficertoperformthe
+functionsdeterminedbytheBoardforthepurposeofenforcingtheprovisions
+ofthis Act and theRegulations.
+(2)Without   limiting   subsection   (1),   an   officer   authorised   by   the
+Commissionmayatanyreasonabletime,entertoinspectandsearchany
+premises to ensure compliance with this Act.
+Records obtained under data subject’s rights ofaccess
+Conditional request for personal data prohibited
+82.(1)Apersonwhoprovidesgoods,facilitiesorservicestothepublic
+shallnotrequireapersontosupplyorproduceaparticularrecordasa
+conditionfortheprovisionofthegoods,facilitiesorservicestothatperson.
+(2)Subsection(1)doesnotapplywheretheimpositionofthe
+requirementisrequiredorauthorisedunderanenactment,ruleoflawor in the
+public interest.
+(3)A person who contravenes subsection (1) commits an offenceandis
+liableonsummaryconvictiontoafineofnotmorethantwohundredandfifty
+penaltyunitsortoatermofimprisonmentofnotmorethantwoyears or to both.
+Demand for health records
+83.A person shall not be required to provide records which
+(a)consistofinformationrelatedtothephysical,mentalhealth
+or mental condition ofan individual, or
+
+(b)hasbeenmadebyoronbehalfofahealthprofessionalin
+connection with the care ofthat individual.
+Information provided to Commission
+Disclosure ofinformation
+84.Theprovisionsofanenactmentoraruleoflawwhichprohibitorrestrict
+thedisclosureofinformationdonotapplyto acasewhere apersonfurnishesthe
+Commissionwithinformationnecessaryfortheperformanceofthe functions of
+the Commission under this Act.
+Confidentiality ofinformation
+85.(1)TheCommission,anemployeeoranagentoftheCommission
+shall not disclose information
+(a)obtainedbytheCommissionunderorforthepurposesof this
+Act,
+(b)furnished to the Commission under or for the purposes of this
+Act,
+(c)which relates to an identifiable individual, and
+(d)whichisnotatthetimeofthedisclosureandhasnotpreviously
+beenavailable to the public from other sources
+unless the disclosure is made with lawful authority.
+(2)Adisclosureismadewithlawfulauthoritywherethedisclosure
+(a)ismadewiththeconsentoftheindividualorthepersonfor the
+time being carrying on the business,
+(b)wasmadeforthepurposeofitsbeingmadeavailabletothe public
+under the provisions ofthis Act,
+(c)ismadeforthepurposesof,andisnecessaryfor,the
+performance ofa function under this Act,
+(d)ismadeforthepurposesofanycivilorcriminalproceedings, which
+arise under or by virtue ofthis Act or otherwise, or
+(e)havingregardtotherights,freedomsorlegitimateinterestsofa
+person,
+thedisclosure is necessary in the public interest.
+(3)Apersonwhoknowinglyorrecklesslydisclosesinformationin
+contraventionofsubsection(1)commitsanoffenceandisliableonsummary
+convictiontoafineofnotmorethantwothousandfivehundredpenaltyunits
+ortoatermofimprisonmentofnotmorethanfiveyears or to both.
+Miscellaneous andgeneral provisions
+General duties ofthe Commission
+86.(1)TheCommissionshallprovideguidelinesandpromotethe
+
+observance ofgood practice toensure compliance with this Act.
+(2)TheCommissionmay  chargethefeesthattheCommissionin
+consultation  with  theMinister  for  Finance  determinesfor  theprovision  of
+services by the Commission.
+(3)TheCommissionisresponsiblefortheconductofpublic
+education andawareness campaigns to the public on the rights ofdata subjects
+and the obligations ofdata controllers under this Act.
+International co-operation
+87.TheCommissionshallperformthedataprotectionfunctionsthat are
+necessarytogiveeffecttoanyinternationalobligationsoftheRepublic.
+Prohibition to purchase, obtain or disclose personal data
+88.(1)A person shall not
+(a)purchasethepersonaldataortheinformationcontainedin  the
+personal data ofanother person;
+(b)knowinglyobtainorknowinglyorrecklesslydisclosethe personal
+dataortheinformationcontainedinthepersonal data ofanother
+person; or
+(c)discloseorcausetobedisclosedtoanotherpersonthe
+information contained in personal data.
+(2)A person whocontravenes subsection (1) commits an offenceandis
+liableonsummaryconvictiontoafineofnotmorethantwohundredandfifty
+penaltyunitsortoatermofimprisonmentofnotmorethantwoyears or to both.
+Prohibition ofsale ofpersonal data
+89.(1)Apersonwhosellsorofferstosellpersonaldataofanother
+personcommitsanoffenceandisliableonsummaryconvictiontoafine
+ofnotmorethantwothousandfivehundredpenaltyunitsortoatermof
+imprisonment ofnot more than fiveyears orto both.
+(2)For the purposes ofthis section an advertisement which indicates that
+personal data is or may be for sale is an offer to sell the data.
+Credit bureau
+90.(1)AcreditbureaushallforthepurposesofthisActbeadata
+controller and
+(a)issubjecttotheordersordirectionsemanatingfromthe
+Commission,
+(b)shallexercise the rights under this Act, and
+(c)be liable for any offences committed by the Credit Bureau
+and its officers under this Act.
+(2)Apersonwhosuffersdamagewhicharisesfromthesupplyof
+inaccurateorincompleteinformationbyacreditbureauabouttheperson  is
+entitledinadditiontotheremediesunderthisActtosuchfurtherrem-edies that
+are provided under the CreditReporting Act, 2007 (Act726).
+
+Application to the State
+91.(1)This Act binds theRepublic.
+(2)For  the  purposes  ofthis  Act,  each  government  department  shall  be
+treated as a data controller.
+(3)Each department shall designate an officer to act as a data supervisor.
+(4)Wherethe  purposes  and  the  manner  in  which  the  processingof
+personaldataaredeterminedby  apersonactingonbehalfoftheExecutive,
+ParliamentandtheJudiciary,thedatacontrollerinrespectof that data for the
+purposes ofthis Act is
+(a)in relationto the Executive, the ChiefDirector,
+(b)in relation toParliament, the Clerk toParliament, and
+(c)in relation to theJudiciary, theJudicial Secretary.
+(5)Adifferentpersonmaybeappointedundersubsection(4)for  a
+different purpose.
+Transmission ofnoticesby electronic or other means
+92.(1)Arequirementthatanotice,request,particularsorapplication
+towhichthisActappliesshallbeinwritingissatisfiedwherethetextof
+the notice, request, particulars or application
+(a)istransmittedbyelectronicmeansinamannerspecifiedby
+the Commission,
+(b)is received in legible form, and
+(c)is capable ofbeing used for subsequentreference.
+(2)TheMinistermay byRegulationsexempt anotice, request, particulars
+orapplication from these requirements.
+Service ofnoticesby the Commission
+93.(1)A notice authorised or required by this Act to be served on or
+given to a person by the Commission may
+(a)ifthatpersonisanindividual,beservedonthatindividual by
+delivery to that individual,
+(i)bypostaddressedtothatindividualatthat
+Individual’s
+usualorlastknownplaceofresidenceor
+business,
+(ii)byleavingthenoticeatthatindividual’susualorlast known
+place ofresidence or business, or
+(iii)bysendingittoanelectronicmailaddressspecified by the
+individual for service ofnotices;
+(b)ifthatpersonisabodycorporateorunincorporated,be served
+on that  body
+(i)byposttotheprincipalofficerofthebodyatits
+principal office,
+(ii)byaddressingittotheprincipalofficerofthebody and
+leaving it at that office, or
+(iii)bysendingittoanelectronicmailaddressspecifiedbythe
+bodyforserviceofnoticesunderthisAct;and
+(c)ifthatpersonisapartnership,beservedonthatpartnership
+(i)by post to the principal office ofthe partnership,
+(ii)byaddressingittothatpartnershipandleavingitat
+
+that office, or
+(iii)bysendingittoanelectronicmailaddressspecified
+by that partnership for service ofnotices under this
+Act.
+(2)Thissectiondoesnotlimitanyotherlawfulmethodofserving or
+giving a notice.
+Regulations
+94.(1)TheMinistermayinconsultationwiththeCommissionby
+legislative instrument makeRegulations to
+(a)extendthetransitionalperiodforadatacontrollerinexistence
+at the commencement ofthis Act,
+(b)specifytheconditionsthataretobesatisfiedforconsentto be given,
+(c)prescribefurtherconditionswhichmaybetakenbyadata
+controller  for  the  maintenance  ofappropriate  safeguards,  for  the
+rights  and  freedoms  ofa  data  subject  related  to  the  processing  of
+special personal data,
+(d)make different provisions for different situations,
+(e)exemptnotices,requests,particularsorapplicationsfrom
+the requirements under the Act, and
+(f)providegenerallyforanyothermatternecessaryfortheeffective
+implementation ofthe provisions ofthis Act.
+(2)A person who commits an offence under theRegulations is liable on
+summary conviction to a fine ofnot more than five thousand penalty units.
+General penalty
+95.WhereapersoncommitsanoffenceunderthisActinrespectof
+whichapenaltyisnotspecified,thepersonisliableonsummaryconvic-
+tiontoafineofnotmorethanfivethousandpenaltyunitsoratermof
+imprisonment ofnot more than tenyears or to both.
+Interpretation
+96.In this Act unless the context otherwise requires
+“assessableprocessing”meansprocessingofadescriptionspecifiedin
+anExecutiveInstrumentmadebytheMinister
+under section 57 (1);
+“business”includes trade or profession;
+“Commission”meanstheCommissionestablishedunder
+section 1 ofthis Act;
+“corporate finance service” means a service which consists of
+(a)underwritinginrespectoftheissueortheplacingof issues of
+any instrument;
+(b)advicetoundertakingsoncapitalstructure,industrialstrategy
+and related matters and advice and servicerelatedtomergers
+andthepurchaseofanundertaking, or
+(c)servicesrelatedtotheunderwritingreferredtoin
+paragraphs(a)and(b);
+“credit   bureau”   means   an   institution   licensed   under   the   Credit
+
+Reporting Act, 2007(Act 726) to carry out credit bureauactivities;
+“data” means information which
+(a)isprocessedbymeansofequipmentoperating
+automaticallyinresponsetoinstructionsgivenforthat
+purpose,
+(b)isrecordedwiththeintentionthatitshouldbeprocessed by
+means ofsuch equipment,
+(c)isrecordedaspartofarelevantfilingsystemorwith the
+intentionthatitshouldformpartofarelevantfiling system, or
+(d)doesnotfallwithinparagraph(a),(b)or(c)butforms part ofan
+accessible record;
+“datacontroller”meansapersonwhoeitheralone,jointlywith other persons
+or  incommon  with  other  persons  or  as  astatutorydutydeterminesthe
+purposesforandthemannerin which personal data is processed or is to be
+processed;
+“dataprotectionprinciples”meanstheprinciplessetoutinsections 17 to 26 of
+this Act;
+“dataprocessor”inrelationtopersonaldatameansanyperson otherthanan
+employeeofthedatacontrollerwho processes the data on behalfofthe data
+controller;
+“data  protection  functions”  means  functions  that  relate  to  theprotectionof
+personaldatainthecourseofdataprocessing;
+“datasubject”meansanindividualwhoisthesubjectofpersonal data;
+“enactment”includesanenactmentpassedafterthecommencement ofthis Act;
+“datasupervisor”means  aprofessionalappointedby  adatacontrollerin
+accordancewithsection58tomonitorthecompliance  by  the  data
+controller in accordance with the provisions ofthe Act;
+“examination”includesanyprocessfordeterminingtheknowledge,
+intelligence,skillorabilityof acandidatebyreference to the candidate’s
+performance in a test,work or other activity;
+“exemptmanualdata”meansinformationinrespectofwhicha controller isnot
+requiredto registerbefore manualprocessing or use;
+“foreigndatasubject”meansdatasubjectinformationregulated  by  laws  ofa
+foreign jurisdiction sent into Ghana from a foreign jurisdictionwholly for
+processing purposes;
+“goodcause”meansanyfailuretocomplywithoraviolationofanyofthedata
+protectionprinciples,enforcementorother   notices   issued   by   the
+Commission;
+“goodpractice”meansthepracticeintheprocessingofpersonaldatain a
+waythatthelikelihoodofcausingsubstantial damage ordistress is reduced;
+“government  department”  includes  a  Ministry,  Department  or  Agency  anda
+body orauthorityexercising statutory functions on behalfofthe State;
+“healthprofessional “ means a registeredmedicalpractitioneror arecognised
+traditionalhealeroranypersonwhoisregistered to provide health services
+under any law for the time being in force;
+“informationnotice”meansnoticegivenbytheCommission pursuant to a
+
+determination under section 78 (1)(b);
+“instrument”meansanyinstrumentrelatedtoapubliclytraded
+security;
+“Minister”meanstheMinisterassignedresponsibilityforCommunications;
+“personaldata”meansdataaboutanindividualwhocanbe
+identified,
+(a)from the data, or
+(b)fromthedataorotherinformationinthepossession
+of,orlikelytocomeintothepossessionofthedata
+controller;
+“prescribedfee”meansafeesetoutinrelationtoany
+Regulations on fees made pursuant to this Act;
+“principaloffice”inrelationtoaregisteredcompany,means
+theregisteredofficeorotheraddressthatthecompanymay
+specify for the delivery ofcorrespondence;
+“principalofficer”inrelationtoabody,meansthesecretaryor
+otherexecutiveofficerchargedwiththeconductofthe
+general affairs ofthe body;
+“processing”meansanoperationoractivityorsetofoperations
+byautomaticorothermeansthatconcernsdataorpersonal
+data and the
+(a)collection,organisation,adaptationoralterationof the information
+or data,
+(b)retrieval,consultationoruseoftheinformationor data,
+(c)disclosureoftheinformationordatabytransmission,
+dissemination or other meansavailable, or
+(d)alignment,combination,blocking,erasureor destruction of
+the information or data;
+“publicfunds”hasthesamemeaningassignedtoitinArticle
+175 ofthe 1992 Constitution;
+“publicregister”meansaregisterwhichpursuanttoarequirement imposed
+(a)by or under an enactment, or
+(b)inpursuanceofanyinternationalagreementisopen
+to
+(i)inspection by the public, or
+(ii)inspectionbyapersonwhohasa legitimate
+interest;
+“publish”inrelationtojournalistic,literaryorartisticmaterial means to make
+available  to  the  public  or  any  class  ofthe  public,  journalistic,  literary  or
+artistic material;
+“pupil”inrelationtoaschoolinthiscountrymeansaregisteredpersonwithin
+themeaningoftheEducationAct,2008(Act778) ofany registered school;
+“recipient” means a person towhom data is disclosed includinganemployeeor
+agentofthedatacontrollerorthedataprocessortowhomdataisdisclosed
+
+inthecourseofprocessingthedataforthedatacontroller,butdoesnot
+include  a  person  to  whom  disclosure  is  made  with  respect  to  a  particular
+inquirypursuant to an enactment;
+“registered  company”  means  a  company  registered  under  anyenactment
+relatedtoanincorporatedorunincorporatedentity  for  the  time  being  in
+force in the country;
+“Regulations” meansRegulations made under this Act; “relevant
+authority” means
+(a)a government department,
+(b)local authority, or
+(c)any other statutory authority;
+“relevantfilingsystem”meansanysetofdatathatrelatesto
+an individual which although not processed by means of equipment
+operatingautomatically in response to instructions given for processing
+that data, the set is structured,eitherbyreferencetoanindividualorby
+referenceto acriteriathatrelatestotheindividualinamannerthat
+specificinformationwhichrelatestoaparticularindividual is readily
+accessible;
+“relevant function” means
+(a)afunctionconferredonapersonbyorunderanenactment,
+(b)afunctionofthegovernment,aMinisterofStateor a government
+department, or
+(c)anyotherfunctionwhichisofapublicnatureand isexercised in
+the  public interest;
+“relevant record” means any record that relates to a conviction or caution held
+by a law enforcement agency or security agency;
+“research purposes” includes statistical or historical purposes;“security
+agency”meansanagencyconnectedwithnational
+security as determined by the National Security Council; “special
+personal data” means personal data which consists of
+information that relates to
+(a)therace,colour,ethnicortribaloriginofthedatasubject;
+(b)the political opinion ofthe data subject;
+(c)thereligiousbeliefsorotherbeliefsofasimilar
+nature, ofthe data subject;
+(d)thephysical,medical,mentalhealthormentalcondition or DNA of
+the data subject;
+(e)the sexualorientation ofthe data subject;
+(f)thecommissionorallegedcommissionofan
+offence by the individual;  or
+(g)proceedingsforanoffencecommittedorallegedto havebeen
+committedbytheindividual,thedisposal
+ofsuchproceedingsorthesentenceofanycourtin the proceedings;
+“special purposes” means any one or more ofthe following:
+
+(a)the purpose ofjournalism,
+(b)where the purpose is in the public interest,
+(c)artistic purposes, and
+(d)literary purposes;
+“subjectinformationprovisions”meanstheprovisionsunder
+thisActwhichdealwiththerightofadatasubjectto
+access information from a data controller;
+“teacher”includesaheadteacherandtheprincipalofaschool towhom
+disclosureisormaybemadeasaresultof,orwith  a  view  to,  an
+inquiry  by  or  on  behalfofthat  person  made  in  theexercise  ofa
+power conferred by law;
+“therelevantconditions”inrelationtotheprocessingofpersonaldata,
+means the conditions
+(a)thatthedataisnotprocessedtosupportmeasures  or
+decisions with respect to particular individuals, and
+(b)thatthedataisnotprocessedinthewaythatsubstantial
+damage or distress is caused oris likely to be caused to the
+data subject; and
+“thirdparty”inrelationtopersonaldata,meansapersonother than
+(a)the data subject,
+(b)the data controller, or
+(c)anydataprocessororotherpersonauthorisedtoprocess
+data for the data controller or processor.
+Transitional provisions
+97.(1)Adatacontrollerincorporatedorestablishedafterthe
+commencementofthisActshallberequiredtoregisterasadatacontroller
+within twenty days ofthe commencement ofbusiness.
+(2)A data controller inexistence at the commencement ofthis Act shall
+be  required  to  register  as  adata  controller  within  three  months  after  the
+commencement ofthis Act.
+Repeals and savings
+98.(1)Sections44to49,51,52,56and57oftheNationalIdentity
+Register Act, 2008 (Act  750) are hereby repealed.
+(2)Section18(1),(g)and(h)oftheNationalIdentificationAuthority
+Act, 2006, (Act 707) is hereby repealed.
+(3)Sections34(1),38and40oftheCreditReportingAct, 2007 (Act 726)
+are hereby repealed.
+(4)Despite the repeal of
+(a)sections44to49,51,52,56and57oftheNationalIdentity
+Register Act, 2008 (Act 750),
+(b)section 18 (1)(g)and(h)ofthe National IdentificationAuthority
+Act, 2006 (Act 707), and
+(c)sections34(1),38and40oftheCreditReportingAct,2007 (Act
+
+726),
+theRegulations,bye-laws,notices,orders,directions,appointmentsorany other
+actlawfullymadeordoneundertherepealedprovisionsandinforce
+immediatelybeforethecommencementofthisActshallbeconsideredto have
+beenmade  ordone  under  thisActandshall  continueto  haveeffect  until
+reviewed, cancelled or terminated.
+Commencement
+99.TheMinistershallspecifythedatewhenthisActshallcomeinto
+force by publication in theGazette.
+Date ofGazettenotification:18th May, 2012
