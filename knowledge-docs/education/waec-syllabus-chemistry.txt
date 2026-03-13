@@ -1,0 +1,3362 @@
+
+
+1 
+ 
+ 
+CHEMISTRY 
+ 
+1. INTRODUCTION 
+This  syllabus  is  drawn  purposely  for  examination,  hence  the  topics  are  not  necessarily 
+arranged in the order in which they should be taught. 
+The following assumptions were made in drawing of the syllabus: 
+(1) That  candidates  must  have  covered  the  Integrated  Science/Basic  Science  or  General 
+Science and Mathematics syllabuses at the Junior Secondary School (JSS)/Junior High 
+School (J.H.S) level; 
+(2) That candidates would carry out as many of the suggested activities and project work as 
+possible, and consequently develop the intended competencies and skills as spelt out in 
+the relevant Chemistry teaching syllabuses; 
+(3) That schools which offer the subject have well-equipped laboratories. 
+Note: Candidates are required to have the knowledge of the significant figures, S.I. 
+units and the conventional/IUPAC system of nomenclature. 
+2.   AIMS  
+The aims and objectives of the syllabus are to assess candidates’ 
+(1) understanding of basic chemistry concepts; 
+(2) level of acquisition of laboratory skills including awareness of hazards and safety 
+measures; 
+(3) level of awareness of the inter-relationship between chemistry and other discipline; 
+(4) level of awareness of the linkage between chemistry and industry/environment/everyday 
+life in terms of benefits and hazards; 
+(5) skills of critical and logical thinking. 
+ 
+3.   EXAMINATION SCHEME  
+There shall be three papers - Papers 1, 2 and 3 all of which must be taken.  Paper 1 and 2 
+shall be a composite paper to be taken at one sitting. 
+ 
+PAPER 1:  Will consist of fifty multiple choice objective questions drawn from Section A of 
+the   syllabus (ie the portion of the syllabus which is common to all candidates) . 
+Candidates will be required to answer all the questions within 1 hour for 50 
+marks. 
+ 
+       
+
+2 
+ 
+   PAPER 2: Will be a 2-hour essay paper covering the entire syllabus and carrying  
+                     100 marks. The paper will be in two sections; Sections A and B. 
+ 
+Section A:    Will consist of ten short structured questions drawn from the 
+common portion of the syllabus. (i.e. Section A of the syllabus). 
+Candidates will be required to answer all the questions for 25 
+marks. 
+ 
+Section B:    Will consist of two questions from the common portion of the 
+syllabus (i.e. Section A of the syllabus) and two other questions 
+from the section of the syllabus which is perculiar to the country of 
+the candidate (i.e. either Section B or C of the syllabus).  
+Candidates will be required to answer any three of the questions. 
+Each question shall carry 25 marks. 
+ 
+ PAPER 3:    This shall be a 2-hour practical test for school candidates or 1 hour  
+30 minutes alternative to practical work test for private candidates. Each 
+version of the paper shall contain three compulsory questions and carry 50 
+marks.   
+ 
+The questions shall be on the following aspects of the syllabus: 
+ 
+        -   One question on quantitative analysis; 
+        -   One question on qualitative analysis; 
+     -      The third question shall test candidates’ familiarity with the 
+practical activities suggested in their teaching syllabuses. 
+ 
+ Details of the input into the continuous assessment shall be given by the Council. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+3 
+ 
+SECTION A 
+(For all candidates) 
+ 
+CONTENT NOTES 
+     
+1.0 INTRODUCTION TO CHEMISTRY 
+(a) (i) Measurement of physical quantities. 
+ 
+(ii) Scientific measurements and their      
+importance in chemistry. 
+ 
+ 
+ 
+ 
+ 
+(b) Scientific Methods 
+ 
+ 
+ 
+ 
+ 
+2.0 STRUCTURE OF THE ATOM 
+(a)  Gross features of the atom. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(b) (i) Atomic number/proton number, 
+number of neutrons, isotopes, atomic 
+mass, mass number. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(1) Measurement of mass, length, time, 
+temperature and volume. 
+(2) Appropriate SI units and significant 
+figures. 
+(3) Precision and accuracy in 
+measurement. 
+ 
+       Outline the scientific method to include: 
+Observation, hypothesis, 
+experimentation, formulation of laws 
+and theories. 
+ 
+ 
+ 
+(1) Short account of Dalton’s atomic 
+theory and limitations, J.J. 
+Thompson’s experiment and Bohr’s 
+model of the atom. 
+(2) Outline description of the 
+Rutherford’s alpha scattering 
+experiment to establish the structure 
+of the atom. 
+ 
+Meaning and representation in symbols of 
+atoms and sub-atomic particles. 
+ 
+ 
+
+4 
+ 
+CONTENT NOTES 
+ 
+(ii) Relative atomic mass (Ar) and 
+relative molecular mass (Mr) based 
+on Carbon-12 scale.  
+ 
+ 
+ 
+ 
+ 
+(iii) Characteristics and 
+ nature of matter. 
+ 
+ 
+(c) Particulate nature of mater: physical and 
+chemical changes. 
+ 
+ 
+ 
+ 
+ 
+ 
+(d) (i) Electron Configuration 
+ 
+ 
+(ii) Orbitals 
+ 
+ 
+(iii) Rules and principles  
+for filling in electrons. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    
+ 
+(1) Atomic mass as the weighted average 
+mass of isotopes. Calculation of 
+relative mass of chlorine should be 
+used as an example. 
+(2) Carbon-12 scale as a unit of 
+measurement.  
+Definition of atomic mass unit. 
+ 
+Atoms, molecules and ions. 
+Definition of particles and treatment of 
+particles as building blocks of matter. 
+ 
+Explain physical and chemical changes 
+with examples. 
+Physical change- melting of solids, 
+magnetization of iron, dissolution of salt 
+etc. 
+Chemical change- burning of wood, 
+rusting of iron, decay of leaves etc. 
+ 
+Detailed electron configurations (s,p,d) 
+for atoms of the first thirty elements. 
+ 
+Origin of s,p and d orbitals as sub-energy 
+levels; shapes of s and p orbitals only. 
+ 
+(1) Aufbau Principle, Hund’s Rule of 
+Maximum Multiplicity and Pauli 
+Exclusion Principle. 
+(2) Abbreviated and detailed electron 
+configuration in terms of s, p, and d. 
+ 
+ 
+        
+
+5 
+ 
+CONTENT NOTES 
+  
+3.0 STANDARD SEPARATION 
+TECHNIQUES   
+FOR MIXTURES 
+(a) Classification of mixtures. 
+ 
+ 
+(b) Separation techniques 
+ 
+ 
+ 
+(c) Criteria for purity.  
+ 
+ 
+ 
+4.0 PERIODIC CHEMISTRY 
+(a) Periodicity of the elements. 
+ 
+ 
+(b) Different categories of elements in the 
+periodic table. 
+ 
+ 
+ 
+(c) Periodic law: 
+ 
+(i) Trends on periodic table; 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(ii) Periodic gradation of the elements in 
+the third period (Na - Ar). 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Solid-solid, solid-liquid, liquid-liquid, 
+gas-gas with examples. 
+ 
+Crystallization, distillation, precipitation, 
+magnetization, chromatography, 
+sublimation etc. 
+ 
+Boiling point for liquids and melting 
+point for solids. 
+ 
+ 
+ 
+Electron configurations leading to group 
+and periodic classifications. 
+ 
+Metals, semi-metals, non-metals in the 
+periodic table and halogens. Alkali 
+metals, alkaline earth metals and 
+transition metals as metals. 
+ 
+      Explanation of the periodic law. 
+       
+Periodic properties; atomic size, ionic 
+size, ionization energy, electron affinity 
+and electronegativity. 
+Simple discrepancies should be 
+accounted for in respect to beryllium, 
+boron, oxygen and nitrogen. 
+ 
+ 
+(1) Progression from: 
+(i) metallic to non-metallic character 
+of element; 
+(ii) ionic to covalent bonding in 
+compounds. 
+ 
+
+6 
+ 
+CONTENTS NOTES 
+ 
+ 
+ 
+ 
+ 
+ 
+(d)  Reactions between acids and metals, 
+their oxides and trioxocarbonates (IV). 
+ 
+ 
+ 
+ 
+(e) Periodic gradation of elements in group 
+seven, the halogens: F, Cl, Br and I. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(f) Elements of the first transition series. 
+21
+Sc – 
+30
+Zn 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(2) Differences and similarities in the 
+properties between the second and the 
+third period elements should be 
+stated. 
+ 
+(1) Period three metals (Na, Mg, Al). 
+(2) Period four metals (K, Ca). 
+(3) Chemical equations. 
+(4) pH of solutions of the metallic oxides 
+and trioxocarbonates. 
+ 
+Recognition of group variations noting 
+any anomalies. 
+Treatment should include the following: 
+(a) physical states, melting and boiling 
+points; 
+(b) variable oxidation states; 
+(c) redox properties of the elements; 
+(d) displacement reaction of one halogen 
+by another; 
+(e) reaction of the elements with water 
+and alkali (balanced equations 
+required). 
+ 
+(1) Their electron configurations, 
+physical properties and chemical 
+reactivity of the elements and their 
+compounds. 
+(2) Physical properties should include: 
+physical states, metallic properties 
+and magnetic properties. 
+(3) Reactivity of the metals with air, 
+water, acids and comparison with s-
+block elements (Li, Na, Be, Mg). 
+ 
+ 
+ 
+ 
+ 
+ 
+
+7 
+ 
+CONTENT NOTES 
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+5.0 CHEMICAL BONDS 
+(a) Interatomic bonding 
+ 
+ 
+ 
+(b) (i)    Formation of ionic bonds and   
+compounds. 
+ 
+ 
+ 
+(ii) Properties of ionic compounds. 
+ 
+ 
+ 
+(c) Naming of ionic compounds. 
+ 
+ 
+(d)  Formation of covalent bonds and 
+compounds. 
+ 
+ 
+(e) (i) Properties of covalent compounds. 
+ 
+ 
+ 
+(ii) Coordinate (dative) covalent bonding. 
+ 
+ 
+(4) Other properties of transition metals 
+should include: 
+(a) variable oxidation states; 
+(b) formation of coloured 
+compounds; 
+(c) complex formation; 
+(d) catalytic abilities; 
+(e) paramagnetism; 
+(f) hardness. 
+ 
+ 
+ 
+Meaning of chemical bonding. 
+Lewis dot structure for simple ionic and 
+covalent compounds. 
+ 
+Formation of stable compounds from 
+ions. Factors influencing formation: 
+ionzation energy; electron affinity and 
+electronegativity difference. 
+ 
+Solubility in polar and non-polar 
+solvents, electrical conductivity, hardness 
+and melting point. 
+ 
+IUPAC system for simple ionic 
+compounds. 
+ 
+Factors influencing covalent bond 
+formation. Electron affinity, ionization 
+energy, atomic size and electronegativity. 
+ 
+Solubility in polar and non-polar 
+solvents, melting point, boiling point and 
+electrical conductivity. 
+ 
+ Formation and difference between pure 
+covalent and coordinate (dative) covalent 
+bonds. 
+ 
+
+8 
+ 
+CONTENT NOTES 
+ 
+(f) Shapes of molecular compounds. 
+ 
+ 
+ 
+(g) (i) Metallic Bonding 
+ 
+(ii) Factors influencing its formation. 
+ 
+ 
+ 
+ 
+(iii) Properties of metals. 
+ 
+ 
+ 
+(h) (i) Inter molecular bonding 
+ 
+    (ii) Intermolecular forces in covalent 
+compounds. 
+ 
+ 
+ 
+ 
+ 
+          (iii) Hydrogen bonding 
+   
+ 
+ 
+(iii) van der Waals forces 
+ 
+ 
+ 
+ 
+(iv) Comparison of all bond types. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Linear, planar, tetrahedral and shapes for 
+some compounds e.g. BeCl
+2
+, BF
+3
+, CH
+4
+, 
+NH
+3
+, CO
+2
+. 
+ 
+ 
+ 
+Factors should include: atomic radius, 
+ionization energy and number of valence 
+electrons. Types of specific packing not 
+required. 
+ 
+Typical properties including heat and 
+electrical conductivity, malleability, 
+lustre, ductility, sonority and hardness. 
+ 
+Relative physical properties of polar and 
+non-polar compounds.  
+Description of formation and nature 
+should be treated. 
+Dipole-dipole, induced dipole-dipole, 
+induced dipole-induced dipole forces 
+should be treated under van der Waal’s 
+forces. 
+ 
+Variation of the melting points and 
+boiling points of noble gases, halogens 
+and alkanes in the homologous series 
+explained in terms of van der Waal’s 
+forces; and variation in the boiling points 
+of H
+2
+O, and H
+2
+S explained using 
+Hydrogen bonding. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+9 
+ 
+CONTENT NOTES 
+ 
+6.0 STOICHIOMETRY AND CHEMICAL 
+REACTIONS 
+(a) (i) Symbols, formulae and equations. 
+ 
+ 
+ 
+    (ii) chemical symbols 
+ 
+    (iii) Empirical and molecular formulae. 
+ 
+ 
+ 
+ 
+ 
+ 
+(iv) Chemical equations and IUPAC 
+names of chemical compounds. 
+ 
+ 
+ 
+ 
+ 
+(v) Laws of chemical combination. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(b) Amount of substance. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+Symbols of the first thirty elements and 
+other common elements that are not 
+among the first thirty elements. 
+ 
+ 
+ 
+Calculations involving formulae and 
+equations will be required. Mass and 
+volume relationships in chemical 
+reactions and the stoichiometry of such 
+reactions such as: calculation of 
+percentage composition of element. 
+ 
+(1)  Combustion reactions (including 
+combustion of simple hydrocarbons) 
+(2) Synthesis 
+(3)  Displacement or replacement 
+(4) Decomposition 
+(5) Ionic reactions 
+ 
+(1) Laws of conservation of mass. 
+(2) Law of constant composition. 
+(3) Law of multiple proportions. 
+Explanation of the laws to balance 
+given equations. 
+(4)  Experimental illustration of the law 
+of conservation of mass. 
+ 
+(1) Mass and volume measurements. 
+(2) The mole as a unit of measurement; 
+Avogadro’s constant, L= 6.02 x 10
+23
+ 
+entities mol
+-1
+.  
+(3) Molar quantities and their uses. 
+(4) Moles of electrons, atoms, molecules, 
+formula units etc.   
+ 
+ 
+ 
+
+10 
+ 
+CONTENT NOTES 
+ 
+(c) Mole ratios 
+ 
+ 
+ 
+ 
+ 
+ 
+(d)  (i) Solutions 
+ 
+ 
+ 
+ 
+ 
+(ii) Concentration terms 
+ 
+ 
+ 
+ 
+ 
+ 
+(iii) Standard solutions. 
+ 
+ 
+ 
+ 
+ 
+ 
+(e) Preparation of solutions from liquid 
+solutes by the method of dilution. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Use of mole ratios in determining 
+stoichiometry of chemical reactions. 
+Simple calculations to determine the 
+number of entities, amount of substance, 
+mass, concentration, volume and 
+percentage yield of product.  
+  
+(1) Concept of a solution as made up of 
+solvent and solute. 
+(2) Distinguishing between dilute 
+solution and concentrated solution. 
+(3) Basic, acidic and neutral solutions. 
+ 
+Mass (g) or moles (mol) per unit volume. 
+Emphasis on current IUPAC chemical 
+terminology, symbols and conventions. 
+Concentration be expressed as mass 
+concentration, g dm
+-3
+, molar 
+concentration, mol dm
+-3
+. 
+ 
+(1) Preparation of some primary 
+standards e.g anhydrous Na
+2
+CO
+3
+, 
+(COOH)
+2
+,
+ 
+ 2H
+2
+O/H
+2
+C
+2
+O
+4
+.2H
+2
+O. 
+(2) Meanning of the terms primary 
+standard, secondary standard and 
+standard solution. 
+ 
+Dilution factor 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+. 
+
+11 
+ 
+CONTENT NOTES 
+ 
+7.0 STATES OF MATTER 
+(a)   (i) Kinetic theory of matter. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(ii) Changes of state of matter. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(iii) Diffusion 
+ 
+ 
+ 
+   
+ 
+ 
+ 
+ 
+    
+ 
+ 
+ 
+ 
+ 
+ 
+(1) Postulates of the kinetic theory of 
+matter. 
+(2) Use of the kinetic theory to explain 
+the following processes: melting of 
+solids, boiling of liquids, evaporation 
+of liquids, dissolution of solutes, 
+Brownian motion and diffusion. 
+ 
+(1) Changes of state of matter should be 
+explained in terms of movement of 
+particles.  It should be emphasized that 
+randomness decreases (and orderliness 
+increases) from gaseous state to liquid 
+state and to solid state and vice versa. 
+(2) Illustrations of changes of state using the 
+different forms of water, iodine, sulphur, 
+naphthalene etc. 
+(3) Brownian motion to be illustrated using 
+any of the following experiments: 
+(a)  pollen grains/powdered sulphur in 
+water (viewed under a microscope); 
+(b) smoke in a glass container 
+illuminated by a strong light from the 
+side; 
+(c) a dusty room being swept and 
+viewed from outside under sunlight. 
+ 
+(1) Experimental demonstration of 
+diffusion of two gases.
+ 
+(2) Relationship between speed at which 
+different gas particles move and the 
+masses of particles.
+ 
+(3) Experimental demonstration of 
+diffusion of solute particles in 
+liquids.
+ 
+ 
+  
+ 
+ 
+\ 
+ 
+
+12 
+ 
+CONTENT NOTES 
+ 
+(b) Gases: 
+(i) Characteristics and nature of gases; 
+ 
+ 
+(ii) The gas laws; 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(iii) Laboratory preparation and properties of 
+some gases. 
+ 
+ 
+ 
+ 
+ 
+(c)  (i) Liquids 
+ 
+ 
+ 
+ 
+(ii) Vapour and gases. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Arrangement of particles, density, shape 
+and compressibility. 
+ 
+The Gas laws: Charles’; Boyle’s; 
+Dalton’s law of partial pressure; 
+Graham’s law of diffusion, Avogadro’s 
+law. The ideal gas equation of state. 
+Qualitative explanation of each of the 
+gas laws using the kinetic model.  
+The use of Kinetic molecular theory to 
+explain changes in gas volumes, 
+pressure, temperature. 
+Mathematical relations of the gas law 
+PV= nRT 
+Ideal and Real gases 
+Factors responsible for the deviation of 
+real gases from ideal situation. 
+ 
+(1)  Preparation of the following gases: 
+H
+2
+, NH
+3
+ and CO
+2
+. Principles of 
+purification and collection of gases. 
+(2)  Physical and chemical properties of 
+the gases. 
+ 
+ 
+Characteristics and nature of liquids 
+based on the arrangement of particles, 
+shape, volume, compressibility, density 
+and viscosity. 
+ 
+(1)  Concept of vapour, vapour pressure, 
+saturated vapour pressure, boiling 
+and evaporation. 
+(2)  Distinction between vapour and gas. 
+(3)  Effect of vapour pressure on boiling 
+points of liquids. 
+(4)  Boiling at reduced pressure. 
+ 
+ 
+
+13 
+ 
+CONTENT NOTES 
+ 
+(d) Solids: 
+(i) Characteristics and nature; 
+ 
+ 
+ 
+ 
+ 
+ 
+(ii) Types and structures; 
+ 
+ 
+ 
+ 
+ 
+(iii) Properties of solids. 
+ 
+(e)  Structures, properties and uses of 
+diamond and graphite. 
+ 
+ 
+(f)  Determination of melting points of 
+covalent solids. 
+ 
+ 
+8.0 ENERGY AND ENERGY CHANGES 
+(a) Energy and enthalpy 
+ 
+ 
+ 
+(b) Description, definition and illustrations 
+of energy changes and their effects. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(1) Ionic, metallic, covalent network and 
+molecular solids. Examples in each 
+case. 
+(2) Arrangements of particles ions, 
+molecules and atoms in the solid 
+state. 
+ 
+Relate the properties of solids to the type 
+of interatomic and intermolecular 
+bonding in the solids. Identification of 
+the types of chemical bonds in graphite 
+and differences in the physical properties. 
+ 
+ 
+ 
+The uses of diamond and graphite related 
+to the structure. 
+The use of iodine in everyday life. 
+ 
+Melting points as indicator of purity of 
+solids e.g. Phenyl methanedioic acid 
+(benzoic acid), ethanedioic acid (oxalic) 
+and ethanamide. 
+ 
+ 
+Explanation of the terms energy and 
+enthalpy. Energy changes associated with 
+chemical processes. 
+ 
+(1) Exothermic and endothermic 
+processes. 
+(2) Total energy of a system as the sum 
+of various forms of energy e.g. 
+kinetic, potential, electrical, heat, 
+sound etc. 
+(3) Enthalpy changes involved in the 
+following processes: combustion, 
+dissolution and neutralization. 
+ 
+
+14 
+ 
+CONTENT NOTES 
+ 
+9.0 ACIDS, BASES AND SALTS 
+(a) Definitions of acids and bases. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(b) Physical and chemical properties of acids 
+and bases. 
+ 
+ 
+ 
+ 
+ 
+(c) Acids, bases and salts as electrolytes. 
+ 
+ 
+ 
+ 
+(d) Classification of acids and bases. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(e) Concept of pH 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(1)  Arrhenius concepts of acids and 
+bases in terms of H
+3
+O
++
+ and OH
+-
+ ions 
+in water. 
+(2)  Effects of acids and bases on 
+indicators, metal Zn, Fe and 
+trioxocarbonate (IV) salts and 
+hydrogentrioxocarbonate (IV) salts. 
+ 
+Characteristic properties of acids and 
+bases in aqueous solution to include: 
+(a) conductivities, taste, 
+litmus/indicators, feel etc.; 
+(b)  balanced chemical equations of all  
+reactions. 
+ 
+Electrolytes and non-electrolytes; strong 
+and weak electrolytes. Evidence from 
+conductivity and enthalpy of 
+neutralization. 
+ 
+(1)  Strength of acids and bases. 
+(2)  Classify acids and bases into strong 
+and weak. 
+(3)  Extent of dissociation reaction with 
+water and conductivity. 
+(4)  Behaviour of weak acids and weak 
+bases in water as example of 
+equilibrium systems. 
+ 
+(1)  Definition of pH and knowledge of 
+pH scale. 
+(2) Measurement of pH of solutions 
+using pH meter, calometric methods 
+or universal indicator. 
+(3)  Significance of pH values in 
+everyday life e.g. acid rain, pH of 
+soil, blood, urine. 
+ 
+
+15 
+ 
+CONTENT NOTES 
+ 
+(f) Salts: 
+ 
+ 
+ 
+(i) Laboratory and industrial preparation 
+of salts; 
+(ii) Uses; 
+ 
+ 
+ 
+(iii) Hydrolysis of salt. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(g) Deliquescent, efflorescent and 
+hygroscopic compound. 
+ 
+(h) Acid-Base indicators 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(i) Acid-Base titration 
+ 
+ 
+ 
+ 
+ 
+Meaning of salts. 
+Types of salts: normal, acidic, basic, 
+double and complex salts. 
+ 
+(1) Description of laboratory and 
+industrial production of salts. 
+(2)  Mining of impure sodium chloride 
+and conversion into granulated salt. 
+(3)  Preparation of  NaOH, Cl
+2
+ and H
+2
+. 
+ 
+(1)  Explanation of how salts forms 
+acidic, alkaline and neutral aqueous 
+solutions. 
+(2)  Behaviour of some salts (e.g NH
+4
+Cl, 
+AlCl
+3
+, Na
+2
+CO
+3
+, CH
+3
+COONa) in 
+water as examples of equilibrium 
+systems. 
+(3)  Effects of charge density of some 
+cations and anions on the hydrolysis 
+of their aqueous solution. Examples 
+to be taken from group 1, group 2, 
+group 3 and the d-block element. 
+ 
+Use of hygroscopic compounds as 
+drying agent should be emphasized. 
+ 
+(1)  Qualitative description of how acid-
+base indicator works. 
+(2) Indicators as weak organic acids or 
+bases (organic dyes). 
+(3)  Colour of indicator at any pH 
+dependent on relative amounts of 
+acid and forms. 
+(4)  Working pH ranges of methyl orange 
+and phenolphthalein. 
+ 
+(1) Knowledge and correct use of 
+relevant apparatus. 
+(2)  Knowledge of how acid-bases 
+indicators work in titrations. 
+
+16 
+ 
+CONTENT 
+ 
+NOTES 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+10.0 SOLUBILITY OF SUBTANCES 
+(a) General principles 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(b) Practical application of solubility. 
+ 
+    
+ 
+ 
+ 
+ 
+(3)  Acid-base titration experiments 
+involving HCl, HNO
+3
+, H
+2
+SO
+4
+ and 
+NaOH, KOH, Ca(OH)
+2
+, CO
+3
+2-
+, 
+HCO
+3
+-
+. 
+(4)  Titration involving weak acids 
+versus strong bases, strong acids 
+versus weak bases and strong acids 
+versus strong bases using the 
+appropriate indicators and their 
+applications in quantitative 
+determination; e.g. concentrations, 
+mole ratio, purity, water of 
+crystallization and composition. 
+ 
+ 
+(1)  Meaning of Solubility. 
+(2)  Saturated and unsaturated solutions. 
+(3)  Saturated solution as an equilibrium 
+system. 
+(4)  Solubility expressed in terms of: mol 
+dm
+-3
+ and g dm
+-3 
+of solution/solvent. 
+(5)  Solubility curves and their uses. 
+(6)  Effect of temperature on solubility of 
+a substance. 
+(7)  Relationship between solubility and 
+crystallization. 
+(8)  Crystallization/recrystallization as a 
+method of purification. 
+(9)  Knowledge of soluble and insoluble 
+salts of stated cations and anions. 
+(10) Calculations on solubility. 
+ 
+Generalization about solubility of salts 
+and their applications to qualitative 
+analysis. e.g. Pb
+2+
+, Ca
+2+
+, Al
+3+
+, Cu
+2+
+, 
+Fe
+2+
+, Fe
+3+
+, Cl
+-
+, Br
+-
+, I
+-
+, SO
+4
+2-
+, S
+2-
+, and 
+CO
+3
+2-
+, Zn
+2+
+, NH
+4+
+, SO
+3
+2-
+ 
+Explanation of solubility rules.
+ 
+ 
+
+17 
+ 
+CONTENT NOTES 
+ 
+11.0 CHEMICAL KINETICS AND 
+EQUILIBRIUM SYSTEM 
+(a) Rate of reactions: 
+ 
+ 
+ 
+ 
+     (i) Factors affecting rates; 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+     (ii) Theories of reaction rates; 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+     (iii) Analysis and interpretation of graphs. 
+ 
+(b) Equilibrium: 
+      (i) General Principle; 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+       
+  
+ 
+ 
+ 
+ 
+(1) Definition of reaction rate. 
+(2) Observable physical and changes: 
+colour, mass, temperature, pH, 
+formation of precipitate etc. 
+ 
+(1) Physical states, concentration/ 
+pressure of reactants, temperature, 
+catalysts, light, particle size and 
+nature of reactants. 
+(2) Appropriate experimental 
+demonstration for each factor is 
+required. 
+ 
+(1) Collision and transition state 
+theories to be treated qualitatively 
+only.  
+(2) Factors influencing collisions: 
+temperature and concentration. 
+(3) Effective collision. 
+(4) Activation energy. 
+(5) Energy profile showing activation 
+energy and enthalpy change. 
+ 
+Drawing of graphs and charts. 
+ 
+ 
+Explanation of reversible and 
+irreversible reactions. Reversible 
+reaction i.e. dynamic equilibrium. 
+Equilibrium constant K must be treated 
+qualitatively. It must be stressed that K 
+for a system is constant at constant 
+temperature. 
+Simple experiment to demonstrate 
+reversible reactions.  
+ 
+ 
+ 
+
+18 
+ 
+CONTENT NOTES 
+ 
+(ii) Le Chatelier’s principle. 
+ 
+ 
+12.0 REDOX REACTIONS 
+(a) Oxidation and reduction process. 
+ 
+ 
+ 
+ 
+ 
+(b) Oxidizing and reducing agents. 
+ 
+ 
+ 
+(c) Redox equations 
+ 
+ 
+(d)  Electrochemical cells: 
+     (i) Standard electrode potential;  
+ 
+ 
+ 
+(ii) Drawing of cell diagram and writing 
+cell notation. 
+ 
+ 
+ 
+Prediction of the effects of external 
+influence of concentration, temperature  
+pressure and volume changes on 
+equilibrium systems. 
+ 
+ 
+(1) Oxidation and reduction in terms of: 
+(a) addition and removal of oxygen 
+and  hydrogen; 
+(b) loss and gain of electrons; 
+(c) change in oxidation   
+numbers/states. 
+(2) Determination of oxidation 
+numbers/states. 
+ 
+ 
+(1) Description of oxidizing and reducing 
+agents in terms of: 
+(a) addition and removal of oxygen 
+and hydrogen; 
+(b) loss and gain of electrons; 
+(c) change in oxidation numbers/state. 
+ 
+Balancing redox equations by: 
+(a) ion, electron or change in oxidation 
+number/states; 
+(b) half reactions and overall reaction. 
+ 
+Definition/Explanation  
+(1) Standard hydrogen electrode: 
+meaning of standard electrode 
+potential (E
+o
+) and its measurement. 
+(2) Only metal/metal ion systems should 
+be used. 
+ 
+ 
+ 
+ 
+ 
+
+19 
+ 
+CONTENT NOTES 
+ 
+(iii) e.m.f of cells; 
+ 
+ 
+(iv) Application of Electrochemical cells. 
+ 
+ 
+  
+    (e) Electrolysis: 
+ (i) Electrolytic cells; 
+ 
+         (ii) Principles of electrolysis; 
+ 
+(iii) Factors influencing discharge of 
+species; 
+ 
+ 
+(iv) Faraday’s laws; 
+ 
+ 
+ 
+(v) Practical application; 
+ 
+ 
+ 
+ 
+(1) Electrochemical cells as a 
+combination of two half-cells. 
+(2) The meaning of magnitude and sign 
+of the e.m.f. 
+ 
+(1) Distinction between primary and 
+secondary cells 
+(2) Daniell cell, lead acid battery cell, dry 
+cells, fuel cells and their use as 
+generators of electrical energy from 
+chemical reactions. 
+ 
+Definition. 
+ 
+Comparison of electrolytic and 
+electrochemical cells; weak and strong 
+electrolyte. 
+ 
+Mechanism of electrolysis. 
+ 
+ 
+Limit electrolytes to molten PbBr
+2
+ 
+ and NaCl, dilute NaCl solution, 
+concentrated NaCl solution, CuSO
+4(aq)
+, 
+dilute H
+2
+SO
+4
+, NaOH
+(aq)
+ and CaCl
+2(aq) 
+(using platinum or graphite and copper 
+electrodes). 
+ 
+Simple calculations based on the relation 
+1F= 96,500 C and mole ratios to 
+determine mass, volume of gases, 
+number of entities, charges etc. using 
+half and overall reactions. 
+ 
+Electroplating, extraction and purification 
+of metals. 
+ 
+ 
+ 
+ 
+
+20 
+ 
+CONTENT NOTES 
+ 
+(vi) Corrosion of metals. 
+ 
+ 
+ 
+ 
+ 
+13.0 CHEMISTRY OF CARBON 
+COMPOUNDS 
+(a) Classification  
+ 
+(b) Functional group 
+ 
+ 
+ 
+ 
+(b) Separation and purification of organic 
+compounds. 
+ 
+(c) Petroleum/crude oil 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(1)   Corrosion treated as a redox process. 
+(2)   Rusting of iron and its economic 
+costs. 
+(3)   Prevention based on relative 
+magnitude of electrode potentials 
+and preventive methods like 
+galvanizing, sacrificial/cathodic 
+protection and non-redox methods 
+(painting, greasing/oiling etc.). 
+ 
+ 
+ 
+Broad classification into straight chain, 
+branched chain, aromatic and alicyclic 
+compounds. 
+ 
+Systematic nomenclature of compounds 
+with the following functional groups: 
+alkanes, alkenes, alkynes, hydroxyl 
+compounds (aliphatic and aromatic), 
+alkanoic acids, alkyl alkanoates (esters 
+and salts) and amines. 
+ 
+Methods to be discussed should include:  
+distillation; crystallization; drying and 
+chromatography. 
+ 
+(1) Composition and classification. 
+(2) Fractional distillation and major 
+products. 
+(3) Cracking and reforming. 
+(4) Petro-chemicals: sources; uses e.g. 
+as starting materials of organic 
+synthesis. 
+(5) Quality of petrol, meaning of octane 
+number and its importance to the 
+petroleum industry. 
+ 
+
+21 
+ 
+CONTENT NOTES 
+ 
+(d) Determination of empirical and 
+molecular formulae and molecular 
+structures of organic compounds. 
+(e) General properties of organic 
+compounds: 
+(i) Homologous series; 
+ 
+ 
+(ii) Isomerism. 
+ 
+ 
+ 
+(f) Alkanes: 
+(i) Sources, properties; 
+ 
+ 
+ 
+ 
+ 
+(ii) Uses. 
+ 
+(g) Alkenes: 
+(i) Sources and properties; 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(1)  Gradation in physical properties. 
+(2)  Effects on the physical properties by 
+introduction of active groups into the 
+inert alkane. 
+ 
+(1)  Examples should be limited to 
+compounds having maximum of five 
+carbon atoms. 
+(2)  Differences between structural and 
+geometric/stereo isomerism. 
+ 
+ 
+ 
+(1) 
+Laboratory and industrial 
+preparations and other sources. 
+(2)  Nomenclature and structure. 
+(3)  Reactivity: 
+     (a)  combustion; 
+ (b)  substitution reactions; 
+(c) cracking of large alkane 
+molecules. 
+ 
+As fuels, as starting materials for 
+synthesis.  Uses of haloakanes and 
+pollution effects. 
+ 
+ 
+ 
+(1) 
+  Laboratory preparation. 
+(2)   Nomenclature and structure. 
+ 
+ 
+
+22 
+ 
+CONTENT NOTES 
+ 
+ 
+ 
+ 
+ 
+(ii) Uses; 
+(iii) Laboratory detection. 
+ 
+(h) Alkynes: 
+(i) Sources, characteristic properties and 
+uses; 
+ 
+ 
+ 
+(ii) Chemical reactions.    
+   
+(i) Benzene: 
+      (i) Structure and physical properties; 
+ 
+     (ii) Chemical properties. 
+ 
+ 
+ 
+ 
+ 
+ 
+(3) Addition reactions with halogens 
+hydrogen, bromine water, hydrogen 
+halides and acidified water. 
+(4)  Oxidation: hydroxylation with 
+aqueous KMnO
+4
+. 
+(5)   Polymerization. 
+ 
+ 
+ 
+Use of reaction with Br
+2
+/water, Br
+2
+/CCl
+4
+ 
+and KMnO
+4(aq) 
+as means of 
+characterizing alkenes. 
+ 
+ 
+(1)  Nomenclature and structure. 
+(2)  Industrial production of ethyne. 
+(3)  Uses of ethyne. 
+(4)  Distinguishing test between terminal 
+and non-terminal alkynes. 
+(5)  Test to distinguish between alkane, 
+alkene and alkyne. 
+ 
+Chemical reactions: halogenation, 
+combustion, hydration and 
+hydrogenation. 
+ 
+ 
+Resonance in benzene.  Stability leading 
+to substitution reactions. 
+ 
+ 
+(1)  Addition reactions: hydrogenation 
+and halogenation (mechanism not 
+required). 
+(2)  Compare reactions with those of 
+alkenes. 
+ 
+ 
+ 
+ 
+
+23 
+ 
+CONTENT 
+NOTES 
+ 
+(J) Alkanols: 
+     (i) Sources, nomenclature and structure; 
+ 
+ 
+ 
+ 
+ 
+     (ii) Classification; 
+     (iii) Physical properties; 
+ 
+     (iv) Chemical properties; 
+ 
+ 
+ 
+ 
+     (v)  Laboratory test; 
+     (vi) Uses. 
+(k) Alkanoic acids: 
+ 
+     (i) Sources, nomenclature and structure; 
+    (ii) Physical properties; 
+ 
+ 
+ 
+ 
+ 
+ 
+(1) Laboratory preparation including 
+hydration of alkenes. 
+(2) Industrial and local production of 
+ethanol including alcoholic 
+beverages,  
+(3) Harmful impurities and methods of 
+purification should be mentioned. 
+(4) Recognition of the structure of mono-
+, di- and triols. 
+ 
+Primary, secondary and tertiary alkanols. 
+ 
+Boiling point, solubility in water. 
+Including hydrogen bonding effect. 
+ 
+(1) Reaction with: 
+(a)  Na; 
+(b) alkanoic acids (esterification); 
+(c) conc. H
+2
+SO
+4
+. 
+(2) Oxidation by: 
+(a) KMnO
+4(aq)
+; 
+(b) K
+2
+Cr
+2
+O
+7(aq)
+; 
+(c) I
+2
+ in NaOH
+(aq)
+. 
+ 
+          Laboratory test for ethanol
+. 
+ 
+ 
+Methanoic acid –insect bite. 
+Ethanoic acid – vinegar. 
+ 
+Recognition of mono and dioic acid. 
+ 
+Boiling point, solubility in water. 
+Including hydrogen bonding effect.  
+ 
+ 
+ 
+
+24 
+ 
+CONTENT NOTES 
+ 
+   (iii) Chemical properties; 
+ 
+   (iv) Laboratory test; 
+         (iv) Uses. 
+ 
+ 
+(l) Alkanoates as drivatives of alkanoic acids: 
+(i)  Sources, nomenclature, preparation 
+and structure; 
+ 
+           (ii) Physical properties; 
+           (iii) Chemical properties; 
+ 
+           (iv) Uses. 
+ 
+ 
+14.0 CHEMISTRY, INDUSTRY AND THE 
+ENVIRONMENT 
+      (a) Chemical industry 
+ 
+ 
+ 
+ 
+       
+ 
+ 
+Acid properties only i.e. reactions with 
+H
+2
+O, NaOH, NH
+3
+, NaHCO
+3
+, Zn and Mg. 
+ 
+Reaction with NaHCO
+3
+, Na
+2
+CO
+3
+. 
+ 
+Uses of ethanoic and phenyl methanoic 
+(benzoic) acids as examples of aliphatic 
+and aromatic acids respectively. 
+ 
+ 
+ 
+ 
+Preparation of alkyl alkanoates (esters) 
+from alkanoic acids. 
+ 
+Solubility, boiling and melting point. 
+ 
+Hydrolysis of alkyl alkanoates 
+(mechanism not required). 
+ 
+Uses of alkanoates to include 
+production of soap, flavouring agent, 
+plasticizers, as solvents and in 
+perfumes. 
+ 
+ 
+ 
+ 
+(1) Natural resources in candidate’s won 
+country. 
+(2) Chemical industries in candidates own 
+country and their corresponding raw 
+materials. 
+(3) Distinction between fine and heavy 
+chemicals. 
+ 
+ 
+ 
+
+25 
+ 
+CONTENT NOTES 
+       
+ 
+ 
+ 
+      (b) Pollution: air, water and soil 
+pollution; 
+ 
+ 
+      (c) Biotechnology. 
+ 
+15.0 BASIC BIOCHEMISTRY AND 
+SYNTHETIC POLYMERS 
+     (a) Proteins: 
+ 
+ 
+           (i) Sources and properties; 
+ 
+ 
+ 
+            (ii) Uses of protein. 
+     (b) Amino acids 
+ 
+ 
+ 
+ 
+ 
+(4) Factors that determine location of 
+chemical industries. 
+(5) Effect of industries on the 
+community. 
+ 
+ 
+(1) Sources, effects and control. 
+(2) Greenhouse effect and depletion of 
+the ozone layer. 
+(3) Biodegradable and non-biodegradable 
+pollutants. 
+ 
+Food processing, fermentation including 
+production of gari, bread and alcoholic 
+beverages e.g. Local gin. 
+ 
+ 
+ 
+Proteins as polymers of amino acids 
+molecules linked by peptide or amide 
+linkage. 
+ 
+Physical properties e.g. solubility  
+Chemical properties to include: 
+(a) hydrolysis of proteins; 
+(b) laboratory test using 
+Ninhydrin/Biuret reagent/Millons 
+reagent. 
+ 
+ 
+ 
+(1) Nomenclature and general structure 
+of amino acids. 
+(2) Difunctional nature of amino acids. 
+ 
+ 
+ 
+ 
+ 
+
+26 
+ 
+CONTACT NOTES 
+ 
+(c) Fats/oils: 
+     (i) Sources and properties; 
+ 
+ 
+ 
+ 
+    (ii) General structure of fats/oils; 
+ 
+   (iii) Preparation of soap; 
+ 
+ 
+  (iv) Uses of fats/oils. 
+ 
+(d) Carbohydrates: 
+(i) Sources and nomenclature; 
+ 
+ 
+ 
+ 
+(ii) Properties; 
+ 
+ 
+ 
+ 
+ 
+ 
+As alkyl alkanoates (esters). 
+ 
+From animals and plants. 
+Physical properties such as solubility. 
+Chemical properties: 
+(a) acidic and alkaline hydrolysis; 
+(b) hydrogenation; 
+(c) test for fats and oil. 
+ 
+As mono-, di-, and tri- esters of propane-
+1,2,3-triol (glycerol). 
+ 
+ 
+(1) Preparation of soap (saponification) 
+from fats and oils. 
+(2) Comparison of soap less detergents 
+and their action on soft and hard 
+water. 
+ 
+ 
+ 
+ 
+ 
+(1) Classes of carbohydrates as: 
+(a) monosaccharides; 
+(b) disaccharides; 
+(c) polysaccharides. 
+(2) Name and components of various 
+classes of carbohydrates. 
+ 
+(1) Physical properties such as solubility 
+of sugars. 
+(2) Chemical properties- Hydrolysis of 
+disaccharides into monosaccharides. 
+(3) Test for reducing sugars using sugar 
+strips, Fehling’s or Benedicts solution 
+or Tollen’s reagent. 
+ 
+
+27 
+ 
+CONTENT NOTES 
+ 
+(iii) Carbohydrate as examples of 
+polymer; 
+ 
+ 
+     (iv) Uses. 
+ 
+(e) Synthetic polymers: 
+  
+ 
+ 
+(i) Properties; 
+    
+ 
+ 
+ 
+ 
+(ii) Uses of polymers. 
+ 
+ 
+(1) Starch as a polymer made up of 
+glucose units. 
+(2) Condensation of monosaccharides to 
+form disaccharides and 
+polysaccharides. 
+ 
+ 
+ 
+ 
+(1) Definition of terms: monomers, 
+polymers and polymerization. 
+(2) Addition and condensation 
+polymerization. 
+(3) Classification and preparation based 
+on the monomers and comonomers. 
+ 
+(1) Thermoplastics and thermosets. 
+(2) Modification of properties of 
+polymers. 
+(3) Plastics and resins. 
+(4) Chemical test on plastics using: 
+(a) heat; 
+(b) acids; 
+(c) alkalis. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+28 
+ 
+SECTION B 
+(For candidates in Ghana only) 
+ 
+CONTENTS NOTES 
+ 
+1.0 STRUCTURE OF THE ATOM 
+(a)  Elementary treatment of mass 
+spectrometer. 
+ 
+ 
+ 
+ 
+ 
+ 
+(b) (i)  Nuclear chemistry 
+ 
+(ii)  Types and nature of radiations: 
+alpha, beta particles and gamma 
+radiation. 
+ 
+ 
+(iii)  Radioactivity: 
+induced/stimulated. 
+ 
+(iv)  Nuclear reactions: fission and 
+fusion in nuclear reactions. 
+ 
+ 
+ 
+(v)  Effects and application of 
+radioactivity 
+ 
+ 
+ 
+ 
+ 
+ 
+2.0 PERIODIC CHEMISTRY 
+(a)  Reactions between acids  
+and metals their oxides and 
+trioxocarbonates (IV). 
+ 
+ 
+(1) Qualitative knowledge of the mass 
+spectrometer: principles and operations of the  
+mass spectrometer; and its use to detect 
+isotopes, determination of Relative atomic and 
+molecular masses only. 
+(2) Wave nature of electrons. 
+(3) Quantum numbers and their importance. 
+ 
+Meaning of terms: Nucleons, nuclide. 
+ 
+Charges, relative mass and penetrating power of 
+radiations.  Meaning of radioactivity.  Difference 
+between spontaneous nuclear reactions 
+(radioactivity) and induced nuclear reactions. 
+ 
+Natural and artificial radioactivity. 
+Detection of radiation by Geiger-Muller counter. 
+ 
+Distinction between ordinary chemical reactions 
+and nuclear reactions.  Generations of electricity; 
+atomic bombs. Balanced equations of nuclear 
+reactions 
+ 
+(1) Carbon dating (qualitative treatment only). 
+(2) Use of radioactivity in agriculture, medicine 
+and industries. 
+(3) Hazards associated with nuclear radiations. 
+ 
+Factors affecting stability of nuclides: 
+Binding energy, neutron-proton ratio, and half life. 
+Calculations involving half-life 
+ 
+ 
+(1) Period three metals (Na, Mg, Al) 
+(2) Period four metals (K, Ca) 
+(3) Chemical equations 
+(4) pH of solutions of the metallic oxides and 
+trioxocarbonates. 
+
+29 
+ 
+CONTENTS NOTES 
+ 
+(b) Acidic properties of oxides of non-
+metals. 
+ 
+ 
+ 
+(c) Physical and chemical properties of 
+period 3 elements and their 
+compounds. 
+ 
+ 
+ 
+ 
+ 
+ 
+(d) Silicon 
+ 
+ 
+ 
+ 
+ 
+(e) Periodic gradation of elements in 
+group seven i.e. the halogens. 
+ 
+ 
+(f) Bonding in complex compounds. 
+ 
+ 
+ 
+ 
+ 
+ 
+(g) Shapes of complex compounds. 
+ 
+ 
+(h) Elements of the first transition 
+series. 
+ 
+3.0. CHEMICAL BONDS 
+      (a) Formation of Ionic bonds: 
+          (i) Factors that influence ionic bond 
+formation; 
+ 
+(1) Oxides of carbon, nitrogen, sulphur, 
+phosphorus and chlorine. 
+(2) pH of aqueous solutions of the oxides. 
+(3) Chemical equations. 
+ 
+(1) Comparison of the physical and chemical 
+properties of period three elements. 
+(2) Comparison of the physical and chemical 
+properties of (hydrides, oxides, hydroxides 
+and chlorides) compounds. 
+(3) Thermal stability of CO
+3
+2- 
+and NO
+3
+- 
+of Li, 
+Na, K, Mg and Ca. 
+(4) Experiment to compare thermal stability of 
+Na
+2
+CO
+3
+/LiCO
+3
+/CuSO
+4
+. 
+ 
+(1) Structures for SiO
+2
+ and CO
+2
+ account for the 
+differences between physical and chemical 
+properties of the two oxides. 
+(2) Uses of silicon and its compounds e.g. 
+ceramics, glass, silica gel and microchips. 
+ 
+(1) Inter- atomic bond energies.  
+(2) Hydrides and their acid strength comparison 
+of the Ka values of the hydrogen halides. 
+(3) Variable oxidation states of the halogens. 
+ 
+Definition of ligands and central ions  
+Examples of ligands 
+(1)  Formation of coordination compounds. 
+(2) Nomenclature of complex ions and 
+compounds (Cl
+-
+, F
+-
+, I
+-
+, NO
+3
+-
+, NH
+3
+, H
+2
+O, 
+SO
+4
+2-
+). 
+ 
+Tetrahedral, square planar, octahedral e.g. 
+(Fe(CN)
+6
+]
+3-
+, [Cu(NH
+3
+)
+4
+]
+2+
+, [Ag)NH
+3
+)
+2
+]
++ 
+[Cu)CN)
+4
+]
+2 
+ 
+Reactivity of the metals with air, water, acids and 
+comparison with s-block elements (Li, Na, Be, 
+Mg). 
+ 
+ 
+Factors should include lattice energy. 
+ 
+
+30 
+ 
+CONTENTS NOTES 
+          
+           (ii) Covalent character in ionic bond; 
+    (iii) Polar covalent bonds. 
+ 
+ 
+ 
+ 
+ 
+ 
+(b)(i)  Hybridization of atomic orbitals. 
+ 
+    (ii)  Formation of hybrid orbitals. 
+ 
+ 
+ 
+ 
+       (iii)  Formation of sigma (σ) and pi (π) 
+bonds. 
+ 
+4.0 SOLUTIONS 
+     (a)  Preparation of solutions from liquid 
+solutes by the method of dilution. 
+ 
+ 
+ 
+ 
+ 
+ 
+5.0 ENERGY AND ENERGY CHANGES
+ 
+(a) Energy changes in physical and 
+isolated systems. 
+ 
+ 
+ 
+ 
+ 
+(b) Hess’s Law of heat summation and 
+Born-Haber cycle. 
+ 
+ 
+ 
+ 
+ 
+(1) Ionic character (polarity) in covalent bonds 
+based on electronegativity difference 
+between the species involved. 
+(2) Effects of covalent and ionic character in 
+ionic and covalent bonds on the solubility, 
+thermal stability and boiling points of ionic 
+and covalent compounds. 
+ 
+Definition of Hybridization. 
+ 
+(1)  Description of sp, sp
+2
+, sp
+3
+ hybrid orbitals. 
+(2) Shapes of sp, sp
+2
+, sp
+3
+ and sp
+3
+d
+2
+ hybrid 
+orbitals.  Treatment should be limited to the 
+following molecules only.  CH
+4
+, H
+2
+O, NH
+3
+, 
+BCl
+3
+, C
+2
+H
+2
+, BeCl
+2
+, C
+2
+H
+4 
+and SF
+6
+. 
+ 
+Description of sigma and pi bonds. Using C
+2
+H
+2 
+and 
+C
+6
+H
+6
+. 
+ 
+ 
+(1) Outline of steps involved in the preparation 
+of solutions from liquid solutes. 
+(2) Determination of concentration of liquid 
+solutes (stock solution) given the density, 
+w/v, w/w), specific gravity, relative 
+molecular mass, molar mass, and % purity. 
+(3) Primary standard, secondary standard and 
+standardized solution. 
+ 
+ 
+(1) Definition and understanding of the 
+meaning of the energy terms: systems, 
+surroundings, open and closed. 
+(2) Enthalpy change involved in the following 
+processes: combustion, atomization, 
+sublimation, hydration/salvation and 
+dissolution. 
+ 
+Explanation of Hess’s law and its application in 
+the development of the Born-Haber cycle. 
+(1) Use of difference cycles to illustrate Hess’s 
+law. 
+
+31 
+ 
+CONTENTS NOTES 
+ 
+ 
+ 
+ 
+ 
+(c)   Bond Energy 
+        
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+6.0  ACIDS, BASES AND SALTS 
+        (a)  Definitions of acids and bases. 
+ 
+ 
+ 
+(b) pH, pOH and pK
+w 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(c) Partial ionization of weak acids and 
+weak bases. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(d) Buffer Solutions 
+ 
+ 
+ 
+(2) Simple calculations using chemical 
+equations, energy cycles or diagrams with 
+given energy changes. 
+ 
+Explanation of bond energy and bond 
+dissociation energy. 
+(1)  Bond energy as an average value. 
+Differences in bond energy and bond 
+dissociation energy. 
+(2) Bond energy in molecules and its use in 
+assessment of bond strength, energy content 
+and enthalpy of reaction. 
+(3) Calculations using summation of bond 
+energies in reactants and products as a 
+measure of enthalpy of reaction. 
+ 
+ 
+(1) Bronsted – Lowry and Lewis concept of 
+acids and bases. 
+(2) Conjugate acid-base pair concept in terms 
+of equilibrium. 
+ 
+(1) Ionic product constant of water K
+w
+ = 
+[H+
+(aq)
+][OH
+(aq)
+] = 1.0 x 10
+-14 
+mol
+2
+dm
+-6
+. 
+(2) pH and pOH as a measure of acidity and 
+alkalinity respectively pH = -log[H
+3
+O
++
+]. 
+(3) Knowledge of pH scale. 
+(4) Calculation of [H
++
+], [OH
+-
+] and the 
+corresponding pH and pOH of given 
+solutions. 
+ 
+Explanation of pKa and pKb of weak acids and 
+bases. 
+(1) Behaviour of weak acids and weak bases in 
+water as example of equilibrium systems. 
+(2) Calculations involving Ka, pKa and Kb, 
+pKb. 
+(3) Ka, pKa and Kb, pKb as measurements of 
+acid and basic strengths respectively. 
+ 
+(1) Qualitative definition of buffers. 
+(2) Examples of buffers from the laboratory. 
+(3) Preparation of buffer solutions. 
+
+32 
+ 
+CONTENTS NOTES 
+ 
+(e) Acid base titrations 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+7.0  SOLUBILITY OF SUBSTANCES 
+ 
+       (a)  Solubility and solubility product. 
+ 
+ 
+ 
+ 
+(c) Crystallization and recrystallization. 
+ 
+ 
+ 
+8.0  CHEMICAL KINETICS AND 
+        EQUILIBRIUM SYSTEMS 
+(a) Rate law and Order of reaction 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(b) Rate determining step of a multi-step 
+reaction. 
+ 
+(c) Equilibrium 
+ 
+ 
+ 
+Double indicator titrations (continuous and 
+Discontinuous) and back titration. 
+Calculations involving concentration, composition 
+and % purity. 
+Graphs for acid-based titrations. Nature of graphs 
+of strong acid and strong base, strong acid and 
+weak base and strong base and weak acid. 
+ 
+ 
+ 
+ 
+(1) Explanation of solubility products (Ksp) of 
+sparingly soluble ionic compounds. 
+(2) Calculations involving solubility and 
+solubility products. 
+(3) Factors affecting solubility. 
+ 
+Explanation of the effect of lattice energy and 
+hydration energy on crystallization and 
+recrystallization. 
+ 
+ 
+ 
+(1) Deduction of order and rate law from 
+experimental data. 
+(2) Simple relationship between rates and 
+concentration of zero, first and second order 
+reactions.  Graphical representation of zero, 
+first and second order reactions. 
+(3) Half-life for first order reactions and its 
+significance. 
+(4) General rate law equation. 
+(5) Derivation of the rate expression from 
+experimentally determined rate data: 
+R = k[A]
+x
+ [B]
+y 
+ where k = rate constant. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+33 
+ 
+CONTENTS NOTES 
+ 
+(d) Equilibrium Law of Mass Action. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+9.0  CHEMISTRY OF CARBON   
+       COMPOUNDS 
+(a)  Separation and Purification.  
+ 
+ 
+(b) Determination of empirical and 
+molecular formulae. 
+ 
+ 
+(c) Reactivity of Organic Compounds. 
+ 
+ 
+ 
+ 
+ 
+(d) Alkanes 
+ 
+ 
+(e) (i)  Reactions of benzene. 
+ 
+ 
+ 
+(ii)  Comparison or reactions of 
+benzene and alkenes. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(1) Mathematical expression for the 
+determination of equilibrium constant K 
+(2) K is constant for a system at constant 
+temperature. 
+(3) Relationship between K
+p
+ and K
+c
+. 
+(4) Calculation of K
+p 
+and K
+c 
+from given set 
+of data. 
+(5) Difference between homogeneous and 
+heterogeneous equilibrium systems. 
+ 
+ 
+ 
+Other methods should include solvent extraction 
+and melting point determinations. 
+ 
+Outline of steps in: 
+(a) Detection of N, S and the halogens. 
+(b) Estimation of C, H and O. 
+ 
+(1)  Inductive effect and Mesomeric effect. 
+(2) Resonance illustrated with benzene 
+molecule. 
+(3) Explanation of the terms: 
+nucleophiles, electrophiles, free radicals and 
+ions.  homolytic fission, heterolytic fission. 
+ 
+Halogenation – free radical mechanism. 
+ 
+Mono substituted reactions of benzene:  toluene, 
+phenol, aniline, benzoic acid and nitrobenzene.  
+(IUPAC and trivial names) 
+ 
+Differences between the reactivity of benzene and 
+alkenes towards certain reagents.  
+Uses of hexachlorocyclobezane and benzene 
+hexachloride (BHC). 
+ 
+ 
+ 
+ 
+ 
+ 
+
+34 
+ 
+CONTENT NOTES 
+ 
+10.0  CHEMICAL INDUSTRY AND 
+          ENVIRONMENT 
+ 
+   (a)  (i)   Sources of raw materials 
+         (ii)  Mining of mineral as ore. 
+ 
+(iii) Extraction of metals Mineral 
+deposits in Ghana. 
+ 
+ 
+ 
+ 
+   (b)   Cement and its uses 
+ 
+ 
+ 
+ 
+ 
+Location of mineral deposits and their nature.  
+ 
+ 
+(1) Metals – gold, bauxite, manganese and iron. 
+(2) Precious stone – diamond. 
+(3) Industrial mining of limestone CaCO
+3
+, clay 
+Kaolin, solar salt 
+(4) Processing of Au, Al, Fe as main products 
+(5) Uses of the metals 
+ 
+(1) Sources of raw materials for cement 
+sproduction. 
+(2) Processes involved in the production of 
+cement. 
+(3) Uses of cement. 
+(4) Environmental impact. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+35 
+ 
+ 
+SECTION C 
+(For candidates in Nigeria, Sierra-Leone, Liberia and The Gambia) 
+CONTENT NOTES 
+   
+1.0 NON METALS AND THEIR 
+COMPOUNDS 
+ 
+(a)  Carbon: 
+                   (i) Allotropes of carbon; 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                  (ii)  Coal: 
+I.  Types; 
+ 
+II. Destructive distillation 
+of coal and uses of the 
+products. 
+ 
+                  (iii)  Coke:  
+I. Classification and uses; 
+II. Manufacture of synthetic 
+gas and uses. 
+ 
+                  (iv)  Oxides of carbon 
+I.   Carbon (IV) oxides; 
+ 
+ 
+ 
+II. Carbon (II) oxides; 
+ 
+III. Trioxocarbonate (IV) salt. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(1) Graphite, diamond and amorphous 
+Carbon; 
+(2) Structures, properties and uses. 
+(3) The uses of the allotropes should be 
+correlated with their properties and 
+structures. 
+(4) Combustion of allotropes. 
+ 
+ 
+Different types should include anthracite, 
+peat and lignite. 
+ 
+ 
+ 
+ 
+ 
+Water gas and producer gas. 
+ 
+ 
+ 
+ 
+(1) Laboratory preparation. 
+(2) Properties and uses. 
+(3) Test for carbon (IV) oxides. 
+Properties and uses only. 
+(1) Properties: solubility, action of heat, 
+reaction with dilute acid.  
+(2) Uses. 
+
+36 
+ 
+CONTENT NOTES 
+ 
+(b) Oxygen: 
+(i) Laboratory and industrial 
+preparation; 
+(ii) Properties and uses; 
+ 
+(iii) Binary compounds of oxygen: 
+acidic, basic, amphoteric and 
+neutral oxides. 
+ 
+(c) Hydrogen: 
+(i)    Laboratory preparations; 
+(ii)   Properties and uses. 
+ 
+    (d) Water and solution: 
+(i)    Composition of water; 
+ 
+ 
+(ii) Water as a solvent; 
+(iii)Hardness of water, causes and 
+methods of removing it; 
+ 
+ 
+(iv) Treatment of water for town 
+supply. 
+ 
+(e) Halogens: 
+ 
+ 
+(i) Chlorine: 
+I.  Laboratory preparation; 
+II. Properties and reactions. 
+ 
+ 
+ 
+(f) Hydrogen chloride gas: 
+(i) Laboratory preparation; 
+(ii) Properties and uses; 
+ 
+ 
+ 
+ 
+ 
+ 
+Test for oxygen will be required. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Test for hydrogen will be required. 
+ 
+Test for water will be required. 
+Reference should be made to the 
+electrolysis of acidified water. 
+ 
+ 
+(1) Advantages and disadvantages of hard 
+water and soft water. 
+(2) Experiments to compare the degrees of 
+hardness in different samples of water. 
+ 
+ 
+ 
+Redox properties of the elements; 
+displacement reaction of one halogen by 
+another. 
+ 
+ 
+Properties should include: 
+(a)  variable oxidation states; 
+(b) reaction with water and alkali 
+(balanced equation required). 
+ 
+ 
+(1) Test for HCl gas. 
+(2) Fountain experiment.  
+ 
+
+37 
+ 
+CONTENT NOTES 
+ 
+(iii) Uses of halogen compounds. 
+ 
+ 
+(g)  Nitrogen: 
+(i) Preparation and properties; 
+ 
+(ii) Uses of nitrogen; 
+(iii) Compounds of nitrogen: 
+I. Ammonia; 
+ 
+ 
+ 
+ 
+II. Trioxonitrate (V) acid; 
+ 
+ 
+III. Trioxonitrate (V) salts. 
+ 
+ 
+(h) Sulphur: 
+(i) Allotropes and uses; 
+(ii) Compound of sulphur; 
+(iii) Trioxosulphate (IV) acids and 
+its salts; 
+(iv) Tetraoxosulphate (VI) acid: 
+industrial preparation, reactions 
+and uses. 
+ 
+(i) The noble gases: properties and uses. 
+ 
+2.0  METALS AND THEIR COMPOUNDS 
+(a)  Extraction of metals: 
+ 
+(i)      Aluminium; 
+(ii)     Iron; 
+(iii)    Tin. 
+ 
+     (b)  Alloys. 
+ 
+ 
+Uses should include silver halide in 
+photography and sodium oxochlorate (I) as 
+a bleaching agent. 
+ 
+Both laboratory and industrial preparations 
+from liquefied air are required. 
+ 
+ 
+(1) Laboratory and industrial preparations. 
+(2) Properties and uses. 
+(3) Test for ammonia. 
+(4) Fountain experiment. 
+ 
+(1) Laboratory preparation. 
+(2) Properties and uses.          
+             
+(1) Action of heat will be required. 
+(2) Test for trioxonitrate (V) ions. 
+ 
+ 
+ 
+ 
+ 
+ 
+Contact process should be discussed. 
+ 
+ 
+ 
+ 
+(1) Raw materials, processing, main 
+products   and by-products.
+                        
+(2) Uses of metals. 
+ 
+ 
+ 
+Common alloys of Cu, Al, Pb, Fe, Sn 
+and their uses. 
+
+38 
+ 
+CONTENT NOTES 
+ 
+(c) Properties and uses of sodium and its 
+compounds. 
+ 
+ 
+(d) Properties and uses of calcium and its 
+compounds. 
+ 
+     (e)   Reactivity of iron and aluminium with 
+air, water and acids. 
+     (f)   Properties and uses of copper and its 
+compounds. 
+ 
+ 
+ 
+Compounds must be limited to NaCl, 
+NaOH, Na
+2
+CO
+3
+, NaNO
+3
+, Na
+2
+SO
+4
+ and 
+NaClO. 
+The compounds must be limited to 
+CaCO
+3
+, CaO, CaSO
+4
+, CaCl
+2
+,  and 
+Ca(OH)
+2
+ 
+ 
+The compounds must be limited to 
+CuSO
+4
+, CuO and CuCl
+2
+. 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+39 
+ 
+.16.0 PRACTICALS 
+         (a)  GENERAL SKILLS AND PRINCIPLES 
+         Candidates will be expected to be familiar with the following skills and principles: 
+(i) Measurement of mass and volume; 
+(ii) Preparation and dilution of standard solutions; 
+(iii) Filtration, recrystallisation and melting point determination; 
+(iv) Measurement of heats of neutralization and solutions; 
+(v) Determination of pH value of various solutions by colorimetry; 
+(vi)          Determination of rates of reaction from concentration versus time curves; 
+        (vii)         Determination of equilibrium constants for simple system. 
+(b)  QUANTITATIVE ANALYSIS 
+Acid-base titrations 
+The use of standard solutions of acids and alkalis and the indicators; methyl orange, 
+methyl red and phenolphthalein to determine the following: 
+(i) The concentrations of acid and alkaline solutions; 
+(ii) The molar masses of acids and bases and water of crystallization. 
+(iii) The solubility of acids and bases; 
+(iv) The percentage purity of acids and bases; 
+(v) Analysis of Na
+2
+CO
+3
+/NaHCO
+3
+ mixture by double  
+indicator methods (Ghanaians only).  
+(vi) Stoichiometry of reactions. 
+ 
+Redox titrations 
+Titrations of the following systems to solve analytical problems: 
+(i)  Acidic MnO
+4
+-
+ with Fe
+2+
+; 
+(ii) Acidic MnO
+4
+-
+ with C
+2
+O
+4
+2-
+; 
+(iii) I
+2
+ in KI versus S
+2
+O
+3
+2-
+. 
+ 
+(d) QUALITATIVE ANALYSIS 
+  No formal scheme of analysis is required. 
+ 
+ (i)   Characteristic tests of the following cations with dilute NaOH
+(aq)  
+and NH
+3(aq)
+; 
+ 
+       NH
+4
+; Ca
+2+
+; Pb
+2+
+;  Cu
+2+
+;  Fe
+2+
+;  Fe
+3+
+;  Al
+3+
+; and Zn
+2+
+. 
+ 
+(ii)   Confirmatory tests for the above cations. 
+ 
+
+40 
+ 
+(iii)  Characteristic reaction of dilute HCl on solids or aqueous solutions and conc.  
+H
+2
+SO
+4
+ on solid samples of the following: 
+     Cl
+-
+ ; SO
+3
+2-
+ ; CO
+3
+2-
+ ; NO
+3
+-
+ and SO
+4
+2-
+. 
+ 
+(iv) Confirmatory tests for the above anions 
+ 
+(v) Comparative study of the halogens; displacement reactions. 
+ 
+(vi) Characteristic tests for the following gases: H
+2
+; NH
+3
+; CO
+2
+; HCl and SO
+2
+. 
+ 
+(vii) Characteristic test tube reactions of the functional groups in the following simple 
+organic compounds: Alkenes; alkanols; alkanoic acids, sugars (using Fehiling’s 
+and Benedict’s solutions only); starch (iodine test only) and proteins (using the 
+Ninhydrin test, Xanthoporteic test, Biuret test and Millon’s test only). 
+ 
+ 
+ 
+ 
+ 

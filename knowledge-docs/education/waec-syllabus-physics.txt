@@ -1,0 +1,2001 @@
+
+
+1 
+ 
+ 
+PHYSICS 
+PREAMBLE 
+ 
+The syllabus is evolved from the Senior Secondary School teaching syllabus and is intended to 
+indicate the scope of the course for Physics examination. 
+ 
+It is structured with the conceptual approach.  The broad concepts of matter, position, motion and 
+time; energy; waves; fields; Atomic and Nuclear Physics, electronics are considered and each 
+concept forms a part on which other sub-concepts are further based. 
+ 
+AIMS 
+ 
+The aims of the syllabus are to enable candidates 
+ 
+(1)     acquire proper understanding of the basic principles and applications of  
+          Physics; 
+ 
+(2)     develop scientific skills and attitudes as pre-requisites for further scientific  
+          activities; 
+ 
+(3)     recognize the usefulness, and limitations of scientific method to appreciate  
+         its applicability ion other disciplines and in every life; 
+ 
+(4)    develop abilities, attitudes and skills that encourage efficient and safe  
+         practice; 
+ 
+(5)    develop scientific attitudes such as accuracy, precision, objectivity, integrity,  
+         initiative and inventiveness. 
+ 
+ASSESSMENT OBJECTIVES 
+ 
+The following activities appropriate to Physics will be tested: 
+ 
+(1) Acquisition of knowledge and understanding: 
+ 
+Candidates should be able to demonstrate knowledge and understanding of 
+ 
+(a)   Scientific phenomena, facts laws, definitions, concepts and theories; 
+ 
+(b)   Scientific vocabulary, terminology and conventions (including symbols, quantities  
+  and units); 
+ 
+(c)   The use of scientific apparatus, including techniques of operation and aspects of    
+  safety; 
+(d)    Scientific quantities and their determinations; 
+ 
+(e)    Scientific and technological applications with their social economic and  
+                         environmental implications. 
+ 
+
+2 
+ 
+(2)  Information Handling and Problem-solving 
+ 
+Candidates should be able, using visual, oral, aural and written (including symbolic, 
+diagrammatic, graphical and numerical) information to 
+ 
+(a)   locate  select, organize and present information from a variety of sources including  
+everyday experience; 
+(b)  analyse and evaluate information and other data; 
+(c)  use information to identify patterns, report trends and draw inferences; 
+(d) present reasonable explanations for natural occurrences, patterns and relationships; 
+(e) make predictions from data. 
+(3)   Experimental and Problem-Solving Techniques 
+            
+                  Candidates  should be able to 
+ 
+(a)    follow instructions; 
+(b)    carry out experimental procedures using apparatus; 
+(c)    make and record observations, measurements and estimates with due regard to  
+   precision, accuracy and units; 
+ 
+(d)   interpret, evaluate and report on observations and experimental data; 
+ 
+(e)   identify problems, plan and carry out investigations, including the selection of  
+                           techniques, apparatus, measuring devices and materials; 
+ 
+(f)   evaluate methods and suggest possible improvements; 
+ 
+(g)   state and explain the necessary precautions taken in experiments to obtain  
+                           accurate results. 
+ 
+SCHEME OF EXAMINATION 
+ 
+There will be three papers, Papers 1, 2 and 3, all of which must be taken. Papers 1 and 2 
+will be a composite paper to be taken at one sitting. 
+      
+PAPER 1:        Will consist of fifty multiple choice questions lasting 1¼ hours and carrying 
+50 marks. 
+PAPER 2:        Will consist of two sections, Sections A and B lasting1½ hours and carrying 
+60 marks. 
+  Section A - Will comprise seven short-structured questions. Candidates    
+will be required to answer any five questions for a total of 15 marks. 
+  Section B - Will comprise five essay questions out of which candidates     
+will be required to answer any three for 45 marks. 
+
+3 
+ 
+PAPER 3:        Will be a practical test for school candidates or an alternative to practical        
+work paper for private candidates.  Each version of the paper will comprise 
+three questions out of which candidates will be required to answer any two 
+in 2¾ hours for 50 marks.   
+ 
+ 
+ 
+DETAILED SYLLABUS 
+ 
+It is important that candidates are involved in practical activities in covering this syllabus.  
+Candidates will be expected to answer questions on the topics set in the column headed ‘ TOPIC’. 
+The ‘NOTES’ are intended to indicate the scope of the questions which will be set but they are not 
+to be considered as an exhaustive list of limitations and illustrations. 
+ 
+NOTE:  Questions will be set in S.I. units.  However, multiples or sub-multiples of the units may be 
+used. 
+PART 1 
+INTERACTION OF MATTER, SPACE & TIME 
+ 
+TOPICS NOTES 
+1. Concepts of matter 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+2.   Fundamental and derived quantities and  
+      units 
+     (a)  Fundamental quantities and units 
+ 
+     
+ 
+     (b)  Derived quantities and units 
+ 
+3.   Position, distance and displacement. 
+     (a)   Concept of position as a location of  
+             point-rectangular coordinates. 
+     (b)   Measurement of distance 
+ 
+ Simple structure of matter should be discussed. 
+Three physics states of matter, namely solid, 
+liquid and gas should be treated.  Evidence of 
+the particle nature of matter e.g. Brownian 
+motion experiment, Kinetic theory of matter.  
+Use of the theory to explain; states of matter 
+(solid, liquid and gas), pressure in a gas, 
+evaporation and boiling; cohesion, adhesion, 
+capillarity.  Crystalline and amorphous 
+substances to be compared (Arrangement of 
+atoms in crystalline structure to be described e.g. 
+face centred, body centred. 
+ 
+Length, mass, time, electric current luminous 
+intensity, thermodynamic temperature, amount 
+of substance  as examples of fundamental 
+quantities and m, kg, s, A, cd, K and mol as their 
+respective units. 
+ 
+Volume, density and speed as derived quantities 
+and m
+3
+, kgm
+-3
+ and ms
+-1
+ as their respective units. 
+ 
+Position of objects in space using the X,Y,Z 
+axes should be mentioned. 
+ 
+Use of string, metre rule, vernier calipers and 
+
+4 
+ 
+     (c)   Concept of direction as a way of locating 
+             a point –bearing 
+              
+     (d)   Distinction between distance and  
+             displacement. 
+ 
+ 
+micrometer screw gauge.  Degree of accuracy 
+should be noted.  Metre (m) as unit of distance. 
+ 
+Use of compass and a protractor. 
+ 
+Graphical location and directions by axes to be 
+stressed. 
+ 
+  
+ 
+TOPICS NOTES 
+4.     Mass and weight 
+ 
+ 
+ 
+         
+        Distinction between mass and weight 
+ 
+ 
+5.    Time 
+       (a)  Concept of time as interval between  
+              physical events 
+ 
+      (b)   Measurement of time 
+ 
+6.   Fluid at rest 
+ 
+(a)   Volume, density and relative density 
+ 
+ 
+(b)   Pressure in fluids 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(c)   Equilibrium of bodies 
+ 
+ 
+ (i)  Archimedes’ principle 
+ 
+   
+ (ii)   Law of flotation 
+Use of lever balance and chemical/beam balance 
+to measure mass and spring balance to measure 
+weight.  Mention should be made of 
+electronic/digital balance. 
+ 
+Kilogram (kg) as unit of mass and newton (N) as 
+unit of weight. 
+ 
+ 
+The use of heart-beat, sand-clock, ticker-timer, 
+pendulum and stopwatch/clock. 
+ 
+Second(s) as unit of time. 
+ 
+ 
+ 
+Experimental determination for solids and 
+liquids. 
+ 
+Concept and definition of pressure.  Pascal’s 
+principle, application of principle to hydraulic 
+press and car brakes.  Dependence of pressure 
+on the depth of a point below a liquid surface.  
+Atmospheric pressure.  Simple barometer,  
+manometer, siphon, syringe and pump. 
+Determination of the relative density of liquids 
+with U-tube and Hare’s apparatus. 
+ 
+Identification of the forces acting on a body 
+partially or completely immersed in a fluid. 
+ 
+Use of the principle to determine the relative 
+densities of solids and liquids. 
+ 
+Establishing the conditions for a body to float in 
+
+5 
+ 
+ 
+ 
+a fluid.  Applications in hydrometer, balloons, 
+boats, ships, submarines etc. 
+ 
+TOPICS NOTES 
+7.     Motion 
+ 
+(a)   Types of motion: 
+  Random, rectilinear, translational, 
+  Rotational, circular, orbital, spin, 
+  Oscillatory. 
+ 
+(b)    Relative motion 
+ 
+(c)    Cause of motion 
+ 
+(d)    Types of force: 
+     (i)   Contact force 
+(ii)   Non-contact force(field force) 
+ 
+ 
+(e)    Solid friction 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(f)  Viscosity (friction in fluids) 
+ 
+ 
+ 
+ 
+ 
+ 
+(g)  Simple ideas of circular motion 
+ 
+ 
+ 
+ 
+Only qualitative treatment is required. 
+Illustration should be given for the various types of 
+motion. 
+ 
+ 
+Numerical problems on co-linear motion may be set. 
+ 
+Force as cause of motion. 
+ 
+ 
+ 
+Push and pull 
+These are field forces namely; electric and magnetic 
+attractions and repulsions; gravitational pull. 
+ 
+Frictional force between two stationary bodies 
+(static) and between two bodies in relative motion 
+(dynamic).  Coefficients of limiting friction and their 
+determinations.  Advantages of friction e.g. in 
+locomotion, friction belt, grindstone.  Disadvantages 
+of friction e.g reduction of efficiency, wear and tear 
+of machines. Methods of reducing friction; e.g. use 
+of ball bearings, rollers, streamlining and lubrication.
+ 
+ 
+Definition and effects.  Simple explanation as 
+extension of friction in fluids.  Fluid friction and its 
+application in lubrication should be treated 
+qualitatively.  Terminal velocity and its 
+determination. 
+ 
+ 
+Experiments with a string tied to a stone at one end 
+and whirled around should be carried out to 
+ 
+(i)  demonstrate motion in a  
+      Vertical/horizontal circle. 
+ 
+ 
+ 
+ 
+TOPICS NOTES 
+
+6 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+8.   Speed and velocity 
+ 
+(a) Concept of speed as change of    
+ distance with time 
+ 
+(b) Concept of velocity as change of 
+displacement with time 
+ 
+(c) Uniform/non-uniform 
+speed/velocity 
+ 
+ 
+(d) Distance/displacement-time graph 
+ 
+9.    Rectilinear acceleration 
+ 
+(a) Concept of 
+Acceleration/deceleration as 
+increase/decrease in velocity with 
+time. 
+ 
+(b) Uniform/non-uniform acceleration 
+ 
+ 
+ 
+(c) Velocity-time graph 
+ 
+ 
+(d) Equations of motion with constant 
+acceleration; 
+ 
+Motion under gravity as a special 
+case. 
+ 
+(i)   show the difference between angular speed and   
+       velocity. 
+ 
+(ii)   Draw a  diagram to illustrate centripetal force.  
+        Banking of roads in reducing sideways friction  
+        should  be qualitatively discussed. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Metre per second (ms
+-1
+) as unit of speed/velocity. 
+ 
+ 
+Ticker-timer or similar devices should be used to 
+determine speed/velocity.  Definition of velocity as  
+ ∆ s    ∆t. 
+ 
+Determination of instantaneous speed/velocity from 
+distance/displacement-time graph and by calculation. 
+ 
+ 
+ 
+ 
+Unit of acceleration as ms
+-2 
+ 
+ 
+ 
+ 
+Ticker timer or similar devices should be used to 
+determine acceleration.  Definition of acceleration as 
+∆ v    ∆t . 
+ 
+Determination of acceleration and displacement 
+from velocity-time graph 
+ 
+Use of equations to solve numerical problems. 
+ 
+TOPICS NOTES 
+
+7 
+ 
+ 
+10.   Scalars and vectors 
+ 
+(a)    Concept of scalars as physical 
+   quantities with magnitude and no  
+   direction 
+ 
+(b)    Concept of vectors as physical  
+quantities with both magnitude and 
+direction. 
+ 
+(c)  Vector representation 
+ 
+(d)   Addition of vectors 
+ 
+(e)   Resolution of vectors 
+ 
+(f)   Resultant velocity using vector 
+representation. 
+ 
+11.    Equilibrium of forces 
+ 
+(a)  Principle of moments 
+ 
+ 
+ 
+(b)  Conditions for equilibrium of rigid 
+bodies under the action of parallel 
+and non-parallel forces. 
+ 
+ 
+ 
+(c) Centre of gravity and stability 
+ 
+12.    Simple harmonic motion 
+ 
+(a)  Illustration, explanation and 
+definition of simple harmonic 
+motion (S.H.M) 
+ 
+  
+ 
+ 
+Mass, distance, speed and time as examples of 
+scalars. 
+ 
+ 
+Weight, displacement, velocity and acceleration as 
+examples of vectors. 
+ 
+ 
+ 
+ 
+Use of force board to determine the resultant of two 
+forces. 
+ 
+ 
+Obtain the resultant of two velocities analytically 
+and graphically. 
+ 
+ 
+ 
+Torque/Moment of force.  Simple treatment of a 
+couple, e.g. turning of water tap, corkscrew and 
+steering wheel.) 
+ 
+Use of force board to determine resultant and 
+equilibrant forces.  Treatment should include 
+resolution of forces into two perpendicular directions 
+and composition of forces 
+Parallelogram of forces.  Triangle of forces. 
+ 
+Should ne treated experimentally.  Treatment should 
+include stable, unstable and neutral equilibra. 
+ 
+ 
+Use of a loaded test-tube oscillating vertically in a 
+liquid, simple pendulum, spiral spring and bifilar 
+suspension to demonstrate simple harmonic motion. 
+TOPICS NOTES 
+
+8 
+ 
+  
+(b)  Speed and acceleration of S.H.M. 
+ 
+(c)   Period, frequency and amplitude 
+of a body executing S.H.M. 
+ 
+(d) Energy of S.H.M 
+ 
+(e) Forced vibration and resonance 
+ 
+ 
+ 
+ 
+13.    Newton’s laws of motion: 
+ 
+(a)  First Law: 
+ Inertia of rest and inertia of 
+motion 
+ 
+(b)  Second Law: 
+Force, acceleration, momentum 
+and impulse 
+ 
+ 
+ 
+ 
+(c)  Third Law: 
+Action and reaction 
+ 
+ 
+ 
+  
+ 
+Relate linear and angular speeds, linear and angular 
+accelerations. 
+Experimental determination of ‘g’ with the simple 
+pendulum and helical spring.  The theory of the 
+principles should be treated but derivation of the 
+formula for ‘g’ is not required 
+ 
+Simple problems may be set on simple harmonic 
+motion.  Mathematical proof of simple harmonic 
+motion in respect of spiral spring, bifilar suspension 
+and loaded test-tube is not required. 
+ 
+ 
+ 
+Distinction between inertia mass and weight 
+ 
+ 
+ 
+Use of timing devices e.g. ticker-timer to determine 
+the acceleration of a falling body and the 
+relationship when the accelerating force is constant. 
+ 
+Linear momentum and its conservation. 
+Collision of elastic bodies in a straight line. 
+ 
+Applications: recoil of a gun, jet and rocket 
+propulsions. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+PART II 
+ENERGY: Mechanical and Heat 
+
+9 
+ 
+ 
+TOPICS NOTES 
+ 14.   Energy: 
+         (a)   Forms of energy 
+ 
+ 
+ 
+         (b)   World energy resources 
+ 
+ 
+ 
+ 
+         (c)   Conservation of energy. 
+ 
+15.    Work, Energy and Power 
+ 
+(a)  Concept of work as a measure of 
+energy transfer 
+ 
+(b)  Concept of energy as capability to 
+do work 
+ 
+(c) Work done in a gravitational field. 
+ 
+(d)  Types of mechanical energy 
+  
+ 
+(i)   Potential energy (P.E.) 
+ 
+(ii)  Kinetic energy (K.E) 
+ 
+(e)  Conservation of mechanical 
+energy. 
+ 
+  
+ 
+ Examples of various forms of energy should be 
+mentioned e.g. mechanical (potential and kinetic), 
+heat chemical, electrical, light, sound, nuclear. 
+ 
+Renewable (e.g. solar, wind, tides, hydro, ocean 
+waves) and non-renewable (e.g. petroleum, coal, 
+nuclear, biomass) sources of energy should be 
+discussed briefly. 
+ 
+Statement of the principle of conservation of energy 
+and its use in explaining energy transformations. 
+ 
+ 
+Unit of energy as the joule (J)  
+ 
+ 
+Unit of energy as the joule (J) while unit of electrical 
+consumption is KWh. 
+ 
+Work done in lifting a body and by falling bodies 
+ 
+Derivation of P.E and K.E are expected to be known.  
+Identification of types of energy possessed by a body 
+under given conditions. 
+ 
+ 
+ 
+ 
+Verification of the principle. 
+ 
+ 
+ 
+ 
+ 
+ 
+TOPICS NOTES 
+
+10 
+ 
+(f)   Concept of power as time rate of 
+doing work. 
+ 
+(g) Application of mechanical energy-
+machines. 
+Levers, pulleys, inclined plane, 
+wedge, screw, wheel and axle, 
+gears. 
+ 
+ 
+16.   Heat Energy 
+ 
+(a)  Temperature and its measurement 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(b)   Effects of heat on matter e.g 
+ 
+(i)     Rise in temperature 
+(ii)   Change of phase state 
+(iii)  Expansion 
+(iv)  Change of resistance 
+ 
+(c)   Thermal expansion – Linear, area  
+and volume expansivities 
+Unit of power as the watt (W) 
+   
+ 
+The force ratio (F.R), mechanical advantage (M.A), 
+velocity ratio (V.R) and efficiency of each machine 
+should be treated. 
+Identification of simple machines that make up a 
+given complicated machine e.g. bicycle. 
+Effects of friction on Machines.  Reduction of 
+friction in machines. 
+ 
+ 
+Concept of temperature as degree of hotness or 
+coldness of a body.  Construction and graduation of 
+a simple thermometer. 
+Properties of thermometric liquids.  The following 
+thermometer, should be treated: 
+Constant – volume gas thermometer, resistance 
+thermometer, thermocouple, liquid-in-glass 
+thermometer including maximum and minimum 
+thermometer and clinical thermometer, pyrometer 
+should be mentioned.  Celsius and Absolute scales 
+of temperature. Kelvin and degree Celsius as units of 
+temperature. 
+ 
+Use of the Kinetic theory to explain effects of heat. 
+ 
+Mention should be made of the following effects: 
+Change of colour 
+Thermionic emission 
+Change in chemical properties 
+ 
+Qualitative and quantitative treatment 
+Consequences and application of expansions. 
+Expansion in buildings and bridges, bimetallic strips, 
+thermostat, over-head cables causing sagging nd in 
+railway lines causing buckling. Real and apparent 
+expansion of liquids.  Anomalous expansion of 
+water. 
+ 
+ 
+ 
+ 
+TOPICS NOTES 
+
+11 
+ 
+   
+(d)    Heat transfer – 
+   Condition, convention and    
+   radiation. 
+ 
+ 
+ 
+ 
+ 
+(e)    The gas laws-Boyle’s law 
+   Charles’ law, pressure law and 
+   general gas law 
+ 
+ 
+(f)   Measurement of heat energy: 
+(i)   Concept of heat capacity 
+(ii)  Specific heat capacity. 
+ 
+ 
+ 
+(g)   Latent heat 
+(i)    Concept of latent heat 
+ 
+(ii)   Melting point and boiling  
+        Point 
+ 
+ 
+ 
+ 
+             (iii)  Specific latent heat of fusion  
+                     and of vaporization 
+ 
+  Per Kelvin (K
+-1
+) as the unit of expansivity. 
+ 
+Use of the kinetic theory to explain the modes of 
+heat transfer.  Simple experimental illustrations.  
+Treatment should include the explanation of land 
+and sea breezes, ventilation and application s in 
+cooling devices.  The vacuum flask. 
+ 
+The laws should be verified using simple apparatus.  
+Use of the kinetic theory to explain the laws.  Simple 
+problems may be set.  Mention should be made of 
+the operation of safety air bags in vehicles. 
+ 
+Use of the method of mixtures and the electrical 
+method to determine the specific heat capacities of 
+solids and liquids.  Land and sea breezes related to 
+the specific heat capacity of water and land, Jkg
+-1
+  
+K
+-1
+ as unit of specific heat capacity. 
+ 
+Explanation and types of latent heat. 
+ 
+ 
+Determination of the melting point of solid and the 
+boiling point of a liquid.  Effects of impurities and 
+pressure on melting and boiling points.  Application 
+in pressure cooker. 
+ 
+ 
+Use of the method of mixtures and the electrical 
+method to determine the specific latent heats of 
+fusion of ice and of vaporization of steam.  
+Applications in refrigerators and air conditioners. 
+ 
+Jkg
+-1
+ as unit of specific latent heat 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+TOPICS NOTES 
+
+12 
+ 
+   
+(h)    Evaporation and boiling 
+ 
+ 
+(i)    Vapour and vapour pressure 
+ 
+ 
+ 
+ 
+(j)    Humidity, relative humidity and  
+   dew point 
+ 
+ 
+(k)    Humidity and the weather 
+  
+ 
+  Effect of temperature, humidity, surface area and 
+draught on evaporation to be discussed. 
+ 
+Explanation of vapour and vapour pressure. 
+Demonstration of vapour pressure using simple 
+experiments.  Saturated vapour pressure and its 
+relation to boiling. 
+ 
+Measurement of dew point and relative humidity.  
+Estimation of humidity of the atmosphere using wet 
+and dry-bulb hygrometer. 
+ 
+Formation of dew, fog and rain. 
+ 
+ 
+PART  III 
+ 
+WAVES 
+TOPICS NOTES 
+  17.   Production and propagation of waves 
+ 
+(a)  Production and propagation of  
+mechanical waves 
+ 
+(b) Pulsating system: 
+Energy transmitted with definite 
+speed, frequency and wavelength. 
+ 
+(c)  Waveform 
+ 
+ 
+ 
+(d)   Mathematical relationship 
+connecting frequency (f), 
+wavelength(), period (T) and 
+velocity (v) 
+ 
+18.   Types of waves 
+ 
+(a)  Transverse and longitudinal 
+ 
+(b)  Mathematical representation of 
+ 
+ 
+Use of ropes and springs (slinky) to generate 
+mechanical waves 
+ 
+Use of ripple tank to show water waves and to 
+demonstrate energy propagation by waves. 
+Hertz(Hz) as unit of frequency. 
+ 
+Description and graphical representation. 
+Amplitude, wave length, frequency and period. 
+Sound and light as wave phenomena. 
+   
+V= f and T = 
+
+
+  simple problems may be set. 
+ 
+ 
+ 
+ 
+ 
+Examples to be given 
+ 
+Equation y = A sin (wt
+± 
+	
+
+
+) to be explained 
+Questions on phase difference will not be set. 
+
+13 
+ 
+wave motion. 
+ 
+19.    Properties of waves: 
+         Reflection, refraction, diffraction, 
+         Interference, superposition of 
+         progressive waves producing standing 
+         stationary waves 
+ 
+20.  Light waves 
+ 
+(a)   Sources of light 
+ 
+   
+ 
+Ripple tank should be extensively used to 
+demonstrate these properties with plane and circular 
+waves.  Explanation of the properties. 
+ 
+ 
+ 
+ 
+ 
+Natural and artificial. Luminous and non-luminous 
+bodies. 
+ 
+ 
+ 
+ 
+ 
+TOPICS NOTES 
+(b)   Rectilinear propagation of light 
+ 
+ 
+(c)  Reflection of light at plane surface: 
+plane mirror 
+ 
+ 
+ 
+(d) Reflection of light at curved 
+surfaces: concave and convex 
+mirrors 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(e) Refraction of light at plane surfaces: 
+rectangular glass prism (block) and 
+triangular prism. 
+ 
+ 
+(f) Refraction of light at curved 
+Formation of shadows and eclipse. Pinhole camera. 
+Simple numerical problems may be set. 
+ 
+ Regular and irregular reflections.  Verification of 
+laws of reflection.  Formation of images.  
+Inclined plane mirrors.  Rotation of mirrors. 
+Applications in periscope, sextant and kaleidoscope. 
+ 
+Laws of reflection. Formation of images. 
+Characteristics of images.  Use of mirror formulae: 
+ 
+
+
++
+
+
+ = 
+
+
+  and magnification m = 
+
+
+ to solve 
+numerical problems. 
+(Derivation of formulae is not required) 
+ 
+Experimental determination of the focal length of 
+concave mirror. 
+Applications in searchlight, parabolic and driving 
+mirrors, car headlamps etc. 
+ 
+Laws of refraction.  Formation of images, real and 
+Apparent depths.  Critical angle and total internal 
+reflection.  Lateral displacement and angle of 
+deviation.  Use of minimum deviation equation: 
+ 
+                       Sin (A + D
+m
+) 
+   =                           2 
+
+14 
+ 
+surfaces: 
+Converging and diverging lenses 
+ 
+ 
+ 
+   
+                           Sin  A/2 
+(Derivation of the formula is not required) 
+Applications: periscope, prism binoculars, optical  
+fibres.  The mirage. 
+ 
+Formation of images.  Use of lens formulae 
+
+
++
+
+
+ = 
+
+
+ and magnification 
+
+
+ tp solve numerical 
+problems. 
+ 
+ 
+ 
+ 
+ 
+ 
+TOPICS NOTES 
+ 
+ 
+ 
+ 
+ 
+(g)  Application of lenses in optical 
+instruments. 
+ 
+ 
+ 
+ 
+ 
+ 
+(h) Dispersion of white light by a 
+triangular glass prism. 
+ 
+ 
+ 
+21.    Electromagnetic waves: 
+         Types of radiation in electromagnetic 
+         Spectrum 
+ 
+ 
+ 
+22.    Sound Waves 
+ 
+(a)   Sources of sound 
+(b)  Transmission of sound waves 
+ 
+ 
+(c)  Speed of sound in solid, liquid and 
+  
+(derivation of the formulae not required). 
+Experimental determination of the focal length of 
+converging lens.  Power of lens in dioptres (D) 
+ 
+Simple camera, the human eye, film projector, 
+simple and compound microscopes, terrestrial and 
+astronomical telescopes.  Angular magnification.  
+Prism binoculars.  The structure and function of the 
+camera and the human eye should be compared.  
+Defects of the human eye and their corrections. 
+ 
+ 
+Production of pure spectrum of a white light. 
+Recombination of the components of the spectrum.  
+Colours of objects.  Mixing coloured lights. 
+ 
+ 
+Elementary description and uses of various types of 
+radiation: Radio, infrared, visible light, ultra-violet, 
+X-rays, gamma rays. 
+ 
+ 
+ 
+ 
+ 
+ 
+Experiment to show that a material medium is 
+required. 
+ 
+To be compared.  Dependence of velocity of sound 
+
+15 
+ 
+air 
+ 
+(d) Echoes and reverberation 
+ 
+ 
+ 
+ 
+(e)  Noise and music 
+(f) Characteristics of sound 
+ 
+ 
+   
+on temperature and pressure to be considered. 
+ 
+Use of echoes in mineral exploration, and 
+determination of ocean depth.  Thunder and multiple 
+reflections in a large room as examples of 
+reverberation. 
+ 
+ 
+Pitch, loudness and quality. 
+ 
+ 
+TOPICS NOTES 
+  
+(g)    Vibration in strings 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(h)   Forced vibration 
+ 
+ 
+(i)    Resonance 
+(ii)   Harmonies and overtones 
+ 
+ 
+(i)  Vibration of air in pipe – open 
+  and closed pipes 
+ 
+   
+    
+The use of sonometer to demonstrate the dependence 
+of frequency (f) on length (1), tension (T) and mass 
+per unit length (liner density) (m) of string should be 
+treated.  Use of the formula: 
+ 
+           
+o
+  =   
+
+
+    
+
+
+ 
+In solving simple numerical problems. 
+Applications in stringed instruments: e.g. guitar, 
+piano, harp and violin. 
+ 
+Use of resonance boxes and sonometer to illustrate 
+forced vibration. 
+ 
+Use of overtones to explain the quality of a musical 
+note.  Applications in percussion instruments: e.g 
+drum, bell, cymbals, xylophone. 
+ 
+Measurement of velocity of sound in air or 
+frequency of tuning fork using the resonance tube.  
+Use of the relationship v =  in solving numerical 
+problems.  End correction is expected to be 
+mentioned.  Applications in wind instruments e.g. 
+organ, flute, trumpet, horn, clarinet and saxophone. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+16 
+ 
+PART IV 
+FIELDS 
+ 
+ 
+TOPICS NOTES 
+  
+ 23.   Description property of fields. 
+ 
+(a)   Concept of fields: 
+  Gravitational, electric and  
+   Magnetic 
+ 
+(b)    Properties of a force field 
+ 
+24.    Gravitational field 
+ 
+(a)   Acceleration due to gravity, (g) 
+ 
+(b)  Gravitational force between two 
+masses: 
+ 
+Newton’s law of gravitation 
+ 
+ 
+(c)  Gravitational potential and escape 
+velocity. 
+ 
+25.    Electric Field 
+ 
+(1)  Electrostatics 
+(a)  Production of electric charges 
+ 
+(b)  Types of distribution of 
+charges 
+ 
+(c) Storage of charges 
+ 
+(d) Electric lines of force 
+   
+    
+  
+ 
+ 
+ 
+ 
+ 
+Use of compass needle and iron filings to show 
+magnetic field lines. 
+ 
+ 
+G as gravitational field intensity should be 
+mentioned, g = F/m. 
+ 
+Masses include protons, electrons and planets 
+ 
+Universal gravitational constant (G) 
+Relationship between ‘G’ and ‘g’ 
+ 
+Calculation of the escape velocity of a rocket from 
+the earth’s gravitational field. 
+ 
+ 
+ 
+ 
+Production by friction, induction and contact. 
+ 
+A simple electroscope should be used to detect and 
+compare charges on differently-shaped bodies. 
+ 
+Application in light conductors. 
+ 
+Determination, properties and field patterns of 
+charges. 
+ 
+ 
+ 
+ 
+ 
+ 
+TOPICS NOTES 
+
+17 
+ 
+(e) Electric force between point 
+charges:  Coulomb’s law 
+ 
+(f) Concepts of electric field, 
+electric field intensity (potential 
+gradient) and electric potential. 
+ 
+(g) Capacitance- 
+Definition, arrangement and 
+application 
+ 
+ 
+ 
+ 
+(2)  Current electricity 
+(a)   Production of electric current 
+from primary and secondary 
+cells 
+ 
+ 
+(b) Potential difference and electric 
+current 
+ 
+ 
+(c) Electric circuit 
+ 
+ 
+ 
+(d) Electric conduction through 
+materials 
+ 
+ 
+(e) Electric energy and power 
+  
+   
+   Permittivity of a medium. 
+ 
+ 
+Calculation of electric field intensity and electric 
+potential of simple systems. 
+ 
+ 
+Factors affecting the capacitance of a parallel-plate 
+capacitor.  The farad (F) as unit of capacitance.  
+Capacitors in series and in parallel. 
+Energy stored in a charged capacitor.  Uses of 
+capacitors: e.g. in radio and Television. 
+(Derivation of formulae for capacitance is not 
+required) 
+ 
+Simple cell and its defects.  Daniel cell, Lechanché 
+cell (wet and dry). 
+Lead-acid accumulator.  Alkalne-cadium cell. 
+E.m.f. of a cell, the volt (V) as unit of e.m.f. 
+ 
+Ohm’s law and resistance.  Verification of Ohm’s 
+law.  The volt (V), ampere (A) and ohm (Ω) as units 
+of p.d., current and reisistance respectively. 
+ 
+Series and parallel arrangement of cells and 
+resistors. Lost volt and internal resistance of 
+batteries. 
+ 
+Ohmic and non ohmic conductors.  Examples of 
+ohmic conductors are metals, non-ohmic conductors 
+are semiconductors. 
+ 
+Quantitative definition of electrical energy and 
+power.  Heating effect of an electric current and its 
+application.  Conversion of electrical energy to 
+mechanical energy e.g. electric motors. 
+Conversion of solar energy to electrical and heat 
+energies: e.g. solar cells, solar heaters. 
+  
+ 
+  
+ 
+ 
+ 
+TOPICS NOTES 
+
+18 
+ 
+(f)  Shunt and multiplier 
+ 
+ 
+(g)  Resistivity and Conductivity 
+ 
+ 
+ 
+(h) Measurement of electric 
+current, potential difference, 
+resistance, e.m.f. and internal 
+resistance of a cell. 
+    
+    26.     Magnetic field 
+ 
+(a)  Properties of magnets and 
+magnetic materials. 
+ 
+(b) Magnetization and 
+demagnetization. 
+ 
+(c) Concept of magnetic field 
+ 
+ 
+ 
+ 
+ 
+(d) Magnetic force on: 
+(i)  a current-carrying conductor 
+      placed in a magnetic field; 
+(ii)  between two parallel  
+       current-carrying conductors 
+(e) Use of electromagnets 
+ 
+(f) The earth’s magnetic field 
+ 
+(g) Magnetic force on a moving 
+charged particle 
+ 
+27.   Electromagnetic field 
+ 
+(a)  Concept of electromagnetic field 
+           
+   Use in conversion of a galvanometer into an   
+ammeter and a voltmeter. 
+ 
+Factors affecting the electrical resistance of a 
+material should be treated.  Simple problems may be 
+set. 
+ 
+Principle of operation and use of ammeter, 
+voltmeter, potentiometer.  The wheatstone bridge 
+and metre bridge. 
+ 
+ 
+ 
+ 
+Practical examples such as soft iron, steel and alloys. 
+ 
+ 
+Temporary and permanent magnets.  Comparison of 
+iron and steel as magnetic materials. 
+ 
+Magnetic flux and magnetic flux density. 
+Magnetic field around a permanent magnet, a 
+current-carrying conductor and a solenoid. 
+Plotting of line of force to locate neutral points 
+Units of magnetic flux and magnetic flux density as 
+weber (Wb) and tesla (T) respectively. 
+ 
+Qualitative treatment only.  Applications:  electric 
+motor and moving-coil galvanometer. 
+ 
+ 
+Examples in electric bell, telephone earpiece etc. 
+ 
+Mariner’s compass.  Angles of dip and declination. 
+ 
+Solving simple problems involving the motion of a 
+charged particle in a magnetic field, using       
+F=qvB sin  
+ 
+ 
+Identifying the directions of current, magnetic field 
+and force in an electromagnetic field (Fleming’s left-
+hand rule). 
+TOPICS NOTES 
+
+19 
+ 
+(i)  Shunt and multiplier 
+ 
+ 
+(j)  Resistivity and Conductivity 
+ 
+ 
+ 
+(k) Measurement of electric 
+current, potential difference, 
+resistance, e.m.f. and internal 
+resistance of a cell. 
+    
+    26.     Magnetic field 
+ 
+(h)  Properties of magnets and 
+magnetic materials. 
+ 
+(i) Magnetization and 
+demagnetization. 
+ 
+(j) Concept of magnetic field 
+ 
+ 
+ 
+ 
+ 
+(k) Magnetic force on: 
+(i)  a current-carrying conductor 
+      placed in a magnetic field; 
+(ii)  between two parallel  
+       current-carrying conductors 
+(l) Use of electromagnets 
+ 
+(m) The earth’s magnetic field 
+ 
+(n) Magnetic force on a moving 
+charged particle 
+ 
+27.   Electromagnetic field 
+ 
+(a)  Concept of electromagnetic field 
+            
+  
+   Use in conversion of a galvanometer into an 
+ammeter and a voltmeter. 
+ 
+Factors affecting the electrical resistance of a 
+material should be treated.  Simple problems may be 
+set. 
+ 
+Principle of operation and use of ammeter, 
+voltmeter, potentiometer.  The wheatstone bridge 
+and metre bridge. 
+ 
+ 
+ 
+ 
+Practical examples such as soft iron, steel and alloys. 
+ 
+ 
+Temporary and permanent magnets.  Comparison of 
+iron and steel as magnetic materials. 
+ 
+Magnetic flux and magnetic flux density. 
+Magnetic field around a permanent magnet, a 
+current-carrying conductor and a solenoid. 
+Plotting of line of force to locate neutral points 
+Units of magnetic flux and magnetic flux density as 
+weber (Wb) and tesla (T) respectively. 
+ 
+Qualitative treatment only.  Applications:  electric 
+motor and moving-coil galvanometer. 
+ 
+ 
+Examples in electric bell, telephone earpiece etc. 
+ 
+Mariner’s compass.  Angles of dip and declination. 
+ 
+Solving simple problems involving the motion of a 
+charged particle in a magnetic field, using F=qvB  
+sin   
+ 
+ 
+Identifying the directions of current, magnetic field 
+and force in an electromagnetic field (Fleming’s left-
+hand rule). 
+ 
+TOPIC NOTES 
+
+20 
+ 
+(b)   Electromagnetic induction 
+ 
+Faraday’s law ,Lenz’s law and 
+motor-generator effect 
+ 
+ 
+ 
+ 
+(c) Inductance 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(d) Eddy currents 
+ 
+ 
+ 
+ 
+(e) Power transmission and 
+distribution 
+ 
+28.  Simple a.c. circuits 
+ 
+ 
+(a)   Graphical representation of e.m.f  
+   and current in an a.c. circult. 
+ 
+(b)   Peak and r..m.s. values 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+TOPIC 
+ 
+ 
+Applications:  Generator (d.c.and a.c.) induction coil 
+and transformer.  The principles underlying the 
+production of direct and alternating currents should 
+be treated.  Equation E = E
+o
+ sinwt should be 
+explained. 
+ 
+Qualitative explanation of self and mutual 
+inductance.  The unit of inductance is henry (H). 
+ 
+(E = 
+
+
+ LI
+2
+) 
+ 
+Application in radio,T.V., transformer. 
+(Derivation of formula is not required). 
+ 
+A method of reducing eddy current losses should be 
+treated.  Applications in induction furnace, 
+speedometer, etc. 
+ 
+Reduction of power losses in high-tension 
+transmission lines.  Household wiring system should 
+be discussed. 
+ 
+ 
+ 
+ 
+Graphs of equation I – Io sin wt and\E = E
+o
+ sinwt 
+should be treated. 
+ 
+Phase relationship between voltage and current in 
+the circuit elements; resistor, inductor and capacitor. 
+NOTES 
+
+21 
+ 
+      
+            (c)   Series circuit containing 
+                   resistor, inductor and capacitor  
+ 
+           (d)   Reactance and impedance 
+ 
+           (e)    Vector diagrams 
+ 
+(f)  Resonance in an a.c, circuit 
+ 
+(g)  Power in an a.c. circuit. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Simple calculations involving a.c. circuit. 
+(Derivation of formulae is not required.) 
+ 
+X
+L
+ and X
+c
+ should be treated.  Simple numerical 
+problems may be set. 
+ 
+ 
+Applications in tuning of radio and T.V. should be 
+discussed. 
+ 
+  PART V 
+ATOMIC AND NUCELAR PHYSICS 
+ 
+TOPICS 
+ . 
+29.   Structure of the atom 
+ 
+(a)  Models of the atom 
+ 
+ 
+ 
+ 
+ 
+(b) Energy quantization 
+ 
+ 
+ 
+ 
+ 
+(c) Photoelectric effect 
+ 
+ 
+ 
+ 
+(d) Thermionic emission 
+ 
+NOTES 
+ 
+Thomson, Rutherford, Bohr and electron-
+cloud (wave-mechanical) models should be 
+discussed qualitatively.  Limitations of each 
+model.  Quantization of angular momentum 
+(Bohr) 
+ 
+Energy levels in the atom.  Colour and light 
+frequency.  Treatment should include the 
+following:  Frank-Hertz experiment, Line 
+spectra from hot bodies, absorption spectra 
+and spectra of discharge lamps. 
+ 
+Explanation of photoelectric effect. Dual 
+nature of light.  Work function and threshold 
+frequency.  Einstein’s photoelectric equation 
+and its explanation.  Application in T.V., 
+camera, etc. 
+Simple problems may be set. 
+ 
+Explanation and applications. 
+ 
+
+22 
+ 
+(e) X-rays 
+ 
+ 
+30.   Structure of the nucleus 
+ 
+(a)  Composition of the nucleus 
+ 
+ 
+ 
+ 
+Production of X-rays and structure of X-ray 
+tube. 
+Types, characteristics, properties, uses and 
+hazards of X-rays.  Safety precautions 
+ 
+Protons and neutrons.  Nucleon number (A), 
+proton number (Z), neutron number (N) and 
+the equation:  A-Z + N to be treated.  
+Nuclides and their notation. Isotopes. 
+   TOPICS 
+ 
+(a)  Radioactivity – 
+Natural and artificial 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(b)  Nuclear reactions --- 
+Fusion and Fission 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+31.   Wave-particle paradox 
+ 
+(a)   Electron diffraction 
+(b)   Duality of matter 
+ 
+ 
+NOTES 
+ 
+ Radioactive elements, radioactive emissions 
+(,β,)and their properties and uses.  
+Detection of radiations by G – M counter, 
+photographic plates, etc.  should be 
+mentioned.  Radioactive decay, half-life and 
+decay constant. 
+Transformation of elements.  Applications of 
+radioactivity in agriculture, medicine, 
+industry, archaeology, etc. 
+ 
+Distinction between fusion and fission.  
+Binding energy, mass defect and energy 
+equation: 
+ 
+E= ∆ mc
+2
+ 
+ 
+Nuclear reactors.  Atomic bomb.  Radiation 
+hazards and safety precautions.  Peaceful 
+uses of nuclear reactions. 
+ 
+ 
+ 
+ 
+ 
+ 
+Simple illustration of the dual nature of 
+light. 
+ 
+ 
+ 
+ 
+ 
+ 
+
+23 
+ 
+HARMONISED TOPICS FOR SHORT STRUCTURED QUESTIONS FOR 
+ALL MEMBER COUNTRIES 
+ 
+TOPICS NOTES 
+1.   Derived quantities and dimensional  
+      Analysis 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+2.    Projectile motion concept of  
+       projectiles as an object thrown/release  
+       into space 
+ 
+3.    Satellites and rockets 
+ 
+ 
+ 
+ 
+ 
+4.    Elastic Properties of solid: 
+       Hooke’s law, Young’s modules and  
+      work done in springs and string 
+ 
+ 
+ 
+      Thermal conductivity: 
+      Solar energy collector and Black body  
+      Radiation. 
+ 
+ 
+5.   Fibre Optics 
+Fundamental quantities and units e.g. Length, mass, 
+time, electric current, luminous intensity e.t.c., m, 
+kg,s, A, cd, e.t.c. as their respective units 
+Derived quantities and units. e.g. volume, density, 
+speed e.t.c. m
+3
+, kgm
+-3
+, ms
+-1
+ e.t.c. as their respective 
+unit 
+Explanation of dimensions in terms of fundamental 
+and derived quantities.  Uses of dimensions 
+-   to verity dimensional correctness of a given  
+    equation 
+-   to derive the relationship between quantities 
+-   to obtain derived units. 
+ 
+Applications of projectiles in warfare, sports etc. 
+Simple problems involving range, maximum height 
+and time of flight may be set. 
+ 
+Meaning of a satellite comparison of natural and 
+artificial satellites parking orbits, Geostationary 
+satellites and period of revolution and speed of a 
+satellite. 
+Uses of satellites and rockets 
+     
+Behaviour of elastic materials under stress – features 
+of load – extension graph  
+Simple calculations on Hook’s law and Young’s 
+modulus.    
+ 
+ 
+Solar energy; solar panel for heat energy supply. 
+Explanation of a blackbody.  Variation of intensity 
+of black body radiation with wavelength at different 
+temperatures.     
+ 
+ Explanation of concept of fibre optics. 
+Principle of transmission of light through an optical 
+fibre  
+Applications of fibre optics e.g. local area Networks 
+(LAN) medicine, rensing devices, carrying laser 
+beams e.t.c.    
+TOPICS NOTES 
+
+24 
+ 
+ 
+6.    Introduction to LASER  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+7.   Magnetic materials 
+ 
+ 
+ 
+ 
+ 
+ 
+8.    Electrical Conduction through  
+       materials [Electronic] 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+9.    Structure of matter  
+ 
+ 
+10.   Wave – particle paradox 
+ 
+ 
+ 
+  
+Meaning of LASER 
+Types of LASERS 
+(Solid state, gas, liquid and semi-conductor 
+LASERS 
+Application of LASERS 
+(in Scientific research, communication, medicine 
+military technology, Holograms e.t.c.  
+Dangers involved in using LASERS. 
+ 
+  
+   
+Uses of magnets and ferromagnetic materials. 
+ 
+ 
+ 
+ 
+ 
+ 
+Distinction between conductors, semiconductors and 
+insulators in term of band theory.   
+Semi conductor materials (silicon and germanium)  
+Meaning of intrinsic semiconductors.  (Example of 
+materials silicon and germanium).  Charge carriers  
+Doping production of p-type and n-type extrinsic 
+semi conductors. 
+Junction diode – forward and reverse biasing, 
+voltage characteristics.  Uses of diodes Half and full 
+wave rectification. 
+ 
+ 
+Use of kinetic theory to explain diffusion. 
+ 
+ 
+Electron diffraction  
+Duality of matter 
+Simple illustrations of dual nature of light. 
+ 

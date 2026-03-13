@@ -1,0 +1,121 @@
+
+
+ 
+ 
+INFORMATION AND COMMUNICATION TECHNOLOGY  (CORE) 
+ 
+ 
+1. AIMS: 
+  
+The aims of the syllabus are to test: 
+ 
+(1)    candidates’ knoweldge and understanding of the basic concepts of Information 
+and Communication Technology. 
+ 
+(2)    the capabilities of candidates in the application of ICT knowledge in education 
+and business. 
+ 
+ (3)    candidates’ preparedness for higher studies. 
+ 
+2. SCHEME OF EXAMINATION: 
+ 
+ 
+ 
+There will be two papers, Papers 1 and 2 both of which will be a composite paper to be   
+taken at one sitting. 
+ 
+PAPER 1:  Will consist of forty multiple-choice objective questions all of which must be                            
+        answered within 45 minutes for 20 marks.   
+ 
+PAPER 2:  Will consist of four compulsory test of practical knowledge questions, and six  
+        essay-type questions.  Candidates will be required to answer  the compulsory  
+         test of practical questions and any two of the other questions within 2 hours  for  
+         80 marks. 
+ 
+3. DETAILED SYLLABUS: 
+ 
+   
+TOPIC                                                                     NOTES
+ 
+1   INTRODUCTION                             1.1 Meaning of ICT and its related  
+TO BASIC ICT                               terminologies. 
+CONCEPTS AND           1.2         Uses of ICT tools e.g.mobile 
+phones,     
+COMPUTERS                computers, Internet, television set, 
+       radio, etc. 
+                 1.3    Impact of ICT on Education, Social 
+ 
+     and Economic Development. 
+                             1.4    Information processing cycle;  
+                  distinction between data and  
+
+     information. 
+                             1.5    Types and uses of computers. 
+ 
+ 2 COMPUTER       2.1     Categories of computer hardware:  
+HARDWARE    system unit, peripherals and storage 
+      media. 
+ 
+ 3  COMPUTER                              3.1    Types of software: 
+SOFTWARE    System and application software. 
+                 3.2    Open source and proprietary 
+software. 
+ 
+ 4   THREATS TO      4.1    Meaning of computer threats. 
+COMPUTERS                        4.2    Categories of computer threats. 
+AND USERS     4.2.1    Natural threats e.g. earth-quakes, heat,            
+floods, etc. 
+      4.2.2  Human threats e.g.viruses, worms, 
+intentional       
+damage, etc. 
+      4.3    Health hazards to computer users: causes 
+and    
+effects. 
+      4.4    Remedies to threats and hazards. 
+ 
+5   WORD PROCESSING    5.1    Word Processing packages, their  
+     uses and importance. 
+    5.2     Related concepts and terminologies 
+    5.3     Creating and saving documents. 
+    5.4     Editing, formatting and insertion of  
+     objects e.g. tables, graphics, etc. 
+    5.5     Printing of documents. 
+    5.6     Speed and Accuracy in typing at  
+     30-35 words per minute. 
+ 
+ 6   SPREADSHEET  6.1     Spreadsheet packages, their uses and  
+importance. 
+    6.2     Related concepts and terminologies 
+    6.3     Types of data and their uses. 
+    6.4     Creating and saving workbook. 
+    6.5     Constructing and inserting formulae  
+     and functions. 
+    6.6     Editing and formatting worksheets. 
+    6.7     Printing worksheets. 
+ 
+7   PRESENTATION  7.1     Presentation Packages, uses and 
+       importance. 
+
+    7.2     Creating and saving presentations. 
+    7.3     Editing, formatting and insertion of 
+objects. 
+    7.4     Slide shows. 
+    7.5      Master slides. 
+    7.6      Factors to consider before delivering  
+     a presentation.    
+                7.7      Printing Presentation documents. 
+ 
+8   THE INTERNET  8.1      Meaning, concepts, terminologies     
+                and requirements. 
+                 8.2     Features and uses of browser  
+     windows. 
+                 8.3     Rules and regulations in the use of the 
+Internet  
+                                                                 (Netiquette). 
+                 8.4     Sending and accessing e-mail. 
+                 8.5     Internet related tools for communication, 
+e.g.     
+                                                                 chatting, downloading, uploading, 
+search      engines, facebook, etc. 
+ 
+ 

@@ -1,0 +1,429 @@
+
+
+  
+ 
+COST ACCOUNTING WASSCE / WAEC SYLLABUS 
+WWW.LARNEDU.COM 
+ 
+ 
+ 
+PRINCIPLES OF COST ACCOUNTING
+ 
+ 
+1.        AIMS AND OBJECTIVES 
+ 
+The aims of this examination are to test candidates’ ability to 
+ 
+a)        assemble, analyze and ascertain the cost of producing and procuring goods and 
+services; 
+(b)       develop skills for using Cost Accounting as a tool for assisting management with 
+information needed for planning, control and decision making; 
+(c)       show awareness of economic use of resources through costing techniques; 
+(d)       demonstrate knowledge of basic methods of presenting cost statements. 
+ 
+2.        SCHEME OF EXAMINATION 
+ 
+There will be two papers, Papers 1 and 2, both of which will be a composite paper to be 
+taken at one sitting. 
+ 
+PAPER 1: Will consist of fifty multiple-choice objective questions all of which must be 
+answered within 1 hour for of 25 marks. 
+ 
+PAPER 2: Will consist of nine essay-type questions. Candidates will be required to 
+answer five questions within 2 hours for 75 marks. 
+ 
+The paper will consist of two sections, Sections A and B as follows: 
+ 
+• Section A: Theory of Principles of Cost Accounting - four questions will be 
+set and candidates will be required to answer two of them for 15 
+marks each. 
+• Section B: Practices of Principles of Cost Accounting – five questions will 
+be set and candidates will be required to answer three of them 
+for 15 marks each. 
+ 
+3.        DETAILED SYLLABUS 
+ 
+TOPICS
+ 
+NOTES
+ 
+1.  INTRODUCTION TO 
+COST ACCOUNTING 
+1.1      Definitionand objectives of 
+CostAccounting. 
+1.2      Functions and importance of Cost 
+Accounting 
+1.3      Differences among Cost Accounting, 
+Management Accounting and 
+Financial Accounting. 
+1.4      Basic Costing terminologies e.g
+ 
+
+  
+ 
+ 
+Cost Centre, cost unit, unit cost 
+etc. 
+2.  CHARACTERISITICS 
+OF A GOOD COSTING SYSTEM 
+ 
+ 
+ 
+ 
+ 
+ 
+3.  COST CLASSIFICATION 
+AND TYPES OF COST 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+4.  ELEMENTS OF COST 
+2.1      Characteristics of a goodCosting 
+System e.gsimple, relevant, accurate, 
+cost-effective etc 
+2.2      Qualities of good Cost information 
+e.g brief, timely, comparable, 
+objective etc. 
+ 
+3.1      Basis of cost classification: 
+Classification of cost according to 
+behaviour, function, nature etc. 
+3.2     Types of cost under various 
+Classifications eg. direct cost, 
+indirect cost, period cost, 
+historical cost, sunk cost, etc. 
+3.3     Components of cost build-up for 
+ascertaining the cost/profit of a 
+product or an activity e.g prime cost, 
+overheads, factory cost, cost  of 
+production, cost of sales, total cost etc. 
+ 
+4.1      Explanation of elements of cost i.e 
+Material, Labour and Expenses. 
+ 
+4.2      Identification and grouping of 
+elements of cost into direct and 
+indirect costs e.g direct material 
+cost direct, labour cost, direct 
+expenses and overheads such as 
+factory, administration, selling and 
+distribution, etc.
+ 
+ 
+ 
+ 
+TOPICS NOTES 
+ 
+5.  MATERIALS 
+ 
+5.1      Purchasing, receiving, storage and 
+their documentation. 
+5.2      Stocktaking: periodic and continuous 
+and perpetual inventory system. 
+5.3      Inventory control – Minimum, 
+Maximum, Re-order stock levels and 
+Economic Order Quantity. 
+(computation of Economic Order 
+
+  
+ 
+ 
+ 
+ 
+ 
+5.4 
+Quantity is not required). 
+Pricing of issues and Stock valuation 
+ 
+using FIFO, LIFO,Simple Average, 
+Weighted Average,Standard Price 
+methods and their advantages and 
+disadvantages. 
+ 
+6. 
+ 
+LABOUR 
+ 
+6.1 
+ 
+ 
+ 
+6.2 
+ 
+Labour: Meaning and types of labour 
+and labour cost:- skilled and unskilled. 
+- direct and indirect. 
+Methods of labour remuneration: 
+   
+- Time rate 
+-  Piece rate: straight piece rate, 
+differential piece rate, price rate with 
+guaranteed time rate. 
+-  incentive schemes: premium bonus,
+ 
+overtime premium. 
+6.3          Methods of time keeping and 
+concept of idle time. 
+6.4   Payroll procedures: 
+-Preparation of wages analysis sheet 
+-statutory and non-statutory deductions 
+should be emphasized. (questions will 
+be limited to computation of individual 
+bonus schemes). 
+6.5    Labour Turnover: Meaning, causes and 
+cost. 
+-Labour turnover ratio. 
+7.  OVERHEADS 7.1    Definition of overheads. 
+7.2    Types of overheads. 
+7.3    Overhead analysis, collection, 
+classification, allocation, apportionment 
+and redistribution.
+ 
+ 
+ 
+ 
+ 
+TOPICS
+ 
+NOTES
+ 
+ 
+ 
+7.4   Overhead Absorption: 
+- Calculation of Overhead 
+Absorption Rates (OAR) e.g 
+Direct Wages Percentage, Direct 
+Material Cost Percentage, 
+Machine Hour Rate, Prime 
+
+  
+ 
+ 
+Cost percentage, etc. 
+7.5  Application of Overhead Absorption 
+Rates. 
+7.6  Calculation of under/over absorption of 
+overheads. 
+7.7  Activity Based Costing: 
+7.7.1 Meaning, advantages and disadvantages 
+of Activity Based Costing (ABC). 
+7.7.2 Steps in Activity Based Costing. 
+7.7.3 Differences between Activity Based 
+Costing and Traditional Product Costing 
+systems. 
+- limitations of Traditional Product 
+Costing System. 
+7.7.4 Computation of product cost using 
+Activity Based Costing. 
+8. COSTING METHODS 
+8.1 Job/Batch Costing 
+ 
+ 
+ 
+8.2 Contract Costing 
+ 
+ 
+ 
+ 
+8.3 Service Costing 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+8.4 Process Costing 
+8.1.1   Purpose and circumstances under 
+which Job/Batch Costing is applied. 
+8.1.2 Ascertainment of cost of a job or batch. 
+ 
+8.2.1 Meaning and characteristics. 
+8.2.2 Preparation of Contract Accounts 
+and Contractee’s Account. 
+ 
+8.3.1  Meaning and objectives of Service 
+Costing. 
+8.3.2 Organizations that use Service Costing. 
+8.3.3  Ascertainment of cost per unit of 
+services rendered. 
+ 
+8.4.1 Explanation and circumstance where 
+process costing is applied 
+8.4.2 Terminologies in process costing e.g 
+joint-products, by-products, scrap, waste, 
+etc.
+ 
+ 
+ 
+ 
+TOPICS
+ 
+NOTES
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+9.0 COSTING TECHNIQUES
+ 
+ 
+8.4.3 Preparation of process accounts 
+including Normal loss, Abnormal 
+Loss and Abnormal gain. 
+
+  
+ 
+ 
+ 
+9.1 Marginal and Absorption Costing 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+9.2 Break Even Analysis 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+10.0 BUDGETING AND BUDGETARY 
+CONTROL 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+11.0 STANDARD COSTING 
+9.1.1 Meaning anddistinction 
+between Marginal and  Absorption 
+Costing. 
+9.1.2 Terminologies used in Marginal and 
+Absorption Costing - fixed cost, variable 
+cost, semi-variable costs, contribution, 
+period and product costs. etc. 
+9.1.3 Preparation of Income Statement using 
+both Marginal and Absorption costing. 
+ 
+9.2.1 Meaning, importance, assumptions and 
+limitations of break-even analysis. 
+9.2.2 Computation of break-even points in 
+units and values from given data 
+including segregation of costs ( using 
+high and low method). 
+9.2.3 Preparation and  interpretation of 
+break-even charts. 
+ 
+10.1  Explanation of basic terminologies in 
+Budgeting and Budgetary control. 
+10.2  Budgeting process and Administration. 
+10.3  Importance of Budgeting and 
+Budgetary control. 
+-  Preparation of budgets will be limited 
+to cash sales, material usage, material 
+purchase and production budgets. 
+10.4  Functional budgets: 
+-   Sales, production, capital expenditure, 
+etc. 
+10.5 Cash budget and master budget. 
+ 
+11.1  Meaning and importance of Standard 
+Costing 
+11.2  Types of Standards. 
+ 
+11.3  Computation of variances: 
+•   Material (price and usage) 
+•   Labour (rate and efficiency).
+ 
+ 
+ 
+TOPICS
+ 
+NOTES
+ 
+ 
+12.0 COST ACCOUNTS 
+ 
+12.1  Interlocking cost accounts. 
+
+  
+ 
+ 
+12.2 Preparation of cost ledger accounts. 
+12.3 Reconciliation of cost and financial 
+profits. 
+12.4 Integrated Cost accounts. 
+ 
+12.5  Preparation of ledger accounts and 
+income statements. 
+ 
+ 
+ 
+SUGGESTED READING LIST 
+ 
+A.        RECOMMENDED TEXT BOOKS 
+ 
+Cost Accounting - by Harper, W.M -      Published by  Pitman Publishing Ltd. 
+Cost Accounting - by T. Lucey        -     Published by DPP Publications Ltd 
+Weldon’s Cost Accounting     -     Published by Macdonald andEvans Ltd.           - by 
+Owler, L.W.J and Brown, J.L 
+ 
+ 
+ 
+Principles of Cost Accounting for       -         Published by Longmanfor the 
+Senior Secondary Schools in Ghana              Ministry of Education, Ghana (1991). 
+ 
+ 
+ 
+Cost Accounting – by Drury, Colin  -           Published by Professional  Heinemann 
+Publishing. 
+ 
+ 
+ 
+B.        OTHER SUGGESTED LOCAL TEXTS /PAMPLETS/JOURNALS IN GHANA 
+ 
+1.  Costing Made Easy     – by Kingsford Opoku (Kings Series) 
+2.  Costing for ‘U’           – by Barnabas Dadzie (C for ‘U’ Series). 
+3.  Cost Accounting for Senior HighSchool - by Williams Asamoah Appiah 
+(AKI-OLA Series)-AKI-OLA Publications, Accra 
+c 
+Visit Larnedu.com for more WASSCE Syllabus 

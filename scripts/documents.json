@@ -320,5 +320,110 @@
     "url": "https://assets.openstax.org/oscms-prodcms/media/documents/CollegeAlgebra-OP.pdf",
     "source": "OpenStax / Rice University (CC BY 4.0)",
     "category": "education"
+  },
+  {
+    "id": "waec-syllabus-business-management",
+    "title": "WAEC WASSCE Syllabus — Business Management",
+    "url": "https://waecsyllabus.com/download/ssce/BUSINESS%20MANAGEMENT.pdf",
+    "source": "West African Examinations Council (WAEC)",
+    "category": "education"
+  },
+  {
+    "id": "waec-syllabus-financial-accounting",
+    "title": "WAEC WASSCE Syllabus — Financial Accounting",
+    "url": "https://waecsyllabus.com/download/ssce/FINANCIAL%20ACCOUNTS.pdf",
+    "source": "West African Examinations Council (WAEC)",
+    "category": "education"
+  },
+  {
+    "id": "waec-syllabus-economics",
+    "title": "WAEC WASSCE Syllabus — Economics",
+    "url": "https://waecsyllabus.com/download/ssce/ECONOMICS.pdf",
+    "source": "West African Examinations Council (WAEC)",
+    "category": "education"
+  },
+  {
+    "id": "waec-syllabus-cost-accounting",
+    "title": "WAEC WASSCE Syllabus — Cost Accounting",
+    "url": "https://www.larnedu.com/wp-content/uploads/2015/03/Cost-Accounting-WASSCE-_-WAEC-Syllabus.pdf",
+    "source": "West African Examinations Council (WAEC)",
+    "category": "education"
+  },
+  {
+    "id": "waec-syllabus-government",
+    "title": "WAEC WASSCE Syllabus — Government",
+    "url": "https://waecsyllabus.com/download/ssce/GOVERNMENT.pdf",
+    "source": "West African Examinations Council (WAEC)",
+    "category": "education"
+  },
+  {
+    "id": "waec-syllabus-history",
+    "title": "WAEC WASSCE Syllabus — History",
+    "url": "https://waecsyllabus.com/download/ssce/HISTORY.pdf",
+    "source": "West African Examinations Council (WAEC)",
+    "category": "education"
+  },
+  {
+    "id": "waec-syllabus-literature-in-english",
+    "title": "WAEC WASSCE Syllabus — Literature in English",
+    "url": "https://waecsyllabus.com/download/ssce/LITERATURE%20IN%20ENGLISH.pdf",
+    "source": "West African Examinations Council (WAEC)",
+    "category": "education"
+  },
+  {
+    "id": "waec-syllabus-christian-religious-studies",
+    "title": "WAEC WASSCE Syllabus — Christian Religious Studies",
+    "url": "https://waecsyllabus.com/download/ssce/CHRISTIAN%20RELIGIOUS%20STUDIES%20(NEW).pdf",
+    "source": "West African Examinations Council (WAEC)",
+    "category": "education"
+  },
+  {
+    "id": "waec-syllabus-geography",
+    "title": "WAEC WASSCE Syllabus — Geography",
+    "url": "https://waecsyllabus.com/download/ssce/GEOGRAPHY.pdf",
+    "source": "West African Examinations Council (WAEC)",
+    "category": "education"
+  },
+  {
+    "id": "waec-syllabus-physics",
+    "title": "WAEC WASSCE Syllabus — Physics",
+    "url": "https://waecsyllabus.com/download/ssce/PHYSICS.pdf",
+    "source": "West African Examinations Council (WAEC)",
+    "category": "education"
+  },
+  {
+    "id": "waec-syllabus-chemistry",
+    "title": "WAEC WASSCE Syllabus — Chemistry",
+    "url": "https://waecsyllabus.com/download/ssce/CHEMISTRY.pdf",
+    "source": "West African Examinations Council (WAEC)",
+    "category": "education"
+  },
+  {
+    "id": "waec-syllabus-biology",
+    "title": "WAEC WASSCE Syllabus — Biology",
+    "url": "https://waecsyllabus.com/download/ssce/BIOLOGY.pdf",
+    "source": "West African Examinations Council (WAEC)",
+    "category": "education"
+  },
+  {
+    "id": "waec-syllabus-elective-mathematics",
+    "title": "WAEC WASSCE Syllabus — Further Mathematics / Elective Mathematics",
+    "url": "https://waecsyllabus.com/download/ssce/FURTHER%20MATHEMATICS%20OR%20MATHEMATICS%20(ELECTIVE).pdf",
+    "source": "West African Examinations Council (WAEC)",
+    "category": "education"
+  },
+  {
+    "id": "waec-syllabus-ict",
+    "title": "WAEC WASSCE Syllabus — Information and Communication Technology (ICT)",
+    "url": "https://waecsyllabus.com/download/ssce/INFORMATION%20AND%20COMMUNICATION%20TECHNOLOGY%20(CORE).pdf",
+    "source": "West African Examinations Council (WAEC)",
+    "category": "education"
+  },
+  {
+    "id": "waec-syllabus-french",
+    "title": "WAEC WASSCE Syllabus — French",
+    "url": "https://waecsyllabus.com/download/ssce/FRENCH.pdf",
+    "source": "West African Examinations Council (WAEC)",
+    "category": "education"
   }
 ]
