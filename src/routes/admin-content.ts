@@ -2242,4 +2242,171 @@ adminContent.get("/api/admin/metrics/tools", adminMiddleware, async (c) => {
   return c.json({ success: true, invocations: rows.results });
 });
 
+// ─── Admin: AI Parse Exam Paper ──────────────────────────────────────
+
+const EXAM_PARSE_SYSTEM_PROMPT = `You are a WAEC exam paper parser. Extract every question from the provided exam paper text into structured JSON.
+
+For each question, extract:
+- question_number: integer
+- question_text: the full question text including any sub-parts
+- options: object with keys A, B, C, D (for MCQ) or null (for theory/essay questions)
+- correct_answer: the letter (A/B/C/D) or null if not determinable from the text
+- explanation: brief explanation of the answer, or empty string if unknown
+- difficulty: "easy", "medium", or "hard" based on cognitive demand (recall=easy, application=medium, analysis=hard)
+- marks: integer marks allocated, or null if not specified
+- topic: the subject topic (e.g., "surds", "photosynthesis", "essay writing", "comprehension")
+
+Return ONLY a valid JSON array of question objects. Do not include any text outside the JSON.
+If you cannot determine the correct answer, set correct_answer to null — do NOT guess.
+If you cannot determine marks, set marks to null.`;
+
+adminContent.post("/api/admin/parse-exam-paper", async (c, next) => {
+  const bootstrapSecret = c.req.header("X-Bootstrap-Secret");
+  if (bootstrapSecret && bootstrapSecret === c.env.BOOTSTRAP_SECRET) {
+    c.set("userId", "system-ingest");
+    return next();
+  }
+  return adminMiddleware(c, next);
+}, async (c) => {
+  const { text, exam_type, subject, year } = await c.req.json();
+
+  if (!text || !exam_type || !subject || !year) {
+    return c.json({ error: "text, exam_type, subject, and year are required" }, 400);
+  }
+
+  // Split long text into segments (~12K chars each) at question boundaries
+  const MAX_SEGMENT = 12000;
+  const segments: string[] = [];
+
+  if (text.length <= MAX_SEGMENT) {
+    segments.push(text);
+  } else {
+    let start = 0;
+    while (start < text.length) {
+      let end = Math.min(start + MAX_SEGMENT, text.length);
+      if (end < text.length) {
+        const questionBoundary = text.lastIndexOf("\n", end);
+        if (questionBoundary > start + MAX_SEGMENT * 0.5) {
+          end = questionBoundary;
+        }
+      }
+      segments.push(text.slice(start, end).trim());
+      start = end;
+    }
+  }
+
+  const allQuestions: any[] = [];
+
+  for (const segment of segments) {
+    try {
+      const response = await c.env.AI.run('@cf/meta/llama-3.1-8b-instruct-fast' as any, {
+        messages: [
+          { role: "system", content: EXAM_PARSE_SYSTEM_PROMPT },
+          { role: "user", content: `Parse this ${exam_type.toUpperCase()} ${subject} (${year}) exam paper:\n\n${segment}` },
+        ],
+        max_tokens: 4096,
+        response_format: { type: "json_object" },
+      });
+
+      const responseText = typeof response === 'string' ? response : (response as any).response || '';
+
+      // Extract JSON array from response (handle markdown code blocks)
+      let jsonText = responseText.trim();
+      if (jsonText.startsWith('```')) {
+        jsonText = jsonText.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '');
+      }
+
+      const parsed = JSON.parse(jsonText);
+      const questions = Array.isArray(parsed) ? parsed : (parsed.questions || []);
+      allQuestions.push(...questions);
+    } catch (err: any) {
+      console.error(`Parse segment error: ${err.message}`);
+    }
+  }
+
+  return c.json({
+    exam_type,
+    subject,
+    year,
+    question_count: allQuestions.length,
+    questions: allQuestions,
+  });
+});
+
+// ─── Admin: Bulk Insert Exam Questions ───────────────────────────────
+
+adminContent.post("/api/admin/exam-questions/bulk", async (c, next) => {
+  const bootstrapSecret = c.req.header("X-Bootstrap-Secret");
+  if (bootstrapSecret && bootstrapSecret === c.env.BOOTSTRAP_SECRET) {
+    c.set("userId", "system-ingest");
+    return next();
+  }
+  return adminMiddleware(c, next);
+}, async (c) => {
+  const { exam_type, subject, year, paper, questions } = await c.req.json();
+
+  if (!exam_type || !subject || !year || !questions || !Array.isArray(questions)) {
+    return c.json({ error: "exam_type, subject, year, and questions array are required" }, 400);
+  }
+
+  const paperStr = String(paper || "1");
+  let inserted = 0;
+  let skipped = 0;
+
+  // Filter out invalid questions
+  const validQuestions = questions.filter((q: any) => {
+    if (!q.question_text || !q.question_number) {
+      console.log(`Skipping invalid question: missing question_text or question_number`);
+      skipped++;
+      return false;
+    }
+    return true;
+  });
+
+  // Process in batches of 20 (D1 batch limit consideration)
+  for (let i = 0; i < validQuestions.length; i += 20) {
+    const batch = validQuestions.slice(i, i + 20);
+    const statements = batch.map((q: any) => {
+      const id = generateId();
+      const optionsJson = q.options ? JSON.stringify(q.options) : null;
+      const difficulty = ['easy', 'medium', 'hard'].includes(q.difficulty) ? q.difficulty : 'medium';
+
+      return c.env.DB.prepare(
+        `INSERT OR IGNORE INTO exam_questions
+         (id, exam_type, subject, year, paper, question_number, question_text, options, correct_answer, explanation, marks, difficulty, topic)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+      ).bind(
+        id,
+        exam_type,
+        subject,
+        year,
+        paperStr,
+        q.question_number || 0,
+        q.question_text || '',
+        optionsJson,
+        q.correct_answer || null,
+        q.explanation || '',
+        q.marks || 0,
+        difficulty,
+        q.topic || ''
+      );
+    });
+
+    try {
+      const results = await c.env.DB.batch(statements);
+      for (const r of results) {
+        if (r.meta.changes > 0) inserted++;
+        else skipped++;
+      }
+    } catch (err: any) {
+      console.error(`Batch insert error: ${err.message}`);
+      skipped += batch.length;
+    }
+  }
+
+  await logAudit(c.env.DB, c.get("userId"), "bulk_insert_exam_questions", "exam_questions", undefined, `${exam_type} ${subject} ${year}: ${inserted} inserted, ${skipped} skipped`);
+
+  return c.json({ inserted, skipped, total: questions.length });
+});
+
 export default adminContent;
