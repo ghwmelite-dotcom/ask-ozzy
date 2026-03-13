@@ -229,5 +229,103 @@
     "url": "https://ohcs.gov.gh/wp-content/uploads/2025/05/2024-Civil-Service-Annual-Performance-Report.pdf",
     "source": "Office of the Head of Civil Service, Ghana",
     "category": "civil_service"
+  },
+  {
+    "id": "ug-thesis-submission-guide",
+    "title": "University of Ghana Thesis Submission and Tracking System Guidelines",
+    "url": "https://sgs.ug.edu.gh/sites/sgs.ug.edu.gh/files/2023-08/Guidelines_To_Students_New%20Thesis_Submission_System_compressed.pdf",
+    "source": "University of Ghana School of Graduate Studies",
+    "category": "research"
+  },
+  {
+    "id": "knust-thesis-preparation-guide",
+    "title": "KNUST Guide for Preparation and Evaluation of Higher Degree Research Thesis",
+    "url": "https://treck.knust.edu.gh/sites/default/files/2019-11/GUIDE%20FOR%20PREPARATION%20AND%20EVALUATION%20OF%20GRADUATE%20THESIS.pdf",
+    "source": "Kwame Nkrumah University of Science and Technology",
+    "category": "research"
+  },
+  {
+    "id": "knust-research-supervision-guide",
+    "title": "KNUST Guide for Higher Research Degree Supervision",
+    "url": "https://treck.knust.edu.gh/sites/default/files/2019-09/GUIDE%20FOR%20HIGHER%20DEGREE%20RESEARCH.pdf",
+    "source": "Kwame Nkrumah University of Science and Technology",
+    "category": "research"
+  },
+  {
+    "id": "ucc-graduate-student-guide",
+    "title": "UCC School of Graduate Studies Student Guide",
+    "url": "https://sgs.ucc.edu.gh/sites/default/files/2024-02/ets-sgs-student-guide.pdf",
+    "source": "University of Cape Coast School of Graduate Studies",
+    "category": "research"
+  },
+  {
+    "id": "ucc-article-based-thesis-policy",
+    "title": "UCC Policy Guidelines on Article-Based Thesis",
+    "url": "https://ucc.edu.gh/sites/default/files/policy_guidelines_on_article-based_thesis_2018_0.pdf",
+    "source": "University of Cape Coast School of Graduate Studies",
+    "category": "research"
+  },
+  {
+    "id": "ucc-academic-policies-graduate",
+    "title": "UCC Academic Policies and Regulations for Graduate Studies",
+    "url": "https://sgs.ucc.edu.gh/sites/default/files/2024-02/academic-policies-and-regulations-for-graduate-studies.pdf",
+    "source": "University of Cape Coast School of Graduate Studies",
+    "category": "research"
+  },
+  {
+    "id": "gcps-dissertation-guidelines",
+    "title": "Ghana College of Physicians and Surgeons Guidelines for Dissertation Writing",
+    "url": "https://gcps.edu.gh/wp-content/uploads/2021/03/Guidelines-For-Dissertation-Writing-Final.pdf",
+    "source": "Ghana College of Physicians and Surgeons",
+    "category": "research"
+  },
+  {
+    "id": "eric-achieving-quality-education-ghana",
+    "title": "Achieving Quality Education in Ghana: Challenges and Prospects",
+    "url": "https://files.eric.ed.gov/fulltext/EJ1079771.pdf",
+    "source": "ERIC (Education Resources Information Center)",
+    "category": "education"
+  },
+  {
+    "id": "eric-teacher-education-ghana",
+    "title": "Teacher Education in Ghana: Policies and Practices",
+    "url": "https://files.eric.ed.gov/fulltext/EJ1248146.pdf",
+    "source": "ERIC (Education Resources Information Center)",
+    "category": "education"
+  },
+  {
+    "id": "eric-access-basic-education-ghana",
+    "title": "Access to Basic Education in Ghana: Politics, Policies and Progress",
+    "url": "https://files.eric.ed.gov/fulltext/ED512117.pdf",
+    "source": "ERIC (Education Resources Information Center)",
+    "category": "education"
+  },
+  {
+    "id": "eric-education-policies-ghana",
+    "title": "Comparative Review of Selected Educational Policies in Ghana",
+    "url": "https://files.eric.ed.gov/fulltext/EJ1137987.pdf",
+    "source": "ERIC (Education Resources Information Center)",
+    "category": "education"
+  },
+  {
+    "id": "eric-teacher-retention-rural-ghana",
+    "title": "Teacher Retention: Policies for Motivating Rural Basic School Teachers in Ghana",
+    "url": "https://files.eric.ed.gov/fulltext/EJ1203657.pdf",
+    "source": "ERIC (Education Resources Information Center)",
+    "category": "education"
+  },
+  {
+    "id": "eric-open-access-eresources-ghana",
+    "title": "Open Access Electronic Resources Use and Research Output in Ghana",
+    "url": "https://files.eric.ed.gov/fulltext/EJ1324294.pdf",
+    "source": "ERIC (Education Resources Information Center)",
+    "category": "research"
+  },
+  {
+    "id": "openstax-college-algebra",
+    "title": "College Algebra (OpenStax)",
+    "url": "https://assets.openstax.org/oscms-prodcms/media/documents/CollegeAlgebra-OP.pdf",
+    "source": "OpenStax / Rice University (CC BY 4.0)",
+    "category": "education"
   }
 ]
