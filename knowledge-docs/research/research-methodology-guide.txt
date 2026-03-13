@@ -1,0 +1,3907 @@
+1 
+ 
+ 
+ 
+RESEARCH METHODOLOGY: 
+TOOLS AND TECHNIQUES 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+2 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+RESEARCH METHODOLOGY: TOOLS AND TECHNIQUES 
+Dr. Prabhat  Pandey 
+Dr. Meenu Mishra Pandey 
+ 
+© Bridge Center, 2015 
+BRIDGE CENTER 
+Buzau, Al. Marghiloman 245 bis, 120082 
+Tel. 0728394546 
+e-mail: editor@euacademic.org 
+Romania, European Union 
+ 
+Printed in Romania 
+First published, 2015 
+ 
+ISBN 978-606-93502-7-0 
+ 
+All   rights   reserved.   No   part   of   this   publication   may   be 
+reproduced  or  transmitted,  in  any  form  or  by  any  means, 
+without  permission.  Any person  who  does  any  unauthorised 
+act  in  relation  to  this  publication  may  be  liable  to  criminal 
+prosecution and civil claims for damages. 
+The  publishers  have  applied  for  copyright  permission  for 
+those    pieces    that    need    copyright    clearance    and    due 
+acknowledgement will be made at the first opportunity. 
+The  views  and  contents  of  this  book  are  solely  of  the  author. 
+The author of the book has taken all reasonable care to ensure 
+that  the  contents  of  the  book  do  not  violate  any  existing 
+copyright  or  other  intellectual  property  rights  of  any  person 
+in  any  manner  whatsoever.  In  the  event  the  author  has  been 
+unable  to  track  any  source  and  if  any  copyright  has  been 
+inadvertently infringed, please notify the publisher in writing 
+for corrective action. 
+ 
+
+ 
+ 
+3 
+ 
+Dr. Prabhat  Pandey 
+Dr. Meenu  Mishra  Pandey 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+RESEARCH METHODOLOGY: TOOLS 
+AND TECHNIQUES 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Bridge Center 
+2015 
+
+ 
+ 
+4 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+5 
+ 
+C
+C
+O
+O
+N
+N
+T
+T
+E
+E
+N
+N
+T
+T
+S
+S 
+ 
+ 
+ 
+Preface................................................................................................................6 
+Chapter 1 – Research...............................................................................7 
+Chapter 2 - Research Process........................................................................13 
+Chapter 3 - Research Design.........................................................................18 
+Chapter 4 - Research Problem......................................................................23 
+Chapter 5 - Variables and Their Types.........................................................29 
+Chapter 6 - Formulation of Hypothesis.......................................................32 
+Chapter 7 – Sampling.....................................................................................40 
+Chapter 8 - Tools of Data Collection............................................................57 
+Chapter 9 -  Data Analysis.............................................................................70 
+Chapter 10 - Interpretation of Data.............................................................75 
+Chapter 11 - Research Methods...................................................................78 
+Chapter 12 - Descriptive or Survey Method...............................................84 
+Chapter 13 - Experimental Method.............................................................89 
+Chapter 14 - Research Proposal.................................................................101 
+Chapter 15 - Research Report.....................................................................110 
+Bibliography..................................................................................................116 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+6 
+P
+P
+R
+R
+E
+E
+F
+F
+A
+A
+C
+C
+E
+E
+ 
+ 
+ 
+ 
+The  authors  felt  during  their  several  years  of  teaching  experience  that 
+students fail to understand the books written on Research Methodology 
+because  generally  they  are  written  in  technical  language.  Since  this 
+course is not taught before the Master’s degree, the students are not 
+familiar with its vocabulary, methodology and course contents. 
+ The  authors  have  made  an  attempt  to  write  it  in  very  non-
+technical  language.  It  has  been  attempted  that  students  who  try  to 
+understand  the  research  methodology  through  self-learning  may  also 
+find  it  easy.  The  chapters  are  written  with  that  approach.  Even  those 
+students  who  intend  to  attain  high  level  of  knowledge  of  the  research 
+methodology   in   social   sciences   will   find   this   book   very   helpful   in 
+understanding   the   basic   concepts   before   they   read   any   book   on 
+research methodology. 
+ This  book  is  useful  those  students  who  offer  the  Research 
+Methodology  at  Post  Graduation  and  M.Phil.  Level.  This  book  is  also 
+very useful for Ph.D. Course Work examinations.  
+ 
+                                                                   Dr. Prabhat Pandey 
+                                                                   Dr. Meenu Mishra Pandey 
+
+ 
+ 
+7 
+ 
+ 
+ 
+ 
+Research 
+ 
+Introduction: 
+ 
+Research  is  an  essential  and  powerful  tool  in  leading  man  towards 
+progress. Without systematic research there would have been very little 
+progress. 
+ John  W. Best has  rightly  said,  “The secret of  our  cultural 
+development has been research, pushing back the areas of ignorance by 
+discovering  new  truths, which, in  turn, lead  to  better  ways  of  doing 
+things and better products.” 
+ Scientific research  leads  to  progress  in  some  field  of  life. New 
+products,  new  facts,  new  concepts  and  new  ways of  doing  things  are 
+being  found due  to  ever-increasing  significant  research in  the  physical, 
+the biological, the social and the psychological fields. Research today is 
+no longer confined to the science laboratory. 
+ 
+Meaning of Research: 
+Word ‘Research’ is comprises of two words =  Re+Search. It  means  to 
+search again. So research means a systematic investigation or activity to 
+gain new knowledge of the already existing facts. 
+ Research  is  an  intellectual activity.  It  is  responsible for bringing 
+to light new knowledge. It is also responsible for correcting the present 
+mistakes, removing existing misconceptions and adding new learning to 
+the existing   fund   of   knowledge. Researches   are considered   as   a 
+combination of those  activities which are removed from day to day  life 
+1 
+
+ 
+ 
+8 
+and are pursued by those persons who are gifted in intellect and sincere 
+in pursuit of knowledge. But  it is not correct  to say that  the research is 
+restricted to  such  type  of persons,  however, it  is  correct  to  say  that 
+major contribution of research comes from highly gifted and committed 
+workers. Thus the  research is not  at  all mysterious and is carried on by 
+hundreds of thousands of average individuals. 
+ Research   is  also   considered   as  the  application   of   scientific 
+method in solving the problems. It is a systematic, formal and intensive 
+process of carrying on the scientific method of analysis. There are many 
+ways   of   obtaining knowledge.   They are   intuition, revelation, and 
+authority, logical manipulation of basic assumptions, informed guesses, 
+observation, and reasoning by analogy. One of the branches of research 
+known as empirical research is highly goal-oriented technique. 
+ 
+Definitions of Research: 
+The following are the important definitions of research: 
+“Research is an endeavor  /  attempt  to  discover,  develop  and  verify 
+knowledge.   It   is   an   intellectual   process   that   has   developed   over 
+hundreds of  years  ever  changing  in  purpose  and  form  and  always 
+researching to truth.”                                  
+                                                                                                 J. Francis Rummel 
+“Research is an honest, exhaustive,  intelligent  searching  for  facts  and 
+their  meanings  or  implications  with  reference  to  a  given  problem.  The 
+product or findings of a given piece of research should be an authentic, 
+verifiable contribution to knowledge in the field studied.”               
+                   P.M. Cook                                                                                                                                                         
+“Research may be defined as a method of studying problems whose 
+solutions are to be derived partly or wholly from facts.”       
+                          W.S. Monroes                                                                                           
+“Research  is  considered  to  be  the  more  formal, systematic  intensive 
+process  of  carrying  on  the  scientific  method  of  analysis. It  involves  a 
+
+ 
+ 
+9 
+more  systematic  structure  of  investigation, usually  resulting  in  some 
+sort   of   formal   record   of   procedures   and   a   report   of   results   or 
+conclusion.”                   
+   John W. Best                                                                       
+“Research comprises defining  and redefining problems ,formulating 
+hypothesis or suggested solutions, collecting ,organizing and evaluating 
+data,  making  deductions  and  reaching  conclusions  and  at  last  careful  
+testing  the  conclusions  to  determine  whether  they  fit  the  formulated 
+hypothesis.”             
+ Clifford Woody                                                                                                                    
+“Research is a systematic effort to gain new knowledge.”   
+Redman & Mori              
+“Social research may be defined as a scientific undertaking which  by 
+means  of  logical    and  systematized  techniques  aims  to  discover  new 
+facts  or  verify  and  test  old  facts  ,  analyse  their  sequences  ,  inter-
+relationships  and  casual  explanation  which  were  derived  within  an 
+appropriate    theoretical  frame  of  reference  ,  develop  new  scientific 
+tools  ,  concepts  and  theories  which  would  facilitate  reliable  and  valid 
+study of human behavior.”                                       
+   P.V. Younge   
+ 
+Purpose of Research: 
+The purpose of research is to discover answers to questions through the 
+application  of  scientific  procedure. The  main  aim  of  research  is  to  find 
+out the truth which is hidden and which has not been discovered as yet. 
+Though each research study has its own specific purpose, some general 
+objectives of research below: 
+(i) To  gain  familiarity  with  a  phenomenon  or  to  achieve  new  insights 
+into it. (Studies with this object in view are termed as exploratory or 
+formative research studies). 
+
+ 
+ 
+10 
+(ii) To  portray  accurately  the  characteristics  of  a  particular  individual, 
+situation  or  a  group.(Studies  with  this  object  in  view  are  known  as 
+descriptive research studies). 
+(iii) To  determine  the  frequency  with  which  something  occurs  or  with 
+which it is associated with something else. (Studies with this object 
+in view are known as diagnostic research studies). 
+(iv)   To  test  a  hypothesis  of  a  causal  relationship  between  variables. 
+(Such studies are known as hypothesis-testing research studies). 
+ 
+Characteristics of Research: 
+Following are the characteristics of research; 
+(i) Research is directed toward the solution of a problem. 
+(ii) Research requires expertise. 
+(iii) Research    emphasizes    the    development    of    generalizations, 
+principles,  or  theories  that  will  be  helpful  in  predicting  future 
+occurrences. 
+(iv) Research   is   based   upon observable   experience   or   empirical 
+evidences. 
+(v) Research demands accurate observation and description. 
+(vi) Research  involves  gathering  new  data  from  primary  or first-hand 
+sources or using existing data for a new purpose. 
+(vii) Research  is characterized by  carefully  designed procedures  that 
+apply rigorous analysis. 
+(viii) Research involves the quest for answers to un-solved problems. 
+(ix) Research strives   to   be   objective   and   logical,   applying   every 
+possible   test   to   validate   the   procedures employed   the data 
+collected and the conclusions reached. 
+(x) Research is characterized by patient and unhurried activity. 
+(xi) Research is carefully recorded and collected. 
+(xii) Research sometimes requires courage. 
+ 
+ 
+
+ 
+ 
+11 
+Types of Research: 
+There  are varieties of  ways  through  which  we  may  classify  it  into 
+different categories. 
+(A) On the basis of nature of information:  
+On  the  basis of  nature  of  information we  can classify  the  research  into 
+two types; 
+(i) Qualitative Research: When information is in the form of qualitative 
+data. 
+(ii) Quantitative   Research:   When   information   is   in   the   form   of 
+quantitative data. 
+(B)  On  the  basis  of  utility  of  content  or  nature  of  subject  matter  of 
+research: 
+On  the  basis  of these  criteria we  can categorize the  research  into  two 
+categories. 
+(i) Basic/  Fundamental  /pure or  Theoretical  Research:  Its  utility  is 
+universal. 
+(ii) Experimental or Applied Research: Its utility is limited. 
+(C) On the basis of approach of research: 
+We may classify research into   two   different categories. 
+(i) Longitudinal Research: Examples of this category are historical, Case 
+study and Genetic research. 
+(ii) Cross-Sectional     Research:     Examples     of     this     category     are 
+Experimental and Survey Research. 
+(D) On the basis of method of research :  
+On  the  basis  of  research  method  we  may  classify  a  research  into  five 
+different categories. 
+(i)  Philosophical Research: It is purely qualitative in nature and we are 
+focusing on the vision of others on the content of research. 
+(ii) Historical Research:  It is  both  qualitative  as  well  as  quantitative  in 
+nature and deals with past events. 
+
+ 
+ 
+12 
+(iii) Survey Research: It  deals with present events and is quantitative  in 
+nature. It may further be sub-divided into; discretional, correlational 
+and exploratory type of research. 
+(iv) Experimental Research: This  is  purely  quantitative  in  nature and 
+deals with future events. 
+(v) Case-Study   Research:   It   deals   with   unusual   events. It   may   be 
+qualitative  as  well  as  quantitative  in  nature  depending  upon  the 
+content. 
+
+ 
+ 
+13 
+ 
+ 
+Research Process 
+ 
+Research  process  consists  of  series  of  actions  or  steps  necessary  to 
+effectively carry out research. These actions or steps are; 
+(i) Formulating the Research Problem 
+(ii) Extensive Literature Survey 
+(iii) Developing the Research Hypothesis 
+(iv) Preparing the Research Design 
+(v) Determining the Research Design 
+(vi) Collecting the Research Data 
+(vii) Execution of the Project 
+(viii) Analysis of Data 
+(ix) Hypothesis Testing 
+(x) Generalization and Interpretation 
+(xi) Preparing of the Report  or Presentation of the Result 
+ 
+(i) Formulation of Research Problem: 
+At  the  very  outset,  the  researcher  must  decide  the  general  area  of 
+interest or aspect of a subject matter that he would like to inquire into 
+and then research problem should be formulated. 
+ 
+(ii) Extensive Literature Survey:  
+Once   the   problem   is   formulated   the   researcher   should   undertake 
+extensive   literature   survey   connected   with   the   problem.   For   this 
+purpose, the   abstracting   and   indexing   journals   and   published or 
+2 
+
+ 
+ 
+14 
+unpublished bibliographies   are   the   first   place   to   go   to   academic 
+journals, conference proceedings, government reports, books etc. must 
+be tapped depending on the nature of the problem. 
+ 
+(iii) Development of Working Hypothesis:  
+After extensive literature survey, researcher should state in clear terms 
+the  working  hypothesis  or  hypotheses.  Working  hypothesis  is  tentative 
+assumption  made  in  order  to  draw  out  and  test  its  logical  or  empirical 
+consequences. It’s very important or it provides the  focal  point  for 
+research. 
+ 
+(iv) Preparing the Research Design: 
+After framing  hypothesis  we  have  to  prepare  a  research  design  i.e.  we 
+have  to state the conceptual structure within which research would be 
+conducted. The preparation of such a design facilitates research to be as 
+efficient  as  possible  yielding  maximal  information.  In  other  words,  the 
+function  of  research  design  is  to  provide  for  the  collection  of  relevant 
+evidence with optimum effort, time and expenditure. But how all these 
+can be achieved depends mainly on the research purpose. 
+ 
+(v) Determining Sample Design:  
+A sample design is a definite plan determined before any data is actually 
+collected  for  obtaining  a  sample  from  a  given  population.in  census 
+inquiry  we  involve  a  great  deal  of  time,  money  and  energy  so  it  it  not 
+possible  in  practice  under  many  circumstances.  Sample  designs  can  be 
+either  probability  or  non-probability. With  probability  samples  each 
+element  has  a  known  probability  of  being  included  in  the  sample  but 
+the non-probability samples do not allow  the researchers  to determine 
+this probability. 
+ 
+
+ 
+ 
+15 
+(vi) Collecting the Data:  
+There  are  several  ways  of  collecting  the  appropriate  data  which  differ 
+considerably in context of cost, time and other resources at the disposal 
+of the   researcher.   Primary   data   can   be   collected   either   through 
+experiment  or  through  survey.  In  case  of  survey,  data  can  be  collected 
+by any one or more of the following ways; 
+By observation, 
+ Through personal interview, 
+ Through telephonic interviews, 
+ By mailing of questionnaires or  
+ Through schedules. 
+ 
+(vii) Execution of the Project: 
+Execution of project is a very important step in the  research process. If 
+the  execution  of  the  project    proceeds  on  correct  lines,  the  data  to  be 
+collected  would  be  adequate  and  dependable  .A  careful  watch  should 
+be kept for unanticipated factors in order to keep the survey realistic as 
+much as possible. 
+ 
+(viii) Analysis of Data:  
+The  analysis  of  data  requires  a  number  of  closely  related operations 
+such as establishment of categories, the application of these categories 
+to  raw  data through  coding,  tabulation  and  then  drawing statistical 
+inference. Analysis  work  after  tabulation  is  generally  based  on  the 
+computation   of   various percentages; coefficients   etc., by   applying 
+various  well defined  statistical  formulae.  In  the  process  of analysis, 
+relationships  of  differences supporting  or conflicting  with  original  or 
+new   hypothesis   should   be   subjected   to   tests   of   significance   to 
+determine   with   what   validity   data   can   be   said   to   indicate   any 
+conclusions. 
+
+ 
+ 
+16 
+(ix) Hypothesis Testing:  
+After  analyzing  the  data,  the  researcher  is  in  a  position  to  test  the 
+hypothesis,  if any, he  had  formulated  earlier.  Do  the  facts support  the 
+hypothesis  or  they  happen  to  be  contrary?  This  is  the  usual  question 
+which  is  to  be  answered by  applying  various  tests  like ‘t’ test, ’F’ test 
+etc.   F   test   have   been   developed   by   statisticians   for the   purpose 
+.Hypothesis  testing  will  result  in  either  accepting  the  hypothesis  or  in 
+rejecting   it. If   the   researcher   had   no   hypothesis   to   start   with, 
+generalizations established on the basis of data may be stated. 
+ 
+(x) Generalizations and Interpretation:  
+If a hypothesis is tested and upheld several times, it may be possible for 
+the  researcher  to  arrive  at  generalization i.e.  to  build  a  theory.  As  a 
+matter  of  fact,  the  real  value  of  research  lies  in  its  ability  to  arrive  at 
+certain  generalizations.  If  the  researcher  had  no  hypothesis  to  start 
+with, he might seek to explain his findings on the basis of some theory. 
+It is known as interpretation. 
+ 
+(xi) Preparation of the Report or the Thesis:  
+Finally, the researcher has to prepare the report of what has been done 
+by  him.  The layout  of  the  report should  be  as  follows; the preliminary 
+pages,  the main text  and end matter. The  preliminary pages  carry  title, 
+acknowledgements  and  forward  and  then  index.  The  main  text  of  the 
+report should have introduction, review of literature and methodology. 
+ 
+Criteria of Good Research: 
+One expects scientific research to satisfy the following criteria: 
+(a) The purpose of the research should be clearly defined and common 
+concepts be used. 
+
+ 
+ 
+17 
+(b) The research procedure used should be described in sufficient detail 
+to  permit  another researcher  to repeat  the  researcher for  further 
+advancement, keeping  the  continuity  of  what has  already been 
+attained. 
+(c) The  procedural  design  of  the research  should be  carefully  planned 
+to yield results that are as objective as possible. 
+(d) The  researcher  should  report with  complete frankness, flaws  in 
+procedural design and estimate their effects upon the findings. 
+(e) The  analysis  of  data  should  be  sufficiently  adequate  to  reveal  its 
+significance    and    the methods    of analysis    used    should    be 
+appropriate.   The validity   and reliability   of the data   should be 
+checked carefully. 
+(f) Conclusions should be confined to those justified by the data of the 
+research   and   limited   to   those   for which   the data   provide   an 
+adequate basis. 
+(g) Greater  confidence  in research  is warranted  if  the  researcher  is 
+experienced,  has  a  good  reputation  in  research  and  is  a  person  of 
+integrity. 
+
+ 
+ 
+18 
+ 
+ 
+Research Design 
+ 
+A  research  design  is  simply  the  framework  or  plan  for  a study  that is 
+used as a guide in collecting and analyzing the data. It is a blueprint that 
+is followed  in  completing  a  study. Research  design  is  the  blue  print  for 
+collection measurement and analysis of data. Actually it is a map that is 
+usually developed to guide the research. 
+ 
+Definitions: 
+“Research   design is   a   master   plan   specifying   the   methods   and 
+procedures for collection and analyzing the needed information.”  
+                 William Zikmund 
+“Research design is the plan, structure  and  strategy  of  investigation 
+conceived so as to obtain answers to research questions and to control 
+variance.”                  
+                                                                                                              Kerlinger   
+Thus we can say that a research design is the arrangement of condition 
+for collection  and  analysis of  data in  a  manner  that  aims  to  generalize 
+the findings of the sample on the population. 
+ 
+Purpose of a Research Design: 
+Research designs are used for the following purposes; 
+(i) To minimize the expenditure: 
+Research  design  carries an  important  influence  on  the  reliability  of  the 
+results   attained .It   therefore   provides   a solid   base for   the  whole 
+research. This  makes  the  research  as  effective  as  possible  by providing 
+3 
+
+ 
+ 
+19 
+maximum information  with minimum  spending  of  effort,  money  and 
+time by preparing the advance plan of all about the research.  
+ 
+(ii) To facilitate the smooth scaling:  
+Research  design  is  needed  because  it  facilitates  the  smooth  scaling  of 
+the various research operations, thereby making research as efficient as 
+possible  yielding  maximal  information  with  minimal  expenditure  of 
+effort, time and money. 
+ 
+(iii) To collect the relevant data and technique:  
+Research  design stands  for advance planning  of  the  methods  to  be 
+adopted for collecting the relevant  data and the techniques  to be  used 
+in their analysis, keeping in view  the objective  of the research and the 
+availability of staff time and money. Poor preparation of research design 
+upset the entire project. 
+ 
+(iv) To provide blue print for plans:  
+Research design is needed due to the fact that it allows for the smooth 
+working of many research operations. It is like blue print which we need 
+in  advance  to  plan  the  methods  to  be  adopted for  collecting the 
+relevant data and techniques to be used in its analysis for preparation of 
+research project.    Just    as    for    better    economical    and    attractive 
+construction  of a house  need a  blue  print  and  a map  of that, similarly 
+we  needs  a  blue  print  or  a  design  for  the smooth  flow of  operation  of 
+research. 
+ 
+(v) To provide an overview to other experts: 
+A research design provides an overview of all the  research process  and 
+with the help of the design we can take  the help and  views of experts 
+
+ 
+ 
+20 
+of  that  field  .The  design  helps  the  investigator  to  organize  his  ideas  , 
+which helps to recognize and fix his faults.  
+ 
+(vi) To provide a direction:  
+A research design provides a proper or particular direction to the other 
+executives   and   others   who   are helping   us   into   the   process. The 
+researcher    studies available,    literature and    learns    about    new 
+(alternative approaches. 
+ 
+Characteristics of Good Research Design: 
+Generally  a  good  research  design  minimizes  bias  and  maximizes  the 
+reliability of the data collected and analyzed. The design which gives the 
+smallest   experimental   error   is   reported   to   be   the   best   design   in 
+scientific   investigation. Similarly,   a   design   which   yields   maximum  
+information   and   provides   an   opportunity   for   considering   different 
+aspects  of  a  problem  is    considered  to  be  the  most  appropriate  and 
+efficient   design.   A   good   research   design   possesses   the   following 
+characteristics; 
+ 
+(i) Objectivity: 
+It  refers  to  the  findings  related  to  the  method  of  data  collection  and 
+scoring   of   the   responses.   The   research   design   should   permit   the 
+measuring   instruments   which   are   fairly   objective   in   which   every 
+observer or judge scoring the performance must precisely give the same 
+report.  In  other  words, the  objectivity  of  the  procedure may  be  judged 
+by  the  degree  of  agreement  between  the  final  scores  assigned  to 
+different  individuals by  more  than one  independent  observer.  This 
+ensures  the objectivity  of the  collected  data  which  shall  be  capable  of 
+analysis and interpretation. 
+ 
+
+ 
+ 
+21 
+(ii) Reliability:  
+It  refers  to  consistency  throughout  a  series  of  measurements.  For 
+example, if a respondent gives out a response to a particular item, he is 
+expected  to  give  the  same  response  to  that  item  even  if  he  is  asked 
+repeatedly.  If  he   is  changing  his  response   to  the  same   item,  the 
+consistency  will  be  lost.  So  the  researcher  should  frame  the  items  in  a 
+questionnaire in such a way that it provides consistency or reliability. 
+ 
+(iii) Validity:  
+Any measuring device or instrument is said to be valid when it measures 
+what  it  is  expected  to  measure.  For  example,  an  intelligence  test 
+conducted  for  measuring  the  IQ  should  measure  only  the  intelligence 
+and nothing else and the questionnaire shall be framed accordingly. 
+ 
+(iv) Generalizability:  
+It  means  how  best  the  data collected  from the  samples  can  be  utilized 
+for  drawing  certain  generalizations  applicable  to  a  large  group  from 
+which sample  is drawn. Thus a research design helps an investigator to 
+generalize  his  findings  provided  he  has  taken  due  care  in  defining  the 
+population,   selecting   the   sample,   deriving   appropriate   statistical 
+analysis etc. while preparing the research design. Thus a good research 
+design  is  one  which  is  methodologically  prepared  and  should  ensure 
+that   generalization   is   possible. For ensuring   the generalization  we 
+should    confirm    that    our    research    problem    has    the    following 
+characteristics; 
+a) The problem is clearly formulated. 
+b) The population is clearly defined. 
+c) Most  appropriate  techniques  of  sample  selection  are  used  to 
+form an appropriate sample. 
+d) Appropriate statistical analysis has been carried out. 
+
+ 
+ 
+22 
+e) The findings of the study are capable of generalizations. 
+ 
+(v)  Adequate Information:   
+The most  important  requirement  of  good  research  design  is  that  it 
+should provide adequate information so that the research problem can 
+be  analyzed  on  a  wide  perspective.  An  ideal  design  should  take  into 
+account important factors like; 
+(i) Identifying the exact research  problem to be studied 
+(ii) The objective of the research 
+(iii) The process of obtaining information 
+(iv) The availability of adequate and skilled manpower and  
+(v) The  availability  of  adequate  financial  resources  for  carrying 
+research. 
+ 
+(vi)  Other Features:  
+Some other important features of a good research design are flexibility, 
+adaptability, efficiency,  being  economic  and  so  on.  A  good  research 
+design should minimize bias and maximize reliability and generalization. 
+
+ 
+ 
+23 
+ 
+ 
+ Research Problem 
+ 
+The problems lie everywhere around us. They even lie at our door step 
+and  in  our  backyards.  Human  nature  is  so  complicated,  that  a  problem  
+solved for one individual may still exist for another individual, a problem 
+solved  for  one  class/  school/teacher/  situation/  system/time  etc.,    still 
+remains a problem for another class/ school/ teacher/ 
+situation/system/time  or  a  problem  solved  for  the  time  being  may 
+reappear with a lapse  of time. We become  habitual of living in the age 
+of  problems  i.e.  we  are  so  much  surrounded  by  the  problem that  we 
+suffers from ,”problem  blindness”. But in order to solve the problem or 
+making research we need to delimit the problem.  
+ Selection   of   problem   is  not   the   first   step   in   research   but 
+identification  of  the  problem  is  the  first  step  in  research.  Selection  of 
+problem  is governed by  reflective thinking.  It is wrong  to  think  that 
+identification  of a problem  means  to select  a  topic  of  a  research  or 
+statement of the problem. 
+ A  topic or statement of the  problem  and  research  problem  are 
+not the synonyms but they are inclusive. The problem concerns with the 
+functioning of the broader area of field studied, whereas a topic or title 
+or  statement  of  the  problem  is  the  verbal  statement  of  the  problem. 
+The  topic  is  the  definition  of  the problem  which delimits  or  pin  points 
+the task of a researcher. 
+ It is  the usual  practice  of  the  researcher  that  they  select  the 
+topic  of  the  study  from different  sources especially from  research 
+abstracts. They  do  not  identify  the problem, but  a  problem  is made  on 
+the basis of the topic. It results that they have no active involvement in 
+their research activities, whatever, they do, do mechanically. 
+4 
+
+ 
+ 
+24 
+Definitions of the Problem: 
+The obstacles which hinder our path are regarded as problem. Different 
+definitions of the problem are given below; 
+“Problem is the obstacle in the path of satisfying our needs.”       
+John  Geoffery 
+“Problem is a question which is to be solved.”                     
+John. G. Tornsand 
+“To define a problem means to put a fence around it, to separate it by 
+careful  distinctions  from  like  questions  found  in  related  situations  of 
+need.”         
+ Whitney 
+“A problem is a question proposed for a solution generally speaking a 
+problem exists when there is a no available answer to same question.”    
+J.C. Townsend 
+“A problem is  an  interrogative  sentence  or  statement  that  asks:  What 
+relation exists between two or more variables?”                                        
+F.N. Kerlinger 
+“To define a problem means to specify it in detail  and  with  precision 
+each  question  and  subordinate  question  to  be  answered  is  to  be 
+specified,    the    limits    of    the    investigation    must    be    determined. 
+Frequently,   it   is   necessary   to   review   previous   studies   in   order   to 
+determine   just  what  is  to  be   done.  Sometimes   it   is  necessary  to 
+formulate   the   point   of   view   or   educational   theory   on   which   the 
+investigation is to be based. If certain assumptions are made, they must 
+be explicitly noted.”                                                          
+   Monero and  Engelhart 
+ 
+Identification of a Research Problem: 
+The following steps are to be followed in identifying a research problem; 
+
+ 
+ 
+25 
+Step I   Determining the field of research in which a researcher is keen 
+to do the research work. 
+Step  II The  researcher  should  develop  the  mastery  on  the  area  or  it 
+should be the field of his specialization. 
+Step  III He  should review  the research conducted  in  area  to  know  the 
+recent trend and studies are being conducted in the area. 
+Step  IV On  the  basis  of  review,  he  should  consider  the  priority  field  of 
+the study. 
+Step  V He  should  draw an  analogy  and  insight  in  identifying  a  problem 
+or  employ  his  personal  experience  of  the  field  in  locating  the 
+problem. He may take help of supervisor or expert of the field.  
+Step VI He should pin point specific aspect of the problem which is to be 
+investigated. 
+ 
+The Sources of the Problem: 
+(i) The  classroom,  school,  home,  community  and  other  agencies  of 
+education are obvious sources. 
+(ii) Social  developments  and  technological  changes  are  constantly 
+bringing forth new problems and opportunities for research. 
+(iii) Record   of   previous   research   such   specialized   sources   as   the 
+encyclopedias of    educational,    research    abstracts,    research 
+bulletins,  research  reports,  journals  of  researches,  dissertations 
+and   many similar   publications   are rich   sources of   research 
+problems. 
+(iv) Text  book  assignments,  special  assignments,  reports  and  term 
+papers will suggest additional areas of needed research. 
+(v) Discussions-Classroom   discussions,   seminars   and   exchange   of 
+ideas  with faculty members and fellow  scholars and students will 
+suggest    many    stimulating    problems    to    be    solved,    close 
+
+ 
+ 
+26 
+professional  relationships, academic  discussions and  constructive 
+academic climate are especially advantageous opportunities. 
+(vi) Questioning  attitude:  A questioning  attitude  towards  prevailing 
+practices and research    oriented academic    experience    will 
+effectively promote problem awareness. 
+(vii) The  most practical  source  of  problem  is  to  consult  supervisor, 
+experts  of  the  field  and  most  experienced  persons  of  the  field. 
+They  may  suggest most  significant problems  of  the  area.  He  can 
+discuss certain issues of the area to emerge a problem. 
+ 
+Although research problems should not be  assigned or they should not 
+be  proposed  and  allotted  by  a  guide  but  consultation  with  the  more 
+experienced faculty member or research worker is a desirable practice.  
+ One of the most important functions of the research guide is to 
+help  the student  clarify his  thinking, achieve  a  sense of  focus  and 
+develop  a  manageable  problem  from  one  that  may  be  vague  and  too 
+complex.   
+ 
+Statement of Problem: 
+Kerlinger has   identified   following   three   criteria   of   good   problem 
+statements; 
+1. A problem should be concerned with relation between two or more 
+variables. 
+2. It should be stated ‘clearly and unambiguously in question form’. 
+3. It should be amenable to empirical testing. 
+ 
+Meeting  these  criteria  in  his  problem  statement  will  result,  in  a  clear 
+and concise idea of what the researcher wants to do. This sets the state 
+for further planning. 
+ 
+
+ 
+ 
+27 
+Objectives of Assumptions about the Problem: 
+1. To make the research work feasible. 
+2. To delimit the scope of the problem. 
+3. To establish the proper frame of reference. 
+ 
+Aspects of Delimiting a Problem: 
+1. Delimited to certain variables that should be mentioned clearly 
+in the problem. 
+2. Delimited to the area or level as primary level, secondary level, 
+college or university level. 
+3. Delimited  to  size of  sample,  considering  the  time,  energy  and 
+money. 
+4. Delimited to the best method only. 
+5. Delimited to the best available tool for measuring the variable. 
+6. Delimited to   the most appropriate techniques. 
+7. Other delimitations particular to a problem.  
+ As  the  above  delimitations  help the  researcher  for  conducting 
+the study, the findings of studies also confine to these delimitations. 
+ 
+Evaluation of the Problem: 
+When  considering a  problem  a  researcher  is  required  to  ask  himself  a 
+series  of  questions  about  it. These  are  helpful  in  the  evaluation  of  the 
+problem on the basis of personal suitability of the researcher and social 
+value of the problem. 
+ Following questions must be  answered affirmatively before the 
+study is under Taken: 
+1. Is the Problem Researchable? 
+2. Is the Problem New? 
+
+ 
+ 
+28 
+3. Is the Problem Significant? 
+4. Is the Problem Feasible for the Particular Researcher? 
+ 
+In order to be feasible, a problem should agree with the following: 
+a) Research competencies of the Researcher 
+b) Interest and  enthusiasm of the Researcher 
+c) Financial  consideration in the Project 
+d) Time requirement for the Project 
+e) Administrative considerations in the Project. 
+
+ 
+ 
+29 
+ 
+ 
+Variables and Their Types 
+  
+Variable  is  a  concept  which  can  take  on  different  quantitative  values. 
+For  example;  height, weight,  income, age  etc. The  main  focus  of  the 
+scientific study is to analyse the functional relationship of the variables. 
+A  variable  is  a  quantity  which  can  vary  from  one  individual  to  another. 
+The quantity which can vary from person to person.  
+“Variable is a property that taken on different value”, 
+Kerlinger 
+It  is  any  feature  or  aspect  of  an  event, function  or  process  that,  by  its 
+presence  and nature, affects  some  other  event  or  process,  which  is 
+being studied. 
+(i) Continuous Variable: 
+It is that which can assume any numerical value within a specific range. 
+(ii) Discrete Variable:  
+A  variable  for  which  the  individual  values  fall  on  the  scale  only  with 
+distinct gaps is called a discrete variable. 
+(iii) Dependent Variable or Criterion variable:  
+If  one  variable  depends  or  is  a  consequence  of  other,  it  is  termed  as 
+dependent   variable. Criterion   variable   is   the   basis   on   which   the 
+effectiveness of the experimental variable is studied. 
+(iv) Independent Variable or Experimental Variable:  
+The  variable  that  is  antecedent  to the  dependent variable  is  termed  as 
+an independent variable. The variable whose effect is going to be known 
+is known as experimental variable. 
+ 
+ 
+5 
+
+ 
+ 
+30 
+(v) Controlled Variable: 
+The effectiveness of an experimental variable is examined by comparing 
+with other variable, known as controlled variable. 
+(vi) Confounding Variable:  
+Those  aspects  of  study  or  sample, that  might  influence  the  dependent 
+variable  (outcome measures) ,and  whose  effect  may  be  confused  with 
+the   effects   of   the   independent   variable. They   are   of   two types; 
+Intervening and extraneous variable. 
+(vii) Intervening Variable:  
+There   are   a   number   of   abstract variables   in educational/social 
+experiments, which  intervene  the  effect  of  experimental  or criterion 
+variable. For controlling   intervening   variable   appropriate   research 
+design should be used. Intervening variables are hard if not impossible, 
+to observe because they usually have to do with an individual’s feelings 
+like boredom, stress, fatigue, excitement etc. Extraneous variable on the 
+other hand, are more readily observed or measured and thus are more 
+easily controlled. 
+(viii) Extraneous Variable:  
+Independent variables that are not related to the purpose of the study, 
+but   may affect the   dependent   variable   are   termed   as   extraneous 
+variables. Suppose  the  researcher  wants  to  test  the  hypothesis  that 
+there  is  a  relationship  between  children’s  gain   in   social   studies 
+achievement and  their  self-concept. Here  self-concept  is  independent 
+variable   and achievement   in   social   study   is   dependent   variable. 
+Intelligence may as well affect the social studies achievement; but since 
+it   is   not related   to the   purpose   of  the   study  undertaken   by   the 
+researcher, it will be termed as extraneous variable. Whatever effect  is 
+noticed  on  dependent  variable  as  a  result  of  extraneous  variable(s)  is 
+technically described as an ‘experimental error.’ 
+ A  study  must  always  be  so  designed    that  the  effect  upon  the 
+dependent  variable  is  attributed    entirely  to  the  independent  variables 
+
+ 
+ 
+31 
+and not to some extraneous variable(s).When the dependent variable is 
+not  free  from  the  influence  of  extraneous  variable(s),  the  relationship 
+between   the   dependent   and   independent   variable   is   said   to   be 
+confounded by an  extraneous variable(s). 
+ Extraneous variable can be controlled by removing the  variable 
+causing distraction. It may be eliminated by selecting cases with uniform 
+characteristics and through randomization. 
+(ix) Organismic Variable:  
+There  are  some  variables  which  cannot  be  manipulated.  They  are 
+accepted  by  the  researcher  as  they  are. They  are  levels  of  intelligence, 
+sex, class levels, and the like. The researcher can classify the subjects by 
+sex but  he  cannot  modify to suit his research condition. If a researcher 
+attempts   to   compare   boys   and   girls   on   some   learning   task,   any 
+differences might  be attributed  to sex  differences  but  not  necessarily 
+so. The differences  between boys  and  girls  could  be  due  to  differences 
+in  intelligence, training, motivation  or  a  myriad  of  other  conditions 
+present in all human beings and not necessarily to biological differences 
+between sex. Those variables which cannot be manipulated and cannot 
+themselves point out causal relations are called organismic variables. 
+
+ 
+ 
+32 
+ 
+ 
+Formulation of Hypothesis 
+ 
+Formulation of Hypothesis 
+The word hypothesis consists of two words –Hypo+Thesis. ‘Hypo’ means 
+tentative or subject to the verification. ‘Thesis’ means statement about 
+solution of the problem. Thus the literal meaning of the term hypothesis 
+is  a tentative  statement about  the solution of  the  problem.  Hypothesis 
+offers  a  solution  of  the  problem  that  is  to  be  verified  empirically  and 
+based on some rationale. 
+ Again, ’hypo’ means the composition of two or more variables 
+which are to be verified and ‘thesis’ means position of these variables in 
+the specific frame of reference. 
+ 
+Definitions of Hypothesis: 
+“Any  supposition  which  we  make  in  order  to  endeavor  to  deduce 
+conclusions in accordance with facts which are  known to be real under 
+the idea that if the conclusions to which the hypothesis leads are known 
+truths, the hypothesis itself either must be or at least likely to be true.”                                                
+J.S. Mill 
+“A hypothesis is a tentative generalization the validity of which remains 
+to  be  tested.  In  its  most  elementary  stage  the  hypothesis  may  be  any 
+hunch,   guess,   imaginative   idea which   becomes basis   for   further 
+investigation.”  
+ Lundberg 
+“It is a shrewd guess or inference that is formulated and provisionally 
+adopted to explain observed facts or conditions and to guide in further 
+investigation.”  
+                                                                                                       John W. Best 
+6 
+
+ 
+ 
+33 
+ 
+“A hypothesis is a statement temporarily accepted as true in the light of 
+what is, at the time, known about a phenomenon, and it is employed as 
+a  basis  for  action  in  the  search for  new,  truth,  when  the  hypothesis  is 
+fully established, it may take the form of facts, principles and theories.”                                   
+Barr and Scates 
+“Hypothesis is an assumption whose testability is to be  tested  on  the 
+basis of the compatibility of its implications with empirical evidence and 
+previous knowledge.”                                
+                                                                                                      Gorge J. Mouly 
+ 
+Nature of Hypothesis: 
+(i) Conceptual: Some kind of conceptual elements  in the  framework 
+are involved in a hypothesis. 
+(ii) Verbal  statement  in  a  declarative  form: It  is  a  verbal  expression 
+of  ideas  and  concepts. It  is  not  merely  mental  idea  but  in  the 
+verbal form, the idea is ready enough for empirical verification. 
+(iii) It  represents the tentative  relationship between  two  or  more 
+variables. 
+(iv) Forward  or  future  oriented:  A  hypothesis  is  future-oriented. It 
+relates   to   the   future   verification   not the   past   facts   and 
+information. 
+(v) Pivot  of  a  scientific  research:  All  research  activities  are  designed 
+for verification of hypothesis. 
+ 
+Functions of Hypothesis: 
+H.H. Mc Ashan has mentioned the following functions of hypothesis; 
+(i) It  is  a  temporary  solution  of  a  problem  concerning  with  some 
+truth which enables an investigator to start his research works. 
+
+ 
+ 
+34 
+(ii) It offers a basis in establishing the specifics what to study for and 
+may provide possible solutions to the problem. 
+(iii) It may lead to formulate another hypothesis. 
+(iv) A preliminary hypothesis may take the shape of final hypothesis. 
+(v) Each hypothesis provides the investigator with definite statement 
+which  may  be  objectively  tested  and  accepted  or  rejected  and 
+leads  for  interpreting  results  and  drawing  conclusions  that  is 
+related to original purpose. 
+(vi) It delimits field of the investigation. 
+(vii) It sensitizes the researcher so that he should work selectively, and 
+have very realistic approach to the problem. 
+(viii) It offers the simple means for collecting evidences for verification. 
+ 
+Importance of a Hypothesis: 
+(i) Investigator’s eyes: Carter  V.  Good thinks  that  by  guiding  the 
+investigator   in   further   investigation   hypothesis   serves   as   the 
+investigator’s  eyes  in  seeking  answers  to  tentatively  adopted 
+generalization. 
+(ii) Focuses  research: Without  hypothesis,  a  research  is  unfocussed 
+research   and   remains like   a   random   empirical   wandering. 
+Hypothesis serves  as  necessary  link  between  theory  and  the 
+investigation. 
+(iii) Clear  and  specific  goals:  A  well  thought out  set  of  hypothesis 
+places  clear  and  specific  goals  before  the  research  worker  and 
+provides  him  with  a  basis  for  selecting  sample  and  research 
+procedure to meet these goals. 
+(iv) Links  together:  According  to Barr  and  Scates,  “It  serves  the 
+important    function    of    linking    together    related    facts    and 
+information and organizing them into wholes.” 
+
+ 
+ 
+35 
+(v) Prevents  blind  research:  In  the  words  of P.V.  Young, ”The use of  
+hypothesis prevents a blind search and indiscriminate gathering of 
+masses  of  data  which  may  later  prove irrelevant  to  the  problem 
+under study."  
+(vi) Guiding Light: ”A hypothesis serves as powerful beacon that lights 
+the way for the research work.” 
+(vii) It   provides   direction to   research   and   prevent   the   review   of 
+irrelevant literature and the collection of useful or excess data. 
+(viii) It sensitizes the investigator certain aspects of situation which are 
+irrelevant from the standpoint of problem at hand. 
+(ix) It  enables  the  investigator  to  understand  with  greater  clarity    his 
+problem and its ramification. 
+(x) It  is  an  indispensible  research  instrument,  for  it  builds  a  bridge 
+between the problem and the location of empirical evidence that 
+may solve the problem. 
+(xi) It provides the investigator with the most efficient instrument for 
+exploring and explaining the unknown facts. 
+(xii) It provides a frame work for drawing conclusion. 
+(xiii) It stimulates the investigator for further research. 
+ 
+Forms of Hypothesis: 
+According to Bruce W. Tuckman following are the forms of hypothesis; 
+(i) Question form:  
+A  hypothesis  stated  as  a  question  represents  the  simplest level  of 
+empirical  observation.  It  fails  to  fit  most  definitions  of  hypothesis.  It 
+frequently  appears  in  the  list.  There  are cases  of simple  investigation 
+which  can  be  adequately  implemented  by  raising  a  question, rather 
+than dichotomizing  the hypothesis  forms  into  acceptable  / reject  able 
+categories. 
+ 
+
+ 
+ 
+36 
+(ii) Declarative Statement :  
+A   hypothesis   developed   as   a declarative statement   provides an 
+anticipated   relationship   or difference   between variables. Such   a 
+hypothesis  developer  has examined  existing  evidence  which  led  him to 
+believe that a difference   may be anticipated as additional evidence. It 
+is  merely  a  declaration of the independent  variables effect  on  the 
+criterion variable. 
+(iii) Directional Hypothesis :  
+A   directional   hypothesis connotes   an   expected direction   in   the 
+relationship  or difference  between  variables. This  type of  hypothesis 
+developer  appears  more  certain  of anticipated  evidence. If  seeking  a 
+tenable   hypothesis is   the   general   interest   of   the   researcher,   this 
+hypothesis  is  less  safe  than  the  others  because  it  reveals  two  possible 
+conditions. First that  the  problem  of  seeking  relationship  between 
+variables  is  so  obvious  that  additional  evidence  is  scarcely  needed. 
+Secondly, researcher  has examined  the  variables  very  thoroughly  and 
+the    available    evidence    supports    the    statement    of    a    particular 
+anticipated outcome. 
+(iv)   Non –Directional Hypothesis or Null Hypothesis:  
+This hypothesis  is  stated  in  the  null  form  which  is  an  assertion  that  no 
+relationship  or no  difference  exists  between  or among  the  variables. 
+Null hypothesis is a statistical hypothesis testable within the framework 
+of probability theory. It is a non-directional form of hypothesis. 
+ There   is   a   trend   to   employ   or   develop   null   hypothesis   in 
+research  in  most  of  the  disciplines. A  null  hypothesis  tentatively  states 
+that  on the  basis  of  evidence  tested  there  is  no  difference.  If  the  null 
+hypothesis  is  rejected,  there  is  a  difference  but  we  do  not  know  the 
+alternative   or   the   differences.   In   this   the   researcher   has   not   to 
+anticipate or give the rational for the declaration or directional form. It 
+does  not  make  researcher  biased  or  prejudiced.  He  may be  objective 
+about the expected outcomes of the research or findings. 
+
+ 
+ 
+37 
+Actually  this  is  a  statistical  hypothesis  which  is  self- explanatory.  Null 
+hypothesis means zero hypotheses. A researcher has not to do anything 
+in developing it. While research hypothesis is second step in the process 
+of reflective thinking. 
+ A    null    hypothesis    in    an    appropriate    form    is    order    to 
+accommodate  the  object  of  inquiry  for  extracting  this  information.  It 
+does not necessarily reflect the expectations of the researcher so much 
+as the utility of the null form as the best fitted to the logic of chance in 
+statistical knowledge or science. 
+ It  is  the  no  difference  form,  i.e.  there  is  no  difference  or 
+relationship between or among variables under certain conditions. 
+ Statistical tests of significance are used to accept and reject the 
+null hypothesis. If it is rejected, the general hypothesis is accepted. 
+ Non-directional hypothesis is known as null hypothesis because 
+it ‘nullifies’ the positive  argument of  the  findings  or  non-directional 
+statement  of  the generalization.  It  is  also  termed  as  statistical  or  zero 
+hypothesis  because  it denies  the existence  of  any  systematic  principles 
+apart from the effect of chance. It assumes that none or zero difference 
+exists between the two population means or the treatments.  
+ 
+Formulation of Testable Hypothesis: 
+A  hypothesis  is  a  tentative  assumption  drawn  from  knowledge  and 
+theory. It is used as a guide in the investigation of other facts and theory 
+that are as yet unknown. Its formulation is one of the most difficult and 
+most  crucial  step  in  the  entire  scientific  process. A  poorly  chosen  or 
+poorly worded hypothesis can prevent the following: 
+(i) The obtaining of enough pertinent data, 
+(ii) The drawing of conclusions and generalizations ,and  
+(iii) The application of certain statistical measures in the analysis of 
+the result. 
+
+ 
+ 
+38 
+ 
+Hypothesis  is  the  central core of  study  that  directs the  selection of  the 
+data  to  be  gathered,  the  experimental  design,  the  statistical  analysis 
+and the conclusions drawn from the study. 
+ A study may be devoted to the testing of one major hypothesis, 
+a   number   of   subsidiary   hypothesis,   or   both   major   and   subsidiary 
+hypotheses.  When  several hypotheses  are used,  each  should  be  stated 
+separately  in  order  to  anticipate  the  type  of  analysis  required  and  in 
+order  to  definitely accept  or reject  each  hypothesis  on  its  own  merit. 
+Irrespective of number or type used each hypothesis should be testable 
+and based upon a logical foundation. 
+ 
+Fundamental Basis of Hypothesis: 
+The researcher deals with reality on two levels; 
+1. The Operational Level:  
+On  the  operational  level  researcher  must  define  events  in  observable 
+terms in order to operate with the reality necessary to do researches. 
+2. The Conceptual Level:  
+On  the  conceptual level  the researcher  must  define  events  in  terms  of 
+underlying  communality with  other  events. Defining  at  a  conceptual 
+level, the researcher   can abstract   from   single   specific   to general 
+instance and   begin   to   understand   how   phenomena   operate   and 
+variables  interrelate.  The  formulation  of a hypothesis very  frequently 
+requires  going  from  an  operational  or  concrete  level  to  the  conceptual 
+or  abstract  level. This  movement  to  the  conceptual level  enables the 
+result  to be  generalized beyond  the specific  conditions of  a  particular 
+study and thus to be of wider applicability. 
+Research requires the  ability   to move  from the operational to 
+the  conceptual  level  and  vice–versa. This  ability  is  required  not only  in 
+constructing  experiments but in  applying their  findings  as  well.  The 
+
+ 
+ 
+39 
+process    of    making    conceptual contrasts    between    operational 
+programme is called conceptualization or dimensionalization. 
+ 
+Difficulties in the Formulation of Useful Hypothesis: 
+Moving from the operational to the conceptual level and vice –versa is a 
+critical ingredient of the research to demonstration process.  The 
+following are the difficulties in the formulation of hypothesis: 
+1. Absence of knowledge of a clear theoretical framework. 
+2. Lack of ability to make use of the theoretical framework logically. 
+3. Lack  of  acquaintance with available research  technique  resulting  in 
+failure to be able to phrase the hypothesis properly. 
+
+ 
+ 
+40 
+ 
+ 
+ Sampling 
+ 
+A survey may be conducted by either of two methods   
+1. Census Method or Parametric method and   
+2. Sampling method or Non-parametric method. 
+ 
+1. Census method: 
+It  deals  with  the  investigation of  the entire  population. Here  the data 
+are collected  for each  and every  unit  of the  universe. This method 
+provides more accurate and exact information as no unit is left out. 
+ 
+2. Sampling method: 
+Here  a small group is selected as representative  of the whole  universe. 
+It  works  with  the  objective  to obtain  accurate  and reliable  information 
+about  the  universe with minimum of  cost, time    and  energy  and  to  set 
+out  the  limits  of  accuracy  of  such  estimates. It  makes exhaustive  and 
+intensive study  possible with  much    less  time,  money  and  material. Its 
+more popular in research work. 
+ 
+Population: 
+Population or universe means, the entire mass of observations, which is 
+the  parent  group  from  which  a  sample  is  to  be  formed. The  term 
+population  or universe  conveys  a  different  meaning  than  a  traditional 
+one. In  census  survey,  the  count  of  individuals  (men,  women  and 
+children) is known as population. 
+7 
+
+ 
+ 
+41 
+But  in  Research  Methodology  population  means  characteristics  of  a 
+specific  group. For  example  secondary school teachers  of,  who  have 
+some specific features like teaching experience, teaching attitudes etc. 
+ Sampling  means  selecting a  given  number  of  subjects  from  a 
+defined population as representative of that population. 
+ One     type     of     population distinguished     by     educational 
+researchers  is called  the target  population.  
+ By target population distinguished by educational researchers is 
+called the  target population.  
+ By  target  population,  also called  universe,  we  mean  all  the 
+members of a real  or hypothetical  set of people , events  or objects to 
+which we wish to generalize  the results  of our research. 
+ 
+The first step in sampling is to define the target population. 
+Research work is guided by inductive thinking. The researcher proceeds 
+from  specificity to  generality.  The  sample observation  is the specific 
+situation, which is applied to the population, it is the general situation.   
+ The measures of a sample are known as statistics and measures 
+of  a  population  are  termed  as  parameter.  Mean, S.D., coefficient  of 
+Correlation  of  sample  observation  known  as  Statistics  and  Mean, S.D., 
+coefficient   of   correlation   of   population   are   known   as   parameters. 
+Generally parameters are estimated on the basis of sample statistics. 
+ Sampling is indispensable technique  in behavioral research and 
+not  so  common  in  physical  sciences. It  is  fundamental to  all  statistical 
+methodology  of   behavioral   and   social   research.   It makes   research 
+findings   economical   and   accurate. Sampling   means   selection   of 
+individuals  from  the  population in such  a  way  that  every  individual  has 
+equal chance to be taken into the sample. 
+Term sample should be reserved for a set of units or portion  of 
+an  aggregate  of  material  which  has  been  selected  in  the  belief  that    it 
+
+ 
+ 
+42 
+will be  representative  of the  whole  aggregate. By  Frank  Yates “Sample 
+is set of units of an aggregate.” 
+ 
+Assumptions of Sampling: 
+1. Homogeneity amidst complexity:  
+Social phenomenon is very complex in nature and every unit appears to 
+be  different from  another. But  at  the  same  time  they  also possess 
+similarities  in many  respects. It  is, therefore, assumed  that there  is the 
+possibility  of such representative  types  in the  whole  population  that  
+makes  sampling  possible. 
+ 
+2. Possibility of Representative Selection: 
+Sampling  has  its  origin in  the  mathematical  theory of probability  and 
+law  of  statistical  regularity. The  law  of  statistical regularity  lays down 
+that a  group  of  objects  chosen  at  random  from  a  large  group  tend to 
+possess the characteristics of that large group (universe) by 
+ L. R. Conner. 
+ 
+3. Absolute  accuracy not essential  but relative  or  significant accuracy 
+i.e. needed in case   of large  scale observations. Because  it is practically 
+impossible to achieve  because of  errors  in  measurement,  collection  of 
+data , its analysis, interpretation. 
+ 
+Definition: 
+“A statistical sample is a miniature picture or cross –section of the entire 
+group or aggregate from which the sample is taken.”   
+                    P. Y. Young 
+ 
+
+ 
+ 
+43 
+A sample is a small proportion of a population selected for observation 
+and  analysis  .It  is  a  collection  consisting  of  a  part  or  sub-set  of the 
+objects  or  individuals  of  population  which  is  selected  for  the  express 
+purpose of representing the population. 
+ By  observing  the  characteristics  of  the  sample,  one  can  make 
+certain inferences about characteristics of the population from which it 
+is drawn. 
+ Sampling,”It  is  the  process  of  selecting  a  sample  from  the 
+population. For this purpose, the population is divided into a number of 
+parts called sampling units.” 
+ Sampling  designs  means the  joint  procedure  of  selection  and 
+estimation. Sampling is a part of the strategy of research. 
+Sampling should be such that the error of estimation is minimum. 
+ Good and Hatt, “A  sample  as  the  name implies,  is a  smaller 
+representation of a larger whole.” 
+ W. G. Cocharn, “In   every   branch   of   science   we   lack   the 
+resources,  to  study  more  than  a fragment  of the  phenomenon  that 
+might    advance    our knowledge.” i.e.    fragment    is    sample and 
+phenomenon is population. The sample observations are applied to the 
+phenomenon i.e. generalization. 
+ David S. Fox, “In the social sciences, it is not possible to collect 
+data from  every respondent  relevant  to our  study  but  only  from  some 
+fractional   part of   the   respondents.   The   process   of   selecting   the 
+fractional part is called sampling.” 
+ 
+Need of Sampling: 
+1. Economy of time. 
+2. Economy of money. 
+3. True detailed knowledge. 
+4. Utility in experimental study. 
+
+ 
+ 
+44 
+5. It has reliability because it is based on probability theory. 
+ 
+Advantages of Sampling: 
+1. It has a greater adaptability. 
+2. It is an economical technique. 
+3. It has high speed for generalization. 
+4. According  to W.G. Cocharan, “It  has  greater  precision and 
+accuracy in the observation”. 
+5. This technique has great accuracy. 
+6. It has a greater speed in conducting a research work. 
+7. It has a greater scope in the field of research. 
+8. It reduces the cost of observation or data collection. 
+ 
+Disadvantages or Limitation of Sampling: 
+1. Scope of biasness.(Less accuracy) 
+2. Problem of representative  sample-Difficulty  in selecting  a  truly   
+representative sample. 
+3. Need of eligible researchers. 
+4. Instability of  sample  subjects or  changeability  of  units  i.e.  in 
+heterogeneous population. 
+5. There are certain situations where   sampling is possible.  
+ 
+Essentials of an Ideal Sample: 
+ Homogeneity: The units included in sample must be as likeness with 
+other units. 
+ Adequacy: A sample having 10% of the whole data is adequate. 
+ Independence:  Every  unit should  be free  to  be  included  in  the 
+sample. 
+
+ 
+ 
+45 
+ Representativeness; An ideal   sample   must   be   such that   it 
+represents the whole data adequately. 
+ 
+In  the number  of  units  included  in  a  sample  should  be  sufficient  to 
+enable derivation of conclusions applicable to the whole data. 
+Economical in terms of time and money. 
+High level of reliability. 
+ 
+Characteristics of a Good Sample: 
+1. A   good sample   is the   true   representative   of   the population 
+corresponding to its properties. 
+2. The  population is  known  as  aggregate  of  certain  properties  and 
+sample is called sub-aggregate of the universe. 
+3. A  good  sample  is  free  from bias; the  sample does  not  permit 
+prejudices, the  learning and  pre-conception,  imaginations  of  the 
+investigator to influence its choice. 
+4. A  good  sample  is  an  objective one; it  refers objectivity  in  selecting 
+procedure or absence of subjective elements from the situation. 
+5. A  good  sample  maintains  accuracy  .It  yields  an  accurate  estimates 
+or statistics and does not involve errors. 
+6. A good sample is comprehensive in nature. This feature of a closely 
+linked with true-representativeness. Comprehensiveness is a quality 
+of   a   sample   which   is   controlled   by   specific   purpose   of   the 
+investigation. A sample may be comprehensive in traits but may not 
+be a good representative of the population. 
+7. A good  sample  has the practicability for research. 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+46 
+Types of Sampling Designs/Methods of Sampling 
+ 
+ 
+    Sampling 
+ 
+A    Probability Sampling                B    Non-Probability Sampling 
+     A 1 Random Sampling                                   B-1 Incidental or Accidental Sampling 
+    A-2 Systematic Sampling                              B-2 Judgment  Sampling  
+     A-3 Stratified Sampling                                 B- 3 Purposive Sampling 
+     A-4 Multistage Sampling                              B-4 Quota Sampling 
+    A-5 Purposive Sampling 
+     A-6 Cluster Sampling 
+     A-7 Multiple Sampling or Double Sampling 
+ 
+Difference between Probability and Non-Probability Sampling 
+ Probability Sampling Non-probability Sampling 
+1. 
+It is a method of sampling which gives 
+the probability that a sample is 
+representative of population. 
+In the absence of any idea of 
+probability the method of sampling is 
+known as non-probability sampling. 
+2. 
+Probability sampling is generally used 
+in fundamental research in which the 
+purpose is to generalize the results. 
+It is generally used in action 
+researches in which one studies a 
+class without any generalization 
+purpose. 
+3. 
+It refers from the sample as well as 
+the population. 
+There is no idea of population. 
+4. 
+Every individual of the population has 
+equal probability to be taken into the 
+sample. 
+There is no probability of selecting 
+any individual. 
+5. 
+It may be representative of the 
+population. 
+It has free distribution. 
+6. 
+Its observations (data) are used for the 
+inferential purpose. 
+The observations are not used for 
+generalization purpose. 
+7. 
+Inferential or parametric statistics are Non-inferential or non-parametric 
+
+ 
+ 
+47 
+used. statistics are used. 
+8. There is a risk of drawing conclusion. 
+There is no risk for drawing 
+conclusions. 
+9. 
+It is based on Law of probability 
+sampling i.e. Law of Statistical 
+Regularity and Law of Inertia of the 
+Large Sample. 
+It is not based on law of probability 
+sampling. 
+ 
+Probability Sampling: 
+ 
+G.C.  Halmstadter, “A probability  sample is  one  that  has  been  used 
+selected   in   such   a   way   that   every   element   chosen   has   a   known 
+probability of being included.” 
+ 
+Probability sampling is of different types: 
+(1) Simple Random Sampling : 
+It  is  one  in  which  each  element  of  the population  has an equal  and 
+independent  chance  of being  included in  the  sample  i.e.  a  sample 
+selected by randomization method is known as simple   random sample 
+and this technique is simple randomizing. 
+Randomization is done by using the following techniques: 
+(a) Tossing a coin                     (b) Throwing a dice 
+(b) Lottery method                  (d) Blind folded method 
+(c) Tippett’s table method 
+Merits of Randomization: 
+1. It requires the minimum knowledge of population. 
+2. It is free from subjectivity and free from personal error. 
+3. It provides appropriate data for one’s purpose. 
+4. The  observations  of  the  sample  can  be  used  for  inferential 
+purpose. 
+
+ 
+ 
+48 
+Demerits of Randomization: 
+1. It cannot ensure the representativeness of a sample. 
+2. It does not use the knowledge about the population. 
+3. Its inferential accuracy depends upon  the size of the sample. 
+ 
+(2)   Systematic Sampling: 
+Systematic   sampling   is   an   improvement   over   the   simple   random 
+sampling.  This  method  requires  the  complete  information about the 
+population. There should be a list of information of all the individuals of 
+the population in any systematic way.  
+Now we decide the size of the sample: 
+Let the size of sample is = n and population size is = N 
+Now  we  select  each  N/n  individual from  the  list  and  thus  we  have  the 
+desired  size  of sample  which is  known  as systematic  sample. Thus  for 
+this   technique of   sampling   population   should   be arranged   in any 
+systematic way. 
+Merits: 
+1. This is a simple method of selecting a sample. 
+2. It reduces the field cost. 
+3. Inferential statistics may be used. 
+4. Sample may be comprehensive and representative of population. 
+5. Observations of the sample may be used for drawing conclusions 
+and generalizations. 
+Demerits: 
+1. This  is  not  free  from  error,  since  there  is  subjectivity  due  to 
+different ways of systematic list by different individuals. 
+2. Knowledge of population is essential. 
+3. Information of each individual is essential.. 
+
+ 
+ 
+49 
+4. This method can’t ensure the representativeness. 
+5. There  is  a risk  in drawing  conclusions  from  the  observations  of 
+the sample. 
+ 
+(3) Stratified Sampling: 
+It  is  an  improvement  over  the  earlier  methods.  When  we employ  this 
+technique, the researcher divides his population into strata on the basis 
+of  some  characteristics  and from  each of  these  smaller  homogenous 
+groups (strata)  draws  at  random a predetermined  number of  units. 
+Researcher  should  choose  that  characteristic  as  criterion which  seems 
+to be more relevant in his research work. 
+Stratified sampling may be of three types; 
+(a) Disproportionate:  
+Means  that the  size  of  the  sample  in  each  unit  is not  proportionate to 
+the size of the unit but depends upon considerations involving personal 
+judgement and convenience. This method of sampling is more effective 
+for  comparing  strata which  have different  error possibilities.  It  is  less 
+efficient for determining population characteristics. 
+(b) Proportionate: 
+It  refers  to  the  selection  from each  sampling  unit  of  a  sample that  is 
+proportionate  to the  size of  the  unit.  Advantages  of    this  procedure  
+includes representativeness with respect to variables used  as the basis  
+of classifying  categories  and  increased chances  of being able to make 
+comparisons  between  strata.  Lack  of  information  on  proportion  of the 
+population in  each  category  and  faulty  classification  may  be listed  as 
+disadvantages of this method. 
+(c) Optimum allocation: 
+Stratified sampling  is  representative  as  well  as  comprehensive  than 
+other stratified  samples.  It  refers  to  selecting  units  from  each  stratum. 
+Each stratum should be in proportion to the corresponding stratum the 
+
+ 
+ 
+50 
+population.  Thus  sample  obtained  is  known  as  optimum  allocation 
+sample. 
+Merits: 
+(i) It is a good representative of the population. 
+(ii) It is an improvement over the earlier technique of sampling. 
+(iii) It is an objective method of sampling. 
+(iv) Observations can be used for inferential purpose. 
+Demerits: 
+(i) Serious disadvantage of this method is that it is difficult for the 
+researcher to decide the relevant   criterion for stratification. 
+(ii) Only one criterion can be used for stratification, but generally it 
+seems more than one criterion relevant for stratification. 
+(iii) It is costly and time consuming method. 
+(iv) Selected  samples  may  be  representative  with  reference to  the 
+used criterion but not for the other. 
+(v) There is a risk of generalization. 
+ 
+(4)  Multiple or Double Repetitive Sampling: 
+Generally  this  is not  a new  method  but  only  a  new  application  of  the 
+samplings. This is most frequently used for establishing the reliability of 
+a  sample. When  employing a  mailed  questionnaire, double  sampling is 
+sometimes  used  to  obtain  a  more  representative  sample. This  is  done 
+because  some  randomly  selected  subjects  who  are  sent  questionnaires 
+may not return them.  
+ Obviously,  the  missing  data  will  bias  the  result  of  the  study,  if 
+the people who fail to reply   the query differ in some fundamental way 
+from the others in respect to the phenomenon being studied. 
+ To  eliminate  this  bias,  a  selected  sample  may  be  drawn  at 
+random  from the  non-respondents  and  the  people interviewed  to 
+
+ 
+ 
+51 
+obtain  the desired  information.  Thus  this  technique  is  also  known  as 
+repeated or multiple sampling. 
+ This  double  sampling  technique  enables  one  to  check  on  the 
+reliability  of  the  information  obtained  from  first  sample. Thus,  double 
+sampling, where  in one sample is analyzed and information obtained is 
+used to draw the next sample to examine the problem further. 
+Merits: 
+(i) Thus   sampling   procedure   leads   to   the   inferences   of   free 
+determine precision based on a number of observations. 
+(ii) This technique of sampling reduces the error. 
+(iii) This  method  maintains the  procedure  of  the  finding  evaluate 
+the reliability of the sample. 
+Demerits: 
+(i) This technique of sampling cannot be used for a large sample . It 
+is applicable only for small sample. 
+(ii) This technique is time consuming and costly. 
+(iii) Its planning and administration is more complicated. 
+ 
+(5) Multi Stage Sampling: 
+This   sample   is   more   comprehensive   and   representative   of   the 
+population. In  this type  of  sampling  primary  sample  units  are  inclusive 
+groups  and secondary units are sub-groups  within  these ultimate units 
+to be selected  which belong to one and only one group.  
+ Stages  of  a  population  are  usually  available  within  a  group or 
+population, whenever  stratification is  done  by  the  researcher.  The 
+individuals  are  selected  from  different stages  for  constituting  the multi 
+stage sampling. 
+Merits: 
+(i) It is a good representative of the population. 
+
+ 
+ 
+52 
+(ii) Multistage   sampling   is   an   improvement   over   the   earlier 
+methods. 
+(iii) It is an objective procedure of sampling. 
+(iv) The  observations  from  multi  stage  sample  may  be  used  for 
+inferential purpose. 
+Demerits: 
+(i) It is a difficult and complex method of sampling. 
+(ii) It involves errors when we consider the primary stages. 
+(iii) It is again a subjective technique of sampling. 
+ 
+(6)  Cluster Sampling: 
+To select the intact group as a whole is known as a cluster sampling. In 
+cluster  sampling the  sample  units  contain  groups  of  element (cluster) 
+instead  of  individual  members  or  items  in  the population. Rather  than 
+listing  all  elementary  school  children  in  a  given  city  and  randomly 
+selecting 15 % of these students for the sample, a researcher lists all of 
+the  elementary  schools  in  the  city,  selects  at  random  15  %  of  these 
+clusters  of  units,  and  uses  all  of  the children  in the  selected  schools  as 
+the sample. 
+Merits: 
+(i) It may be a good representative of the population. 
+(ii) It is an easy method. 
+(iii) It is an economical method. 
+(iv) It is practicable and highly applicable in education. 
+(v) Observations can be used for inferential purpose. 
+Demerits: 
+(i) Cluster sampling is not free from errors. 
+(ii) It is not comprehensive. 
+ 
+
+ 
+ 
+53 
+ 
+ 
+Non-Probability Sampling Method: 
+Samples which  are  selected    through  non-random  methods  are called 
+non probability samples. Depending upon the technique used it may be; 
+ 
+(1)  Incidental or Accidental Sampling: 
+The  term  incidental  or  accidental  applied  to  those  samples  that  are 
+taken  because  they  are  most  frequently  available  i.e.  this  refers  to  the 
+groups  which  are  used  as  samples  of  a  population    because    they  are 
+readily available  or because  the researcher is unable to  employ more 
+acceptable sampling methods. 
+Merits: 
+(i) It is very easy method of sampling. 
+(ii) It is frequently used method in behavioural sciences. 
+(iii) It  reduces  the  time,  money  and  energy  i.e.  it  is  an  economical 
+method. 
+Demerits: 
+(i) It is not representative of the population. 
+(ii) It is not free from errors. 
+(iii) Parametric statistics cannot be used. 
+ 
+(2)  Judgment Sampling: 
+This involves the selection of a group from  the  population on the basis 
+of  available  information  assuming  as  if  they  are  representative  of  the 
+entire  population. Here  group  may  also  be  selected  on  the  basis  of 
+intuition  or on  the  basis  of  the  criterion  deemed  to  be self-evident. 
+Generally investigator   should   take   the judgment sample   so   this 
+sampling is highly risky. 
+ 
+ 
+
+ 
+ 
+54 
+Merits: 
+(i) Knowledge of investigator can be best used in this technique of 
+sampling. 
+(ii) This method of sampling is economical. 
+Demerits: 
+(i) This technique is objective. 
+(ii) It is not free from errors. 
+(iii) It includes uncontrolled variation. 
+(iv) Inferential  statistics  cannot  be  used  for  the  observation  of  this 
+sampling, so generalization is not possible. 
+ 
+(3) Purposive Sampling: 
+The purposive sampling  is selected  by some  arbitrary method because 
+it is known  to be representative of the  total population, or it is known 
+that  it  will  produce  well  matched  groups.  The  idea  is  to  pick  out  the 
+sample in relation to  criterion which are considered  important for the  
+particular  study. This  method  is  appropriate    when    the  study    places 
+special emphasis  upon the control of certain specific variables. 
+Merits: 
+(i) Use   the   best   available   knowledge   concerning   the   sample 
+subjects. 
+(ii) Better control of significant   variables. 
+(iii) Sample groups data can be easily matched. 
+(iv) Homogeneity of subjects used in the sample. 
+Demerits: 
+(i) Reliability of the criterion is questionable. 
+(ii) Knowledge of population is essential. 
+(iii) Errors in classifying sampling subjects. 
+(iv) Inability to utilize the inferential parametric statistics. 
+(v) Inability to make generalization concerning total population. 
+ 
+
+ 
+ 
+55 
+(4) Quota Sampling: 
+This combines both judgment sampling and probability sampling: on the 
+basis   of   judgment   or   assumption   or   the   previous   knowledge,   the 
+proportion   of   population   falling   into each   category is   decided. 
+Thereafter  a  quota  of  cases  to  be  drawn  is fixed  and the  observer  is 
+allowed to sample as he likes. Quota sampling is very arbitrary and likely 
+to figure in municipal surveys. 
+Merits: 
+(i) It is an improvement over the judgment sampling. 
+(ii) It is an easy  sampling technique. 
+(iii) It is not frequently used in social surveys. 
+Demerits: 
+(i) It is not a representative sample. 
+(ii) It is not free from errors. 
+(iii) It has the influence of regional , geographical and social factors. 
+ 
+(5) Snowball Sampling: 
+The term;  snow ball sampling’ has been used to describe a sampling 
+procedure  in  which  the sample  goes on becoming  bigger and  bigger  as 
+the  observation  or  study  proceeds. The  term  snowball  stems  from  the 
+analogy   of a snowball   sample which would   allow computation   of 
+estimates of sampling error and use of statistical test of significance. 
+ For example, an  opinion  survey  is  to  be  conducted on  smokers 
+of  a  particular  brand  of  cigarette.  At  the  first stage, we  may  pick  up  a 
+few people who are known to us or can be identified to be the smokers 
+of that  brand. At  the  time  of interviewing  them, we  may  obtain  the 
+names  of  other  persons known  to the  first  stage  subjects. Thus the 
+subjects  go on  serving an  informant  for the  identification of  more 
+subjects and the sample goes on increasing. 
+ 
+
+ 
+ 
+56 
+Merit: 
+ Snowball  sampling  which  is  generally  considered  to  be  non-
+probabilistic  can  be converted  into probabilistic  by  selecting  subjects 
+randomly within each stage. 
+ 
+Demerits:  
+Sampling errors may creep in. 
+ 
+(6) Purposive or Expert Choice Sampling: 
+Samples   are   sometimes   expressly   chosen because, in   the light   of 
+available information, these mirror some larger group with reference to 
+one  or  more  given  characteristics. The  controls  in such  samples are 
+usually  identified  as representative  areas (city,  country,  state,  district), 
+representative  characteristics  of  individuals  (age,  sex,  marital  status, 
+socio-economic    status,    race)   or    types   of    groups    (administrator, 
+counselors, teachers etc.). 
+ These   controls   may   be   further   sub-divided   by   specified 
+categories within classes such as amount of training, years of experience 
+or  attitudes  towards  a  specific  phenomenon.  Up-to  this stage, these 
+controls  are somewhat  similar  to  those  used  in  satisfaction. Purposive 
+sampling  differs  from  stratified  random  sampling  in  that  the  actual 
+selection of the units to be included in the sample in each group is done 
+purposively rather than by random method. 
+
+ 
+ 
+57 
+ 
+ 
+Tools of Data Collection 
+ 
+A researcher requires many data – gathering tools or techniques. Tests 
+are the  tools  of  measurement  and  it guides  the researcher in  data 
+collection   and also   in evaluation. Tools   may   vary   in   complexity, 
+interpretation, design and   administration. Each tool is suitable for the 
+collection of certain type of information. 
+ One  has  to select  from  the available  tools those which  will 
+provide  data  he seeks  for testing  hypothesis. It  may happen  that 
+existing  research tools  do not  suit  the  purpose in  some  situation,  so 
+researcher should modify them or construct his own. 
+Different tools used for data collection may be; 
+1. Questionnaires 
+2. Interviews 
+3. Schedules 
+4. Observation Techniques 
+5. Rating Scales 
+ 
+1. Questionnaire:  
+It is list of questions related to one topic. It may be defined as; 
+ 
+“A  questionnaire  is  a  systematic  compilation  of  questions  that  are 
+submitted   to   a   sampling   of   population from   which information   is 
+desired.”    
+Barr, Davis & Johnson 
+8 
+
+ 
+ 
+58 
+“In general,  the word  questionnaire  refers  to  a  device  for securing  
+answers  to  questions  by  using    a  form    which  the  respondent  fills  in 
+himself.” 
+ W. J. Goode & K. Hall 
+ 
+The questionnaire  is probably  most  used  and  most abused  of the  data 
+gathering devices .It is easy to prepare and to administer. 
+ The questionnaire  is a form prepared and distributed to secure 
+responses  to certain  questions. It  is  a device  for securing  answers  to 
+questions by using a form which the respondent will fill by himself. 
+ It  is  a  systematic  compilation  of  questions.  It  is  an  important 
+instrument  being  used  to  gather  information  from  widely  scattered 
+sources. Normally  used  where  one  cannot  see  personally  all  of  the 
+people from whom he desires responses or where there is no particular 
+reason to see them personally. 
+ 
+Characteristics of a Good Questionnaire: 
+1. It deals with an important or significant topic. 
+2. Its significance is carefully stated on the questionnaire itself or on its 
+covering letter. 
+3. It seeks only that data which cannot be obtained from the resources 
+like books, reports and records. 
+4. It is as short as possible, only long enough to get the essential data. 
+5. It is attractive in appearance, nearly arranged and clearly duplicated 
+or printed. 
+6. Directions are clear and complete, important terms are clarified. 
+7. The questions are objective, with no clues, hints or suggestions. 
+8. Questions are presented in a order from simple to complex. 
+9. Double negatives, adverbs and descriptive adjectives are avoided. 
+10. Double barreled questions or putting two questions in one question 
+are also avoided. 
+
+ 
+ 
+59 
+11. The questions carry adequate number of alternatives. 
+12. It is easy to tabulate, summarize and interpret.  
+Merits of Questionnaire Method: 
+1. it’s very economical. 
+2. It’s a time saving process. 
+3. It covers the research in wide area. 
+4. It’s very suitable for special type of responses. 
+5. It is most reliable in special cases. 
+Demerits of Questionnaire Method: 
+1. Through this we get only limited responses. 
+2. Lack of personal contact. 
+3. Greater possibility of wrong answers. 
+4. Chances of receiving incomplete response are more. 
+5. Sometimes answers may be illegible. 
+6. It may be useless in many problems. 
+ 
+The Interview: 
+Interview is a two way method which permits an exchange of ideas  and 
+information. 
+ 
+“Interviewing is fundamentally a process of social interaction.”  
+W. J. Goode & P.K. Hatt 
+“The interview constitutes a social situation between two persons, the 
+psychological   process   involved   requiring   both   individuals   mutually 
+respond  though  the  social  research  purpose  of  the  interview  call  for  a 
+varied response from the two parties concerned.”    
+                                                  Vivien Palmar 
+
+ 
+ 
+60 
+“The interview  may  be regarded  as a  systematic  method  by which  a 
+person   enters more   or   less   imaginatively   into   the   inner   life   of   a 
+comparative stranger.” 
+                                                                                                            P.V. Young 
+ 
+In an interview a rapport is established between the interviewer and the 
+interviewee.  Not  only  is  physical  distance  between  them  annihilated, 
+the social and cultural barrier is also removed; and a free mutual flow of 
+ideas  to  and  fro  takes  place.  Both  create  their  respective  impression 
+upon each other. 
+ The  interview  brings  them  both  on  the  same  level  and  an 
+emotional attachment supervenes between them. 
+In  an  interview  all  formalities  are  laid  down  and  the  gate  is 
+opened for delivering into the intellectuals, emotional and subconscious 
+stirrings  of  the  interviewee. Thus here the ‘depth’ of subject (man) is 
+gone  to  the  very  bottom  of  his  emotional  pool  and  may  check  his 
+truthfulness of responses. 
+ 
+Difference between Interview and Questionnaire 
+Questionnaire Method Interview Method 
+1. Data is gathered indirectly. 
+2. No face to face contact between two. 
+3. Interviewer should have the general 
+knowledge of the topic. 
+4. Interviwee will hesitate to write it. 
+5. We get written information only. 
+1. Data is gathered directly. 
+2. There is face to face contact between 
+interviewer and interviewee. 
+3. Skillful interviewer is needed. 
+4. Some confidential information can 
+also be obtained. 
+5. We get written and oral both type of 
+information. 
+ 
+ 
+Characteristics of an Interview: 
+1. The  interviewer can  probe  into casual  factors,  determine  attitudes, 
+discover the origin of problem. 
+
+ 
+ 
+61 
+2. Its appropriate to deal with young children and illiterates person. 
+3. It can make cross questioning possible. 
+4. It   helps   the   investigator   to   gain   an   impression   of   the   person 
+concerned. 
+5. It can deal with delicate, confidential and even intimate topics. 
+6. It has flexibility. 
+7. Sincerity, frankness, truthfulness and insight of the interviewee can 
+be better judged through cross questioning. 
+8. It gives no chance for respondent to modify his earlier answer. 
+9. It   is   applicable   in   survey   method, but   it   is   also   applicable   in 
+historical, experimental, case studies and clinical studies. 
+Merits of Interview: 
+1. Direct research. 
+2. Deep research 
+3. Knowledge of past and future. 
+4. Knowledge of special features. 
+5. Mutual encouragement is ossible. 
+6. Supra-observation is possible. 
+7. Knowledge of historical and emotional causes. 
+8. Examination of known data. 
+Disadvantage of Interview: 
+1. May provides misleading information. 
+2. Defects  due  to  interviewee(low  level  of  intelligence  or may  be 
+emotionally unbalanced) 
+3. Result may be affected due to prejudices of interviewer. 
+4. Result  may  be  affected  due  to  the  difference  in  the  mental 
+outlook of interwee and interviewer. 
+5. One sided and incomplete research. 
+
+ 
+ 
+62 
+6. Art rather than science. 
+Schedule: 
+When a researcher is using a set of questionnaires for interview purpose 
+it is known as schedule.  
+ 
+“Schedule is the name usually applied to set of questions, which are 
+asked  and  filled  by  an  interviewer  in  a  face  to  face  situation  with 
+another.”  
+W.J. Goode & P. K. Hatt 
+By  a schedule  we cannot, however, obtain  information about  many 
+things at once. It is best suited to the study of a single item thoroughly. 
+ According   to Thomas   Carson   Macormie, “The schedule   is 
+nothing more  than a list  of questions which, it  seems necessary  to test 
+the hypothesis.” 
+ Thus  schedule  is  a  list  of  questions  formulated  and  presented 
+with the specific purpose of testing an assumption or hypothesis. 
+In schedule method interview occupies a central and plays a vital role. 
+ As  a  matter of  fact  success  in  the  use  of  schedule  is largely 
+determined by the ability and tact of the interviewer rather than by the 
+quality of the questions posed.  
+ Because the  interviewer himself poses  the  questions and notes 
+down  the answers  all  by himself, the quality  of  questions has  not  any 
+great significance. 
+ 
+Important Features of Schedule: 
+1. The  schedule  is  presented  by  the  interviewer.  The  questions  are 
+asked and the answers are noted down by him. 
+2. The  list  of  questions  is  a  mere  formal document,  it need  not be 
+attractive. 
+3. The schedule can be used in a very narrow sphere of social research. 
+
+ 
+ 
+63 
+4. It  aids  to  delimit  the  scope  of  the  study  and  to  concentrate  on  the 
+circumscribed elements essential to the analysis. 
+5. It aims at delimiting the subject. 
+6. In the schedule the  list of questions is preplanned and noted down 
+formally  and  the  interviewer  is  always  armed  with  the  formal 
+document detailing the questions. 
+Thus interviewer not to depend upon the memory. 
+Points to be kept in mind while designing schedule; 
+1. Interviewer should not frame long, complex, defective questions. 
+2. Unrelated and unnecessary questions should not be asked. 
+3. Schedule should not contain personal and upsetting questions. 
+4. Its questions should be simple, clear and relevant to topic. 
+5. Questions be suitable to respondent’s intelligence level. 
+6. Impersonal, indirect and unambiguous questions should be included 
+in schedule. 
+Merits of Schedule: 
+1. Higher percentage of responses. 
+2. Possible to observe personality factors. 
+3. Through interview personal contact is possible. 
+4. It is possible to give human touch to schedule. 
+5. Removal of doubts is possible because face to face interaction is 
+there. 
+6. It is possible to know about the defects of the interviewee. 
+ 
+Observation Technique: 
+This is most commonly used technique of evaluation research. It is used 
+for evaluating cognitive and non-cognitive aspects of a person. It is used 
+in evaluation performance, interests, attitudes, values towards their life 
+problems  and  situations.  It  is  most  useful  technique  for  evaluating  the 
+behaviors of children. 
+
+ 
+ 
+64 
+It is technique of evaluation in which behavior are observed in a natural 
+situations. 
+ “It is thorough study based on visual observation. Under  this 
+technique   group   behaviours and   social institutions   problems   are 
+evaluated.”      
+  C. Y. Younge 
+ “Observation employs relatively more visual and senses than 
+audio and vocal organs.”      
+                                                                                     C.A. Mourse 
+ The  cause- effect  relationship  and  study  of  events  in  original 
+form, is known as observation. 
+ Observation  seeks  to  ascertain  what  people  think  and  do  by 
+watching them in action as they express themselves in various situations 
+and activities. 
+ Observation is recognized as the most direct means of studying 
+people when one is interested in their overt behavior. 
+ In  questionnaires  and  interview  people may  write  answer  as 
+they  think,  they  do  but  this  is  often  different  from  what  they  actually 
+do. These  restrictions are  missing in  observation  so  observation  is  a 
+more   natural   way of   gathering   data.   Artificiality   and   formality   of 
+questionnaires  and  interview is  replaced by  reality  and  informality  in 
+observation. Data obtained through observation are more real and true 
+than  the  data  collected  by  any  other  method. It  also  plays  a  particular 
+part in survey procedure. 
+ 
+Characteristics of Observation Schedule: 
+According to Jahoda it has many characteristics; 
+1. It serves a formulated research purpose. 
+2. It is planned systematically rather than occurring haphazardly. 
+
+ 
+ 
+65 
+3. It   is systematically   recorded and   related   to   more general 
+propositions. 
+4. It  is  subjected  to  checks  and  controls  with  respect  to  validity  , 
+reliability and precision. 
+5. It  is  a  direct  technique  to  study  an  object,  an  event  or  a 
+problem. 
+6. It is based mainly on visual –audio scene. 
+7. It employs own experiences. 
+8. It establishes cause-effect relationship. 
+9. It is an objective technique of data collection. 
+10. It is both objective and subjective evaluation technique. 
+11. It is formal as well as informal technique. 
+12. It   is   quantitative   as   well   as   qualitative technique   for   data 
+collection. 
+Advantages: 
+1. It   is   reliable   and   valid technique   of   collecting   data   and 
+information. 
+2. We get first hand data through this method. 
+3. Record of observation is also available immediately. 
+4. It is simple, broad and comprehensive method. 
+5. It  is  an  oldest  technique  of  data  collection  and  getting  direct 
+information. 
+Limitations: 
+1. It  has  a  limited  scope for  its  use  because  all the  events cannot 
+be observed directly. 
+2. It is subjective method. 
+3. It is very time consuming process. 
+4. Costly so energy consuming also. 
+
+ 
+ 
+66 
+5. Presence  of observer  influences  the  behavior of  the  person  i.e. 
+subject becomes conscious. 
+6. In  case  covert  behavior, which can’t be observed,  it is  not 
+useful. 
+7. Observer should be trained and experienced. 
+Rating Scale: 
+ Ratting is   term applied   to   express opinion   or judgment 
+regarding some  situation,  object  or  character. Opinions  are  usually 
+expressed  on a  scale  of values; rating  techniques  are  devices  by  which 
+such judgments may be quantified.  
+“Rating is an essence and direct observation.”  
+Ruth Strong 
+ “A rating scale ascertains the degree, intensity and frequency of 
+a variable.”  
+Von Dallen 
+ Rating techniques are more commonly used in scaling traits and 
+attributes. 
+ A  rating  method  is  a  method  by  which  one  systematizes,  the 
+expression of opinion concerning a trait.  
+ The rating is done by parents, teachers, a board of interviewers 
+and judges and even by the self as well. 
+ The  special  feature  of  rating  scale  is  that  the  attitudes  are 
+evaluated  not  on  the  basis  of  the  opinions  of  the  subjects but  on  the 
+basis of the opinions and judgments of the experimenter himself. 
+ In  rating  scale  data  are  collected  by; Verbal  behavior,  facial 
+expression,   personal   documents,   clinical   type   interview,   projective 
+techniques   and   immediate   experiences   as   emotions,   thoughts   and 
+perceptions. 
+Advantages: 
+1. Writing reports to parents. 
+
+ 
+ 
+67 
+2. Filling out admission blanks for colleges. 
+3. Finding out students’ needs. 
+4. Making recommendations to employers. 
+5. Supplementing other sources of under taking about child. 
+6. Stimulating effect upon the rates. 
+Limitations: 
+1. Difference in rating abilities. 
+2. Difference in reliability as subjects for rating. 
+3. Agreement among raters of one type of contact only. 
+4. Average superior than single. 
+5. Impact of emotions. 
+6. Limits of self-rating. 
+7. Over rating. 
+8. Limits of rating of specific qualities. 
+9. Limits of justifications. 
+Activities Involved in Data Collection: 
+ Data must  be  collected and  recorded  in  a  form  suitable  for the 
+intended  analysis. The  collection  of  data  requires  time and  substantial  
+effort  for  acquiring  skills  and  making    the  necessary  arrangements  for 
+collection  and to ensure adequate quality. 
+Access to Data: 
+ Generally  it is  a  problem  for  researcher  to  get  access  to  data 
+because  the institutions  or  the persons  who  generally  control  the  data 
+are  not  willing  to  provide  him  data  for  one  or  the  other  reason  or 
+excuse. Some necessary steps are required to motivate such institutions 
+or  persons  to  provide  necessary  data  willingly.  Some  educational 
+problems  are  of  such  nature  that  the  subjects  specially  girls  are  not 
+willing  to  disclose  correct  information.  Similarly  a  researcher  of  any 
+board or university may not have access to confidential data. 
+
+ 
+ 
+68 
+Adequate Standard: 
+The   researcher   should   demonstrate   that   his   data   were   properly 
+collected. It is possible if the following conditions are fulfilled. 
+(i) It  should  be  ensured  that  the  supplied  data  met  e  requirement  of 
+validity. In other  words  the  data should,  ensure  what they  claimed 
+to measure. 
+(ii) Proper attention should be paid to measurement error.  
+The following types of error are possible in data collection; 
+(a) Errors    due    to malfunctioning    of measuring    equipment/ 
+instrument. 
+(b) Error of bias. 
+(c) Deliberate falsehood. 
+(d) Distortion of facts. 
+(e) Random errors. 
+(iii) It  should  be  ensured  that  a  suitable  sample  was  drawn  out  of  the 
+population so that proper generalization could be made. 
+(iv) It should also be checked that the data were properly recorded. The 
+conditions under which the data were gathered should be  properly 
+noted  and  suitable  data  recording  method  should  be  used. The 
+efforts should be made to detect and eliminate errors arising during 
+recording. The data  are generally recorded in the following forms; 
+(a) notes of the researcher 
+(b) Log  books  and  journals  are  used  by  a  researcher  doing  the 
+experiment or conducting  a field study 
+(c) Interview notes 
+(d) Responses to questionnaires 
+(e) Recording on tape recorder. 
+(f)  Video cameras 
+(g) Transcribing data for computer input 
+ 
+
+ 
+ 
+69 
+Data Organization: 
+Whatever method is used for collection of data it will be necessary that 
+an extensive  set of  supplementary  notes  should  be  made  for  the 
+following; 
+(a) Sources of data 
+(b) Conditions under which data were gathered. 
+ There should be stored in such a way as offer some reasonable 
+prospects of retrieval when required. 
+Collecting Primary Data and Secondary Data: 
+The  primary  data  can  be  collected through  laboratory  measurement, 
+field  observation,  questionnaires,  interviews,  opinionnaires,  schedules 
+etc. 
+ The secondary data can be collected from technical publications 
+such  as  manuals,  handbooks,  data  sheets,  and  standards,  books  and 
+journals,    official    publications    of    the    Central    government,    state 
+governments,  local  bodies,  private  data  services  and  computer  data 
+base. 
+General Rules: 
+There  are  some  general  rules  that  apply  to  all  types  of  data  collection. 
+They are as follows; 
+(i) Do  not  collect  more  information  than  is  required  for  the  research 
+problem. 
+(ii) Make  sure  the  wording  of  the  data  collection  instrument  is  clear  and 
+unambiguous. 
+(iii) Use clear and explicit instructions in data collection instruments. 
+(iv) Design   the   response   options   as   carefully   as   the   items   stems 
+themselves. 
+(v) Make   responding   to   the   measuring   instrument   as   alternative   as 
+possible. 
+(vi) Make sure that the final products look professional. 
+
+ 
+ 
+70 
+ 
+ 
+Data Analysis 
+ 
+Data   analysis   embraces   a   whole   range   of   activities   of   both   the 
+qualitative  and  quantitative  type. It  is  usual  tendency  in  behavioral 
+research  that  much  use  of  quantative  analysis  is  made  and  statistical 
+methods  and  techniques  are  employed. The  statistical  methods  and 
+techniques  are  employed. The statistical  methods and  techniques  have 
+got  a  special position  in  research  because  they  provide  answers  to  the 
+problems. 
+ Kaul defines  data  analysis  as, ”Studying the organized material 
+in  order  to  discover  inherent  facts. The  data  are  studied  from  as  many 
+angles as possible to explore the new facts.” 
+ 
+Purpose: 
+The following are the main purposes of data analysis: 
+ 
+(i) Description:  
+It  involves  a  set  of  activities  that  are  as  essential  first  step  in  the 
+development  of most  fields. A  researcher  must  be  able  to  identify  a 
+topic  about  which  much  was  not  known;  he  must  be  able  to  convince 
+others about its importance and must be able to collect data. 
+ 
+(ii) Construction of Measurement Scale:  
+The  researcher  should  construct  a  measurement  scale.  All  numbers 
+generated  by  measuring  instruments  can  be  placed  into  one  of four 
+categories: 
+9 
+
+ 
+ 
+71 
+(a) Nominal: The number  serves as  nothing  more  than  labels. For 
+example  no 1  was  not  less  than  no  2  .Similarly  no  2  was  neither 
+more than no 1 and nor less than no 3. 
+(b) Ordinal: Such  numbers  are  used  to  designate an  ordering along 
+some  dimensions  such  as  from  less  to  more,  from  small  to  large, 
+from sooner to later. 
+(c) Interval: The  interval  provides  more  précised  information  than 
+ordinal one. By this type of measurement the researcher can make 
+exact and meaningful decisions. For example if A,B and C are of 150 
+cm, 145cm and 140 cm height, the researcher can say that A is 5 cm 
+taller than B and B is 5 cm taller than C. 
+(d) Ratio Scale: It has two unique characteristics. The intervals between 
+points can be demonstrated to be precisely the same and the scale 
+has a conceptually meaningful zero point. 
+ 
+(iii) Generating empirical relationships:  
+Another  purpose  of  analysis  of  data  is  identification  of  regularities  and 
+relationships  among  data. The  researcher  has  no  clear  idea  about  the 
+relationship  which will be  found  from    the  collected  data.  If  the  data 
+were  available  in  details  it  will  be  easier  to  determine  the  relationship. 
+The  researcher  can  develop theories  if  he  is  able  to  recognize  pattern 
+and  order  of  data.  The  pattern  may  be  showing  association  among 
+variables, which may be done by calculating correlation among variables 
+or  showing  order,  precedence  or  priority.  The  derivation  of  empirical 
+laws may be made in the form of simple equations relating one interval 
+or ratio scaled variable to a few others through graph methods. 
+ 
+(iv) Explanation and prediction:  
+Generally  knowledge  and  research  are  equated  with  the  identification 
+of causal relationships and all research activities are directed to it. But in 
+many fields  the research  has  not  been  developed  to the  level  where 
+
+ 
+ 
+72 
+causal explanation is possible or valid predictions can be made. In such a 
+situation explanation and prediction is construct  as enabling the values 
+of one set of variables to be derived given the values of another. 
+Functions: 
+The following are the main functions of data analysis: 
+(i) The researcher should analyze the available data for examining 
+the statement of the problem. 
+(ii) The researcher should analyze the available data for examining 
+each hypothesis of the problem. 
+(iii) The  researcher  should  study the  original  records  of  the  data 
+before data analysis. 
+(iv) The  researcher  should analyze the  data  for  thinking about  the 
+research problem in lay man’s term. 
+(v) The researcher  should analyze the  data  by  attacking  it  through 
+statistical calculations. 
+(vi) The  researcher  should  think  in  terms  of  significant  tables  that 
+the available data permits for the analysis of data. 
+ 
+Statistical Calculations: 
+The researcher will have to use either descriptive statistics or inferential 
+statistics for the purpose of the analysis. 
+ 
+(i) The descriptive statistics may be on any of the following forms: 
+(a) Measures of Central Tendency:  
+ These measures  are mean, median, mode  geometric mean and 
+harmonic mean. In  behavioral  statistics  the  last  two measures  are not 
+used.  Which  of  the  first  three  will  be  used  in  social  statistics  depends 
+upon the nature of the problem. 
+ 
+
+ 
+ 
+73 
+ 
+(b) Measures of Variability:  
+These  measures  are  range,  mean  deviation,  quartile  deviation  and 
+standard  deviation.  In  social  statistics  the  first  two  measures  are  rarely 
+used. The  use  of  standard  deviation  is  very  frequently  made  for  the 
+purpose of analysis. 
+ 
+(c) Measures of Relative Position:  
+These  measures  are standard  scores (Z  or  T  scores), percentiles and 
+percentile ranks  .All  of  them  are  used  in  educational  statistics  for data 
+analysis. 
+ 
+(d) Measures of Relationship:  
+There  measures  are  Co-efficient  of  Correlation,  partial  correlation  and 
+multiple correlations. All  of  them  are  used  in  educational statistics  for 
+the analysis of data. However the use  of rank method is made  more  in 
+comparison to Karl pearson method. 
+ 
+(ii)The inferential statistics may be in any one of the following forms: 
+(a) Significance of Difference between Means: 
+It  is  used  to  determine  whether  a true  difference exists  between 
+population means of two samples. 
+ 
+(b) Analysis of Variance:  
+The Z or t tests are used to determine whether there was any significant 
+difference  between  the  means  of  two  random  samples.  The  F  test 
+enables  the  researcher  to  determine  whether  the  sample  means  differ 
+from  one  another  to a  greater  extent  then  the  test  scores  differ  from 
+their own sample means using the F ratio. 
+
+ 
+ 
+74 
+(c) Analysis of Co-Variance:  
+It  is  an  extension  of  analysis  of  variance  to  test  the  significance  of 
+difference  between  means  of  final  experimental  data  by  taking  into 
+account  the  Correlation  between  the  dependent  variable  and one  or 
+more  Co-variates  or control  variables  and  by  adjusting  initial  mean 
+differences in the group. 
+ 
+(d) Correlation Methods:  
+Either  of  two  methods  of  correlation  can  be  used  for  the  purpose of 
+calculating  the  significance  of  the  difference  between  Co-efficient of 
+Correlation. 
+ 
+(e) Chi Square Test:  
+It is used to estimate the like hood that some factor other than chance 
+accounts   to   the   observed   relationship. In   this   test   the      expected 
+frequency and observed frequency are used for evaluating Chi Square. 
+ 
+(f) Regression Analysis: 
+For calculating the probability of occurrence of any phenomenon or for 
+predicting the phenomenon or relationship between different variables 
+regression analysis is cone. 
+
+ 
+ 
+75 
+ 
+ 
+Interpretation of Data 
+ 
+According to F.L. Whitney, interpretation means an adequate exposition 
+of the true meaning of the material presented in terms of the purposes 
+of  the  study  being  reported  and  of  the  chapter  and  section  topic 
+involved. 
+ 
+Purposes: 
+The following are the main purposes of interpretation of data or results; 
+(i) To  throw  light  on  the  real  significance  of  the  material  in  the 
+context. 
+(ii) To understand implications of the data. 
+(iii) To  provide  hints  of  conclusions  and  recommendations  of  the 
+researcher. 
+(iv) To show the values of greatest worth that has resulted from the 
+research. 
+(v) To refer important generalization. 
+ 
+Factors: 
+The  researcher  should  keep  the  following  factors  in  consideration  in 
+interpretation of data; 
+ 
+(i) Not to ignore those factors which are unstudied: 
+In  social  /  behavioral  researches  there  are  many  factors  which  have 
+their  impact  upon  the  findings  of  the  research  but  no  researcher  is  in 
+the position  to study  all  the  factors. Naturally  he  does  not  take  into 
+account  in  interpretation  of  the results  those  factors  which  have  not 
+10
+0 
+
+ 
+ 
+76 
+been  studied. It  has  its  effect  upon the  search  of  truth.  Thus  the 
+researcher    should    take    into    consideration    such    factors    in    his 
+interpretation. For  example  if  a  comparison  has  been  made  between 
+the traditional method of teaching and any modern method of teaching 
+in respect of effectiveness of teaching, the interpretation that successful 
+attainment is the result of method of teaching only is complete denial of 
+the  role  of  general  mental  ability,  high  achievement motivation  and 
+better study habits etc.  
+ 
+(ii) Not to ignore those factors which have not been selected for study: 
+In social / behavioral researches, the subjects are generally so large that 
+the   researcher collects   the   data   from   a   selected   group   only.   The 
+researcher  should  remember  that  some  factors  which  have  not  been 
+included in  selective  group are  equally  important  in  their impact  upon 
+findings. For example if  the  researcher  collects  data  from  a particular 
+school   in   a   particular   area   and   then   he   concludes   about all   the 
+schools/colleges. 
+ 
+(iii) Not to over –interpret the expected results: 
+The  researcher should  remember that  even  if  he  finds  the  findings of 
+the research as per his expectations he should not   interpret more than 
+what  can  be  interpreted  on  the  basis  of  data  available. The  researcher 
+should  be  cautious  that  he  reports  all  such  factors  which  might  be 
+responsible for the findings. 
+ 
+(iv) Not to exercise defense mechanism in interpreting the results: 
+The  researcher  should  remember  that  it  is  not  necessary  that  the 
+hypotheses   should   always   be   confirmed. It   is   possible   that   the 
+researcher  may  exercise defense mechanism if  the  results  of  the  study 
+are not found as per expectations of the research. In such a situation he 
+should not try to find faults in tools or samples for the results against his 
+
+ 
+ 
+77 
+expectations. If any researcher tries to do so, his interpretation will not 
+be  considered  fair.  The  hypotheses  are  made  in  the  beginning  of  the 
+research  when  the  knowledge  of  the  researcher about  the  problem  is 
+very limited. Agreement  between  the  tentative  and  the  results  is  not 
+necessary.  
+
+ 
+ 
+78 
+ 
+ 
+Research Methods 
+ 
+Historical Research Method: 
+ 
+History  is  the  record  of  the  changing  processes. History  consists  of 
+changes  which  social  structures  undergo. Social scientists studies the 
+past  to  gain  a  better  understanding  of  the  present  state  of  affairs. 
+History is the meaningful record of man’s achievement. It is not merely 
+a list of   characteristics of   chronological   events,  but   an   integrated 
+account of the relationship between persons, events, times and places. 
+ John W. Best, “Man uses history to understand the past, and try 
+to understand    the present    in the    light    of    past    events    and 
+developments.” 
+ F.N.  Kerlinger, “Historical research  is the application  of the 
+scientific method of inquiry to historical problems.” 
+ Whitney,  “Historical research deals with the past 
+experiences....its aim is to apply the method of reflective thinking   of 
+social problems , still unsolved , by means of discovery  of past trends of 
+event,  fact  and  attitude.  It  traces  the  lines  of development  in human 
+thought and action in order to reach some basis for social activity.” 
+ Redcliff  Browne, “Historical    method  may  be  defined  as  a 
+system  in  which  present  day  events  are  studied  with  reference  to  the 
+events that took place in the past.” 
+ Historical  method  seeks  to  find explanation  of questions  of 
+current  interest  by  an  intensive  study  of  the  past. Many  studies  in  the 
+field  of  economics,  politics, sociology,  education  and  psychology  are 
+essentially historical in approach. 
+11
+0 
+
+ 
+ 
+79 
+Purpose of Historical Research: 
+(i) Historical researches provide important information concerning 
+the  effects  of  certain  past  practices  and  may  suggest  plans  for 
+future actions. 
+(ii) It  also  offers explanation of  the how  and  why  of  many  of  the 
+theories  and practices that  has developed  and  now prevails in 
+the school/college. 
+(iii) It  contributes  to  an  understanding  of  the significance  of the 
+phenomenon studied. 
+(iv) It helps to gain an accurate account of the past. 
+(v) It helps to gain a clear perspective of the present. 
+ 
+Sources of Historical Research: 
+There    are    many    sources    for    collection    of    historical    data    like; 
+Autobiographies,   Diaries,   Confessions,   Memories,   Personal   letters, 
+Accessible documents,    news-papers    and    literature,    books    and 
+Magazines,  Cultural  and  Analytical  history  material,  Artistic  materials, 
+historical paintings, Portraits , charts etc. 
+ These  sources  can  be  divided  into  two  categories  i.e.  Primary 
+sources and Secondary sources. 
+ 
+Primary sources: 
+The original  documents  are  termed  as  Primary  sources. These  are solid 
+basis of historical research and are highly prized by a historian. 
+ According to Kerlinger, “A primary source is the only repository 
+of  an  historical  datum,  like  an  original  record  kept  of  an  important 
+occasion, an eye witness description of an event, a photograph, minutes 
+of organization meeting and so on.” 
+ 
+
+ 
+ 
+80 
+(i) Document or records:  
+These are maintained and written by actual participant or witness of an 
+event.  These  sources  are  produced  for  the  purpose  of  transmitting 
+information  to  be  used  in  the  future. Documents  classified  as  primary 
+sources  are constitution,  charters, laws, court  decisions,  diaries,  deeds, 
+genealogies, contracts, wills, autobiographies, letters, official minutes or 
+records,     permits, licenses,     affidavits,     depositions,     declarations, 
+proclamations certificates, lists, bills, handbills, receipts, 
+newspapers,magazines,accounts,maps,diagrams,books,pamphlets,catal
+ogues,films,pictures,paintings,recordings,transcriptions    and    research 
+reports.  
+ 
+(ii) Remains or Relics: 
+These  are  associated  with  a  person,  group, period, fossils, skeletons, 
+tools, weapons, food  utensils, clothing,  buildings, furniture,  coins,  art 
+objects, pictures and paintings are examples of relics. 
+ 
+(iii) Oral Testimony:  
+These  are  spoken  account  of  witness  or  participant  in  an  event.  It  is 
+obtained in a personal interview. It may be recorded or transcript as the 
+witness relates his experiences. 
+ 
+Secondary Sources of Data:  
+In  the  words of Kerlinger, “A secondary source is an account or record 
+of an historical event or circumstance one or more steps removed from 
+an original history.” 
+ Secondary  sources  are  the  reports  of  a  person  who  relates  the 
+testimony of actual witness of, or participant in an event. The writer of 
+the  secondary  source  who  was  not  on  the  scene  of the  event, merely 
+
+ 
+ 
+81 
+reports  what  the  person  who  was there  said  or  wrote. Most  history 
+books and encyclopedias are the examples of secondary source. 
+ 
+Characteristics of Historical Method: 
+(i) Historical method is universal. 
+(ii) Historical method involves very deep and intensive  investigation 
+of material that already exists. 
+(iii) Historical facts cannot be repeated in an accurate fashion as can 
+be done in laboratory observation. 
+(iv) Only such problems which are based on historical records can be 
+investigated by following this approach. 
+(v) Historical  approach  to research  is  the  application  of  scientific 
+method to historical problems. 
+(vi) In Historical Method   hypothesis may or  may not be formulated   
+depending upon the nature of the research. 
+(vii) The  interpretation  of  data  entirely  depends  upon  the  topic  of 
+research.     
+ 
+Approaches to Historical Research: 
+ 
+1. Perspective Approach:  
+It means  to study  the  events  from  the  past    towards  present. It  is 
+ancient   approach.   Ancient   approach   was   to   study   the   political 
+personality approach. 
+2. Retrospective Approach:  
+It means to study the events of present and proceed to past events. It is 
+a recent approach to study the phenomena in social milieu. 
+ 
+ 
+
+ 
+ 
+82 
+Types of Historical Research: 
+(1) Approach:  
+An example is the pragmatic approach used by Karl max to arrange facts 
+of history to support his concept of socialism. 
+(2) Subject:   
+It  includes  the bibliography  of  a  given  person, monography  of a  town, 
+state, nation  or  civilization  or  slightly  higher  level  the  history  of  ideas, 
+institutions or trends. 
+(3) Technique: It is based either on documents or relics. 
+(4) Classical studies 
+(5) Documentary research: It considers only documents. 
+(6) Bibliographical research:  
+It includes history of a unit. (nation, person, culture)  
+(7) Legal Research 
+ 
+The Steps of Historical Research: 
+(1) Identification and Definition of the Problem: 
+It  involves  not only  the  location of the  problem  ,  which  has  a  historical 
+significance, but also the availability of adequate data.  
+(2) Collection of Data:  
+It  may  involve anything  from digging  up  ancient  ruins  to  stumbling  on 
+old  documents or  remains.  Most  educational  data  have  to  be  gathered 
+in  the  routine  fashion  by  giving  minutes  of  meetings,  diaries  etc. Data 
+are collected by two sources: primary or secondary. 
+(3) Criticism of Data:  
+The establishment of the validity of data involves a dual process, of first 
+establishing  the  authenticity  of  the  sources  and  then  the  validity  of  its 
+content. 
+ 
+
+ 
+ 
+83 
+(4) Interpretation of Data:  
+This  should  be  made  from  the  standpoint  of  a  hypothesis  or  theory  of 
+the  data. Data  should  be  considered  in  relation  to  one  another  and 
+synthesized into a generalization or conclusion which places the overall 
+significance in focus. 
+ 
+Limitations of Historical Research: 
+1. It is very difficult to study historical events on the basis of cause-
+effect relationship. 
+2. Many obstacles hinder the objectivity of the study. 
+3. The investigator must have a special historical perspective. 
+4. The importance of historical research has declined due to use of 
+scientific method in social sciences. 
+ 
+Guidelines of Historical Research: 
+1. Primary sources should be used as extensively as possible. 
+2. Personal  bias  should  not  be   allowed  to  influence  research 
+procedure. 
+3. Proper  recognition  should  be  given  to  the  inter-relationship  of 
+education with other social institutions and forces. 
+4. Words  and expressions  should  be  interpreted  in  the  light of 
+their usages in earlier times. 
+5. Various   facts   should   be   synthesized   and   integrated   into 
+meaningful generalization. 
+6. Significant  facts  must  be  distinguished  from  trivial facts  in a 
+situation. 
+
+ 
+ 
+84 
+ 
+ 
+Descriptive or Survey Method 
+ 
+The  term  survey  is  used  for  the  techniques  of investigation  by a  direct 
+observation  of a  phenomenon or  a systematic gathering  of data  from 
+population by applying personal contact and interviews when adequate 
+information  about certain problem  is  not  available  in  records, files  and 
+other sources. 
+ The  survey  is  an  important  tool  to  gather  evidences  relating  to 
+certain  social  problems. The  term  social  survey  indicates  the  study  of 
+social  phenomena through  a  survey of  a  small  sampled population  and 
+also  to  broad  segments of population. It  is  concerned with  the present 
+and   attempts   to   determine   the   status  of   the   phenomenon   under 
+investigation.  
+ 
+Definitions: 
+“A social survey is a process by which quantitative facts are  collected 
+about the social aspects of a community composition and activities.” 
+ A. F. Well 
+“The survey is in briefly a method of analysis in scientific and orderly 
+form  for  defined  purpose  of  given  social  situation  of  problem  and 
+population.”  
+S. Herman 
+Objects of Social Survey: 
+(i) Direct and close contact of researcher to the  phenomenon under 
+study. 
+(ii) To collect general information. 
+(iii) A basis for hypothesis. 
+12 
+
+ 
+ 
+85 
+(iv) To explain cause and effect relationship. 
+(v) To know opinion and attitudes of the people. 
+ 
+Purposes: 
+(i) It provides  necessary  information  which  helps  the  administrator 
+for making decisions. 
+(ii) It provides necessary information and plan for improvement so it 
+is forward-looking. 
+(iii) It interprets, synthesizes  and integrates  data and points  out  their 
+implications. 
+(iv) It is more realistic because investigation is done in this method in 
+natural setting. 
+(v) It is the only method through which the researcher can obtain the 
+opinions, attitudes and suggestions for improvement. 
+(vi) It is useful in the development of research tools such as checklists, 
+questionnaires etc. 
+ 
+Types of Descriptive Method: 
+Descriptive method is divided into four parts. They are; 
+ 
+
+ 
+ 
+86 
+ 
+ 
+The Survey Studies: They are of following types; 
+ 
+The Inter-relationship Studies  are of following types; 
+ 
+The Developmental Studies are of the following types; 
+ 
+ 
+The  Content  Analysis deals  with  the  nature  utility  and  procedure  of 
+content analysis. The important problems in this area are as follows; 
+(i) Developing and modifying curriculum. 
+(ii) Developing a standardized test in any subject. 
+(iii) Differentiating aspects of different writing styles. 
+Characteristics of Survey Method: 
+(i) Social survey is confined to the study of specific current problems 
+of society eg poverty, unemployment etc. 
+(ii) A  survey  research  is  planned  collection  of  data  for  prediction  of 
+relations between the variables. 
+(iii) Survey  is  concerned  with  large  or  widely  dispersed  group  of 
+peoples contrasted with the lab experiments. 
+
+ 
+ 
+87 
+(iv) Under this   method   observation,   interviews, attitude   scales, 
+projective  techniques,  small  scale  experiments  etc. are  used  to 
+collect data. 
+(v) The  facts  collected  here  may  form  the  basis  of  further  social 
+researches. 
+Planning a Survey Method: 
+The following are the steps which are involved in survey methods; 
+(i) Select a problem. 
+(ii) Preliminary or pilot study should be done. 
+(iii) General and Specific objectives of the study are to be framed. 
+(iv) It   should   be   determined   that   for   which   of   the   variables,  
+identified in the problem whether; adequate techniques for data 
+collection  are  available,  and  if  not  then  is  it  possible  for  the 
+researcher to design them. 
+(v) Population   should   be   identified   and representative sample 
+should be selected. 
+(vi) Data collection design should be prepared. 
+(vii) The data should be collected. 
+(viii) The data should be analyzed. 
+(ix) The  report should  be  prepared  which  should  have  descriptive 
+past, comparative or evaluative past and findings. 
+Merits of Survey Methods: 
+(i) Direct and close contact between researcher and respondents. 
+(ii) Greate objectivity. 
+(iii) Testing the validity of theories. 
+(iv) Formulation and testing of hypothesis. 
+(v) Social surveys are based on actual observation. 
+(vi) It has universal application. 
+
+ 
+ 
+88 
+Limitations: 
+(i) Survey method is costly, time consuming and wasteful in certain 
+cases where the objectives are limited. 
+(ii) The survey method is unsuitable if the numbers of persons to be 
+surveyed   are very   large   or   if   they   spread   over   a   large 
+geographical area. 
+(iii) In this method personal bias may vitiate the result. 
+(iv) It lacks the flexibility. 
+(v) In  this method,  it is  very  difficult  to  verify  the  accuracy  of  the 
+data collection. 
+(vi) Only useful for current problems. 
+(vii) It  does  not  permit  more  comprehensive  and  dynamic  study  of 
+the   society   but   deals   with         the   problems   of   immediate 
+importance only. 
+(viii) Under this method most of the surveys are conducted on sample 
+basis. If  the  sample  is  not  carefully  planned,  inferences  drawn 
+may be inaccurate and misleading. 
+
+ 
+ 
+89 
+ 
+ 
+ Experimental Method 
+ 
+It  may  be  defined  as  the  study  of  the  relationships  among  variables-
+those   manipulated   and   those   measured. It   simply   enables   the 
+researcher   to   improve   the   conditions   under   which   the   researcher 
+observes  and thus to arrive  at  a more precise results. It enables him to 
+relate  a  given  consequent to  a  specific  antecedent rather  than to  a 
+vague conglomeration of antecedents. 
+ It is a scientific method; give more precise, accurate and reliable 
+results. It is just  like an observation under controlled conditions. It  acts 
+on  the  law  of  single  variable  and  causing  factors.  It  studies  cause  and 
+effect  relationship. It  is  a  systematic  and  logical  method  for  answering 
+the  questions. In  this  the  researcher  seeks  to evaluate  something  new. 
+It leads to contribution to the already acquired fund of knowledge. The 
+three  essential  elements  in  an  experiment are;  control,  manipulation 
+and  observation. In  this, experimentor  has  to  imagine  that  research 
+conditions are  entirely new, they  were  not  existing  previously  and 
+recently. It  is  a  method  in  which  we  study  the  effect  of  d  dependent 
+variable   on   independent   variable. Whatever   we   know   about   the 
+environment, is  possible  only  by  observation. All  types  of  experiments 
+are related with observation and generalization of these observed facts 
+and it is also possible to test the internal validity. 
+ 
+Definitions: 
+“It is a method of testing hypothesis.”  
+Jhoda 
+13
+0 
+
+ 
+ 
+90 
+“An experiment is an observation under controlled conditioned.”  
+F. S. Chapin 
+“Experimental research is the description and analysis of what will be or 
+what will occur, under carefully controlled condition.”  
+John W. Best 
+“Experiment is a means of providing the hypothesis whereby the causal  
+relations between two facts is studied.”  
+ Green Wood 
+“The essence of an experiment may be described as observing the effect 
+on   a   dependent   variable   of   the   manipulation   of   an   independent 
+variable.”   
+Festinger 
+Characteristics: 
+(i) Based on the law of single variable. 
+(ii) This  method  of  research  is  maximum in  use  in  educational  / 
+social researches where the factors can be controlled.  
+(iii) Experimental  method  is  a  method  of  testing  of  clear  specific 
+hypothesis of different intensions. 
+(iv) It is a bias free estimation of the true effect. 
+(v) It  emphasizes  control  of  conditions  and  the  experimentation  of 
+certain variables in controlled conditions. 
+(vi) It  sets  out  more  or  less  of  the  causal  type  relationship  between 
+the phenomenons. 
+(vii) It  uses  standardized  tool  for  experimentation  and  makes  the 
+evidences very much objective. 
+(viii) The  sample  is  selected  with  great  precaution  and  very  care  is 
+taken to safe guard extraneous factors. 
+(ix) This method helps in developing laws, postulate and theories. 
+(x) It allows for precision and definiteness. 
+
+ 
+ 
+91 
+Elements: 
+(1) Control: The extent to which different factors are accounted for  
+(a) Purposes of Control: 
+(i) Intervening  variables  are  isolated  so  that  they  may  effect  the 
+dependent variable. 
+(ii) Not    only    intervening    variables    are    to    be isolated    from 
+independent variables but it is also to be ascertained how much 
+it contributed. 
+(iii) The  magnitude  is  not  only  ascertained  terms  of  larger  or  small 
+but also in quantitative terms. 
+(b) Degree of Control:  
+It has to be remembered that in social researches high degree of control 
+is not possible as in laboratory situation. 
+(c) Methods of Control:  
+The  researcher  directs efforts  towards controlling  the  variables  which 
+are related  to the independent  variable otherwise  it will  be  difficult  to 
+ascertain which is responsible for effect on dependent variable. 
+ 
+The following methods are used for controlling; 
+(i) Random assignment of subjects to groups: 
+It  means  that  subjects  are  assigned  in  such  a  way  that  every  member 
+has an equal opportunity of being chosen. 
+(ii) Matching subjects with random assignment:  
+The subjects are assigned to groups to match individual’s subjects on as 
+many extraneous variable as the  researcher can  identify. They may be; 
+(a)  Subject to  subject  matching, (b)  matching  for  mean  and  standard 
+deviation,(c)Ranking of subjects on matching variable. 
+ 
+ 
+
+ 
+ 
+92 
+(iii) Random assignment on the basis of homogeneous selection:  
+It is done to make groups comparable on an extraneous variable so as to 
+select groups those are as homogenous as possible on the variable. The 
+variable may be like socio-economic –status and sex etc. 
+(iv)Techniques of analysis of Co-variance:  
+It is attempted to control the variation within the groups .A co-variate is 
+a variable which the researcher has not been able to control. 
+(v) Methods of using subjects as their own controls:  
+It  is  done  to  assign  the  same  subjects  to  two  experimental  treatments 
+and then to obtain measurements of the subjects under one treatment 
+and then on the other. But there is practical difficulty in this method in 
+some cases. 
+ 
+(2) Manipulation:  
+In  the  experimental  method  manipulation  is  done  to  set  the  stage  for 
+the occurrence of the factor whose performance is to be studied under 
+conditions in which all other factors are controlled. Variables which can 
+be manipulated  may be  personality characteristics,  attitudes,  teaching 
+methods, type of motivation etc. 
+ 
+(3) Observation:  
+Another element  of  the  experimental  method  is  that  the  effect  of  the 
+manipulation  of  independent  variable  on  the  dependent  variable  is 
+studied   or   observed. The   technique   of   observation   is   applied   if 
+measurement is not possible. 
+ 
+(4) Replication: 
+In   spite of   attempts   of   controlling   extraneous   variables,   some 
+extraneous  variable  and  some  discrepancies remain  and influence  the 
+
+ 
+ 
+93 
+results.  Thus  replication  is  a  matter  of  conducting  a  number  of  sub-
+experiments within the frame work of an overall experiment design.    
+ 
+Features: 
+(i) It is based on law of the single variable. It means if one element 
+is  added  or  subtracted  in  one  of  the  two  situations  and  other 
+situation  is  kept  as  it  is,  the  change  in  the  two  situations  is  the 
+result of that single variable. 
+(ii) It  is  applicable  when  significant  factor  or  conditions  can  be 
+controlled. 
+(iii) It is not a perfectly precise method in educational research as in 
+scientific method. 
+(iv) Control group and experimental group are never identical as they 
+should be for an exact experiment. 
+ 
+Experimental Validity: 
+Two types of validity are involved; 
+(i) Internal Validity:  
+It  is  the  minimum  without  which  an  experiment  is  useless.  The  crucial 
+point  is  whether  the  independent  variable  created  the  effect  on  the 
+dependent   variable. It   means   that   some   uncontrolled   extraneous 
+factors   do   not   affect the   dependent   variable. The   following   eight 
+extraneous factors are to be controlled for obtaining internal validity; 
+a) Contemporary confounding factor.  
+b) Maturation of the subject with the passage of time, 
+c) Experience in pre-test reflecting itself in the post test, 
+d) Change in the calibration of the measuring instruments, 
+e) Tendency for extreme scores to regress towards the mean, 
+
+ 
+ 
+94 
+f) Difference  in  the  selection  of  subject  in  the  pre-test  and post-
+test, 
+g) Differential  loss  of  subjects  from  the  experimental  and  control 
+groups tend to bias the results of the experiment, 
+h) Interaction   of   selection   and   maturation   and   selection   and 
+history. 
+ 
+(ii) External Validity:  
+The  crucial  point  is  what  is  the  applicability  of  the  findings  beyond  the 
+limits  of particular  experiment. Are  the  results  valid  in  general  for 
+students? The  following  factors  are  to  be  controlled  for  obtaining 
+external validity; 
+a) Selections  of  sample  with  some  special  characteristics  make the 
+application restrictive. 
+b) Pre-testing may sensitize the subject to the experimental factor. 
+c) Effects of  experimental  procedures  restrict  the  generalize  ability 
+of the findings. 
+d) Effects  of  a  treatment  on  a  subject  previously  exposed  to  other 
+treatments cannot be generalized to other subjects who have not 
+undergone the same sequence of treatments. 
+Types of Experimental Designs: 
+It is to the researcher what a blue –print is to an architect. The following 
+are the factors upon which the selection of designs depends; 
+(i) What is the nature of the experiment? 
+(ii) What is the main purpose of the experiment? 
+(iii) What types of the variables are to be manipulated? 
+(iv) What is the nature of data? 
+(v) What is the competence level of the experimentor? 
+ 
+
+ 
+ 
+95 
+The experimental designs are classified as follows; 
+(a) Pre-experimental designs: 
+In  this  type  of  design  there  is  no control  over extraneous  or  situation 
+variables. They are divided into the following categories; 
+ 
+Design No.1: 
+One Group, Pre-test –Post-test Design 
+Pre-test Independent Variable Post-test 
+T
+1 
+X T
+2 
+ 
+Since  there  is  no  control  group  in  this  research  design  it  cannot  be 
+checked whether the obtained result is due to treatment or extraneous 
+variables. 
+Design No.2:  
+Two Group, Static Design 
+Group Independent Variable Post-test 
+Experimental  T
+2
+ 
+Control  T
+2
+ 
+ 
+In  this  design,  the  two  groups  are  assigned  but  neither  on  the  basis  of 
+randomization  nor  matching. There  is  no  pre-test  so  the  researcher 
+cannot measure the  difference on account of treatment. In this design, 
+comparison is made on the basis of post-test, in experimental group and 
+control group. 
+ 
+(b)True-experimental designs:  
+In  these  designs,  the researcher  attempts to control  the effects  of 
+history, maturation, testing, measuring instruments etc. 
+ 
+ 
+ 
+
+ 
+ 
+96 
+Design No.3: 
+Two groups, Randomized Subject, Post –test only Design 
+Randomly assigned Group Independent Variable Post-test 
+Experimental  T
+2 
+Control  T
+2 
+ 
+In this design, there is provision of randomization of subjects to the two 
+groups,  it  assures  the  equivalence  of  groups  and  since  there  is  no 
+provision of pre-test there is probability of interaction effect. However, 
+the  use  of  the  designs  restricts  the  external  validity  of  the  experiment. 
+There  are some  situations  which  do  not  permit  selection  of  subjects  at 
+random. 
+ 
+DesignNo.4:  
+Two groups, Randomized Matched Subjects, Post-test only Design 
+Randomly assigned group after 
+matching 
+Independent 
+Variable 
+Post-test 
+Experimental  T
+2 
+Control  T
+2 
+ 
+This design is the most useful where small groups are to be used. In this 
+design   the   subjects are   randomly   assigned   to   two   groups   after 
+matching, it ensures strengths to design. 
+ But  it  is  very  difficult  to  match  the  subjects  with  precision 
+because  it  reduces  the  sizes  of  the  sample.  In  some  cases  it  is  not 
+possible  to  match  one  or  more  potential  subjects. If  some  subjects  are 
+to be reduced for this purpose, a bias is introduced in the sample. 
+ 
+ 
+ 
+ 
+
+ 
+ 
+97 
+Design No.5: 
+Randomized groups—Pre-test, Post-test Design 
+Randomly assigned Pre-test Independent Variable Post-test 
+Experimental group T
+1
+   E  T
+2
+   E 
+Control group T
+1
+  C  T
+2
+    C 
+ 
+In   this   design   additional   check   is   provided   for   the   equality   of 
+Experimental group and control group because there is provision of pre-
+test. The  nature  of  the  design  is  such  that  it  controls  most  of  the 
+extraneous variables. 
+ However,  the  design  has  certain  limitations. Firstly  interaction 
+between  pre-test  and  treatment  may  sensitize  subjects  which  may 
+affect  the  results. Secondly, interaction  of  experimental  variable with 
+other  factor  limits  its  generalization.  Thirdly,  experimental  procedure 
+may affect normalcy. 
+ 
+Design No.6: 
+The Randomized Solomon Three Group Design 
+Randomly assigned Pre-test 
+Independent 
+Variable 
+Post –test 
+Experimental group(E) T
+1
+  E  T
+2
+  E 
+Control group  1(C
+1
+) T
+1
+  C
+1 
+ T
+2
+  C
+1
+ 
+Control group 2 (C
+2
+) No Pre-test  T
+2
+  C
+2
+ 
+ 
+In  this  design  check  is  provided  for  the  equality  of  Experimental  group 
+and  control  group  because  there  is  provision of  pre-test. The  nature  of 
+the design is such that it controls most of the extraneous variables. The 
+provision of the second control group ensures control interaction effect 
+of Pre-test and treatment.  
+ 
+ 
+
+ 
+ 
+98 
+Design No.7: 
+The Randomized Solomon Four Group Design 
+Randomly assigned Pre-test 
+Independent 
+Variable 
+Post-test 
+Experimental group(E) T
+1
+  E  T
+2
+  E 
+Control group 1(C
+1
+) T
+1
+  C
+1
+  T
+2
+  C
+1
+ 
+Control group 2 (C
+2
+) No Pre-test  T
+2
+  C
+2
+ 
+Control group 3(C
+3
+) No Pre-test  T
+2
+  C
+3
+ 
+ 
+In  this  stage  check  is  provided  for  equality  of  Experimental  group  and 
+control group, because  there is provision of pre-test. The nature of the 
+design  is such  that  it  controls  most  of  the  extraneous  variables. The 
+provision of the second control ensures control interaction effect of pre-
+test  and  treatment. The  design  controls  any  possible  contemporary 
+effects   between   pre-test   and   post-test. The result   in   this   design 
+provides greater confidence. 
+ However  this design  is  such  that  it  is  difficult  to  conduct  in 
+practical  situation. There  is  a  difficulty  of  statistical  application  in  this 
+design. 
+ 
+(C) Factorial Design:  
+This design enables the experimenter to evaluate or manipulate two or 
+more experimenter to  evaluate  or  manipulate  two  or  more  variables 
+simultaneously  in order to  study the effects  of  number  of  independent 
+factors singly as well as the effects due to interactions with one another. 
+Design No.8: Single Factorial Design of 2 2 
+There  are  two  independent  variables  and  each  of the  independent 
+variables   has   two values.   The first   independent   variable   which   is 
+manipulated and has two values is called the experimental variable. The 
+second  independent  variable  which  is  divided  into  levels may  be  called 
+control variable. 
+
+ 
+ 
+99 
+In  this  design  the impact of  more  than  one  variable  can  be  studied 
+simultaneously.   In this   not   only   the   significance   of   difference   of 
+different levels is studied but interaction effect can also be studied. 
+However,  if  too  many  variables and  two  many  levels  are  studied,  the 
+experiment and statistical analysis becomes too difficult to manage. 
+ 
+Steps of Experimental Research Methods: 
+The  procedures  of  the experimental  method  are  to  be  executed  under 
+the following steps; 
+(i) Identifying, defining and delimiting the problem:  
+The  problem  that  can  be  verified  or  refuted  by  the  experimental  data 
+should be  selected first. The  variables to be  investigated are defined in 
+operational terms. 
+(ii) Reviewing the literature:  
+After  selecting  the  problem,  the  related  literature  and  experiments 
+should be reviewed and the method of approach or experimental design 
+to be pursued should be planned or outlined. 
+(iii) Formulating the hypothesis and deducing their consequences:  
+The problem has to be converted into a hypothesis that can be verified 
+or refuted by experimental method. 
+(iv) Drawing up the experimental design:  
+This  section  should  place primary emphasis on  the question of  control, 
+randomization,  replication,  place  of  the experiment,  duration  of  the 
+experiment,  selecting  or constructing  and validating  instruments  to 
+measure  the outcomes  of the experiment  and conducting pilot for trial 
+run tests to perfect instrument. 
+(v) Defining the population:  
+It is necessary to define the population precisely so that there can be no 
+question about population to which the conclusions are to apply. It may 
+
+ 
+ 
+100 
+consist of selecting a sample of subjects to represent a given population 
+and pairing of subjects to secure homogeneity.  
+(vi) Administration of test / Carrying out the study:  
+It  is  necessary  to  insist  on  close  adherence  to  plans  and experimental 
+design. This   will   involve   controlling variable   or non-experimental 
+factors, applying  the  experimental  factors  and  keeping  the  careful 
+record of steps in the procedure. 
+(vii) Measuring the outcomes / Collection of Data:  
+Careful consideration must be given to the selection of the criterion on 
+the basis of which the results are measured. 
+(viii) Analyzing and interpreting the outcomes;  
+The result pertaining to the factors under study should be clearly noted. 
+The analysis of data demands expert use of statistical procedures. Only 
+then the analysis becomes the basis for valid interpretation. 
+(ix) Drawing the conclusions:  
+The conclusions  of  the  study must  be  restricted  to  the  population 
+actually covered; care must be taken not to over ganaralize the results. 
+The  result  also  pertains  to  the conditions  under which  they  were 
+derived. Care must be taken to restrict the conclusions to the conditions 
+actually present  in the experiment. 
+(x) Reporting the results:  
+The study must be reported in sufficient details. 
+
+ 
+ 
+101 
+ 
+ 
+ Research Proposal 
+ 
+Each researcher has to write a research proposal before he  undertakes 
+any  research  work. For  a  new  researcher  it  presents a  great  problem 
+because  he  does  not  know  the  components of  any  research  proposal. 
+Even an  experienced  research  worker  is  required  to  write  a  research 
+proposal  if  he  proposes  to  obtain financial  assistance  for  a  research 
+project  from  any  research  organization.  In  our  own  country  NCERT, 
+UGC, AICTE, ICSSR etc. have developed their own research formats but a 
+few   basic   components   are   common   to   all   well-prepared   research 
+proposals. 
+ 
+Title of the Proposal: 
+The first part of any research proposal is its title. If the title is not clearly 
+stated  it will  not help  the  researcher  in  his  work. A  good  title  should 
+clearly identify  the  research  proposal and  must  clearly  state  about  the 
+following: 
+(i) What variables are included in the research proposal? 
+(ii) What is the relationship between the different variables? 
+(iii) Which is the population to which the results may be generalized? 
+While  independent  and  dependent  variables are  stated  in  the  research 
+proposal  title,  which  are  of  experimental  nature,  the  variates  and 
+criterion variables   are written in non-experimental studies. 
+One example of each is given below; 
+ 
+ 
+ 
+14
+0 
+
+ 
+ 
+102 
+Experimental Study: 
+“The Effect of Lecture Method and Text Book Method on the Academic 
+Achievement in Economics of Class IX Students” 
+ 
+Non-Experimental Study: 
+“The  Relationship between Socio-Economic   Status   and   Academic 
+Achievement in a Foreign Language of Class X Students” 
+ In the experimental study the title of the research proposal is so 
+stated that it shows the effect of independent variable upon dependent 
+variable.  This  type  of  title  indicates  which  variable  will  be  manipulated 
+by  the  research  and  upon  which variable  its effect  will  be  observed. In 
+non- experimental  study,  the title   should indicate   the  relationship 
+between  the  variate  and  the  criterion  variable.  In  non –experimental 
+study  the variables  are  not  manipulated,  only relationship  between 
+variate and criterion variable is stated. In the above examples, “Lecture 
+method”  and  “Text  Book  Method”  are  independent  variable  and 
+academic  achievement  is  dependent  variable. In  the  second  example 
+the ‘Socio-Economic Status’ is an example of criterion variable. 
+ The  boundaries  should  be  identified  for  which  the  research 
+findings may be generalized. They are generally expressed in the terms 
+of ‘Target Population’. 
+ In the above examples, students of class IX and students of class 
+X    are    target population    in experimental    and    non-experimental 
+population respectively. 
+ Another requirement for a good,, research title is that  it should 
+not   be   too   lengthy.   Attempts   should   not   be   made   to answer   all 
+questions  relating  to  variables  and  the  population  in  a  title. Fifteen  to 
+twenty words are the maximum can be included in a research title. 
+Some good titles are given below; 
+
+ 
+ 
+103 
+1. “A   Comparison   Between   Two   Methods   of   Teaching   Algebra-
+Expository   and Discovery-in   the   Tenth Class   in   a   Recognized 
+Secondary School”. 
+2. “The Effects of Grading on Achievement in Mathematics.” 
+3. “The  Relationship between Spelling,    Achievement    and    a 
+Personality Factor”. 
+4. “A Comparison  of the  Evaluation  of  Teacher  Performance  by 
+Principals and Teachers”. 
+5. “A Study of the Effect of Two Seating Arrangements in the in the 
+Foreign Language Achievement of Class VI.” 
+ 
+Research Problem: 
+The  second  part  of  any  research  proposal  is  the  research  problem.  It  is 
+of  special importance  on account  of  its  strategic  location. The  problem 
+should define and delimit the specific area of the proposed research. It 
+should begin with the general background of the problem and end with 
+a specific statement of the problem. The research problem should be so 
+structured  that  it  should  begin  with  a  broad  base  of  general  problems 
+and explanations. It should be  followed by a survey of related research 
+literature. It should end with the problem statement. The background of 
+the  research  should  identify  the  variables  of  the  research  problem, 
+discuss  the  variables  which  are  selected  for  the  research  study. Other 
+important variables which are not included in the research study should 
+also be briefly discussed. It should also be made clear that which criteria 
+were  used  for  the  selection  of  the  variables. This  part  of  the  research 
+proposal  should  be written  in simple  language  and  should  also  be 
+précised. 
+ The significance of the problem should also be written. It should 
+meet the following requirements; 
+
+ 
+ 
+104 
+(i) The  research  proposal  is time  bound document.  Thrust  areas  of 
+research  changes  from  time  to  time. Only  such  areas  should  be 
+selected which are of crucial importance these days. 
+(ii) The research proposal should be related with practical problems. 
+It  should  provide  solution  to  any  existing  social /  behavioral 
+/educational /institutional/library related problem etc. 
+(iii) The  research  problem  should  not  have  small  target  population, 
+because its result cannot be verified. 
+(iv) Target population of any research problem should be related to a 
+popular population. 
+If  the  research  proposal  is  to  be  submitted  for  financial  assistance  it 
+should  also  be  seen  that  what the  areas  of  priority  of  the  funding 
+agency  are. Each  agency  grants  financial assistance  to those  research 
+studies which it considers as central to its area of concern and others as 
+peripheral. 
+ The statement of the problem is the last stone in the pyramid of 
+the  research  problem. It  specifies  the  variate  and  criterion  variables  in 
+non-experimental  studies  and independent  and dependent  variables in 
+an  experimental  study,  the  type  of  relationship between  variables  and 
+target population. 
+ Another criterion of a good problem statement is that it can be 
+measured. A research   problem in   which   the   relationship   between 
+variables  cannot  be  measured  empirically  cannot  be  categorized  a 
+research problem. 
+ The statement  which  seeks to  answer  the  question  of  value-
+judgment  should not  be  included  in  research  problem.  Such  questions 
+cannot  be  answered  by  a  research  study.  They  should  be  avoided in  a 
+research proposal. 
+ 
+ 
+
+ 
+ 
+105 
+Statement of Hypothesis: 
+The  third  part  of  a  research  proposal  is  statement  of  Hypotheses.  It  is 
+done  more  sophistically  than  the  statement  of  problem.  The  research 
+hypothesis  is  presented  in  an  affirmative  form  rather  than  in  the 
+interrogative  form.  They  state  what  is  expected  to  occur  if  various 
+conditions  are  evoked  or  presumed.  The  researcher  should  review  the 
+related literature thoroughly before formulating hypotheses. 
+ All  the  terms  which  are  used  in  any  hypothesis  should  be 
+carefully  defined. The hypothesis should be  unambiguous and testable. 
+Since  the  quantum  of  achievement  is  difficult  to  predict  at  the  time  of 
+statement of hypothesis, researchers prefer ‘null hypothesis’ which 
+assumes that only a chance difference is expected to occur between the 
+groups  .A  null  hypothesis  merely  states  that  there  is  no  relationship 
+between the variables. It is expressed in statistical terms; X
+a
+-X
+b
+=0. 
+ Suppose  a  researcher  observed  that  Mr.X  appeared  to  have 
+better  teacher-student  relation  that  Mr.Y. It  was  observed  that  Mr.X 
+used  to  discuss  personal  problems  of  the  students  and  find  out  their 
+solutions while Mr.Y used to have only formal relationship of classroom 
+teaching. The researcher formulated the following problem. 
+ “What are the effects of discussion of personal problems of the 
+students on the teacher-student relationship”? 
+ The   problem   statement   could   be   written   as   substantive 
+hypothesis in the following words; 
+ “The discussion of personal problems of the students will have 
+better    teacher-student    relationship    than    not    having    any    such 
+discussion.” 
+ This   hypothesis   can   be   written   as   null   hypothesis   in   the 
+following form; 
+ “Discussion  of  personal  problems  of  the  students  by  the 
+teachers  with  them  and  no  discussion  will  have  no  differential  effect 
+upon the teacher-student relationship.” 
+
+ 
+ 
+106 
+The following criteria should be used for the formulation of testable and 
+significant hypothesis; 
+(i) The hypothesis must be clearly stated in operational terms. 
+(ii) The hypothesis must be specific and testable. 
+(iii) Research problems should be selected which are directly related to 
+previous research or theoretical formulations. 
+ 
+Procedures: 
+The  fourth  part  of  a  research  proposal  is  called procedures.  It is  also 
+called as ‘Methodology’ and ‘Method of Procedure.’ 
+It comprises of the following; 
+(i) Target Population:  
+It  is  also  called  universe. The  salient  characteristics  of  the  population 
+should be thoroughly described so that it should be definite that what is 
+the target population for which sample is to be drawn and to which the 
+results of the study could be generalized. 
+(ii) Sampling Plan:  
+The method of sampling should be specified in the research proposal. If 
+the  sample  is  not  thoroughly  analyzed  and  precisely  described,  faulty 
+generalizations  may  be  made.  The  sample  should  be  made  the  true 
+representative  of  the  population. The  sampling  plan  should  also  be 
+described in the proposal. It should describe how the units in the target 
+population will be selected and used .A good sampling plan should meet 
+the following criteria; 
+a. Obtaining  or  constructing  an  accurate,  current  list  of  the  target 
+population units. 
+b. Method of drawing the sample. 
+c. Number of subjects or population units to be selected. 
+ 
+
+ 
+ 
+107 
+(iii) Research Design:  
+The  research  design  should  indicate  how  the  research  setting  will  be 
+arranged in  order  to  yield  the  desired  data  with  the  least  possible 
+contamination/ error by intervening variables. There is no single design 
+that   can   be   applied   in   all   the   cases. It   depends   upon   individual 
+researcher to devise his design. The design should ensure the answer of 
+every hypothesis designed in the proposed research work. 
+ A  well  prepared  research  design  should contain  the following 
+characteristics; 
+a) Specifications of its relationship to each research hypothesis. 
+b) Description  of  the  methods  of  proposed  control  of  confounding 
+variables and threats to validity. 
+c) Description of the design in statistical terms. 
+d) Identification of the types of interferences that may be made. 
+(iv) Stimulus Materials: 
+It  should  also  be  specified  in  the  research  proposal  that  what  stimulus 
+materials will be used in the study. Kinds and ways of stimuli should be 
+described.   Most   commonly   used   stimuli   are   printed   instructional 
+materials. Instructional materials should include the following elements; 
+a) Title 
+b) Author/Editor 
+c) Publisher 
+d) Year of publication 
+e) Intended population 
+f) Time required for administration  
+g) Cost of material 
+(v) Response Measures:  
+
+ 
+ 
+108 
+The researcher should specify clearly what raw data are required by the 
+research design and how they will be collected. Each instrument should 
+be described including the following items of information: 
+a) Title 
+b) Author/Editor 
+c) Publisher 
+d) Population 
+e) Forms 
+f) Test Objectives 
+g) Description of test ,items, scoring  procedures 
+h) Traits represented in score 
+i) Predictive / Concurrent validity 
+j) Reliability data 
+k) Normative data 
+l) Internal consistency of tests 
+m) Time required for administration 
+n) Cost of material 
+o) Data of publication 
+(vi)  Data Collection Methods:  
+The research proposal should identify  the schedules and procedures  to 
+be used  for acquiring  the  data  and  recording  it  accurately. If  they  are 
+lengthy, they should be placed in an appendix and reference be given in 
+the body of the proposal. 
+(vii) Data Analysis:  
+The researcher should specify how the data will be ordered and reduced 
+to  relate  directly  to  the  research  problem. The statistical  procedure  to 
+be used in the analysis of data they should be described. It will be done 
+hypothesis wise or not, it should be  indicated in the  research proposal. 
+
+ 
+ 
+109 
+If a complex design or obscure statistical test is to be used, it should be 
+indicated in the proposal. 
+ If the research proposal is to be submitted to a Funding agency, 
+the  following  information  should  also  be  provided  in  the  research 
+proposal; 
+Logistics:  
+It consists of the following; 
+(a) Time Schedule 
+(b) Personnel 
+(i) Facilities, equipment and supplies 
+(c) Travel expenses 
+(d) Publication costs and other direct costs 
+(e) Budget forms 
+The researcher should identify  the  funding agency such as; UGC, ICSSR, 
+NCERT, SCERT, Universities 
+ The researcher should also obtain the research format from the 
+funding   agency   and   prepare   research   proposal   on   the   guidelines 
+provided by the funding agency. 
+
+ 
+ 
+110 
+ 
+ 
+Research Report 
+ 
+A detailed  account of  the  research  experience from  selection and 
+definition   of   the problem, formulation   of hypotheses, gathering, 
+analyzing    and    interpreting    data,    testing    of    hypotheses,    making 
+conclusion and suggesting further research in the related problem area 
+is called a research report. 
+ 
+Components:  
+The basic components of a research report are as follows; 
+(i) Introduction of the research problem: 
+The researcher will write in it; 
+a) What is the problem? 
+b) What is its importance? 
+c) What  is  the  relation  of  the  problem  with  previous  theory  and 
+research, 
+d) What are the objectives of the study? 
+e) What are the hypotheses? 
+(ii) Description of the procedure of the research:  
+The researcher will write in it; 
+a) How did he select the subjects? 
+b) How many subjects were used? 
+c) How were the subjects assigned to groups? 
+d) What was done to the subjects? 
+e) How was it done? 
+15
+0 
+
+ 
+ 
+111 
+f) When was it done? 
+g) How long was it done? 
+h) How was the reliability of the measuring instruments measured? 
+i) How was the validity of the measuring instruments measured? 
+(III) Description and presentation of the results:  
+The researcher will write in it; 
+a) Which statistical procedures he used to test the hypotheses? 
+b) What were the outcomes of those procedures? 
+c) What were the subsidiary findings of the research? 
+(IV) Discussion of the study findings:  
+The researcher will write in it; 
+a) Why did the results manifest themselves in a particular way? 
+b) What did there results signify? 
+c) What   was   the   relationship   between   this   research   and   the 
+previous research upon which it was based? 
+ 
+Features:  
+The following are the essential features of a good research report; 
+(i) Clarity 
+(ii) Conciseness 
+(iii) Veracity 
+(iv) No   place   for   figures   of   speech,   lyrical   prose   and   in   using 
+anecdotes. 
+(v) No lengthy digressions 
+(vi) Only necessary details 
+(vii) Absolute uncompromising honesty 
+(viii) Serious attempt and not a game 
+
+ 
+ 
+112 
+ 
+ 
+Reasons for Writing:  
+The following are the main reasons on account of which the researcher 
+should write the research report. 
+(i) It is a logical conclusion of doing the research. 
+(ii) It enriches the curriculum vitae of the researcher which helps him 
+in appointment and promotion. 
+(iii) Writing  of  the  research  report  is  an  easy  task  and  it  is  not  that 
+difficult as understood. 
+Mode of Communications:  
+The  researcher  may  use  any  of  the  following  mode  for  communicating 
+his research results; 
+(i) A research monograph: 
+The  researcher  may  publish  a  research  monograph  on  the  basis  of  his 
+research  results  through  a  research  journals  or  a  reputed  research 
+publisher.ph  depends  upon  the  standard  of  the  research  work  and  the 
+reputation of the researcher. 
+(ii) A research journal:  
+The  researcher  may  publish  a  research  paper  in  a  reputed  research 
+journal.  But  this  requires  that  the  paper  should  be  acceptable  to  the 
+Editor  of  the  journal.  The  prestigious  journals  send  these  papers  to 
+reviewers  who  are  conversant  with  the  research  area  in  which  te 
+research paper has been written. 
+(iii) Presenting  in  the  meeting  of  the  Association/  Society  /Congress: 
+There   are   annual   conferences   of   the   associations,   societies   and 
+Congress   in   each   subject   area.   They   provide   opportunities   to   the 
+researchers  to  present  their  research  results  in  the  form  of  a  research 
+paper  before  the  members  of  the  association  or  the  society  or  the 
+delegates of  the  Congress  which  are  followed  by  the  discussions.  The 
+
+ 
+ 
+113 
+journals  of  those  organizations  publish  these papers  in  the  form  of the 
+proceedings of the Association / Society / Congress. 
+ 
+Format:  
+The research reports are divided into the following parts; 
+(a) Preliminary Section:  
+It consists of the following: 
+(i) Title Page 
+(ii) Preface 
+(iii) Table of Contents 
+(iv) List of Tables 
+(v) List of figure, maps and illustrations 
+(b)Introduction:  
+It consists of the following: 
+(h) Importance of the problem under investigation. 
+(ii) A review of related literature 
+(iii) Statement of Hypotheses or relationships being studied 
+(iv) Delimitations of the study 
+(v) Assumptions of the study 
+(vi) Definition of important terms 
+(c) Methods:  
+It consists of the following; 
+(i) How was the study conducted? 
+(ii) From which population was the sample selected? 
+(iii) How many subjects were selected? 
+(iv) What were the demographic characteristics of the 
+subjects?(male/female, average age) 
+
+ 
+ 
+114 
+(v) Was there any characteristic which make the sample a typical to 
+the population? 
+(vi) How were the subjects assigned to groups? 
+(vii) What instructions were given to the subjects? 
+(viii) How conditions were controlled? 
+(ix) What was the treatment of variables? 
+(x) How, when and on what were subjects measured? 
+(xi) What data collection instruments were used? 
+(xii) What was the format of items? 
+(xiii) What was the reliability of the instrument? 
+(xiv) What was the validity of the instrument? 
+(xv) What  are  the  details  of  the  instruments  which  was  prepared  by 
+the researcher? 
+(d) Results:  
+It consists of the following 
+(j) What statistical procedure was used to study the hypotheses? 
+(iii) What was the probability level of each hypotheses test? 
+(iv) What was the probability level of each statistics? 
+(v) What was the attendant degree of freedom? 
+(vi) What was the strength of the relationship of the variables? 
+(vii) What were the group means and standard deviation? 
+(viii) What were principle finding? 
+(e) Discussion:  
+It consists of the following; 
+(i) What were the original purposes of the study? 
+(ii) How were these purpose met? 
+(iii) Why the obtained occurred? 
+
+ 
+ 
+115 
+(iv) What were  the  conclusions  of  the researcher  for  practice,  theory 
+and future research? 
+(v) What is the contribution of the study to the research literature? 
+(vi) What are the strengths and weaknesses of the study? 
+(f) Reference Section: 
+It consists of the following: 
+(i) Bibliography 
+(ii) Appendices: Questionnaires,  Copies  of  letters  used,  evaluation 
+sheets, checklists etc. 
+
+ 
+ 
+116 
+-Bibliography- 
+ 
+ 
+1. Ackoff, Russell  L. (1961). The  Design  of  Social  Research,  University 
+of Chicago Press: Chicago. 
+2. Allen,  T.  Harrell,  (1978). New  Methods  in  Social  Research, Praeger 
+Publication: New York. 
+3. Baker,  R.P.  &  Howell,  A.C. (1958). The  Preparation  of  Reports, 
+Ronald Press: New York. 
+4. Barzun,   Jacques   &   Graff. F. (1990).The   Modern   Researcher, 
+Harcourt, Brace Publication: New York. 
+5. Berelson Conard & Colton, Raymond.  (1978). Research and Report 
+Writing for Business and Economics, Random House: New York. 
+6. Best, John, W.& Kahn, James. (1986).Research in Education, 5
+th
+ ed., 
+Prentice–Hall of India Pvt Ltd: New Delhi. 
+7. Bhattacharya,     Srinivas. (1972).Psychometrics     &     Behavioural 
+Research, Sterling Publishers Pvt.Ltd.: New Delhi. 
+8. Burgess, Earnest. (1960).Research Methods in Sociology, New York 
+Philosophical Library: New York. 
+9. Chaturvedi,    J.C. (1970). Mathematical    Statistics, Nok    Jonk 
+Karyalaya: Agra. 
+10. Clover,  Vernon  T. &  Balsley,  Howard  L. (1984). Business  Research 
+Methods, Grid, Inc: Columbus. 
+11. Cochran,  W.G. (1963). Sampling  Techniques, John Wiley  &  Sons: 
+New York. 
+12. Deming,   W. Edwards.   (1980). Sampling   Designs   in   Business 
+Research, John Wiley & Sons: New York. 
+13. Dennis, Child. (1980). The Essentials of Factor Analysis, Rinehart & 
+Winston: New York. 
+
+ 
+ 
+117 
+14. Denzin, Norman. (1986). The Research Act, Aldine :Chicago. 
+15. Ferber, R. & Verdoorn, P.J. (1972). Research Methods in Economics 
+and Business, The Macmillan Company: New York. 
+16. Ghosh, B.N. (1992). Scientific Methods and Social Research, Sterling 
+Publishers Pvt. Ltd : New Delhi. 
+17. Glock, Charles Y. (1977). Survey Research in Social Sciences, Russell 
+Sage Foundation: New York. 
+18. Goode, William, J.   &   Hatt,  Paul   K. (1968). Methods   in   Social 
+Research, McGraw-Hill: New York. 
+19. Gopal, M.H. (1974). Research Reporting in Social Sciences, Karnatak 
+University: Dharwar. 
+20. Guilford,  J.P. (1964). Psychometric  Methods, McGraw  Hills, Inc: 
+New York. 
+21. Hilway,  T. (1964). Introduction  to  Research, 2
+nd
+ ed., Houghton 
+Mifflin: Boston. 
+22. Hyman Herbert  H.et  al., (1975). Interviewing  in  Social  Research, 
+University of Chicago Press: Chicago. 
+23. John   Peter,   W   M.   (1971). Statistical   Design   and   Analysis   of 
+Experiments, The Macmillan Co.: New York. 
+24. Johnson   Ellen. (1961). The   Research   Report: A   Guide   for   the 
+Beginner, Ronald Press: New York. 
+25. Kerlinger, Fred  N. (1973). Foundations  of  Behavioral  Research, 2
+nd
+ 
+ed., Holt, Reinhart and Wilson: New York. 
+26. Kish, Leslie. (1965). Survey Sampling, John Wiley & Sons: New York. 
+27. Kothari, C.R. (1984). Quantitative   Techniques,   2
+nd
+ ed.,   Holt, 
+Reinhart and Wilson: New York. 
+28. Leonard  Schatzman  &Anselm  L. Strauss. (1973). Field  Research, 
+Prentice–Hall Inc.: New Jersey. 
+
+ 
+ 
+118 
+29. Levin, Richard  I. (1979). Statistics  for  Management, Prentice–Hall 
+of India Pvt. Ltd: New Delhi. 
+30. Miller,  Delbert  C. (1977). Handbook  of  Research  Design  &  Social 
+Measurement, 3
+rd
+ ed., David Mckay Company, Inc: New Delhi. 
+31. Phillips,  Bernard S. (1971). Social Research,  Strategy and  Tactics, 
+2
+nd
+ed., The Macmillan Company :New York. 
+32. Sadhu,  A.N. &  Amarjit. (1990). Research  Methodology  in  Social 
+Sciences, Himalayan Publishing House :Bombay. 
+33. Sharma, B .A, V. et  al (1998). Research Methods in Social Sciences, 
+Sterling Publishers Pvt. Ltd.: New Delhi. 
+34. Siegel, S. (1970). Nonparametric   Statistics   for   the   Behavioural 
+Sciences, McGraw-Hill Publishing Co: New York. 
+35. Tondon, B.C.  (1989). Research  Methodology  in  Social  Sciences, 
+Chaitanya Publishing House: Allahabad. 
+36. Yamane, T. (1973). Statistics: An Introductory Analysis, Harper and 
+Row: New York. 
+37. Young Pauline V. (1960). Scientific Social Surveys and Research, 3rd 
+ed., Prentice–Hall: New York.

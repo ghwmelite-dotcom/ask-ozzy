@@ -1,0 +1,1398 @@
+GENERAL MATHEMATICS/MATHEMATICS (CORE) 
+1. AIMS OF THE SYLLABUS 
+The aims of the syllabus are to test candidates’: 
+(1) mathematical competency and computational skills; 
+(2) understanding of mathematical concepts and their relationship to the   
+  acquisition of entrepreneurial skills for everyday living in the global world; 
+(3) ability to translate problems into mathematical language and solve them     
+  using appropriate methods; 
+(4)  ability to be accurate to a degree relevant to the problem at hand; 
+(5) logical, abstract and precise thinking. 
+This syllabus is not intended to be used as a teaching syllabus. Teachers are advised to 
+use their own National teaching syllabuses or curricular for that purpose. 
+1. EXAMINATION SCHEME 
+ 
+There will be two papers, Papers 1 and 2, both of which must be taken. 
+ 
+PAPER 1:    will consist of fifty multiple-choice objective questions, drawn from the common 
+areas of the syllabus, to be answered in 1½ hours for 50 marks. 
+ 
+PAPER 2:   will consist of thirteen essay questions in two sections – Sections A and B, to be 
+answered in 2½ hours for 100 marks. Candidates will be required to answer ten 
+questions in all. 
+ 
+Section A -    Will consist of five compulsory questions, elementary in nature carrying a 
+total of 40 marks. The questions will be drawn from the common areas of 
+the syllabus. 
+ 
+Section B -    will consist of eight questions of greater length and difficulty.  The 
+questions shall include a maximum of two which shall be drawn from 
+parts of the syllabuses which may not be peculiar to candidates’ home 
+countries. Candidates will be expected to answer five questions for 
+60marks.  
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+2. DETAILED SYLLABUS 
+The topics, contents and notes are intended to indicate the scope of the questions which 
+will be set. The notes are not to be considered as an exhaustive list of 
+illustrations/limitations. 
+ 
+ 
+TOPICS 
+ 
+ 
+CONTENTS 
+ 
+NOTES 
+A.   NUMBER AND 
+      NUMERATION 
+ 
+( a ) Number bases 
+ 
+ 
+ 
+ 
+( i ) conversion of numbers from  
+      one base to another 
+ 
+ 
+ 
+( ii ) Basic operations on number   
+       bases 
+ 
+ 
+ 
+Conversion from one 
+base              
+to base 10 and vice versa. 
+Conversion from one base to 
+another base  . 
+ 
+Addition, subtraction and 
+multiplication of number 
+bases. 
+ 
+ 
+(b)  Modular Arithmetic 
+ 
+(i) Concept of Modulo Arithmetic. 
+ 
+ 
+(ii) Addition, subtraction and  
+     multiplication operations in 
+     modulo arithmetic. 
+ 
+(iii) Application to daily life 
+ 
+Interpretation of modulo 
+arithmetic e.g.  
+6 + 4 = k(mod7), 
+3 x 5 = b(mod6),  
+m = 2(mod 3), etc. 
+ 
+ 
+Relate to market days, 
+clock,shift duty, etc. 
+ 
+( c ) Fractions, Decimals and   
+       Approximations 
+(i) Basic operations on fractions 
+    and decimals. 
+(ii) Approximations and 
+     significant figures. 
+ 
+ 
+Approximations should be 
+realistic e.g. a road is not 
+measured correct to the 
+nearest cm.   
+ 
+( d ) Indices 
+ 
+( i ) Laws of indices 
+ 
+ 
+ 
+ 
+e.g. a
+x
+ x a
+y
+ = a
+x + y
+ , a
+x
+÷a
+y
+ = 
+a
+x – y
+,  (a
+x
+)
+y
+ = a
+xy
+, etc where x, 
+y are real numbers and a ≠0. 
+Include simple examples of 
+
+ 
+ 
+ 
+( ii ) Numbers in standard form 
+       ( scientific notation) 
+negative and fractional 
+indices. 
+ 
+Expression of large and small 
+numbers in standard form  
+e.g. 375300000 = 3.753 x 10
+8
+ 
+0.00000035 = 3.5 x 10
+-7
+ 
+Use of tables of squares, 
+square roots and reciprocals 
+is accepted. 
+ 
+ 
+( e) Logarithms 
+ 
+( i ) Relationship between indices  
+      and logarithms e.g.  
+y = 
+10
+k
+      implies log
+10
+y = k. 
+( ii ) Basic rules of logarithms e.g.  
+       log
+10
+(pq) = log
+10
+p + log
+10
+q 
+       log
+10
+(p/q) = log
+10
+p – log
+10
+q 
+       log
+10
+p
+n
+ = nlog
+10
+p. 
+(iii) Use of tables of logarithms 
+     and antilogarithms. 
+ 
+ 
+ 
+ 
+Calculations involving 
+multiplication, division, 
+powers and roots. 
+( f ) Sequence and Series (i) Patterns of sequences.      
+ 
+ 
+ 
+ 
+(ii) Arithmetic progression (A.P.) 
+     Geometric Progression (G.P.) 
+Determine any term of a 
+given sequence. The notation 
+U
+n
+ = the nth termof a 
+sequence may be used. 
+ 
+Simple cases only, including 
+word problems. (Include sum 
+for A.P. and exclude sum for 
+G.P). 
+ 
+( g  ) Sets 
+ 
+ 
+ 
+ 
+ 
+(i) Idea of sets, universal sets,  
+    finite and infinite sets, 
+    subsets, empty sets and 
+    disjoint sets.  
+Idea of and notation for union, 
+    intersection and complement 
+    of sets. 
+ 
+(ii) Solution of practical problems 
+     involving classification using 
+     Venn diagrams. 
+Notations: 
+ℰ,⊂,∪,∩, { }, ∅,   
+P’( the compliment of P). 
+ 
+♦• properties e.g. 
+commutative, associative and 
+distributive 
+ 
+ 
+Use of Venn diagrams 
+restricted to at most 3 sets. 
+( h ) Logical Reasoning Simple statements. True and 
+false statements. Negation of 
+statements, implications. 
+Use of symbols: 
+⟹,⇐, use of 
+Venn diagrams. 
+(i) Positive and negative      
+     integers, rational numbers 
+The four basic operations on 
+rational numbers. 
+Match rational numbers with 
+points on the number line. 
+
+Notation: Natural numbers 
+(N), Integers ( Z ),  Rational 
+numbers ( Q ).  
+ 
+( j ) Surds (Radicals) Simplification and rationalization 
+of simple surds. 
+Surds of the form 
+
+√
+
+, a
+√
+ and   
+a ±
+√
+where a is a rational 
+number and b is a positive 
+integer. 
+Basic operations on surds 
+(exclude surd of the form 
+
+ 
+√
+
+). 
+ 
+•∗
+∗∗
+∗ ( k ) Matrices and 
+          Determinants 
+( i ) Identification of order,  
+          notation and types of 
+          matrices. 
+ 
+( ii ) Addition, subtraction, 
+       scalar multiplication and 
+       multiplication of 
+       matrices. 
+ 
+( iii ) Determinant of a matrix 
+Not more than 3 x 3 matrices. 
+Idea of columns and rows. 
+ 
+ 
+Restrict to 2 x 2 matrices. 
+ 
+ 
+ 
+ 
+Application to solving 
+simultaneous linear equations 
+in two variables. Restrict to 2 
+x 2 matrices. 
+ 
+( l ) Ratio, Proportions and 
+      Rates 
+Ratio between two similar 
+quantities. 
+Proportion between two or more 
+similar quantities. 
+ 
+Financial partnerships, rates of 
+work, costs, taxes, foreign 
+exchange, density (e.g. 
+population), mass, distance, time 
+and speed. 
+ 
+ 
+ 
+Relate to real life situations. 
+ 
+ 
+Include average rates, taxes 
+e.g. VAT, Withholding tax, etc 
+( m ) Percentages Simple interest, commission, 
+discount, depreciation, profit and 
+loss, compound interest, hire 
+purchase and percentage error. 
+ 
+Limit compound interest to a 
+maximum of 3 years. 
+∗
+∗∗
+∗( n) Financial Arithmetic 
+( i ) Depreciation/ Amortization. 
+ 
+ 
+ 
+ 
+Definition/meaning, 
+calculation of depreciation on 
+fixed assets, computation of 
+amortization on capitalized 
+assets. 
+
+ 
+( ii ) Annuities 
+ 
+ 
+(iii ) Capital Market Instruments 
+ 
+Definition/meaning, solve 
+simple problems on annuities. 
+ 
+Shares/stocks, debentures, 
+bonds, simple problems on 
+interest on bonds and 
+debentures. 
+ 
+( o ) Variation Direct, inverse, partial and joint 
+variations. 
+Expression of various types of 
+variation in mathematical 
+symbols e.g. direct (z ∝n ), 
+inverse (z ∝
+
+
+), etc. 
+Application to simple practical 
+problems. 
+ 
+B. ALGEBRAIC PROCESSES 
+ 
+( a ) Algebraic expressions 
+ 
+ 
+(i) Formulating algebraic 
+    expressions from given 
+    situations 
+ 
+ 
+ 
+( ii ) Evaluation of algebraic 
+       expressions 
+ 
+ 
+e.g. find an expression for the 
+cost C Naira of 4 pens at x 
+Naira each and 3 oranges at y 
+naira each. 
+Solution:  C = 4x + 3y 
+ 
+e.g. If 
+x =60 and y = 20, find       
+      C.  
+C = 4(60) + 3(20) = 300 
+naira. 
+ 
+( b ) Simple operations on  
+       algebraic expressions 
+( i ) Expansion 
+ 
+ 
+(ii ) Factorization  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+♦•♣♠ (iii) Binary Operations 
+e.g.  (a +b)(c + d),             
+(a + 3)(c - 4), etc. 
+ 
+factorization of expressions of 
+the form ax + ay, 
+a(b + c) + d(b + c),  a
+2
+ – b
+2
+,  
+ax
+2
+ + bx + c where a, b, c 
+are integers. 
+Application of difference of 
+two squares e.g.  49
+2
+ – 47
+2
+ =  
+(49 + 47)(49 – 47) = 96 x 2 
+= 192. 
+ 
+Carry out binary operations 
+on real numbers such as: a*b 
+= 2
+a + b – ab, etc. 
+ 
+( c ) Solution of Linear   
+       Equations 
+( i ) Linear equations in one 
+      variable 
+Solving/finding the truth set 
+(solution set) for linear 
+
+ 
+ 
+( ii ) Simultaneous linear 
+       equations in two variables. 
+equations in one variable. 
+ 
+Solving/finding the truth set 
+of simultaneous equations in 
+two variables by elimination, 
+substitution and graphical 
+methods. Word problems 
+involving one or two variables 
+ 
+( d ) Change of Subject of 
+a        Formula/Relation 
+( i ) Change of subject of a 
+      formula/relation 
+(ii) Substitution. 
+e.g.  if
+
+
+ = 
+
+
+ + 
+
+
+, find v. 
+Finding the value of a 
+variable e.g. evaluating 
+v 
+given the values of u and f. 
+ 
+( e ) Quadratic Equations ( i ) Solution of quadratic 
+      equations 
+ 
+ 
+ 
+(ii) Forming quadratic equation  
+     with given roots. 
+ 
+ 
+(iii) Application of solution of 
+      quadratic equation in 
+      practical problems. 
+ 
+Using factorization i.e. ab = 0 
+⇒ either a = 0 or b = 0.  
+•∗
+∗∗
+∗♣♠By completing the 
+square and use of formula 
+ 
+Simple rational roots only e.g. 
+forming a quadratic equation 
+whose roots are -3 and 
+
+
+⇒ (x 
++ 3)(x - 
+
+
+) = 0. 
+(f) Graphs of Linear and  
+     Quadratic functions. 
+(i) Interpretation of graphs, 
+    coordinate of points, table of 
+    values, drawing quadratic 
+    graphs and obtaining roots 
+    from graphs. 
+ 
+ 
+ 
+( ii ) Graphical solution of a pair 
+        of equations of the form:   
+y = ax
+2
+ + bx + c and y = mx + k 
+ 
+∗
+∗∗
+∗♣♠(iii) Drawing tangents to 
+curves to determine the gradient 
+at a given point. 
+ 
+Finding:                                           
+(i) the coordinates of 
+maximum and minimum 
+points on the graph. 
+(ii) intercepts on the axes, 
+identifying axis of symmetry, 
+recognizing sketched graphs. 
+ 
+Use of quadratic graphs to 
+solve related equations e.g. 
+graph of    
+y = x
+2
+ + 5x + 6 to 
+solve x
+2
+ + 5x + 4 = 0. 
+Determining the gradient by 
+drawing relevant triangle. 
+ 
+( g ) Linear Inequalities 
+ 
+(i) Solution of linear inequalities  
+    in one variable and 
+    representation on the number 
+    line. 
+ 
+Truth set is also required. 
+Simple practical problems 
+ 
+ 
+
+ 
+∗
+∗∗
+∗(ii) Graphical solution of linear 
+     inequalities in two variables. 
+ 
+∗
+∗∗
+∗(iii) Graphical solution of 
+     simultaneous linear 
+     inequalities in two variables. 
+ 
+ 
+ 
+ 
+ 
+Maximum and minimum 
+values. Application to real life 
+situations e.g. minimum cost, 
+maximum profit, linear 
+programming, etc. 
+ 
+ 
+( h ) Algebraic Fractions 
+ 
+Operations on algebraic fractions 
+with:                                                          
+( i ) Monomial denominators 
+ 
+ 
+ 
+( ii ) Binomial denominators 
+ 
+ 
+ 
+Simple cases only e.g.  
+
+
+ + 
+
+
+ 
+= 
+
+
+( x≠0, y≠ 0). 
+ 
+Simple cases only e.g.  
+
+
+ + 
+
+
+ = 
+
+ 
+
+!
+ !
+ where a andb 
+are constants and x≠a or b.    
+Values for which a fraction is 
+undefined e.g.  
+
+"
+is not 
+defined for x = -3. 
+♦•♣♠(i) Functions and 
+Relations 
+Types of Functions One-to-one, one-to-many, 
+many-to-one, many-to-many.  
+Functions as a mapping, 
+determination of the rule of a 
+given mapping/function. 
+ 
+C.  MENSURATION 
+ 
+  ( a ) Lengths and 
+         Perimeters 
+ 
+ 
+(i) Use of Pythagoras theorem, 
+    ∗
+∗∗
+∗♣♠sine and cosine rules to 
+    determine lengths and 
+    distances. 
+(ii) Lengths of arcs of 
+circles,     perimeters of sectors 
+and      segments. 
+♦∗
+∗∗
+∗♣♠(iii) Longitudes and 
+Latitudes. 
+ 
+ 
+No formal proofs of the 
+theorem and rules are 
+required. 
+ 
+ 
+ 
+ 
+Distances along latitudes and 
+Longitudes and their 
+corresponding angles. 
+ 
+( b ) Areas ( i ) Triangles and special 
+       quadrilaterals – rectangles, 
+       parallelograms and 
+       trapeziums 
+ 
+ 
+Areas of similar figures. 
+Include area of triangle = ½ 
+base x height and ½absinC. 
+Areas of compound shapes. 
+
+(ii) Circles, sectors and segments  
+     of circles. 
+ 
+ 
+(iii) Surface areas of cubes,       
+      cuboids, cylinder, pyramids, 
+      righttriangular prisms, cones 
+      andspheres. 
+ 
+Relationship between the 
+sector of a circle and the 
+surface area of a cone. 
+( c ) Volumes (i) Volumes of cubes, cuboids, 
+    cylinders, cones, right 
+    pyramids and spheres. 
+ 
+( ii ) Volumes of similar solids 
+ 
+ 
+ 
+Include volumes of compound 
+shapes. 
+D.  PLANE GEOMETRY 
+ 
+(a) Angles  
+ 
+ 
+(i) Angles at a point add up to 
+    360
+o
+. 
+(ii) Adjacent angles on a straight 
+     line are supplementary. 
+(iii) Vertically opposite angles are 
+      equal. 
+ 
+ 
+ 
+The degree as a unit of 
+measure. 
+Consider acute, obtuse, reflex 
+angles, etc. 
+(b) Angles and intercepts on 
+     parallel lines. 
+(i) Alternate angles are equal. 
+( ii )Corresponding angles are 
+      equal. 
+( iii )Interior opposite angles are 
+       supplementary 
+∗
+∗∗
+∗♣♠(iv) Intercept theorem.  
+ 
+ 
+ 
+ 
+ 
+Application to proportional 
+division of a line segment. 
+ 
+(c) Triangles and Polygons. (i) The sum of the angles of a  
+    triangle is 2 right angles. 
+(ii) The exterior angle of a 
+     triangle equals the sum of 
+     the two interior opposite 
+      angles. 
+ 
+(iii) Congruent triangles. 
+ 
+ 
+ 
+( iv ) Properties of special 
+        triangles       - Isosceles,  
+       equilateral, right-angled, etc 
+ 
+(v) Properties of special 
+ 
+∗
+∗∗
+∗The formal proofs of those 
+underlined may be required. 
+ 
+ 
+ 
+ 
+Conditions to be known but 
+proofs not required e.g. SSS, 
+SAS, etc. 
+ 
+Use symmetry where 
+applicable. 
+ 
+ 
+ 
+
+     quadrilaterals – 
+     parallelogram, rhombus, 
+     square, rectangle, trapezium. 
+ 
+( vi )Properties of similar 
+       triangles. 
+ 
+( vii ) The sum of the angles of a 
+         polygon 
+ 
+ 
+ 
+(viii) Property of exterior angles 
+       of a polygon. 
+ 
+(ix) Parallelograms on the same 
+      base and between the same 
+      parallels are equal in area. 
+ 
+ 
+ 
+ 
+ 
+Equiangular properties and 
+ratio of sides and areas. 
+ 
+Sum of interior angles =      
+(n - 2)180
+o
+ or (2n – 4)right 
+angles, where n is the 
+number of sides 
+( d ) Circles (i) Chords. 
+ 
+ 
+ 
+ 
+(ii) The angle which an arc of a 
+     circle subtends at the centre 
+     of the circle is twice that 
+     which it subtends at any 
+     point on the remaining part 
+     of the circumference. 
+ 
+(iii) Any angle subtended at the 
+      circumference by a diameter 
+      is a right angle. 
+ 
+(iv) Angles in the same segment 
+     are equal. 
+(v) Angles in opposite segments 
+      are supplementary. 
+ 
+( vi )Perpendicularity of tangent 
+       and radius. 
+ 
+(vii )If a tangent is drawn to a 
+       circle and from the point  of 
+       contact a chord is drawn, 
+       each angle which this chord 
+       makes with the tangent is 
+Angles subtended by chords 
+in a circle and at the centre. 
+Perpendicular bisectors of 
+chords. 
+ 
+ 
+ 
+∗
+∗∗
+∗the formal proofs of those 
+underlined may be required. 
+
+       equal to the angle in the 
+       alternate segment. 
+ 
+♦∗
+∗∗
+∗♣♠( e ) Construction 
+( i ) Bisectors of angles and line 
+      segments 
+(ii) Line parallel or perpendicular 
+     to a given line. 
+( iii )Angles e.g. 90
+o
+, 60
+o
+, 45
+o
+, 
+      30
+o
+, and an angle equal to a 
+      given angle. 
+(iv) Triangles and quadrilaterals 
+      from sufficient data. 
+ 
+ 
+ 
+ 
+ 
+Include combination of these 
+angles e.g. 75
+o
+, 105
+o
+,135
+o
+, 
+etc. 
+♦∗
+∗∗
+∗♣♠( f ) Loci 
+Knowledge of the loci listed 
+below and their intersections in 2 
+dimensions. 
+(i) Points at a given distance from 
+    a given point. 
+(ii) Points equidistant from two 
+     given points. 
+( iii)Points equidistant from two 
+     given straight lines. 
+(iv)Points at a given distance       
+  
+     from a given straight line. 
+ 
+ 
+ 
+ 
+ 
+                                                      
+Consider parallel and 
+intersecting lines. 
+Application to real life 
+situations. 
+E. COORDINATE  
+    GEOMETRY OF 
+    STRAIGHT LINES 
+(i) Concept of the x-y plane. 
+ 
+(ii) Coordinates of points on the 
+x-y plane. 
+ 
+ 
+Midpoint of two points, 
+distance between two points 
+i.e. |PQ| = 
+#
+ $
+
+− $
+
+!
+
++  '
+
+− '
+
+!
+
+, 
+where P(x
+1
+,y
+1
+) and Q(x
+2
+, y
+2
+), 
+gradient (slope) of a line   
+m= 
+
+(
+ 
+)
+
+(
+ 
+)
+, equation of a line 
+in the form y = mx + c and   
+y – y
+1
+ = m(x – x
+1
+), where m 
+is the gradient (slope) and c 
+is a constant. 
+ 
+F. TRIGONOMETRY 
+ 
+ (a) Sine, Cosine and Tangent 
+      of an angle. 
+ 
+ 
+(i) Sine, Cosine and Tangent of 
+    acute angles. 
+ 
+(ii) Use of tables of trigonometric 
+     ratios. 
+ 
+(iii) Trigonometric ratios of 30
+o
+, 
+ 
+ 
+Use of right angled triangles 
+ 
+ 
+ 
+ 
+ 
+Without the use of tables. 
+
+      45
+o
+ and 60
+o
+. 
+ 
+(iv) Sine, cosine and tangent of 
+angles from 0
+o
+ to 360
+o
+. 
+ 
+( v )Graphs of sine and cosine. 
+ 
+(vi)Graphs of trigonometric  
+ratios. 
+ 
+ 
+ 
+Relate to the unit circle. 
+0
+o
+≤ x ≤ 360
+o
+. 
+ 
+e.g.
+y = asinx, y = bcosx 
+ 
+Graphs of simultaneous linear 
+and trigonometric equations. 
+e.g. y = asin x + bcos x, etc. 
+ 
+( b ) Angles of elevation and 
+       depression 
+(i) Calculating angles of elevation 
+and depression. 
+(ii) Application to heights and 
+distances. 
+ 
+Simple problems only. 
+♦∗
+∗∗
+∗♣♠( c ) Bearings 
+(i) Bearing of one point from 
+another. 
+ 
+(ii) Calculation of distances and 
+angles 
+Notation e.g. 035
+o
+, N35
+o
+E 
+ 
+ 
+Simple problems only. Use of 
+diagram is required.∗
+∗∗
+∗♣♠Sine 
+and cosine rules may be 
+used. 
+ 
+ 
+∗
+∗∗
+∗G. INTRODUCTORY  
+      CALCULUS 
+(i) Differentiation of algebraic 
+    functions. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(ii) Integration of simple 
+Algebraic functions.  
+Concept/meaning of 
+differentiation/derived 
+function, 
++,
++-
+ ,   relationship 
+between gradient of a curve 
+at a point and the differential 
+coefficient of the equation of 
+the curve at that point. 
+Standard derivatives of some 
+basic function e.g. if y = x
+2
+, 
++,
++-
+  = 2x.   If s = 2t
+3
+ + 4, 
++.
++/
+ = 
+v = 6t
+2
+, where s = distance, t 
+= time and v = velocity. 
+Application to real life 
+situation such as maximum 
+and minimum values, rates of 
+change etc. 
+ 
+Meaning/ concept of 
+integration, evaluation of 
+simple definite algebraic 
+equations. 
+ 
+
+H. STATISTICS AND 
+PROBABILITY. 
+( A ) Statistics 
+ 
+(i) Frequency distribution 
+ 
+ 
+ 
+ 
+( ii ) Pie charts, bar charts, 
+histograms and frequency 
+polygons 
+ 
+ 
+(iii) Mean, median and mode for 
+both discrete and grouped data. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(iv) Cumulative frequency curve 
+(Ogive). 
+ 
+ 
+(v) Measures of Dispersion: 
+range, semi inter-quartile/inter-
+quartile range, variance, mean 
+deviation and standard deviation. 
+ 
+ 
+ 
+ 
+Construction of frequency 
+distribution tables, concept of 
+class intervals, class mark and 
+class boundary. 
+ 
+Reading and drawing simple 
+inferences from graphs, 
+interpretation of data in 
+histograms. 
+Exclude unequal class 
+interval.  
+Use of an assumed mean is 
+acceptable but not required. 
+For grouped data, the mode 
+should be estimated from the 
+histogram while the median, 
+quartiles and percentiles are 
+estimated from the 
+cumulative frequency curve. 
+ 
+ 
+Application of the cumulative 
+frequency curve to every day 
+life. 
+ 
+Definition of range, variance, 
+standard deviation, inter-
+quartile range. Note that 
+mean deviation is the mean 
+of the absolute deviations 
+from the mean and variance 
+is the square of the standard 
+deviation. Problems on range, 
+variance, standard deviation 
+etc. 
+∗
+∗∗
+∗♣♠Standard deviation of 
+grouped data 
+ 
+( b ) Probability (i) Experimental and theoretical 
+probability. 
+ 
+ 
+ 
+(ii) Addition of probabilities for 
+     mutually exclusive and 
+     independent events. 
+ 
+Include equally likely events 
+e.g. probability of throwing a 
+six with a fair die or a head 
+when tossing a fair coin. 
+ 
+With replacement. 
+∗
+∗∗
+∗♣♠without replacement. 
+ 
+ 
+
+(iii) Multiplication of probabilities 
+     for independent events. 
+ 
+Simple practical problems 
+only. Interpretation of “and” 
+and “or” in probability. 
+♦♣♠I. VECTORS AND        
+          TRANSFORMATION 
+ 
+(a) Vectors in a Plane 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+(b) Transformation in the 
+Cartesian Plane 
+ 
+ 
+ 
+Vectors as a directed line 
+segment. 
+ 
+Cartesian components of a vector 
+ 
+Magnitude of a vector, equal 
+vectors, addition and subtraction 
+of vectors, zero vector, parallel 
+vectors, multiplication of a  
+vector by scalar. 
+ 
+Reflection of points and shapes in 
+the Cartesian Plane.  
+ 
+ 
+ 
+ 
+Rotation of points and shapes in 
+the Cartesian Plane. 
+ 
+ 
+ 
+ 
+Translation of points and shapes 
+in the Cartesian Plane. 
+ 
+Enlargement  
+ 
+ 
+ 
+(5, 060
+o
+) 
+ 
+e.g. 
+0
+ .12 34
+5
+6734
+5
+8. 
+ 
+ 
+Knowledge of graphical 
+representation is necessary. 
+ 
+ 
+ 
+Restrict Plane to the 
+x and y 
+axes and in the lines x = k, y 
+= x and y = k
+x, where k is an 
+integer. Determination of 
+mirror lines (symmetry). 
+ 
+Rotation about the origin and 
+a point other than the origin. 
+Determination of the angle of 
+rotation (restrict angles of 
+rotation to -180
+o
+ to 180
+o
+). 
+ 
+Translation using a translation 
+vector. 
+ 
+Draw the images of plane 
+figures under enlargement 
+with a given centre for a 
+given scale factor.Use given 
+scales to enlarge or reduce 
+plane figures. 
+ 
+3. UNITS  
+Candidates should be familiar with the following units and their symbols. 
+ 
+( 1 )  Length  
+1000 millimetres (mm) = 100 centimetres (cm) = 1 metre(m). 
+1000 metres = 1 kilometre (km) 
+
+ 
+( 2 )  Area  
+10,000 square metres (m
+2
+) = 1 hectare (ha)  
+ 
+( 3 )  Capacity 
+1000 cubic centimeters (cm
+3
+) = 1 litre (l) 
+ 
+ 
+( 4 )  Mass 
+1000 milligrammes (mg) = 1 gramme (g) 
+                1000 grammes (g) = 1 kilogramme( kg ) 
+1000 ogrammes (kg) = 1 tonne. 
+( 5) Currencies 
+The Gambia     –     100 bututs (b) = 1 Dalasi (D) 
+     Ghana         -    100 Ghana pesewas (Gp) = 1 Ghana Cedi ( GH¢) 
+Liberia        -    100 cents (c) = 1 Liberian Dollar (LD) 
+Nigeria        -    100 kobo (k) = 1 Naira (N) 
+Sierra Leone    -    100 cents (c) = 1 Leone (Le) 
+UK                 -    100 pence (p) = 1 pound (£) 
+USA          -    100 cents (c) = 1 dollar ($) 
+French Speaking territories:    100 centimes (c) = 1 Franc (fr) 
+Any other units used will be defined. 
+ 
+4. OTHER IMPORTANT INFORMATION 
+ 
+( 1) Use of Mathematical and Statistical Tables 
+Mathematics and Statistical tables, published or approved by WAEC may be used 
+in the examination room.  Where the degree of accuracy is not specified in a 
+question, the degree of accuracy expected will be that obtainable from the 
+mathematical tables. 
+ 
+(2) Use of calculators 
+The use of non-programmable, silent and cordless calculators is allowed. The 
+calculators must, however not have the capability to print out nor to  receive 
+or send any information. Phones with or without calculators are not 
+allowed. 
+ 
+ 
+
+(3) Other Materials Required for the examination 
+Candidates should bring rulers, pairs of compasses, protractors, set squares etc 
+required for papers of the subject. They will not be allowed to borrow such 
+instruments and any other material from other candidates in the examination 
+hall.  
+Graph papers ruled in 2mm squares will be provided for any paper in which it is 
+required. 
+ 
+( 4)  Disclaimer 
+In spite of the provisions made in paragraphs 4 (1) and (2) above, it should be 
+noted that some questions may prohibit the use of tables and/or calculators.

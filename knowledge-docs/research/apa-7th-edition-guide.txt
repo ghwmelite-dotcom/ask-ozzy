@@ -1,0 +1,604 @@
+Adapted from the Publication Manual of the American Psychological Association, 7th edition. More information is available at apastyle.apa.org.
+APA 7
+th
+ Edition Guide 
+APA (American Psychological Association) style is used by numerous programs and disciplines in 
+academia. It offers guidelines for many aspects of writing and formatting work.  
+Basic APA Style 
+•Double-space all work
+•Choose a neutral font, such as Calibri, Ariel, Georgia or Times New Roman
+•Indent paragraphs in the body of your work
+•Use the title page format shown below:
+ 1 
+Economic Regulations in Ontario  
+Bob Smith 
+Lawrence Kinlin School of Business, Fanshawe College 
+ECON 101: Canadian Economics  
+Professor Kim Park 
+March 13, 2020 
+Page number 
+Title of Paper 
+Student Name 
+Name of Department 
+and Institution 
+Course 
+Instructor 
+Due Date 
+
+Library Learning Commons | APA 7
+th
+ Edition Guide | Summer 2020  2 
+Adapted from the Publication Manual of the American Psychological Association, 7th edition. More information is available at apastyle.apa.org. 
+•Use the following heading format:
+Level Format Example 
+1 Centred, Bold, Title Case 
+ Text begins as a new paragraph.  
+*Use for main title of paper and any other main sections
+including the title of the reference list.
+Olympic Sports 
+     Text begins as a new paragraph. 
+2 Flush Left, Bold, Title Case 
+ Text begins as a new paragraph. 
+Winter Sports 
+     Text begins as a new paragraph. 
+3 Flush Left, Bold Italic, Title Case 
+ Text begins as a new paragraph. 
+Skiing 
+ Text begins as a new paragraph. 
+4        Indented, Bold, Title Case, Ends With Period. Text begins 
+on the same line and continues as a regular paragraph. 
+      Downhill Skiing. Text to the 
+paragraph begins right after heading. 
+5        Indented, Bold Italic, Title Case, Ends With Period. Text 
+begins on the same line and continues a regular paragraph. 
+      Slalom. Text to the paragraph 
+begins right after heading.  
+APA Citation 
+In order to avoid plagiarism and credit authors, use APA citation style.  APA citation style uses two 
+components to cite work: references and in-text citations.  Both are needed to properly cite work. 
+References:  
+•References are located at the end of the paper and identify all published work used in the paper.
+•The reference list is alphabetized, double-spaced and uses a hanging indent.
+•References provide 4 key elements to identify the works for the reader:
+Author Date Title Source 
+Who? When? What? Where? 
+In-Text Citations: 
+•In-text citations identify quoted or paraphrased work within papers by noting the author and
+year. The reader can then turn to the reference list to find all the information to look up the work
+if needed.
+•Although page numbers are encouraged for all source material, they are only required for direct
+quotes (word-for-word).
+•In-text citations can be narrative (part of the text of the sentence) or parenthetical (in brackets).
+
+Library Learning Commons | APA 7
+th
+ Edition Guide | Summer 2020  3 
+Adapted from the Publication Manual of the American Psychological Association, 7th edition. More information is available at apastyle.apa.org. 
+Note: The following are examples of commonly used formats. Please consult APA’s Publication Manual, 7
+th
+ Edition for more 
+rules and examples. This is available at the bookstore and the library. Resources are also available at APA’s official website: 
+https://apastyle.apa.org/blog/. The use of colour below is for learning purposes; your references should be in black font. 
+Source Type 
+Reference and In-Text Citation Examples 
+Book with 1 author 
+•The title is in italics and is in
+sentence case (only proper
+nouns and the first word of
+titles and subtitles are
+capitalized).
+•Include an edition number if
+present (don’t use 1st).
+Findlay, I. (2018). Business communication now (4th ed.). McGraw-Hill Education. 
+Parenthetical citation: (Findlay, 2018) 
+Narrative citation: Findlay (2018) 
+Book with DOI and group author 
+•Include a DOI (Digital Object
+Identifier) if it is present (even 
+if you didn’t look at the source 
+online). 
+•The current, preferred format
+for a DOI is “https://doi.org/”
+followed by alpha-numeric
+codes unique to each source.
+Convert older DOI formats to
+the new format in your
+reference list.
+American Psychological Association. (2020). Publication manual of the American 
+Psychological Association (7th ed.). https://doi.org/10.1037/0000165-000 
+Parenthetical citation: (American Psychological Association [APA], 2020) 
+Narrative citation: American Psychological Association (APA, 2020) 
+*Only define the abbreviation for a group author once using either citation format.
+Use the abbreviation in subsequent citations: (APA, 2020) or APA (2020). If you only
+use the source once in your writing, you don’t need to show the abbreviation.
+Chapter in an Edited Book 
+•Use the chapter’s author(s) in
+the author section.
+•The title of the chapter is not
+italicized. The title of the book
+is italicized.
+Elson, D. (2011). International financial architecture: A view from the kitchen. In N. 
+Visvanathan, L. Duggan, N. Wiegersma & L. Nisonoff (Eds.), The women, gender 
+and development reader (2nd ed., pp. 295-305). Zed Books. 
+Parenthetical citation: (Elson, 2011) 
+Narrative citation: Elson (2011) 
+Report by a government agency 
+or other organization 
+•Include catalogue or report
+numbers (if present) after the
+title.
+•Use the larger parent agencies
+in the source section.
+Competition Bureau Canada. (2019). Market study highlights: Competition in 
+Canada's broadband industry (Cat. No. Iu54-74/2019E-PDF). Innovation, Science 
+and Economic Development Canada.  http://publications.gc.ca/collections/ 
+_2020/isde-ised/Iu54-74-2019-eng.pdf 
+Parenthetical: (Competition Bureau Canada, 2019) 
+Narrative: Competition Bureau Canada (2019) 
+last name 
+initial 
+publication year 
+title 
+edition (if present)
+publisher
+DOI 
+report number
+
+Library Learning Commons | APA 7
+th
+ Edition Guide | Summer 2020  4 
+Adapted from the Publication Manual of the American Psychological Association, 7th edition. More information is available at apastyle.apa.org. 
+Source Type Reference and In-Text Citation Examples 
+Journal article with 1 author 
+•The name of the journal and
+the volume number are in
+italics.
+•The name of the journal is in
+title case (capitalized).
+•The article title is in sentence
+case (only proper nouns and
+the first word of titles and
+subtitles are capitalized).
+Guirguis, R. (2018). Should we let them play? Three key benefits of play to 
+improve early childhood programs. International Journal of Education and 
+Practice, 6(1), 43–49.  https://doi.org/10.18488/journal.61.2018.61.43.49 
+Parenthetical citation: (Guirguis, 2018) 
+Narrative citation: Guirguis (2018) 
+Journal article with 2 authors 
+•Join between 2-20 authors
+with commas and an
+ampersand (&).
+•Articles may or may not have
+DOIs (Digital Object
+Identifier). If they are present,
+they must be included.
+Raphael, D., & Sayani, A. (2019). Assuming policy responsibility for health equity: Local 
+public health action in Ontario, Canada. Health Promotion International, 34(2), 215–
+226. https://doi.org/10.1093/heapro/dax073
+Parenthetical citation: (Raphael & Sayani, 2019) 
+Narrative citation: Raphael and Sayani (2019) 
+Journal article with 21+ authors 
+and eLocator 
+•Include the first 19 authors,
+followed by an ellipsis (...) and
+the final author.
+•Some articles use eLocator
+numbers instead of page
+numbers. Use the word
+“Article” followed by the
+eLocator information.
+Beach, T. G., Adler, C. H., Zhang, N., Serrano, G. E., Sue, L. I., Driver-Dunckley, E., 
+Mehta, S. H., Zamrini, E. E., Sabbagh, M. N., Shill, H. A., Belden, C. M., Shprecher, D. 
+R., Caselli, R. J., Reiman, E. M., Davis, K. J., Long, K. E., Nicholson, L. R., Intorcia, A. J., 
+Glass, M. J., . . . Gerkin, R. C. (2020). Severe hyposmia distinguishes 
+neuropathologically confirmed dementia with Lewy bodies from Alzheimer’s 
+disease dementia. PLOS ONE, 15(4), Article e0231720. 
+https://doi.org/10.1371/journal.pone.0231720 
+Parenthetical citation: (Beach et al., 2020) 
+Narrative citation: Beach et al. (2020) 
+Journal article with the same 
+author and publication year 
+•In order to distinguish works
+in your in-text citations, add
+“a, b, c” and so on beside the
+year. Start with the title
+closest to “a” and continue
+alphabetically.
+Bednarik, R. G. (2003a). A figurine from the African Acheulian. Current Anthropology, 
+ 44(3), 405-413. 
+Bednarik, R. G. (2003b). Seafaring in the Pleistocene. Cambridge Archaeological 
+  Journal, 13(1), 41-66. 
+Parenthetical citation: (Bednarik, 2003a) / (Bednarik, 2003b) 
+Narrative citation: Bednarik (2003a) / Bednarik (2003b) 
+DOI 
+eLocator 
+last name 
+first initial 
+year 
+title of article
+journal name 
+page 
+number(s
+)
+issue 
+number
+volume 
+number 
+DOI 
+
+Library Learning Commons | APA 7
+th
+ Edition Guide | Summer 2020  5 
+Adapted from the Publication Manual of the American Psychological Association, 7th edition. More information is available at apastyle.apa.org. 
+Source Type Reference and In-Text Citation Examples 
+Webpage with group author 
+•If the author is the same as
+the site name, omit it from
+the source element.
+•Use “n.d.” to indicate there is
+no publication date listed.
+Canadian Mental Health Association. (n.d.).  Fast facts about mental illness. 
+https://cmha.ca/fast-facts-about-mental-illness 
+Parenthetical citation: (Canadian Mental Health Association, n.d.) 
+Narrative citation: Canadian Mental Health Association (n.d.) 
+Webpage with an individual 
+author 
+•The site name is included
+after the title.
+Werneburg, B. L. (2017, May 2). Improve your relationships with better communication. 
+Mayo Clinic. https://www.mayoclinic.org/healthy-lifestyle/adult-health/in-
+depth/improve-your-relationships-with-better-communication/art-20314073 
+Parenthetical citation: (Werneburg, 2017) 
+Narrative citation: Werneburg (2017) 
+Newspaper article online 
+•The name of the newspaper is
+in italics.
+•Use a specific date in the
+reference list, but only the
+year in the in-text citation.
+Friesen, J. (2020, May 3). Canadian universities work to mitigate financial threat posed 
+by coronavirus. The Globe and Mail. https://www.theglobeandmail.com/canada/ 
+article-laurentian-university-warns-financial-viability-threatened-by-covid-1/ 
+Parenthetical citation: (Friesen, 2020) 
+Narrative citation: Friesen (2020) 
+Newspaper article online with no 
+author 
+•The title moves to the author
+section in the references.
+•Use a shortened title and
+quotation marks for the in-
+text citation.
+Millions of Chinese students brace themselves for joblessness. (2020). The Economist. 
+https://www.economist.com/china/2020/05/02/millions-of-chinese-students-
+brace-themselves-for-joblessness 
+Parenthetical citation: (“Millions of Chinese,” 2020)
+Narrative citation: “Millions of Chinese” (2020) 
+Magazine article online 
+•The name of the magazine is
+in italics.
+•Use the month and year for a
+magazine published monthly,
+or the month, day, and year
+for a magazine published
+weekly/biweekly.
+Kingston, A. (2019, September 17). We are the dead. Maclean’s. 
+https://www.macleans.ca/news/canada/we-are-the-dead/ 
+Parenthetical citation: (Kingston, 2019)
+Narrative citation: Kingston (2019) 
+Article from news website 
+•The article title is in italics.
+Morris, J. (2020, May 4). Vaccine may be the only way sports return to full arenas. CBC. 
+https://www.cbc.ca/sports/vaccine-fans-returning-to-sports-arenas-1.5554422 
+Parenthetical citation: (Morris, 2020) 
+Narrative citation: Morris (2020) 
+name of magazine 
+title 
+
+Library Learning Commons | APA 7
+th
+ Edition Guide | Summer 2020  6 
+Adapted from the Publication Manual of the American Psychological Association, 7th edition. More information is available at apastyle.apa.org. 
+Source Type Reference and In-Text Citation Examples 
+TED video on YouTube 
+•The author is the person or
+group who posted the video.
+•The name of the speaker is
+included in the title.
+TED. (2020, May 1). Yifat Susskind: In uncertain times, think like a mother [Video]. 
+YouTube. https://www.youtube.com/watch?v=bW941OpsnMM 
+Parenthetical citation: (TED, 2020) 
+Narrative citation: TED (2020) 
+TED video on their website 
+•The speaker is the author of
+the video. TED is included in
+the source section.
+Wood, Z. R. (2018, April). Why it’s worth listening to people you disagree with [Video]. 
+TED Conferences. https://www.ted.com/talks/zachary_r_wood_why_it_s_ 
+worth_listening_to_people_you_disagree_with  
+Parenthetical citation: (Wood, 2018) 
+Narrative citation: Wood (2018) 
+PowerPoint slides 
+•Because your intended
+audience (your professor) can
+access your source, cite it in
+your reference list.
+Parker, P. (2020). Accounting 101 [PowerPoint slides]. FanshaweOnline. 
+https://fanshaweonline.ca/d2l/home/104763 
+Parenthetical citation: (Parker, 2020) 
+Narrative citation: Parker (2020) 
+Open Educational Resource 
+•The retrieval date is used if
+the content is meant to be
+updated and there isn’t an
+archived version.
+Baldwin, A. (2020, March 27). College success. Openstax. Retrieved August 26, 2020, 
+from https://openstax.org/details/books/college-success 
+Parenthetical citation: (Baldwin, 2020) 
+Narrative citation: Baldwin (2020) 
+The following are formats to cite images. If you reproduce images in your assignment, you also need copyright attributions. 
+For more information: https://apastyle.apa.org/style-grammar-guidelines/references/examples/clip-art-references#2 
+Infographic 
+•Include the word
+“infographic” in square
+brackets in the title section.
+Health Canada. (2019). Canada’s food guide: Food guide snapshot [Infographic]. 
+https://food-guide.canada.ca/en/food-guide-snapshot/ 
+Parenthetical citation: (Health Canada, 2019) 
+Narrative citation: Health Canada (2019) 
+Photograph 
+•Include the word
+photograph after the title.
+•If there isn’t a title, include a
+description of the
+photograph in the square
+brackets as well.
+Ballesta, L. (2018). Frenzy [Photograph]. National Geographic. 
+https://www.nationalgeographic.com/photography/best-of-2018/best-pictures-
+2018/ 
+Parenthetical citation: (Ballesta, 2018) 
+Narrative citation: Ballesta (2018) 
+name of speaker 
+name of speaker 
+retrieval date, 
+if needed 
+publisher 
+
+Library Learning Commons | APA 7
+th
+ Edition Guide | Summer 2020  7 
+Adapted from the Publication Manual of the American Psychological Association, 7th edition. More information is available at apastyle.apa.org. 
+Here is an example of a reference list that would be found on its own page at the end of your work. 
+References 
+Beach, T. G., Adler, C. H., Zhang, N., Serrano, G. E., Sue, L. I., Driver-Dunckley, E.,  Mehta, S. H., Zamrini, E. 
+E., Sabbagh, M. N., Shill, H. A., Belden, C. M., Shprecher, D. R., Caselli, R. J., Reiman, E. M., Davis, 
+K. J., Long, K. E., Nicholson, L. R., Intorcia, A. J., Glass, M. J., . . . Gerkin, R. C. (2020). Severe
+hyposmia distinguishes neuropathologically confirmed dementia with Lewy bodies from 
+Alzheimer’s disease dementia. PLOS ONE, 15(4), Article e0231720. 
+https://doi.org/10.1371/journal.pone.0231720 
+Bednarik, R. G. (2003a). A figurine from the African Acheulian. Current Anthropology, 44(3), 405-413. 
+Bednarik, R. G. (2003b). Seafaring in the Pleistocene. Cambridge Archaeological Journal, 13(1), 41-66. 
+Canadian Mental Health Association. (n.d.). Mental health meter.  https://cmha.ca/mental-health-meter 
+Findlay, I. (2018). Business communication now (4th ed.) McGraw-Hill Education. 
+Health Canada. (2019). Canada’s food guide: Food guide snapshot [Infographic]. https://food-
+guide.canada.ca/en/food-guide-snapshot/ 
+Millions of Chinese students brace themselves for joblessness. (2020). The Economist. 
+https://www.economist.com/china/2020/05/02/millions-of-chinese-students-brace-themselves-
+for-joblessness 
+Raphael, D., & Sayani, A. (2019). Assuming policy responsibility for health equity: Local public health 
+action in Ontario, Canada. Health Promotion International, 34(2), 215–226. 
+https://doi.org/10.1093/heapro/dax073 
+TED. (2020, May 1). Yifat Susskind: In uncertain times, think like a mother [Video].  YouTube. 
+https://www.youtube.com/watch?v=bW941OpsnMM 
+Wood, Z. R. (2018, April). Why it’s worth listening to people you disagree with [Video]. TED Conferences. 
+https://www.ted.com/talks/zachary_r_wood_why_it_s_worth_listening_to_people_you_disagre
+e_with  
+
+Library Learning Commons | APA 7
+th
+ Edition Guide | Summer 2020  8 
+Adapted from the Publication Manual of the American Psychological Association, 7th edition. More information is available at apastyle.apa.org. 
+Missing Information 
+In-Text Citation Author Formatting 
+Author Type Parenthetical Citation Narrative Citation 
+One author 
+(Diamond, 2020) Diamond (2020) 
+Two authors 
+(Diamond & Frey, 2020) Diamond and Frey (2020) 
+Three or more authors 
+(Hawkins et al., 2020) Hawkins et al. (2020) 
+Group author with abbreviation 
+•After a group author is defined,
+use the abbreviation of a group
+author in subsequent citations.
+•If you only use the source once in
+your writing, you don’t need to
+show the abbreviation.
+(World Health Organization [WHO], 
+2020) 
+Subsequent citations: (WHO, 2020) 
+World Health Organization (WHO, 
+2020)  
+Subsequent citations: WHO (2020) 
+Group author with no abbreviation 
+•Use the full name every time.
+(Harvard University, 2020) Harvard University (2020) 
+Missing Element Solution Reference In-Text Citation 
+Nothing missing Provide the author, date, 
+title, and source.  
+Author. (Date). Title. Source. (Author, year) 
+Author (year) 
+No Date Use “n.d.” in place of the 
+missing date 
+Author. (n.d.). Title. Source. (Author, n.d.) 
+Author (n.d.) 
+No author Use the title, date and 
+source. 
+Title. (Date). Source. (“Shortened title,” year) 
+“Shortened title,” (year) 
+Title Use a description of the 
+work.  
+Author. (Date). [Description 
+of work]. Source 
+(Author, year) 
+Author (year) 
+Source Cite as personal 
+communication. Use the 
+author’s first initial, last 
+name, the words “personal 
+communication” and the 
+date. 
+No reference list entry (A. Communicator, personal 
+communication, month day, year) 
+A. Communicator (personal
+communication, month, day,
+year)
+
+Library Learning Commons | APA 7
+th
+ Edition Guide | Summer 2020  9 
+Adapted from the Publication Manual of the American Psychological Association, 7th edition. More information is available at apastyle.apa.org. 
+In-Text Citation Basics 
+Explanation Example 
+Narrative vs. parenthetical citation 
+•A narrative citation reads as part
+of the sentence. The author is
+often the subject of the sentence.
+•A parenthetical citation is
+formatted as “extra” information
+in parentheses (round brackets).
+Narrative citation: 
+Guirguis (2018) noted that play provides children the ability to learn in engaging 
+environments. 
+Parenthetical citation: 
+Play is essential in the classroom because it provides children the ability to 
+learn in engaging environments (Guirguis, 2018). 
+Paraphrase 
+•A paraphrase is when you take
+information from a source and
+format it in your own words.
+•You do not have to provide page
+numbers, but you can in order to
+make it easier for your reader to
+find the information.
+Narrative citation: 
+Guirguis (2018) noted that play provides children the ability to learn in engaging 
+environments. 
+Parenthetical citation: 
+Play is essential in the classroom because it provides children the ability to 
+learn in engaging environments (Guirguis, 2018). 
+Direct quote 
+•Use quotation marks around text
+taken word-for-word from
+somewhere else.
+•Page numbers must be included so
+that readers can find the quote.
+Use “p.” short for page and “pp.”
+short for multiple pages.
+•The year is always listed with the
+author’s name, but the page
+number comes after the quoted
+material.
+Narrative citation: 
+According to Health Canada (2019), “Canadians should eat a variety of food” (p. 
+3).  
+Health Canada (2019) has directed Canadians to “eat a variety of food” (p. 3). 
+Parenthetical citation: 
+Recently, researchers advised Canadians to “eat a variety of food” (Health 
+Canada, 2019, p. 3).  
+Although it is tempting to eat junk food, “Canadians should eat a variety of 
+food” (Health Canada, 2019, p. 3). 
+Direct quote with no page number 
+•Use other ways to identify where
+the quote is from, such as a slide
+number, paragraph number or
+time stamp.
+•If using information from a website
+that has headings or sections, you
+can use heading or section names
+as well. Count the paragraphs from
+the heading or section in this case.
+Type 
+Narrative Parenthetical 
+PowerPoint: Slide Parker (2020, Slide 4) (Parker, 2020, Slide 4) 
+Video: use the time from 
+the beginning of a quote 
+(hours:minutes:seconds) 
+Wood (2018, 13:40) (Wood, 2018, 13:40) 
+Work with no page 
+numbers (such as a 
+webpage): para. 
+Diamond (2020, para. 
+4.) 
+(Diamond, 2020, para. 4) 
+Work with no page 
+numbers, has headings: 
+heading, para. 
+Frey (2019, Research, 
+para. 2) 
+(Frey, 2019, Research, 
+para. 2) 
+subject of sentence 
+extra information 
+
+Library Learning Commons | APA 7
+th
+ Edition Guide | Summer 2020  10 
+Adapted from the Publication Manual of the American Psychological Association, 7th edition. More information is available at apastyle.apa.org. 
+In-Text Citation Examples in Writing 
+Every time you use information from another source, you must cite it. However, if you are using the 
+same source for a few sentences in a row you can use repeated narrative citations.  
+Repeated narrative citations: After a sentence with a complete narrative citation, you can use a pronoun 
+(he, she, they), a last name, or words that refer to the source (the study) in the next sentence as long as 
+your writing makes it clear that you are still referring to that author’s work.  
+Note: If using a direct quote or parenthetical citations, always use a complete citation.  
+Games are an important tool for educators to increase active learning in 
+the classroom. Many educators use games to improve literacy and math skills 
+(Diamond, 2020; Frey, 2019).  For example, Diamond (2020) noted the success of 
+a popcorn sight words game in her classroom.  According to Diamond, she used 
+the game every day for one month and found that students’ overall reading levels 
+increased by two points.  Similarly, Frey (2019) observed that her students’ math 
+abilities improved after incorporating games, such as math baseball and math 
+bingo.  She hypothesized that the games increased students’ interest in math and 
+resulted in more engagement. This theory is echoed by Hawkins and Jones (2020) 
+who argued that “children learn best when they are working in low-stakes, 
+engaging environments” (para. 4).  Further, Parlette et al. (2016) and Fry (2015) 
+recorded that students were more likely to participate in games than in traditional 
+math drills and exercises.  In addition, students who participated in educational 
+games expressed a positive association with the subject (Parlette et al., 2016) and 
+increased self-confidence in their abilities (Fry, 2015).  As a result of these 
+findings, educators should be encouraged to incorporate cooperative, fun games 
+into their learning environments.
+2 different 
+sources 
+supporting 
+the same 
+information, 
+joined with a 
+semicolon 
+author name and year 
+year omitted 
+author name 
+and year 
+use of 
+pronoun 
+(she) 
+direct quote 
+2 different 
+sources 
+supporting 
+the same 
+information, 
+joined with 
+“and” 
+2 sources 
+supporting 
+different 
+information in 
+the same 
+sentence, 
+placement 
+after the 
+appropriate 
+information 
+source with 
+two authors
