@@ -1,0 +1,851 @@
+Writing an Effective  
+Literature Review 
+ 
+A Study Guide  
+ 
+ 
+ 
+ 
+Allan Gaw 
+  
+
+ 2 
+ 
+ 
+ 
+ 
+TABLE OF CONTENTS 
+ 
+ 
+Introduction          3  
+What is a literature review?      4 
+Why do I have to write a review?     6 
+How do I begin?        8 
+How do I write it?             11 
+How do I reference it?       19 
+Conclusions         21 
+Further Reading and Resources     22 
+About the Author        23 
+Acknowledgements        23 
+ 
+  
+
+ 3 
+ 
+ 
+INTRODUCTION 
+Whatever stage you are at in your academic life, you will have to review the literature 
+and write about it.  You will be asked to do this as a student when you write essays, 
+dissertations and theses.  Later, whenever you write an academic paper, there will 
+usually be some element of literature review in the introduction. And if you have to 
+write a grant application, you will be expected to review the work that has already 
+been done in your area. However, just because we all have to do this a lot, doesn’t 
+make the task any easier, and indeed for many, writing a literature review is one of 
+the most challenging aspects of their academic writing.  In this study guide, I will 
+begin by clearing up some misconceptions about what a literature review is and what 
+it is not.  Then, I will break the process down into a series of simple steps, looking at 
+examples along the way.  In the end, I hope you will have a simple, practical strategy 
+to write an effective literature review. 
+ 
+However, before we get going, I need to manage your expectations.  Some people 
+come to a study guide like this thinking that it will help them understand the literature 
+they are reading in their own field.  I can’t do that for you.  I can only help you write 
+about the understanding you already possess. You have to put the necessary work 
+in to develop your own critical skills which often have to be honed over a long period 
+through reading, attending lectures, seminars and conferences and discussing your 
+own work and that of others with your peers.  That is how you build your scholarship.  
+What this guide is about is doing justice to that scholarship and making sure your 
+readers are left in no doubt about your ability to critically evaluate the published 
+literature.  
+
+ 4 
+ 
+ 
+ 
+WHAT IS A LITERATURE REVIEW? 
+ 
+This might seem like a very simple question.  Of course, you know what a literature 
+review is.  Everyone knows what they are and what they look like.  Well, if that’s true 
+why are they so often badly written, difficult to read and lacking in any meaningful 
+critical evaluation of the papers and books being reviewed?  So, let’s start with a 
+blank page and start by defining what we are talking about. 
+ 
+A literature review is a survey of published work relevant to a particular issue, field of 
+research, topic or theory. It will never be about everything and should have clearly 
+defined limits. This survey will certainly provide short descriptions of the sources 
+being reviewed, but much more importantly it will also provide the reader with a 
+critical evaluation of those sources. 
+ 
+Given the many misunderstandings about what is required of someone writing a 
+literature review in academia, at this point it might be useful to state what a literature 
+review is not, before looking at what it is. 
+ 
+ 
+It is not: 
+ 
+§ A list or annotated bibliography of the sources you have read 
+§ A simple summary of those sources or paraphrasing of the conclusions 
+§ Confined to description of the studies and their findings 
+
+ 5 
+§ Narrow and shallow in its approach 
+§ Confusing and longwinded in the way you write about the papers 
+§ Constructed in an arbitrary fashion. 
+ 
+ 
+It is: 
+ 
+§ A critical evaluation of the literature you have read 
+§ A synthesis of the available research in a defined area 
+§ Broad and deep in its approach 
+§ Clear and concise in the way you write about the papers 
+§ Guided by a clearly defined, consistent concept. 
+ 
+When comparing what it is not and what it is, there are two key words to remember, 
+and these are ‘summary’ and ‘synthesis.’ A ‘summary’ is merely a recap of the 
+information you have read and often involves a simple paraphrasing of what the 
+paper was about and what its conclusions were.  In contrast, a ‘synthesis’ is a re-
+organization, or weaving together, of that information.  Think of it like this.  Imagine 
+each of the papers you have read is a piece of coloured thread.  If you snip the end 
+off each thread and present me with a handful of these, it will be colourful and I will 
+be able to see at a glance how many papers you have read, and I will have a brief 
+summary of each, but that’s not a literature review.  Only when you take those 
+threads and weave them together and then present me with a new piece of cloth, will 
+that be a literature review. Only then will you have produced a critical piece of 
+discursive prose. 
+ 
+Now, that might sound a very difficult task, but as we will see later when we look at 
+how we write the review, there are some very simple things we can do to show our 
+readers that we have engaged critically with the literature. 
+ 
+ 
+  
+
+ 6 
+WHY DO I HAVE TO WRITE A LITERATURE REVIEW? 
+ 
+As mentioned in the Introduction above, you will find yourself being asked to review 
+the literature and to write about it for a number of reasons.   
+ 
+As a student, you will be asked to do this to demonstrate your familiarity and 
+understanding of the research that underpins your subject area.  It serves as proof 
+for your examiners that you have done the necessary work to identify and read the 
+important papers relating to a specific topic.  It also allows your examiners to glimpse 
+inside your head to see what you think about what you’ve read. By reading how you 
+write about the literature, they can see if you truly understand what you have read, 
+and they can reassure themselves that you possess the necessary critical skills that 
+underpin all scholarship. 
+ 
+As a researcher, you will be asked to review the literature not only to show your 
+familiarity with it but also to place your own work into context and to ensure your 
+work is seen as credible by your peers.  Reading the way other people write about 
+their work in your field also allows you to learn how it’s done, what are the 
+expectations in your field and how people think about their findings.  Studying the 
+way other people in your field go about analysing their findings and formulating their 
+arguments will help you learn how to do this when it comes to writing about your own 
+research work. You will be making connections between your own work and that of 
+others and clearly demonstrating what contribution you have made to the scholarship 
+in your field.   All literature reviews collect what is understood about a topic up to a 
+point in time and often indicates the direction for future research. As such, a 
+ 
+
+ 7 
+literature review can be an essential component of any research proposal and grant 
+application. 
+ 
+Systematic vs Narrative Review 
+ 
+At this point it is important to say that there are different kinds of review you may be 
+asked to write.  By far the commonest kind of review you will ever read or be asked 
+to write in academia is the so-called ‘narrative review’.  In this type of review, you will 
+use your judgement about the relevance and importance of different sources to your 
+research question or the theories you are exploring.  In other words, you will not 
+necessarily include everything you have read on a topic.  This is the kind of review 
+you will find as part of most dissertations and theses, most academic papers and 
+most grant applications. 
+ 
+In contrast, the so-called ‘systematic review’ is a very different piece of work.  The 
+purpose of such a review is to evaluate and interpret all available relevant research 
+evidence in a defined field.  To do this we have to adopt a highly mechanical, pre-
+planned strategy for identifying the literature, assessing it for quality and then writing 
+about it.  This involves writing a detailed methodology of your search strategy and 
+your assessment strategy. When we are dealing with quantitative research, such an 
+approach often also includes meta-analysis where the results of different smaller 
+studies are grouped together and collectively re-assessed.  
+ 
+Now, the term systematic review has a very clear definition, but unfortunately the 
+term is used loosely even in academic settings.  Students may be asked to write a 
+‘systematic review,’ meaning only that they should adopt a thorough and scholarly 
+approach.  All literature reviews should be that, but a systematic review has a 
+different aim and a very different methodology.  Because of this confusion, I would 
+urge anyone who is asked to undertake a systematic review to check exactly what 
+they are being asked to write.  
+ 
+I do not plan to say any more about systematic reviews specifically, but much of 
+what I will say below about how we write a literature review once we have identified 
+and assessed our sources will be the same.  
+
+ 8 
+ 
+ 
+ 
+HOW DO I BEGIN? 
+ 
+You begin any writing project in academia not by writing at all, but by reading.  And 
+in the case of a literature review, the necessary first step is finding what you should 
+read.  I do not intent to go into detail here about how we search the literature.  This 
+will be a routine task familiar to most of you and will always involve the use of 
+dedicated search engines.  What I do want to mention, however, is the challenge 
+that the literature poses in this respect.  The problem is rarely one of finding too little 
+to read and review and much more often one of being overwhelmed by the number 
+of potentially relevant sources. 
+ 
+ 
+Deciding what to read 
+ 
+This is especially true when we start out trying to get to grips with a new topic or 
+field.  Any broad search of the literature will generally retrieve more papers than can 
+be comfortably read and understood in a lifetime.  Perhaps, if we could narrow down 
+our search by focussing on specific aspects of our topic that would help. While that is 
+certainly true, it’s often the case that early on we do not know enough about the topic 
+to know what might be relevant and what might not.  So, we find ourselves in a 
+quandary, unable to narrow our focus until we have read more, and unable to decide 
+what to read because there’s too much to deal with.  How do we escape this vicious 
+
+ 9 
+circle?  The first thing you should consider is speaking with someone who is more 
+knowledgeable about the topic than you.  This might be a supervisor or a more 
+senior peer, but it will always be someone who is already familiar with the literature 
+you are trying to tackle.  They should be able to point you to useful starting points, 
+perhaps they will recommend key journals, or research groups you should seek out.  
+Of course, not everyone has that sort of resource readily available, so what should 
+they do?  Well, the next best thing is to use the expertise of a more knowledgeable 
+person in your field, but one you have never met.  And by that, I mean the author of 
+a review article in your topic published recently in a good journal.  The author of such 
+an article will be a respected figure in your field who is thoroughly knowledgeable 
+about the literature and their review article will highlight what he or she considers to 
+be the most important sources.  By looking at their list of references, it will quickly 
+give you an idea of the kinds of papers you should be reading. 
+ 
+ 
+How to read a paper 
+ 
+When you do decide to read a paper, do so actively rather than passively.  Often 
+people say that they like to read a paper over first to see if it is useful, and if it is they 
+will go back to it and read it properly. Let me tell you an inconvenient truth—in 
+academia, you don’t have time to do that.  There is a lot to read, and more being 
+published every day, so you have to develop a highly efficient way of reading and 
+keeping up with the literature.  The first thing you must do is always read actively.  In 
+practice, that means always reading with a pen in your hand, or with some way of 
+taking notes.  It also means reading anything in layers.  Academic papers are not 
+novels.  They are not designed to be read necessarily from start to finish, and the 
+amount of time you devote to any paper will vary depending on its relevance to you.  
+The first thing you will read is the title, hopefully identifying relevant keywords.  If the 
+paper looks promising, you go to the next layer and look at the abstract. Only if it still 
+seems to be potentially interesting and relevant, will you go to the next layer and 
+engage with the main text, but even then, you may focus on the sections that are of 
+most interest to you.  There will be thousands of papers whose titles and abstracts 
+you scan, fewer whose main text you study, even fewer where you read and re-read 
+sections of the paper, and some where you have read it so often you can recite 
+passages from memory.   
+ 
+As you read, develop a reviewer’s mentality.  This means you should be questioning 
+everything you are reading, asking why they did that, how they came to that 
+conclusion, what might be an alternative explanation.  The more you learn about 
+your topic, the more questions will come to mind and even if you do not yet know the 
+answers to these questions, write them down as part of the notes you are taking on 
+the paper. These questions can help you later when you are writing your review. 
+ 
+As you read different papers, look for themes that emerge.  You may, for example, 
+find agreement between different research groups or alternatively you may uncover 
+differences of opinion. You may even identify areas of marked controversy in your 
+field, with opposing schools of thought.  And you may find completely unanswered 
+questions where there are significant gaps in the literature.  All of this will help you 
+critically discuss the literature you have been reading, especially the connections you 
+find between different papers.  I like to think of it as a process of joining the dots.  
+
+ 10 
+Each paper is a dot on the page and as we read, we gather more and more dots, but 
+we may also start to see patterns emerging.  As we join the dots, a completely new 
+picture may appear before us. 
+ 
+ 
+Getting organized 
+ 
+The commonest thing anyone says when they are in the process of writing a 
+literature review is, “I know I read that somewhere.”  If you haven’t said this yet, you 
+will because very quickly we can lose track of our sources unless we are very 
+organized.  
+ 
+In practice, this means having a system to keep track of the full reference citation 
+and any notes you have taken.  There are a number of dedicated software packages 
+that can help here, such as Reference Manager, RefWorks, ProCite and Endnote 
+and even the functionality in many modern word processing packages will do the job.   
+Any of these software solutions will save you time by helping you organize and store 
+your references, and they will also allow you to create your referenced document 
+with in-text citations and your reference list based on the required style. If you don’t 
+have a system to keep your references organized, now is the time to get one.  Find 
+out what your colleagues are using and adopt that.  If nothing else, you’ll have 
+someone you can go to for help you when you get stuck. 
+ 
+ 
+Some last thoughts 
+ 
+Just before we proceed to look in detail at how we might go about writing a literature 
+review, it is worth pausing for a moment and thinking about what those who read 
+them might want.  I am thinking particularly here of the examiners who judge our 
+essays, dissertations and theses.   
+ 
+The literature review has been cited by some examiners as “the second most 
+deficient aspect” of the theses they have read.  Incidentally, the number one spot is 
+taken by problems of grammar and punctuation. Those same examiners when 
+probed further talk about the specific problems they encounter.  They state that the 
+authors of literature reviews often fail to use recent literature, adopt a parochial 
+approach to their review, exclude landmark studies, fail to discriminate between the 
+relevant and the irrelevant and fail to demonstrate any ability to critically assess what 
+they are reading.  They even go on to conclude that the literature reviews they have 
+to read are often, “lengthy, irrelevant, outdated, tedious, repetitive, bewildering and 
+flabbergasting.”  So, with all that criticism ringing in our ears, let’s look at how we 
+might do better. 
+ 
+  
+
+ 11 
+ 
+ 
+HOW DO I WRITE IT? 
+ 
+There is an enormous amount written about how to write.  Some of this is helpful, 
+some is complicated, and some is only useful if you already know how to do it, as it 
+just serves to confirm what you already knew.  I like to take as simple an approach 
+as possible to advice about how to write.  I do this because if it’s simple, you might 
+remember it and be able to put it into practice.  So, let’s start with the simplest thing 
+of all—structure.  Everything you write has three components: a beginning, a middle 
+and an end and each serves a different purpose. In practice, this means your review 
+will have an introduction, a main body where you review the literature and a 
+conclusion where you tie things up.  Let’s look at each of these in turn. 
+ 
+ 
+Introduction 
+ 
+The first part of any literature review is a way of inviting your reader into the topic 
+and orientating them.  A good introduction tells the reader what the review is about –
+its scope—and what you are going to cover.  It may also specifically tell your reader 
+what you will not be covering.  Overall, it’s a device to help manage the reader’s 
+expectations of what’s to come. 
+ 
+The introduction may also go into more detail about the position or point of view that 
+you plan to adopt in the review.  For example, your review may be about climate 
+change, but you state in your introduction that you are going to focus on 
+developments only in the last ten years and you will specifically address its impact 
+
+ 12 
+on agriculture.  Alternatively, your review might be about Queer Theory, but you 
+state in your introduction that you propose to adopt an historical approach to our 
+changing understanding of gender and sex-based binaries and will focus on 
+challenges to heteronormativity as depicted in mainstream cinema over the last fifty 
+years. 
+ 
+ 
+Let’s look at an example of an introduction.  All the examples I have included are as 
+generic as I can make them in the hope that anyone from any discipline can 
+understand and appreciate the points I am trying to make. 
+  
+ 
+Activity 1 
+ 
+Read the following paragraph and then try to answer the questions I have posed on 
+your own before reading my answers. 
+ 
+Human behaviour is complex, and many theories have been 
+proposed to explain what motivates it.  Although the literature 
+covers a wide variety of such theories, this review will deal with 
+three major themes that emerge repeatedly in published works.  
+These themes are: the influence of rewards; the influence of 
+peer pressure; and the influence of moral frameworks in which 
+we operate.  Although the literature presents these themes in 
+different contexts, this review will primarily focus on their 
+application to how we behave in times of crisis. 
+ 
+ 
+Questions: 
+ 
+• Is it clear what this literature review is going to be about? 
+• Do you have an understanding of what will be included and what won’t? 
+• Are you surprised that no original sources have been mentioned? 
+ 
+ 
+Answers: 
+ 
+This paragraph is a good example of an introduction to a literature review.  This 
+example is four sentences long, but the length of the introduction will vary a great 
+deal depending on the overall length of the literature review.  It might be shorter, for 
+example as the introduction to a paper, or much longer, for example introducing a 
+literature review in a PhD thesis. 
+ 
+While the specifics of what this text is about are unimportant, what does matter for 
+our purposes is its structure.  Let’s take a closer look at that.  The first sentence is 
+what is often called a “topic sentence”, that is an introductory sentence at the head of 
+a paragraph that tells the reader what this paragraph is going to be about.  If each of 
+your paragraphs has such a sentence, generally your reader will find your writing 
+easier to read and follow.  We know right away that this is all going to be about 
+“Human behaviour”, but in the second sentence we get some refinement of that and 
+
+ 13 
+are told that this review “will deal with three major themes”.  Not surprisingly, the next 
+sentence tells us what those themes are.  The last sentence offers one last 
+importance piece of information to help orientate the reader.  There, we are told that 
+the review will further focus of one specific aspect of all this.   
+ 
+After reading these four sentences, the reader should be aware of what they are 
+about to get if they read on.  They won’t learn everything about what motivates 
+human behaviour, but they will learn about three major themes and specifically how 
+these impact on behaviour in the particular setting of crisis. 
+ 
+Introductions like this can be thought of as a set of ground rules laid down by the 
+author to help the reader.  As such, it is not surprising that, as yet, we have not 
+included any specific references.  All that is still to come in the main body of the 
+review.  
+ 
+ 
+ 
+Main Body 
+ 
+As we saw earlier, a literature review cannot be a simple summary and paraphrasing 
+of what we have read but must include elements of critical evaluation of that 
+literature.  How do we do this?  Well, there are two things we need to do.  The first is 
+very simple and you may think it is not even worth telling you about.  However, I 
+make no apology for what some will see as stating the obvious because I have read 
+too may students’ literature reviews that do not even do this.  What I am talking 
+about is simple integration of the sources you have read, highlighting similarities 
+between some papers and differences between others.  Let’s look at an example of 
+that to see what I mean.   
+ 
+ 
+Activity 2 
+ 
+Read the following paragraph and then try to answer the questions I have posed on 
+your own before reading my answers. 
+ 
+ 
+Maxwell and Brown (2018) found that the gross domestic 
+product of Latin American countries fell by an average of 11% in 
+the 1990s.  Similarly, Jones and Chang (2019) showed that the 
+economies of Brazil, Argentina and Chile contracted 10-14% 
+during the same period. In contrast, Rossi and Ivanov (2021) 
+reported that there were major upturns in productivity in 
+Colombia, Venezuela and Peru from 1991-97 and relatively flat 
+growth in most of the other economies in the region. 
+ 
+ 
+ 
+Questions: 
+ 
+• Is this just a simple summary of the literature that this reviewer has read? 
+
+ 14 
+• What does the word, ‘Similarly’ tell you about this reviewer’s understanding of 
+the literature? 
+• Can you identify any signpost words that show evidence of integration? 
+ 
+ 
+ 
+Answers: 
+ 
+This text does briefly summarise and paraphrase the results of the publications 
+mentioned, but it is not merely a laundry list of the papers.  What the reviewer has 
+done is something very simple but very important.  They could have written:  
+ 
+Maxwell and Brown (2018) found that... 
+Jones and Chang (2019) showed that... 
+Rossi and Ivanov (2021) reported that... 
+ 
+but they didn’t.  They used simple signpost words to make it clear to their reader that 
+they understood that the first two papers reached the same conclusions while the 
+third came to a different conclusion.  They highlight a similarity between the first two 
+by linking them with the word ‘similarly’ and they highlight a difference between those 
+two and the third paper by using the signpost phrase, ‘In contrast.’ 
+ 
+ 
+The second thing we have to do in order to show that we are able to critically 
+evaluate the literature we have read is to introduce our own critical analysis.  This is 
+more difficult than simply identifying similarities and differences between the papers 
+you have read, but it is an essential part of a good review.  It is also more difficult to 
+illustrate with individual examples because there are many different ways you might 
+do this depending on the nature of the source materials you are reviewing.  For 
+example, one of the main points you may wish to discuss is a controversy in your 
+field of study—where some papers conclude one thing and others something 
+different.  You may want to discuss why this might be or even which conclusion you 
+think, based on the strength of the evidence, is more plausible.  You may wish to 
+track the development of a research problem over time and along the way highlight 
+what you regard as the most significant milestones and present your own take on the 
+state of the art.  You may wish to introduce evidence of your wider reading to help 
+explain a gap in the literature that you have identified. 
+ 
+Whatever it is, analysis is usually about taking a metaphorical step back from the 
+literature you are surveying and trying to look at the bigger picture.  You might be 
+asking yourself questions as you do so.  For example, you might tell your reader 
+about several important pieces of work that have been reported in the literature, but 
+then pause to ask, ‘so what does that all mean?’ or ‘why are there conflicting 
+findings?’ or ‘what about this group or approach or strategy that has never been 
+tested?’ or even ‘could there be a different answer altogether, when we consider this 
+new information?’ 
+ 
+As always, the best way to explain this further is to look at some examples.  Read 
+over the following paragraphs and in each case try to answer the questions on your 
+own before moving on to read my analysis. 
+
+ 15 
+ 
+ 
+ 
+Activity 3 
+ 
+Read the following paragraphs and think about these questions as you do: 
+ 
+• Do you get a sense that the author understands the papers they are writing 
+about? 
+• Have they gone deeper that merely reporting what the papers found? 
+• Can you identify the point where the author steps back from the review to look 
+at the bigger picture? 
+ 
+ 
+ 
+ 
+Example of analysis A 
+ 
+Schmidt and Cohen (2009) reported increased numbers of 
+children contracting measles in the two years after the 
+publication of concerns about the safety of the childhood 
+vaccination programme in China. However, Dexter and 
+Yamamoto (2012), when examining the same population over 
+the same time period found no such increase.  An explanation 
+for these apparently contradictory findings may be found when 
+their respective study designs are examined. Tufts and Larson 
+(2002) have previously demonstrated markedly different 
+outcomes when using self-reported disease rates versus 
+laboratory-based diagnoses, thus highlighting the importance of 
+choice of both study population and analytical method. A novel 
+approach that avoids this potential source of error was recently 
+presented by McDonald and Murphy (2021), who concluded 
+that rate of measles per 100,000 population was unchanged 
+during the period in question. 
+ 
+ 
+Here is another example of analysis.  This time a problem is being looked at 
+chronologically, but again at some point the reviewer is taking a step back from the 
+literature to take in the bigger picture that is before them. 
+ 
+ 
+Example of Analysis B 
+ 
+Over the last century there has been a steady progression in 
+our understanding of this problem.  Goldstein and Rivers (1922) 
+first defined the central research question and postulated a 
+solution. However, the underlying premise of that hypothesis 
+was later criticised by Jack and Kaminsky (1933) who proposed 
+the use of a new theoretical framework.  A major re-evaluation 
+of the problem, taking into account developing methodologies, 
+
+ 16 
+was published by Ho and Lam (1955), but this was quickly 
+superseded by the work of Ausberg and Hoffmann (1957).  The 
+latest developments have been the result of the application of 
+Complex Number Theory to the problem and these have 
+yielded a series of publications from the Toronto Group (Oliver, 
+March and DuPont, 1998, 2002, 2003 & 2017).   While many 
+possible solutions have been proposed by that group, there is 
+still significant controversy over which, if any, of these is correct. 
+In this context, the recent work of Singh and Baxter (2021) 
+purportedly offers a completely new way of looking at the 
+problem.  However, close analysis of their work reveals that 
+despite using revised and updated terminology and positioning 
+their approach within a 21st century context, they have relied 
+almost exclusively on the approach originally proposed a 
+century ago (Goldstein and Rivers, 1922). 
+ 
+ 
+With these thoughts in minds, let’s take a look at two different versions of the same 
+literature review. Read the two paragraphs below and decide, if you were an 
+examiner reading these, which you would rate more highly. 
+ 
+ 
+Activity 4 
+ 
+Version 1 
+ 
+How competent are post graduate students at British 
+universities when it comes to grammar and punctuation?  This 
+question has been studied using different methods in recent 
+years.  When academic staff in English universities were 
+questioned, they reported a marked decline in the competence 
+of their students’ written English skills over the last ten years 
+(McDonald and Grey, 2020).  Redmayne and Heap (2021) 
+concurred with these findings in their review of university 
+application forms completed by post graduate students in 2019-
+20.  However, no such decline has been found when 35 PhD 
+theses submitted in 2019 were examined (Messi and Stone, 
+2020).  This discrepancy may be resolved by looking at the only 
+available comparative objective evidence. Armitage and Rossi 
+analysed the number of errors in 167 Masters dissertations and 
+PhD theses submitted between 1991-95 and a further 189 
+submitted between 2015-2019 and found no significant 
+difference between the two five-year periods in either the 
+Masters of the Doctoral group. We may therefore conclude that 
+this is a problem of perception rather than reality. 
+ 
+Version 2 
+ 
+There have been a number of concerns raised in recent years 
+regarding the competence of post graduate students in written 
+
+ 17 
+English.  Several major studies have been conducted and their 
+findings are presented here.  Green and Schmidt (2019) 
+showed in a detailed analysis of questionnaires returned by 765 
+post graduate students that 23% had no formal training in the 
+use of English grammar at university.   Dixon and Partridge 
+(2018) found that in the United States, 65% of the colleges they 
+studied offered remedial grammar tuition to all their post 
+graduate students irrespective of their discipline.  Wong and 
+Felippe (2020) reported that sales of English Grammar 
+textbooks fell to an all-time low in 2018-19. 
+ 
+The first version is an example of good writing.  The paragraph begins with a simple 
+topic sentence in the form of a question that the paragraph then goes on to answer.  
+Two examples of studies from the literature are introduced, and these are linked by 
+the signpost words “concurred with these findings” showing us that the author 
+understood that these two pieces of research were in agreement with each other.  A 
+third paper is introduced giving conflicting results and again this is signposted with 
+the word, “However.” A discrepancy is identified, and then further analysis is 
+presented in the form of another paper allowing the author to take that all-important 
+step back to look at the bigger picture and come to a conclusion. 
+ 
+While the second version shows that the author has been busy reading papers and 
+taking notes so they can paraphrase their findings, there is no sense that they have 
+any deeper understanding of what they have read. Now, they may have a very good 
+understanding, but the only evidence we have to base our opinion on is how they are 
+writing about the literature.  What they have presented is a laundry list of papers, one 
+after the other, with no attempt at integrating their findings or of introducing any 
+deeper analysis.  At no point, do they take that step back to look at and comment on 
+the bigger picture that is so important to a good literature review. 
+ 
+Conclusion 
+ 
+The final part of the story we have to tell when writing a literature review is to tie it up 
+neatly.  Just as introductions vary greatly in length depending on the overall length of 
+the review, so does the conclusion.  It may be a single sentence, a whole page or 
+anything in between.  What it shouldn’t be is merely a recap of everything that has 
+gone before.  Sometimes, it’s about coming to a specific conclusion about which of 
+two theories has the greatest weight, which method is more robust, which school of 
+thought is dominant and why.  Other times it might be about highlighting what is 
+missing from the literature.  And if your review is part of a larger piece of work where 
+you are reporting your own research findings, it may be a segue into that. 
+ 
+ 
+Grammar and Punctuation 
+ 
+While this is not really the place to give a lesson on the mechanics of writing English, 
+it would be remiss of me not to mention such an important aspect of writing and one 
+which upsets so many people.  It’s often said that in an academic setting it doesn’t 
+matter how you write, it’s what you write that’s important.  Forgive me, but that is 
+
+ 18 
+rubbish because whatever you write will be read by human beings who all have petty 
+little prejudices about how English should be written.  Of course, the thrust of your 
+argument and the development of your thesis are important, but it is so easy to be 
+dismissed out of hand by readers who find fault with your misuse of the word 
+however, and your inability to use an apostrophe. Here’s what one academic said 
+about it: 
+ 
+“Examiners appreciate work which is logically presented, focused, succinct, and in 
+which signposts are used to help readers to understand the path they are taking 
+through the work ...One of the problems with work that is poorly presented is that the 
+examiner tends to lose confidence in the candidate and can become suspicious that 
+there are deeper problems of inadequate and rushed conceptualisation.” 
+ 
+In other words, don’t make it easy for them to put you on the rejects’ pile.  Pay 
+attention to spelling, grammar and punctuation and if you have particular challenges 
+in these aspects of writing, get some help and read a book about it.  Most of the 
+rules of English grammar and punctuation are quite simple—remember most of us 
+learn them at elementary school, so it shouldn’t be beyond anyone in higher 
+education. 
+ 
+That said, here are a few quick pointers to make your writing better: 
+ 
+• Sentences 
+Keep them short and express one idea per sentence. This is the single most 
+important thing you can do to make your writing easier to read and 
+understand, even though many academics seem to think only by writing page 
+long sentences will they appear smart. They don’t.  They appear as if they 
+don’t know how to write.  
+ 
+• Paragraphs 
+Group sentences that express and develop one aspect of your topic into 
+paragraphs. Use a new paragraph for another aspect or another topic and as 
+with sentences keep the paragraphs relatively short.  Text with lots of 
+paragraph breaks is more open and always easier and pleasanter to read. 
+ 
+• Consistency 
+Use sentences and paragraphs with appropriate use of punctuation because 
+incorrect punctuation can affect the meaning. 
+ 
+• Exclamation marks 
+Never, never, never use these. No matter how wonderful or awful you think 
+something is, there is no need in academic writing to exclaim it and shout it 
+from the page.  It just makes you look like an amateur. 
+ 
+  
+
+ 19 
+ 
+ 
+ 
+HOW DO I REFERENCE IT? 
+ 
+When writing in an academic context you should be aware of the importance of 
+properly referencing your sources to provide evidence of your academic integrity.  
+Failing to cite your sources is plagiarism and all universities take this very seriously.  
+ 
+Plagiarism has many different definitions but all of them boil down to the same 
+thing—theft.  Plagiarism is about stealing another person’s ideas, processes, results, 
+or words without giving them appropriate credit. The simple rule to avoid plagiarism 
+is to make sure that if you include any words, ideas, or results that you did not 
+personally write, think up or collect, then you must cite the source and include it in a 
+reference list. 
+ 
+Importantly, you must understand that paraphrasing someone else’s words does not 
+turn it into your idea, and a reference must still be given. 
+ 
+There are different ways of referencing text, and the two commonest in-text citation 
+systems used are: 
+  
+• Harvard: Also called the Name & Date system 
+• Vancouver: Also called the Number system 
+ 
+But even these have many variations and the most important thing you can do is to 
+check what is required for the piece of work you are writing.  If your literature review 
+
+ 20 
+is part of an academic paper, check what the journal’s instructions are for 
+referencing before you start writing.  If your literature review is for a dissertation or a 
+thesis, check what the requirements of your institution or department are.  Similarly, 
+if you are writing a grant application and including a literature review in it, check the 
+funding body’s instructions.  And remember, in every case these requirements are 
+not optional and any journal editor, examiner, or grant funding body will expect their 
+instructions on referencing to be followed rigidly. 
+ 
+Often people are concerned about much or how little referencing they should 
+include.  My advice here is simple.  If in doubt, reference it.  It is much easier to take 
+a reference out than it is to put one in.  Whatever you are writing will go through 
+many drafts and iterations before you reach the final version for submission.  During 
+this process, I think it is especially important to over-reference.  If in an early draft of 
+your review, you are discussing the details of a particular paper over several 
+sentences, I suggest putting the reference to that paper at the end of every one of 
+those sentences.  The reason for this is that as you cut and paste and move text 
+around, it is very possible that you could lose track of the text and its source.  At the 
+end of the editing process as you finalise your text, you can always delete any 
+redundant over-referencing. 
+  
+
+ 21 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+CONCLUSIONS 
+ 
+Let’s tie things up.  Here are the five things I would like you to take away from this 
+study guide. 
+ 
+1. Read selectively, efficiently and actively 
+You can’t read everything, so you have to choose wisely how to spend your limited 
+time.  Actively engage with the papers you read and always take notes as you read 
+and pose questions, never taking anything at face value. 
+ 
+2. Keep track of your references and your notes  
+It’s so easy to misplace something you have read and to waste hours trying to find it 
+again.  Make sure you develop a good system that works for you and use it. 
+  
+3. Don’t write a laundry list of papers 
+A literature review should be a synthesis of the papers you have read to tell a 
+meaningful story about the literature, not a simple list of paraphrases of what each 
+paper said. 
+ 
+4. Make your scholarship evident   
+Have you given any evidence in your writing that you have critically engaged with the 
+literature?  Have you found common ground and identified differences and even 
+highlighted gaps? Have you taken that all-important step back from the literature to 
+look at the bigger picture? 
+ 
+5. Write it as well as you can 
+The way you write the review matters, so spend the time necessary to get the 
+spelling, grammar and punctuation right and please don’t use exclamation marks.  
+
+ 22 
+ 
+ 
+ 
+ 
+FURTHER READING AND RESOURCES 
+There are a lot of books you can read that claim to teach you how to write.  Here are 
+a few that I think live up to their promises and which are written specifically with an 
+academic rather than a business audience in mind. 
+ 
+Two books by the academic Rowena Murray are excellent: 
+ 
+• How to Write a Thesis, 4
+th
+ Ed, Open University Press, London, 2017. 
+• Writing for Academic Journals, 4
+th
+ Ed, Open University Press, London, 2020. 
+ 
+And if you would like some help with grammar and punctuation or other aspects of 
+your academic writing, why not take a look at my two eBooks on the subjects? 
+ 
+• WordEasy: The Commonest Grammatical Mistakes in Formal Writing & How 
+to Avoid Them, 2013. 
+• WriteEasy: A Strategy for More Effective Scientific Writing, 2014 
+If you want some bite-sized English grammar and punctuation guides in the form of 
+animated videos, check out this You Tube channel: 
+ 
+• Writing Space. https://youtu.be/J25YJ8FzMxk 
+ 
+
+ 23 
+ 
+ 
+ABOUT THE AUTHOR 
+ 
+ 
+Allan Gaw, MD, PhD, FRCPath, FFPM 
+ 
+I have worked in academia for over 30 years and for the last ten I have been running 
+courses teaching under graduates, post graduates and academic staff a range of 
+essential academic skills.  Amongst these have been writing and presentation skills 
+as well as time management and project management.  I have also authored or 
+edited more than 25 books and I write a regular blog entitled: The Business of 
+Discovery which you can access here: www.researchet.wordpress.com  You can 
+also follow me on twitter: @ResearchET or visit my webpage: www.allangaw.com 
+ 
+ 
+ 
+ACKNOWLEDGEMENTS 
+ 
+The contents of this study guide are based on face-to-face writing workshops and 
+online sessions run by the author over the last ten years. 
+ 
+All photographs are used under the CC-BY Creative Commons licence.

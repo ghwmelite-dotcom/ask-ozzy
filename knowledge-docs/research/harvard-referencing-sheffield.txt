@@ -1,0 +1,2770 @@
+1 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Harvard referencing 
+This information has been adapted from the Harvard referencing guide. 
+Referencing guides are updated regularly in line with guidance from the institution on which 
+the style is based. In order to make sure you are using the most up to date version of this 
+guide, check the University Library’s referencing page for the latest version. 
+Contents 
+Contents ................................................................................................................................. 1 
+Introduction ........................................................................................................................... 4 
+Creating a citation and reference list .................................................................................... 4 
+Ancient or Historical Texts ................................................................................................... 10 
+App ....................................................................................................................................... 11 
+Art e.g. in an art gallery, museum or online ........................................................................ 12 
+Blog ...................................................................................................................................... 13 
+Book (with a single author) .................................................................................................. 14 
+Book (with two or more authors) ........................................................................................ 14 
+Book Chapter (in an edited book) ........................................................................................ 15 
+Book –   Edited ....................................................................................................................... 16 
+Book –   Electronic ................................................................................................................. 17 
+Case Law ............................................................................................................................... 18 
+Clinical Guidelines ................................................................................................................ 20 
+Code ..................................................................................................................................... 21 
+Conference Papers ............................................................................................................... 21 
+Conference Poster ............................................................................................................... 22 
+Conference Proceedings ...................................................................................................... 24 
+Confidential Information ..................................................................................................... 24 
+Dataset ................................................................................................................................. 25 
+Dictionary ............................................................................................................................. 26 
+Dissertation (Undergraduate or Masters) ........................................................................... 27 
+Exhibition ............................................................................................................................. 28 
+Forum Post/Message Board ................................................................................................ 29 
+Government Publication –   Act of Parliament ...................................................................... 30 
+
+2 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Government Publication – Command Paper ....................................................................... 31 
+Government Publication – Government Statistics or Dataset ............................................ 32 
+Government Publication – Hansard ..................................................................................... 33 
+Government Publication – House of Lords and House of Commons Papers ...................... 34 
+Government Publication – Parliamentary Bills, Amendments and Explanatory Notes ...... 35 
+Government Publications – Statutory Instruments ............................................................. 37 
+Government Publication – Other Official Publications ........................................................ 37 
+Images and Figures .............................................................................................................. 38 
+Information Sheet ................................................................................................................ 41 
+Journal Article – Print ........................................................................................................... 42 
+Journal Article with a DOI (Electronic) ................................................................................. 42 
+Journal Article without a DOI (Electronic) ........................................................................... 43 
+Journal Article – Preprint (Ahead of Publication) ................................................................ 44 
+Journal Article with many authors ....................................................................................... 45 
+Lecture notes, lecture recordings, handouts and other unpublished teaching materials ..  46 
+Magazine .............................................................................................................................. 46 
+Manuscript ........................................................................................................................... 46 
+Maps..................................................................................................................................... 47 
+Music – Album (Physical Format) ........................................................................................ 48 
+Music - Album Track (Physical Format) ............................................................................... 48 
+Music – Digital formats ........................................................................................................ 49 
+Music Score .......................................................................................................................... 50 
+Newspaper Article ................................................................................................................ 51 
+Patent ................................................................................................................................... 52 
+Personal Communications ................................................................................................... 53 
+Plays ..................................................................................................................................... 53 
+Podcast ................................................................................................................................. 55 
+Presentation ......................................................................................................................... 56 
+Radio .................................................................................................................................... 57 
+Reports ................................................................................................................................. 58 
+Sacred Texts ......................................................................................................................... 59 
+Sculpture .............................................................................................................................. 61 
+Social Media ......................................................................................................................... 62 
+
+3 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Standards e.g. British Standards .......................................................................................... 63 
+Thesis (PhD) ......................................................................................................................... 64 
+Translated Item .................................................................................................................... 64 
+Unpublished item ................................................................................................................. 66 
+Video – Physical Format ....................................................................................................... 66 
+Video – Streaming Service ................................................................................................... 68 
+Video – Sharing Website (e.g. YouTube) ............................................................................. 69 
+Web page ............................................................................................................................. 70 
+Website ................................................................................................................................ 72 
+Summary .............................................................................................................................. 73 
+Full URLs ............................................................................................................................... 73 
+  
+
+4 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Introduction 
+This guide details the Harvard style of referencing based upon the advice given in the 
+book “Cite Them Right (10
+th
+ rev. and expanded edn.)” This is the style of Harvard that The 
+University of Sheffield supports. 
+Referencing in the Harvard style is a two–part process: 
+• Citation in the text: this is the brief indication of the source within the text of your 
+work immediately following the use of the source whether quoted or summarised. 
+• Reference list: a complete list of all the cited references used in your work with full 
+bibliographic details, to allow the reader to follow up these references and find the 
+original text. 
+Creating a citation and reference list  
+Creating a citation 
+Harvard style referencing is an author/date method. Sources are cited within the body of 
+your assignment by giving the name of the author(s) followed by the date of publication. All 
+other details about the publication are given in the list of references or bibliography at the 
+end. 
+Citations which are used with direct quotations, or are referring to a particular part of a 
+source, should include the page number in your citation, e.g. (Smith,  2017, p. 42) or Smith 
+(2017, p. 42). 
+Tips on citing where page numbers are not present 
+If a citation does not have page numbers then you should use the number of the paragraph 
+(if available), e.g. Climate change can refer to local, regional, and global changes in weather 
+(Met Office, 2013, para. 2.).  
+If the paragraph number is not available then you may direct the reader to a specific section 
+of the item, and then the number of the paragraph, e.g. Using the factor command 
+can...(Gaubatz, 2015, Generating Factors, para. 2.). 
+If the name of the section is long, you may use the first few words of the section in 
+quotation marks, e.g. The value of numbers needs to be random...(Gaubatz, 2015, "Random 
+Numbers and Generating" section, para.2.). 
+Tips for citing 
+• If the author(s) name appears in the text as part of the body of the assignment, then 
+the year will follow in round brackets, e.g. According to Smith (2017). 
+• If the author(s) name does not appear in the body of the text, then the name and 
+date should follow in round brackets, e.g. The terminology has been called into 
+question when it was discovered...(Smith, 2017). 
+
+5 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+• The abbreviations ibid. and idem. should not be used within the Harvard referencing 
+system. 
+• If more than one of your citations has the same author and year of publication, then 
+you should distinguish between them by using a lower–case letter following the 
+year, e.g. It was discovered that...(Smith, 2017a), this was supported by... (Smith, 
+2017b). 
+• Some authors have the same surname and works published in the same year, if this 
+is the case use their initial to distinguish between them, e.g. When looking at the 
+average income it was found that...(Williams, A., 2009). However, it was also 
+discovered that...(Williams, J., 2009). 
+• In some instances you may need to cite more than one piece of work for an idea. If 
+this occurs, you should separate the references with a semicolon and cite them in 
+chronological order, e.g. This point has been shown by numerous authors...(Jones, 
+2014; Smith, 2017). 
+• When citing in-text, include the name of up to three authors. If there are four or 
+more authors for the work you are citing then use the name of the first author 
+followed by "et al.", e.g. This was shown to be the case when Taylor et al. 
+(2015)...Or, the study shows...(Taylor et al.,  2015). 
+• For items where the author is a corporation, cite the name of the corporation in full, 
+e.g. Birdwatching in the woods...(Woodland Trust, 2016), unless their abbreviation is 
+well–known, e.g. The governance of the network...(BBC, 2017). 
+• If a work is designated as Anonymous or there is no author, use the title in italics in 
+place of the Author, e.g. (OED online, 2008). 
+• If no date can be found then you would state that there is no date, e.g. The ancient 
+text indicated the use of... (Wells, no date). 
+Quoting 
+Quoting 
+Quoting is including a section of a source in your own work using exactly the same words as 
+those used by the original author. 
+Paraphrasing
+ can be used to avoid inserting too many direct quotations into your work, as 
+this can distract from the coherence of the argument you are presenting. The use of 
+quotations varies considerably from discipline to discipline. If in doubt, check with your 
+tutor or in your course handbook for further guidance. 
+If you are directly quoting from a source, then you should include the page number in your 
+citation. 
+A short quotation (under two lines), should be within the body of the text and in quotation 
+marks, e.g. 
+
+6 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+There is still a labelling issue when it comes to flavourings in food, it is noted that, 
+"flavours such as vanillin which occur naturally in food are called ‘nature–identical’. 
+The label does not have to state where it comes from." (Wilson, 2009, p. 257). 
+If the quote is more than two lines, then it should be presented as a new paragraph which is 
+preceded by a colon and indented from the rest of the text. You do not need to use 
+quotation marks, e.g. 
+Wilson (2009, p. 257) has looked at food flavourings in the UK and makes the 
+following observation about Vanilla: 
+In Britain, flavours such as vanillin which occur naturally in food are called ‘nature–identical’. 
+The label does not have to state where it comes from. A flavouring only counts as fully 
+‘artificial’ if it does not occur in nature at all, as is the case with another, stronger vanilla–
+substitute called ethyl–vanillin (often used in chocolate). 
+Omitting material from quotations 
+If you are omitting materials from an original source, use three dots [...] to indicate this, e.g. 
+Canter and Canter (1992) state that students come to the classroom with "their own 
+needs, their own past experiences and ... their preconceptions of who you are, what 
+your limits will be" (p. 49). It is important to manage the expectations of students 
+effectively. 
+This does not need to be done at the beginning or end of a sentence. 
+Reference List 
+Wilson, B. (2009) Swindled: From poison sweets to counterfeit coffee – the dark history of 
+the food cheats. London: John Murray (Publishers). 
+Paraphrasing 
+Paraphrasing 
+Paraphrasing is putting someone else's ideas into your own words. It does not mean 
+changing the odd word or rearranging the sentence. When you paraphrase, you should 
+restate the meaning of the original text in your own words. Be sure to cite and reference 
+when you are paraphrasing someone else's work, e.g.: 
+Booth et al. (2016, pp. 208-209) give the example of acceptable paraphrasing using Gladwell 
+(2008) as their example: 
+This this the original quote from Gladwell (2008, p. 38) 
+"Achievement is talent plus preparation. The problem with this view is that the 
+closer psychologists look at the careers of the gifted, the smaller the role innate 
+talent seems to play and the bigger the role preparation seems to play." 
+Below is an unacceptable paraphrase of the above quote because it follows the original too 
+closely: 
+
+7 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Success seems to depend on a combination of talent and preparation. However, 
+when psychologists closely example the gifted and their careers, they discover that 
+innate talent plays a much smaller role than preparation (Gladwell, 2008, p. 38). 
+The next is an example of an acceptable paraphrase as the meaning of the original has been 
+restated in the author's own words: 
+As Gladwell (2008, p. 38) observes, summarising studies on the highly successful, we 
+tend to overestimate the role of talent and underestimate that of preparation. 
+Reference List 
+Booth, W. C. et al. (2016) The craft of research. 4th edn. Chicago: University of Chicago 
+Press. 
+Gladwell, M. (2008) Outliers: The story of success. New York: Back Bay Books. 
+Summarising 
+Summarising means briefly stating the main ideas or arguments of a complete information 
+source or a substantial portion of an information source. 
+Be sure to cite and reference when you are summarising someone else's work. A citation for 
+a summary should include the author and date, e.g. (Smith,  2017) or Smith (2017), but there 
+is no need to include a specific page number. 
+Secondary Referencing 
+This is when you reference one author who is referring to the work of another and the 
+primary source is not available (refer to the primary source where it is available). Secondary 
+referencing should be avoided where possible - if you have only read the later publication 
+you are accepting someone else's opinion and interpretation of the author's original 
+intention. 
+You must make it clear to your reader which author you have read whilst giving details of 
+the original source by using ‘cited in’, e.g. (Ecott, 2002, cited in Wilson,  2009) or (Cannon, 
+1989, quoted in Wilson, 2009, p. 269). 
+In the reference list you should give details of the item you looked at. Looking at the above 
+examples, you would reference Wilson (2009) in your bibliography/reference list. 
+Creating a reference list 
+A reference list is the list of items you have used in your work. Reference lists in Harvard are 
+alphabetical. 
+General tips for creating a list are: 
+• If you have distinguished between authors in your citation, you should use the same 
+letter in your reference list to distinguish them, e.g. (Smith,  2017b) will be Smith, S. 
+(2017b)... 
+
+8 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+• A reference with one author will appear before a reference with two or more 
+authors if the first author has the same last name, e.g. Smith, S. (2017b) would 
+appear before Smith, S. and Jones, A. (2017). 
+• Multiple references by the same author or creator are listed in chronological order. 
+• Corporations are listed using the first proper noun of the name, e.g. Royal Academy 
+of Arts (The). 
+• If there are two or three authors use “and” between the names rather than “&”. 
+• For references with four or more authors, include only the first author followed by et 
+al. written in italics. See Journal Article with many authors
+ for an example. 
+• Author/Editor names should be given in the following format: Surname, INITIAL(S). 
+e.g. Smith, F.G. 
+• The edition of a book is not included for the first edition, only for later editions, e.g. 
+2
+nd
+ edn., 3
+rd
+ edn., etc. Edition is abbreviated to edn to distinguish it from the 
+abbreviation for Editor (ed.). 
+• Certain types of material, such as encyclopedias or dictionaries, may not have one 
+person or persons as the main author or editor. These can be referenced by the title 
+in italics first, e.g.  
+ OED online (2017) Oxford: Oxford University Press. [Viewed 26 January 2017]. 
+ Available from: http://www.oed.com 
+• References for works designated as Anonymous, or works without an author or 
+editor, should begin with the title in italics instead, followed by the date, e.g. 
+ A woman in Berlin (2011) Translated by Philip Boehm. London: Virago. 
+• If no date can be found, then you would use (no date). 
+• Include the state abbreviation for items published in the United States if it is not 
+obvious where the location is, e.g. you wouldn’t need to include NY after New York, 
+but you would include the state abbreviation in ‘Cambridge, MA:  Harvard University 
+Press’ as there is also a Cambridge in the UK. 
+• If the item is widely known by, or was originally issued under, a title different from 
+that of the preferred source, the alternative may also be given in brackets if 
+necessary, e.g. 
+ Browne, J. (2010) Securing a sustainable future for higher education: an 
+ independent review of higher education funding and student finance [The Browne 
+ Report]. 
+• If a publisher is not listed or cannot be found, use one of the following (listed in 
+order or preference): 
+o Publisher or production company 
+
+9 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+o Distributor or issuing body 
+o Printer or manufacturer 
+o Sponsoring body 
+• If there is more than one place of publication, only include the most local one in the 
+reference. 
+• Each reference should end in a full stop unless it is a URL or DOI (a full stop after a 
+URL or DOI may be presumed to be part of the link and prevent it from working). 
+• A DOI should be written with the prefix https://doi.org/ followed by the DOI number 
+(adding the prefix makes it into a URL which will link directly to the item, whereas 
+the DOI number on its own will only open a browser search of the DOI and doesn’t 
+link directly to the item), e.g. https://doi.org /10.1111/j.1540-5931.2006.00203.x 
+• For a source with a DOI you don’t need to include “Available at” or “(Accessed: 
+date)” in the reference as a DOI is a stable identifier and will not change, whereas a 
+URL may change or be deleted so the extra information is needed to clarify where 
+and when you found the source. 
+• Always write DOI in lower case in your references, e.g. doi: 
+ 
+Citing and referencing foreign language materials 
+Citing material from non-r oman script e.g. Cyrillic, East Asian languages 
+• If you are citing materials from non-r oman script, you should transliterate the 
+references to roman script. If you are unsure, you may want to consult with an 
+expert of the language or an international standard to check. 
+For in-text citations 
+• Spell out the authors' family name, or corporate name, in roman script. If you are 
+unsure of the correct spelling, you may want to consult with an expert of the 
+language to check. 
+For references in the reference list/bibliography 
+• The family name of the author should be written in full roman script. The initials of 
+the author(s) should also be given in roman script. The name should be given in the 
+order in the reference. 
+• The title of the item (article/book/book chapter, etc.) should be given in roman script 
+using the standard conventions for that language. 
+• The title should be translated into English and placed in square brackets immediately 
+after the romanised title. The words in the square brackets should not use italics. 
+• The journal title, or title of a book (if it is an edited book), and publisher's name all 
+need to be given in roman script, but do not need to be translated. If there is an 
+
+10 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+official English translation, then you may use it especially in cases where it provides 
+greater understanding of the subject or publication. 
+Example 
+Terao, M. (1998) Denai kugi wa suterareru [The nail that does not stick up may be thrown 
+away]. Tokyo: Fusosha. 
+Notes 
+• See more from East Asian Studies on the Romanisation of East Asian Languages
+. 
+Materials in roman script 
+If you are citing materials produced in a language other than English, but in roman script, 
+you may need to place a translated title in square brackets after the original title, depending 
+on who the intended audience for your work will be. 
+Back to Contents
+ 
+ 
+Ancient or Historical Texts 
+In the text 
+For an in-text citation in your work, you would cite the reference as follows: 
+Southey (1876) provided a culturally... 
+The Common-place book (Southey, 1876)... 
+Hobbs (1678) demonstrates an example of... 
+The demonstration of a social structure can be identified...(Hobbs, 1678). 
+In the bibliography/reference list 
+Physical item 
+Author Surname, INITIAL(S). (  Year of publication) Title. Translated by INITIAL(S) Surname (if 
+relevant). Edition (if not the first). Place of publication: Publisher or Printing statement. 
+Series and Volume number (if relevant). 
+Southey, R. (1876) Common-place book. London: Reeves and Turner. 
+Some early printed books were privately printed and do not have a publisher, in which case 
+give the printing statement from the book in your reference. For example: 
+ Hobbes, T. (1651) Leviathan. London: Printed for Andrew Crooke. 
+Online/Electronic 
+If the online version you are referencing is a scanned version of the printed book with the 
+same page numbers and publication information, reference it in the same way you would 
+reference a printed book. 
+
+11 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+However, if you have downloaded the book onto an edevice and the page numbers are not 
+available in the device you are using, use the information that is available, such as loc, %, 
+chapter or paragraph if you need to identify a particular page/section for your in-text 
+citation. See Book –   Electronic
+ for further information. 
+Notes 
+• If there is no author or the author is designated as “Anonymous”, use the title in 
+italics in place of the author in the reference and the in-text citation. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+• For texts translated from the original see Translated item.  
+Back to Contents 
+App 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+campusM (2021) created... 
+The app iSheffield allows the user...(campus, 2 021) 
+In the bibliography/reference list 
+Developer/Producer (Year of release/update) Title of app (Version) [ Mobile app]. Available 
+at: app store name (Downloaded: date). 
+campusM. (2021)  iSheffield ( Version 5.4.2.) [  Mobile app]. Available at: Google Play 
+(Downloaded: 25 March 2021). 
+Notes 
+• If the name of the Developer/Producer is not available, use the title of the app in 
+italics in place of it in the reference and the in-text citation 
+• The Downloaded: date in the reference is the date that you downloaded the app 
+onto your device. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+
+12 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Art e.g. in an art gallery, museum or online 
+Paintings/Drawings viewed in a gallery or museum 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+The Mona Lisa by DaVinci (1503-18) focuses closely on the subject... 
+The famous smile on the Mona Lisa (DaVinci, 1503-18) has become... 
+Blake’s The Laborious Passage Along the Rocks (1824-27) portrays... 
+The illustration shows Virgil helping Dante...(Blake, 1824-27) 
+ 
+In the bibliography/reference list 
+Surname of artist, INITIAL(S). (Year) Title [ Medium].  Holding institution, City. 
+Blake, W. (1824-27) The Laborious Passage Along the Rocks [Graphite, ink and 
+watercolour on paper]. Tate Gallery, London. 
+DaVinci, L. (1503-18) Mona Lisa [Oil on wood].  Musée du Louvre, Paris. 
+Paintings/Drawings viewed online 
+See Images and Figures 
+ 
+Installation/exhibit viewed in a gallery or museum 
+In the text 
+For an in-text citation in your work, you would cite the reference as follows: 
+ Long's Delabole Spiral (1981) is made from slabs of slate... 
+ The spiral of jagged-edged slate (Long, 1981) represents... 
+ The Brandy saucepan made by Nathaniel Smith & Company (1789) was used to 
+ heat... 
+ The saucepan (Nathaniel Smith & Company, 1789) was hallmarked in Sheffield... 
+In the bibliography/reference list 
+Surname of artist, INITIAL(S). (Year) Title [Installation or Exhibit]. Holding institution, City 
+(Viewed: date). 
+ Long, R. (1981) Delabole Spiral [Installation]. Graves Gallery, Sheffield (Viewed: 19 
+ January 2019). 
+ Nathaniel Smith & Company (1789) Brandy saucepan [Exhibit]. Millennium Gallery, 
+ Sheffield (Viewed: 19 January 2019). 
+
+13 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Installation/exhibit viewed online 
+See Images and Figures 
+Notes 
+• If there is no clear title to the item, a popular title may be used if one exists. If a 
+popular title to the image does not exist then you will need to supply the item with a 
+title, in square brackets, providing the following where possible: 
+o The subject matter 
+o The name or place of the object depicted, i.e. the person, the building, the 
+location,  etc. 
+• If   no exact date can be found then you would use (no date). 
+• The original title of a translated information resource, or a translation of the title, 
+may be supplied immediately after the original title, e.g. Kinderhände im washbecken 
+[Children's Hands in Washbasin]. 
+• If the artwork has a popular or traditional title, then you may use this,  e.g. Mona 
+Lisa. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+Blog 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+Chaurey (2020) considers ethical review processes... 
+The limitations of the framework...(Chaurey, 2020) 
+In the bibliography/reference list 
+Author Surname, INITIAL(S). (Year) ‘Title of blog post’,  Title of blog,  Day/Month of post. 
+Available at: URL (Accessed: date). 
+ Chaurey, K. (2020) 'Decolonising ethics frameworks for research in Africa', Africa at 
+ LSE,  8th January. Available at: 
+ https://blogs.lse.ac.uk/africaatlse/2020/01/08/decolonising-ethics-frameworks-
+ research-africa/ (Accessed: 29 March 2021). 
+Notes 
+• If the author of the blog has used an alias instead of their real full name, you may use 
+this in the in-text citation and reference. 
+
+14 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Book (with a single author) 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+Bryman (2016) recommends... 
+Quantitative data is more suited to the study due to... (Bryman, 2016). 
+In the bibliography/reference list 
+Author Surname, INITIAL(S). (Year) Title.  Edition (if not first edition). Place of publication: 
+Publisher. 
+Bryman, A. (2016) Social research methods. 5th edn. Oxford: Oxford University Press. 
+Notes 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list. 
+Back to Contents 
+Book (with two or more authors) 
+Book with two authors 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+Wallace and Wolf (2006) found that... 
+Globalization is a theory that has many concepts... (Wallace and Wolf, 2006). 
+In the bibliography/reference list 
+Author Surname, INITIAL(S). and Author Surname, INITIAL(S). (Year) Title.  Edition (if not first 
+edition). Place of publication: Publisher. 
+Wallace, R. A. and Wolf, A. (2006) Contemporary sociological theory: expanding the 
+classical tradition. 6th edn. Upper Saddle River, N.J.: Prentice Hall. 
+Book with three authors 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+
+15 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+ Greig, Taylor and MacKay (2013) found that... 
+ Finding the reasons behind a child's behaviour... (Greig, Taylor and MacKay, 2013). 
+In the bibliography/reference list 
+Author Surname, INITIAL(S)., Author Surname, INITIAL(S). and Author Surname, INITIAL(S). 
+(Year) Title. Edition (if not first edition). Place of publication: Publisher. 
+ Greig, A., Taylor, J. and MacKay, T. (2013) Doing research with children: a practical 
+ guide. 3rd edn. London: Sage. 
+Book with four or more authors 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+ Begg et al. (2014) found that... 
+ The elasticity of demand demonstrates... (Begg et al.,  2014). 
+In the bibliography/reference list 
+First Author Surname, INITIAL(S). et al.  (Year). Title. Edition (if not first edition). Place of 
+publication: Publisher. 
+ Begg, D.K.H. et al.  (2014). Economics. 11th edn. London: McGraw-Hill. 
+Notes 
+• If there are two or three authors use “and” in between the names rather than “&”. 
+• For references with four or more authors, include only the first author followed by et 
+al written in italics. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Book Chapter (in an edited book) 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+He (1997) found that... 
+The ethnic relations in China ...(He, 1997). 
+Zheng (1997) looked at the cultural influences... 
+The culture of western business during the period...(Zheng, 1997). 
+
+16 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+In the bibliography/reference list 
+Chapter Author Surname,  INITIAL(S). (Year) ‘Title of chapter’, in Editor(s) Surname, Editor(s) 
+INITIAL(S).  (ed. or eds.) Title of book. Edition (if not first). Place of publication: Publisher, 
+Page numbers. 
+He, X. (1997) ‘The market economy and ethnic relations in China’, in Ikeo, A. 
+(ed.) Economic development in twentieth century East Asia: the international 
+context. London: Routledge, pp. 190–205. 
+Zheng, X. (1997) ‘Chinese business culture from the 1920s to the 1950s’, in Ikeo, A. 
+(ed.) Economic development in twentieth century East Asia: the international 
+context. London: Routledge, pp. 35–54. 
+Notes 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list. 
+Back to Contents 
+ 
+Book – Edited 
+In the bibliography/reference list for one editor 
+Editor Surname, INITIAL(S). (ed.) (Year) Title. Edition (if not the first). Place of publication: 
+Publisher. 
+Ikeo, A. (ed.) (1997) Economic development in twentieth century East Asia: the 
+international context. London: Routledge. 
+In the bibliography/reference list for two editors 
+Editor Surname, INITIAL(S). and Editor Surname, INITIAL(S). (eds.) (Year) Title. Edition (if not 
+the first). Place of publication: Publisher. 
+Parker, R. and Aggleton, P. (eds.) (2007) Culture, society and sexuality: a reader. 2nd 
+edn. London: Routledge. 
+In the bibliography/reference list for three editors 
+Editor Surname, INITIAL(S)., Editor Surname, INITIAL(S). and Editor Surname, INITIAL(S). 
+(eds.) (Year) Title.  Edition (if not the first). Place of Publication: Publisher. 
+Alcock, P., May, M. and Wright, S. (eds.) (2012) The student's companion to social 
+policy. 4th edn. Oxford: Wiley–Blackwell. 
+In the bibliography/reference list for four or more editors 
+First Editor Surname, INITIAL(S). et al. (eds.) (Year) Title. Edition (if not the first). Place of 
+Publication: Publisher. 
+
+17 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+ Ritchie, J. et al. (eds.) (2014) Qualitative research practice: a guide for social science 
+ students and researchers. 2nd edn. Los Angeles: Sage 
+Notes 
+• If there are two or three editors use “and” in between the names rather than “&”. 
+• For references with four or more editors, include only the first author followed by et 
+al written in italics. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Book – Electronic 
+Many ebooks look the same as a printed book in terms of pagination, publisher details, etc., 
+so the in-text citation and reference will be in the same format as a printed book; you do 
+not need to include details of where you accessed it from online in the reference. Follow the 
+guidance in the sections for print books: 
+• Book (with a single author)
+ 
+• Book (with two or more authors) 
+• Book Chapter (in an edited book) 
+• Book -  Edited 
+For an e-reader (e.g. Kindle) 
+If you have downloaded the book onto an edevice and the page numbers of the ebook are 
+not available in the device you are using, use the information that is available, such as 
+loc, %, chapter or paragraph if you need to identify a particular page/section for your in-text 
+citation. 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+The main sociological theories are explained (Bruce, 2018)... 
+Bruce explains this particular theory as...(2018, 52%). 
+In the bibliography/reference list 
+Author Surname, INITIAL(S). (Year) Title of item. Edition (if not the first). Available at: URL 
+(Downloaded: date). 
+Bruce, S. (2018) Sociology: a very short introduction. 2nd edn. Available at: 
+https://www.amazon.co.uk/Sociology-Very-Short-Introduction-Introductions-
+ebook/dp/B07DP6M3XM/ref=sr_1_1 (Downloaded: 30 April 2021). 
+
+18 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Notes 
+• The Downloaded: date in the reference is the date that you downloaded the book 
+onto your device. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Case Law 
+In the text 
+Please note that case law is formatted in one of two ways: 
+• For cases from approximately 2001 onwards, where a neutral citation is available, 
+this should be included in the citation. 
+• For pre-2001 cases, or any other case where there is no neutral citation,  you will 
+only need to include a law report citation. 
+Neutral citations enable people to find cases online more easily and are independent of any 
+printed series of law reports. Each neutral citation is made up of: 
+• The year that the case was heard. 
+• An abbreviation for the relevant court (e.g. UKSC for the United Kingdom Supreme 
+Court; EWCA Crim for the Court of Appeal Criminal Division; AC for the Appeals 
+Court). 
+• Case number (i.e. the number 4 would mean the fourth case heard in that particular 
+court that year). 
+An example of a neutral citation would be: 
+ [2010] UKSC 42. 
+In a neutral citation, the abbreviated court name will start with "UK" or "EW" to indicate 
+that the court's jurisdiction extends to the United Kingdom or England and Wales. 
+Law report citations are made up of: 
+• The year the law report was made available, contained within [square brackets]. 
+• The law report volume number. 
+• Abbreviation of the law report title. 
+• Page or case number from the law report. 
+An example of a law report citation would be: 
+ [2011] 1 AC 534. 
+
+19 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+When citing a judgement from a law report, cite the 'best report' (as indicated in hierarchy 
+of law reports). If there is no neutral citation (for cases before 2001), also indicate the court 
+in brackets at the end of the law report citation, e.g. (SC) for the Supreme Court. 
+For example: 
+ [2011] 1 AC 534, (SC). 
+In the text citation (for cases with and without neutral citation) 
+You should use the party names ( in italics) and the year the case was heard in court. 
+For an in-text citation in your work, you would cite the reference as follows: 
+In the case of ‘Radmacher v Granatino’ (2010) the Supreme Court ruled that... 
+...when a court grants a decree of divorce, nullity of marriage or judicial separation it 
+has the power to order ancillary relief (‘Radmacher v Granatino’, 2010). 
+In the reference list 
+Cases with a neutral court citation (f  rom approximately 2001 onwards) 
+Standard citation where there is no link to a publicly accessible website or where you have 
+referred to a paper/hard copy of the case law 
+‘Case name’,  neutral court citation, law report citation. 
+‘Radmacher v Granatino’, [2010] UKSC 42, [2011] 1 AC 534. 
+Standard citation from a publicly accessible website 
+‘Case name’, neutral court citation. Database or website name [Online]. Available at: URL 
+(Accessed: date). 
+'Radmacher v Granatino' [2010] UKSC 42. BAILII [Online]. Available at: 
+http://www.bailii.org/uk/cases/UKSC/2010/42.html (Accessed 16 August 2018). 
+Cases before 2001 
+For cases without a neutral citation. 
+Standard citation where there is no link to a publicly accessible website or where you have 
+referred to a paper/hard copy of the case law 
+‘Case name’,  law report citation, (court abbreviation). 
+‘James v Eastleigh BC’, [1990] 2 AC 751, (HL). 
+Standard citation from a publicly accessible website 
+‘Case name’,  law report citation, (court abbreviation). Database or website name [Online]. 
+Available at: URL (Accessed: date). 
+
+20 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+'James v Eastleigh BC', [1990] 2 AC 751, (HL). BAILII [Online]. Available at: 
+http://www.bailii.org/uk/cases/UKHL/1990/6.html (Accessed 12 June 2023). 
+Important note about referencing online case reports 
+• Only use URLs from publicly available websites such as the "British and Irish Legal 
+Information Institute (BAILII)", not from databases such as Nexis or Westlaw as these 
+are not publicly available. If you are citing from Westlaw (or another database which 
+is not freely available and accessible) cite as a "Standard citation, where there is no 
+link to a publicly available website", and do not include a web link. For example: 
+'Radmacher v Granatino', [2010] UKSC 42, [2011] 1 AC 534.  
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list. 
+Back to Contents 
+Clinical Guidelines 
+In the text 
+For an in-text citation in your work, you would cite the reference as follows: 
+ The National Institute for Clinical Excellence (NICE) (2015) guideline... 
+ ...the guideline stipulates...(National Institute for Clinical Excellence (NICE), 2015). 
+ The British Society of Gastroenterology (BSG) (2017) guideline... 
+ ...initial investigations should include...(British Society of Gastroenterology (BSG), 
+ 2017). 
+In the bibliography/reference list 
+Physical item 
+Corporate Author (Year of publication) Title of Guideline. Reference Number (if given). Place 
+of publication: Publisher. 
+ NICE (2004) The epilepsies: the diagnosis and management of the epilepsies in adults 
+ and children in primary and secondary care. CG20. London: National Institute for 
+ Clinical Excellence. 
+Online/electronic 
+Corporate Author (Year of publication) Title of Guideline. Reference Number (if given). 
+Available at: URL (Accessed: date) or doi: 
+ BSG (2017) Guidelines on the management of abnormal liver blood tests. Available 
+ at: https://www.bsg.org.uk/clinical-resource/guidelines-on-the-management-of-
+ abnormal-liver-blood-tests/ (Accessed: 30 March 2021). 
+
+21 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+ NICE (2015) Obesity in children and young people: prevention and lifestyle weight 
+ management programmes. QS94. Available at: 
+ https://www.nice.org.uk/guidance/qs94 (Accessed: 4 August 2017). 
+Notes 
+• If the Corporate Author is well known by an abbreviation, for the first time you cite 
+the resource write out the name in full followed by the abbreviation in round 
+brackets, then use just the abbreviation for second and further citations, e.g. for the 
+first citation use (National Institute for Health and Care Excellence (NICE), 2016) or 
+National Institute for Health and Care Excellence (NICE), (2016). The second and 
+further citations would then read (NICE, 2016) or NICE (2016). 
+• You can then use the abbreviation in your reference list rather than writing out the 
+name in full. 
+• A DOI should be written with the prefix https://doi.org/ followed by the DOI number, 
+e.g. https://doi.org/10.1111/j.1540-5931.2006.00203.x 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Code 
+It’s important to acknowledge the source of code just like you would acknowledge the 
+source of any work that is not your own. Referencing correctly will help to distinguish your 
+work from others, give credit to the original author and allow anyone to identify the source. 
+See Referencing Code for guidance. You will need to adapt the guidance to your referencing 
+style. 
+Back to Contents 
+ 
+Conference Papers 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+Galar et al. (2014) identified that the risks of... 
+SMART risk assessments...(Galar et al.,  2014) 
+Redknap (2004) questioned whether settlements in North Wales... 
+The geographical location of Anglesey meant that...(Redknap, 2004). 
+Fujikami et al. (2015) identified that in order to improve Fast Device Discovery... 
+Fast Device Discovery can be aided by...(Fujikami et al.,  2015) 
+
+22 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+In the bibliography/reference list 
+Physical item 
+Author(s) of paper Surname, INITIAL(S). (Year) 'Paper title', Conference title. Place of 
+conference, Date of conference. Place of publication: Publisher, Page numbers. 
+Galar, D. et al. (2014) 'SMART: integrating human safety risk assessment with Asset 
+Integrity', Advances in condition monitoring of machinery in non–stationary 
+operations, proceedings of the third international conference on condition 
+monitoring of machinery in non–stationary operations, CMMNO, 2013. Ferrara, Italy, 
+8-  10 May. Berlin: Springer, pp. 37–59. 
+ Redknap, M. (2004) 'Viking–age settlements in Wales and the evidence from 
+ Llanbedrgoch', Land, sea and home, proceedings of a conference on Viking–period 
+ settlement. Cardiff, July 2001. Leeds: Manay Publishing, pp. 139–175. 
+Online/Electronic 
+Author(s) of paper Surname, INITIAL(S). (Year) 'Paper title', Conference title. Place of 
+conference, Date of conference, Page numbers (if available). Available at: URL (Accessed: 
+date) or doi: 
+ Fujikami, S. et al. (2015) 'Fast device discovery for vehicle–to–pedestrian 
+ communication using wireless LAN', 12th Annual IEEE Consumer Communications 
+ and Networking Conference (CCNC 2015). Las Vegas, NV, 9–12 January. pp. 35–40. 
+ doi: https://doi.org/10.1109/CCNC.2015.7157943 
+Notes 
+• The name of the conference, in italics, should be used as the author if an individual 
+author or corporate author cannot be identified. 
+• You don’t need to include the Place of publication or Publisher if you are referencing 
+an online source. 
+• A DOI should be written with the prefix https://doi.org/ followed by the DOI number, 
+e.g. https://doi.org/10.1111/j.1540-5931.2006.00203.x 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+Conference Poster 
+In the text 
+For an in-text citation in your work, you would cite the reference as follows: 
+
+23 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Bazela, Grant and Tucker (2014) presented the poster... 
+...the poster shows the use of technology enhanced learning...(Bazela, Grant and 
+Tucker, 2014). 
+Kleinschmidt, Fuhr and Wietfeld (2016) demonstrated the... 
+...the conference poster showed...(Kleinschmidt, Fuhr and Wietfeld, 2016). 
+In the bibliography/reference list 
+Physical item 
+Author(s) of poster Surname, INITIAL(S). (Year) 'Title of poster' [Poster], Conference title. 
+Place of conference, Date of conference.  
+ Bazela, C., Grant, V. and Tucker, A. (2014) 'History of medicine 2.0: using creative 
+ media to enhance information literacy teaching for 1st year medical students' 
+ [Poster], LILAC. Sheffield, 23-25 April. 
+If accessed online (published in conference proceedings) 
+Author(s) of poster Surname, INITIAL(S). (Year) 'Title of poster' [Poster], Conference title. 
+Place of conference, Date of conference. Page numbers (if available). Available at: URL 
+(Accessed: date) or doi: 
+Kleinschmidt, T., Fuhr, O. and Wietfeld, C. (2016) 'Synchronised charging of electric 
+vehicles with distant renewable energy resources' [Poster], 2016 IEEE Vehicular 
+Networking Conference (VNC). Columbus, OH, 8-10 December. doi: 
+https://doi.org/10.1109/VNC.2016.7835983 
+If accessed online (via conference website) 
+Author(s) of poster Surname, INITIAL(S). (Year) 'Title of poster' [Poster], Conference title. 
+Place of conference, Date of conference. Available at: URL (Accessed: date) or doi: 
+Bazela, C., Grant, V. and Tucker, A. (2014) 'History of medicine 2.0: using creative 
+media to enhance information literacy teaching for 1st year medical students' 
+[Poster], LILAC. Sheffield, 23-25 April. Available at: 
+https://www.slideshare.net/infolit_group/bazela-grant-tucker-poster (Accessed: 31 
+May 2017). 
+Notes 
+• A DOI should be written with the prefix https://doi.org/ followed by the DOI number, 
+e.g. https://doi.org/10.1111/j.1540-5931.2006.00203.x 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list. 
+Back to Contents 
+ 
+
+24 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Conference Proceedings 
+In the bibliography/reference list 
+Physical item 
+Editor(s) of proceedings Surname, INITIAL(S). (ed. or eds.) (Year) Title of conference. Place of 
+conference, Date of conference. Place of publication: Publisher. Volume (if needed). 
+Dalpiaz, G. et al. (eds.) (2014) Advances in condition monitoring of machinery in non–
+stationary operations, proceedings of the third international conference on condition 
+monitoring of machinery in non–stationary operations, CMMNO, 2013. Ferrara, Italy, 
+8-  10 May. Berlin: Springer. 
+Orman, W. and Valleau, M.J. (eds.) (2014). Proceedings of the 38th annual Boston 
+University Conference on language development. Boston, MA, 1-3 November 2013. 
+Somerville, MA: Cascadilla Press. Volume 2. 
+Online/Electronic 
+Editor(s) of proceedings Surname, INITIAL(S). (ed. or eds.) (Year) Title of conference. Place of 
+conference, Date of conference. Volume (if needed). Available at: URL (Accessed: date) or 
+doi: 
+Institute of Electrical and Electronics Engineers (IEEE) (2015) 12th Annual IEEE 
+Consumer Communications and Networking Conference (CCNC 2015). Las Vegas, NV, 
+9–12 January. Available at: 
+http://ieeexplore.ieee.org/xpl/tocresult.jsp?asf_pun=7151874 (Accessed: 10 
+December 2015). 
+Notes 
+• The name of the conference, in italics, should be used as the author if an individual 
+author, or corporate author cannot be identified. 
+• You don’t need to include the Place of publication or Publisher if you are referencing 
+an online source. 
+• A DOI should be written with the prefix https://doi.org/ followed by the DOI number, 
+e.g. https://doi.org/10.1111/j.1540-5931.2006.00203.x 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Confidential Information 
+There may be cases where the source you are citing and referencing will need to be 
+anonymised, e.g. names in medical, legal or business material. In place of real names you 
+
+25 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+may use terms such as “Patient X” or “Placement School”. If the source is a medical image, 
+e.g. a patient X-ray or scan, use the format in the Medical images section of Images and 
+Figures. 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+The treatment strategies for these patients (Placement hospital, 2022)... 
+In the bibliography/reference list 
+[Anonymised institution/agency] (Year produced) Anonymised title with square brackets 
+around the anonymised name if it appears in the title. Location: [Anonymised producer]. 
+[Placement hospital] (2022) [Placement hospital] treatment strategies for cardiology 
+patients. South Yorkshire: [Placement hospital]. 
+Notes 
+• If the location of the town or city would be likely to identify a specific institution, use 
+the county as the location instead, e.g. South Yorkshire: [Placement hospital]. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Dataset 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+The Office for National Statistics, Social Survey Division (2016) provided the statistics 
+for... 
+The statistics show that social divisions within the UK... (Office for National Statistics, 
+Social Survey Division, 2016) 
+NHS Digital (2015) provided the statistics for obesity, these show... 
+The statistics show that physical activity...(NHS Digital, 2015) 
+Curwen (2021) conducted experiments to confirm whether synaesthesia... 
+The data showed that synaesthesia for written musical keys...(Curwen, 2021) 
+In the bibliography/reference list 
+Author Surname, INITIAL(S). OR Organisation (Year) 'Title of dataset'. Edition (if necessary). 
+Number or Version of dataset (if necessary). Available at: URL (Accessed: date) or doi: 
+Curwen, C. (2021) 'Synaesthesia for reading written musical keys'. Version 3. 
+Available at: 
+
+26 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+https://figshare.shef.ac.uk/articles/dataset/Synaesthesia_for_written_musical_keys/
+13140086 (Accessed 28 June 2021). 
+NHS Digital (2015) 'Statistics on obesity, physical activity and diet, England'. Available 
+at: 
+https://data.gov.uk/dataset/statistics_on_obesity_physical_activity_and_diet_engla
+nd (Accessed 23 January 2017). 
+Office for National Statistics, Social Survey Division (2019) 'Annual Population Survey, 
+April 2015-2016'. 6th edn. SN: 8003. doi: http://doi.org/10.5255/UKDA-SN-8003-6 
+Notes 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list. 
+Back to Contents 
+Dictionary 
+Dictionary Entry – Print 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+‘Research’ (2009) is defined as... 
+This is the process of...(‘Research’,  2009) 
+Berges (2012) notes that ‘moral development’... 
+‘Moral development’  is associated with...(Berges, 2012) 
+In the bibliography/reference list 
+Author of Section Surname, INITIAL(S). (Year) 'Title of entry', in Editor(s) Surname, 
+INITIAL(S). (ed. or eds.) Title: Volume (if applicable). Edition (if not first). Place of publication: 
+Publisher. Page numbers. 
+Berges, S. (2012) 'Moral Development', in Chadwick, R. (ed.) Encyclopedia of Applied 
+Ethics: Volume 3 M–R. 2nd edn. London: Academic Press. pp. 141–151. 
+'Research' (2009) in Concise Oxford English Dictionary. 11th rev. edn. Oxford: Oxford 
+University Press. p. 1222. 
+Dictionary Entry – Online 
+In the bibliography/reference list 
+Author of Section Surname, INITIAL(S). (Year) 'Title of entry', in Editor(s) Surname, 
+INITIAL(S). (ed. or eds.) Title: Volume (if applicable). Edition (if not first). Available at: URL 
+(Accessed: date) or doi: 
+
+27 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+'Research, n.1' (2015) in OED Online. Available at: 
+http://www.oed.com/view/Entry/163432 (Accessed: 14 December 2015). 
+Full Dictionary – In Print 
+In the bibliography/reference list 
+Editor(s) Surname, INITIAL(S). (ed. or eds.) (Year) Title (no. of vols. if applicable). Edition (if 
+not first). Place of publication: Publisher. 
+Chadwick, R. (ed.)  (2012) Encylopedia of applied ethics (4 vols.). 2nd edn. London: 
+Academic Press. 
+Soanes, C. and Stevenson, A. (eds.) (2005) Oxford English Dictionary. 2nd rev. edn. 
+Oxford: Oxford University Press. 
+Full Dictionary Online 
+In the bibliography/reference list 
+Editor(s) Surname, INITIAL(S). (ed. or eds.) (replace with Title if no editor) (Year) Title (no. of 
+vols. if applicable). Edition (if not first). Available at: URL (Accessed: date). 
+OED online (2021). Available at: http://www.oed.com (Accessed: 28 June 2021). 
+Notes 
+• Certain types of material, such as encyclopedias or dictionaries, may not have a 
+person or persons as the main author or editor. These can be referenced by the title 
+in italics first, e.g.  
+  OED online (2021). Available at: http://www.oed.com (Accessed: 28 June  
+  2021). 
+• To reference an entry in a dictionary or encyclopedia without an author or editor, 
+put the title of the entry in single quotation marks first, e.g. 
+  'Research' (2009) in Concise Oxford English Dictionary. 11th rev. edn. Oxford: 
+  Oxford University Press. p. 1222. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Dissertation (Undergraduate or Masters) 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+Vickers (2008) noted that the impact of technology has changed the way spaces 
+within a library building are provided... 
+
+28 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Learning spaces and services provided are changing due to technological advances 
+(Vickers, 2008)... 
+In the bibliography/reference list 
+Author Surname, INITIAL(S). (Year) Title. Award and Type of qualification. Awarding body. 
+Vickers, S. (2008) An oral history examination of how technology has impacted on 
+library space using the University of Sheffield Library as a case study. MA 
+Dissertation. University of Sheffield. 
+Notes 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list. 
+Back to Contents 
+Exhibition 
+Full exhibition 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+The exhibition at the National Portrait Gallery (Elizabeth I & Her People,  2013–
+2014)... 
+In the exhibition Elizabeth I & Her People (2013
+-
+2
+014)... 
+Be
+atles to Bowie: the 60s exposed (2009–2010) showcased the acts of the 1960s... 
+Images of music personalities and memorabilia from the 1960s formed a major 
+exhibition in the National Portrait Gallery (Beatles to Bowie: the 60s exposed,  2009–
+2010)... 
+The exhibition The Age of Abstraction: Women Artists (2016) at Graves Gallery 
+exhibited... 
+Use of colour, pattern and line have been explored in a recent exhibition (The Age of 
+Abstraction: Women Artists, 2016) which delves... 
+In the bibliography/reference list 
+Title of exhibition (Year) [Exhibition]. Location. Date(s) of exhibition. 
+Beatles to Bowie: the 60s exposed (2009–2010) [Exhibition]. National Portrait 
+Gallery, London. 15 October 2009–24 January 2010. 
+Elizabeth I & Her People (2013–2014) [Exhibition]. National Portrait Gallery, London. 
+10 October 2013–5 January 2014. 
+The Age of Abstraction: Women Artists (2016) [Exhibition]. Graves Gallery, Sheffield. 
+5 February 2016–29 October 2016. 
+
+29 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Item type as part of an exhibition 
+In the text 
+For an in–citation in your work, you would cite the reference as follows: 
+The portrait of Elizabeth I by Hilliard (1585)... 
+The painting of Elizabeth I (Hilliard, 1585) shows the monarch... 
+Bebbington (1969) captures David Bowie... 
+The image of David Bowie (Bebbington, 1969)... 
+In the bibliography/reference list 
+Artist Surname, INITIAL(S). (Date of artwork) Title of Artwork [Item type], in Title of 
+exhibition [Exhibition]. Location. Date(s) of exhibition. 
+Bebbington, D. (1969) 'David Bowie' [Photograph] in Beatles to Bowie: the 60s 
+exposed (2009–2010) [Exhibition]. National Portrait Gallery, London. 15 October 
+2009–24 January 2010. 
+Hilliard, N. (1585) 'Elizabeth I, the "Ermine" portrait' [Oil painting] in Elizabeth I & Her 
+People (2013–2014) [Exhibition]. National Portrait Gallery, London. 10 October 
+2013–5 January 2014. 
+Notes 
+• An exhibition may run over a period of two years, if this is the case you may enter a 
+date range, e.g. 2013–2014. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Forum Post/Message Board 
+In the text 
+For an in-text citation in your work, you would cite your reference as follows: 
+ Keith (2019) discusses network connectivity issues on Ubuntu... 
+ Network connectivity issues in the software...(Keith, 2019) 
+ McNaught (2021) posted details about the survey... 
+ ...about the barriers experienced in implementing accessibility (McNaught, 2021). 
+In the bibliography/reference list 
+Username or Surname, INITIAL(S). of creator (Year) 'Title/Subject of message', Title of host 
+message system (required if applicable), Day/Month message was posted. Available at: URL 
+or Available email: email address (Accessed: date). 
+
+30 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+ Keith (2019) 'usb wireless adapter for Ubuntu18.04', Linux Forums, 11 July. Available 
+ at: https://linuxforums.org.uk/index.php?topic=13634.msg110605#msg110605 
+ (Accessed: 26 May 2021). 
+ McNaught, A. (2021) 'Implementing digital accessibility regulations', 
+ DIGITALACCESSIBILITYREGULATIONS, 4 May. Available email: 
+ digitalaccessibilityregulations@jiscmail.ac.uk (Accessed: 26 May 2021). 
+Notes 
+• If the author of a post has used an alias instead of their real full name, you may use 
+this in the in-text citation and reference. 
+• For more information about in–text citation and referencing multiple authors, 
+see   Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Government Publication – Act of Parliament 
+In the text 
+For an in–citation in your work, you would cite the reference as follows: 
+It is now possible to face up to 7 years imprisonment for supplying psychoactive 
+substances (Psychoactive Substances Act 2016)... 
+The Psychoactive Substances Act 2016 introduced the ban on... 
+In the bibliography/reference list 
+Title of Act including year and chapter number. Available at: URL (Accessed: date). 
+ Psychoactive Substances Act 2016, c. 2. Available at: 
+ https://www.legislation.gov.uk/ukpga/2016/2/contents/enacted (Accessed: 6 May 
+ 2021). 
+Or if you are referring to the PDF version: 
+ Psychoactive Substances Act 2016, c. 2. Available at: 
+ https://www.legislation.gov.uk/ukpga/2016/2/contents/enacted/data.pdf 
+ (Accessed: 6 May 2021). 
+Notes 
+• In the in-text citation, the date does not need to be stated separately in round 
+brackets as it already appears in the title of the Act. 
+• Most Acts will be available to access online and you can either reference the web 
+page or the PDF, whichever one you viewed it as. 
+
+31 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+• For more information about in–t  ext citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Government Publication – Command Paper 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+The principles of the Teaching Excellence Framework were introduced as a 
+way...(Department for Business, Innovation and Skills, 2015) 
+The Department for Business, Innovation and Skills (2015) introduced the 
+framework... 
+In a report on the knowledge economy (Department for Business, Innovation and 
+Skills, 2016)... 
+The Department for Business, Innovation and Skills (2016) has stated that... 
+Challenges facing the NHS...( Department of Health 2016) 
+The Department of Health (2016) suggests that demand reduction... 
+In the bibliography/reference list 
+Physical item 
+Government Department (at the time of publication) (Year) Title (Paper number). Place of 
+publication: Publisher. 
+Department for Business, Innovation and Skills (2015) Fulfilling our potential: 
+teaching excellence, social mobility and student choice (Cm 9141). London: HMSO. 
+Department for Business, Innovation and Skills (2016) Success as a knowledge 
+economy: teaching excellence, social mobility and student choice (Cm 9258). London: 
+HMSO. 
+Department of Health (2016) Government response to the House of Commons Health 
+Select Committee report into the impact of the spending review on health and social 
+care (Cm 9385). London: HMSO. 
+Online/Electronic 
+Government Department (at the time of publication) (Year) Title (Paper number). Available 
+at: URL (Accessed: date). 
+Department for Business, Innovation and Skills (2015) Fulfilling our potential: 
+teaching excellence, social mobility and student choice (Cm 9141). Available at: 
+https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/47
+
+32 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+4227/BIS-15-623-fulfilling-our-potential-teaching-excellence-social-mobility-and-
+student-choice.pdf (Accessed: 1 December 2015). 
+Department for Business, Innovation and Skills (2016) Success as a knowledge 
+economy: teaching excellence, social mobility and student choice (Cm 9258). 
+Available at: 
+https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/52
+3396/bis-16-265-success-as-a-knowledge-economy.pdf (Accessed: 17 June 2016). 
+Department of Health (2016) Government response to the House of Commons Health 
+Select Committee report into the impact of the spending review on health and social 
+care (Cm 9385). Available at: 
+https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/57
+7910/DH_Gov_Response_Accessible.pdf (Accessed: 1 February 2017). 
+Notes 
+• The numbering of Command Papers is done by running numbers with a prefix which 
+changes as the number gets close to 10,000. The prefixes are listed below: 
+o 1868–1869 – 1–4222 
+o 1870–1899 –   C 1–C 9550 
+o 1900–1918 –   Cd 1–Cd 9239 
+o 1919–1956 –   Cmd 1–Cmd 9889 
+o 1956–1986 –   Cmnd 1–Cmnd 9927 
+o 1986–2018 – Cm 1–Cm 9756 
+o 2019–current –   CP 1- 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Government Publication –   Government Statistics or Dataset 
+In the text 
+For an in-text citation in your work, you would cite the reference as follows: 
+The Department of Health (2015) statistics show... 
+The DoLS statistics (Department of Health, 2015) show that the trend... 
+In the bibliography/reference list 
+Governmental Department (Year) 'Title of dataset'. Edition (if necessary). Number of dataset 
+(if necessary). Available at: URL (Accessed: date) or doi: 
+
+33 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Department of Health (2015) 'DoLS monthly summary statistics'. Quarter 2, 2015 to 
+2016: raw data. Available at: 
+https://www.gov.uk/government/statistics/deprivation-of-liberty-safeguards-dols-
+july-to-september-2015 (Accessed 1 February 2017). 
+Notes 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Government Publication –   Hansard 
+In the text 
+For an in–text citation in your work, you would reference the in-text citation as follows: 
+Jonathan Ashworth MP (2021) questioned how the care system would be 
+integrated... 
+The need for a sustainable social care plan (Ashworth, 2021)... 
+Clive Betts MP (2017) mentions the mixture of funding for social care... 
+Questioning the future of funding (Betts, 2017)... 
+In the bibliography/reference list 
+Name of speaker/author (Year) 'Subject of debate or speech', Hansard: Name of House of 
+Parliament debates/written statement/Westminster Hall or petitions, Day and Month, 
+Volume, Column or Page number. Available at: URL (Accessed: date). 
+Ashworth, J. (2021) 'Future of Health and Care', Hansard: House of Commons 
+debates,  11 February, 689, c. 508. Available at: 
+https://hansard.parliament.uk/Commons/2021-02-11/debates/1A5C67A2-7FE5-
+4ECE-9E0F-A98A85639918/FutureOfHealthAndCare (Accessed 17 May 2021). 
+Betts, C. (2017) 'Health and Social Care Budgets', Hansard: House of Commons 
+Westminster Hall, 14 March, 623, cc. 28WH–29WH. Available at: 
+https://hansard.parliament.uk/Commons/2017-03-14/debates/43778548-9da5-
+492a-aa3c-2611f9e6f29d/WestminsterHall (Accessed 17 May 2021). 
+Notes 
+• If you are citing more than one column, use cc as the prefix 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list. 
+Back to Contents 
+ 
+
+34 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Government Publication – House of Lords and House of Commons 
+Papers 
+In the text 
+For an in–citation in your work, you would cite the reference as follows: 
+More than 30 fully funded Marshall Scholarships were awarded during the academic 
+year...(Parliament. House of Commons, 2016a) 
+The Marshall Aid Commemoration Committee (Parliament. House of Commons, 
+2016a) awarded scholarships... 
+Affordable housing remains on the agenda for the current government...(Parliament. 
+House of Lords, 2016) 
+The Select Committee for Economic Affairs (Parliament. House of Lords, 2016) 
+looked at the provision of affordable housing... 
+If the provision of the regulation is broken...(Parliament. House of Lords, 2017) 
+The Delegated Powers and Regulatory Reform Committee (Parliament. House of 
+Lords, 2017) found that maximum penalties could be... 
+The deficits within the NHS...(Parliament. House of Commons, 2016b) 
+The Health Committee (Parliament. House of Commons, 2016b) found that the 
+deficit within the NHS... 
+In the bibliography/reference list 
+Physical item 
+Parliament. House of Commons or House of Lords. (Year) Title. (HC or HL Session and Paper 
+number). Place of publication: Publisher. 
+Parliament. House of Commons (2016a) Marshall Aid Commemoration Commission 
+Account 2015–2016 (HC 2016–2017 539). London: National Audit Office.  
+Parliament. House of Commons (2016b) Impact of the spending review on health and 
+social care: First Report of Session 2016-17 (HC 2016–2017 139). London: By the 
+authority of the House of Commons. 
+Parliament. House of Lords (2016) Building more homes : First Report of Session 
+2016-17 (HL 2016–2017 (20)). London: By the authority of the House of Lords. 
+Parliament. House of Lords (2017) Health Service Medical Supplies (Costs) Bill: 12th 
+Report of Session 2016-17 (HL 2016–2017 (94)). London: By the authority of the 
+House of Lords. 
+Online/Electronic 
+Parliament. House of Commons or House of Lords (Year) Title (HC or HL Session and Paper 
+number). Available at: URL (Accessed: date). 
+
+35 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Parliament. House of Commons (2016a) Marshall Aid Commemoration Commission 
+Account 2015–2016 (HC 2016–2017 539). Available at: 
+https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/54
+2143/MACC_account_2015_to_2016.pdf (Accessed 7 August 2016).  
+Parliament. House of Commons (2016b) Impact of the spending review on health and 
+social care: First Report of Session 2016-17 (HC 2016–2017 139). Available at: 
+https://www.publications.parliament.uk/pa/cm201617/cmselect/cmhealth/139/139
+.pdf (Accessed 1 February 2017). 
+Parliament. House of Lords (2016) Building more homes: First Report of Session 
+2016-17 (HL 2016–2017 (20)). Available at: 
+http://www.publications.parliament.uk/pa/ld201617/ldselect/ldeconaf/20/20.pdf 
+(Accessed 8 September 2016). 
+Parliament. House of Lords (2017) Health Service Medical Supplies (Costs) Bill: 12th 
+Report of Session 2016-17 (HL 2016–2017 (94)). Available at: 
+https://www.publications.parliament.uk/pa/ld201617/ldselect/lddelreg/94/94.pdf 
+(Accessed 12 November 2017). 
+Notes 
+• If more than one of your citations has the same author and year of publication, then 
+you should distinguish between them by using a lower–case letter following the 
+year, e.g. The paper...(Parliament. House of Commons, 2016a)...this was supported 
+by...(Parliament. House of Commons, 2016b). 
+• In your references, paper numbers for the House of Lords papers are put within 
+round brackets after the Session dates to distinguish them from identical House of 
+Commons paper numbers, e.g. paper number 20 from the House of Commons 
+Session 2016–2017 would be written (HC 2016–2017 20) whereas paper number 20 
+from the House of Lords Session 2016–2017 would be written (HL 2016–2017 (20)). 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Government Publication – Parliamentary Bills, Amendments and 
+Explanatory Notes 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+The Digital Economy Bill (2016) has attracted controversy... 
+The House of Commons proposed that the BBC could face more regulation from 
+Ofcom (Digital Economy Bill, 2016) 
+
+36 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Increased measures for child safety have been included in amendments to the Crime 
+and Policing Bill (2016)... 
+The House of Lords (Crime and Policing Bill, 2016) have amended... 
+The Oil and Gas Authority were transferred regulatory powers from the Secretary of 
+State for Energy (Energy Bill Explanatory Notes, 2015) 
+The House of Lords note in the Energy Bill Explanatory Notes (2015) that the Oil and 
+Gas Authority... 
+In the bibliography/reference list 
+Physical item 
+Title (Year of publication). Parliament: House of Commons or House of Lords. Bill no. Place 
+of publication: Publisher. 
+Digital Economy Bill (2016). Parliament: House of Commons. Bill no. 45. London: The 
+Stationery Office. 
+Energy Bill Explanatory Notes (2015). Parliament: House of Lords. Bill no. 56–EN. 
+London: The Stationery Office.  
+Policing and Crime Bill Amendments (2016). Parliament: House of Lords. Bill no. 55 c. 
+London: The Stationery Office. 
+Online/Electronic 
+Title (Year of publication). Parliament: House of Commons or House of Lords. Bill no. 
+Available at: URL (Accessed: date). 
+Digital Economy Bill (2016). Parliament: House of Commons. Bill no. 45. Available at: 
+http://www.publications.parliament.uk/pa/bills/cbill/2016-2017/0045/cbill_2016-
+20170045_en_1.htm (Accessed: 16 August 2016). 
+Energy Bill Explanatory Notes (2015). Parliament: House of Lords. Bill no. 56–EN. 
+Available at: http://www.publications.parliament.uk/pa/bills/lbill/2015-
+2016/0056/en/16056en.pdf (Accessed 30 August 2016). 
+Policing and Crime Bill Amendments (2016). Parliament: House of Lords. Bill no. 55 c. 
+Available at: http://www.publications.parliament.uk/pa/bills/lbill/2016-
+2017/0055/17055(c).pdf (Accessed: 1 September 2016). 
+Notes 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list. 
+Back to Contents 
+ 
+
+37 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Government Publications – Statutory Instruments 
+In the text 
+For an in–text citation in your work, you would reference the citation as follows: 
+The Police (Amendment) (No.2) Regulations 2006 introduced changes... 
+Conflicts of interest for Police Officers should be reported to their senior...(The Police 
+(Amendment) (No.2) Regulations 2006) 
+In the bibliography/reference list 
+Physical item 
+Name of Statutory Instrument including year (SI year/number). Place of publication: 
+Publisher. 
+The Police (Amendment) (No.2) Regulations 2006 (SI 2006/3449). London: The 
+Stationery Office 
+Online/Electronic 
+Name of Statutory Instrument including year (SI year/number). Available at: URL (Accessed: 
+date). 
+The Police (Amendment) (No.2) Regulations 2006 (SI 2006/3449). Available at: 
+http://www.legislation.gov.uk/uksi/2006/3449/pdfs/uksi_20063449_en.pdf 
+(Accessed: 28 September 2016). 
+Notes 
+• In the in-text citation, the date does not need to be stated separately in round 
+brackets as it already appears in the title of the Act. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Government Publication – Other Official Publications 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+The ongoing decommissioning of nuclear plants in scheduled...(Office for Nuclear 
+Regulation, 2016) 
+The Office for Nuclear Regulation (2016) have set out their strategic aims... 
+The funding of care must be provided by either NHS or the local 
+authority...(Department of Health, 2016). 
+The Department of Health (2016) found that funding... 
+
+38 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+In the bibliography/reference list 
+Physical item 
+Government Department or Office (at time of publication, if available) (Year) Title. Place of 
+Publication: Publisher. (Series if applicable). 
+Department of Health (2019) National framework for NHS continuing healthcare and 
+NHS funded nursing care. London: Department of Health. 
+Office for Nuclear Regulation (2016) Office for Nuclear Regulation Strategic Plan 
+2016–2020: Presented to Parliament pursuant to Paragraph 25(3) of Schedule 7 to 
+the Energy Act 2013, March 2016. London: Office for Nuclear Regulation.  
+Online/Electronic 
+Government Department or Office (at time of publication, if available) (Year) Title. (Series if 
+applicable). Available at: URL (Accessed: date). 
+Department of Health (2019) National framework for NHS continuing healthcare and 
+NHS funded nursing care. Available at: 
+https://www.gov.uk/government/publications/national-framework-for-nhs-
+continuing-healthcare-and-nhs-funded-nursing-care (Accessed:  17 May 2021). 
+Office for Nuclear Regulation (2016) Office for Nuclear Regulation Strategic Plan 
+2016–2020: Presented to Parliament pursuant to Paragraph 25(3) of Schedule 7 to 
+the Energy Act 2013, March 2016. Available at: 
+http://www.onr.org.uk/documents/2016/strategic-plan-2016-2020.pdf (Accessed: 
+17 May 2021). 
+Notes 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list. 
+Back to Contents 
+ 
+Images and Figures 
+This guidance is for citing and referencing images and figures that you are referring to in 
+your work. If you have inserted an image or figure into your work please see the “Guidance 
+for taught course students inserting images and figures into university work.” 
+In the text 
+ 
+For an in–text citation in your work, you would cite the reference as follows: 
+ 
+The overflow of the Ladybower reservoir can be seen in the image (andy_c, 2005)... 
+Schnabel (1984) created the artwork using paint on velvet... 
+
+39 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+The photograph (Nicholls, 1919) shows the 18th Battalion... 
+The painting shows the effects of intense heat on the structure of a building 
+(Sutherland, 1941). 
+In the bibliography/reference list 
+From an online collection/social media site, e.g. Flickr, Instagram, etc. 
+Artist/Creator Surname, INITIAL(S). or Screen name (Year) Title of image/figure 
+[Description]. Available at: URL (Accessed: date). 
+andy_c (2005) Ladybower Plughole [Photograph]. Available at: 
+https://www.flickr.com/photos/andycpics/3035948922 (Accessed: 6 July 2016). 
+From a museum/gallery (either viewed in person or online) 
+Artist/Creator Surname, INITIAL(S). (Year). Title of image/figure [Description]. Name of 
+museum/gallery, Location. [If viewed in person] Viewed: date. [If viewed online] Available 
+at: URL (Accessed: date). 
+ Nicholls, H. (1919) Preparations for the Peace Day Celebrations, July 1919 
+ [Photograph]. Imperial War Museum, London. Available at: 
+ http://www.iwm.org.uk/collections/item/object/205297061 (Accessed: 2 January 
+ 2016). 
+From a journal 
+Artist/Creator surname, INITIAL(S). (Year) ‘Title of image/figure’ [Description], in Author of 
+journal article (if different to Artist/Creator) Surname, INITIAL(S). (Year) ‘Title of article’, Title 
+of Journal Volume(Issue), Page number. [If online]  Available at: URL (Accessed: date). 
+ Schnabel, J. (1984) ‘Ethnic Types #15 and #72’ [Oil, animal hide, modeling paste on 
+ velvet], in Sans, J. (2020) ‘Julian Schnabel: The Myth Unfurls’, Art in Translation 
+ 12(3), p. 400. doi: https://doi.org/10.1080/17561310.2020.1876831 
+From a book/ebook 
+Artist/Creator surname, INITIAL(S). (Year) ‘Title of image/figure’ [Description], in Author of 
+book (if different to Artist/Creator) Surname, INITIAL(S). (Year) ‘Title of book’ (Year). Place of 
+publication: Publisher, Page number. 
+ Sutherland, G. (1941) ‘Devastation 1941: City, twisted girders’ [Painting], in Mellor, L. 
+ Reading the ruins: Modernism, bombsites and British culture (2011). Cambridge: 
+ Cambridge University Press, p. 119. 
+Notes 
+• Reference an ebook in the same way as a print book. You do not need to add the 
+URL. 
+
+40 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+• In some cases you may need to use the screen name of the creator if their real name 
+is not available, which may be the case with image sharing or social media websites. 
+• If a person or corporation cannot be identified as the artist/creator, omit the 
+artist/creator and start the reference with the title. 
+• If there is no clear title to the image, a popular title may be used if one exists. If a 
+popular title to the image does not exist then you will need to supply the image with 
+a title, in square brackets, providing the following where possible 
+o The subject matter. 
+o The name or place of the object depicted, i.e. the person, the building, the 
+location,  etc. 
+• Some online journal articles group multiple figures together as one downloadable 
+image. If you are only referring to one of the figures within the image, make this 
+clear by using the title of that particular figure in your citation/reference. 
+• Include a description of the item in square brackets, e.g. [Photograph], [Diagram], 
+[Table], etc. If it is a painting or drawing you can either describe it as [Painting] or 
+[Drawing], or if the medium used is available you can use this as the description, e.g. 
+[Watercolour], [Oil on canvas], [Charcoal on paper], etc. 
+• If you are referencing an image or figure from a source other than those listed 
+above, include the details of the source in the usual format for that item type after 
+the details of the image. 
+• You don't need to include a citation and reference for any images or figures that you 
+have created yourself. Everything in your work is assumed to be your own work 
+unless you state otherwise, i.e. by citing someone else's work. 
+Medical images 
+You may need to reference an individual patients X-  ray or scan, e.g. if you are working on a 
+placement in a hospital. As this is confidential information, you would need to anonymise 
+the name of the patient. (See Confidential Information for referencing other medical 
+information.) 
+In the text 
+ The tumour can clearly be seen in Patient A’s MRI scan (2022). 
+In the bibliography/reference list 
+[Anonymised patient’s name] (Year image produced) Image title [Medium]. Location: Name 
+of institution. 
+ [Patient A] (2022) Upper mandible [MRI scan]. Sheffield: Weston Park Hospital. 
+
+41 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Notes 
+• If you are referencing an image of an individual patient’s scan or X-ray, you must 
+obtain permission to use the image from both the patient and the hospital. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Information Sheet 
+In the text 
+For an in-text citation in your work, you would cite your reference as follows: 
+The SOLiD System allows...(Applied Biosystems, 2008) 
+Applied Biosystems (2008) manufacture... 
+The Boots decongestant tablet...(Boots Pharmaceuticals, 2020). 
+Boots Pharmaceuticals (2020) recommend that their decongestant... 
+The patient information leaflet for Doxycycline recommends (Kent Pharmaceuticals 
+Ltd, 2020)... 
+Kent Pharmaceuticals Ltd (2020) indicate that Doxycycline... 
+In the bibliography/reference list 
+Physical item 
+Corporate Author or Author Surname, INITIAL(S). (Year) Title of Information Sheet. Place of 
+publication: Publisher. Publication Number. 
+Applied Biosystems (2008) Application Fact Sheet SOLiD System Accuracy. Foster 
+City, C.A.: Applied Biosystems. 139AP04-04. 
+Boots Pharmaceuticals (2020) Decongestant tablet (Pseudoephedrine hydrochloride). 
+Nottingham: The Boots Company PLC. 00014/0375. 
+Kent Pharmaceuticals Ltd (2020) Patient information leaflet: Doxycycline 50mg 
+capsules. Ashford: Kent Pharmaceuticals Ltd. PL 30464/0060. 
+Online/Electronic 
+Corporate Author or Author Surname, INITIAL(S). (Year) Title of Information Sheet. 
+Publication Number. Available at: URL (Accessed: date). 
+Applied Biosystems (2008) Application Fact Sheet SOLiD System Accuracy. 139AP04-
+04. Available at: 
+http://tools.thermofisher.com/content/sfs/brochures/SOLiD_Accuracy.pdf 
+(Accessed: 8 April 2021). 
+
+42 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Boots Pharmaceuticals (2020) Decongestant tablets (Pseudoephedrine 
+hydrochloride). 00014/0375. Available at: 
+https://www.medicines.org.uk/emc/PIL.21466.latest.pdf (Accessed: 8 April 2021). 
+Kent Pharmaceuticals Ltd (2020) Patient information leaflet: Doxycycline 50mg 
+capsules. PL 30464/0060. Available at: 
+https://www.medicines.org.uk/emc/files/pil.4050.pdf (Accessed: 8 April 2021). 
+Notes 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Journal Article – Print 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+Austin (2009) argues that periodical conflict may be expected... 
+It can be assumed that pickpocketing...(Austin, 2009) 
+In the bibliography, in the reference list 
+Author of article Surname, INITIAL(S). (Year) 'Title of article', Journal title, Volume(Issue), 
+Page range. 
+Austin, T. (2012) 'Takers keepers, losers weepers: theft as customary play in 
+southern Philippines', Journal of Folklore Research,  49(3), pp. 263–284. 
+Notes 
+• Enclose the title of the article in single quotation marks. 
+• Capitalise the first letter of each of the main words of the journal title, but not the 
+linking words such as "and", "for", "of" or "the". 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Journal Article with a DOI (Electronic) 
+What is a DOI? 
+If you are unsure if the article you are looking at has a DOI, please see the following 
+page: DOIs and URLs
+ which gives an explanation of the identifier. 
+
+43 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+Dobson (2006) identified that the depiction... 
+The stereotypical portrayal of cultures...(Dobson, 2006). 
+In the bibliography/reference list 
+Author of article Surname, INITIAL(S). (Year) 'Title of article', Title of journal, Volume(Issue), 
+Page range (if available). doi: 
+Dobson, H. (2006) 'Mister Sparkle meets the 'Yakuza': depictions of Japan in The 
+Simpsons', Journal of Popular Culture, 39(1), pp. 44–68. doi: 
+https://doi.org/10.1111/j.1540-5931.2006.00203.x 
+Notes 
+• For a journal article with a DOI you don't need to include "Available at" or 
+"(Accessed: date)" in the reference as a DOI is a stable identifier and will not change, 
+whereas a URL may change or be deleted so the extra information is needed to 
+clarify where and when you found the article. 
+• Always write DOI in lower case letters in your references, e.g. doi. 
+• A DOI should be written with the prefix https://doi.org/ followed by the DOI number. 
+• Never put a full stop after a DOI or URL as it may be assumed that it is part of the 
+DOI or URL and prevent it from working. 
+• Enclose the title of the article in single quotation marks. 
+• Capitalise the first letter of each of the main words of the journal title, but not the 
+linking words such as "and", "for", "of" or "the". 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Journal Article without a DOI (Electronic) 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+Ashby (1999) identified Zappa's style... 
+The melodies in Zappa's work...(Ashby, 1999). 
+In the bibliography/reference list 
+Author of article Surname, INITIAL(S). (Year) 'Title of article', Title of Journal, Volume(Issue), 
+Page range (if available). Available at: URL (Accessed: date). 
+
+44 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Ashby, A. (1999) 'Frank Zappa and the anti–fetishist orchestra', The Musical 
+Quarterly, 83(4), pp. 557–606. Available at: http://www.jstor.org/stable/742617 
+(Accessed: 8 April 2021). 
+Notes 
+• Enclose the title of the article in single quotation marks. 
+• Capitalise the first letter of each of the main words of the journal title, but not the 
+linking words such as "and", "for", "of" or "the". 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+Journal Article – Preprint (Ahead of Publication) 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+Lichtenthaler (2016) demonstrated an innovation–based view... 
+Complex relationships that appear in companies...(Lichtenthaler, 2016) 
+In the bibliography/reference list 
+Author Surname, INITIAL(S). (Year) 'Title of Article'. To be published in Title of journal (if 
+stated), Volume(Issue) [Preprint]. Available at: URL (Accessed: date) or doi: 
+Lichtenthaler, U. (2016) 'Towards an innovation–based perspective on company 
+performance'. To be published in Management Decision, 54(1) [Preprint]. Available 
+at: http://www.emeraldinsight.com/doi/abs/10.1108/MD-05-2015-0161 (Accessed: 
+7 January 2016). 
+Notes 
+• Enclose the title of the article in single quotation marks. 
+• There may not be any information about which journal the article will be published 
+in, so that part of the reference doesn't have to be included. 
+• Capitalise the first letter of each of the main words of the journal title, but not the 
+linking words such as "and", "for", "of" or "the". 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+
+45 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Journal Article with many authors 
+In some fields, such as medicine and physics, an article may have hundreds of authors, in 
+such cases it may be impractical to list each one. You would reference as follows: 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+Abbott et al. (2016) observed gravitational waves... 
+The first observation of a binary black hole merger included...(Abbott et al., 2016) 
+In the bibliography/reference list 
+Physical item 
+First or lead author of article Surname, INITIAL(S). et al. (Year) 'Title of article', Journal title, 
+Volume(Issue), Page range. 
+Abbott, B.P. et al. (2016) 'Observation of gravitational waves from a binary black 
+hole merger', Physical Review Letters,  116(6), 061102. 
+Online/Electronic 
+First or lead author of article Surname, INITIAL(S). et al. (Year) 'Title of article', Title of 
+journal, Volume(Issue), Page range (if available). Available at: URL (Accessed: date) or doi: 
+Aubert, B. et al. (2002) 'The BABAR detector', Nuclear Instruments and Methods in 
+Physics Research Section A: Accelerators, Spectrometers, Detectors and Associated 
+Equipment,  479(1), pp. 1-116. doi: https://doi.org/10.1016/S0168-9002(01)02012-5 
+Notes 
+• For references with up to three authors, list all the authors in the reference list in the 
+order they appear in the source. In some cases there may be a long list of authors (in 
+medical and scientific papers). If this is the case you only need to include the first 
+author followed by et al written in italics. 
+• Enclose the title of the article in single quotation marks. 
+• Capitalise the first letter of each of the main words of the journal title, but not the 
+linking words such as "and", "for", "of" or "the". 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+
+46 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Lecture notes, lecture recordings, handouts and other unpublished 
+teaching materials 
+Citing informal or unpublished materials, such as handouts, lecture recordings and lecture 
+notes is not generally recommended. Instead you should look to cite a primary source (such 
+as a textbook or journal article) which describes or summarises the idea you are referring to. 
+You may wish to ask your lecturer for recommended reading. 
+Back to Contents
+ 
+Magazine 
+Guidance from Cite Them Right, 10th rev. and expanded edn, suggests that a magazine 
+article should be referenced as a Journal Article. 
+In order to locate some of the information required for referencing you may need to look at 
+the following locations: 
+• The front of the magazine near the barcode 
+• The back of the magazine near the barcode 
+• The table of contents 
+• The publication information, which is normally written in very small text near the 
+front of the magazine, or near the back of the magazine. This usually contains 
+contact emails and copyright statements as well. 
+Back to Contents 
+ 
+Manuscript 
+In the text 
+For an in-text citation in your work, you would cite your reference as follows: 
+ In his letter, Ellis (no date) mentions... 
+ The correspondence with John Holmes...(Ellis, no date) 
+ 
+In the bibliography/reference list 
+Author Surname, INITIAL(S). (Year) Title of Manuscript, Date (if available). Name of 
+Collection and Reference number. Location of Archive or Repository. 
+ Ellis, H. (no date) Letter to John Holmes, assistant keeper, Department of 
+ Manuscripts, British Museum. Single Manuscript Collection, MS 24 (42). Special 
+ Collections and Archives, University of Sheffield. 
+Notes 
+• If no date can be found then you would use (no date). 
+
+47 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Maps 
+In the text 
+For an in-text citation in your work, you would cite your reference as follows: 
+ The Inverness and Strathglass Ordnance Survey map (1996) shows Loch Ness... 
+ The area covered by the map...(Ordnance Survey, 1996) 
+ The Information Commons (Google Maps, 2021) is near... 
+ The library can be seen using Google Maps (2021)... 
+ 
+In the bibliography/reference list 
+Physical item 
+Name of creator or creator Surname, INITIAL(S). (Year) Title of map, Sheet number, Map 
+scale, Edition (if needed). Place of publication: Publisher. (Series). 
+Ordnance Survey (1996) Inverness and Strathglass, Sheet 26, 1:50000, 7-GSGS edn. 
+Southampton: Ordnance Survey. (Landranger Series). 
+Online/Electronic 
+Name of creator or creator Surname, INITIAL(S). (Year) 'Title of map' (Format if available), 
+Scale if available. Available at: URL (Accessed: date). 
+Google Maps (2021) 'Information Commons, Sheffield'. Available at: 
+https://www.google.co.uk/maps/ (Accessed: 8 April 2021). 
+Ordnance Survey (2020) 'Castleton, Derbyshire', 1:50000. Available at: 
+http://digimap.edina.ac.uk/ (Accessed:  8 April 2021). 
+Notes 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list. 
+Back to Contents 
+ 
+
+48 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Music – Album (Physical Format) 
+In the text 
+For an in-text citation in your work, you would cite your reference as follows: 
+ The controversy caused by the album by The Prodigy (1997)... 
+ The track listing on The Fat of the Land (The Prodigy, 1997)... 
+ The Beatles (1967) produced the self-titled album...     
+ The album known as The White Album (The Beatles, 1967) was the follow up 
+ album... 
+ Recorded by Queens of the Stone Age (2002)...  
+ The album Songs for the Deaf (Queens of the Stone Age, 2002) featured the guest 
+ drummer... 
+In the bibliography/reference list 
+Name of Artist (Year) Title of Album [Format]. Edition (if needed). Place of Publication: 
+Record Label. 
+ The Beatles (1967) The Beatles [The White Album] [CD]. Heyes: Parlophone/EMI. 
+The Prodigy (1997) The Fat of the Land [Vinyl]. London: XL-Recordings. 
+Queens of the Stone Age (2002) Songs for the Deaf [CD]. Limited Edition UK Version. 
+Santa Monica: Interscope Records. 
+Notes 
+• If the item is widely known by, or was originally issued under, a title different from 
+that of the item, the alternative title may also be provided in brackets if necessary, 
+e.g. The Beatles [The White Album]. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Music - Album Track (Physical Format) 
+In the text 
+For an in-text citation in your work, you would cite your reference as follows: 
+The Prodigy (1997) recorded the song... 
+The song 'Breathe' (The Prodigy, 1997) demonstrated... 
+Lennon and McCartney wrote the Beatles (1968) song... 
+'While My Guitar Gently Weeps' (The Beatles, 1968) is a... 
+
+49 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+The Runaways (1976) song 'Cherry Bomb' appears on the compilation album... 
+The song 'Cherry Bomb' (The Runaways, 1976) is used in the film... 
+In the bibliography/reference list 
+Name of Artist (Year) 'Title of song', Title of Album (Year if different to the original song 
+recording) [Format]. Edition (if needed). Place of Publication: Record Label. 
+The Beatles (1968) 'While My Guitar Gently Weeps', The Beatles [The White Album] 
+[CD]. Heyes: Parlophone/EMI. 
+The Prodigy (1997) 'Breathe', The Fat of the Land [Vinyl]. London: XL-Recordings. 
+The Runaways (1976) 'Cherry Bomb', Guardians of the Galaxy: Awesome Mix Vol.1 
+(Original Motion Picture Soundtrack) (2014) [CD]. Hollywood: Marvel Music. 
+Notes 
+• If the item is widely known by, or was originally issued under, a title different from 
+that of the item, the alternative title may also be provided in brackets if necessary, 
+e.g. The Beatles [The White Album]. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+Music – Digital formats 
+Full album 
+In the text 
+For an in-text citation in your work, you would cite your reference as follows: 
+Pink Floyd's (1977) Animals album... 
+Animals (Pink Floyd, 1977) shows political statements... 
+Hardwired...to Self-Destruct is the latest album by Metallica (2016)... 
+Hardwired...to Self-Destruct (Metallica, 2016) includes the track... 
+In the bibliography/reference list 
+Name of Artist (Year) Title of Album. Edition (if needed). Available at: URL (Downloaded: 
+date). 
+Metallica (2016) Hardwired...to Self-Destruct. Available at: 
+https://open.spotify.com/album/4kizef5du9TgAGfNhWbKmt (Downloaded: 31 
+March 2021).  
+Pink Floyd (1977) Animals. 2011 Remastered Version. Available at: 
+https://www.amazon.co.uk/Animals-2011-Remastered-Version-
+Floyd/dp/B005NNZ9IM/ (Downloaded: 31 March 2021). 
+
+50 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+For an album track 
+In the text 
+For an in-text citation in your work, you would cite your reference as follows 
+Pink Floyd's (1977) song 'Sheep' describes the political... 
+The song 'Sheep' (Pink Floyd, 1977) is a view on political followers... 
+Metallica's (2016) song 'Moth into Flame'... 
+'Moth into Flame' (Metallica, 2016) was used as part of... 
+In the bibliography/reference list 
+Name of Artist (Year) 'Title of song', Title of Album. Edition (if needed). Available at: URL 
+(Downloaded: date). 
+Metallica (2016) 'Moth into Flame', Hardwired...to Self-Destruct. Available at: 
+https://open.spotify.com/album/4kizef5du9TgAGfNhWbKmt (Downloaded: 31 
+March 2021).  
+Pink Floyd (1977) 'Sheep', Animals. 2011 Remastered Version. Available at: 
+https://www.amazon.co.uk/Animals-2011-Remastered-Version-
+Floyd/dp/B005NNZ9IM/ (Downloaded: 31 March 2021). 
+Notes 
+• If the item is widely known by, or was originally issued under, a title different from 
+that of the item, the alternative title may also be provided in brackets if necessary, 
+e.g. The Beatles [The White Album]. 
+• The Downloaded: date in the reference is the date that you downloaded the music 
+onto your device. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Music Score 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+Bowie (1998) used the... 
+The score represents (Bowie, 1998)... 
+Busoni (1992) represented the... 
+The piano concerto...(Busoni, 1992) 
+
+51 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Wagner's score (1900) shows... 
+Tristan and Isolde (Wagner, 1900) represents... 
+In the bibliography/reference list 
+Composer Surname, INITIAL(S ). (Date) Title of score. Notes on version (including librettists, 
+editors, translators) if applicable. Edition (if applicable). Place of publication: Publisher. 
+Bowie, D. (1998) The Best of David Bowie 1974/1979. London: Wise Publications. 
+Busoni, F. (1992) Kadenzen zu klavierkonzerten Wolfgang Amadeus Mozart 
+[Cadenzas to piano concertos of Wolfgang Amadeus Mozart]. Edited by Reiner 
+Weber. Edition Breikopf Nr. 8577. Weisbaden: Breitkoff & Härtel. 
+Wagner, R. (1900) Tristan and Isolde. Score by Hans Von Bülow, English Translation 
+by H. and F. Corder. Leipzig: Breitkoff & Härtel. 
+Notes 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+Newspaper Article 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+Sample (2014) highlights the research which has taken place... 
+The research was reported in the national news...(Sample, 2014) 
+In print 
+In the bibliography/reference list 
+Author Surname, INITIAL(S). (Year) 'Title of Article', Title of newspaper. Date (Day, Month). 
+Page range. 
+Sample, I. (2014) 'Why an octopus never gets itself tied in knots', The Guardian, 16 
+May, p. 17. 
+Online/Electronic 
+In the bibliography/reference list 
+Author Surname, INITIAL(S). (Year) 'Title of article', Title of Newspaper, Date (Day Month), 
+Page number (if available). Available at: URL or doi: (Accessed: date). 
+Sample, I. (2014) 'Why an octopus's suckers don't stick its arms together', The 
+Guardian, 15 May. Available at: 
+
+52 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+http://www.theguardian.com/science/2014/may/15/octopus-suckers-arms-
+chemical-skin (Accessed: 17 January 2015). 
+Newspaper database e.g. Nexis 
+If you have accessed an article via a password-protected institutional database, e.g. Nexis, 
+you do not need to iclude the database details in the reference as it may not be accessible 
+to everyone. Give enough detail in the reference for the reader to be able to find the article, 
+e.g. as in the examples above. 
+Notes 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list. 
+Back to Contents 
+ 
+Patent 
+In the text 
+For an in-text citation, you would cite the reference as follows: 
+Hollis and Tan's helical gradient coil (2017)... 
+The helical gradient coil demonstrates...(Hollis and Tan, 2017) 
+Carter and Lawless (2010) show the gimbaled... 
+The gimbaled-shoulder design...(Carter and Lawless, 2010). 
+In the bibliography/reference list 
+Inventor(s) Surname, INITIAL(S). (Year patent granted) Title of patent. Authorising 
+organisation Patent number. Available at: URL (Accessed: date). 
+Carter, R.W. and Lawless, K.G. (2010). Gimbaled-shoulder friction stir welding tool. 
+United States Patent and Trademark Office Patent no. 7,686,202. Available at: 
+https://patents.justia.com/patent/7686202 (Accessed: 12 April 2021). 
+Hollis, T.J. and Tan, F. (2017). Helical gradient coil for magnetic resonance imaging 
+apparatus. UK Intellectual Property Office Patent no. GB2494259. Available at: 
+https://www.ipo.gov.uk/p-find-publication-
+getPDF.pdf?PatentNo=GB2494259&DocType=B&JournalNumber=6664 (Accessed: 12 
+April 2021). 
+Notes 
+• If using a patent retrieved from Espacenet you will need to ensure you use the 
+correct patent code as they are not all European Patents. A European patent will 
+have a code that begins with EP. 
+
+53 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Personal Communications 
+This includes any personal communication you have had either physically or online, e.g. a 
+face-to-face conversation, a phone conversation, a Skype or FaceTime conversation, an 
+email, a text message, a letter or a fax. 
+In the text 
+For an in-text citation, you would cite the reference as follows: 
+In the conversation with Smith (2021)... 
+It was decided that the information would be included...(Smith, 2021) 
+In the bibliography/reference list 
+Sender/Speaker/Author Surname, INITIAL(S). (Year of communication) Medium of 
+communication to/with Receiver of communication, Day/Month of communication. 
+ Smith, S. (2019) Email to Jennifer Jones, 11 February. 
+ Smith, S. (2020) Text message to Julia Carpenter, 28 June. 
+ Smith, S. (2021) Skype conversation with Max Williams, 16 March. 
+Notes 
+• You may need permission from anyone involved in the communication before using 
+them in your work. 
+• You may include a copy of written communications in your appendices. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Plays 
+In the text 
+Shakespeare (1984) displays the tragedy... 
+Romeo and Juliet (Shakespeare, 1984) uses... 
+Shakespeare (2010) shows the use of... 
+The Taming of the Shrew (Shakespeare, 2010)... 
+
+54 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+In the bibliography/reference list 
+Individual play 
+Author of play Surname, INITIAL(S). (Year of Publication) Title of play. Edition (if needed). 
+Edited by Full Name. Place of publication: Publisher. 
+Shakespeare, W. (1984) Romeo and Juliet. Edited by G. Blakemore Evans. Cambridge: 
+Cambridge University Press. 
+Shakespeare, W. (2010) The Taming of the Shrew. Edited by Barbara Hodgson. 
+London: Methuen Drama. 
+In an anthology/complete works 
+Author of play Surname, INITIAL(S). (Year of publication) 'Title of play', in Editor(s) 
+Surname(s), INITIAL(S). (ed. or eds.). Title of book. Edition (if not first edition). Place of 
+publication: Publisher. Page numbers. 
+ Shakespeare, W. (2007a) 'The taming of the shrew', in Bate, J. and Rasmussen, E. 
+ (eds.) William Shakespeare Complete Works. Basingstoke: Macmillan. pp. 526-583. 
+ Shakespeare, W. (2007b) 'The tragedy of Romeo and Juliet', in Bate, J. and  
+ Rasmussen, E. (eds.) William Shakespeare Complete Works. Basingstoke: Macmillan. 
+ pp. 1679-1743. 
+If accessed online 
+Many ebooks look the same as a printed book in terms of pagination, publisher details, etc., 
+so the in-text citation and reference will be in the same format as a print book; you do not 
+need to include details of where you accessed it from online in the reference. Cite and 
+reference plays in an electronic format as you would for plays in print books unless you have 
+downloaded it onto an ereader and the pagination is not available: 
+For an e-reader (e.g. Kindle) 
+If the page numbers of an ebook are not available in the device you are using, use the 
+information that is available, such as loc, %, chapter or paragraph if you need to identify a 
+particular page/section for your in-text citation. The date that you downloaded it onto your 
+electronic device is included at the end of the reference. 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+ Shakespeare (2021) explores the theme of jealousy... 
+ Othello (Shakespeare, 2021) uses... 
+In the bibliography/reference list 
+Author of play Surname, INITIAL(S). (Year of Publication) Title of play. Edition (if needed). 
+Available at: URL (Downloaded: date). 
+
+55 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+ Shakespeare, W. (2021) Othello. Available at: https://www.amazon.co.uk/Othello-
+ William-Shakespeare-  ebook/dp/B095M94KCT/ref=sr_1_5? (Downloaded: 30 April 
+ 2021). 
+Notes 
+• When directly quoting from a play, you should use Act.Scene:Line e.g. (Shakespeare 
+2007, 2.1:176-179) 
+• The Year of publication is the year that the item you are referencing was published, 
+rather than the year the play was written. 
+• The Downloaded: date in the reference is the date that you downloaded the play 
+onto your device. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+Podcast 
+In the text 
+For an in-text citation in your work, you would cite the reference as follows: 
+ Bragg (2021) discusses the deciphering of hieroglyphics... 
+ The role of Champollion...(Bragg, 2021). 
+ Thompson (2021) discusses the history... 
+ The use of blackface in Shakespeare...(Thompson, 2021). 
+ The Centre for the History of the Emotions (2017) investigates... 
+ The concept of what is normal...(Centre for the History of the Emotions, 2017). 
+In the bibliography/reference list 
+Surname of Author/Presenter, INITIAL(S). (Year site was published/last updated) Title of 
+Podcast [Podcast]. Day/Month posted (if available). Available at: URL (Accessed: date). 
+ Bragg, M. (2021) The Rosetta Stone [Podcast]. 11 February. Available at: 
+ https://www.bbc.co.uk/programmes/m000s2qd (Accessed: 22 May 2021). 
+ Centre for the History of the Emotions (2017) The Museum of the Normal [Podcast]. 
+ Available at: https://soundcloud.com/user-357683788/the-museum-of-the-normal 
+ (Accessed: 24 May 2021). 
+ Thompson, A. (2021) Blackface: a brief history [Podcast]. 12 May. Available at: 
+ https://www.historyextra.com/period/20th-  century/blackface-history-podcast-
+ ayanna-thompson/ (Accessed: 18 May 2021). 
+
+56 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Notes 
+• Reference where the podcast was published or displayed rather than referencing it 
+as a download on your edevice. 
+• If there is no author or presenter, use the name of the organisation who created it in 
+place of Author/Presenter. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Presentation 
+In the text 
+For an in-text citation in your work, you would cite the reference as follows: 
+Grant (2016) demonstrates the issues... 
+The artwork expresses the...(Grant, 2016). 
+Sciamanna, Bazela, and Bullingham (2016) presented the work surrounding... 
+The case study within the presentation focused on...(Sciamanna, Bazela, and 
+Bullingham, 2016). 
+In the bibliography/reference list 
+Surname of presenter, INITIAL(S). (Year of presentation) 'Title of presentation' [Medium, e.g. 
+PowerPoint presentation]. Name of event. Available at: URL (Accessed: date). 
+Grant, V. (2016) 'Voice, agency and the medical arts' [PowerPoint presentation]. 
+Medical Arts Seminar, HRI, University of Sheffield. Available at: 
+https://www.slideshare.net/missvagrant/voice-agency-and-the-medical-arts? 
+(Accessed: 22 May 2017). 
+Sciamanna, C., Bazela, C. and Bullingham, L. (2016) 'Reconceptualising information 
+and digital literacy in a fluid digital world' [PowerPoint presentation]. Northern 
+Collaboration Conference 2016. Available from: 
+https://www.slideshare.net/northerncollaboration/reconceptualising-information-
+and-digital-literacy-in-a-fluid-digital-world (Accessed: 18 May 2017). 
+Notes 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list. 
+Back to Contents 
+ 
+
+57 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Radio 
+In the text 
+For an in-text citation in your work, you would reference as follows: 
+World at One (2017) provided the update on... 
+The new head judge...(World at One, 2017) 
+Desert Island Discs: Bernardine Evaristo (2020) played the song... 
+The discussion with the Booker Prize-winning author...(Desert Island Discs: 
+Bernardine Evaristo, 2020) 
+Recall of the Rock (2021) shares the oral history of women climbers... 
+Helen Mort's poem is interwoven with interviews... (Recall of the Rock,  2021). 
+In the bibliography/reference list 
+Original Broadcast 
+Title of programme (Year of transmission) Transmitting organisation or channel, Day/Month 
+of transmission. 
+ World at One (2017) BBC Radio 4, 9 May. 
+Original broadcast as part of a series 
+Title of show, episode number (if available),  episode title (if available) (Year of transmission) 
+Transmitting organisation or channel, Day/Month of transmission. 
+ Desert Island Discs: Bernardine Evaristo (2020) BBC Radio 4, 25 September. 
+Broadcast accessed via online/database/streaming service 
+Title of programme (Year of transmission) Transmitting organisation or channel, Day/Month 
+of transmission. Available at: URL or name of streaming service/database (Accessed: date). 
+ Recall of the Rock (2021) BBC Sounds, 11 April. Available at: 
+ https://www.bbc.co.uk/sounds/play/m000v2mr (Accessed: 13 April 2021). 
+Original broadcast as part of a series accessed via online/database/streaming service 
+Title of show, episode number (if available), episode title (if available) (Year of transmission) 
+Transmitting organisation or channel, Day/Month of transmission. Available at: URL or name 
+of streaming service/database (Accessed: date). 
+ Desert Island Discs: David Olusoga (2021) BBC Radio 4, 15 January. Available at: 
+ https://www.bbc.co.uk/programmes/m000r314 (Accessed: 13 April 2021). 
+Notes 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list. 
+
+58 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Back to Contents 
+ 
+Reports 
+In the text 
+For an in-text citation in your work, you would cite the reference as follows: 
+Johnson and Fitzpatrick (2007) note that street users... 
+Enforcement areas for the problem...(Johnson and Fitzpatrick, 2007) 
+J Sainsbury (2016) acknowledged the amount of food waste... 
+Supermarkets are aware of the waste created due to...(J Sainsbury, 2016) 
+The Joseph Rowntree Foundation (2015) reported that... 
+...the supply of new homes would need to be sustainable (Joseph Rowntree 
+Foundation, 2015) 
+Snowdon (2017) looked at the cost of healthy eating... 
+It was found that the cost of a healthy diet...(Snowdon, 2017) 
+Schonfeld and Sweeney (2019) note that art museums... 
+To reach and engage new audiences...(Schonfeld and Sweeney, 2019) 
+In the bibliography/reference list 
+Physical item 
+Author Surname, INITIAL(S) or Corporate Author (Year of publication) Title of report. Paper 
+number (if applicable). Place of Publication: Publisher. 
+Johnson, S. and Fitzpatrick, S. (2007) The impact of enforcement on street users in 
+England. Bristol: The Policy Press. 
+Online/Electronic with a URL 
+Author Surname, INITIAL(S) or Corporate Author (Year of publication) Title of report. Paper 
+number (if applicable). Available at: URL (Accessed: date). 
+Joseph Rowntree Foundation (2015) Building sustainable homes. Available at: 
+https://www.jrf.org.uk/file/46481/download?token=UXZzH3XM&filetype=full-report 
+(Accessed: 4 May 2017). 
+J Sainsbury (2016) Sainsbury's food surplus and food waste: how we are delivering a 
+positive impact. Available at: http://www.j-
+sainsbury.co.uk/media/3442510/Sainsbury's%20food%20surplus%20and%20food%2
+0waste%20figures%2015-16%20report.pdf (Accessed: 4 May 2017). 
+Snowdon, C. (2017) Cheap as chips: Is a healthy diet affordable? IEA Discussion Paper 
+No. 82. Available at: https://iea.org.uk/wp-content/uploads/2017/03/Cheap-as-
+Chips-PDF.pdf  (Accessed: 30 March 2017). 
+
+59 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Online/Electronic with a DOI 
+What is a DOI? 
+If you are unsure if the item you are looking at has a DOI, please see the following page: 
+DOIs and URLs
+ which gives an explanation of the identifier. 
+Author Surname, INITIAL(S) or Corporate Author (Year of publication) Title of report. Paper 
+number (if applicable). doi: 
+ Schonfeld, R.C. and Sweeney, L. (2019) Organizing the work of the art museum. doi: 
+ https://doi.org/10.18665/sr.311731 
+Notes 
+• For a report with a DOI you don't need to include "Available at" or "(Accessed: date)" 
+in the reference as a DOI is a stable identifier and will not change, whereas a URL 
+may change or be deleted so the extra information is needed to clarify where and 
+when you found the report. 
+• Always write DOI in lower case letters in your references, e.g. doi: 
+• A DOI should be written with the prefix https://doi.org/ followed by the DOI number. 
+• Never put a full stop after a DOI or URL as it may be assumed that it is part of the 
+DOI or URL and prevent it from working. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Sacred Texts 
+The Bible 
+In the text 
+For an in-text citation you would cite the reference as follows: 
+ Naomi’s advice to her daughter-in-law (Ruth 2: 22)... 
+In the bibliography/reference list 
+Book of the Bible Chapter: verse, Holy Bible. Version of the Holy Bible. 
+ Ruth 2: 22, Holy Bible. King James Version. 
+Notes 
+• The author is not required as this may not be clear. 
+• The page numbers are not required as these will vary between printings. 
+
+60 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+• The publisher and publication date are not required. 
+ 
+The Torah 
+In the text 
+For an in-text citation you would cite the reference as follows: 
+ Helping those in need (Devarim 15: 11)... 
+In the bibliography/reference list 
+Torah. Book Chapter: verse. 
+ Torah. Devarim 15: 11. 
+Notes 
+• The author is not required as this may not be clear. 
+• The page numbers are not required as these will vary between printings. 
+• The publisher and publication date are not required. 
+ 
+The Qur’an 
+In the text 
+For an in-text citation you would cite the reference as follows: 
+ “Give what you can spare.” (Qur’an 2: 219) 
+In the bibliography/reference list 
+Qur’an Surah (or chapter): verse (Year of publication) Translated by Surname, INITIAL(S). 
+Place of publication: Publisher. 
+Qur’an 2: 219 (2008) Translated by Abdel Haleem, M.A.S. Oxford: Oxford University 
+Press. 
+Notes 
+• The page numbers are not required as these will vary between printings. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list. 
+Back to Contents 
+ 
+
+61 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Sculpture 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+Keegan's (1991) sculpture shows the use of raku–fired earthenware... 
+The sculpture Newby the Dog (Keegan, 1991)... 
+The sculpture of Neptune and Triton by Bernini (no date) shows the use of... 
+The marble sculpture of Neptune and Triton (Bernini, no date)... 
+In the bibliography/reference list 
+Physical item 
+Surname of artist, INITIAL(S). (Year) Title [Sculpture]. Place, Gallery or Name of collection, 
+department (if available), identifier or reference number (if available). 
+Bernini, G. (no date) Neptune and Triton [Sculpture]. London, Victoria and Albert 
+Museum, A.18:1–1950. 
+Keegan, S. (1991) Newby the dog [Sculpture]. London, Victoria and Albert Museum, 
+C.196:1, 2–1991. 
+Online 
+See Images and Figures
+ 
+Notes 
+• If there is no clear title to the item, a popular title may be used if one exists. If a 
+popular title to the image does not exist then you will need to supply the item with a 
+title, in square brackets, providing the following where possible 
+o The subject matter 
+o The name or place of the object depicted, i.e. the person, the building, the 
+location,  etc. 
+• If no date can be found then you would use (no date). 
+• The original title of a translated information resource, or a translation of the title, 
+may be supplied immediately after the original title, e.g. Kinderhände im washbecken 
+[Children's Hands in Washbasin]. 
+• If the artwork has a popular or traditional title, then you may use this,  e.g. Mona 
+Lisa. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+
+62 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Social Media 
+In the text 
+For an in-text citation you would cite the reference as follows: 
+Uni of Sheffield Library (2017) celebrated the opening of the... 
+The anniversary of the Western Bank Library was marked on social media (Uni of 
+Sheffield Library, 2017). 
+University of Sheffield Library (2017) marked the first library opening at the 
+university... 
+The first library at the University opened in 1909 (University of Sheffield Library, 
+2017). 
+In the bibliography/reference list: 
+Name of Creator Surname, INITIAL(S). or Screen name if proper name not available (Year) 
+Title of message - up to 40 words [Medium] Day/Month of post. Available at: URL (Accessed: 
+date). 
+ Uni of Sheffield Library (2017) On this day in 1959, our Western Bank Library (then 
+ called the 'Main Library') was officially opened by T.S. Eliot 
+ http://www.sheffield.ac.uk/library/special/libcoll ... [Twitter] 12 May. Available at: 
+ https://twitter.com/UniSheffieldLib/status/862945694457274368 (Accessed 15 May 
+ 2017). 
+ University of Sheffield Library (2017) On this day, in 1909, the first library opened at 
+ the University of Sheffield [Facebook] 26 April. Available at: 
+ https://www.facebook.com/UniSheffieldLib/posts/1346273698788324 (Accessed 15 
+ May 2017). 
+Notes 
+• You are not required to ask permission from anyone involved in the 
+post/conversation before using them in your work, but you may wish to do so as a 
+courtesy. You are only required to do so if the conversation occurred in a private 
+context (locked X (formerlyTwitter) accounts, members only forums etc.). 
+• You may need to provide a title for the social media post if there is not one provided. 
+Use up to the first 40 words of the post in square brackets as the title. 
+• It is acceptable to use the main page URL of the social media platform in your 
+reference if the post is not openly accessible to everyone, e.g. use 
+https://www.facebook.com/ as the URL in your reference if you are referring to a 
+discussion between yourself and another member of Facebook that is not open to 
+everyone to view. 
+
+63 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+• If the post is not accessible to everyone, you may include a copy of any discussions 
+between yourself and another member of a social media platform as an appendix to 
+your work. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Standards e.g. British Standards 
+In the text 
+For an in-text citation in your work, you would cite the reference as follows: 
+The British Standards Institution (2017) have produced updated guidelines... 
+The use of BS 8888:2017 (British Standards Institution, 2017)... 
+The ASTM (2012) standard... 
+The standard specification for...(ASTM, 2012). 
+ 
+In the bibliography/reference list 
+Physical item 
+Corporate Author (Year of publication) Number of Standard: Title of Standard. Place of 
+publication: Publisher. 
+ASTM (2012) A53/A53M-12: Standard specification for pipe, steel, black and hot-
+dipped, zinc-coated, welded and seamless. West Conshohocken, PA: ASTM 
+International. 
+British Standards Institution (2017) BS 8888:2017: Technical product documentation 
+and specification. London: British Standards Publications. 
+Online/Electronic 
+Corporate Author (Year of publication) Number of standard: Title of Standard. Available at: 
+URL (Accessed: date). 
+ASTM (2020) A53/A53M-20: Standard specification for pipe, steel, black and hot-
+dipped, zinc-coated, welded and seamless. Available at: 
+https://www.astm.org/Standards/A53.htm (Accessed: 13 April 2021).  
+British Standards Institution (2019) BS 8888:2020: Technical product documentation 
+and specification. Available at: 
+https://bsol.bsigroup.com/Bibliographic/BibliographicInfoData/00000000003038474
+6 (Accessed: 13 April 2021).  
+
+64 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Notes 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list. 
+Back to Contents 
+ 
+Thesis (PhD)  
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+Wilson (2014) notes that whilst Rage Against the Machine signed with a major 
+record label, their music still holds the intended meaning to the audience... 
+Popular music is still relevant to society when it makes a political statement even 
+though the artist may be signed to a major record label... (Wilson, 2014). 
+Tomlinson (2009) found that differing amounts of grip... 
+Moisture can affect grip when examining...(Tomlinson, 2009) 
+In the bibliography/reference list 
+Physical item 
+Author Surname, INITIAL(S) (Year) Title. Award and Type of qualification. Awarding body. 
+Wilson, B. (2014) It sounds like revolution: the changing role of popular music within 
+political resistance movements. PhD thesis. University of Sheffield 
+Online/Electronic 
+Author Surname, INITIAL(S). (Year) Title. Award and Type of qualification. Awarding body. 
+Available at: URL (Accessed: date). 
+Tomlinson, S.E. (2009) Understanding the friction between human fingers and 
+contacting surfaces. PhD thesis. University of Sheffield. Available at: 
+http://etheses.whiterose.ac.uk/150 (Accessed: 14 October 2015). 
+Notes 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list. 
+Back to Contents 
+ 
+Translated Item 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+
+65 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Tolstoy (2008) explores the story of... 
+Anna Karenina (Tolstoy, 2008) tells the story of... 
+Homer (1997) presents the tale... 
+The Odyssey (Homer, 1997) demonstrates... 
+Dostoyevsky (2003) shows the dilemmas... 
+The character of Raskolnikov...(Dostoyevsky, 2003). 
+In the bibliography/reference list 
+Physical item 
+Author Surname,  INITIAL(S). (Year of publication) Title of item. Edition (if not the first). 
+Translated from the (language) by (Translator(s) INITIAL(S) and Surname). Place of 
+Publication: Publisher. 
+Homer (1997) The Odyssey. Translated by R. Fagles. Introduction and notes by B. 
+Knox. New York: Penguin. 
+Tolstoy, L. (2008) Anna Karenina. Translated from the Russian by L. Maude and A. 
+Maude. Oxford: Oxford University Press. 
+If accessed online 
+Many ebooks look the same as a printed book in terms of pagination, publisher details, etc., 
+so the in-text citation and reference will be in the same format as a print book; you do not 
+need to include details of where you accessed it from online in the reference. Cite and 
+reference books in an electronic format as you would for books in print books unless you 
+have downloaded it onto an ereader and the pagination is not available: 
+For an e-reader (e.g. Kindle) 
+If the page numbers of an ebook are not available in the device you are using, use the 
+information that is available, such as loc, %, chapter or paragraph if you need to identify a 
+particular page/section for your in-text citation. The date that you downloaded it onto your 
+electronic device is included at the end of the reference. 
+Author Surname, INITIAL(S). (Year of publication). Title of item. Edition (if needed). 
+Translated from the (language) by (Translators full name). Available at: URL (Downloaded: 
+date). 
+ Dostoyevsky, F. (2003) Crime and punishment. Rev. edn. Translated from the Russian 
+ by David McDuff. Available at: https://www.amazon.co.uk/Punishment-Penguin-
+ Classics-Fyodor-Dostoyevsky-ebook/dp/B002RI936U/ref=sr_1_4? (Downloaded 30 
+ April 2021). 
+ Tolstoy, L. (2019). Anna Karenina. Translated from the Russian by Constance Garnett. 
+ Available at: https://www.amazon.co.uk/Anna-Karenina-AmazonClassics-Leo-
+ Tolstoy-ebook/dp/B07YWRTHMC/ref=sr_1_4? (Downloaded: 30 April 2021). 
+
+66 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Notes 
+• Use the year of publication for the specific item you read,  as there may be different 
+translations of the same item available. 
+• You may not need to add the language the item is translated from, but include the 
+language if appropriate. 
+• The Downloaded: date in the reference is the date that you downloaded the book 
+onto your device. 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Unpublished item 
+In the bibliography/reference list 
+For an in-text citation in your work, you would cite the reference as follows: 
+Hall (2011) noted that the changes... 
+...the changes that occurred meant...(Hall, 2011). 
+In the bibliography/reference list 
+Author Surname, INITIAL(S). or Corporate author (Date) Title of item. Place of holding 
+organisation: Holding organisation. Unpublished. 
+Hall, D. (2011) Making sense of changes. Sheffield: University of Sheffield. 
+Unpublished. 
+Notes 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list. 
+Back to Contents 
+ 
+Video – Physical Format 
+Film/One off documentary 
+In the text 
+For an in-text citation in your work, you would cite the reference as follows: 
+Black Swan (2010) used imagery to represent... 
+The hidden images contained in the film...(Black Swan, 2010) 
+
+67 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+The premise of Captain America: The Winter Soldier (2014)... 
+The use of green screen in the film (Captain America: The Winter Soldier, 2014)... 
+In the bibliography/reference list 
+For a film/documentary viewed at the cinema 
+Title of Film/Documentary (Year of distribution) Directed by INITIAL(S). Surname [Film]. 
+Place of distribution: Distribution Company. 
+ Captain America: The Winter Soldier (2014) Directed by A. Russo and J. Russo [Film]. 
+ New York: Marvel Entertainment. 
+For a film/documentary viewed on DVD or Blu-ray 
+Title of Film/Documentary (Year of distribution) Directed by INITIAL(S). Surname [DVD] or 
+[Blu-ray]. Place of distribution: Distribution Company. 
+ Black Swan (2010) Directed by D. Aronofsky [Blu-ray]. Los Angeles: Fox Searchlight 
+ Pictures. 
+TV Episode from a series 
+In the text 
+For an in-text citation in your work, you would cite the reference as follows: 
+The detectives Bulk and McNulty revisit an old crime scene...('Old Cases', 2002) 
+...in the episode 'Old Cases' (2002) 
+The episode uses visions to reveal the events...('The Door', 2016) 
+..In 'The Door' (2016) we see the visualisation of... 
+In the bibliography/reference list 
+'Title of Episode' (Year of distribution) Title of Programme/Series In Title of compilation or 
+box-set [DVD] or [Blu-ray] Place of distribution: Distribution company. 
+ 'Old Cases' (2005) The Wire In The Wire: the complete first season [DVD] New York: 
+ HBO. 
+ 'The Door' (2016) Game of Thrones In Game of Thrones: the complete sixth season 
+ [Blu-ray] New York: HBO. 
+Notes 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list. 
+Back to Contents 
+
+68 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Video – Streaming Service 
+This includes Films and TV Series or Episodes that you have viewed via subscription services 
+such as Netflix, Amazon Prime Video, Now TV, etc., and catch-up services such as Box of 
+Broadcasts, BBC iPlayer, All 4, My 5, etc. 
+Film 
+In the text 
+For an in-text citation in your work, you would cite the reference as follows: 
+Portrait of a Lady on Fire (2019) is set in 18th century France... 
+...the film (Portrait of a Lady on Fire, 2019) was written and directed by... 
+An unofficial segregation policy is uncovered in Small Axe: Education (2020)... 
+...the film (Small Axe: Education, 2020) is part of a series directed by... 
+The use of mirrors in Atlantics (2019)... 
+...the film (Atlantics, 2019) was co-written and directed by... 
+In the bibliography/reference list 
+Title of Film (Year of distribution) Directed by INITIAL(S). Surname. Available at: Name of 
+service (Accessed: date). 
+ Atlantics (2019) Directed by M. Diop. Available at: Netflix (Accessed: 25 May 2021). 
+ Portrait of a Lady on Fire (2019) Directed by C. Sciamma. Available at: MUBI 
+ (Accessed: 15 April 2020). 
+ Small Axe: Education (2020) Directed by S. McQueen. Available at: Box of Broadcasts 
+ (Accessed: 25 May 2021). 
+Current Affairs Programme 
+In the text 
+For an in-text citation in your work, you would cite the reference as follows: 
+The BBC News at Six (2021) covered the story... 
+When this news story was first reported (BBC News at Six, 2021) 
+The Year Britain Stopped (2021) chronicles... 
+Frontline workers and scientists tell their stories...(The Year Britain Stopped, 2021) 
+In the bibliography/reference list 
+Title of Programme (Year of original broadcast) Name of Channel, Day/Month, Time of 
+broadcast. Available at: Name of Streaming Service (Accessed: date). 
+BBC News at Six (2021) BBC One, 20 May, 18:00. Available at: BBC iPlayer (Accessed: 
+21 May 2021). 
+
+69 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+The Year Britain Stopped (2021) Channel 4, 24 May, 21:00. Available at: All 4 
+(Accessed: 27 May 2021). 
+TV Episode from a series 
+In the text 
+For an in-text citation in your work, you would cite the reference as follows: 
+The first episode of Stranger Things, 'The Vanishing of Will Byers' (2016), uses 
+aspects of... 
+The monster makes a first appearance...('The Vanishing of Will Byers', 2016) 
+In the episode 'Cooper's Dream' (1990) the stage is set for... 
+Agent Cooper visits the Log Lady ('Cooper's Dream', 1990) which represents... 
+In the bibliography/reference list 
+'Title of Episode' (Year of original broadcast/release) Title of Series/Season, Series/Season 
+and episode numbers OR day/month (if available). Production Company. Available at: Name 
+of streaming service. (Accessed: date). 
+'Cooper's Dream' (1990) Twin Peaks, Season 1, episode 6. Propaganda Films. 
+Available at: NowTV (Accessed: 29 December 2016). 
+'The Vanishing of Will Byers' (2016) Stranger Things, Season 1, episode 1. 21 Laps 
+Entertainment. Available at: Netflix (Accessed 29 December 2016). 
+Notes 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+Video – Sharing Website (e.g. YouTube) 
+This includes sharing platforms such as YouTube, Vimeo, IGTV, TED, etc. 
+In the text 
+For an in-text citation in your work, you would cite the reference as follows: 
+YouTube Movies (2016) have... 
+Doctor Strange (YouTube Movies, 2016) shows the... 
+The University of Sheffield (2019) have created... 
+Campus Tour (The University of Sheffield, 2019) takes a tour of the campus... 
+Climate and data scientist Angel Hsu (2020) gave a TED Talk... 
+In Cities are driving climate change. Here's how they can fix it (Hsu, 2020, 3:47) she 
+observes the disparities... 
+
+70 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+In the bibliography/reference list 
+Name of Person/Organisation posting video (Year video posted) Title of Film. Day/Month 
+uploaded (if available). Available at: URL (Accessed: date) or doi: 
+Hsu, A. (2020) Cities are driving climate change. Here's how they can fix it. October. 
+Available at: 
+https://www.ted.com/talks/angel_hsu_cities_are_driving_climate_change_here_s_h
+ow_they_can_fix_it (Accessed: 27 May 2021). 
+The University of Sheffield (2019) Campus Tour. 5 June. Available at: 
+https://www.instagram.com/tv/ByVQviAhJ9i/ (Accessed: 27 May 2021). 
+YouTube Movies (2016) Doctor Strange. 24 February. Available at: 
+https://youtu.be/bLaKpGUsMmU (Accessed: 27 May 2021). 
+Notes 
+• For a TED Talk, use the name of the speaker in the video as the Name of 
+Person/Organisation in your reference and in-text citation. 
+• If you need to refer to a specific place within a video, include the time stamp in your 
+in-text citation in the format minutes:seconds, e.g. (YouTube Movies, 2016, 18:33). 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+Back to Contents 
+ 
+Web page 
+Only reference a source as a web page if the source does not fall into another category, such 
+as journal article, conference proceedings, report, blog, image, etc. 
+Web page with an individual author 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+In Michael Rosen's biography (2021)... 
+He began writing poetry at the age of twelve...(Rosen, 2021) 
+In the bibliography/reference list 
+Author Surname, INITIAL(S). (Year site was published/last updated) Title of web page. 
+Available at: URL (Accessed: date). 
+Rosen, M. (2021) Michael Rosen Biography. Available at: 
+https://www.michaelrosen.co.uk/for-  adults-biography/ (Accessed: 26 April 2021). 
+
+71 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Web page with a group or organisation as author 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+ The NHS (2019) lists the main symptoms... 
+ The causes of diabetes...(NHS, 2019) 
+In the bibliography/reference list 
+Group or Corporate author (Year site was published/last updated) Title of web page. 
+Available at: URL (Accessed: date). 
+ NHS (2019) Diabetes. Available at: https://www.nhs.uk/conditions/diabetes/ 
+ (Accessed: 26 April 2021). 
+Web page with no author 
+In the text 
+For an in–text citation in your work, you would cite the reference as follows: 
+ The Grey to Green Sheffield project (2016) has had national recognition... 
+ A sustainable drainage system was used...(Grey to Green Sheffield, 2016) 
+In the bibliography/reference list 
+Title of web page (Year site was published/last updated). Available at: URL (Accessed: date). 
+ Grey to Green Sheffield (2016). Available at: 
+ http://www.greytogreen.org.uk/index.html (Accessed: 26 April 2021). 
+Notes 
+• If a web page has no author, use the title of the page in italics in place of the author 
+for both the in-text citation and the reference. 
+• If the Corporate Author is well known by an abbreviation, for the first time you cite 
+the resource write out the name in full followed by the abbreviation in round 
+brackets, then use just the abbreviation for second and further citations, e.g. for the 
+first citation use (National Institute for Health and Care Excellence (NICE), 2016) or 
+National Institute for Health and Care Excellence (NICE), (2016). The second and 
+further citations would then read (NICE, 2016) or NICE (2016). 
+• You can then use the abbreviation in your reference list rather than writing out the 
+name in full. 
+• If you cannot find the date that the web page was published or last updated, use (no 
+date). 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list
+. 
+
+72 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Back to Contents 
+ 
+Website 
+If you are not citing specific information or a specific page from a website you do not need 
+to create an in-text citation or a reference for it. 
+When mentioning a website within your text, provide the name of the website followed by 
+the URL in parentheses, e.g. 
+ Participants were surveyed using SurveyMonkey 
+ (https://www.surveymonkey.co.uk). 
+Notes 
+• For more information about in–text citation and referencing multiple authors, 
+see Creating a citation and reference list. 
+Back to Contents 
+  
+
+73 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+Summary 
+You have reached the end of this resource. 
+Why not look at some of our other Research Skills and Critical Thinking resources? 
+Book onto a workshop or take an online tutorial: 
+Research Skills and Critical Thinking workshops and online tutorials. 
+Visit our FAQs: Library FAQs 
+Get in touch: library@sheffield.ac.uk 
+Back to Contents 
+Full URLs 
+Harvard referencing guide: 
+https://www.librarydevelopment.group.shef.ac.uk/referencing/harvard.html 
+Cite Them Right (2016) 10
+th
+ rev.and expanded edition: 
+https://find.shef.ac.uk/permalink/f/1lephdb/44SFD_ALMA_DS21250961330001441 
+Romanisation of East Asian Languages: 
+https://www.sheffield.ac.uk/seas/currentstudents/assessedwork/romanization 
+DOIs and URLs: https://apastyle.apa.org/style-grammar-guidelines/references/dois-urls 
+Referencing Code: 
+https://librarydevelopment.group.shef.ac.uk/Assets/pdfs/referencing/referencing-code.pdf 
+Hierarch of law reports:  
+https://www.law.ox.ac.uk/legal-research-and-mooting-skills-programme/law-reports
+  
+ 
+British and Irish Legal Information Institute (BAILII): https://www.bailii.org/ 
+ 
+Guidance for taught course students inserting images and figures into university work: 
+https://xerte.shef.ac.uk/play.php?template_id=836
+  
+Research Skills and Critical Thinking workshops and online tutorials: 
+https://www.sheffield.ac.uk/library/study/research-skills/index  
+Library FAQs: https://libraryhelp.shef.ac.uk/ 
+University Library’s referencing page:  
+https://www.sheffield.ac.uk/library/study/research-skills/referencing 
+Back to Contents 
+Last reviewed: October 2023 
+Review due: Summer 2024  
+
+74 
+Last reviewed: October 2023 
+Review date: Summer 2024 
+  
+Except otherwise noted, this work by The University of Sheffield Library is licensed under 
+the Creative Commons Attribution-NonCommercialShareAlike 4.0 International License. To 
+view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/.

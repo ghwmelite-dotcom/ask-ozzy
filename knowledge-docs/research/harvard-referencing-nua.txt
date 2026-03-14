@@ -1,0 +1,864 @@
+Harvard 
+referencing guide 
+2024/25 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+
+1 
+ 
+Contents 
+Introduction ............................................................................................................................................ 2 
+Why reference?................................................................................................................................... 2 
+Which type of referencing does Norwich use? ................................................................................... 2 
+Which version of Harvard referencing should I use? .......................................................................... 2 
+How can I get help with referencing? ................................................................................................. 2 
+In-text citations ...................................................................................................................................... 3 
+What is an in-text citation? ................................................................................................................. 3 
+What does it look like? ........................................................................................................................ 3 
+What do I include in my in-text citation?............................................................................................ 3 
+How to cite one or more authors: ...................................................................................................... 4 
+Where in my sentence should I put my in-text citation? ................................................................... 5 
+How to layout quotations ................................................................................................................... 5 
+Paraphrasing and summarising ........................................................................................................... 6 
+How do I reference images? ............................................................................................................... 7 
+Table of illustrations.......................................................................................................................................7 
+Creating your bibliography .................................................................................................................... 8 
+What is a bibliography? ...................................................................................................................... 8 
+How should I order my bibliography? ................................................................................................. 8 
+How do I know which details to include in my bibliography? ............................................................ 8 
+How to reference a book: ................................................................................................................... 8 
+How to reference a journal article: ..................................................................................................... 8 
+How to reference a webpage or PDF: ................................................................................................. 8 
+How do I reference a film? .................................................................................................................. 9 
+How do I reference a painting / drawing? .......................................................................................... 9 
+How do I reference a video game? ..................................................................................................... 9 
+How do I reference YouTube? .......................................................................................................... 10 
+Where do I find all the details I need for my bibliography? ............................................................. 11 
+Reference Layout Guide ....................................................................................................................... 13 
+Books and Pamphlets ........................................................................................................................ 13 
+Journals, Magazines and Newspapers .............................................................................................. 14 
+Websites, Social Media and Apps ..................................................................................................... 15 
+Films, TV, Games and Music ............................................................................................................. 16 
+Images and Visual sources ................................................................................................................ 17 
+Public and Personal Communication (unpublished works) .............................................................. 19 
+Hand-in Checklist .................................................................................................................................. 20 
+
+2 
+ 
+ 
+Introduction 
+ 
+Why reference? 
+Referencing is an important part of your degree for many reasons: 
+• to acknowledge the ideas of others 
+• to add credibility to your work 
+• to demonstrate how widely you have researched your topic 
+• to show that your research includes academic sources 
+• to avoid plagiarism. 
+ 
+Which type of referencing does Norwich Uni use?  
+Norwich Uni uses Harvard referencing, which contains two parts: 
+1. In-text citations   
+An in-text citation shows the author’s surname, the copyright year and (if applicable) 
+the page number(s) of the resource you used. They are inserted into the main text of 
+your essay. 
+For example: (Smith, 2020, p. 10). 
+ 
+2. A bibliography  
+The bibliography is a list of all the resources you have used in your essay. It should 
+contain enough information for your lecturer to find the original resource. The 
+bibliography appears at the end of your report, in alphabetical order by surname.  
+Which version of Harvard referencing should I use? 
+Norwich Uni uses the Harvard version detailed in the book ‘Cite them right’ (Pears and 
+Shields, 2022). You can borrow the book from the Library but you should find help with 
+most of your referencing questions within this guide.  
+While there are many different versions of Harvard the most important thing is to make 
+sure your referencing is consistent. 
+How can I get help with referencing? 
+• In addition to this guide there is a short leaflet available covering the main types 
+of resources used by Norwich students.  
+• There is also step-by-step help available on the library website: 
+https://library.norwichuni.ac.uk    
+• We’re here to help – please get in touch if you would like more support. Email us 
+at library@norwichuni.ac.uk or ask your librarian.
+  
+
+3 
+ 
+In-text citations 
+ 
+What is an in-text citation? 
+An in-text citation is an acknowledgment of the source material you have used when you 
+quote someone directly, or summarise someone else’s ideas. You must include an in-text 
+citation every time you refer to someone else’s work. 
+ 
+What does it look like? 
+Here are some examples of where an in-text citation has been used to acknowledge 
+someone else’s ideas in an essay: 
+ 
+What do I include in my in-text citation?  
+An in-text citation contains only two or three pieces of information, always in the same 
+order: 
+1. Author’s surname(s) 
+2. Publication date (or copyright date) 
+3. Page number(s)  - where applicable 
+You do not need to include any more information than this in your essay (so don’t add in 
+URLs for instance) That is because your in-text citation will refer to a source in your 
+bibliography where you will include the full information of the source.  
+Example of how an in-text citation points to the full information in the bibliography:   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Carter, R. and Meggs, P. (1993) Typographic design: form and function. New York: Wiley. 
+ 
+Rand, P. (2014) Thoughts on design. San Francisco: Chronicle Books. 
+ 
+Victore, J. (2019) Feck perfuction: dangerous ideas on the business of life. San Francisco: Chronicle 
+Books.  
+Vladimir Propp’s studies into one hundred Russian folktales caused him to theorise that most 
+shared the same structure (Orenstein, 2020, p.227). 
+McKee (2021, p.317) states ‘the more powerful and complex the forces of antagonism opposing 
+the character, the more completely realised character and story MUST become’.  
+ 
+Working without set rules and ‘freed from concrete restraints’ (Victore, 2019, p.3) allows an artist 
+to develop their ideas more freely. 
+
+4 
+ 
+How to cite one or more authors: 
+One author: 
+(Smith, 2020) is used when referring to the whole resource  
+(rather than a particular page or pages) 
+ 
+(Smith, 2020, p.3) 
+ 
+is used when you are referring to a specific 
+page 
+ 
+(Smith, 2020, pp. 3-5) 
+ 
+is used when referring to multiple pages 
+Two authors:         
+ 
+(Smith and Jones, 2020, pp. 3-5) 
+  
+Three authors: 
+(Smith, Jones and Davies, 2021, pp. 3-5) 
+ 
+Four or more authors:    
+(Smith et al., 2021, pp. 3-5) 
+ 
+Corporate author:         
+ (Tate, 2020) Used when no individual author / artist is 
+named, very common with websites.  
+ 
+Editor: 
+(Martinéz, S. (ed)., 2018, p.3) 
+ 
+Single editor 
+(Dry, T. and Murphy, S. (eds)., 2017, p.4) 
+ 
+Multiple editors 
+Secondary referencing (where one author quotes another author): 
+ 
+(Becker, 1971, quoted in Ilyin, 2006, p.35) 
+In this  example, Ilyin’s 2006 book included 
+a quote from Becker’s 1971 book.  
+ 
+Only Ilyin’s 2006 book would appear in your 
+bibliography because you haven’t read 
+Becker’s book. 
+ 
+Two or more resources written by the same author in the same year: 
+(Thomas, 2020a)  
+(Thomas, 2020b) 
+Use a, b, c etc. to make it clear which 
+resource you’re talking about.  
+Make sure that your bibliography also has a 
+matching a, b, c next to the date so that 
+your lecturer can tell which resource is 
+which. 
+
+5 
+ 
+Where in my sentence should I put my in-text citation? 
+This is entirely up to you; choose whichever makes your sentence or paragraph flow well.  
+You can tag it onto the end of your sentence: 
+or you can put it within your sentence: 
+If you have already mentioned the author’s name in your own sentence, you do not need to 
+include the author’s name again in your in-text citation: 
+Note how it is clear in the example above that the quotation has come from Victore, so 
+there is no need to include his name again in the in-text citation. Also, note that the 
+elements of the in-text citation are still in the same order, i.e. Surname, Date, Page number.  
+ 
+How to layout quotations 
+Direct quotations:  when you quote an author word for word.  
+You can use ‘single’ or “double” quotation marks, simply choose one style and use it 
+consistently throughout your essay.  
+Use direct quotations sparingly because they break up the flow of your writing. Use direct 
+quotations to support a point, but remember that it is your thoughts and ideas that your 
+lecturer is most interested in.  
+Short quotations (typically up to two or three lines long) should be included in your 
+paragraph, e.g.  
+ 
+Working without set rules and ‘freed from concrete restraints’ (Victore, 2019, p.3), 
+allows an artist to develop their ideas more freely. 
+‘Freed from concrete restraints, we can enter a creative state of not knowing, open to all 
+opportunities’  (Victore, 2019, p.20). 
+Pixar has a long-standing reputation for high quality animated feature films. One 
+example is Finding Nemo (2003), which ‘augments vivid, classically styled animation 
+technique, rendered using computer graphics, with a story anchored in the expression 
+of long-held truths’ (Clarke, 2013, p. 94). It is in this father-son tale that.... 
+ 
+As explained by Victore in his exploration of creativity, ‘Admitting you don’t know is the 
+path to knowledge and even wisdom’ (2019, p.20).  
+ 
+
+6 
+ 
+Longer quotations
+ should appear in a separate paragraph, indented from your main text, 
+with the in-text citation at the end of the quotation. Because you are indenting the 
+quotation, there is no need to use quotation marks: 
+ 
+Paraphrasing and summarising 
+Paraphrasing and summarising are when you express someone else’s thoughts or ideas in 
+your own words, often in a more concise way.  
+Paraphrasing is when you re-write a sentence, paragraph or page into your own words.  
+Summarising is when you give the main points of an entire chapter, book or webpage.  
+The benefits of paraphrasing and summarising are: 
+• You demonstrate your understanding of their work  
+• You can often express their ideas more succinctly and with greater clarity 
+• It makes your writing flow better than the stop / start of using direct quotations.  
+The most important things to remember are you MUST keep the original meaning, and you 
+MUST include clear in-text citations so that your lecturer can tell which are your own 
+thoughts and ideas, and which are someone else’s. For example: 
+Original text (from Leonard, 2016, p.86): 
+Paraphrased example: 
+You can see how the paraphrased example is more concise, but still keeps the original 
+meaning and the in-text citation.   
+According to Rojek: 
+It is an enormous paradox that democracy...cannot proceed without creating 
+celebrities who stand above the common citizen and achieve veneration and 
+god-like worship (Rojek, 2001, p.198).  
+This view suggests that democracy itself is responsible for the creation of celebrity 
+culture.  
+Successful networking means always having a goal. This doesn’t have to be too specific, 
+but could be to identify at least two key contacts at design studios you would like to 
+work with, or a couple of people who are experts in something that you are deficient in 
+that you will need for an upcoming job. If you go in without any aims, you will almost 
+certainly achieve nothing.   
+Successful networking can be achieved by approaching an event with a goal in mind, e.g. 
+making two contacts that can be helpful to you, either in terms of their skills or 
+connections (Leonard, 2016, p.86). 
+
+7 
+ 
+How do I reference images? 
+When you include an image in your report, you need to ensure you give it a figure number, 
+author/creator, title or brief description, and year  
+For example: 
+   
+Figure 1,  Dorothea Lange,  
+Migrant Mother, Nipomo, California 
+1936 
+ 
+When you refer to the image in your text, you need to include an appropriate in-text 
+citation for the source of the image: 
+ 
+Figure 1. (Lange, 1936) is striking in its depiction of desperation and despair suffered 
+during the Great Depression.  
+
+8 
+ 
+Creating your bibliography 
+ 
+What is a bibliography? 
+A bibliography is a list at the end of your work that gives the details of all the sources you 
+have used. This is to enable anyone who reads your work to be able to go to the original 
+source for themselves if they want to.  
+ 
+How should I order my bibliography? 
+Your bibliography should be in alphabetical order by the first author’s surname. You do not 
+need to break the list up into different types of sources, your bibliography should be one 
+long list. 
+ 
+How do I know which details to include in my bibliography? 
+Norwich Uni uses ‘Cite them right’ (Pears and Shields, 2022) to determine which bits of 
+information you need to include, but all Harvard referencing follows a similar pattern: 
+Author (Year) Title of the work. [type of thing if needed]. Any further details needed to get 
+to the specific edition or issue. (date accessed online if needed). 
+The most common layouts you will need to use are shown below, but you will find loads of 
+examples of all kinds of different sources in the tables on page 14 onwards of this guide. 
+ 
+How to reference a book: 
+Author (Year of publication) Title. Edition. (for 2
+nd
+ edition onwards) Place of publication: 
+Publisher.  
+Example:  
+ 
+How to reference a journal article: 
+Author (Year of publication) ‘Title of article’, Title of Journal, Volume number (issue 
+number), page numbers.  
+Example:  
+ 
+How to reference a webpage or PDF: 
+Author (Year) Title. Available at: URL. (Accessed: date).  
+Klein, N. and Smith, R. (2000) No logo. 2
+nd
+ edn. London: Flamingo. 
+Strassmann, W.P. (2000) ‘Mobility and affordability in US housing’, Urban Studies, 37(1), 
+pp. 113-126.  
+
+9 
+ 
+Example:  
+ 
+How do I reference a film?  
+Title of film (Year of distribution) Directed by [Film]. Place of distribution: Distribution 
+company.  
+Example:  
+ 
+How do I reference a painting / drawing?  
+Artist (Year) Title of the work. [Medium] Institution or collection that houses the work, city 
+where the work is located.  
+Example:  
+OR:  
+Artist (Year) Title of the work [Medium] Available at: URL (Accessed: date).  
+Example:  
+ 
+How do I reference a video game?  
+Company / individual developer (Release year) Title of game [Video game]. Publisher.  
+Example:  
+ 
+Halliday, S. (2017) February footfall falters: UK sees no let-up in declining visitor traffic 
+trend. Available at: https://www.wgsn.com/news/february-footfall-falters-uksees-no-let-
+up-in-declining-visitor-traffic-trend/ (Accessed: 20 March 2023). 
+Fahrenheit 9/11 (2004) Directed by Michael Moore [Film]. Santa Monica, Calif: Lions 
+Gate Films.  
+Lichtenstein, R. (1963) Whaam! [Acrylic paint and oil paint on canvas] The Tate Gallery, 
+London.  
+Ackling, R. (1978) Five sunsets in one hour [Burnt lines on board and transfer lettering on 
+card]. Available at: http://www.tate.org.uk/art/artworks/ackling-five-sunsets-inone-
+hour-t03562 (Accessed: 16 June 2023).  
+Giant Squid Studios (2017) Abzu [Video game]. 505 Games. 
+
+10 
+ 
+How do I reference YouTube?  
+Name of person posting the video (Year posted) Title. Available at: URL (Accessed: date).  
+Example:  
+  
+Tate (2014) What makes an artist? Grayson Perry and Sarah Thornton. Available at: 
+https://www.youtube.com/watch?v=Ude15RmhjDs (Accessed: 16 June 2023). 
+ 
+
+11 
+ 
+ 
+Where do I find all the details I need for my bibliography? 
+With printed sources, you may need to look in the following places for the information you 
+need: 
+• Front cover 
+• Title page 
+• The back of the title page 
+• Contents or editorial page if a magazine 
+• Back page 
+For online sources it should be a bit easier to find information – but you may need to scroll 
+all the way to the bottom of a page to find full details such as date and author. 
+Author 
+Use surname (also known as family name), followed by initials (see p.4. for more details). . 
+Where no author / artist is named, use the corporate author, i.e. the organisation 
+responsible for the resource being published. For example Tate, or BBC.  
+Year 
+For a book, look for the most recent copyright date, this can be found in the small print, 
+usually a few pages in from the start or end of the book (called the copyright page). If it is a 
+book from the library, look on the library catalogue for the book’s full details, including the 
+date https://discovery.norwichuni.ac.uk  
+Webpages can be particularly difficult when trying to find a publication date. Try scrolling 
+down to the bottom of the webpage to look for the copyright date for the whole site, and 
+use this date instead.   
+If you still cannot find a date, you can use ‘no date’, e.g. (Tate, no date), but use this option 
+with caution – can you be sure that the information is up-to-date and reliable if no 
+publication or copyright date is given? 
+If in doubt, ask your librarian!  
+Title 
+Try to be consistent with how you use capital letters, and ignore how the book has 
+formatted them. Ideally, just the first word is capitalised: 
+Note that the subtitle starts with a lower case “a”. 
+  
+How the world ended.  
+ 
+Art and design: a student guide. 
+
+12 
+ 
+Edition 
+You only need to include this information for books which are a 2
+nd
+ edition or onwards. This 
+is usually clearly printed on the front cover or title page of the book. 
+Ignore mention of any reprints, these are not revised editions.  
+Place 
+Look for the Publisher’s head office address.  
+If multiple locations (e.g. London, New York, Paris) – include the city most local to you (i.e. 
+London) or just use the first city on the list. You do not need to include the whole list of 
+locations in your reference. 
+Page numbers 
+These only appear in your in-text citation for books, as the whole book is then referenced in 
+your bibliography.  
+Map data 
+You can find map information for your reference list by looking at the ‘Map Information’ 
+section in the left hand column when using Digimap.  
+Ebook/ejournals 
+Sometimes stable urls can be hard to find for ebooks and ejournals, and they can be very 
+long. If you are using a known academic source you can refer to that instead. 
+e.g. Available at: https://discovery.norwichuni.ac.uk 
+ 
+  
+
+13 
+ 
+Reference Layout Guide 
+Books and Pamphlets 
+Resource 
+type 
+In-text layout Bibliography layout 
+Book 
+(1 author) 
+(Spiekermann, 
+2003, p. 44) 
+Spiekermann, E. (2003) Stop stealing sheep and find 
+out how type works. 2nd edn. Berkeley: Adobe 
+Press. 
+Book 
+(2 or 3 
+authors) 
+(Rifkin, 
+Ackerman, and 
+Folkenberg, 
+2006, p. 76) 
+Rifkin, B., Ackerman, M. and Folkenberg, J. 
+(2006) Human anatomy: depicting the body from 
+Renaissance to today. London: Thames and Hudson. 
+Book 
+(4 or more 
+authors) 
+(Ainsworth et al., 
+2010, p. 63) 
+Ainsworth, M. et al. (2010) Man, myth and sensual 
+pleasure: Jan Gossaert’s Renaissance. New Haven: 
+Yale University Press. 
+  
+Book with 
+an editor 
+(Buckley, 2010, 
+pp. 89-90) 
+Buckley, P. (ed.) (2010) Penguin 75. New York: 
+Penguin. 
+Chapter in 
+an edited 
+book 
+(Telfer, 2006, p. 
+15) 
+Telfer, E. (2006) ‘Food as art’, in Neill, A. 
+(ed.) Arguing about art. 3rd edn. Abingdon: 
+Routledge. pp. 11-29. 
+Ebook (New, 2005, p. 
+46) 
+New, J. (2005) Drawing from life: the journal as art. 
+Available at: 
+http://lib.myilibrary.com/Browse/Open.asp?ID=106
+596 (Downloaded: 19 October 2023). 
+Digitised 
+extract 
+from a 
+book, 
+accessed via 
+the VLE 
+(Salter, 2001) Salter, R. ‘Method’, in Japanese woodblock printing. 
+London: A & C Black, pp. 60 – 97. Architecture: 
+BA1A. Available at: https://vle.norwichuni.ac.uk/my/ 
+(Accessed: 25 June 2023).  
+Exhibition 
+catalogue / 
+pamphlet 
+(Wallis, 1997) Wallis, S. (1997) Within these walls. Exhibition held 
+at Kettle’s Yard, Cambridge, 2 August to 21 
+September 1997 [Exhibition catalogue]. 
+ 
+
+14 
+ 
+Journals, Magazines and Newspapers 
+Resource type In-text layout Bibliography layout 
+Printed journal/ 
+magazine article 
+(Smith, 2008, 
+p. 63) 
+Smith, B. (2008) ‘Feeling good: eco fashion is 
+looking fine’, Selvedge, 21, pp. 62-65. 
+Online journal/ 
+magazine article 
+(Steyn, 2007, 
+p.192) 
+Steyn, J. (2007) ‘The cultural politics of 
+friendship’, Third Text,  21(2), pp. 189-198. 
+Available at: 
+http://www.informaworld.com/10.1080/09528820
+701273489 (Accessed: 27 March 2023). 
+Online 
+newspaper 
+articles 
+(Brooker, 
+2009) 
+Brooker, C. (2009) ‘Charlie Brooker: why I love 
+video games’, The Guardian. Available at: 
+http://www.guardian.co.uk/technology/2009/dec/
+11/charlie-brooker-i-love-videogames (Accessed: 
+05 June 2023). 
+Magazine 
+advertisement 
+(Vogue, 2017) Vogue (2017) ‘Alexander McQueen’ 
+[Advertisement]. June, p. 62. 
+ 
+  
+
+15 
+ 
+Websites, Social Media and Apps 
+Resource type In-text 
+layout 
+Bibliography layout 
+Website / pdf 
+/ online 
+photograph 
+(Kentridge, 
+2007) 
+Kentridge, W. (2007) Fragile identities. Available at: 
+http://www.brighton.ac.uk/kentridge/exhibition.html 
+(Accessed: 17 Dec 2022). 
+PDFs See websites (above) 
+Maps 
+(Digimap 
+online) 
+(Ordnance 
+Survey, 
+2017) 
+Ordnance Survey (2018) St Andrews Hall, 1:500. Available 
+at: http://edina.ac.uk/digimap (Accessed 8 August 2023).  
+Facebook (The 
+National 
+Gallery, 
+2017) 
+The National Gallery (2017) Otto Franz 
+Scholderer [Facebook] 14 June. Available at: 
+https://www.facebook.com/thenationalgallery/ 
+(Accessed: 21 June 2023). 
+Twitter (Norfolk 
+Museums, 
+2017) 
+Norfolk Museums (2017) [Twitter] 21 June. Available at: 
+https://twitter.com/NorfolkMuseums (Accessed: 21 June 
+2023). 
+Instagram 
+image 
+(Norwich 
+Castle Art, 
+2017) 
+Norwich Castle Art (2017) Development image by Carl 
+Rowe. Available at: 
+https://www.instagram.com/p/BVkMWUjFV3i/ 
+(Accessed: 21 June 2023). 
+Blog (Lau, 2017) Lau, S. (2017) ‘We choose to go to the moon’, Style 
+Bubble, 26 May. Available at: 
+http://stylebubble.co.uk/style_bubble/2017/05/we-
+choose-to-go-to-the-moon.html (Accessed: 05 June 
+2023). 
+App (Fitbit, 2017) Fitbit (2017) Fitbit [Mobile app]. Available at: Google Play 
+Store. [Downloaded: 21 June 2023). 
+Wikipedia  Easy answer - don’t put a Wikipedia reference in your 
+essay!  
+(By all means use it to find some keywords when you first 
+get your project brief, but only use Wikipedia to get 
+yourself started, don’t quote from it).  
+ 
+
+16 
+ 
+Films, TV, Games and Music 
+Resource type In-text layout Bibliography layout 
+Film (DVD) (Deadpool, 
+2016) 
+Deadpool (2016) Directed by T. Miller [DVD]. Los 
+Angeles, Calif.: 20
+th
+Century Fox. 
+Film (Online) 
+e.g. Netflix  
+(Pinocchio, 
+2022) 
+Pinocchio (2022) Directed by G. del Toro. Available 
+at: https://www.netflix.com/browse/genre/34399 
+(Accessed: 01 August 2023). 
+Directors’ 
+commentary 
+(Mendes, 
+1999) 
+Mendes, S. (1999) ‘Director’s 
+commentary’, American Beauty. Directed by S. 
+Mendes [DVD]. Los Angeles, Calif.: Dreamworks. 
+TV programme (The shock of 
+the new, 
+2012) 
+The shock of the new (2012) BBC Four Television, 
+17 September. 
+TV programme 
+viewed online 
+(e.g. via BoB) 
+(‘Living in the 
+city’, 2016) 
+‘Living in the city’ (2016) Grand Designs, Series 11, 
+episode 9, Channel 4 Television, 23 August. 
+Available at: 
+https://learningonscreen.ac.uk/ondemand/index.p
+hp/prog/0A58A922?bcast=122350515 (Accessed: 
+05 June 2023). 
+TV 
+advertisement 
+(Samsung, 
+2017) 
+Samsung (2017) Ostrich [Advertisement on ITV1 
+Television]. 31 March. 
+Video Game (Giant Squid 
+Studios, 2017) 
+Giant Squid Studios (2017) Abzu [Video game]. 505 
+Games. 
+YouTube (FF Channel, 
+2017) 
+FF Channel (2017) Gucci: cruise 2018. Available at: 
+https://www.youtube.com/watch?v=15sgCqxvrwI 
+(Accessed: 05 June 2023). 
+Podcast (Diez, 2019)  Diez, L. E. (2019) Cotton: is organic clothing really 
+eco-friendly? [Podcast]. 19 February. Available at: 
+http://lauraediez.com/2019/02/19/45-cotton-is-
+organic-clothing-really-eco-friendly (Accessed: 10 
+July 2023). 
+Song lyrics (Winehouse, 
+2007) 
+Winehouse, A. (2007) Rehab. London: Universal 
+Island Records. 
+Music track:  (Stormzy, 
+2019) 
+Stormzy (2019) ‘Crown’. Available at: Spotify 
+(Accessed 10 July 2023).  
+
+17 
+ 
+Images and Visual sources 
+You should include references for all images you use in your work (even if the images are 
+your own). Include image references in your bibliography, or table of illustrations where 
+applicable (e.g. when writing a research report).  
+Resource type In-text layout Bibliography layout 
+ 
+Exhibition (Tracey Emin 
+and William 
+Blake in 
+focus, 2017) 
+Tracey Emin and William Blake in focus (2017) 
+[Exhibition]. Tate Liverpool. 16 September 2016 – 3 
+September 2023. 
+Sculpture (Hepworth, 
+1956) 
+Hepworth, B. (1956) Forms in movement [Sculpture]. 
+Aratoi, Wairarapa Museum of Art and History. 
+Painting / 
+drawing 
+(Tyson, 1995) Tyson, N. (1995) Swimmer [Oil on canvas]. Tate, 
+London. 
+Graffiti (Pedro Lujan 
+and his dog, 
+2012) 
+Pedro Lujan and his dog (2012) [Graffiti] Factory 
+building, Pedro de Luján, Barracas, Buenos Aires. 
+(Viewed: 29 November 2022) 
+Photograph 
+(from book, 
+print or slide) 
+(Fullerton-
+Batten, 2008) 
+Fullerton-Batten, J. (2008) Hallway [Photograph]. 
+London: Thames and Hudson. 
+Photograph 
+(online) 
+(Lange, 1936) Lange, D. (1936) Migrant mother. Available at: 
+https://www.loc.gov/rr/print/list/128_migm.html 
+(Accessed: 21 June 2023). 
+Image (from a 
+book) 
+(Huntemann 
+and Aslinger, 
+2013, p. 133, 
+Figure 6.2) 
+Huntemann, N.B. and Aslinger, B. (eds.) (2013) Gaming 
+globally: production, play and place. New York: 
+Palgrave Macmillan.  
+Image (online) Boghosian 
+(2019)  
+Boghosian, J. (2019) Stranger Things logo. Available at: 
+https://www.printmag.com/design-trends-2/stranger-
+things-logo-design/ (Accessed: 11 July 2023).  
+Image (your 
+own) 
+(Jackson, 
+2019) 
+Jackson, T. (2019) Cromer pier at sunrise [Photograph].  
+NB If your photograph is of another artist’s work, and 
+it’s that artist that you’re discussing, reference their 
+artwork rather than your photo.  
+
+18 
+ 
+Flickr (Pogue, 2015) Pogue, S. (2015) _DSC9159. Available at: 
+https://www.flickr.com/photos/sandypogue/23557050
+746/in/dateposted/ (Accessed: 05 June 2023). 
+Copyright free 
+image  
+(WikiImages, 
+2019) 
+WikiImages (2019) Planet earth. Available at: 
+https://pixabay.com/photos/earth-blue-planet-globe-
+planet-11008/ (Accessed: 10 July 2023). 
+Google image 
+search 
+(Topshop, 
+2019) 
+Topshop (2019) Silk printed wide joggers by Boutique. 
+Available at: 
+https://www.topshop.com/en/tsuk/product/new-in-
+this-week-2169932/new-in-fashion-6367514/printed-
+wide-jogger-by-boutique-8976362 (Accessed: 10 July 
+2023).  
+NB You will need to open the website that the image 
+appears on, and reference that webpage rather than a 
+Google images webpage.   
+Packaging (Nestlé, 2017) Nestlé (2017) Rowntree’s fruit pastilles [Wrapper]. 
+Logo (Starbucks, 
+2017) 
+Starbucks (2017) Starbucks [Logo]. Available at: 
+https://www.starbucks.com (Accessed: 21 June 2023). 
+Pinterest  Don’t reference an image from Pinterest!  
+ 
+It is incredibly difficult to be certain who created the 
+original image as these are frequently re-posted. Find 
+the original source of the image and reference that 
+instead.  
+ 
+  
+
+19 
+ 
+Public and Personal Communication (unpublished works) 
+Resource type In-text layout Bibliography layout 
+Lecture (Westwood, 
+2018) 
+Westwood, V. (2018) ‘Music and fashion’ [Lecture]. 
+BA2a: Experimentation and application. Norwich 
+University of the Arts. 10 November. 
+Conversation (Obama, 
+2015) 
+Obama, B. (2015) Conversation with John Smith, 10 
+April. 
+ 
+(NB – in the example above, you are John Smith, 
+and B. Obama is the person you had a conversation 
+with). 
+Email (Obama, 
+2016) 
+Obama, B. (2016) Email to Lauren Rowley, 23 May. 
+(NB – in the example above, you are L. Rowley, and 
+B. Obama is the person who emailed you). 
+Poster (viewed 
+online) 
+(Miller, 1943) Miller, J.H. (1943) We can do it! [Poster] Available 
+at: https://www.xerox.co.uk/en-gb/digital-
+printing/insights/custom-poster-prints (Accessed: 
+10 July 2023).    
+Poster (viewed 
+at exhibition) 
+(Games, 
+1941) 
+Games, A. (1941) Join the ATS [Poster]. Exhibited at 
+London, National Army Museum. 6 April to 24 
+November 2019.  
+Leaflets / flyers (Association 
+of Illustrators, 
+no date) 
+Association of Illustrators (no date) Norwich drink 
+and draw [Leaflet obtained from Norwich Uni 
+Library]. 10 July 2023. 
+Tutor’s handout  
+/   notes 
+(Walker, 
+2022) 
+Walker, S. (2022) ‘Astro experiment’. BA1A: 
+Fundamentals. Norwich University of the Arts. 
+Unpublished.  
+Eventbrite 
+programme 
+details 
+(Festival of 
+the Dead, 
+2019) 
+Festival of the Dead (2019) Festival of the Dead: 
+Norwich. The LCR, Norwich [Event programme].  
+ 
+  
+
+20 
+ 
+Hand-in Checklist 
+ 
+Use this checklist before hand-in to double check that your in-text citations, image 
+references and bibliography are well organised and ready for marking: 
+In-text 
+ Are all your in-text citations in this order: author’s surname(s), publication year, page 
+number(s) 
+ 
+ Does each of your in-text citations have a matching item in your bibliography?  
+Go through each in-text citation to double check 
+ 
+ Where you have paraphrased or summarised, is it clear which parts of your 
+paragraph are your own ideas, and which are someone else’s? 
+If not, have a look at moving your in-text citation to make it clearer.  
+ 
+ Have you used quotation marks consistently? I.e. have you used only ‘single’ or 
+“double” quotation marks throughout, or have you used a mixture of both?   
+ 
+Bibliography 
+ Do you have a good mix of sources, or have you over relied on websites? 
+ 
+ Are you happy that all of your sources are reliable? 
+ 
+ Have you listed every source that you have cited, including images?  
+ 
+ You should have one long list, there’s no need to split different types of resources 
+(e.g. books and websites) into different sections.  
+ 
+ Is your bibliography in alphabetical order by author’s surname?  
+ 
+ Is your punctuation (brackets etc.) consistent throughout for each reference?  
+ 
+Got a question?  
+Email library@norwichuni.ac.uk or check our website https://library.norwichuni.ac.uk

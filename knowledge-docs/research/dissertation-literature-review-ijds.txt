@@ -1,0 +1,1175 @@
+Vo l u m e   17, 2022 
+Accepting Editor Nicole Buzzetto-Hollywood │Received: May 9, 2022│ Revised: September 14, 2022 │ Ac-
+cepted: September 20, 2022.  
+Cite as: Ali, A., Pandya, S., & Varma, U. (2022). Writing doctoral dissertation literature review: Identifying the 
+prerequisites, corequisites, and the iterative process for writing the literature. International Journal of  Doctoral Stud-
+ies, 17, 433-458. https://doi.org/10.28945/5026  
+(CC BY-NC 4.0) This article is licensed to you under a Creati   ve Commons Attribution-NonCommercial 4.0 International 
+License. When you copy and redistribute this paper in full or in part, you need to provide proper attribution to it to ensure 
+that others can later locate this work (and to ensure that others do not accuse you of plagiarism). You may (and we encour-
+age you to) adapt, remix, transform, and build upon the material for any non-commercial purposes. This license does not 
+permit you to use this material for commercial purposes.
+ 
+WRITING DOCTORAL DISSERTATION LITERATURE 
+REVIEW: IDENTIFYING THE PREREQUISITES, 
+COREQUISITES, AND THE ITERATIVE PROCESS FOR 
+WRITING THE LITERATURE 
+Azad Ali* Indiana University of Pennsylvania, 
+Indiana, PA, USA 
+Azad.ali@iup.edu  
+Shardul Pandya American National University,  
+Salem, VA, USA 
+drspandya@yahoo.com    
+Umesh Varma American National University,  
+Salem, VA, USA 
+ucvarma@an.edu 
+*Corresponding author 
+ABSTRACT 
+Aim/Purpose Identify the prerequisites, the corequisites, and the iteration processes in or-
+ganizing and writing the literature review chapter of doctoral dissertations 
+Background Writing the literature review chapter of doctoral dissertations presents unique 
+challenges. Students waste a lot of time identifying material to write, and the 
+experience is generally that of frustration and time delay.  
+Methodology This paper reviews literature to identify levels of information helpful for 
+writing the literature review chapter: prerequisites, corequisites, and iteration 
+process.   
+Contribution The contribution of this paper is different than others that have been written 
+about the literature review. The intended audiences for this paper are men-
+tors, advisors, or academies that supervise students in writing their doctoral 
+dissertations. Th is paper introduces the writing of the literature review by or-
+ganizing the suggestions into groups of   topics more familiar to academies 
+than in other fields. The concepts of prerequisites, corequisites, and iteration 
+are very familiar to educators; they    often use them in their courses. The aca-
+demic curriculums are built on such concepts. Thus, grouping the discussion 
+into these terms familiar to mentors, advisors, or doctoral dissertations super-
+visors will put the findings into a more helpful focus for educators that su-
+pervise students in writing the literature review chapter.    
+
+Writing Doctoral Dissertation Literature Review 
+434 
+Findings Writing a doctoral dissertation literature review is long and complicated be-
+cause some students delve    into the writing without much preparation. Identi-
+fying what is helpful before and   during the writing and being mindful of the 
+repetitive steps helps    guide the students through the writing of the literature 
+review chapter of doctoral dissertations.  
+Recommendations  
+for Practitioners 
+Before delving into the writing of the literature review, it will be helpful to 
+identify the prerequisites, the corequisites, and the iteration process that goes 
+into the writing literature review.  
+Recommendations  
+for Researchers  
+Writing the literature review chapter in doctoral dissertations remains chal-
+lenging. More research would be helpful that focuses on the late writing 
+stages. The suggestions we made in this paper could form a solid start for fu-
+ture research in this topic.       
+Impact on Society The research findings will help doctoral mentors/advisors guide students in 
+completing the chapter on literature review 
+Keywords literature review, dissertation literature review, phases of literature review, 
+snowballing in literature review 
+INTRODUCTION 
+In my view, an incredible amount of scholarly waste exists in the academic industry 
+that results from the inefficient way doctoral students typically conduct doctoral liter-
+ature reviews. Thousands of doctoral students every year spend hundreds of hours 
+on their dissertation literature review. Most of this time is spent aimlessly floundering 
+since most students don’t know what they are doing, and most supervisors don’t have 
+a model for guiding them to proceed in a systematic manner. (Okoli, 2015, p  . 904) 
+The points that can be drawn from the quote above are twofold. First, a literature review is essential 
+to completing a doctoral dissertation before working on the other chapters. Second, it can be inferred 
+that   conducting a literature review could turn out to be an unnecessarily lengthy and daunting pro-
+cess.    The main reason that    makes the writing of the literature review chapter long is that students of-
+ten venture into writing the chapter without much preparation and adequate knowledge of what is 
+involved in writing the chapter (Randolph, 2009).   
+Writing a literature review (typically the second chapter of a doctoral dissertation), if started without 
+adequate knowledge about what goes into  writing the dissertation, will complicate the effort and   ex-
+pand    the time required to write it (Ebrahim, 2012). Many issues need to be addressed before and dur-
+ing the literature review, and identifying these issues could lead to a better understanding of writing 
+the literature review chapter. This paper addresses these    issues    surrounding the writing of chapter 
+two of   doctoral dissertations. The purpose of this study is to identify factors that    are  helpful at the 
+different phases of the writing of a literature review: 
+- The   factors that   are helpful to learn before starting the writing of chapter 2. We term this 
+knowledge as the prerequisites to writing chapter 2 and cover it first. 
+- The   specific attributes that are needed to develop during the writing of chapter 2. We term 
+this as the corequisites to writing the chapter on lit review, and we cover it second. 
+- The repetitive nature of specific steps that students follow when writing the literature review. 
+We   name these steps the iterative process for reading and organizing the reviewed literature. 
+- The daunting task of formalizing the long list of literature reviewed into clear writing con-
+sistent with the purpose of research and adhering to formatting and regulation guidelines is 
+addressed next in this paper. 
+
+Ali, Pandya, & Varma 
+435 
+- Last, the paper displays a symbolic su mmary of what is discussed in the paper and the sug-
+gestions it made. It will also include recommendations for future research on topics related 
+to writing doctoral dissertations.  
+RESEARCH PLAN 
+The purpose of this research is to clarify the   factors of prerequisites, corequisites, and the iterative 
+process that are helpful to the writing of the   literature review chapter of doctoral dissertations. The 
+clarification comes in two different forms: First, through the explanation of the various arti  cles to 
+form a view of what is involved in writing each phase of the literature review. Second, through draw-
+ing figures that represent what was discussed during the phase of the literature review. Then, the fig-
+ures   are merged into one combined chart representative of all the stages of writing the literature re-
+view chapter. So instead of following a straight line of completion in this study, an often-wavy line is 
+followed to clarify the different points that   need to be explained here in this paper. Figure 1 depicts 
+the wavy way this research has   followed to report their findings. 
+ 
+ 
+Figure 1: Plan Overview of  This Paper 
+IDENTIFYING PREREQUISITES FOR THE LITERATURE REVIEW 
+Prerequisite is a word often repeated in academia to refer to one or more courses a student must 
+complete before they are eligible to tak  e a specific course. For example, a  course IT8000 Research 
+Method I might be a prerequisite for the course IT8100 Research Method II. This means a student 
+cannot register for IT8100 unless they have    taken and passed IT8000 or are otherwise able to 
+demonstrate evidence of knowledge of material covered in IT8000. Thus, knowledge of material im-
+parted in IT8000 is a prerequisite for students enrolling in IT8100. Furthermore, it stands to reason 
+that if a student begins work in IT8100 without the prerequisite knowledge for IT8100, the student 
+will, at best, flounder and struggle in IT8100. 
+Identifying
+Prerequesites
+IdentifyinCo-
+requisites
+Explainingthe 
+itermation 
+process
+Suggestions for 
+writingchapter 
+two
+
+Writing Doctoral Dissertation Literature Review 
+436 
+In this paper, we use the word Prerequisite to mean knowledge that will be helpful to students as they 
+begin and eventually complete chapter two -  the literature review chapter. In other words, it will be 
+more beneficial to the students in their literature review writing if they have this knowledge. We have 
+identified the following points that   are helpful to teach the students before starting the work on the 
+literature review: 
+• Identifying the dissertation research topic 
+• Review of published dissertations 
+• Clarify the purpose of   the   literature review 
+• Identify typical contents of     the   literature review 
+• Establish evaluation metrics and benchmarks 
+CLEAR IDENTIFICATION OF THE RESEARCH TOPIC 
+Writing a literature review can be helped by adequately identifying the research topic. Clarifying the 
+research topic helps identify what sources to review, keywords to search for, databases to search for, 
+and in many other ways. To put it differently, clear identification of the research topic can give more 
+precise directions in the writing of a literature review (Paul & Criado, 2020; Torraco, 2016; Webster & 
+Watson, 2002).   
+Identifying the research topic does not come in isolation. Instead, it must be connected to other dis-
+sertation sections before being clarified. Lunenburg and Irby (2008) suggested that explaining the re-
+search purpose as a pre-condition to starting the literature review is essential. Ali and Pandya (2021) 
+stressed the importance of clarifying the research question section before beginning the literature re-
+view. 
+Along with suggestions for the   research problem statement, other concepts in the dissertations need 
+to be clarified. Writing the literature review can be helped by specifying the expected outcome of the 
+research (Terrell, 2015). Understanding the section of research purpose can help determine if the 
+topic is research worthy (Levy     & Ellis, 2006) and what kind of literature search needs to be com-
+pleted. Along the same lines, crucial to clarifying the   research topic is knowledge of how to collect 
+data for the research, which brings the issue of the   targeted population for the study (Jalali & Wohlin, 
+2012).  
+REVIEW OF PUBLISHED DISSERTATIONS 
+Reviewing published dissertations before writing the literature review is of enormous value to the 
+student writing the   dissertation. This is more specifically true about writing the literature review. 
+Studying published dissertations provides students with examples and can serve as a guide or naviga-
+tion tool as they begin their dissertation journey (Wohlin, 2014). Some challenges could be faced in 
+the search for published dissertations. However, electronic library databases can help (Bates    et al., 
+2017).  
+In our search, we found at least one library database that is specifically geared toward finding pub-
+lished dissertations. Using the ProQuest Dissertations and Theses library database, students can search 
+through numerous published dissertations. According to  the headlines listed on their page, ProQuest 
+has the most comprehensive collection of dissertations, and their published dissertations can go back 
+to 1861. Unless searching for   some specific or seminal dissertation, most    students would not need to 
+go back beyond the past five years. But that one can search for dissertations going back 150+ years 
+could be helpful to some students when they review literature.  
+Students can search for dissertations in ProQuest using    a simple search. They can also use the ad-
+vanced search feature, which allows the search to narrow down. The advanced search has different 
+search options and logical operators that can help narrow down the field and focus more or narrow 
+the focus of the searched dissertations so the search could be more manageable. 
+
+Ali, Pandya, & Varma 
+437 
+CLARIFYING PURPOSE OF LITERATURE REVIEW 
+The   literature review has different purposes of achieving and different sections to include. Randolph 
+(2009), for example, suggested four purposes for completing the literature review:  
+• Demonstrating the author’s knowledge of the selected field of study 
+• Clarify the vocabulary, theories, key variables, and phenomena for the selected topic of re-
+search 
+• Presents a  history of the topic and methods of searching for information about the topic 
+• Inform the students of the influential researchers for the chosen topic 
+Xiao and Watson (2019) noted that the objectives of the literature review could be three: understand 
+the   depth of knowledge in a field and find gaps; test   hypotheses and develop new theories; and re-
+veal weaknesses, contradictions, and inconsistencies.  
+Jacobs (2013) stressed the importance of conducting a literature review to narrow down the writing 
+of  the   research problem statement. Wee and Banister (2016) suggested that a literature review repre-
+sents an added value for researchers because they (the researchers) get up-to -date information on the 
+issue being discussed in the problem statement. Torraco (2005  ), on the other hand, considers con-
+ducting a literature review very important because it gives the researcher exposure to past writings on 
+the topic and provides a framework on which to explore the future.  
+We can detect from the statements above that conducting a literature review is sometimes considered 
+an “eye-opener” for the researcher in terms of starting the dissertation by writing the research prob-
+lem statement (Columbaro, 2009). Literature review, in turn, gives the students ideas on what prob-
+lems were discussed in the past and compares them with the problem identified in their research 
+(Okoli, 2015). It gives them examples of how research problem statements were written in the past, 
+and they can model what they learned   to write their problem statement (Ebrahim, 2012).  
+Last, we refer to Shaf fril et al. (2020), who described the purpose of the   literature review in the fol-
+lowing statement: 
+Previous works are fundamental to the creation of new knowledge. When performing 
+a literature review, researchers analyze, interpret, and critically evaluate the existing 
+body of knowledge. The process allows them to discover the patterns of prior results, 
+comprehend the depth and details of the existing knowledge, and identify gaps for 
+further exploration. ( p. 1) 
+COMMON CONTENT TYPICALLY INCLUDED IN LITERATURE REVIEW 
+An appropriate question that could be asked at this point includes what to incorporate in the litera-
+ture review and which section headings need to be included. Different studies answer this question, 
+but the results do not produce a shortlist of topics to be covered in a literature review chapter. For 
+example, Lunenburg and Irby (2008) list ten common topics to be included in the   chapter of litera-
+ture review: Providing a historical background; Describing its current status; Supporting the purpose 
+of  the   study; Identifying gaps in the literature; Becoming aware of variables relevant to the problem; 
+Understanding the seminal studies that are cited more often; Identifying the leading scholars relevant 
+to the problem; Proposing useful theoretical constructs for the study; Understanding the methodol-
+ogy used, and Observing comparative studies. Rowe (2014) suggested that the literature review chap-
+ter needs to include a summary of prior research, examination, and contribution of the   present re-
+search, an  explanation of results of prior studies, and clarifying alternative views. Kraus et al. (2020), 
+on the other hand, offer that   a literature review should contain an  explanation of the definition of 
+critical terms and concepts, the theoretical foundation of the study, the    historical context of the topic 
+of study, genesis of the topic, and   synthesis of literature review.  
+
+Writing Doctoral Dissertation Literature Review 
+438 
+As seen here, the suggestions are diverse and numerous. Admittedly, the content of the literature re-
+view could vary greatly depending on the topic being selected. However, some minimum identifiable 
+sections need to be clarified that could lead the students to start somewhere with the writing of the 
+literature review chapter. Based on our review and what was noted in this section, we determined that 
+the minimum required sections in the chapter of the   literature review could include the following.  
+Introduction: Describe the topic, the purpose of the dissertation, and an overview of the structure 
+of the chapter (Denscombe, 2017).  
+Search strategy: It is essential to include what the student has done to search the literature and or-
+ganize them into helpful topics that can be written at later stages. It will be helpful if the student 
+give s details about what databases were searched, what keywords were used, and   the results of find-
+ing and filtering (Kable et al., 2012).  
+Historical Context of  the Dissertation Topic: Presenting some historical context of a topic could 
+be helpful. Clarifying what took place before the current content sets the reader to appreciate the ex-
+isting content (Nystrand, 2006). It can also serve as a platform to appreciate new research that doc-
+toral students conduct. 
+The theoretical foundation used in the study is worthy of research and explanation because the 
+doctoral dissertation is typically based on a theoretical foundation (Osanloo & Grant, 2016). The sec-
+tion on the theoretical foundation is a major focus of doctoral dissertations because many other sec-
+tions build on it. Thus, providing the   detailed context of the theoretical foundation is needed in the 
+literature review chapter. 
+The variables used in the study:  If there is a model that the study will follow or variables that will 
+be studied, the literature review chapter is a good place to introduce this. This    discussion may   sound 
+specific to quantitative dissertations, but it is not. Typically, quantitative, qualitative, and mixed 
+method studies all  have variables in some shape or form, and it is helpful to introduce and explain 
+them within the literature review chapter of a doctoral dissertation (Osanloo & Grant, 2016).  
+Literature Review and Synthesis: As the name suggests, this section forms the core of the chapter 
+on literature review. The materials covered in this section lay the foundation for building the content 
+of chapter 2 of doctoral dissertations. Therefore, this section is pivo  tal in how the dissertation would 
+proceed (Kraus et al., 2020). Understandably, the contents of this section are specific to the research 
+problem, and the materials discussed in this section would vary from one study to the next. However, 
+analysis and synthesis of the reviewed material justify the selection of the theoretical framework and 
+the variables used in the study (Paré et al., 2015). 
+In the literature review section, the researcher is expected to search for answers to the research ques-
+tion(s) they have proposed in chapter 1 of their study. They do this by sourcing, reviewing, an alyzing, 
+and synthesizing current relevant published literature. This exercise is important because it serves two 
+purposes.  
+The first purpose of this exercise is that it establishes that the research problem proposed in chapter 
+one is a known problem among academics. It is important to establish that the proposed research is 
+of interest to researchers and that the student has   not proposed using their doctoral journey to solve 
+a local problem or to research a “pet peeve.” If academically rigorous research publications discuss-
+ing their problem cannot be found, the student risks not adding to the “body of knowledge” once 
+their work is complete (Ferrari, 2015).   
+The second purpose of studying current literature on the research topic is to confirm that, while the 
+topic has been studied in academia, a solution to the student’s specific research question(s) is un-
+known. Obviously, while conducting this exercise, if the student finds a solution to their question(s), 
+their research proposal is moot. But by searching for and not finding a solution, the student can es-
+tablish that (a) this is a legitimate problem and (b) no known solution can be found (Kraus et al., 
+2020). Thus  , the student makes the case that the only way to answer their research question(s) is for 
+
+Ali, Pandya, & Varma 
+439 
+the student to solve the problem themself. This then sets the tone for chapter three, where the stu-
+dent discusses the research method and   specifies, in detail, how they plan to use to solve the prob-
+lem. Hence, this section lays the foundation that will play a pivotal role in how the dissertation will 
+proceed. 
+EVALUATION METRICS/BENCHMARKS/CRITERIA 
+Setting criteria to evaluate completed work has been part of academia from its inception. The criteria 
+can be set at  the   assignment level, at a course level, at  the   program level, or even to obtain a degree. 
+De Villiers et al. (2017) suggested that set conditions for evaluation need to start by identifying the 
+evaluation subject, then the   criteria, and then the metrics. This entails clarifying what is to be com-
+pleted and how it is going to be evaluated. Developing criteria can come in the form of evaluation 
+metrics or establishing benchmarks (Sarialtin, 2015). By establishing metrics or setting benchmarks, 
+criteria can be established   in terms of answers to the question of what makes a quality submission 
+(Schoenfeld et al., 2018). 
+Evaluation metrics and criteria are everywhere. And they are practiced repeatedly in different applica-
+tions. They can be used to evaluate employee performance when applying for promotion, for in-
+stance. They can be used in academia to evaluate the work submitted by students for grading or eval-
+uate faculty for tenure or promotion eligibility. Metrics    are often attached to the performance evalua-
+tion process. These metrics are benchmarks that determine if the   examined performance meets the 
+conditions for which the evaluation is being conducted.  
+Similarly, for the chapter on literature review, different qualitative measurements can be applied. 
+However, along with qualitative measurements, it will be helpful to include some quantitative metrics 
+that students can learn to look for in advance. Two such metrics commonly exist for doctoral disser-
+tations  : the number of pages and the number of references that are cited in the chapter. (Kushkow-
+ski et al., 2003). 
+The number of written pages    may   not always reflect quality. The common notion is that more writ-
+ten pages may indicate proficiency in writing while fewer pages may show the opposite. Longer writ-
+ing does not necessarily correlate with    the   quality and depth of writing. On the contrary, fewer pages 
+may be more concise in describing the reviewed literature (Kraus et al.., 2020). Nevertheless, the 
+number of pages in a literature review chapter is commonly used    as a benchmark when reflecting on 
+the   quality of the chapter.  
+The number and type of references are other indicators of  research depth. I f more references are 
+listed in the document, it could imply that more articles are reviewed, and thus more knowledge is 
+presented in the chapter. This may not always be true. Writing with fewer references could be more 
+direct and have better quality than with a reference list that   boasts a larger number of references ( D.   
+A. Becker & Chiware, 2015).  
+Another quantitative metric is the originality report, which is a measure of the extent of match be-
+tween a paper submitted for evaluation and other publications (Baptista et al., 2015). While no spe-
+cific   scoring of matches is available, it is accepted that a high percentage of a   match     may be indica-
+tive   of plagiarism. A common issue that results in high matches is direct quotes (Trinchera, 2002). 
+Too many direct quotes in a document will result in high matches. So, it will be best if these direct 
+quotes are kept to a minimum. 
+Determining qualitative metrics for assessing the chapter on literature review could be more challeng-
+ing to identify. Brocke et al. (2009) noted that the quality of the   literature review is often affected by 
+the literature review process – that is, the portion of the chapter that talks explicitly about the   litera-
+ture review. Since this explicit talk of about a literature review could be unique to each dissertation, it 
+will be challenging to establish metrics that can be applied to all who write chapter two or this section 
+in the chapter.  
+
+Writing Doctoral Dissertation Literature Review 
+440 
+Based on the discussion in this section, we list in Figure 2 a waterfall graph that shows our suggested 
+prerequisites for writing chapter 2. We selected the waterfall shape to show that each step depends 
+(falls in) on the previous step. That is, one step falls into the   next step, and so on. We suggest that 
+these steps are to be explained consecutively to start with clarifying the topic, and as the topic is clari-
+fied, then talking about the purpose of the   literature review is made easier. The same thing    can be 
+said   about the other steps.  
+ 
+Figure 2 –  Depiction of prerequisites to conducting a literature review 
+IDENTIFYING THE COREQUISITES TO LITERATURE REVIEW  
+In academia, the term “co  -requisites” is  often    used to identify courses that are needed to be taken to-
+gether. In other words, a course (call it course A) needs to be taken at the same time as another 
+course (call it course B) because knowledge in both courses complements each other or is required to 
+be taken together. In this study, we refer to the corequisites as characteristics, activities, and steps that 
+are helpful to have while conducting the literature review. In particular, we deem the following factors 
+as helpful to have during the writing of the literature review chapter of the doctoral dissertation: 
+• Managing the reviewed literature 
+• Annotations in digital documents 
+• The progressive quality of the writing of literature review 
+• Self-efficacy and writing efficacy 
+MANAGING THE REVIEWED LITERATURE 
+Over the past two decades, “Googling” has   morphed into an acceptable verb in the English language, 
+and it is common knowledge that one can quickly get oodles of information on almost any subject 
+by simply searching for it on internet browsers. However, most of what is found from web searches 
+need not be directly related to the topic being searched (Harzing & Van der Wal, 2008). Instead, 
+Clearly 
+identifying 
+research 
+topic
+Review of 
+published 
+dissertations
+Clarify 
+purpose of 
+literature 
+review
+Identify 
+common 
+content
+Identify quality 
+measurements
+
+Ali, Pandya, & Varma 
+441 
+search results yield portions of the phrase searched for, similar words, or other tertiary information 
+related and oftentimes unrelated to the search. So, internet surfers end up having to decipher through 
+the   loads of information displayed to them and   separate the   wheat from the chaff.  
+A similar thing can be said about students writing doctoral dissertations: when they search for a 
+topic, they can find a lot of information from a simple search they conduct. But they could be over-
+whelmed by the volume of information that they   find from the search (Beliga, 2014). In addition, 
+this   information volume must be recalled later when writing the d   issertation. To avoid being over-
+whelmed and to make it easier for retrieval later , the reviewed literature needs to be organized to sim-
+plify the recall. For this purpose, two concepts were discussed among researchers on how to manage 
+the   reviewed literature: concept map and organizing references and citations.  
+A concept map is a help  ful way to plot ideas. I t draws graphics because the text that describes the 
+concept that is cumbersome and difficult to understand (Wilhelm & Kaunelis, 2005). These concepts 
+can better be explained if put in a chart or a diagram that depicts the relationship among these ele-
+ments. Figure 3 shows the conceptual map for the formal problem determination. Ideally, a re-
+searcher may have already considered the concept based on his or her perceptual ability. However, 
+the concept must be translated into one or more constructs so that a determination can be made as 
+to what variables should be investigated. This is where the preliminary review of the literature will 
+indicate the gap in research or the need for replication of such research to substantiate the findings 
+of other researchers. Regardless of the objective of literature review – action research, case study, 
+cohort design, cross-sectional design, descriptive, experimental, exploratory, or field research – the 
+researcher may need to cross-reference the   problem domain with the existing literature to establish a 
+strong case for the study of perceived dependent variable(s). Although, at this stage the problem do-
+main cannot be defined formally, nevertheless, and as indicated in the concept map, the validation 
+and verification of the problem requires further refinement by adding three distinct components that 
+include a) preliminary investigation or analysis of the problem, b) internal/external controls that may 
+influence dependent variable, and c) researcher’s own skills, efficacy, perceptual ability, and risk-taking 
+propensity.  
+ 
+Figure 3 – Concept Map Schema for Problem Determination 
+
+Writing Doctoral Dissertation Literature Review 
+442 
+Another way    to manage all the references that were found in the search is by using the reference 
+management (RM)    software tool. Gilmour and Cobus-Kuo (2011) recommended the use of refer-
+ence management software because it contains the following features: 
+• Organization: Reference managers offer   different ways of managing references, including 
+breaking them into categories that can be recalled and tagging the reviewed literature so it 
+can be easily categorized.  
+• Searching and sorting: RM software allows searching and sorting the software. This fea-
+ture is particularly helpful when attempting to look for specific information later    after    the 
+student has commenced writing with intensity.  
+• Annotation: RM software allows adding notes to the references. In other words, as the 
+search for literature continues and the student decides to include a reference, they can add 
+notes to remind them of the main points or the reason for adding this literature. Although it 
+may sound trivial, any little step that can organize and simplify the review process is  help  ful. 
+• Citing references and creating bibliographies: This   feature help  s immensely reduce er-
+rors from misspelling and incorrectly citing references. As the research proposal – and later, 
+the thesis – nears completion, it will be critical that   all references are correctly spelled and all 
+references listed in the reference section are cited in the body of the dissertation and   vice 
+versa. RM software can help with this time-consuming and tedious task. 
+While    RM software is  helpful and perhaps superior in managing the references, most Word Pro-
+cessing software offers many of the above features. MS Word for example offers a feature to tag the 
+references for easy categorization and review. MS Word also   offers options for citations but is limited 
+to inserting parenthetical citations (the citation listed at the end of the sentence).  
+Organizing the reviewed literature is not limited to the use of the software. Other ways can be intro-
+duced to organize the reviewed literature. One way is to create a spreadsheet in which the student 
+highlights or lists the main points from the reviewed literature. It can be done by listing the main col-
+umns, including author, title, focus, context, and other information. Saving all this information as Ex-
+cel a  nd PDF files can help review and find information (via search feature) at later stages. Most elec-
+tronic libraries and search engines allow the download of PDF files. These files can be saved and or-
+ganized, and   they aid in searching for content as the writing of the literature review begins. 
+ANNOTATION IN DIGITAL DOCUMENTS  
+Note-taking (or annotation) on printed documents has long been practiced in academia. Annotation 
+can be practiced in many forms: Making notes on the margins of the page, underlying text, scribbling 
+on the selected text, and other means of annotations. Highlighting text with different colors or even 
+adding post-it slips to mark pages where specific information is  located serves the same purpose 
+(Pearson et al., 2009). (The annotation techniques allow the researcher to backtrack relevant findings 
+and cross-reference with continued research.) This kind of annotation contributes to close attentive 
+reading where more concentration and memory of materials read is needed.  
+Above was the norm until technological advances led to a practice evolving significantly. Over the 
+past two decades, primary reading gradually shifted to interactive on-screen and digital media (Pear-
+son et al., 2012). For a while, this reading of digital documents made it difficult to make annotations, 
+as  digital media was not conducive to notetaking. This then affected attentive reading (Buchanan et 
+al., 2015).  
+Today, digital readers have evolved, with embedded annotation tools routinely available within web 
+browsers and portable document format (PDF) such as Adobe Acrobat Reader. The simplest and 
+most common annotation tools include drawing with different colors, highlighting text with different 
+color codes, adding pop-up comments to certain text for clarification, reading aloud, and other anno-
+tation tools.  
+
+Ali, Pandya, & Varma 
+443 
+Pearson et al. (2012) research took the annotation issue and further provided significant suggestions 
+for using digital screen annotation to make it easier to annotate. Pearson et al. listed the following 
+techniques that could be used for annotation in digital documents: 
+• Annotation and bookmarking 
+• Document mark-up tools are as easy as possible 
+• Unified post-it tool 
+• Visual placeholders 
+• Digital reading desk 
+• Digital notetaking 
+With these techniques, readers can annotate in different ways, including writing on the margins, 
+bookmarking where different sections can be linked to others, color coding, and many other tech-
+niques that students can use. The point that can be drawn is that annotation came back to the digital 
+screen with more power: readers can highlight, underline, draw, and others as  in the past. In addition 
+to  annotation in digital documents, digital    flashcards and further annotation tools can be used to help 
+pay close attention while reading and   so to serve    for easier retrieval at a later stage of writing a  litera-
+ture review (Pearson et al., 2009). 
+Annotation tools can come in handy and be helpful for students writing their literature reviews. 
+When going through the literature volume, it is not a good idea to totally depend on one’s memory 
+and to remember all the notes taken during the review. Instead, using annotation tools in various 
+forms provided with technology could help with the retrieval of the information and the writing of 
+the reviews (Agosti & Ferro, 2007). 
+WRITING EFFICACY AN D SELF EFFICACY 
+Self-ef ficacy has been the subject of discussions in many research areas and is considered a key con-
+tributor to the success of individuals who persist and complete tasks (Bandura, 1993, Bruning et al., 
+2013). Bandura (2006) explained that self-efficacy is often associated with the capability of the indi-
+vidual to complete tasks. On the other hand, Bruning et al. (2013) described self-efficacy as the per-
+sonal confidence that one has that one can complete one’s task successfully in the intended domain. 
+In other words, students with higher self-efficacy can tolerate more challenges and persist longer. 
+Bandura (2006) identified four skills that contribute to an individual’s self-efficacy: cognitive skills, 
+motivational skills, emotional skills, and behavioral skills. In terms of the completion of academic 
+tasks, Bandura (1993) noted that self-efficacy operates at three different levels when it comes to con-
+tributing to students’ academic success. These include the   student’s belief, the teacher’s belief, and the 
+faculty’s belief in the students’ self-efficacy. McBrayer et al. (2018) studied the relationship between 
+self-efficacy and time to degree completion of doctoral study. The study concluded that students 
+with higher self-efficacy end up completing the writing of their dissertations in a shorter time.  
+A subsection of the concepts discussed regarding the writing of a doctoral dissertation is the writing 
+efficacy of the student. Writing efficacy is connected to self-efficacy and is  described by Stadtlander 
+et al. (2020) as how well a researcher can accomplish writing tasks based on various skills, such as 
+composition, grammar, and other mechanical skills. Bruning et al. (2013) explained that writing effi-
+cacy is a function of three factors: writing ideation, writing convention, and writing self-regulation. In 
+writing ideation, the researcher starts with writing ideas as they emerge in mind, though how well the 
+researcher expresses the ideas is also important. The writing convention is about the different con-
+ventions and rules that need to be followed when writing. Writing self-regulation is related to manag-
+ing the writing of tasks and observing the writing habits that researchers develop.  
+Self-efficacy and writing-eff icacy are necessary components in successfully writing the doctoral dis-
+sertations literature review chapter. Self-efficacy is connected to writing efficacy because self-efficacy 
+influences writing efficacy (Stadtlander et al., 2020). In other words, higher self-efficacy students will 
+
+Writing Doctoral Dissertation Literature Review 
+444 
+make better writing progress. The question that could be asked regarding this study is how advi-
+sors/mentors can   influence or contribute to enhancing both efficacies and thereby fostering pro-
+gress.   
+Stadtlander et al. (2020) noted that a structured experience that the mentor supervises helps improve 
+the   students’ self-efficacy. Breitenbach (2019) suggested that designing a structured program with 
+sufficient feedback could help more students complete their dissertations. Ewing et al. (2012) echoed 
+similar contentions and noted further that designing a structured dissertation writing process helps 
+acquire research skills.  
+Structured experience in the dissertation writing (and writing chapter two of the dissertation) can be 
+helped by using a rubric type of feedback. Sparrow (2004) suggested that using rubrics improves 
+teaching by explaining grading criteria. We argue that rubrics also help in writing with efficacy and 
+self-efficacy. Rubrics provide a clearer picture of what is expected. Therefore, students can approach 
+the task with greater clarity.   
+After going through this discussion, we drew a chart (Figure 4) to depict what is needed for corequi-
+sites while writing the literature review. We presented the shape in similar rectangles to show that all 
+factors are handled at the same level and that they do not depend on previous steps to be completed. 
+ 
+Figure 4 –   Factors helpful during (co  -requisites) to writing a literature review 
+THE ITERATIVE STEPS IN LITERATURE REVIEW 
+Iteration (or loop) is repeated often in computer programming courses. It refers to a step (or a series 
+of steps) that are repeated until a condition is met, and   at that time, the iteration is branched out and 
+continues to the next set of instructions. If the condition to halt the iteration cannot be met, the 
+condition is called an “endless loop” or an “ infinite iteration”. So, to prevent an endless loop, there 
+must   be a set of conditions to end an iteration (Felizardo et al., 2016).  
+In writing a literature review, closely similar concepts are practiced when reviewing the   literature. 
+Given the plethora of available literature, students can   get caught up in searching for and reading 
+more and more and inadvertently, or even perhaps advertently, keep postponing the writing or adding 
+new material to their reviewed literature. At some point, writing has to start    for the student to move 
+forward. Otherwise, the student may enter into the endless loop that is sometimes seen in computer 
+programming. 
+Th is section explains the iterative process that characterizes some literature review steps. It includes 
+the following sections: Selecting keyword/ key phrase for searching the literature, Identifying the elec-
+tronic database for the search, Snowballing, and   Writing small 
+KEYWORDS (KEY PHRASES) SELECTION FOR SEARCHING 
+The literature review typically starts with identifying a topic and learning about a few keywords that 
+best describe the topic. The intent of identifying keywords is to start searching using them to find 
+articles related to the topic of the study in the dissertation (Siddiqi & Sharan, 2015). The question 
+that   could be asked at this point is how to identify words or phrases for search. 
+Good record 
+keeping of 
+reviewed literature
+Good annotation of 
+the reviewed 
+literature
+Writing with 
+efficacy and self 
+efficacy
+
+Ali, Pandya, & Varma 
+445 
+Lunenburg and Irby (2008) suggested using the funnel approach, where the search begins with gen-
+eral terms and then narrows the keywords to more specific ones. At the wider end of the funnel, stu-
+dents can find more literature through the search, while later, there will be fewer articles found as the 
+student focuses the search more.  
+The funnel approach can go only so far as the search continues. At this time, more specific keywords 
+need to be used to focus the search, and   alternative words may   need to be used in the search (Linder 
+et   al., 2015). The    question that could be asked at that point is what other keywords to use as the 
+search continues to narrow down. The critical point here is finding alternative keywords that could 
+describe the same point originally searched.  
+Wilhelm and Kaunelis (2005) gave an example to  draw    an  analogy for using different words to focus 
+the research more. Wilhelm and Kaunelis’s topic was “cheating on the Internet,” and they started the 
+search by using the keyword “cheating.” As they searched more and needed   to find more articles 
+about the topic, they realized that they needed   to change the keyword they used first for searching 
+“cheating” to alternative words that could lead to finding more related articles. Wilheim and Kaunelis 
+assembled a list of keywords they used to find articles about the topic they were researching. Figure 5 
+summarizes the list of keywords they used for their search. This led to finding relevant articles di-
+rectly related to their research topic. 
+Cheating Academics Stopping Technology 
+Plagiarism Students Combating Higher education 
+Detecting Computer software Dishonesty Colleges 
+Preventing Internet Ethics Academic 
+Deterring Paper mills University Defining 
+Figure 5 – Key Search Concepts and Terms 
+Note. Key search terms used to research ‘cheating’ on the   Internet (Wilhelm and Kaunelis, 2005)  
+IDENTIFY ELECTRONIC DATABASES FOR SEARCH 
+A literature review could take different turns depending on the remaining writing and literature 
+search. However, it will most likely take successive searches to find sufficient literature to include in 
+the writing finally. Searching the web can be done either through search engines or a  library database 
+(Liu et al., 2018). Internet search engines are more known among internet surfers, and people use 
+them for many different searches. However, searching library databases is less known, and questions 
+could arise if there are differences among the databases and which to use at later stages of the 
+search.  
+Typical library databases related to education can include ERIC, Wilson Education Abstracts, 
+ProQuest Education Journals, and   Professional Development Collection (from EBSCOhost). Busi-
+ness-related databases include ABI/INFORM (from ProQuest), Business Source Premier (from EB-
+SCOhost), LexisNexis Academic, and Business and Company Resource Center (from Gale/Thom-
+son) (Wilhelm & Kaun   elis, 2005). These library databases can be general or subject-specific (Chen et 
+al., 2020).  
+Conventional wisdom dictates that searching general databases will be a good place to start the 
+search because it yields a  large volume of articles. But the catch here is that searching these databases 
+could result in a lot of unrelated information and less directly relevant information about the topic. 
+The nature of the literature search may necessitate searching for topics specific to the field of study 
+being researched (Bratt, 2018).   
+
+Writing Doctoral Dissertation Literature Review 
+446 
+Another factor to consider when selecting a library database for search is the availability of key fea-
+tures that are provided. Besides the specificity of the subject, library databases can be preferred 
+based on the features they provide for searching and recording the results. Some of the preferable 
+features available in library databases include (Wilhelm & Kaunelis. 2005): 
+- Availability of PDF files to download 
+- The number of logical operators that are used to limit the search in the database 
+- Ability to use the cite feature where the database list the citation as selected based on the 
+writing style (APA, MLA, Chicago, and others) 
+- Ability to link to articles listed in their bibliography and also to similar articles about similar 
+topics,   
+Last, we recommend conducting time-bound studies when searching for references from databases. 
+Unless seminal in nature, we recommend articles be ignored if they were published more than the 
+past half-a-dozen or so years. Given the fact that new material is constantly published and made 
+available for review and that databases can have    source articles published globally, it is   reasonable to 
+expect that material published a decade or so ago is now old and has been refreshed. So, we submit 
+that a researcher should not spend time sourcing and reviewing older material when there is a pleth-
+ora of new material available. This approach will help limit the number of articles that one would re-
+view and is , therefore, a small step in curtailing the   endless loop in which some researchers find 
+themselves. The only exception is seminal work. As and when seminal work needs to be adequately 
+referenced, it logically makes sense to research and read it, irrespective of when that work was pub-
+lished. 
+SNOWBALLING 
+Snowballing is a term often used in different conversations with different contexts. However, the 
+word means one general thing that people in different fields of study can use for their own purpose. 
+So, it is prudent first to define what it means and how it is applied here in the literature review. We b -
+ster’s dictionary defined snowballing as “to increase, accumulate, expand, or multiply at a rapidly ac-
+celerating rate” (Merriam-Webster, n.d. b ).   
+Snowballing in literature review refers to searching more literature to find additional relevant infor-
+mation to the research topic so  as  to include and cite more information in the chapter or sections of 
+the   literature review (Wohlin, 2016). The goal is to find relevant information on the research topic 
+and include it in the literature review. Snowballing can be accomplished either by searching forward 
+(forward snowballing), searching backward (backward snowballing), or searching relevant articles. All 
+three ways of snowballing can be helped using electronic databases and search engines.  
+Forward snowballing aims at finding articles that reference or cite the article being reviewed (Badam-
+pudi et al., 2015). In other words, while the researcher reviews one article (We can call it Article A), 
+the researcher can find articles B, C, and D that cite article A. Citing or referencing article A may in-
+dicate that more relevant information can be found by reviewing the other articles. Since the article 
+was cited by other    articles (B, C, and D in this case), the researcher can find more relevant infor-
+mation by reading the other articles (in this case, article   s B, C, and D). Library databases make this 
+snowballing easier – they often provide a list of articles that reference the article being reviewed, and 
+the researcher can click on them and review them. An advantage of forward snowballing that can be 
+noted here is that    forward snowballing provides a list of articles published more recently or at least 
+after the   first article was published (Felizardo et    al. , 2016).  
+Backward snowballing can be done by searching the references section of the articles being reviewed 
+to find articles relevant to the research (Felizardo et al. , 2016). Some library databases and search en-
+gines offer a clickable reference section (which    mea  ns when   clicked, it displays the referenced article). 
+In this case, it makes it easier for the researcher to review the cited articles – they can click on the ar-
+ticle, view the content, and decide whether to add it as a reference. The backward snowballing 
+
+Ali, Pandya, & Varma 
+447 
+searches resources in the reference section; thus, it is published before the date of writing the litera-
+ture review and before the date of the article being examined by the researcher. 
+Figure 6 shows a view of forward and backward snowballing to illustrate the difference between the 
+two snowballing methods. 
+ 
+Figure 6 – Backward and forward snowballing 
+Searching for relevant articles is another feature that is offered in electronic databases. When search-
+ing for a particular topic or keyword, the library databases display a list of hits for the keyword. They 
+list a link labeled “relative articles” or something similar that can be clicked and further searched. 
+When clicked, the search can continue, and the researcher can find more relevant articles, and the 
+search can continue. Figure 7 depicts the three methods of snowballing used in finding literature 
+while    searching library databases: forward snowballing, backward snowballing, and finding relevant 
+articles. 
+ 
+Figure 7 – Snowballing Methods in Library Database Searches 
+All three methods are helpful and easy to use, but the ease of use of it may make it addictive – that 
+is, researchers will get bogged down by looking at an article, looking at relevant articles, then finding 
+more relevant articles, and continuing the clicking and the finding of more information. Thus, it be-
+comes critical to start writing even on a smaller scale.  
+Snowballing in 
+literature review
+Forward 
+snowballing
+Backward 
+snowballing
+Related 
+literature
+Forward 
+Cited by 
+Searching 
+SNOWBALLING 
+Backward 
+Reference 
+Searching 
+
+Writing Doctoral Dissertation Literature Review 
+448 
+WRITING SMALL 
+The point that can be said about writing a literature review is that students will read a lot of material, 
+indeed read a lot more than what they will write (Okoli, 2015). As articles are found, the temptation 
+could be to continue reading. I t is a good idea to write some as the search continues. Writing com-
+plete sections is not likely at this point because the search and iteration continue. Thus, we recom-
+mend writing some, preferably based on what was found in the article currently being studied, and 
+then   adding to it as the next article(s) are sourced and read. In this exercise, the writing can also be-
+come iterative if, each time the student adds to the document, s/he first reviews what was written 
+thus far before continuing. However, this form of iteration is a good exercise as it helps reinforce 
+prior material and prevents the student from advertently writing something covered in an earlier ref-
+erence. 
+Writing some text at this point is not to be confused with the focused writing of the dissertation 
+chapter. At this stage, the writing can be compared to doodling, which some may do manually. Doo-
+dling, although it is mainly characterized as being bored and is a way to get out of boredom, doodling 
+can be used constructively as well. It can help us remember information. Writing some as the litera-
+ture review continues will help jot down some information that can work as reminders for later big-
+time writing.  
+Figure 8 illustrates the steps that are typically practiced during the repetition and iteration of the liter-
+ature review. It  shows the repetition (iteration) while writing the literature review. It  reveals that it 
+starts by selecting keywords to search library databases and continues by writing some of what was 
+found. That cycle could continue for some time, but it has to end at some point, and the focus has to 
+shift to writing.   
+ 
+Figure 8 – A show of  the iteration process in the literature review 
+BRANCHING OUT OF THE ITERATION – FOCUS ON WRITING 
+Once the decision is made to start the writing, the heavy lifting begins to translate the piles of re-
+viewed documents into meaningful, understandable writing for chapter two. Writing the literature re-
+view is an arduous, grueling, and difficult, and nothing we say in this paper is meant to indicate other-
+wise. To add more complexity to the issue, we also note another difficulty that faces the writers once 
+they start writing –writer’s block. Figure 9 depicts cynically the stages and frustration that accompany 
+going through the phases of writer’s block. 
+Selecting 
+Keywords
+Choosing 
+Database
+Forward 
+Snowballin
+g
+Relevant 
+articles
+Backward 
+Snowballing
+Write 
+Small
+
+Ali, Pandya, & Varma 
+449 
+ 
+Figure 9 – Cynical way of  representing the writer’s block (Cham, 2014) 
+Huston (1998, p. 93) called it the “white page terror” and described it as “a stress reaction that para-
+lyzes the ability to put thoughts into words.” Castillo (2014) suggested that most writers (even long-
+practiced writers) experience this in one way or another. Bastug et al. (2017) noted that writer’s block 
+is related to certain cognitive and affective issues in the writing process. These issues intensify when 
+writing doctoral dissertations, particularly in the literature review (Rose & Rose, 2009). For doctoral 
+dissertations, the difficulties are more complicated due to the rigid rules and the shifting focus associ-
+ated with writing doctoral dissertations (Rose, 1980). 
+There are many causes of writer’s block. It could be related to unrealistic expectations (Huston, 
+1998) where writers expect to write a large amount of the literature in one session or to finish an er-
+ror-free review in the same session. Lowering these expectations and putting them in a realistic image 
+of the long and arduous writing of the chapter literature review could be helpful (Tubbs, 2017). 
+Despite the difficulties associated with writer’s block, students need to progress and build upon what 
+was reviewed. Taking the whole writing of  the chapter on literature review as a one-step would not 
+be possible for most researchers (Castillo, 2014). It could be counterproductive if attempted to do so 
+(Huston, 1998). Instead, breaking down the   writing process into smaller, more manageable steps will 
+be more attainable.   
+Ali and Pandya (2021) tackled the issue of writing a research problem statement (a crucial step in 
+starting to write doctoral dissertations) by breaking down the process into four stages. The suggested 
+stages by Ali and Pandya start with writing simple statements to continue providing more support 
+and then to the finalization stage. Regarding writing the literature review, a similar approach could be 
+followed from the general standpoint but a different four stages that are more fit for writing the 
+chapter on literature review. We suggest the following four steps to be followed in the writing of the 
+literature review: 
+• Develop a rough outline 
+• Start t   he crude writing process 
+• Connect ideas 
+• Finalize the writing 
+DEVELOP A ROUGH OUTLINE 
+Starting by developing a rough, sketchy outline will be a good first step in the venture to writing the 
+literature review chapter. Although a good number of sections in the    literature review dissertation 
+
+Writing Doctoral Dissertation Literature Review 
+450 
+chapter are  specified, developing an outline that would include more than just a listing of the sections 
+in the chapter can be helpful. A thorough outline goes beyond what was described before as doo-
+dling ideas should be developed. I nstead, some complete sentences may   need to be phrased in each 
+section, although we do not suggest that the sentences and phrases be complete or connected here. 
+The idea is to get moving with a rough outline and start the writing.  
+Lovering (2017) stressed the importance of developing a rough outline in writing research and ex-
+plained these benefits that could be gained from developing a rough outline that could include the 
+following. 
+• A rough outline assists in giving ideas about the structure of the paper and seeing if the in-
+formation flows smoothly. 
+• The rough outline helps in selecting a better way to organize the information needed to be 
+presented and the analysis and conclusion from the information that was gathered. 
+• A clearer picture of the direction of the writing could be drawn after drawing the draft, thus, 
+clearing the way for a smoother writing 
+• A rough outline could change over time as the writing continues, new ideas emerge, and dif-
+ferent old ideas may need to be taken out and so to continue the cycle of writing 
+THE CRUDE WRITING PROCESS  
+What is meant by crude writing is simply to write and write more. Webster’s dictionary defined crude 
+as: “marked by the primitive, gross, or elemental or by uncultivated simplicity or vulgarity” (Merriam-
+Webster, n.d. a).  Our interpretation of this definition emph   asizes the primitive and the elemental 
+parts as   applied to writing a literature review to build out the   chapter. The    interesting thing about 
+writing is that it connects the mind with the arms and   hands ( A. Becker, 2006). So, continuing the 
+writing may be a good idea even if what was written does not make clear sense.    The important point 
+is to write the ideas reviewed and translate what was reviewed into simple writing. The emphasis here 
+is  on simple writing to keep the writing flow going. As more ideas are written, more connections to 
+other ideas emerge, and the writing will be a step close to completion. Other tasks like following the 
+correct formatting and checking references and citations could be postponed to a later stage for the 
+sake of the continuation of writing. The point to be emphasized here is that writing continues, and 
+as more writing is done, new ideas emerge, and these ideas need to be connected to give room for 
+more writing.  
+CONNECTING IDE AS 
+Next  , we suggest connecting ideas    that were written in the previous step. Connecting the basic sen-
+tences     written in the crude-writing step to make full paragraphs helps in proceeding with the writing. 
+It is also helpful to check the flow of writing and how the work is progressing. Ideas can emerge 
+from the beginning and through the different sections as the writing continues.  
+Connecting ideas can be addressed at the writing and subject levels of the topic being discussed. The 
+University of Melbourne (n.d.) published an article that suggested connecting ideas at the sentence 
+and paragraph levels. Most notable from these suggestions are ideas about the connectedness used at 
+th e sentence and paragraph levels. According to Melbourne University, these connectedness words or 
+phrases present the ideas clearly and cohesively. Some software tools (like Grammarly) may help with 
+this, but it is no substitute for a thorough review by the writer.  
+Connecting ideas need to be taken care of at the topic level as well to ensure that the information 
+presentation flows clearly and consistently. Wiesner-Groff (2021) suggested dividing the writing into 
+main topics and sub-topics. Wiesner-Groff also suggested dividing the writing according to a struc-
+ture that links the different topics (main topic and subtopic). Hence, the reader clearly understands 
+the main topic and how the sub-topics support them.  
+
+Ali, Pandya, & Varma 
+451 
+FINALIZATION STAGE 
+Thi s is   the last sage that we suggest to be followed. At this stage, we suggest going through all  that 
+has been written and   ensuring it is all correctly stated and all points are correctly aligned and con-
+nected. The main points to check at this stage include: 
+- Checking proper formatting (APA or others)  
+- Checking that the references are properly cited 
+- Check the clarity of the flow of information 
+- Checking for punctuation  
+- Checking for completeness, all ideas that need to be included are properly included and cited 
+- Cross-check the citations and the references ensuring all references are cited and all citations 
+have    a corresponding reference. 
+A good idea here is to check with assessment rubrics if  they are available in academic programs for 
+which the dissertation is being prepared. Assessment rubrics may serve different purposes. Cabig   ao 
+(2021) identified three questions that rubrics could answer: 
+1- What do educators want students to know and be able to do? 
+2- How well do we want students to know and be able to apply or use a skill in a concept? 
+3- How well teachers and other scorers determine when a learner knows a concept and does an 
+activity well 
+ 
+De Silva (2014) echoed the same ideas about rubrics and noted further that rubrics affect perfor-
+mance in writing. Despite these notes, a point is that not all academic programs have rubrics (Agu et 
+al., 2015). It could be worthwhile to consult checklists and rubrics published for this purpose. For ex-
+ample, Leite et al., 2019) prepared an elaborate literature review checklist that included many items. 
+These can be consulted to ensure that the literature review chapter is complete. At the same time, ru-
+brics could be subject to  wide disagreement on what is being covered and how the items are judged. 
+In a case like this, the research could be helped more by double-checking the rubrics if available. At 
+the same time, it would be more robust if a manual check of all the sections of the   literature reviews 
+chapter is completed both ways, along with checking the rubrics. 
+Figure 10 shows a view of the steps suggested in these sections about starting the writing and   then 
+completing the finalization stage. 
+ 
+Figure 10: Suggested four steps for writing the literature review 
+PUTTING IT TOGETHER 
+After going through the steps to explain and elaborate on the different points that need to be ad-
+dressed in organizing and writing the literature that was collected, it is time to show all these steps 
+together in one figure. Showing the figures together gives a clearer   glimpse of the four phases that 
+were discussed in this paper. It also works as an effective summary of what was covered earlier in the 
+paper. 
+The result of what was intended in this study is presented in the form of a figure (Figure 11) that 
+shows the four phases we covered. The first figure is about identifying the prerequisites for writing 
+the literature review. The figure has a   waterfall format    to show the preference for coverage. The 
+Develop 
+roough 
+outline
+Crude 
+writing 
+Process
+Connecting 
+Ideas
+Finalization 
+Stage
+
+Writing Doctoral Dissertation Literature Review 
+452 
+second shows the corequisites, suggesting skills that would help with organizing the literature. The 
+third figure is presented circularly to show the repetitive nature of these steps. The fourth is the writ-
+ing process which we divided into four sections for simpler management of the reviewed literature 
+and the review’s writing. All four figures are combined into one figure below to present one glimpse 
+of what was covered in this paper.  
++ 
+Figure 11 –    Putting it   Together, Phases of  Writing Chapter 2 of  Doctoral Dissertation 
+SUMMARY AND SUGGESTIONS FOR FUTURE RESEARCH 
+Writing the literature review chapter of doctoral dissertations is an arduous process that could last a 
+long time and has the potential to make or break a dissertation. The main contributing factor to the 
+
+Ali, Pandya, & Varma 
+453 
+failure to complete the literature review chapter is a lack of knowledge about what goes on in a litera-
+ture review from two viewpoints: writing and preparation. This paper attempted to fill this gap and 
+explained the factors that go into the writing of a literature review from the following perspectives: 
+- To clarify what is needed to learn about literature review before starting it 
+- What is helpful to have during the review of the literature 
+- The repetitive nature of reading literature and recording reviews 
+- Overcoming the writer’s block and focusing on the writing process 
+In our view, our coverage of the literature review in this paper helps organize the literature review 
+and makes known all factors related to the writing of the literature review, which students have major 
+difficulties in completing. However, there are other sections that students have challenges with  , and 
+we feel we can help. A major challenge that students have difficulty with is aligning the major sec-
+tions of chapter one in the doctoral dissertations. Aligning these sections of chapter one proved to 
+be a major challenge for many students. Such correct alignment could prove to be a major turna-
+round if completed properly during the writing of  the   doctoral dissertation. We feel that we have the 
+expertise that we can provide suggestions and give ideas on how to align the main sections of chap-
+ter one and then continue a smoother ride toward the completion of writing the dissertation. So, we 
+plan to shift the focus of writing to chapter one, and we plan on writing on how to align the main 
+sections of chapter one of doctoral dissertations.  
+REFERENCES 
+Agosti, M., & Fer ro, N. (2007). A formal model of annotations of digital content. ACM Transactions on Infor-
+mation Systems (TOIS), 26(1), 3-es. https://doi.org/10.1145/1292591.1292594  
+Agu, N. N., Omenyi, A. S., & Odimegwu, C. (2015). Evaluation of doctorate dissertation in Nigerian universi-
+ties: Do faculties provide and use explicit criteria/rubrics? International Journal of  Technology and Inclusive Edu-
+cation, 4(1), 574-578. https://doi.org/10.20533/ijtie.2047.0533.2015.0074  
+Ali, A., & Pandya, S. (2021). A four stage framework for the development of a research problem statement in 
+doctoral dissertations. International Journal of  Doctoral Studies, 16, 469-485. https://doi.org/10.28945/4839  
+Badampudi, D. , Wohlin, C., & Petersen, K. (2015, April). Experiences from using snowballing and database 
+searches in systematic literature studies. In Proceedings of  the    19th International Conference on Evaluation and As-
+sessment in Software Engineering (pp. 1-10). https://doi.org/10.1145/2745802.2745818   
+Bandura, A.    (1993). Perceived self-efficacy in cognitive development and functioning. Educational Psychologist, 
+28(2), 117-148. https://doi.org/10.1207/s15326985ep2802_3
+  
+Bandura, A.    (2006). Guide for constructing self-efficacy scales. Self-Efficacy Beliefs of  Adolescents, 5(1), 307-337. 
+https://doi.org/10.1207/s15326985ep2802_3
+  
+Baptista, A., Frick, L., Holley, K., Remmik, M., & Tesch, J.  (2015). The doctorate as an original contribution to  
+knowledge: Considering relationships between originality, creativity, and innovation. Frontline Learning Re-
+search, 3(3), 55-67. 
+Bastug, M., Ertem, I. S.,    & Hasan, K. K. (2017). A phenomenological research study on writer’s block: causes, 
+processes, and results. Education & Training, 59(6), 605-618. https://doi.org/10.1108/ET-11-2016-0169  
+Bates, J. ,   Best, P. ,    McQuilkin, J. ,   & Taylor, B.   (2017). Will web search engines replace bibliographic databases in 
+the systematic identification of research?. The Journal of  Academic Librarianship, 43(1), 8-17. 
+https://doi.org/10.1016/j.acalib.2016.11.003  
+Becker, A.    (2006). A review of writing model research based on cognitive processes. In A. Horning & A. 
+Becker (Eds.), Revision: History, theor y, and practice (pp. 25-49). Parlor Press. https://wac.colos-
+tate.edu/docs/books/horning_revision/chapter3.pdf  
+Becker, D.  A., & Chiware, E.    R. (2015). Citation analysis of masters’ theses and doctoral dissertations: Balanc-
+ing library collections with students’ research information needs. The Journal of  Academic Librarianship, 41(5), 
+613-620. https://doi.org/10.1016/j.acalib.2015.06.022 
+
+Writing Doctoral Dissertation Literature Review 
+454 
+Beliga, S. (2014). Keyword extraction: A review of  methods and approaches. University of Rijeka, Department of Infor-
+matics, Rijeka. 
+Bratt, S. (2018). Digital library keyword analysis for visualization education research. Journal of  Applied Research 
+in Higher Education, 10(4), 595-611. https://doi.org/10.1108/JARHE-03-2018-0047   
+Breitenbach, E.    (2019). Evaluating a model to  increase doctorate program completion rates: A focus on social 
+connectedness and structure. International Journal of Doctoral Studies, 14(1), 217-236. 
+https://doi.org/10.28945/4239
+  
+Brocke, J.  V., Simons, A., Niehaves, B.,    Niehaves, B.,    Reimer, K., Plattfaut, R., & Cleven, A.    (2009). We are re-
+constructing the giant: On the importance of rigor in documenting the literature search process. In Proceed-
+ings of ECIS 2009. https://aisel.aisnet.org/ecis2009/161  
+Bruning, R., Dempsey, M., Kauffman, D. F., McKim, C., & Zumbrunn, S. (2013). Examining dimensions of 
+self-efficacy for writing. Journal of Educational Psychology, 105(1), 25. https://doi.org/10.1037/a0029692
+ 
+Buchanan, G., McKay, D. , & Levitt, J.  (2015, June). Where my books go: Choice and place in digital reading. In 
+Proceedings of  the    15th ACM/IEEE-CS Joint Conference on Digital Libraries (pp. 17-26). 
+https://doi.org/10.1145/2756406.2756917 
+Cabigao, J.  (2021). Development and validation of a proposed model rubric in rating written outputs at the 
+graduate school level. Development, 5(4), 122-131. 
+Castillo, M. (2014). Writer’s block. American Journal of  Neuroradiology, 35(6), 1043-1044. 
+https://doi.org/10.3174/ajnr.A3729  
+Cham, J.  (2014). Writing. Phdcomics.com. https://phdcomics.com/comics/archive.php?comicid=1732 
+Chen, C., Yang, B.,    & Zhao, C. (2020, April). Keywords extraction based on word relevance degrees. In Proceed-
+ings of  the    2020 5th International Conference on Mathematics and Artificial Intelligence (pp. 60-65). 
+https://doi.org/10.1145/3395260.3395262  
+Columbaro, N. L.   (2009). e-Mentoring possibilities for online doctoral students: A literature review. Adult Learn-
+ing, 20(3-4), 9-15. https://doi.org/10.1177/104515950902000305  
+De Silva, R. (2014). Rubrics for assessment: Their effects on ESL students’ authentic task performance. 4th 
+CELC Symposium Proceedings, National University of Singapore. 
+https://www.researchgate.net/publica-
+tion/289506227_Rubrics_for_Assessment_Their_Effects_on_ESL_Students%27_Authentic_Task_Per-
+formance  
+De Villiers, C., Venter, E.    R., & Hsiao, P.  C. K. (2017). Integrated reporting: background, measurement issues, 
+approaches and an agenda for future research. Accounting & Finance, 57(4), 937-959. 
+https://doi.org/10.1111/acfi.12246  
+Denscombe, M. (2017). The good research guide: For small-scale social research projects. Open University Press; 
+McGraw-Hill Education (UK). 
+Ebrahim, N. A.    (2012). Approach to conduct an effective literature review. Academic Collaboration Centre for Publica-
+tion Promotion, Kuala Lumpur, Malaysia. https://works.bepress.com/aleebrahim/65/  
+Ewing, H., Mathieson, K., Alexander, J.  L., & Leafman, J.  (2012). Enhancing the acquisition of research skills in 
+online doctoral programs: The Ewing model©. Journal of  Online Learning and Teaching, 8(1), 34-44. 
+https://www.semanticscholar.org/paper/Enhancing-the-Acquisition-of-Research-Skills-in-The-Ewing-
+Mathieson/434f925f4c2479cf13d4c8932ef73ec314631c97  
+Felizardo, K. R., Mendes, E., Kalinowski, M., Souza, É.    F. ,    & Vijaykumar, N. L.   (2016, September). Using for-
+ward snowballing to  update systematic reviews in software engineering. In Proceedings of  the    10th 
+ACM/IEEE International Symposium on Empirical Software Engineering and Measurement (pp. 1-6). 
+https://doi.org/10.1145/2961111.2962630  
+Ferrari, R. (2015). Writing narrative style literature reviews. Medical Writing, 24(4), 230-235. 
+https://doi.org/10.1179/2047480615Z.000000000329  
+Gilmour, R., & Cobus-Kuo, L.   (2011). Reference management software: A comparative analysis of four prod-
+ucts. Issues in Science and Technology Librarianship, 66, 63-75. https://doi.org/10.29173/istl1521  
+
+Ali, Pandya, & Varma 
+455 
+Harzing, A.    W.  K., & Van der Wal, R. (2008). Google Scholar as a new source for citation analysis. Ethics in sci-
+ence and environmental politics, 8(1), 61-73. https://doi.org/10.3354/esep00076  
+Huston, P.  (1998). Resolving writer’s block. Canadian Fa m i l y Physician, 44, 92-97. 
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2277565/  
+Jacobs, R. L.   (2013). Developing a dissertation research problem: A guide for doctoral students in human re-
+source development and adult education. New Horizons in Adult Education and Human Resource Development, 
+25(3), 103-117. https://doi.org/10.1002/nha3.20034
+  
+Jalali, S.,    & Wohlin, C. (2012, September). Systematic literature studies: Database searches vs. backward snow-
+balling. In Proceedings of  the    2012 ACM-IEEE International Symposium on Empirical Software Engineering and 
+Measurement (pp. 29-38). IEEE. https://doi.org/10.1145/2372251.2372257  
+Kable, A. K., Pich, J. ,   & Maslin-Prothero, S. E.    (2012). A structured approach to  documenting a search strategy 
+for publication: A 12 step guideline for authors. Nurse Education Today, 32(8), 878-886. 
+https://doi.org/10.1016/j.nedt.2012.02.022  
+Kushkowski, J.  D. , Parsons, K. A., & Wiese, W.  H. (2003). Master’s and doctoral thesis citations: Analysis and 
+trends of a longitudinal study. Portal: Libraries and the    Academy, 3(3), 459-479. 
+https://doi.org/10.1353/pla.2003.0062  
+Kraus, S.,    Breier, M., & Dasí-Rodríguez, S. (2020). The art of crafting a systematic literature review in entrepre-
+neurship research. International Entrepreneurship and Management Journal, 16, 1023-1042. 
+https://doi.org/10.1007/s11365-020-00635-4
+   
+Leite, D.  F. ,    Padilha, M. A.    S.,    & Cecatti, J.  G. (2019). Approaching literature review for academic purposes: The 
+Literature Review Checklist. Clinics, 74, e1403.  https://doi.org/10.6061/clinics/2019/e1403 
+ 
+Levy, Y. ,    & Ellis, T.  J.  (2006). Towards a framework of literature review process in support of information sys-
+tems research. In Proceedings of  the  2006 Informing Science and IT  Education Joint Conference (Vol. 26). 
+https://doi.org/10.28945/2980  
+Linder, S. K., Kamath, G. R., Pratt, G. F. ,    Saraykar, S. S.,    & Volk, R. J.  (2015). Citation searches are more sensi-
+tive than keyword searches to  identify studies using specific measurement instruments. Journal of  Clinical 
+Epidemiology, 68(4), 412-417. https://doi.org/10.1016/j.jclinepi.2014.10.008 
+Liu, J. ,   Zamir, H., Li, Y. ,    & Hastings, S. K. (2018). Search systems and their feat  ures: What college students use 
+to  find and save information. Library & Information Science Research, 40(2), 118-124. 
+https://doi.org/10.1016/j.lisr.2018.06.002
+  
+Lovering, C. (2017, February 21). How to write a rough outline. Pen & the Pad. https://penandthepad.com/write-
+rough-outline-8688693.html  
+Lunenburg, F.  C., & Irby, B.   J.  (2008). Writing a successful thesis or dissertation: Tips and strategies for  students in the    social 
+and behavioral sciences. Corwin Press. https://doi.org/10.4135/9781483329659  
+McBrayer, J. S., Melton, T.   D., Calhoun, D. W., Dunbar, M., & Tolman, S. (2018). The correlation between 
+self-efficacy and time to  degree completion of educational leadership doctoral students. International Journal 
+of Doctoral Studies, 13, 413-439. https://doi.org/10.28945/4138
+  
+Merriam-Webster. (n.d. a).  Crude. In Merriam-Webster.com dictionary. Retrieved December 22, 2021, from 
+https://www.merriam-webster.com/dictionary/crude  
+Merriam-Webster. (n.d. b). Snowballing. In Merriam-Webster.com dictionary. Retrieved December 12, 2021, from 
+https://www.merriam-webster.com/dictionary/snowballing 
+Nystrand, M. (2006). The social and historical context for writing research. In C. A. MacArthur, S. Graham, & 
+J. Fitzgerald (Eds.), Handbook of  writing research (pp. 11-27). The Guilford Press. 
+https://psycnet.apa.org/record/2006-07885-001  
+Okoli, C. (2015). A guide to  conducting a standalone systematic literature review. Communications of  the    Associa-
+tion for  Information Systems, 37(1), 43. https://doi.org/10.17705/1CAIS.03743  
+
+Writing Doctoral Dissertation Literature Review 
+456 
+Osanloo, A., & Grant, C. (2016). Understanding, selecting, and integrating a theoretical framework in disserta-
+tion research: Creating the blueprint for your “house”. Administrative Issues Journal: Connecting Education, Prac-
+tice, and Research, 4(2), 12-26. https://aij.scholasticahq.com/article/7-understanding-selecting-and-integrat-
+ing-a-theoretical-framework-in-dissertation-research-creating-the-blueprint-for-your-house  
+Paré, G., Tr udel, M. C., Jaana, M., & Kitsiou, S. (2015). Synthesizing information systems knowledge: A typol-
+ogy of literature reviews. Information & Management, 52(2), 183-199. 
+https://doi.org/10.1016/j.im.2014.08.008  
+Paul, J. ,   & Criado, A.    R. (2020). The art of writing literature review: What do we know and what do we need to  
+know?. International Business Review, 29(4),  101717. https://doi.org/10.1016/j.ibusrev.2020.101717  
+Pearson, J. ,   Buchanan, G., & Thimbleby, H. (2009, September). Improving annotations in digital documents. 
+Proceedings of  the Research and Advanced Technology for Digital Libraries, 13th European Conference, ECDL 2009, 
+Corfu, Greece (pp. 429-432). https://www.researchgate.net/publication/221176014_Improving_Annota-
+tions_in_Digital_Documents  
+Pearson, J. ,   Buchanan, G., Thimbleby, H., & Jones, M. (2012). The digital reading desk  : A lightweight approach 
+to  digital notetaking. Interacting with Computers, 24(5), 327-338. 
+https://doi.org/10.1016/j.intcom.2012.03.001  
+Randolph, J.  (2009). A guide to  writing the dissertation literature review. Practical Assessment, Research, and Evalua-
+tion, 14(1), Article 13. https://doi.org/10.7275/b0az-8t74  
+Rose, M. (1980). Rigid rules, inflexible plans, and the stifling of language: A cognitivist analysis of writer’s 
+block. College Composition and Communication, 31(4), 389-401. https://doi.org/10.2307/356589  
+Rose, M., & Rose, M. A.    (2009). Writer’s block: The cognitive dimension. SIU Press.  
+Rowe, F.  (2014). What literature review is not: diversity, boundaries and recommendations. European Journal of  
+Information Systems, 23(3), 241-255. https://doi.org/10.1057/ejis.2014.7  
+Sarialtin, H. (2015). Benchmarking as a quality assurance tool and its application to  higher education (A  con-
+ceptual framework). The Online Journal of Quality in Higher Education, 2(3), 15-26. 
+Schoenfeld, A.    J. ,   Sturgeon, D.  J. ,   Burns, C. B.,    Hunt, T.  J. ,   & Bono, C. M. (2018). Establishing benchmarks for 
+the volume-outcome relationship for common lumbar spine surgical procedures. The Spine Journal, 18(1), 
+22-28. https://doi.org/10.1016/j.spinee.2017.08.263
+ 
+Shaffril, H. A.    M., Samsuddin, S. F. ,    & Samah, A.    A.    (2020). The ABC of systematic literature review: The basic 
+methodological guidance for beginners. Quality & Quantity, 4, 1-28. 
+Siddiqi, S.,    & Sharan, A.    (2015). Keyword and keyphrase extraction techniques: A literature review. International 
+Journal of  Computer Applications, 109(2). https://doi.org/10.5120/19161-0607  
+Sparrow, S. M. (2004). Describing the    ball: Improve teaching by   using rubrics – Explicit grading criteria. University of New 
+Hampshire Scholar’s Repository. 
+https://scholars.unh.edu/cgi/viewcontent.cgi?article=1031&con-
+text=law_facpub  
+Stadtlander, L.   M., Sickel, A., & Salter, D. (2020). Online doctoral student research and writing self-efficacy in a 
+publishing internship. Higher Learning Research Communications, 10(1), 4. 
+https://doi.org/10.18870/hlrc.v10i1.1170
+  
+Terrell, S. R. (2015). Writing a proposal for  your dissertation: Guidelines and examples. Guilford Publications.  
+Torraco, R. J.  (2005). Writing integrative literature reviews: Guidelines and examples. Human Resource Development 
+Review, 4(3), 356-367. https://doi.org/10.1177/1534484305278283 
+Torraco, R. J.  (2016). Writing integrative literature reviews: Using the past and present to  explore the future. Hu-
+man Resource Development Review, 15(4), 404-428. https://doi.org/10.1177/1534484316671606  
+Trinchera, T.  (2002). Cut and paste plagiarism: What it is and what to  do about it. Community & Junior College Li-
+braries, 10(3), 5-9.  https://doi.org/10.1300/J107v10n03_02
+  
+Tubbs, F. (2017, August 21). 7 Ways for  students to overcome writer’s block. https://collegepuzzle.stanford.edu/7-
+ways-for-students-to-overcome-writers-block/  
+
+Ali, Pandya, & Varma 
+457 
+The University of Melbourne. (n.d.). Connecting ideas in writing: How to  connect ideas at the sentence level 
+and paragraph level in academic writing. 
+https://www.avondale.edu.au/Departments/Library/Academic-
+Writing---   connecting-ideas.pdf  
+Webster, J. ,   & Watson, R. T.  (2002). Analyzing the past to  prepare for the future: Writing a literature review. 
+MIS Quarterly, 26(2), xiii-xxiii. https://www.jstor.org/stable/4132319   
+We e, B.   V., & Banister, D.  (2016). How to  write a literature review paper? Transport Reviews, 36(2), 278–288. 
+https://doi.org/10.1080/01441647.2015.1065456
+  
+Wiesner-Groff, A. (2021). Connecting main ideas to related sources & topics. Study.com https://study.com/acad-
+emy/lesson/connecting-main-ideas-to-related-sources-topics.html. 
+Wilhelm, W.  J. ,   & Kaunelis, D.  (2005). Literature reviews: Analysis, planning, and query techniques. Delta Pi Ep-
+silon Journal, 47(2), 91-106. 
+Wohlin, C. (2014, May). Guidelines for snowballing in systematic literature studies and a replication in software 
+engineering. EASE 14: Proceedings of  the 18th International Conference on Evaluation and Assessment in Software 
+Engineering (pp. 1-10). https://doi.org/10.1145/2601248.2601268   
+Wohlin, C. (2016, June). Second-generation systematic literature stu dies using snowballing. In Proceedings of  the    
+20th International Conference on Evaluation and Assessment in Software Engineering (pp. 1-6). 
+https://doi.org/10.1145/2915970.2916006  
+Xiao, Y. ,    & Watson, M. (2019). Guidance on conducting a systematic literature review. Journal of  Planning Educa-
+tion and Research, 39(1), 93-112. https://doi.org/10.1177/0739456x17723971  
+  
+
+Writing Doctoral Dissertation Literature Review 
+458 
+AUTHORS 
+Azad Ali, D.Sc., Professor of Information Technology, has more than 30 
+years of combined experience in the   areas of financial and information 
+systems. He holds a bachelor’s degree in Business Administration from 
+the University of Baghdad, an MBA from Indiana University of Pennsyl-
+vania, an MPA from the University of Pittsburgh, and a Doctorate of Sci-
+ence in Communications and Information Systems from Robert Morris 
+University. Dr. Ali’s research interests include service-learning projects, 
+web design tools, dealing with isolation in doctoral programs, and curric-
+ulum development. Azad has been involved in mentoring doctoral stu-
+dents to complete their doctoral dissertations and has so far mentored 
+five students to complete their dissertations.  
+ 
+ 
+Shardul Y. Pandya. Ph.D. After retiring as Tenured Faculty and Sr. Doc-
+toral Dissertation Advisor with the School of Business, Technology, and 
+Healthcare Administration at Capella University, Dr. Pandya currently 
+serves as Adjunct Professor at the American National University and the 
+University of the Cumberlands. An Industrial Engineer by training, he 
+earned a Ph.D. in Engineering Management from the College of Engi-
+neering at Old Dominion University in Norfolk, VA. Over the decades, 
+he has worked and consulted at various manufacturing organizations as 
+well as in the areas of Data Mining and Database Marketing. The academic Dr. Pandya has pub-
+lished, taught university courses at all levels, and approximately 25 doctoral students have successfully 
+defended their dissertations under his supervision. His public Linkedin profile is here: 
+https://www.linkedin.com/in/shardulpandya/
+ 
+ 
+ 
+Umesh C. Varma. D.I.A. Dr. Varma has more than 32 years of teaching expe-
+rience in higher education at undergraduate, graduate, and doctoral levels in In-
+formation Technology, Computer Information Systems, Computer Science, 
+Cyber Security, and Information Assurance. He has designed, developed, and 
+implemented several academic programs in various institutions of higher learn-
+ing. He has worked with several institutions for program accreditation, outcome 
+assessment, and institutional research. He served as a Program Director for 
+doctoral programs at the   University of Fairfax before assuming a leadership 
+role at American National University. He has also conducted several webinars 
+on Cyber Security. He holds undergraduate degrees in General Science, Business Administration, 
+Master in Computer Science, and Doctorate in Information Assurance/Cyber Security from India, 
+U.K., and United States, respectively. His research interests are Cyber Security Intelligence analytics, 
+anti-forensics, covert channel analysis, query optimization, data architecture, and security modeling.

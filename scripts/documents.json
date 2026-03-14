@@ -425,5 +425,124 @@
     "url": "https://waecsyllabus.com/download/ssce/FRENCH.pdf",
     "source": "West African Examinations Council (WAEC)",
     "category": "education"
+  },
+  {
+    "id": "ug-masters-handbook",
+    "title": "University of Ghana Handbook for Masters Degree Programmes",
+    "url": "https://www.sgs.ug.edu.gh/sites/sgs.ug.edu.gh/files/2023-07/UGMastersHandbook2014V_May2020_2.pdf",
+    "source": "University of Ghana School of Graduate Studies",
+    "category": "research"
+  },
+  {
+    "id": "ug-phd-handbook",
+    "title": "University of Ghana Handbook for Doctoral Studies",
+    "url": "https://www.sgs.ug.edu.gh/sites/sgs.ug.edu.gh/files/2023-07/UGPHDHandbook2014V_May2020_2.pdf",
+    "source": "University of Ghana School of Graduate Studies",
+    "category": "research"
+  },
+  {
+    "id": "cug-graduate-studies-guide",
+    "title": "Catholic University of Ghana School of Graduate Studies Guidelines",
+    "url": "https://www.cug.edu.gh/uploads/staff_resource/1709955583.pdf",
+    "source": "Catholic University of Ghana",
+    "category": "research"
+  },
+  {
+    "id": "social-science-research-methods",
+    "title": "Social Science Research: Principles, Methods and Practices",
+    "url": "https://digitalcommons.usf.edu/cgi/viewcontent.cgi?article=1002&context=oa_textbooks",
+    "source": "University of South Florida (Anol Bhattacherjee, CC BY-NC-SA)",
+    "category": "research"
+  },
+  {
+    "id": "research-methods-libretexts",
+    "title": "Research Methods for the Social Sciences",
+    "url": "https://batch.libretexts.org/print/Letter/Finished/socialsci-84769/Full.pdf",
+    "source": "LibreTexts / William Pelz, Herkimer College (CC BY-SA)",
+    "category": "research"
+  },
+  {
+    "id": "handbook-research-methodology",
+    "title": "Handbook of Research Methodology",
+    "url": "https://www.mimt.org/pdf/Research%20Methodology.pdf",
+    "source": "Mahratta Chamber of Commerce Industries & Agriculture (ISBN 978-93-94198-49-4)",
+    "category": "research"
+  },
+  {
+    "id": "harvard-referencing-sheffield",
+    "title": "Harvard Referencing Guide",
+    "url": "https://librarydevelopment.group.shef.ac.uk/Assets/pdfs/referencing/harvard.pdf",
+    "source": "University of Sheffield Library",
+    "category": "research"
+  },
+  {
+    "id": "harvard-referencing-nua",
+    "title": "Harvard Referencing Guide 2024/25",
+    "url": "https://library.norwichuni.ac.uk/app/uploads/2025/01/NUA-Harvard-referencing-guide-2425-full.pdf",
+    "source": "Norwich University of the Arts Library",
+    "category": "research"
+  },
+  {
+    "id": "harvard-referencing-brunel",
+    "title": "Harvard Referencing Guide",
+    "url": "https://www.brunel.ac.uk/study/academic-skills/ASK-Documents/Harvard-Guide.pdf",
+    "source": "Brunel University London Academic Skills",
+    "category": "research"
+  },
+  {
+    "id": "mla-referencing-guide",
+    "title": "MLA 9th Edition Referencing Quick Guide",
+    "url": "https://www.yorksj.ac.uk/media/content-assets/ile/documents/MLA-9th-ed-Referencing-quick-guide-(online)-2024-(1).pdf",
+    "source": "York St John University Library",
+    "category": "research"
+  },
+  {
+    "id": "literature-review-sjsu",
+    "title": "How to Write a Literature Review",
+    "url": "https://www.sjsu.edu/writingcenter/docs/handouts/Literature%20Reviews.pdf",
+    "source": "San Jos\u00e9 State University Writing Center",
+    "category": "research"
+  },
+  {
+    "id": "literature-review-edinburgh",
+    "title": "Writing an Effective Literature Review — A Study Guide",
+    "url": "https://www.docs.hss.ed.ac.uk/iad/Postgraduate/PhD_researchers/Study_Guide_How_to_Write_an_Effective_Literature_Review_v2.0_.pdf",
+    "source": "University of Edinburgh Institute for Academic Development",
+    "category": "research"
+  },
+  {
+    "id": "dissertation-literature-review-ijds",
+    "title": "Writing Doctoral Dissertation Literature Review: Identifying the Challenges",
+    "url": "http://ijds.org/Volume17/IJDSv17p433-458Ali8376.pdf",
+    "source": "International Journal of Doctoral Studies (Vol 17)",
+    "category": "research"
+  },
+  {
+    "id": "openstax-introductory-statistics",
+    "title": "OpenStax Introductory Statistics",
+    "url": "https://assets.openstax.org/oscms-prodcms/media/documents/IntroductoryStatistics-OP_i6tAI7e.pdf",
+    "source": "OpenStax / Rice University (CC BY 4.0)",
+    "category": "research"
+  },
+  {
+    "id": "openstax-business-ethics",
+    "title": "OpenStax Business Ethics",
+    "url": "https://assets.openstax.org/oscms-prodcms/media/documents/BusinessEthics-OP_lNFo87S.pdf",
+    "source": "OpenStax / Rice University (CC BY 4.0)",
+    "category": "research"
+  },
+  {
+    "id": "openstax-chemistry-2e",
+    "title": "OpenStax Chemistry 2e",
+    "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Chemistry2e-OP.pdf",
+    "source": "OpenStax / Rice University (CC BY 4.0)",
+    "category": "research"
+  },
+  {
+    "id": "who-code-of-ethics",
+    "title": "WHO Code of Ethics (2023)",
+    "url": "https://cdn.who.int/media/docs/default-source/ethics/code-of-ethics.pdf",
+    "source": "World Health Organization",
+    "category": "research"
   }
 ]

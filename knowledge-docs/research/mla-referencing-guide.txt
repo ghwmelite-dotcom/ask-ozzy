@@ -1,0 +1,80 @@
+MLA Referencing quick guide 
+Please note, this is a quick guide to citing and referencing using the MLA (9
+th
+ edition) referencing style. 
+For more detailed examples, please go to Cite Them Right Online, or see the guidance on the MLA 
+Style Center. 
+Your referencing includes two main parts: 
+— a citation within the text of your assignment 
+— a list of references or bibliography at the end of your assignment 
+In-text citations 
+MLA in-text citations should: 
+1. Identify the source of the information, e.g. author’s name or a brief title. Use whichever 
+information appears first in the full reference for the item. 
+2. Identify the location where the information was found, e.g. page number(s), chapter number(s), or 
+time. For some items that have no pagination or other division, such as web pages or online 
+articles, it may be appropriate to leave out this element of the reference. 
+Examples: 
+Book/journal article (Atwood 83–4) 
+E-book without pagination (Austen ch. 5) 
+Film (title in italics) (Alien 00:24:13–18) 
+Web page (York St John University) 
+Where multiple items by the same author are cited, you should also provide additional distinguishing 
+information, such as a brief title. (Where titles are used, use either italics or “quote marks” depending 
+on how the title appears in the full reference.) 
+Book/journal article with 
+distinguishing information 
+(Atwood, Negotiating 83–4) 
+Key reference examples 
+Full information about the source is then provided in the bibliography or reference list at the end of the 
+document. 
+Books 
+Format Author. Book title in italics. Edition, Publisher, Date. 
+Example Atwood, Margaret. Negotiating with the dead: a writer on writing. 2
+nd
+ ed., Cambridge 
+University Press, 2002. 
+ 
+  
+
+CC BY 4.0 International, July 2025 www.yorksj.ac.uk/library/ |  library@yorksj.ac.uk 
+ 
+Journal articles 
+Format Author. “Article title in quote marks.” Journal title in italics, Volume, Issue number, Date, 
+Page range.  
+ 
+For electronic articles: 
+ 
+Author. “Article title in quote marks.” Journal title in italics, Volume, Issue number, Date, 
+Page range. Collection in italics, DOI or URL. 
+Examples Cowan, Brian William. “Mr. Spectator and the Coffeehouse Public Sphere.” Eighteenth-
+Century Studies, vol. 37, no. 3, 2004, pp. 345–366. 
+ 
+Falter, Elizabeth and Neville, Sarah. “William Shakespeare’s Much A-Zoom About 
+Nothing.” International Journal of Performance Arts and Digital Media, vol. 16, no. 3, 2020, 
+pp.306-318. EBSCO, 10.1080/14794713.2020.1831828. 
+Web pages 
+Format Author/corporate author. “Web page title in quote marks.” Website where the page is 
+hosted in italics, Date last updated, URL. 
+ 
+If the date the web page was last updated is not available, you should instead include the 
+date of access after the URL: 
+ 
+Author/corporate author. “Web page title in quote marks.” Website where the page is 
+hosted in italics, URL. Accessed Date of access. 
+Examples Modern Language Association of America. “Works Cited: A Quick Guide.” The MLA Style 
+Center, 2022, https://style.mla.org/works-cited-a-quick-guide/. 
+ 
+York St John University. “Your Academic Liaison Librarians.” York St John University, 
+https://www.yorksj.ac.uk/students/library/academic-liaison-librarians/. Accessed 14 Jun. 
+2022. 
+Chapter in an edited book 
+Format Author. “Chapter title in quote marks.” Book title in italics, edited by Editor, Publisher, Date, 
+Page range. 
+Example Robins, Fred C. “Beowulf.” The Cambridge companion to Old English Literature, edited by 
+Malcolm Godden, Cambridge University Press, 2006, pp. 142–159. 
+Film 
+Format Film title in italics. Directed by Director, Film studio/distributor, Date. 
+Example Alien. Directed by Ridley Scott, 20th Century Fox, 1979. 
+Other resources 
+Referencing examples for further resources can be found on Cite Them Right Online.
