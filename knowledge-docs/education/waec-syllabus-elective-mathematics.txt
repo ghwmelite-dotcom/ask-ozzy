@@ -1,5 +1,3 @@
-
-
 FURTHER MATHEMATICS/MATHEMATICS (ELECTIVE) 
  
 AIMS OF THE SYLLABUS 
@@ -2550,11 +2548,4 @@ required.
 ( 4)  Disclaimer 
 
 In spite of the provisions made in paragraphs 2 (1) and (2) above, it should be noted 
-that some questions may prohibit the use of tables and/or calculators. 
- 
- 
- 
- 
- 
- 
- 
+that some questions may prohibit the use of tables and/or calculators.

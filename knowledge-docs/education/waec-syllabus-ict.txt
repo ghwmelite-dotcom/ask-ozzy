@@ -1,7 +1,3 @@
-
-
- 
- 
 INFORMATION AND COMMUNICATION TECHNOLOGY  (CORE) 
  
  
@@ -116,6 +112,4 @@ Internet
                  8.5     Internet related tools for communication, 
 e.g.     
                                                                  chatting, downloading, uploading, 
-search      engines, facebook, etc. 
- 
- 
+search      engines, facebook, etc.

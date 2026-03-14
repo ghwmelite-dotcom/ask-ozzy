@@ -1,5 +1,3 @@
-
-
 1 
  
  
@@ -3354,9 +3352,4 @@ SO
 (vii) Characteristic test tube reactions of the functional groups in the following simple 
 organic compounds: Alkenes; alkanols; alkanoic acids, sugars (using Fehiling’s 
 and Benedict’s solutions only); starch (iodine test only) and proteins (using the 
-Ninhydrin test, Xanthoporteic test, Biuret test and Millon’s test only). 
- 
- 
- 
- 
- 
+Ninhydrin test, Xanthoporteic test, Biuret test and Millon’s test only).
