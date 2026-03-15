@@ -4354,7 +4354,7 @@ function showVoiceWelcome() {
     <div class="voice-welcome-card">
       <div class="voice-welcome-flag"><span></span><span></span><span></span></div>
       <h2>Welcome to AskOzzy</h2>
-      <p class="subtitle">Tap the microphone to ask your question in any Ghanaian language</p>
+      <p class="subtitle">Your AI assistant for Government of Ghana operations, education, and more</p>
       <button class="voice-welcome-mic" id="voice-welcome-mic-btn" title="Tap to speak">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
@@ -4363,8 +4363,8 @@ function showVoiceWelcome() {
           <line x1="8" y1="23" x2="16" y2="23"/>
         </svg>
       </button>
-      <p class="or-type">Or type your question below</p>
-      <button class="voice-welcome-dismiss" id="voice-welcome-dismiss">Got it</button>
+      <p class="or-type">Tap the mic to speak or type your question below</p>
+      <button class="voice-welcome-dismiss" id="voice-welcome-dismiss">Get Started</button>
     </div>
   `;
 
