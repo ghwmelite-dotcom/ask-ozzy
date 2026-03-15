@@ -1823,17 +1823,23 @@ export default {
         return;
       }
 
+      // 70% local (Ghana + Africa) / 30% global distribution
       const topicFetches = [
+        // ── Local: Ghana (~70% of content) ──────────────────────────────
         { category: "ghana", url: `${GNEWS_BASE}/top-headlines?country=gh&lang=en&max=20&apikey=${apiKey}` },
-        { category: "africa", url: `${GNEWS_BASE}/search?q=Africa OR "African Union" OR ECOWAS OR "West Africa" OR "East Africa" OR "South Africa"&lang=en&max=20&apikey=${apiKey}` },
-        { category: "world", url: `${GNEWS_BASE}/top-headlines?topic=world&lang=en&max=20&apikey=${apiKey}` },
-        { category: "business", url: `${GNEWS_BASE}/top-headlines?topic=business&lang=en&max=20&apikey=${apiKey}` },
-        { category: "technology", url: `${GNEWS_BASE}/top-headlines?topic=technology&lang=en&max=20&apikey=${apiKey}` },
-        { category: "science", url: `${GNEWS_BASE}/top-headlines?topic=science&lang=en&max=20&apikey=${apiKey}` },
-        { category: "health", url: `${GNEWS_BASE}/top-headlines?topic=health&lang=en&max=20&apikey=${apiKey}` },
-        { category: "sports", url: `${GNEWS_BASE}/top-headlines?topic=sports&lang=en&max=20&apikey=${apiKey}` },
-        { category: "entertainment", url: `${GNEWS_BASE}/top-headlines?topic=entertainment&lang=en&max=20&apikey=${apiKey}` },
-        { category: "government", url: `${GNEWS_BASE}/search?q=government OR politics OR policy OR parliament OR legislation&lang=en&max=20&apikey=${apiKey}` },
+        { category: "ghana", url: `${GNEWS_BASE}/search?q=Ghana government OR parliament OR policy OR president OR ministry&lang=en&country=gh&max=15&apikey=${apiKey}` },
+        { category: "ghana", url: `${GNEWS_BASE}/search?q=Ghana economy OR business OR trade OR cedi OR "Bank of Ghana"&lang=en&country=gh&max=15&apikey=${apiKey}` },
+        { category: "ghana", url: `${GNEWS_BASE}/search?q=Ghana education OR university OR WAEC OR GES OR BECE&lang=en&country=gh&max=10&apikey=${apiKey}` },
+        { category: "ghana", url: `${GNEWS_BASE}/search?q=Ghana football OR "Black Stars" OR GPL OR sports&lang=en&country=gh&max=10&apikey=${apiKey}` },
+        { category: "africa", url: `${GNEWS_BASE}/search?q=Africa OR ECOWAS OR "West Africa" OR "African Union"&lang=en&max=10&apikey=${apiKey}` },
+        // ── Global: World news (~30% of content) ────────────────────────
+        { category: "world", url: `${GNEWS_BASE}/top-headlines?topic=world&lang=en&max=5&apikey=${apiKey}` },
+        { category: "business", url: `${GNEWS_BASE}/top-headlines?topic=business&lang=en&max=5&apikey=${apiKey}` },
+        { category: "technology", url: `${GNEWS_BASE}/top-headlines?topic=technology&lang=en&max=5&apikey=${apiKey}` },
+        { category: "science", url: `${GNEWS_BASE}/top-headlines?topic=science&lang=en&max=4&apikey=${apiKey}` },
+        { category: "health", url: `${GNEWS_BASE}/top-headlines?topic=health&lang=en&max=4&apikey=${apiKey}` },
+        { category: "sports", url: `${GNEWS_BASE}/top-headlines?topic=sports&lang=en&max=4&apikey=${apiKey}` },
+        { category: "entertainment", url: `${GNEWS_BASE}/top-headlines?topic=entertainment&lang=en&max=3&apikey=${apiKey}` },
       ];
 
       for (const { category, url } of topicFetches) {

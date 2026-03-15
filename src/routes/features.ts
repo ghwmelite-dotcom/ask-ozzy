@@ -1735,24 +1735,56 @@ features.get("/api/discover", async (c) => {
   const limit = Math.min(50, Math.max(1, parseInt(c.req.query("limit") || "20")));
   const offset = (page - 1) * limit;
 
-  let query = "SELECT * FROM discover_articles";
-  let countQuery = "SELECT COUNT(*) as total FROM discover_articles";
-  const params: string[] = [];
+  // When showing "all", enforce 70% local (ghana/africa) + 30% global ratio
+  if (!category || category === "all") {
+    const localLimit = Math.ceil(limit * 0.7);
+    const globalLimit = limit - localLimit;
+    const localOffset = Math.ceil(offset * 0.7);
+    const globalOffset = offset - localOffset;
 
-  if (category && category !== "all") {
-    query += " WHERE category = ?";
-    countQuery += " WHERE category = ?";
-    params.push(category);
+    const [localArticles, globalArticles, countResult] = await Promise.all([
+      c.env.DB.prepare(
+        `SELECT * FROM discover_articles WHERE category IN ('ghana', 'africa')
+         ORDER BY published_at DESC LIMIT ? OFFSET ?`
+      ).bind(localLimit, localOffset).all(),
+      c.env.DB.prepare(
+        `SELECT * FROM discover_articles WHERE category NOT IN ('ghana', 'africa')
+         ORDER BY published_at DESC LIMIT ? OFFSET ?`
+      ).bind(globalLimit, globalOffset).all(),
+      c.env.DB.prepare(
+        "SELECT COUNT(*) as total FROM discover_articles"
+      ).first<{ total: number }>(),
+    ]);
+
+    // Interleave: 2-3 local articles, then 1 global, repeat
+    const merged: unknown[] = [];
+    let li = 0, gi = 0;
+    const localResults = localArticles.results || [];
+    const globalResults = globalArticles.results || [];
+    while (li < localResults.length || gi < globalResults.length) {
+      // Add 2 local
+      if (li < localResults.length) merged.push(localResults[li++]);
+      if (li < localResults.length) merged.push(localResults[li++]);
+      // Add 1 global
+      if (gi < globalResults.length) merged.push(globalResults[gi++]);
+    }
+
+    const total = countResult?.total || 0;
+    return c.json({
+      articles: merged,
+      total,
+      page,
+      hasMore: offset + limit < total,
+    });
   }
 
-  query += " ORDER BY published_at DESC LIMIT ? OFFSET ?";
-
-  const countParams = [...params];
-  params.push(String(limit), String(offset));
+  // Specific category — return as-is
+  const query = "SELECT * FROM discover_articles WHERE category = ? ORDER BY published_at DESC LIMIT ? OFFSET ?";
+  const countQuery = "SELECT COUNT(*) as total FROM discover_articles WHERE category = ?";
 
   const [articles, countResult] = await Promise.all([
-    c.env.DB.prepare(query).bind(...params).all(),
-    c.env.DB.prepare(countQuery).bind(...countParams).first<{ total: number }>(),
+    c.env.DB.prepare(query).bind(category, limit, offset).all(),
+    c.env.DB.prepare(countQuery).bind(category).first<{ total: number }>(),
   ]);
 
   const total = countResult?.total || 0;

@@ -4769,11 +4769,10 @@ const discoverState = {
 };
 
 const DISCOVER_CATEGORIES = [
-  { id: 'all', label: 'All' },
+  { id: 'all', label: 'For You' },
   { id: 'ghana', label: 'Ghana' },
   { id: 'africa', label: 'Africa' },
   { id: 'world', label: 'World' },
-  { id: 'government', label: 'Gov & Politics' },
   { id: 'business', label: 'Business' },
   { id: 'technology', label: 'Technology' },
   { id: 'science', label: 'Science' },
