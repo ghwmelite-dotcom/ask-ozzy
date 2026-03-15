@@ -4363,43 +4363,12 @@ function showVoiceWelcome() {
           <line x1="8" y1="23" x2="16" y2="23"/>
         </svg>
       </button>
-      <div class="voice-lang-pills" id="voice-welcome-langs"></div>
       <p class="or-type">Or type your question below</p>
       <button class="voice-welcome-dismiss" id="voice-welcome-dismiss">Got it</button>
     </div>
   `;
 
   document.body.appendChild(overlay);
-
-  // Populate language pills
-  const languages = [
-    { code: 'en', name: 'English' },
-    { code: 'tw', name: 'Twi' },
-    { code: 'ga', name: 'Ga' },
-    { code: 'ee', name: 'Ewe' },
-    { code: 'ha', name: 'Hausa' },
-    { code: 'fr', name: 'Fran\u00e7ais' },
-    { code: 'dag', name: 'Dagbani' },
-  ];
-
-  const pillsContainer = document.getElementById('voice-welcome-langs');
-  if (pillsContainer) {
-    pillsContainer.innerHTML = languages.map(l =>
-      `<button class="voice-lang-pill ${l.code === (state.language || 'en') ? 'active' : ''}" data-lang="${l.code}">${l.name}</button>`
-    ).join('');
-
-    // Language pill click handlers
-    pillsContainer.addEventListener('click', (e) => {
-      const pill = e.target.closest('.voice-lang-pill');
-      if (!pill) return;
-      const lang = pill.dataset.lang;
-      // Update active state
-      pillsContainer.querySelectorAll('.voice-lang-pill').forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-      // Change the app language
-      changeLanguage(lang);
-    });
-  }
 
   // Mic button in welcome — start voice and dismiss
   const micBtn = document.getElementById('voice-welcome-mic-btn');
