@@ -11,7 +11,7 @@ const path = require("path");
 
 // ─── Configuration ───────────────────────────────────────────────────
 
-const API_URL = process.env.ASKOZZY_URL || "https://askozzy.ghwmelite.workers.dev";
+const API_URL = process.env.ASKOZZY_URL || "https://askozzy.work";
 const SECRET = process.env.BOOTSTRAP_SECRET;
 const DOCS_DIR = path.join(__dirname, "..", "knowledge-docs", "education");
 const UPLOAD_DELAY_MS = 2000;

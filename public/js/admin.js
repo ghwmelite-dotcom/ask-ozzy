@@ -3536,7 +3536,7 @@ async function loadUSSDTab() {
             <div>
               <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;">Callback URL</label>
               <div style="display:flex;gap:8px;">
-                <input type="text" id="ussd-callback-url" value="${escapeHtml(config.callbackUrl || 'https://askozzy.ghwmelite.workers.dev/api/ussd/callback')}" readonly
+                <input type="text" id="ussd-callback-url" value="${escapeHtml(config.callbackUrl || 'https://askozzy.work/api/ussd/callback')}" readonly
                   style="flex:1;padding:10px 14px;background:var(--bg-tertiary);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-size:13px;font-family:monospace;outline:none;" />
                 <button class="btn-action" onclick="copyUSSDUrl()" title="Copy URL">Copy</button>
               </div>

@@ -6,7 +6,7 @@ const pdfParse = require("pdf-parse");
 
 // ─── Configuration ───────────────────────────────────────────────────
 
-const API_URL = process.env.ASKOZZY_URL || "https://askozzy.ghwmelite.workers.dev";
+const API_URL = process.env.ASKOZZY_URL || "https://askozzy.work";
 const SECRET = process.env.BOOTSTRAP_SECRET;
 const CACHE_DIR = path.join(__dirname, ".cache");
 const DOCS_DIR = path.join(__dirname, "..", "knowledge-docs");

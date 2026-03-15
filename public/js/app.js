@@ -6576,13 +6576,13 @@ async function shareConversationExcerpt(conversationId) {
   } catch { /* use title only */ }
 
   const text = excerpt || title;
-  const url = 'https://askozzy.ghwmelite.workers.dev';
+  const url = 'https://askozzy.work';
   await shareContent('AskOzzy: ' + title, text, url);
 }
 
 async function shareReferralLink() {
   const referralCode = (state.user && state.user.referral_code) ? state.user.referral_code : '';
-  const url = 'https://askozzy.ghwmelite.workers.dev' + (referralCode ? '?ref=' + referralCode : '');
+  const url = 'https://askozzy.work' + (referralCode ? '?ref=' + referralCode : '');
   const text = 'Try AskOzzy — AI-powered productivity for Government of Ghana.' + (referralCode ? ' Use my referral code: ' + referralCode : '');
   await shareContent('Join AskOzzy', text, url);
 }
@@ -6778,7 +6778,7 @@ async function pickContactForReferral() {
       var contact = contacts[0];
       var referralCode = (state.user && state.user.referral_code) ? state.user.referral_code : '';
       var contactName = (contact.name && contact.name[0]) ? contact.name[0] : 'there';
-      var msg = 'Hey ' + contactName + '! Try AskOzzy \u2014 AI for Government of Ghana. Use my code: ' + referralCode + '\nhttps://askozzy.ghwmelite.workers.dev?ref=' + referralCode;
+      var msg = 'Hey ' + contactName + '! Try AskOzzy \u2014 AI for Government of Ghana. Use my code: ' + referralCode + '\nhttps://askozzy.work?ref=' + referralCode;
 
       if (contact.email && contact.email[0]) {
         window.open('mailto:' + contact.email[0] + '?subject=Try AskOzzy&body=' + encodeURIComponent(msg));
@@ -6786,7 +6786,7 @@ async function pickContactForReferral() {
         window.open('sms:' + contact.tel[0] + '?body=' + encodeURIComponent(msg));
       } else {
         // No email or phone, share via Web Share
-        await shareContent('Join AskOzzy', msg, 'https://askozzy.ghwmelite.workers.dev?ref=' + referralCode);
+        await shareContent('Join AskOzzy', msg, 'https://askozzy.work?ref=' + referralCode);
       }
       hapticFeedback('success');
     }

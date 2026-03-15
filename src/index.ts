@@ -57,9 +57,23 @@ app.onError((err, c) => {
   return c.json({ error: "Internal server error" }, 500);
 });
 
+// Redirect www and workers.dev to primary domain (askozzy.work)
+app.use("*", async (c, next) => {
+  const url = new URL(c.req.url);
+  if (url.hostname === "www.askozzy.work" || url.hostname === "askozzy.ghwmelite.workers.dev") {
+    url.hostname = "askozzy.work";
+    return c.redirect(url.toString(), 301);
+  }
+  await next();
+});
+
 app.use("/api/*", cors({
   origin: (origin) => {
-    const allowed = ["https://askozzy.ghwmelite.workers.dev"];
+    const allowed = [
+      "https://askozzy.work",
+      "https://www.askozzy.work",
+      "https://askozzy.ghwmelite.workers.dev",
+    ];
     return allowed.includes(origin) ? origin : allowed[0];
   },
   allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
