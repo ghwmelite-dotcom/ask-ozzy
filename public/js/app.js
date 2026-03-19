@@ -695,6 +695,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (state.token && state.user) {
     state.userType = state.user.userType || 'gog_employee';
     onAuthenticated();
+  } else if (!state.token && localStorage.getItem('askozzy_last_email')) {
+    // Attempt biometric login if token is missing but user was previously logged in
+    attemptBiometricLogin().then(success => {
+      if (success) {
+        loadConversations();
+        showWelcomeScreen();
+      }
+    });
   }
 
   // Initialize rotating tip bar
@@ -1065,6 +1073,10 @@ function bufferToBase64url(buffer) {
 
 // Runs after successful login or register
 function onAuthenticated() {
+  // Remember user for biometric quick re-login
+  if (state.user) {
+    rememberUserForBiometric(state.user.id, state.user.email);
+  }
   applyPersonaUI();
   renderTemplateGrid();
   renderCategoryTabs();
@@ -1608,6 +1620,7 @@ async function deleteConversation(id) {
 // ─── Chat ────────────────────────────────────────────────────────────
 
 function showChatScreen() {
+  updateBottomNavActive('chat');
   hideDiscoverScreen();
   document.getElementById("welcome-screen").classList.add("hidden");
   document.getElementById("welcome-screen").style.display = "none";
@@ -1618,6 +1631,7 @@ function showChatScreen() {
 }
 
 function showWelcomeScreen() {
+  updateBottomNavActive('chat');
   hideDiscoverScreen();
   document.getElementById("welcome-screen").classList.remove("hidden");
   document.getElementById("welcome-screen").style.display = "";
@@ -1886,6 +1900,11 @@ async function sendMessage() {
     await loadConversations();
     loadUsageStatus(); // refresh usage counter
     checkUpgradeNudge(); // Feature 1: Smart upgrade nudge after each message
+
+    // Track message count for push notification prompt
+    const mc = parseInt(localStorage.getItem('askozzy_msg_count') || '0') + 1;
+    localStorage.setItem('askozzy_msg_count', String(mc));
+    if (mc === 3) maybeShowPushBanner();
     if (shouldShowInlineTip()) renderInlineTip();
 
     // Growth system: track message + trigger value cards/celebrations
@@ -4782,6 +4801,7 @@ const DISCOVER_CATEGORIES = [
 ];
 
 function showDiscoverScreen() {
+  updateBottomNavActive('discover');
   document.getElementById('welcome-screen').classList.add('hidden');
   document.getElementById('welcome-screen').style.display = 'none';
   const chat = document.getElementById('chat-screen');
@@ -11869,4 +11889,370 @@ tbody td { border-bottom: 1px solid #e8e4d4; }
       scrollTimeout = setTimeout(() => { el.style.willChange = ''; }, 150);
     }, { passive: true });
   });
-})()
+})();
+
+// ═══════════════════════════════════════════════════════════════════
+//  Push Notifications
+// ═══════════════════════════════════════════════════════════════════
+
+async function enablePushNotifications() {
+  try {
+    const permission = await Notification.requestPermission();
+    if (permission !== 'granted') {
+      showToast('Notifications blocked. Enable in browser settings.', 'error');
+      return;
+    }
+
+    const reg = await navigator.serviceWorker.ready;
+
+    // Get VAPID key from server
+    const vapidRes = await fetch('/api/push/vapid-public-key');
+    const { publicKey } = await vapidRes.json();
+    if (!publicKey) {
+      showToast('Push notifications not configured', 'error');
+      return;
+    }
+
+    // Convert VAPID key to Uint8Array
+    const padding = '='.repeat((4 - publicKey.length % 4) % 4);
+    const base64 = (publicKey + padding).replace(/-/g, '+').replace(/_/g, '/');
+    const rawData = atob(base64);
+    const vapidKey = new Uint8Array(rawData.length);
+    for (let i = 0; i < rawData.length; i++) vapidKey[i] = rawData.charCodeAt(i);
+
+    const subscription = await reg.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: vapidKey,
+    });
+
+    const sub = subscription.toJSON();
+    await fetch('/api/push/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${state.token}` },
+      body: JSON.stringify({
+        endpoint: sub.endpoint,
+        keys: sub.keys,
+        preferences: { announcements: true, queueSync: true, sharedChat: true },
+      }),
+    });
+
+    hapticFeedback('success');
+    showToast('Notifications enabled!', 'success');
+    dismissPushBanner();
+    sessionStorage.setItem('askozzy_push_enabled', 'true');
+  } catch (err) {
+    console.error('Push subscription failed:', err);
+    showToast('Could not enable notifications', 'error');
+  }
+}
+
+function dismissPushBanner() {
+  const banner = document.getElementById('push-permission-banner');
+  if (banner) banner.style.display = 'none';
+  sessionStorage.setItem('askozzy_push_dismissed', 'true');
+}
+
+function maybeShowPushBanner() {
+  // Don't show if: already subscribed, dismissed this session, not logged in, or notifications not supported
+  if (!('PushManager' in window) || !('Notification' in window)) return;
+  if (Notification.permission === 'granted' || Notification.permission === 'denied') return;
+  if (sessionStorage.getItem('askozzy_push_dismissed')) return;
+  if (sessionStorage.getItem('askozzy_push_enabled')) return;
+  if (!state.token) return;
+
+  // Show after user has sent at least 3 messages (check conversation count)
+  const msgCount = parseInt(localStorage.getItem('askozzy_msg_count') || '0');
+  if (msgCount < 3) return;
+
+  const banner = document.getElementById('push-permission-banner');
+  if (banner) banner.style.display = 'flex';
+}
+
+// Listen for push notification clicks from service worker
+navigator.serviceWorker?.addEventListener('message', (event) => {
+  if (event.data?.type === 'NOTIFICATION_CLICK') {
+    if (event.data.conversationId) {
+      openConversation(event.data.conversationId);
+    } else if (event.data.url) {
+      window.location.href = event.data.url;
+    }
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════════
+//  Bottom Navigation
+// ═══════════════════════════════════════════════════════════════════
+
+function bottomNavTo(screen) {
+  hapticFeedback('light');
+
+  // Update active state
+  document.querySelectorAll('.bottom-nav-item').forEach(item => {
+    item.classList.toggle('active', item.dataset.screen === screen);
+  });
+
+  switch (screen) {
+    case 'chat':
+      if (state.activeConversationId) {
+        showChatScreen();
+      } else {
+        showWelcomeScreen();
+      }
+      break;
+    case 'discover':
+      showDiscoverScreen();
+      break;
+    case 'tools':
+      openBottomSheet('Tools', buildToolsSheetContent());
+      break;
+    case 'profile':
+      openBottomSheet('Profile', buildProfileSheetContent());
+      break;
+  }
+}
+
+function updateBottomNavActive(screen) {
+  document.querySelectorAll('.bottom-nav-item').forEach(item => {
+    item.classList.toggle('active', item.dataset.screen === screen);
+  });
+}
+
+// Hide bottom nav when keyboard is visible (mobile input focus)
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', () => {
+    const nav = document.getElementById('bottom-nav');
+    if (!nav) return;
+    const keyboardOpen = window.visualViewport.height < window.innerHeight * 0.75;
+    nav.classList.toggle('keyboard-open', keyboardOpen);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  Bottom Sheet
+// ═══════════════════════════════════════════════════════════════════
+
+let _bottomSheetStartY = 0;
+let _bottomSheetCurrentY = 0;
+let _bottomSheetDragging = false;
+
+function openBottomSheet(title, contentHtml) {
+  const overlay = document.getElementById('bottom-sheet-overlay');
+  const sheet = document.getElementById('bottom-sheet');
+  const header = document.getElementById('bottom-sheet-header');
+  const content = document.getElementById('bottom-sheet-content');
+  if (!sheet || !overlay) return;
+
+  header.textContent = title || '';
+  content.innerHTML = contentHtml;
+
+  overlay.classList.add('active');
+  requestAnimationFrame(() => {
+    sheet.classList.add('open');
+  });
+  hapticFeedback('light');
+
+  // Set up drag-to-dismiss on handle
+  const handle = sheet.querySelector('.bottom-sheet-handle');
+  if (handle) {
+    handle.addEventListener('touchstart', onBottomSheetTouchStart, { passive: true });
+    handle.addEventListener('touchmove', onBottomSheetTouchMove, { passive: false });
+    handle.addEventListener('touchend', onBottomSheetTouchEnd, { passive: true });
+  }
+}
+
+function closeBottomSheet() {
+  const overlay = document.getElementById('bottom-sheet-overlay');
+  const sheet = document.getElementById('bottom-sheet');
+  if (!sheet) return;
+
+  sheet.classList.remove('open');
+  sheet.style.transform = '';
+  setTimeout(() => {
+    overlay?.classList.remove('active');
+  }, 350);
+}
+
+function onBottomSheetTouchStart(e) {
+  _bottomSheetStartY = e.touches[0].clientY;
+  _bottomSheetDragging = true;
+  const sheet = document.getElementById('bottom-sheet');
+  if (sheet) sheet.style.transition = 'none';
+}
+
+function onBottomSheetTouchMove(e) {
+  if (!_bottomSheetDragging) return;
+  _bottomSheetCurrentY = e.touches[0].clientY - _bottomSheetStartY;
+  if (_bottomSheetCurrentY < 0) _bottomSheetCurrentY = 0; // Only drag down
+  const sheet = document.getElementById('bottom-sheet');
+  if (sheet) sheet.style.transform = `translateY(${_bottomSheetCurrentY}px)`;
+  if (_bottomSheetCurrentY > 10) e.preventDefault();
+}
+
+function onBottomSheetTouchEnd() {
+  _bottomSheetDragging = false;
+  const sheet = document.getElementById('bottom-sheet');
+  if (sheet) sheet.style.transition = '';
+
+  if (_bottomSheetCurrentY > 120) {
+    closeBottomSheet();
+    hapticFeedback('light');
+  } else {
+    if (sheet) sheet.style.transform = '';
+  }
+  _bottomSheetCurrentY = 0;
+}
+
+function buildToolsSheetContent() {
+  return `
+    <button class="bottom-sheet-action" onclick="closeBottomSheet();document.getElementById('template-btn')?.click();">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      Templates
+    </button>
+    <button class="bottom-sheet-action" onclick="closeBottomSheet();document.getElementById('research-btn')?.click();">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      Deep Research
+    </button>
+    <button class="bottom-sheet-action" onclick="closeBottomSheet();openCamera();">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      Camera
+    </button>
+    <button class="bottom-sheet-action" onclick="closeBottomSheet();toggleVoice();">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
+      Voice Input
+    </button>
+    <button class="bottom-sheet-action" onclick="closeBottomSheet();document.getElementById('web-search-btn')?.click();">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+      Web Search
+    </button>
+  `;
+}
+
+function buildProfileSheetContent() {
+  const user = state.user || {};
+  const tier = user.tier || 'free';
+  const tierLabel = tier.charAt(0).toUpperCase() + tier.slice(1);
+  return `
+    <div style="display:flex;align-items:center;gap:12px;padding:8px 0 16px;">
+      <div style="width:44px;height:44px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px;">${(user.name || user.email || 'U').charAt(0).toUpperCase()}</div>
+      <div>
+        <div style="font-weight:600;font-size:15px;color:var(--text);">${escapeHtml(user.name || user.email || 'User')}</div>
+        <div style="font-size:12px;color:var(--text-muted);">${tierLabel} Plan</div>
+      </div>
+    </div>
+    <button class="bottom-sheet-action" onclick="closeBottomSheet();showSettingsModal();">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      Settings
+    </button>
+    <button class="bottom-sheet-action" onclick="closeBottomSheet();showPricingModal();">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      Upgrade Plan
+    </button>
+    <button class="bottom-sheet-action bottom-sheet-action-destructive" onclick="closeBottomSheet();handleLogout();">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Log Out
+    </button>
+  `;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  Biometric Quick Login
+// ═══════════════════════════════════════════════════════════════════
+
+async function attemptBiometricLogin() {
+  // Only attempt if: WebAuthn supported, user previously logged in, session expired
+  if (!window.PublicKeyCredential) return false;
+
+  const lastUserId = localStorage.getItem('askozzy_last_user_id');
+  const lastEmail = localStorage.getItem('askozzy_last_email');
+  if (!lastUserId || !lastEmail) return false;
+
+  // Check if platform authenticator (fingerprint/face) is available
+  const available = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable?.();
+  if (!available) return false;
+
+  try {
+    // Request WebAuthn login options from server
+    const optionsRes = await fetch('/api/auth/webauthn/login-options', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: lastEmail }),
+    });
+
+    if (!optionsRes.ok) return false;
+    const options = await optionsRes.json();
+    if (!options.challenge) return false;
+
+    // Convert challenge from base64url
+    const challengeBuffer = Uint8Array.from(atob(options.challenge.replace(/-/g, '+').replace(/_/g, '/')), c => c.charCodeAt(0));
+
+    const allowCredentials = (options.credentials || []).map(cred => ({
+      type: 'public-key',
+      id: Uint8Array.from(atob(cred.id.replace(/-/g, '+').replace(/_/g, '/')), c => c.charCodeAt(0)),
+    }));
+
+    if (allowCredentials.length === 0) return false;
+
+    const assertion = await navigator.credentials.get({
+      publicKey: {
+        challenge: challengeBuffer,
+        rpId: window.location.hostname,
+        allowCredentials: allowCredentials,
+        userVerification: 'required',
+        timeout: 60000,
+      },
+    });
+
+    if (!assertion) return false;
+
+    // Send assertion to server for verification
+    const arrayToBase64url = (buffer) => {
+      const bytes = new Uint8Array(buffer);
+      let binary = '';
+      bytes.forEach(b => binary += String.fromCharCode(b));
+      return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    };
+
+    const loginRes = await fetch('/api/auth/webauthn/login-complete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: lastEmail,
+        id: assertion.id,
+        rawId: arrayToBase64url(assertion.rawId),
+        authenticatorData: arrayToBase64url(assertion.response.authenticatorData),
+        clientDataJSON: arrayToBase64url(assertion.response.clientDataJSON),
+        signature: arrayToBase64url(assertion.response.signature),
+      }),
+    });
+
+    if (!loginRes.ok) return false;
+    const loginData = await loginRes.json();
+
+    if (loginData.token) {
+      state.token = loginData.token;
+      localStorage.setItem('askozzy_token', loginData.token);
+      state.user = loginData.user || {};
+      localStorage.setItem('askozzy_user', JSON.stringify(state.user));
+      hapticFeedback('success');
+      showToast('Welcome back!', 'success');
+      return true;
+    }
+    return false;
+  } catch (err) {
+    console.log('Biometric login not available or cancelled:', err.name);
+    return false;
+  }
+}
+
+// Store last user info on successful login for biometric re-auth
+function rememberUserForBiometric(userId, email) {
+  if (userId) localStorage.setItem('askozzy_last_user_id', userId);
+  if (email) localStorage.setItem('askozzy_last_email', email);
+}
+
+// Clear badge when app becomes visible
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    updateAppBadge(0);
+  }
+});

@@ -95,6 +95,18 @@
         <span>You're offline — messages will send when you reconnect</span>
       </div>
 
+      <!-- Push Notification Permission Banner -->
+      <div class="push-permission-banner" id="push-permission-banner" style="display:none">
+        <div class="push-banner-content">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+          <span>Enable notifications to stay updated</span>
+        </div>
+        <div class="push-banner-actions">
+          <button onclick="enablePushNotifications()" class="push-banner-btn push-banner-allow">Enable</button>
+          <button onclick="dismissPushBanner()" class="push-banner-btn push-banner-dismiss">Not now</button>
+        </div>
+      </div>
+
       <header class="main-header">
         <!-- Left zone: nav controls -->
         <div class="header-zone header-zone-left">
@@ -614,5 +626,34 @@
 
   <!-- Context Menu -->
   <div class="ctx-menu" id="ctx-menu"></div>
+
+  <!-- Bottom Sheet (reusable) -->
+  <div class="bottom-sheet-overlay" id="bottom-sheet-overlay" onclick="closeBottomSheet()"></div>
+  <div class="bottom-sheet" id="bottom-sheet" role="dialog" aria-modal="true">
+    <div class="bottom-sheet-handle" aria-hidden="true"><div class="bottom-sheet-handle-bar"></div></div>
+    <div class="bottom-sheet-header" id="bottom-sheet-header"></div>
+    <div class="bottom-sheet-content" id="bottom-sheet-content"></div>
+  </div>
+
+  <!-- Mobile Bottom Navigation -->
+  <nav class="bottom-nav" id="bottom-nav" aria-label="Main navigation">
+    <button class="bottom-nav-item active" data-screen="chat" onclick="bottomNavTo('chat')" aria-label="Chat">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      <span>Chat</span>
+    </button>
+    <button class="bottom-nav-item" data-screen="discover" onclick="bottomNavTo('discover')" aria-label="Discover">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88"/></svg>
+      <span>Discover</span>
+    </button>
+    <button class="bottom-nav-item" data-screen="tools" onclick="bottomNavTo('tools')" aria-label="Tools">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+      <span>Tools</span>
+    </button>
+    <button class="bottom-nav-item" data-screen="profile" onclick="bottomNavTo('profile')" aria-label="Profile">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Profile</span>
+      <span class="bottom-nav-badge" id="profile-badge" style="display:none"></span>
+    </button>
+  </nav>
 </body>
 </html>

@@ -1853,6 +1853,17 @@ self.addEventListener("message", (event) => {
       notifyClients({ type: "QUEUE_UPDATED" });
     });
   }
+
+  // Badge management via postMessage
+  if (event.data && event.data.type === 'SET_BADGE') {
+    if (navigator.setAppBadge) {
+      navigator.setAppBadge(event.data.count || 0).catch(() => {});
+    }
+  } else if (event.data && event.data.type === 'CLEAR_BADGE') {
+    if (navigator.clearAppBadge) {
+      navigator.clearAppBadge().catch(() => {});
+    }
+  }
 });
 
 // ─── Background Sync: process queue when OS signals connectivity ─────
@@ -1875,3 +1886,88 @@ self.addEventListener("periodicsync", (event) => {
 // Removed duplicate fetch listener that piggybacked queue processing on every fetch.
 // Queue processing is handled by: (1) explicit PROCESS_QUEUE messages from client,
 // (2) Background Sync API via "sync-offline-queue" tag, (3) online event in client.
+
+// ─── Push Notifications ─────────────────────────────────────────────
+self.addEventListener('push', (event) => {
+  if (!event.data) return;
+
+  let data;
+  try {
+    data = event.data.json();
+  } catch {
+    data = { title: 'AskOzzy', body: event.data.text() };
+  }
+
+  const title = data.title || 'AskOzzy';
+  const options = {
+    body: data.body || '',
+    icon: '/icons/icon-192.png',
+    badge: '/icons/icon-192.png',
+    tag: data.tag || 'askozzy-notification',
+    renotify: !!data.renotify,
+    data: {
+      url: data.url || '/',
+      type: data.type || 'general',
+      conversationId: data.conversationId || null,
+    },
+    actions: [],
+    vibrate: [100, 50, 100],
+    requireInteraction: data.requireInteraction || false,
+  };
+
+  // Add context-specific actions
+  if (data.type === 'shared_chat') {
+    options.actions = [
+      { action: 'open', title: 'Open Chat' },
+      { action: 'dismiss', title: 'Dismiss' },
+    ];
+  } else if (data.type === 'announcement') {
+    options.actions = [
+      { action: 'open', title: 'Read More' },
+      { action: 'dismiss', title: 'Dismiss' },
+    ];
+  }
+
+  // Update app badge with unread count
+  if (data.unreadCount && navigator.setAppBadge) {
+    navigator.setAppBadge(data.unreadCount).catch(() => {});
+  }
+
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  if (event.action === 'dismiss') return;
+
+  const url = event.notification.data?.url || '/';
+
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+      // Focus existing window if open
+      for (const client of clientList) {
+        if (client.url.includes(self.location.origin) && 'focus' in client) {
+          client.focus();
+          // Navigate to the specific URL
+          client.postMessage({
+            type: 'NOTIFICATION_CLICK',
+            url: url,
+            conversationId: event.notification.data?.conversationId,
+            notificationType: event.notification.data?.type,
+          });
+          return;
+        }
+      }
+      // No existing window — open a new one
+      return clients.openWindow(url);
+    })
+  );
+});
+
+// Clear badge when app is focused
+self.addEventListener('notificationclose', (event) => {
+  if (navigator.clearAppBadge) {
+    navigator.clearAppBadge().catch(() => {});
+  }
+});
