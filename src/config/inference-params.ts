@@ -88,7 +88,7 @@ export const AGENT_PARAMS: Record<string, InferenceParams> = {
   },
   verifier: {
     temperature: 0.05, top_p: 0.8, top_k: 20, max_tokens: 600,
-    model: '@cf/meta/llama-3.1-70b-instruct',
+    model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
     response_format: { type: 'json_object' }
   }
 };

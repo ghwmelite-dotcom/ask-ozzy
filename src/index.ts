@@ -141,6 +141,7 @@ const PRICING_TIERS: Record<string, {
 };
 
 const FREE_TIER_MODELS = [
+  "@cf/qwen/qwen3-30b-a3b-fp8",
   "@cf/openai/gpt-oss-20b",
   "@cf/google/gemma-3-12b-it",
   "@cf/meta/llama-3.1-8b-instruct-fast",
@@ -148,6 +149,7 @@ const FREE_TIER_MODELS = [
 
 const PRO_TIER_MODELS = [
   ...FREE_TIER_MODELS,
+  "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
   "@cf/meta/llama-4-scout-17b-16e-instruct",
   "@cf/qwen/qwq-32b",
   "@cf/mistralai/mistral-small-3.1-24b-instruct",

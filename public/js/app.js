@@ -101,7 +101,7 @@ const state = {
   activeConversationId: null,
   messages: [],
   isStreaming: false,
-  selectedModel: "@cf/openai/gpt-oss-20b",
+  selectedModel: "@cf/qwen/qwen3-30b-a3b-fp8",
   activeCategory: "All",
   pendingAction: null,
   folders: [],
@@ -520,7 +520,7 @@ const GUIDE_SECTIONS = [
     features: [
       { id: 'gs-register', title: 'Create Your Account', tier: 'free', description: 'Register with your name, email, GoG department, and a referral code. You\'ll receive a personal access code and set up 2FA security.', steps: ['Click "Sign In / Create Account" in the sidebar', 'Switch to the "Register" tab', 'Choose your persona: GoG Employee or Student', 'Enter your full name, email, department, and referral code', 'A referral code is required — get one from a colleague or click "Generate" for a system code', 'Set up 2FA by scanning the QR code with an authenticator app', 'Save your access code and recovery code — shown only once!'] },
       { id: 'gs-signin', title: 'Sign In with Access Code', tier: 'free', description: 'Use your email and access code to sign in. No passwords needed — simple and secure.', steps: ['Click "Sign In / Create Account"', 'Enter your email and access code', 'Enter your 6-digit 2FA code from your authenticator app', 'You\'re signed in with a personalized "Welcome to AskOzzy, [Name]!" greeting', 'Your conversations, preferences, and settings are all restored'] },
-      { id: 'gs-models', title: 'Choose Your AI Model', tier: 'free', description: 'Select from multiple AI models optimized for different tasks. Higher tiers unlock more powerful models.', steps: ['Look for the model selector dropdown in the header', 'Free tier includes GPT-OSS 20B, Gemma 3, and Llama 3.1 8B', 'Professional tier unlocks all 11 models including Llama 3.3 70B and DeepSeek R1', 'Each model has strengths — experiment to find your favorite'] },
+      { id: 'gs-models', title: 'Choose Your AI Model', tier: 'free', description: 'Select from multiple AI models optimized for different tasks. Higher tiers unlock more powerful models.', steps: ['Look for the model selector dropdown in the header', 'Free tier includes Qwen3 30B (default), GPT-OSS 20B, Gemma 3, and Llama 3.1 8B', 'Professional tier unlocks Llama 3.3 70B, Llama 4 Scout, and more', 'Each model has strengths — experiment to find your favorite'] },
       { id: 'gs-persona', title: 'GoG Employee vs Student Mode', tier: 'free', description: 'AskOzzy adapts its interface, templates, and pricing based on whether you\'re a GoG employee or student.', steps: ['Select your persona during registration (GoG Employee or Student)', 'GoG Employees see government-focused templates (memos, briefs, procurement)', 'Students see academic templates (essays, research, study aids)', 'Students get discounted subscription pricing — up to 58% off!', 'Your persona is saved to your account and persists across devices'] },
     ]
   },

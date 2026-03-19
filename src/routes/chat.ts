@@ -68,6 +68,7 @@ const PRICING_TIERS: Record<string, {
 };
 
 const FREE_TIER_MODELS = [
+  "@cf/qwen/qwen3-30b-a3b-fp8",
   "@cf/openai/gpt-oss-20b",
   "@cf/google/gemma-3-12b-it",
   "@cf/meta/llama-3.1-8b-instruct-fast",
@@ -75,6 +76,7 @@ const FREE_TIER_MODELS = [
 
 const PRO_TIER_MODELS = [
   ...FREE_TIER_MODELS,
+  "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
   "@cf/meta/llama-4-scout-17b-16e-instruct",
   "@cf/qwen/qwq-32b",
   "@cf/mistralai/mistral-small-3.1-24b-instruct",
@@ -1018,17 +1020,17 @@ chat.post("/api/chat", authMiddleware, async (c) => {
     return c.json({ error: "Conversation not found" }, 404);
   }
 
-  let selectedModel = model || convo.model || "@cf/meta/llama-4-scout-17b-16e-instruct";
+  let selectedModel = model || convo.model || "@cf/qwen/qwen3-30b-a3b-fp8";
   let modelDowngraded = false;
 
   // Free tier: restrict to basic models
   if (userTier === "free" && !FREE_TIER_MODELS.includes(selectedModel)) {
-    selectedModel = "@cf/openai/gpt-oss-20b"; // fallback to best free model
+    selectedModel = "@cf/qwen/qwen3-30b-a3b-fp8"; // fallback to best free model (MoE, 3B active)
     modelDowngraded = true;
   }
-  // Professional tier: restrict to pro + free models (6 total)
+  // Professional tier: restrict to pro + free models
   if (userTier === "professional" && !PRO_TIER_MODELS.includes(selectedModel)) {
-    selectedModel = "@cf/meta/llama-4-scout-17b-16e-instruct"; // fallback to best pro model
+    selectedModel = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"; // fallback to best pro model
     modelDowngraded = true;
   }
 
