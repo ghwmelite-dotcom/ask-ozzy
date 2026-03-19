@@ -87,14 +87,35 @@ export function generateReferralSuffix(length = 4): string {
 
 // ─── Session Tokens ─────────────────────────────────────────────────
 
-export async function createToken(userId: string, env: Env): Promise<string> {
+export async function createToken(userId: string, env: Env, sessionVersion?: number): Promise<string> {
   const token = generateId();
-  await env.SESSIONS.put(`session:${token}`, userId, {
+  await env.SESSIONS.put(`session:${token}`, JSON.stringify({ userId, sessionVersion: sessionVersion || 1 }), {
     expirationTtl: 60 * 60 * 24 * 7, // 7 days
   });
   return token;
 }
 
 export async function verifyToken(token: string, env: Env): Promise<string | null> {
-  return await env.SESSIONS.get(`session:${token}`);
+  const data = await env.SESSIONS.get(`session:${token}`);
+  if (!data) return null;
+  // Backward compatible: old sessions stored plain userId string
+  try {
+    const parsed = JSON.parse(data);
+    return parsed.userId || null;
+  } catch {
+    // Legacy plain userId string
+    return data;
+  }
+}
+
+export async function getSessionData(token: string, env: Env): Promise<{ userId: string; sessionVersion?: number } | null> {
+  const data = await env.SESSIONS.get(`session:${token}`);
+  if (!data) return null;
+  try {
+    const parsed = JSON.parse(data);
+    if (parsed.userId) return parsed;
+    return { userId: data };
+  } catch {
+    return { userId: data };
+  }
 }

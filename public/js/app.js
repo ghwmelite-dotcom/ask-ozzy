@@ -1657,9 +1657,9 @@ function renderMessages() {
             <span class="msg-action-icon">&#x1F5A8;</span> Print
           </button>
           ${msg.id ? `
-          <button class="msg-rate-btn ${msg.userRating === 1 ? 'rated' : ''}" data-rate-msg="${msg.id}" data-rating="1" onclick="rateMessage('${msg.id}', 1)" title="Good response">&#x1F44D;</button>
-          <button class="msg-rate-btn ${msg.userRating === -1 ? 'rated' : ''}" data-rate-msg="${msg.id}" data-rating="-1" onclick="rateMessage('${msg.id}', -1)" title="Poor response">&#x1F44E;</button>
-          <button class="msg-action-btn" onclick="regenerateMessage('${msg.id}')" title="Regenerate response">
+          <button class="msg-rate-btn ${msg.userRating === 1 ? 'rated' : ''}" data-rate-msg="${escapeHtml(msg.id)}" data-rating="1" onclick="rateMessage('${escapeHtml(msg.id)}', 1)" title="Good response">&#x1F44D;</button>
+          <button class="msg-rate-btn ${msg.userRating === -1 ? 'rated' : ''}" data-rate-msg="${escapeHtml(msg.id)}" data-rating="-1" onclick="rateMessage('${escapeHtml(msg.id)}', -1)" title="Poor response">&#x1F44E;</button>
+          <button class="msg-action-btn" onclick="regenerateMessage('${escapeHtml(msg.id)}')" title="Regenerate response">
             <span class="msg-action-icon">&#x1F504;</span> Regenerate
           </button>
           ` : ""}
@@ -2225,7 +2225,7 @@ function printMessage(index) {
   if (!win) { alert("Please allow popups to print."); return; }
   const department = (state.user && state.user.department) || '';
   const date = new Date().toLocaleDateString("en-GB", { day:"numeric", month:"long", year:"numeric" });
-  win.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>AskOzzy \u2014 Print</title>
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:;"><title>AskOzzy \u2014 Print</title>
 <style>body{font-family:Georgia,'Times New Roman',serif;font-size:12pt;line-height:1.7;color:#1a1a1a;max-width:700px;margin:40px auto;padding:0 20px}h1{font-size:18pt;color:#006B3F;border-bottom:2px solid #006B3F;padding-bottom:4px}h2{font-size:16pt;color:#006B3F}h3{font-size:14pt;color:#333}pre{background:#f5f5f5;padding:12px;border:1px solid #ddd;border-radius:4px;font-family:Consolas,monospace;font-size:10pt;white-space:pre-wrap}code{font-family:Consolas,monospace;font-size:10pt;background:#f5f5f5;padding:2px 4px}blockquote{border-left:3px solid #006B3F;padding-left:12px;color:#555;font-style:italic}table{border-collapse:collapse;width:100%}th,td{border:1px solid #999;padding:8px;text-align:left}th{background:#eee;font-weight:bold}.gog-header{text-align:center;margin-bottom:24px;padding-bottom:12px;border-bottom:3px double #006B3F}.gog-header .republic{font-size:16pt;font-weight:bold;color:#006B3F;letter-spacing:2px;margin-bottom:4px}.gog-header .star{font-size:32pt;color:#D4AF37;line-height:1.2}.gog-header .dept{font-size:11pt;font-weight:bold;color:#333;text-transform:uppercase;letter-spacing:1px}.footer{margin-top:40px;padding-top:12px;border-top:1px solid #006B3F;font-size:9pt;color:#999;text-align:center}@media print{body{margin:0;padding:20px}}</style>
 </head><body>
 <div class="gog-header">
@@ -2567,7 +2567,7 @@ function renderMarkdown(text) {
 function escapeHtml(text) {
   const div = document.createElement("div");
   div.textContent = text;
-  return div.innerHTML;
+  return div.innerHTML.replace(/'/g, "&#39;");
 }
 
 // ─── Affiliate Programme (Enhanced Dashboard) ───────────────────────
@@ -4626,7 +4626,7 @@ function showMoveToFolderMenu(event, convoId) {
   closeContextMenu();
   const folders = state.folders || [];
   const convo = state.conversations.find(c => c.id === convoId);
-  const safeConvoId = convoId.replace(/'/g, "\\'");
+  const safeConvoId = escapeHtml(convoId);
 
   let menuHtml = '<div class="context-menu" id="context-menu">';
   menuHtml += '<div class="context-menu-title">Move to folder</div>';
@@ -4635,7 +4635,7 @@ function showMoveToFolderMenu(event, convoId) {
   }
   for (const f of folders) {
     const isCurrent = convo && convo.folder_id === f.id;
-    const safeFolderId = f.id.replace(/'/g, "\\'");
+    const safeFolderId = escapeHtml(f.id);
     menuHtml += `<button class="context-menu-item ${isCurrent ? 'active' : ''}" onclick="moveToFolder('${safeConvoId}','${safeFolderId}');closeContextMenu();">📁 ${escapeHtml(f.name)}${isCurrent ? ' ✓' : ''}</button>`;
   }
   if (folders.length === 0) {
@@ -4659,7 +4659,7 @@ function showConvoContextMenu(event, convoId, isPinned, folderId) {
   const folders = state.folders || [];
 
   let menuHtml = '<div class="context-menu" id="context-menu">';
-  const safeConvoId = convoId.replace(/'/g, "\\'");
+  const safeConvoId = escapeHtml(convoId);
   menuHtml += `<button class="context-menu-item" onclick="togglePin('${safeConvoId}');closeContextMenu();">${isPinned ? '📌 Unpin' : '📍 Pin to top'}</button>`;
   if (isPaid) {
     menuHtml += '<div class="context-menu-divider"></div>';
@@ -4669,7 +4669,7 @@ function showConvoContextMenu(event, convoId, isPinned, folderId) {
     }
     for (const f of folders) {
       const isCurrent = folderId === f.id;
-      const safeFolderId = f.id.replace(/'/g, "\\'");
+      const safeFolderId = escapeHtml(f.id);
       menuHtml += `<button class="context-menu-item ${isCurrent ? 'active' : ''}" onclick="moveToFolder('${safeConvoId}','${safeFolderId}');closeContextMenu();">📁 ${escapeHtml(f.name)}${isCurrent ? ' ✓' : ''}</button>`;
     }
     menuHtml += `<button class="context-menu-item context-menu-new" onclick="closeContextMenu();createFolder();">+ New Folder</button>`;
@@ -4974,7 +4974,7 @@ function renderDiscoverCard(article) {
   const catLabel = DISCOVER_CATEGORIES.find(c => c.id === article.category)?.label || article.category;
 
   const imgHtml = article.image_url
-    ? `<img class="discover-card-img" src="${escapeHtml(article.image_url)}" alt="" loading="lazy" onerror="this.outerHTML='<div class=\\'discover-card-img-placeholder\\'><svg width=\\'32\\' height=\\'32\\' viewBox=\\'0 0 24 24\\' fill=\\'none\\' stroke=\\'currentColor\\' stroke-width=\\'1.5\\'><circle cx=\\'12\\' cy=\\'12\\' r=\\'10\\'/><polygon points=\\'16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76\\'/></svg></div>'">`
+    ? `<img class="discover-card-img" src="${escapeHtml(article.image_url)}" alt="" loading="lazy" onerror="this.remove()">`
     : `<div class="discover-card-img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>`;
 
   return `
@@ -6865,7 +6865,7 @@ function showPaymentSuccess(planName) {
   banner.innerHTML = `
     <div style="display:flex;align-items:center;gap:12px;padding:16px 24px;background:linear-gradient(135deg, var(--green), var(--green-light));color:white;border-radius:12px;margin:12px;font-size:14px;font-weight:600;animation:slideDown 0.3s ease;">
       <span style="font-size:24px;">&#x2705;</span>
-      <span>Successfully upgraded to ${planName}! All premium features are now unlocked.</span>
+      <span>Successfully upgraded to ${escapeHtml(planName)}! All premium features are now unlocked.</span>
       <button onclick="this.parentElement.parentElement.remove()" style="background:none;border:none;color:white;font-size:18px;cursor:pointer;margin-left:auto;">&#x2715;</button>
     </div>`;
   document.querySelector(".main-content").prepend(banner);

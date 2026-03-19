@@ -27,6 +27,8 @@ import { assessStudentLevel, getOrCreateStudentProfile, buildScaffoldingPrompt, 
 import { retrieveAtLevel } from "../lib/difficulty-retriever";
 import { log } from "../lib/logger";
 
+function escapeLike(s: string): string { return s.replace(/[%_\\]/g, '\\$&'); }
+
 const chat = new Hono<AppType>();
 
 // ─── Duplicated Constants & Helpers from index.ts ─────────────────────
@@ -678,8 +680,8 @@ async function searchKnowledge(env: Env, query: string, topK = 5, agentType?: st
   try {
     const keywords = query.toLowerCase().split(/\s+/).filter(w => w.length > 3);
     if (keywords.length > 0) {
-      const likeClauses = keywords.slice(0, 5).map(() => '(keywords LIKE ? OR question LIKE ?)').join(' OR ');
-      const params = keywords.slice(0, 5).flatMap(kw => [`%${kw}%`, `%${kw}%`]);
+      const likeClauses = keywords.slice(0, 5).map(() => "(keywords LIKE ? ESCAPE '\\' OR question LIKE ? ESCAPE '\\')").join(' OR ');
+      const params = keywords.slice(0, 5).flatMap(kw => [`%${escapeLike(kw)}%`, `%${escapeLike(kw)}%`]);
 
       const { results } = await env.DB.prepare(
         `SELECT question, answer, category FROM knowledge_base WHERE active = 1 AND (${likeClauses}) ORDER BY priority DESC LIMIT 3`
@@ -978,6 +980,10 @@ chat.post("/api/chat", authMiddleware, async (c) => {
 
   if (message && message.length > 50000) {
     return c.json({ error: "Message too long (max 50,000 characters)" }, 400);
+  }
+
+  if (systemPrompt && (typeof systemPrompt !== 'string' || systemPrompt.length > 4000)) {
+    return c.json({ error: "System prompt too long (max 4000 characters)" }, 400);
   }
 
   // Get user tier and type (with trial + subscription expiry support)

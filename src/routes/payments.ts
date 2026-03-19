@@ -1234,8 +1234,33 @@ payments.post("/api/webhooks/paystack", async (c) => {
     return c.json({ error: "Invalid JSON payload" }, 400);
   }
 
+  // Ensure processed_payments table exists
+  try {
+    await c.env.DB.prepare("SELECT 1 FROM processed_payments LIMIT 0").first();
+  } catch {
+    await c.env.DB.exec(`CREATE TABLE IF NOT EXISTS processed_payments (
+      reference TEXT PRIMARY KEY,
+      event_type TEXT NOT NULL,
+      user_id TEXT NOT NULL,
+      amount_pesewas INTEGER NOT NULL,
+      processed_at TEXT NOT NULL DEFAULT (datetime('now')),
+      metadata TEXT
+    )`);
+  }
+
   if (event.event === "charge.success") {
     const { metadata, reference, amount: amountPesewas, customer } = event.data;
+
+    // Idempotency: atomically claim this reference before processing
+    if (reference) {
+      const claim = await c.env.DB.prepare(
+        "INSERT OR IGNORE INTO processed_payments (reference, event_type, user_id, amount_pesewas, metadata) VALUES (?, ?, ?, ?, ?)"
+      ).bind(reference, metadata?.type || "charge", metadata?.userId || "", Number(amountPesewas) || 0, JSON.stringify(metadata || {})).run();
+      if (claim.meta.changes === 0) {
+        // Reference already claimed by a prior delivery
+        return c.json({ received: true, duplicate: true });
+      }
+    }
 
     // Handle document credit purchases
     if (metadata?.type === "doc_credits" && metadata?.userId && metadata?.packId) {
@@ -1326,6 +1351,7 @@ payments.post("/api/webhooks/paystack", async (c) => {
           }
         })());
       }
+
     }
   }
 

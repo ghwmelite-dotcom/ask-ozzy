@@ -289,6 +289,11 @@ async function logUserAudit(c: any, actionType: string, queryPreview?: string, m
   }
 }
 
+const VALID_STAT_COLUMNS = new Set([
+  "messages_sent", "research_reports", "analyses_run",
+  "meetings_processed", "workflows_completed", "documents_generated",
+]);
+
 const PRODUCTIVITY_MULTIPLIERS: Record<string, { column: string; minutes: number }> = {
   chat: { column: "messages_sent", minutes: 2 },
   research: { column: "research_reports", minutes: 30 },
@@ -306,7 +311,7 @@ async function trackProductivity(c: any, statType: string) {
     const userId = c.get("userId");
     const today = new Date().toISOString().split("T")[0];
     const multiplier = PRODUCTIVITY_MULTIPLIERS[statType];
-    if (!multiplier) return;
+    if (!multiplier || !VALID_STAT_COLUMNS.has(multiplier.column)) return;
 
     await c.env.DB.prepare(
       `INSERT INTO productivity_stats (user_id, stat_date, ${multiplier.column}, estimated_minutes_saved)

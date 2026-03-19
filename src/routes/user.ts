@@ -573,6 +573,68 @@ Return ONLY a JSON object:
   }
 });
 
+// ═══════════════════════════════════════════════════════════════════
+//  Self-Service Account Deletion
+// ═══════════════════════════════════════════════════════════════════
+
+user.delete("/api/account", authMiddleware, async (c) => {
+  const userId = c.get("userId");
+  const body = await c.req.json<{ confirm?: boolean }>().catch(() => ({ confirm: false }));
+
+  if (!body.confirm) {
+    return c.json({ error: "Must send { confirm: true } to delete account" }, 400);
+  }
+
+  try {
+    // Cascade delete all user data via batch
+    const db = c.env.DB;
+    const stmts = [
+      db.prepare("DELETE FROM messages WHERE conversation_id IN (SELECT id FROM conversations WHERE user_id = ?)").bind(userId),
+      db.prepare("DELETE FROM conversations WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM shared_conversations WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM response_feedback WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM productivity_stats WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM push_subscriptions WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM webauthn_credentials WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM folders WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM action_items WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM notes WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM saved_prompts WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM user_preferences WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM api_keys WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM audit_log WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM user_memories WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM user_profiles WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM document_credits WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM document_credit_transactions WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM exam_progress WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM student_profiles WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM session_tracking WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM referrals WHERE referrer_id = ? OR referred_id = ?").bind(userId, userId),
+      db.prepare("DELETE FROM affiliate_commissions WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM moderation_log WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM hallucination_events WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM kb_gaps WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM user_tools WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM org_invites WHERE user_id = ?").bind(userId),
+      db.prepare("DELETE FROM users WHERE id = ?").bind(userId),
+    ];
+
+    await db.batch(stmts);
+
+    // Clean up current KV session
+    const token = c.req.header("Authorization")?.slice(7);
+    if (token) {
+      await c.env.SESSIONS.delete(`session:${token}`);
+    }
+
+    return c.json({ deleted: true });
+  } catch (err: any) {
+    log("error", "Account deletion failed", { userId, error: err?.message });
+    return c.json({ error: "Account deletion failed. Please try again." }, 500);
+  }
+});
+
 // ─── Exports ────────────────────────────────────────────────────────
 
 export {

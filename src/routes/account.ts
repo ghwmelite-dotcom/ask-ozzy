@@ -115,6 +115,11 @@ async function logUserAudit(c: any, actionType: string, queryPreview?: string, m
 }
 
 // Productivity tracking
+const VALID_STAT_COLUMNS = new Set([
+  "messages_sent", "research_reports", "analyses_run",
+  "meetings_processed", "workflows_completed", "documents_generated",
+]);
+
 const PRODUCTIVITY_MULTIPLIERS: Record<string, { column: string; minutes: number }> = {
   chat: { column: "messages_sent", minutes: 2 },
   research: { column: "research_reports", minutes: 30 },
@@ -131,7 +136,7 @@ async function trackProductivity(c: any, statType: string) {
     const userId = c.get("userId");
     const today = new Date().toISOString().split("T")[0];
     const multiplier = PRODUCTIVITY_MULTIPLIERS[statType];
-    if (!multiplier) return;
+    if (!multiplier || !VALID_STAT_COLUMNS.has(multiplier.column)) return;
 
     await c.env.DB.prepare(
       `INSERT INTO productivity_stats (user_id, stat_date, ${multiplier.column}, estimated_minutes_saved)
@@ -275,6 +280,9 @@ account.post("/api/user/sessions/revoke-all", authMiddleware, async (c) => {
   const newHash = await hashPassword(newAccessCode);
   await c.env.DB.prepare("UPDATE users SET password_hash = ? WHERE id = ?")
     .bind(newHash, userId).run();
+
+  // Bump session version to invalidate all existing sessions
+  await c.env.DB.prepare("UPDATE users SET session_version = session_version + 1 WHERE id = ?").bind(userId).run();
 
   // Delete current session
   const currentToken = c.req.header("Authorization")?.slice(7) || "";

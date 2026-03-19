@@ -1,9 +1,11 @@
 import { Hono } from "hono";
 import type { Env, AppType } from "../types";
-import { adminMiddleware, deptAdminMiddleware } from "../lib/middleware";
+import { adminMiddleware, deptAdminMiddleware, checkRateLimit } from "../lib/middleware";
 import { generateId, generateAccessCode, hashPassword, generateRecoveryCode, generateReferralSuffix } from "../lib/utils";
 import { log } from "../lib/logger";
 import { uploadDocumentToR2, listR2Documents, deleteR2Document } from "../lib/autorag-retriever";
+
+function escapeLike(s: string): string { return s.replace(/[%_\\]/g, '\\$&'); }
 
 const adminContent = new Hono<AppType>();
 
@@ -554,8 +556,8 @@ adminContent.get("/api/admin/audit", adminMiddleware, async (c) => {
     params.push(dateTo + " 23:59:59");
   }
   if (search) {
-    where += " AND (user_email LIKE ? OR query_preview LIKE ? OR department LIKE ?)";
-    const s = `%${search}%`;
+    where += " AND (user_email LIKE ? ESCAPE '\\' OR query_preview LIKE ? ESCAPE '\\' OR department LIKE ? ESCAPE '\\')";
+    const s = `%${escapeLike(search)}%`;
     params.push(s, s, s);
   }
 
@@ -599,8 +601,8 @@ adminContent.get("/api/admin/audit/export", adminMiddleware, async (c) => {
     params.push(dateTo + " 23:59:59");
   }
   if (search) {
-    where += " AND (user_email LIKE ? OR query_preview LIKE ? OR department LIKE ?)";
-    const s = `%${search}%`;
+    where += " AND (user_email LIKE ? ESCAPE '\\' OR query_preview LIKE ? ESCAPE '\\' OR department LIKE ? ESCAPE '\\')";
+    const s = `%${escapeLike(search)}%`;
     params.push(s, s, s);
   }
 
@@ -768,8 +770,8 @@ adminContent.get("/api/admin/organizations", adminMiddleware, async (c) => {
   const params: any[] = [];
 
   if (search) {
-    query += " WHERE o.name LIKE ? OR o.slug LIKE ?";
-    params.push(`%${search}%`, `%${search}%`);
+    query += " WHERE o.name LIKE ? ESCAPE '\\' OR o.slug LIKE ? ESCAPE '\\'";
+    params.push(`%${escapeLike(search)}%`, `%${escapeLike(search)}%`);
   }
   query += " ORDER BY o.created_at DESC LIMIT ? OFFSET ?";
   params.push(limit, offset);
@@ -779,8 +781,8 @@ adminContent.get("/api/admin/organizations", adminMiddleware, async (c) => {
   let countQuery = "SELECT COUNT(*) as count FROM organizations";
   const countParams: any[] = [];
   if (search) {
-    countQuery += " WHERE name LIKE ? OR slug LIKE ?";
-    countParams.push(`%${search}%`, `%${search}%`);
+    countQuery += " WHERE name LIKE ? ESCAPE '\\' OR slug LIKE ? ESCAPE '\\'";
+    countParams.push(`%${escapeLike(search)}%`, `%${escapeLike(search)}%`);
   }
   const total = countParams.length > 0
     ? await c.env.DB.prepare(countQuery).bind(...countParams).first<{ count: number }>()
@@ -1036,6 +1038,9 @@ adminContent.get("/api/admin/kb/stats", adminMiddleware, async (c) => {
 adminContent.post("/api/admin/documents", async (c, next) => {
   const bootstrapSecret = c.req.header("X-Bootstrap-Secret");
   if (bootstrapSecret && bootstrapSecret === c.env.BOOTSTRAP_SECRET) {
+    const ip = c.req.header("cf-connecting-ip") || "unknown";
+    const { allowed } = await checkRateLimit(c.env, ip, "auth");
+    if (!allowed) return c.json({ error: "Rate limit exceeded" }, 429);
     c.set("userId", "system-ingest");
     return next();
   }
@@ -2071,8 +2076,8 @@ adminContent.get("/api/admin/knowledge/stats", adminMiddleware, async (c) => {
 
     const gogStatus: Array<{ name: string; category: string; uploaded: boolean; doc_count: number }> = [];
     for (const gogDoc of gogDocuments) {
-      const likeClauses = gogDoc.keywords.map(() => 'LOWER(title) LIKE ?').join(' OR ');
-      const params = gogDoc.keywords.map(kw => `%${kw}%`);
+      const likeClauses = gogDoc.keywords.map(() => "LOWER(title) LIKE ? ESCAPE '\\'").join(' OR ');
+      const params = gogDoc.keywords.map(kw => `%${escapeLike(kw)}%`);
       const found = await c.env.DB.prepare(
         `SELECT COUNT(*) as count FROM documents WHERE (${likeClauses}) OR category = ?`
       ).bind(...params, gogDoc.category).first<{ count: number }>();
@@ -2124,8 +2129,8 @@ adminContent.get("/api/admin/knowledge/documents", adminMiddleware, async (c) =>
     params.push(category);
   }
   if (search) {
-    conditions.push("(LOWER(d.title) LIKE ? OR LOWER(d.source) LIKE ?)");
-    params.push(`%${search.toLowerCase()}%`, `%${search.toLowerCase()}%`);
+    conditions.push("(LOWER(d.title) LIKE ? ESCAPE '\\' OR LOWER(d.source) LIKE ? ESCAPE '\\')");
+    params.push(`%${escapeLike(search.toLowerCase())}%`, `%${escapeLike(search.toLowerCase())}%`);
   }
 
   if (conditions.length > 0) {
@@ -2272,6 +2277,9 @@ If you cannot determine marks, set marks to null.`;
 adminContent.post("/api/admin/parse-exam-paper", async (c, next) => {
   const bootstrapSecret = c.req.header("X-Bootstrap-Secret");
   if (bootstrapSecret && bootstrapSecret === c.env.BOOTSTRAP_SECRET) {
+    const ip = c.req.header("cf-connecting-ip") || "unknown";
+    const { allowed } = await checkRateLimit(c.env, ip, "auth");
+    if (!allowed) return c.json({ error: "Rate limit exceeded" }, 429);
     c.set("userId", "system-ingest");
     return next();
   }
@@ -2347,6 +2355,9 @@ adminContent.post("/api/admin/parse-exam-paper", async (c, next) => {
 adminContent.post("/api/admin/exam-questions/bulk", async (c, next) => {
   const bootstrapSecret = c.req.header("X-Bootstrap-Secret");
   if (bootstrapSecret && bootstrapSecret === c.env.BOOTSTRAP_SECRET) {
+    const ip = c.req.header("cf-connecting-ip") || "unknown";
+    const { allowed } = await checkRateLimit(c.env, ip, "auth");
+    if (!allowed) return c.json({ error: "Rate limit exceeded" }, 429);
     c.set("userId", "system-ingest");
     return next();
   }

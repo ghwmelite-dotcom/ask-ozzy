@@ -49,6 +49,8 @@ import chatRoutes from "./routes/chat";
 import accountRoutes from "./routes/account";
 import miscRoutes from "./routes/misc";
 
+function escapeLike(s: string): string { return s.replace(/[%_\\]/g, '\\$&'); }
+
 const app = new Hono<AppType>();
 
 // Global error handler — prevent stack trace leaks
@@ -957,8 +959,8 @@ export async function searchKnowledge(env: Env, query: string, topK = 5, agentTy
   try {
     const keywords = query.toLowerCase().split(/\s+/).filter(w => w.length > 3);
     if (keywords.length > 0) {
-      const likeClauses = keywords.slice(0, 5).map(() => '(keywords LIKE ? OR question LIKE ?)').join(' OR ');
-      const params = keywords.slice(0, 5).flatMap(kw => [`%${kw}%`, `%${kw}%`]);
+      const likeClauses = keywords.slice(0, 5).map(() => "(keywords LIKE ? ESCAPE '\\' OR question LIKE ? ESCAPE '\\')").join(' OR ');
+      const params = keywords.slice(0, 5).flatMap(kw => [`%${escapeLike(kw)}%`, `%${escapeLike(kw)}%`]);
 
       const { results } = await env.DB.prepare(
         `SELECT question, answer, category FROM knowledge_base WHERE active = 1 AND (${likeClauses}) ORDER BY priority DESC LIMIT 3`
@@ -1270,6 +1272,11 @@ async function logUserAudit(c: any, actionType: string, queryPreview?: string, m
 
 // ─── Productivity Tracking ────────────────────────────────────────────
 
+const VALID_STAT_COLUMNS = new Set([
+  "messages_sent", "research_reports", "analyses_run",
+  "meetings_processed", "workflows_completed", "documents_generated",
+]);
+
 const PRODUCTIVITY_MULTIPLIERS: Record<string, { column: string; minutes: number }> = {
   chat: { column: "messages_sent", minutes: 2 },
   research: { column: "research_reports", minutes: 30 },
@@ -1286,7 +1293,7 @@ async function trackProductivity(c: any, statType: string) {
     const userId = c.get("userId");
     const today = new Date().toISOString().split("T")[0];
     const multiplier = PRODUCTIVITY_MULTIPLIERS[statType];
-    if (!multiplier) return;
+    if (!multiplier || !VALID_STAT_COLUMNS.has(multiplier.column)) return;
 
     await c.env.DB.prepare(
       `INSERT INTO productivity_stats (user_id, stat_date, ${multiplier.column}, estimated_minutes_saved)
@@ -1799,11 +1806,15 @@ export default {
   fetch: app.fetch,
   async scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext) {
     // Downgrade users whose subscription expired more than 7 days ago (grace period over)
-    const graceCutoff = new Date(Date.now() - 7 * 86400000)
-      .toISOString().replace("T", " ").split(".")[0];
-    await env.DB.prepare(
-      "UPDATE users SET tier = 'free' WHERE tier != 'free' AND subscription_expires_at IS NOT NULL AND subscription_expires_at < ?"
-    ).bind(graceCutoff).run();
+    try {
+      const graceCutoff = new Date(Date.now() - 7 * 86400000)
+        .toISOString().replace("T", " ").split(".")[0];
+      await env.DB.prepare(
+        "UPDATE users SET tier = 'free' WHERE tier != 'free' AND subscription_expires_at IS NOT NULL AND subscription_expires_at < ?"
+      ).bind(graceCutoff).run();
+    } catch (err: any) {
+      log('error', 'Cron: subscription downgrade failed', { error: err?.message });
+    }
 
     // Phase 6: Auto-toggle exam_seasons.active based on date range
     try {

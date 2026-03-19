@@ -19,6 +19,8 @@ function getVolumeDiscount(seats: number): number {
   return 0;
 }
 
+function escapeLike(s: string): string { return s.replace(/[%_\\]/g, '\\$&'); }
+
 const orgAdmin = new Hono<AppType>();
 
 orgAdmin.get("/api/org-admin/verify", orgAdminMiddleware, async (c) => {
@@ -95,10 +97,10 @@ orgAdmin.get("/api/org-admin/users", orgAdminMiddleware, async (c) => {
   const params: string[] = [orgId];
 
   if (search) {
-    const searchFilter = " AND (full_name LIKE ? OR email LIKE ?)";
+    const searchFilter = " AND (full_name LIKE ? ESCAPE '\\' OR email LIKE ? ESCAPE '\\')";
     countQuery += searchFilter;
     dataQuery += searchFilter;
-    params.push(`%${search}%`, `%${search}%`);
+    params.push(`%${escapeLike(search)}%`, `%${escapeLike(search)}%`);
   }
 
   dataQuery += " ORDER BY created_at DESC LIMIT ? OFFSET ?";
@@ -106,8 +108,8 @@ orgAdmin.get("/api/org-admin/users", orgAdminMiddleware, async (c) => {
   const countStmt = c.env.DB.prepare(countQuery);
   const dataStmt = c.env.DB.prepare(dataQuery);
 
-  const countParams = search ? [orgId, `%${search}%`, `%${search}%`] : [orgId];
-  const dataParams = search ? [orgId, `%${search}%`, `%${search}%`, String(limit), String(offset)] : [orgId, String(limit), String(offset)];
+  const countParams = search ? [orgId, `%${escapeLike(search)}%`, `%${escapeLike(search)}%`] : [orgId];
+  const dataParams = search ? [orgId, `%${escapeLike(search)}%`, `%${escapeLike(search)}%`, String(limit), String(offset)] : [orgId, String(limit), String(offset)];
 
   const [total, { results }] = await Promise.all([
     countStmt.bind(...countParams).first<{ count: number }>(),

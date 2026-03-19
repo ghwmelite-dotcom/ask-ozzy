@@ -148,6 +148,14 @@ async function ensureReferralSourceColumn(db: D1Database) {
   }
 }
 
+async function ensureSessionVersionColumn(db: D1Database) {
+  try {
+    await db.prepare("SELECT session_version FROM users LIMIT 1").first();
+  } catch {
+    await db.exec("ALTER TABLE users ADD COLUMN session_version INTEGER NOT NULL DEFAULT 1");
+  }
+}
+
 async function ensureAuthMethodColumns(db: D1Database) {
   try {
     await db.prepare("SELECT auth_method FROM users LIMIT 1").first();
@@ -508,6 +516,7 @@ auth.post("/api/auth/register", async (c) => {
   await ensureUserTypeColumn(c.env.DB);
   await ensureAuthMethodColumns(c.env.DB);
   await ensureReferralSourceColumn(c.env.DB);
+  await ensureSessionVersionColumn(c.env.DB);
   await c.env.DB.prepare(
     "INSERT INTO users (id, email, password_hash, full_name, department, referral_code, referred_by, user_type, totp_secret, auth_method, recovery_code_hash, referral_source, submitted_referral_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'totp', ?, ?, ?)"
   )
@@ -840,7 +849,10 @@ auth.post("/api/auth/register/verify-totp", async (c) => {
     "UPDATE users SET totp_enabled = 1, auth_method = 'totp' WHERE id = ?"
   ).bind(user.id).run();
 
-  const token = await createToken(user.id, c.env);
+  await ensureSessionVersionColumn(c.env.DB);
+  const sv = await c.env.DB.prepare("SELECT session_version FROM users WHERE id = ?")
+    .bind(user.id).first<{ session_version: number }>();
+  const token = await createToken(user.id, c.env, sv?.session_version);
 
   // Only generate recovery code if one doesn't already exist (e.g. set during account reset)
   let newRecoveryCode: string | null = null;
@@ -921,6 +933,10 @@ auth.post("/api/auth/reset-account", async (c) => {
     "UPDATE users SET password_hash = ?, totp_secret = ?, totp_enabled = 0, recovery_code_hash = ? WHERE id = ?"
   ).bind(newPasswordHash, newTotpSecret, newRecoveryHash, user.id).run();
 
+  // Bump session version to invalidate all existing sessions
+  await ensureSessionVersionColumn(c.env.DB);
+  await c.env.DB.prepare("UPDATE users SET session_version = session_version + 1 WHERE id = ?").bind(user.id).run();
+
   const totpUri = `otpauth://totp/AskOzzy:${user.email}?secret=${newTotpSecret}&issuer=AskOzzy&digits=6&period=30`;
 
   return c.json({
@@ -954,8 +970,9 @@ auth.post("/api/auth/login", async (c) => {
   await ensureAuthMethodColumns(c.env.DB);
   await ensureSubscriptionColumns(c.env.DB);
   await ensureOrgRoleColumn(c.env.DB);
+  await ensureSessionVersionColumn(c.env.DB);
   const user = await c.env.DB.prepare(
-    "SELECT id, email, password_hash, full_name, department, role, tier, referral_code, affiliate_tier, total_referrals, affiliate_earnings, trial_expires_at, user_type, totp_secret, totp_enabled, auth_method, recovery_code_hash, subscription_expires_at, billing_cycle, org_id, org_role FROM users WHERE email = ?"
+    "SELECT id, email, password_hash, full_name, department, role, tier, referral_code, affiliate_tier, total_referrals, affiliate_earnings, trial_expires_at, user_type, totp_secret, totp_enabled, auth_method, recovery_code_hash, subscription_expires_at, billing_cycle, org_id, org_role, session_version FROM users WHERE email = ?"
   )
     .bind(email.toLowerCase().trim())
     .first<{
@@ -966,6 +983,7 @@ auth.post("/api/auth/login", async (c) => {
       totp_secret: string | null; totp_enabled: number; auth_method: string | null;
       recovery_code_hash: string | null;
       subscription_expires_at: string | null; billing_cycle: string | null;
+      session_version: number;
     }>();
 
   if (!user) {
@@ -1043,7 +1061,7 @@ auth.post("/api/auth/login", async (c) => {
     "UPDATE users SET last_login = datetime('now') WHERE id = ?"
   ).bind(user.id).run();
 
-  const token = await createToken(user.id, c.env);
+  const token = await createToken(user.id, c.env, user.session_version);
 
   // Compute effective tier honoring trial + subscription expiry
   const effectiveTier = getEffectiveTier(user);
@@ -1231,14 +1249,16 @@ auth.post("/api/auth/webauthn/login-complete", async (c) => {
   }
 
   await ensureSubscriptionColumns(c.env.DB);
+  await ensureSessionVersionColumn(c.env.DB);
   const user = await c.env.DB.prepare(
-    "SELECT id, email, full_name, department, role, tier, referral_code, affiliate_tier, total_referrals, affiliate_earnings, trial_expires_at, user_type, subscription_expires_at, billing_cycle FROM users WHERE email = ?"
+    "SELECT id, email, full_name, department, role, tier, referral_code, affiliate_tier, total_referrals, affiliate_earnings, trial_expires_at, user_type, subscription_expires_at, billing_cycle, session_version FROM users WHERE email = ?"
   ).bind(email.toLowerCase().trim()).first<{
     id: string; email: string; full_name: string; department: string;
     role: string; tier: string; referral_code: string;
     affiliate_tier: string; total_referrals: number; affiliate_earnings: number;
     trial_expires_at: string | null; user_type: string | null;
     subscription_expires_at: string | null; billing_cycle: string | null;
+    session_version: number;
   }>();
   if (!user) return c.json({ error: "User not found" }, 401);
 
@@ -1291,7 +1311,7 @@ auth.post("/api/auth/webauthn/login-complete", async (c) => {
   await c.env.DB.prepare("UPDATE users SET last_login = datetime('now') WHERE id = ?")
     .bind(user.id).run();
 
-  const token = await createToken(user.id, c.env);
+  const token = await createToken(user.id, c.env, user.session_version);
   const effectiveTier = getEffectiveTier(user);
 
   // Grace period detection

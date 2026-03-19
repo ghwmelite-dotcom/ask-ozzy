@@ -13,6 +13,8 @@ import {
 } from "../config/agent-prompts";
 import { hybridRetrieve } from "../lib/hybrid-retriever";
 
+function escapeLike(s: string): string { return s.replace(/[%_\\]/g, '\\$&'); }
+
 const misc = new Hono<AppType>();
 
 // ─── Duplicated Helpers ──────────────────────────────────────────────
@@ -142,8 +144,8 @@ async function searchKnowledge(env: Env, query: string, topK = 5, agentType?: st
   try {
     const keywords = query.toLowerCase().split(/\s+/).filter(w => w.length > 3);
     if (keywords.length > 0) {
-      const likeClauses = keywords.slice(0, 5).map(() => '(keywords LIKE ? OR question LIKE ?)').join(' OR ');
-      const params = keywords.slice(0, 5).flatMap(kw => [`%${kw}%`, `%${kw}%`]);
+      const likeClauses = keywords.slice(0, 5).map(() => "(keywords LIKE ? ESCAPE '\\' OR question LIKE ? ESCAPE '\\')").join(' OR ');
+      const params = keywords.slice(0, 5).flatMap(kw => [`%${escapeLike(kw)}%`, `%${escapeLike(kw)}%`]);
 
       const { results } = await env.DB.prepare(
         `SELECT question, answer, category FROM knowledge_base WHERE active = 1 AND (${likeClauses}) ORDER BY priority DESC LIMIT 3`
