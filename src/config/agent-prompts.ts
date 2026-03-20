@@ -1,4 +1,5 @@
 import { getAuthorityForAgent } from './authorities';
+import { WRITING_STYLE_RULES } from './humanizer-rules';
 
 // ─── Universal Grounding Rules ──────────────────────────────────────
 // Copy this verbatim into EVERY agent's system prompt
@@ -176,6 +177,9 @@ export function buildGroundedSystemPrompt(
   }
 
   prompt += '\n\n' + PROHIBITED_BEHAVIORS;
+
+  // Humanizer rules — teach the model to avoid AI-sounding output
+  prompt += '\n\n' + WRITING_STYLE_RULES;
 
   return prompt;
 }

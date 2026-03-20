@@ -26,6 +26,7 @@ import { loadStudentProfile, saveStudentProfile, updateSessionScore } from "../l
 import { assessStudentLevel, getOrCreateStudentProfile, buildScaffoldingPrompt, generateOrientationBrief, isNewTopic } from "../agents/tutor-agent";
 import { retrieveAtLevel } from "../lib/difficulty-retriever";
 import { log } from "../lib/logger";
+import { humanizeResponse } from "../lib/humanizer";
 
 function escapeLike(s: string): string { return s.replace(/[%_\\]/g, '\\$&'); }
 
@@ -1409,8 +1410,11 @@ Start with these warm-up questions: ${brief.starter_questions.join(' | ') || 'N/
       } finally {
         await writer.close();
 
-        // Save assistant message
+        // Save assistant message (humanized for storage/history)
         if (fullResponse) {
+          // Post-process: remove mechanical AI-writing patterns before persisting
+          fullResponse = humanizeResponse(fullResponse);
+
           const assistantMsgId = generateId();
           await c.env.DB.prepare(
             "INSERT INTO messages (id, conversation_id, role, content, model) VALUES (?, ?, 'assistant', ?, ?)"
