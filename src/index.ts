@@ -48,6 +48,7 @@ import adminContentRoutes from "./routes/admin-content";
 import chatRoutes from "./routes/chat";
 import accountRoutes from "./routes/account";
 import miscRoutes from "./routes/misc";
+import eclassroomRoutes from "./routes/eclassroom";
 
 function escapeLike(s: string): string { return s.replace(/[%_\\]/g, '\\$&'); }
 
@@ -75,6 +76,7 @@ app.use("/api/*", cors({
       "https://askozzy.work",
       "https://www.askozzy.work",
       "https://askozzy.ghwmelite.workers.dev",
+      "https://eclassroom.askozzy.work",
     ];
     return allowed.includes(origin) ? origin : allowed[0];
   },
@@ -90,7 +92,7 @@ app.use("*", async (c, next) => {
   c.header("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
   c.header("Referrer-Policy", "strict-origin-when-cross-origin");
   c.header("Permissions-Policy", "camera=(self), microphone=(self), geolocation=()");
-  c.header("Content-Security-Policy", "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://cdn.jsdelivr.net https://gnews.io; frame-ancestors 'none'; base-uri 'self'; form-action 'self';");
+  c.header("Content-Security-Policy", "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://cdn.jsdelivr.net https://gnews.io https://eclassroom.askozzy.work; frame-ancestors 'none'; base-uri 'self'; form-action 'self';");
 });
 
 // ─── Request Body Size Limit ─────────────────────────────────────────
@@ -1803,6 +1805,7 @@ app.route("/", adminContentRoutes);
 app.route("/", chatRoutes);
 app.route("/", accountRoutes);
 app.route("/", miscRoutes);
+app.route("/", eclassroomRoutes);
 
 export default {
   fetch: app.fetch,
