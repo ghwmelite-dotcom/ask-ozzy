@@ -11,6 +11,7 @@ export type Env = {
   PAYSTACK_SECRET: string;
   BOOTSTRAP_SECRET?: string;
   GNEWS_API_KEY: string;
+  ECLASSROOM_API_KEY: string;
 };
 
 export type Variables = {
