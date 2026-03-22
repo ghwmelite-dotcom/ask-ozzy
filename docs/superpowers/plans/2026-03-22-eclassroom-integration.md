@@ -10,6 +10,12 @@
 
 **Spec:** `docs/superpowers/specs/2026-03-22-eclassroom-openmaic-integration-design.md`
 
+**Out of Scope (deferred to future plans):**
+- OS Browser Matrix bot integration (`/classroom` command, sidebar shortcut)
+- Enterprise tier features (bulk creation, custom branding, training module builder)
+- Chat-to-Classroom button ("Turn this into a classroom" in chat)
+- Rate limiting on AI proxy (100 req/min — implement after traffic baseline established)
+
 ---
 
 ## File Structure
@@ -17,6 +23,7 @@
 ### New Files
 | File | Responsibility |
 |------|---------------|
+| `src/lib/jwt.ts` | JWT signing/verification using Web Crypto HMAC-SHA256 (for eClassroom cross-service auth) |
 | `src/routes/eclassroom.ts` | eClassroom API routes: AI proxy, JWT minting, session tracking, classroom listing |
 | `schema-eclassroom.sql` | D1 migration: `classroom_sessions` + `prebuilt_classrooms` tables |
 
@@ -25,9 +32,9 @@
 |------|---------|
 | `src/types.ts` | Add `ECLASSROOM_API_KEY` to `Env` type |
 | `src/index.ts:54` | Import + mount `eclassroomRoutes`, update CORS allowlist, update CSP |
-| `public/index.html:120` | Add eClassroom nav button after Discover button |
-| `public/index.html:194` | Add eClassroom screen container after Discover screen |
-| `public/js/app.js` | Add eClassroom state, screen functions, classroom browser, agent suggestions |
+| `public/index.html:120` | Add eClassroom nav button after Discover button (inside `header-zone-left` div) |
+| `public/index.html:194` | Add eClassroom screen container between Discover screen and Welcome screen |
+| `public/js/app.js` | Add eClassroom state, screen functions, classroom browser, agent suggestions; patch existing screen functions to hide eClassroom |
 | `public/css/app.css` | Add eClassroom nav button, screen, card, and category styles |
 | `public/sw.js` | Bump cache version to v13 |
 
@@ -69,7 +76,112 @@ git commit -m "feat(eclassroom): add ECLASSROOM_API_KEY to Env type"
 
 ---
 
-### Task 2: Create D1 migration for classroom tables
+### Task 2: Create JWT signing utility for cross-service auth
+
+**Files:**
+- Create: `src/lib/jwt.ts`
+
+> **Why this is needed:** The existing `createToken()` in `src/lib/utils.ts:90` creates KV-backed session tokens (random ID stored in KV). eClassroom needs actual JWT tokens with custom claims (`sub`, `email`, `tier`, `role`) that the VPS can validate independently using the shared `JWT_SECRET`. This requires HMAC-SHA256 signing via Web Crypto API.
+
+- [ ] **Step 1: Create the JWT utility**
+
+Create `src/lib/jwt.ts`:
+
+```typescript
+// JWT signing/verification for cross-service auth (AskOzzy ↔ eClassroom)
+// Uses Web Crypto HMAC-SHA256 — works on Cloudflare Workers runtime
+
+function base64UrlEncode(data: Uint8Array): string {
+  const base64 = btoa(String.fromCharCode(...data));
+  return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+function base64UrlEncodeString(str: string): string {
+  return base64UrlEncode(new TextEncoder().encode(str));
+}
+
+async function getSigningKey(secret: string): Promise<CryptoKey> {
+  return crypto.subtle.importKey(
+    'raw',
+    new TextEncoder().encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign', 'verify']
+  );
+}
+
+export async function mintJWT(
+  payload: Record<string, unknown>,
+  secret: string
+): Promise<string> {
+  const header = { alg: 'HS256', typ: 'JWT' };
+  const encodedHeader = base64UrlEncodeString(JSON.stringify(header));
+  const encodedPayload = base64UrlEncodeString(JSON.stringify(payload));
+  const signingInput = `${encodedHeader}.${encodedPayload}`;
+
+  const key = await getSigningKey(secret);
+  const signature = await crypto.subtle.sign(
+    'HMAC',
+    key,
+    new TextEncoder().encode(signingInput)
+  );
+
+  const encodedSignature = base64UrlEncode(new Uint8Array(signature));
+  return `${signingInput}.${encodedSignature}`;
+}
+
+export async function verifyJWT(
+  token: string,
+  secret: string
+): Promise<Record<string, unknown> | null> {
+  try {
+    const parts = token.split('.');
+    if (parts.length !== 3) return null;
+
+    const [encodedHeader, encodedPayload, encodedSignature] = parts;
+    const signingInput = `${encodedHeader}.${encodedPayload}`;
+
+    const key = await getSigningKey(secret);
+    const signatureBytes = Uint8Array.from(
+      atob(encodedSignature.replace(/-/g, '+').replace(/_/g, '/')),
+      c => c.charCodeAt(0)
+    );
+
+    const valid = await crypto.subtle.verify(
+      'HMAC',
+      key,
+      signatureBytes,
+      new TextEncoder().encode(signingInput)
+    );
+
+    if (!valid) return null;
+
+    const payload = JSON.parse(
+      atob(encodedPayload.replace(/-/g, '+').replace(/_/g, '/'))
+    );
+
+    // Check expiration
+    if (payload.exp && payload.exp < Math.floor(Date.now() / 1000)) {
+      return null;
+    }
+
+    return payload;
+  } catch {
+    return null;
+  }
+}
+```
+
+- [ ] **Step 2: Commit**
+
+```bash
+git add src/lib/jwt.ts
+git commit -m "feat(eclassroom): add JWT signing/verification utility for cross-service auth"
+```
+
+---
+
+### Task 3: Create D1 migration for classroom tables
 
 **Files:**
 - Create: `schema-eclassroom.sql`
@@ -131,7 +243,7 @@ git commit -m "feat(eclassroom): add D1 migration for classroom sessions and pre
 
 ---
 
-### Task 3: Create the eClassroom route module
+### Task 4: Create the eClassroom route module
 
 **Files:**
 - Create: `src/routes/eclassroom.ts`
@@ -139,7 +251,7 @@ git commit -m "feat(eclassroom): add D1 migration for classroom sessions and pre
 This is the largest task. The route module contains 4 endpoints:
 1. `POST /api/ai-proxy/chat/completions` — OpenAI-compatible proxy to Workers AI
 2. `GET /api/eclassroom/token` — Mint JWT for classroom redirect
-3. `GET /api/eclassroom/classrooms` — List prebuilt classrooms
+3. `GET /api/eclassroom/classrooms` — List prebuilt classrooms (intentionally public — lets unauthenticated users browse before signing up)
 4. `POST /api/eclassroom/sessions` — Track session usage
 
 - [ ] **Step 1: Create the route file with imports and helpers**
@@ -150,7 +262,8 @@ Create `src/routes/eclassroom.ts`:
 import { Hono } from "hono";
 import type { AppType } from "../types";
 import { authMiddleware } from "../lib/middleware";
-import { generateId, createToken } from "../lib/utils";
+import { generateId } from "../lib/utils";
+import { mintJWT } from "../lib/jwt";
 import { log } from "../lib/logger";
 
 const eclassroom = new Hono<AppType>();
@@ -209,6 +322,11 @@ const MODEL_MAP: Record<string, string> = {
 const DEFAULT_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
 
 eclassroom.post("/api/ai-proxy/chat/completions", async (c) => {
+  // EXCEPTION to CLAUDE.md rules #1 and #2:
+  // This is a proxy endpoint — eClassroom (OpenMAIC) controls its own prompts
+  // and temperature. We intentionally bypass the grounding pipeline and accept
+  // caller-provided temperature because this serves an external application.
+
   // Validate API key
   const authHeader = c.req.header("Authorization");
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -343,7 +461,7 @@ eclassroom.get("/api/eclassroom/token", authMiddleware, async (c) => {
       exp: Math.floor(Date.now() / 1000) + 3600, // 1 hour
     };
 
-    const token = await createToken(payload, c.env.JWT_SECRET);
+    const token = await mintJWT(payload, c.env.JWT_SECRET);
 
     return c.json({ token, tier: effectiveTier });
   } catch (err: any) {
@@ -454,7 +572,7 @@ git commit -m "feat(eclassroom): add route module with AI proxy, JWT minting, cl
 
 ---
 
-### Task 4: Mount the eClassroom routes and update CORS/CSP
+### Task 5: Mount the eClassroom routes and update CORS/CSP
 
 **Files:**
 - Modify: `src/index.ts:50` (import)
@@ -508,7 +626,7 @@ git commit -m "feat(eclassroom): mount routes, update CORS and CSP for eclassroo
 
 ---
 
-### Task 5: Set the Cloudflare secret
+### Task 6: Set the Cloudflare secret
 
 **Files:** None (Cloudflare CLI only)
 
@@ -554,7 +672,7 @@ git push origin main
 
 ## Phase 1B: VPS Setup (Manual Steps)
 
-### Task 6: VPS infrastructure setup
+### Task 7: VPS infrastructure setup
 
 > These are manual steps on the Hostinger VPS. Follow the detailed guide in the spec document section 8.1-8.12.
 
@@ -594,7 +712,7 @@ mkdir -p /opt/eclassroom
 cd /opt/eclassroom
 git clone https://github.com/THU-MAIC/OpenMAIC.git .
 nano .env.local
-# Paste config from spec — use the ECLASSROOM_API_KEY you generated in Task 5
+# Paste config from spec — use the ECLASSROOM_API_KEY you generated in Task 6
 ```
 
 - [ ] **Step 5: Create docker-compose.yml and build**
@@ -663,7 +781,7 @@ Open `https://eclassroom.askozzy.work` in your browser. You should see the OpenM
 
 ## Phase 2: AskOzzy Frontend Integration
 
-### Task 7: Add eClassroom nav button to header
+### Task 8: Add eClassroom nav button to header
 
 **Files:**
 - Modify: `public/index.html:120` (after Discover button)
@@ -718,7 +836,7 @@ git commit -m "feat(eclassroom): add nav button and screen container to index.ht
 
 ---
 
-### Task 8: Add eClassroom CSS styles
+### Task 9: Add eClassroom CSS styles
 
 **Files:**
 - Modify: `public/css/app.css` (append after Discover styles, ~line 10675)
@@ -932,7 +1050,7 @@ git commit -m "feat(eclassroom): add CSS styles for nav, screen, cards, categori
 
 ---
 
-### Task 9: Add eClassroom JavaScript logic
+### Task 10: Add eClassroom JavaScript logic
 
 **Files:**
 - Modify: `public/js/app.js` (add after Discover logic, ~line 5010)
@@ -1165,7 +1283,28 @@ async function launchClassroom(classroomId, classroomTitle) {
 }
 ```
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 6: Patch existing screen functions to hide eClassroom**
+
+Find `showChatScreen()` (~line 1643) and `showWelcomeScreen()` (~line 1654) and `showDiscoverScreen()` (~line 4824) in `public/js/app.js`. Add a call to `hideEclassroomScreen()` in each, at the same location where they call `hideDiscoverScreen()` or equivalent:
+
+In `showChatScreen()`, add:
+```javascript
+hideEclassroomScreen();
+```
+
+In `showWelcomeScreen()`, add:
+```javascript
+hideEclassroomScreen();
+```
+
+In `showDiscoverScreen()`, add:
+```javascript
+hideEclassroomScreen();
+```
+
+This prevents the eClassroom screen from remaining visible when users navigate to other screens.
+
+- [ ] **Step 7: Commit**
 
 ```bash
 git add public/js/app.js
@@ -1174,7 +1313,7 @@ git commit -m "feat(eclassroom): add JS logic for screen, categories, loading, c
 
 ---
 
-### Task 10: Bump service worker cache and deploy
+### Task 11: Bump service worker cache and deploy
 
 **Files:**
 - Modify: `public/sw.js:8`
@@ -1214,7 +1353,7 @@ npx wrangler deploy
 
 ## Phase 2B: Seed Pre-Built Classrooms
 
-### Task 11: Insert pre-built BECE/WASSCE classrooms
+### Task 12: Insert pre-built BECE/WASSCE classrooms
 
 **Files:** None (D1 SQL only)
 
@@ -1250,7 +1389,7 @@ Hard-refresh `https://askozzy.work`, open eClassroom screen. You should now see 
 
 ## Phase 3: Agent Classroom Suggestions (Future)
 
-### Task 12: Add classroom suggestion to student agent responses
+### Task 13: Add classroom suggestion to student agent responses
 
 > This task should be implemented after Phase 1 + 2 are stable and tested.
 
