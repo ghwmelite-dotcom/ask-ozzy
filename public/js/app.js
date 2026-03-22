@@ -144,7 +144,12 @@ const _employeeTips = [
   "Refer a colleague, earn real money. Check your affiliate dashboard.",
   "Upgrade for 200 messages/day, all 11 AI models, and Deep Research mode.",
   "Join thousands of GoG staff already using Ozzy Pro across departments.",
-  "Unlock meeting transcription, workflow automation, and priority response speeds."
+  "Unlock meeting transcription, workflow automation, and priority response speeds.",
+  "Your subscription directly funds the AI models that power AskOzzy \u2014 every cedi keeps our LLMs running.",
+  "Subscribing supports Ghana\u2019s first government-built OS browser app \u2014 a platform by us, for us.",
+  "The affiliate system pays you monthly \u2014 refer colleagues and build a real passive income stream.",
+  "Part of every subscription goes to running and improving the LLMs that make Ozzy smarter for everyone.",
+  "Help build Africa\u2019s first sovereign AI + OS browser platform \u2014 your subscription makes it possible."
 ];
 
 const _studentTips = [
@@ -157,7 +162,12 @@ const _studentTips = [
   "Refer a classmate, earn real money. Check your affiliate dashboard.",
   "Upgrade for 200 messages/day, all 11 AI models, and Deep Research mode.",
   "Join hundreds of students already using Ozzy Pro for better grades.",
-  "Unlock AI memory \u2014 Ozzy remembers your courses and research topics."
+  "Unlock AI memory \u2014 Ozzy remembers your courses and research topics.",
+  "Your subscription funds the AI models behind Ozzy \u2014 every cedi keeps our LLMs running for you.",
+  "Subscribing supports Ghana\u2019s first government OS browser app \u2014 built by Ghanaians, for Ghanaians.",
+  "The affiliate system is real passive income \u2014 refer classmates and earn commissions every month.",
+  "Part of every subscription goes to running the powerful LLMs that help you ace your courses.",
+  "Help build Africa\u2019s first sovereign AI + OS browser platform \u2014 your subscription makes it happen."
 ];
 
 function shouldShowInlineTip() {
@@ -211,6 +221,12 @@ const _platformTips = [
   "Share your referral link on WhatsApp — one tap, and you start earning when they subscribe.",
   "Imagine 50 colleagues subscribing at GHS 60/month. That's GHS 900/month in your affiliate wallet.",
   "New users get GHS 5 welcome bonus when they use your referral code. Easy sell.",
+  // Where subscriptions go
+  "Your subscription funds real LLM compute — every cedi keeps AskOzzy's AI models running for the nation.",
+  "Subscriptions power Ghana's first government-built OS browser app — a sovereign platform managed for all of us.",
+  "Part of every payment goes to running, fine-tuning, and scaling the AI models behind AskOzzy.",
+  "You're not just subscribing — you're co-funding Africa's first government-first AI + OS browser platform.",
+  "The affiliate system generates passive income for you while funding the infrastructure that serves millions.",
   // Platform benefits
   "AskOzzy runs on 10 AI models — switch between them for different tasks, all in one place.",
   "Draft official GoG memos, cabinet briefs, and policy documents with ready-made templates.",
@@ -219,7 +235,6 @@ const _platformTips = [
   "Voice input works in Twi, Ga, Ewe, Hausa, Dagbani, French, and English.",
   "Your data stays in Ghana — sovereign, private, encrypted. No foreign servers.",
   "AskOzzy works offline. Start typing even without internet — it syncs when you're back online.",
-
   "Upload meeting recordings and get AI-generated minutes in seconds.",
   "Pro users get 200 messages/day, all AI models, and priority response speeds.",
 ];
@@ -232,6 +247,12 @@ const _studentPlatformTips = [
   "Hit 10 referrals = GHS 30 bonus. 25 = GHS 60. 100 referrals = free Enterprise for life.",
   "Share your referral link in your class WhatsApp group — start earning today.",
   "New users get GHS 5 welcome bonus with your code. Tell your study group.",
+  // Where subscriptions go
+  "Your subscription funds the AI models that power AskOzzy — every cedi keeps our LLMs running.",
+  "Subscribing supports Ghana's first government OS browser app — built and managed for all of us.",
+  "Part of every payment runs and improves the AI that helps students across Ghana succeed.",
+  "You're co-building Africa's first sovereign AI + OS browser platform — your subscription matters.",
+  "The affiliate system earns you passive income while funding the platform that serves your whole campus.",
   // Platform benefits
   "Student plans start at GHS 12/month — less than a printout at the library.",
   "AskOzzy has 16 academic templates: essays, research proposals, lit reviews, and more.",
