@@ -118,11 +118,6 @@
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
             <span class="discover-nav-label">Discover</span>
           </button>
-          <button class="btn-eclassroom-nav" id="btn-eclassroom-nav" onclick="showEclassroomScreen()" title="eClassroom — Interactive AI Lessons">
-            <span class="eclassroom-nav-dot"></span>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-            <span class="eclassroom-nav-label">eClassroom</span>
-          </button>
         </div>
 
         <!-- Center zone: model selector -->
@@ -198,28 +193,6 @@
         </div>
       </div>
 
-      <!-- eClassroom Screen -->
-      <div id="eclassroom-screen" class="eclassroom-screen hidden" style="display:none;">
-        <div class="eclassroom-header">
-          <div class="eclassroom-title-row">
-            <button class="eclassroom-back-btn" onclick="eclassroomGoBack()" title="Back to Home" aria-label="Back to Home">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-            </button>
-            <div>
-              <h2>eClassroom</h2>
-              <p class="eclassroom-subtitle">Interactive AI lessons with virtual teachers</p>
-            </div>
-          </div>
-        </div>
-        <div class="eclassroom-categories-wrap" id="eclassroom-categories-wrap">
-          <div class="eclassroom-categories" id="eclassroom-categories"></div>
-        </div>
-        <div class="eclassroom-grid" id="eclassroom-grid"></div>
-        <div class="eclassroom-empty" id="eclassroom-empty" style="display:none;">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-          <p>No classrooms available yet. Check back soon.</p>
-        </div>
-      </div>
 
       <!-- Welcome Screen -->
       <div id="welcome-screen" class="welcome-screen">

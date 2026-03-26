@@ -1643,7 +1643,6 @@ async function deleteConversation(id) {
 function showChatScreen() {
   updateBottomNavActive('chat');
   hideDiscoverScreen();
-  hideEclassroomScreen();
   document.getElementById("welcome-screen").classList.add("hidden");
   document.getElementById("welcome-screen").style.display = "none";
   const chatScreen = document.getElementById("chat-screen");
@@ -1655,7 +1654,6 @@ function showChatScreen() {
 function showWelcomeScreen() {
   updateBottomNavActive('chat');
   hideDiscoverScreen();
-  hideEclassroomScreen();
   document.getElementById("welcome-screen").classList.remove("hidden");
   document.getElementById("welcome-screen").style.display = "";
   const chatScreen = document.getElementById("chat-screen");
@@ -4825,7 +4823,6 @@ const DISCOVER_CATEGORIES = [
 
 function showDiscoverScreen() {
   updateBottomNavActive('discover');
-  hideEclassroomScreen();
   document.getElementById('welcome-screen').classList.add('hidden');
   document.getElementById('welcome-screen').style.display = 'none';
   const chat = document.getElementById('chat-screen');
@@ -5108,205 +5105,6 @@ async function discussArticle(articleId) {
   } catch (err) {
     console.error('Failed to discuss article:', err);
     alert('Something went wrong. Please try again.');
-  }
-}
-
-// ─── eClassroom: Interactive AI Lessons ─────────────────────────────
-const ECLASSROOM_URL = 'https://eclassroom.askozzy.work';
-
-const eclassroomState = {
-  classrooms: [],
-  subject: 'all',
-  loading: false,
-  loaded: false,
-};
-
-const ECLASSROOM_SUBJECTS = [
-  { id: 'all', label: 'All Subjects' },
-  { id: 'mathematics', label: 'Mathematics' },
-  { id: 'english', label: 'English' },
-  { id: 'science', label: 'Science' },
-  { id: 'social_studies', label: 'Social Studies' },
-  { id: 'ict', label: 'ICT' },
-  { id: 'procurement', label: 'Procurement' },
-  { id: 'policy', label: 'Policy & Governance' },
-];
-
-function showEclassroomScreen() {
-  const welcome = document.getElementById('welcome-screen');
-  const chat = document.getElementById('chat-screen');
-  const discover = document.getElementById('discover-screen');
-  const eclassroom = document.getElementById('eclassroom-screen');
-  if (welcome) { welcome.classList.add('hidden'); welcome.style.display = 'none'; }
-  if (chat) { chat.classList.add('hidden'); chat.style.display = 'none'; }
-  if (discover) { discover.classList.add('hidden'); discover.style.display = 'none'; }
-  if (eclassroom) { eclassroom.classList.remove('hidden'); eclassroom.style.display = ''; }
-
-  const discoverBtn = document.getElementById('btn-discover-nav');
-  const eclassroomBtn = document.getElementById('btn-eclassroom-nav');
-  if (discoverBtn) discoverBtn.classList.remove('active');
-  if (eclassroomBtn) eclassroomBtn.classList.add('active');
-
-  const welcomeTip = document.getElementById('welcome-tip-bar');
-  if (welcomeTip) welcomeTip.style.display = 'none';
-
-  if (!eclassroomState.loaded) {
-    renderEclassroomSkeletons();
-    renderEclassroomCategories();
-    loadEclassrooms();
-  }
-}
-
-function hideEclassroomScreen() {
-  const eclassroom = document.getElementById('eclassroom-screen');
-  if (eclassroom) { eclassroom.classList.add('hidden'); eclassroom.style.display = 'none'; }
-  const btn = document.getElementById('btn-eclassroom-nav');
-  if (btn) btn.classList.remove('active');
-}
-
-function eclassroomGoBack() {
-  hideEclassroomScreen();
-  showWelcomeScreen();
-}
-
-function renderEclassroomCategories() {
-  const container = document.getElementById('eclassroom-categories');
-  if (!container) return;
-
-  const subjects = isStudent()
-    ? ECLASSROOM_SUBJECTS.filter(s => !['procurement', 'policy'].includes(s.id))
-    : ECLASSROOM_SUBJECTS;
-
-  container.innerHTML = subjects.map(s =>
-    `<button class="eclassroom-cat-btn ${eclassroomState.subject === s.id ? 'active' : ''}"
-      onclick="selectEclassroomSubject('${s.id}')">${escapeHtml(s.label)}</button>`
-  ).join('');
-}
-
-function selectEclassroomSubject(subject) {
-  eclassroomState.subject = subject;
-  renderEclassroomCategories();
-  renderEclassroomSkeletons();
-  loadEclassrooms();
-}
-
-async function loadEclassrooms() {
-  if (eclassroomState.loading) return;
-  eclassroomState.loading = true;
-
-  try {
-    const params = new URLSearchParams();
-    if (eclassroomState.subject !== 'all') params.set('subject', eclassroomState.subject);
-    params.set('audience', isStudent() ? 'student' : 'employee');
-
-    const res = await fetch(`${API}/api/eclassroom/classrooms?${params}`, {
-      headers: state.token ? { 'Authorization': `Bearer ${state.token}` } : {},
-    });
-
-    if (!res.ok) throw new Error('Failed to load classrooms');
-    const data = await res.json();
-
-    eclassroomState.classrooms = data.classrooms || [];
-    eclassroomState.loaded = true;
-    renderEclassrooms();
-  } catch (err) {
-    console.error('eClassroom load error:', err);
-    const grid = document.getElementById('eclassroom-grid');
-    if (grid) grid.innerHTML = '';
-    const empty = document.getElementById('eclassroom-empty');
-    if (empty) empty.style.display = '';
-  } finally {
-    eclassroomState.loading = false;
-  }
-}
-
-function renderEclassrooms() {
-  const grid = document.getElementById('eclassroom-grid');
-  const empty = document.getElementById('eclassroom-empty');
-  if (!grid) return;
-
-  if (eclassroomState.classrooms.length === 0) {
-    grid.innerHTML = '';
-    if (empty) empty.style.display = '';
-    return;
-  }
-  if (empty) empty.style.display = 'none';
-
-  const subjectIcons = {
-    mathematics: '\uD83D\uDCCA', english: '\uD83D\uDCDD', science: '\u2697\uFE0F',
-    social_studies: '\uD83C\uDF0D', ict: '\uD83D\uDCBB',
-    procurement: '\uD83D\uDCC4', policy: '\uD83C\uDFDB\uFE0F',
-  };
-
-  grid.innerHTML = eclassroomState.classrooms.map(c => `
-    <div class="eclassroom-card" onclick="launchClassroom('${escapeHtml(c.id)}', '${escapeHtml(c.title)}')">
-      <div class="eclassroom-card-thumb">${subjectIcons[c.subject] || '\uD83D\uDCDA'}</div>
-      <div class="eclassroom-card-body">
-        <div class="eclassroom-card-subject">${escapeHtml(c.subject.replace(/_/g, ' '))}</div>
-        <div class="eclassroom-card-title">${escapeHtml(c.title)}</div>
-        <div class="eclassroom-card-desc">${escapeHtml(c.description || '')}</div>
-        <div class="eclassroom-card-meta">
-          <span class="eclassroom-card-difficulty">${escapeHtml(c.difficulty || 'intermediate')}</span>
-          ${c.exam_type ? `<span>${escapeHtml(c.exam_type)}</span>` : ''}
-          <button class="eclassroom-card-launch" onclick="event.stopPropagation();launchClassroom('${escapeHtml(c.id)}', '${escapeHtml(c.title)}')">Launch</button>
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-function renderEclassroomSkeletons() {
-  const grid = document.getElementById('eclassroom-grid');
-  if (!grid) return;
-  grid.innerHTML = Array(6).fill(0).map(() => `
-    <div class="eclassroom-skeleton">
-      <div class="eclassroom-skeleton-thumb"></div>
-      <div class="eclassroom-skeleton-body">
-        <div class="eclassroom-skeleton-line"></div>
-        <div class="eclassroom-skeleton-line"></div>
-        <div class="eclassroom-skeleton-line"></div>
-      </div>
-    </div>
-  `).join('');
-}
-
-async function launchClassroom(classroomId, classroomTitle) {
-  if (!state.token) {
-    showToast('Please log in to access eClassroom', 'warning');
-    return;
-  }
-
-  try {
-    const res = await fetch(`${API}/api/eclassroom/token`, {
-      headers: { 'Authorization': `Bearer ${state.token}` },
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      if (data.upgrade) {
-        showToast(`Free limit reached (${data.used}/${data.limit} this month). Upgrade for unlimited access.`, 'warning');
-        openPricingModal();
-        return;
-      }
-      throw new Error(data.error || 'Failed to get classroom token');
-    }
-
-    await fetch(`${API}/api/eclassroom/sessions`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${state.token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ classroomId, classroomTitle }),
-    });
-
-    const url = `${ECLASSROOM_URL}/join?token=${encodeURIComponent(data.token)}&classroom=${encodeURIComponent(classroomId)}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
-
-  } catch (err) {
-    console.error('Classroom launch error:', err);
-    showToast('Failed to launch classroom. Please try again.', 'error');
   }
 }
 

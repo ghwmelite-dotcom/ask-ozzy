@@ -1,4 +1,4 @@
-// JWT signing/verification for cross-service auth (AskOzzy ↔ eClassroom)
+// JWT signing/verification for cross-service auth
 // Uses Web Crypto HMAC-SHA256 — works on Cloudflare Workers runtime
 
 function base64UrlEncode(data: Uint8Array): string {

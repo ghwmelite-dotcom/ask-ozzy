@@ -50,6 +50,7 @@ import accountRoutes from "./routes/account";
 import miscRoutes from "./routes/misc";
 import eclassroomRoutes from "./routes/eclassroom";
 
+
 function escapeLike(s: string): string { return s.replace(/[%_\\]/g, '\\$&'); }
 
 const app = new Hono<AppType>();
