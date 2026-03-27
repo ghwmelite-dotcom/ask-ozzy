@@ -29,19 +29,29 @@ const LEVELS = [
 ];
 
 const SUBJECT_ICONS: Record<string, string> = {
-  mathematics: '📐',
-  core_mathematics: '📊',
-  science: '🔬',
-  english: '📝',
-  social_studies: '🌍',
-  ict: '💻',
+  mathematics: '📐', core_mathematics: '📊', science: '🔬',
+  english: '📝', social_studies: '🌍', ict: '💻',
+};
+
+const SUBJECT_GRADIENTS: Record<string, string> = {
+  mathematics: 'var(--gradient-math)',
+  core_mathematics: 'var(--gradient-math)',
+  science: 'var(--gradient-science)',
+  english: 'var(--gradient-english)',
+  social_studies: 'var(--gradient-social)',
+  ict: 'var(--gradient-ict)',
 };
 
 const TEACHER_NAMES: Record<string, string> = {
-  abena: 'Madam Abena',
-  kwame: 'Mr. Kwame',
-  esi: 'Madam Esi',
-  mensah: 'Dr. Mensah',
+  abena: 'Madam Abena', kwame: 'Mr. Kwame',
+  esi: 'Madam Esi', mensah: 'Dr. Mensah',
+};
+
+const TEACHER_TAGLINES: Record<string, string> = {
+  abena: 'Encouraging, uses real-world Ghana examples',
+  kwame: 'Methodical, loves diagrams & experiments',
+  esi: 'Gentle corrections, praise first',
+  mensah: 'Scholarly storyteller & historian',
 };
 
 export function Home() {
@@ -71,212 +81,297 @@ export function Home() {
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg-primary)' }}>
-      {/* Header */}
+
+      {/* ─── Header ─── */}
       <header
-        className="sticky top-0 z-10 border-b"
-        style={{ background: 'var(--bg-secondary)', borderColor: 'var(--border)' }}
+        className="sticky top-[3px] z-40"
+        style={{
+          background: 'rgba(15, 17, 23, 0.85)',
+          backdropFilter: 'blur(12px) saturate(180%)',
+          borderBottom: '1px solid var(--border-color)',
+        }}
       >
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-5 py-3.5 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div
-              className="w-9 h-9 rounded-xl flex items-center justify-center text-lg font-bold"
-              style={{ background: 'var(--accent)', color: '#000' }}
+              className="w-10 h-10 rounded-xl flex items-center justify-center text-xl"
+              style={{
+                background: 'var(--accent)',
+                color: '#000',
+                fontWeight: 800,
+                boxShadow: 'var(--gold-glow-soft)',
+              }}
             >
               e
             </div>
             <div>
-              <h1 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
+              <h1 className="text-base font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
                 eClassroom
               </h1>
-              <p className="text-[11px]" style={{ color: 'var(--text-muted)' }}>
-                AI-Powered Academic Preparation
+              <p className="text-[10px] tracking-wide uppercase" style={{ color: 'var(--text-muted)' }}>
+                by AskOzzy
               </p>
             </div>
           </div>
           <a
             href="https://askozzy.work"
-            className="text-xs px-3 py-1.5 rounded-lg"
-            style={{ background: 'var(--bg-tertiary)', color: 'var(--text-secondary)', textDecoration: 'none' }}
+            className="text-xs px-4 py-2 rounded-lg font-medium"
+            style={{
+              background: 'var(--bg-tertiary)',
+              color: 'var(--text-secondary)',
+              textDecoration: 'none',
+              border: '1px solid var(--border-color)',
+              transition: 'all 0.2s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = 'var(--accent)';
+              e.currentTarget.style.color = 'var(--accent)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'var(--border-color)';
+              e.currentTarget.style.color = 'var(--text-secondary)';
+            }}
           >
             AskOzzy.work
           </a>
         </div>
       </header>
 
-      <div className="max-w-6xl mx-auto px-4 py-6">
-        {/* Hero */}
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
-            Learn with AI Teachers
+      <div className="max-w-6xl mx-auto px-5">
+
+        {/* ─── Hero ─── */}
+        <section
+          className="animate-in pt-10 pb-8 relative"
+          style={{ borderBottom: '1px solid var(--border-color)' }}
+        >
+          <div
+            className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-[0.04]"
+            style={{
+              background: 'radial-gradient(circle, var(--accent) 0%, transparent 70%)',
+              filter: 'blur(40px)',
+              pointerEvents: 'none',
+            }}
+          />
+          <p
+            className="text-[11px] font-bold uppercase tracking-[0.2em] mb-4"
+            style={{ color: 'var(--accent)' }}
+          >
+            AI-Powered Academic Preparation
+          </p>
+          <h2
+            className="text-gold-gradient text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.1] mb-4"
+          >
+            Learn with Ghana's<br />Best AI Teachers
           </h2>
-          <p className="text-sm max-w-xl" style={{ color: 'var(--text-secondary)' }}>
-            Interactive whiteboard lessons aligned to the GES syllabus. Prepare for BECE, WASSCE, and university exams with personalized AI tutoring.
+          <p
+            className="text-base max-w-lg leading-relaxed"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            Interactive whiteboard lessons aligned to the GES syllabus.
+            Prepare for BECE & WASSCE with personalized tutoring — anytime, anywhere.
           </p>
         </section>
 
-        {/* Teacher Roster */}
-        <section className="mb-8">
+        {/* ─── Teacher Roster ─── */}
+        <section className="py-8" style={{ borderBottom: '1px solid var(--border-color)' }}>
           <h3
-            className="text-xs font-semibold uppercase tracking-wide mb-3"
+            className="text-[11px] font-bold uppercase tracking-[0.15em] mb-5"
             style={{ color: 'var(--text-muted)' }}
           >
-            Your Teachers
+            Meet Your Teachers
           </h3>
-          <div className="flex gap-4 overflow-x-auto pb-2" style={{ scrollbarWidth: 'none' }}>
-            {teachers.map((t) => (
+          <div
+            className="grid grid-cols-2 sm:grid-cols-4 gap-3"
+          >
+            {teachers.map((t, i) => (
               <div
                 key={t.id}
-                className="flex flex-col items-center gap-2 flex-shrink-0"
-                style={{ minWidth: 90 }}
+                className="card-hover animate-in rounded-2xl p-4 flex flex-col items-center text-center"
+                style={{
+                  background: 'var(--bg-secondary)',
+                  border: '1px solid var(--border-color)',
+                  animationDelay: `${i * 80}ms`,
+                }}
               >
-                <div
-                  className="rounded-2xl p-2"
-                  style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)' }}
-                >
+                <div className="mb-3">
                   <TeacherAvatar
                     teacher={t.id as TeacherId}
                     mood="explaining"
                     mouth="closed"
-                    size={72}
+                    size={88}
                   />
                 </div>
-                <div className="text-center">
-                  <p className="text-xs font-semibold" style={{ color: 'var(--text-primary)' }}>
-                    {t.name}
-                  </p>
-                  <p className="text-[10px]" style={{ color: 'var(--text-muted)' }}>
-                    {t.subject.replace(/_/g, ' ')}
-                  </p>
-                </div>
+                <p className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>
+                  {t.name}
+                </p>
+                <p
+                  className="text-[10px] font-semibold uppercase tracking-wider mt-0.5 mb-1.5"
+                  style={{ color: 'var(--accent)' }}
+                >
+                  {t.subject.replace(/_/g, ' ')}
+                </p>
+                <p className="text-[11px] leading-snug" style={{ color: 'var(--text-muted)' }}>
+                  {TEACHER_TAGLINES[t.id] ?? ''}
+                </p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Level Filter Tabs */}
-        <section className="mb-6">
-          <div className="flex gap-2 overflow-x-auto pb-1" style={{ scrollbarWidth: 'none' }}>
-            {LEVELS.map((l) => (
-              <button
-                key={l.id}
-                onClick={() => handleLevelChange(l.id)}
-                className="flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-all"
-                style={{
-                  background: activeLevel === l.id ? 'var(--accent)' : 'var(--bg-secondary)',
-                  color: activeLevel === l.id ? '#000' : 'var(--text-secondary)',
-                  border: `1px solid ${activeLevel === l.id ? 'var(--accent)' : 'var(--border)'}`,
-                  cursor: 'pointer',
-                }}
-              >
-                {l.label}
-              </button>
-            ))}
+        {/* ─── Level Filter ─── */}
+        <section className="pt-8 pb-2">
+          <div className="flex items-center gap-3 mb-5 flex-wrap">
+            <h3
+              className="text-[11px] font-bold uppercase tracking-[0.15em]"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              Browse Lessons
+            </h3>
+            <div className="flex gap-2 overflow-x-auto" style={{ scrollbarWidth: 'none' }}>
+              {LEVELS.map((l) => {
+                const isActive = activeLevel === l.id;
+                return (
+                  <button
+                    key={l.id}
+                    onClick={() => handleLevelChange(l.id)}
+                    className="flex-shrink-0 px-4 py-2 rounded-full text-xs font-semibold"
+                    style={{
+                      background: isActive ? 'var(--accent)' : 'var(--bg-secondary)',
+                      color: isActive ? '#000' : 'var(--text-secondary)',
+                      border: `1px solid ${isActive ? 'var(--accent)' : 'var(--border-color)'}`,
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                      boxShadow: isActive ? 'var(--gold-glow-soft)' : 'none',
+                    }}
+                  >
+                    {l.label}
+                  </button>
+                );
+              })}
+            </div>
+            {!loading && (
+              <span className="text-xs ml-auto" style={{ color: 'var(--text-muted)' }}>
+                {lessons.length} lesson{lessons.length !== 1 ? 's' : ''}
+              </span>
+            )}
           </div>
         </section>
 
-        {/* Lesson Grid */}
-        <section>
-          <h3
-            className="text-xs font-semibold uppercase tracking-wide mb-3"
-            style={{ color: 'var(--text-muted)' }}
-          >
-            {activeLevel === 'all' ? 'All Lessons' : `${LEVELS.find(l => l.id === activeLevel)?.label} Lessons`}
-            {!loading && ` (${lessons.length})`}
-          </h3>
-
+        {/* ─── Lesson Grid ─── */}
+        <section className="pb-16">
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {Array(6).fill(0).map((_, i) => (
                 <div
                   key={i}
-                  className="rounded-2xl overflow-hidden animate-pulse"
-                  style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)' }}
+                  className="rounded-2xl overflow-hidden"
+                  style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}
                 >
-                  <div className="h-28" style={{ background: 'var(--bg-tertiary)' }} />
-                  <div className="p-4 space-y-2">
-                    <div className="h-3 rounded w-1/3" style={{ background: 'var(--bg-tertiary)' }} />
-                    <div className="h-4 rounded w-3/4" style={{ background: 'var(--bg-tertiary)' }} />
-                    <div className="h-3 rounded w-1/2" style={{ background: 'var(--bg-tertiary)' }} />
+                  <div className="h-32 skeleton-shimmer" />
+                  <div className="p-5 space-y-3">
+                    <div className="h-3 rounded-full w-1/3 skeleton-shimmer" />
+                    <div className="h-4 rounded-full w-4/5 skeleton-shimmer" />
+                    <div className="h-3 rounded-full w-2/3 skeleton-shimmer" />
                   </div>
                 </div>
               ))}
             </div>
           ) : lessons.length === 0 ? (
-            <div className="text-center py-16">
-              <p className="text-4xl mb-3">📚</p>
-              <p className="font-semibold" style={{ color: 'var(--text-primary)' }}>
+            <div className="text-center py-20">
+              <div
+                className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-3xl"
+                style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}
+              >
+                📚
+              </div>
+              <p className="font-bold text-lg" style={{ color: 'var(--text-primary)' }}>
                 No lessons available yet
               </p>
-              <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>
+              <p className="text-sm mt-2" style={{ color: 'var(--text-muted)' }}>
                 Check back soon for new content
               </p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {lessons.map((lesson) => (
+              {lessons.map((lesson, i) => (
                 <button
                   key={lesson.id}
                   onClick={() => navigate(`/lesson/${lesson.id}`)}
-                  className="text-left rounded-2xl overflow-hidden transition-all"
+                  className="card-hover animate-in text-left rounded-2xl overflow-hidden"
                   style={{
                     background: 'var(--bg-secondary)',
-                    border: '1px solid var(--border)',
+                    border: '1px solid var(--border-color)',
                     cursor: 'pointer',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.borderColor = 'var(--accent)';
-                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = '';
-                    e.currentTarget.style.borderColor = 'var(--border)';
-                    e.currentTarget.style.boxShadow = '';
+                    boxShadow: 'var(--card-shadow)',
+                    animationDelay: `${i * 60}ms`,
                   }}
                 >
-                  {/* Card header with icon */}
+                  {/* Subject gradient header */}
                   <div
-                    className="h-28 flex items-center justify-center text-4xl"
+                    className="h-32 flex items-center justify-center relative"
                     style={{
-                      background: 'linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary))',
+                      background: SUBJECT_GRADIENTS[lesson.subject] ?? 'var(--gradient-default)',
                     }}
                   >
-                    {SUBJECT_ICONS[lesson.subject] ?? '📚'}
+                    <span className="text-5xl opacity-90 drop-shadow-lg">
+                      {SUBJECT_ICONS[lesson.subject] ?? '📚'}
+                    </span>
+                    {/* Level badge */}
+                    <span
+                      className="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"
+                      style={{
+                        background: 'rgba(0,0,0,0.4)',
+                        color: '#fff',
+                        backdropFilter: 'blur(4px)',
+                      }}
+                    >
+                      {lesson.level === 'jhs' ? 'BECE' : lesson.level === 'shs' ? 'WASSCE' : 'UNI'}
+                    </span>
                   </div>
 
-                  {/* Card body */}
-                  <div className="p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span
-                        className="text-[10px] font-bold uppercase tracking-wider"
-                        style={{ color: 'var(--accent)' }}
-                      >
-                        {lesson.subject.replace(/_/g, ' ')}
-                      </span>
-                      <span
-                        className="text-[10px] px-1.5 py-0.5 rounded"
-                        style={{ background: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}
-                      >
-                        {lesson.level.toUpperCase()}
-                      </span>
-                    </div>
+                  {/* Card content */}
+                  <div className="p-5">
+                    <p
+                      className="text-[10px] font-bold uppercase tracking-[0.12em] mb-2"
+                      style={{ color: 'var(--accent)' }}
+                    >
+                      {lesson.subject.replace(/_/g, ' ')}
+                    </p>
 
                     <h4
-                      className="text-sm font-bold mb-2 leading-tight"
+                      className="text-[15px] font-bold leading-snug mb-3"
                       style={{ color: 'var(--text-primary)' }}
                     >
                       {lesson.topic}
                     </h4>
 
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3 text-[11px]" style={{ color: 'var(--text-muted)' }}>
-                        <span>{TEACHER_NAMES[lesson.teacher_id] ?? lesson.teacher_id}</span>
-                        <span>·</span>
-                        <span>{lesson.estimated_minutes} min</span>
+                    <div
+                      className="flex items-center justify-between pt-3"
+                      style={{ borderTop: '1px solid var(--border-color)' }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <div className="w-5 h-5 rounded-full overflow-hidden flex-shrink-0">
+                          <TeacherAvatar
+                            teacher={lesson.teacher_id as TeacherId}
+                            mood="explaining"
+                            mouth="closed"
+                            size={20}
+                          />
+                        </div>
+                        <span className="text-[11px]" style={{ color: 'var(--text-muted)' }}>
+                          {TEACHER_NAMES[lesson.teacher_id] ?? lesson.teacher_id}
+                        </span>
+                        <span className="text-[11px]" style={{ color: 'var(--border-light, #3d4460)' }}>|</span>
+                        <span className="text-[11px]" style={{ color: 'var(--text-muted)' }}>
+                          {lesson.estimated_minutes} min
+                        </span>
                       </div>
                       <span
-                        className="text-[10px] font-bold px-2 py-0.5 rounded-md"
-                        style={{ background: 'rgba(252,209,22,0.12)', color: 'var(--accent)' }}
+                        className="text-[10px] font-bold px-2 py-1 rounded-md"
+                        style={{
+                          background: 'var(--accent-dim)',
+                          color: 'var(--accent)',
+                        }}
                       >
                         +{lesson.xp_reward} XP
                       </span>
@@ -289,11 +384,18 @@ export function Home() {
         </section>
       </div>
 
-      {/* Footer */}
-      <footer className="border-t mt-12 py-6" style={{ borderColor: 'var(--border)' }}>
-        <div className="max-w-6xl mx-auto px-4 text-center">
+      {/* ─── Footer ─── */}
+      <footer style={{ borderTop: '1px solid var(--border-color)' }}>
+        <div
+          className="h-[2px]"
+          style={{ background: 'linear-gradient(to right, #CE1126 33%, #FCD116 33% 66%, #006B3F 66%)' }}
+        />
+        <div className="max-w-6xl mx-auto px-5 py-6 flex items-center justify-between">
           <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
-            eClassroom by AskOzzy — Aligned to GES Syllabus & WAEC Exam Formats
+            eClassroom by AskOzzy
+          </p>
+          <p className="text-[10px]" style={{ color: 'var(--text-muted)' }}>
+            Aligned to GES Syllabus & WAEC Exam Formats
           </p>
         </div>
       </footer>
