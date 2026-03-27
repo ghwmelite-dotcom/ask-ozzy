@@ -1,12 +1,10 @@
-import type { Editor } from 'tldraw';
-import { createShapeId, compressLegacySegments, toRichText } from '@tldraw/tlschema';
-import type { TLDefaultColorStyle } from '@tldraw/tlschema';
 import type { BoardAction, LessonStep } from '@/types/lesson';
+import type { WhiteboardHandle } from './Whiteboard';
 
 export class WhiteboardTeacher {
   private shapeCounter = 0;
 
-  constructor(private editor: Editor) {}
+  constructor(private board: WhiteboardHandle) {}
 
   async executeStep(step: LessonStep): Promise<void> {
     for (const action of step.board_actions) {
@@ -29,113 +27,71 @@ export class WhiteboardTeacher {
         this.drawLine(action);
         break;
       case 'clearBoard':
-        this.clearBoard();
+        this.board.clear();
         break;
     }
   }
 
   private drawShape(action: BoardAction & { action: 'drawShape' }): void {
-    if (action.points && action.points.length >= 3) {
-      // Draw as freehand polygon using draw shape
-      const firstPoint = action.points[0];
-      if (!firstPoint) return;
-      const legacyPoints = action.points.map(([x, y]) => ({ x: x!, y: y!, z: 0.5 }));
-      // Close the shape by adding the first point at the end
-      legacyPoints.push({ x: firstPoint[0]!, y: firstPoint[1]!, z: 0.5 });
+    const id = `shape-${this.shapeCounter++}`;
 
-      const segments = compressLegacySegments([{
-        type: 'free' as const,
-        points: legacyPoints,
-      }]);
-
-      this.editor.createShape({
-        id: createShapeId(`wb-${this.shapeCounter++}`),
-        type: 'draw',
-        x: 0,
-        y: 0,
-        props: {
-          segments,
-          color: 'white' as TLDefaultColorStyle,
-          size: 'm',
-          isClosed: true,
-          isComplete: true,
-        },
+    if (action.points && action.points.length >= 2) {
+      // Polygon (triangle, etc.)
+      this.board.addElement({
+        id,
+        type: 'polygon',
+        points: action.points,
+        color: '#ffffff',
       });
-    } else if (action.position && action.width && action.height) {
-      this.editor.createShape({
-        id: createShapeId(`wb-${this.shapeCounter++}`),
-        type: 'geo',
+    } else if (action.position) {
+      // Rectangle or circle
+      const shapeType = action.type === 'circle' ? 'circle' : 'rect';
+      this.board.addElement({
+        id,
+        type: shapeType,
         x: action.position[0],
         y: action.position[1],
-        props: {
-          geo: action.type === 'circle' ? 'ellipse' : 'rectangle',
-          w: action.width,
-          h: action.height,
-          color: 'white' as TLDefaultColorStyle,
-          fill: 'none',
-          size: 'm',
-        },
+        width: action.width ?? 60,
+        height: action.height ?? 60,
+        color: '#ffffff',
+      });
+    }
+
+    // Right angle marker
+    if (action.type === 'rightAngleMarker' && action.position) {
+      this.board.addElement({
+        id: `${id}-marker`,
+        type: 'line',
+        points: [
+          [action.position[0] - 15, action.position[1]],
+          [action.position[0] - 15, action.position[1] - 15],
+          [action.position[0], action.position[1] - 15],
+        ],
+        color: '#FCD116',
       });
     }
   }
 
   private addLabel(action: BoardAction & { action: 'addLabel' }): void {
-    this.editor.createShape({
-      id: createShapeId(`wb-${this.shapeCounter++}`),
+    this.board.addElement({
+      id: `label-${this.shapeCounter++}`,
       type: 'text',
       x: action.position[0],
       y: action.position[1],
-      props: {
-        richText: toRichText(action.text),
-        color: this.mapColor(action.color),
-        size: 'm',
-        autoSize: true,
-      },
+      text: action.text,
+      color: action.color ?? '#ffffff',
+      fontSize: 16,
     });
   }
 
   private drawLine(action: BoardAction & { action: 'drawLine' }): void {
     if (action.points.length < 2) return;
-
-    const segments = compressLegacySegments([{
-      type: 'free' as const,
-      points: action.points.map(([x, y]) => ({ x, y, z: 0.5 })),
-    }]);
-
-    this.editor.createShape({
-      id: createShapeId(`wb-${this.shapeCounter++}`),
-      type: 'draw',
-      x: 0,
-      y: 0,
-      props: {
-        segments,
-        color: this.mapColor(action.color),
-        size: 'm',
-        isComplete: true,
-      },
+    this.board.addElement({
+      id: `line-${this.shapeCounter++}`,
+      type: 'line',
+      points: action.points,
+      color: action.color ?? '#ffffff',
     });
-  }
-
-  private clearBoard(): void {
-    const allShapeIds = this.editor.getCurrentPageShapeIds();
-    if (allShapeIds.size > 0) {
-      this.editor.deleteShapes([...allShapeIds]);
-    }
-  }
-
-  private mapColor(hex?: string): TLDefaultColorStyle {
-    if (!hex) return 'white';
-    const colorMap: Record<string, TLDefaultColorStyle> = {
-      '#FCD116': 'yellow',
-      '#EF9F27': 'orange',
-      '#4FC3F7': 'light-blue',
-      '#81C784': 'light-green',
-      '#FF5252': 'red',
-      '#CE1126': 'red',
-      '#FFFFFF': 'white',
-      '#ffffff': 'white',
-    };
-    return colorMap[hex] ?? 'white';
   }
 
   private delay(ms: number): Promise<void> {
@@ -143,7 +99,7 @@ export class WhiteboardTeacher {
   }
 
   reset(): void {
-    this.clearBoard();
+    this.board.clear();
     this.shapeCounter = 0;
   }
 }

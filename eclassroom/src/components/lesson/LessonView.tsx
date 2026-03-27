@@ -1,6 +1,6 @@
 import { useRef, useState, useCallback } from 'react';
-import type { Editor } from 'tldraw';
 import { Whiteboard } from '@/components/whiteboard/Whiteboard';
+import type { WhiteboardHandle } from '@/components/whiteboard/Whiteboard';
 import { WhiteboardTeacher } from '@/components/whiteboard/WhiteboardTeacher';
 import { LessonPlayer } from './LessonPlayer';
 import type { PlayerState } from './LessonPlayer';
@@ -24,7 +24,6 @@ const TEACHER_NAMES: Record<string, string> = {
 
 export function LessonView({ lesson }: LessonViewProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const editorRef = useRef<Editor | null>(null);
   const playerRef = useRef<LessonPlayer | null>(null);
   const whiteboardTeacherRef = useRef<WhiteboardTeacher | null>(null);
 
@@ -45,10 +44,8 @@ export function LessonView({ lesson }: LessonViewProps) {
     hasCheckpoint: s.checkpoint !== null,
   }));
 
-  const handleEditorReady = useCallback((editor: Editor) => {
-    editorRef.current = editor;
-
-    const wbTeacher = new WhiteboardTeacher(editor);
+  const handleEditorReady = useCallback((board: WhiteboardHandle) => {
+    const wbTeacher = new WhiteboardTeacher(board);
     whiteboardTeacherRef.current = wbTeacher;
 
     const audio = audioRef.current;
@@ -146,7 +143,7 @@ export function LessonView({ lesson }: LessonViewProps) {
           {/* tldraw container — needs explicit dimensions */}
           <div className="flex-1 relative" style={{ minHeight: 0 }}>
             <div style={{ position: 'absolute', inset: 0 }}>
-              <Whiteboard onEditorReady={handleEditorReady} />
+              <Whiteboard onReady={handleEditorReady} />
             </div>
 
             {/* Checkpoint overlay */}
