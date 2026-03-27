@@ -51,6 +51,29 @@ export const Whiteboard = forwardRef<WhiteboardHandle, WhiteboardProps>(
       onReady?.(handle);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+    const computeViewBoxHeight = (els: WhiteboardElement[]): number => {
+      let maxY = 260; // minimum height
+      for (const el of els) {
+        let bottomY = 0;
+        if (el.y !== undefined) {
+          // Text: account for font size + potential wrapped lines
+          const lineCount = el.text ? Math.ceil(el.text.length / 40) : 1;
+          bottomY = el.y + (el.fontSize ?? 14) * 1.5 * lineCount + 10;
+        }
+        if (el.y !== undefined && el.height !== undefined) {
+          bottomY = Math.max(bottomY, el.y + el.height + 10);
+        }
+        if (el.points) {
+          for (const pt of el.points) {
+            const py = pt[1];
+            if (py !== undefined) bottomY = Math.max(bottomY, py + 10);
+          }
+        }
+        maxY = Math.max(maxY, bottomY);
+      }
+      return maxY;
+    };
+
     const renderElement = (el: WhiteboardElement) => {
       const style = { transition: 'opacity 0.4s ease', opacity: el.opacity ?? 1 };
 
@@ -184,16 +207,24 @@ export const Whiteboard = forwardRef<WhiteboardHandle, WhiteboardProps>(
           <rect width="100%" height="100%" fill="url(#grid)" />
         </svg>
 
-        {/* Drawing canvas */}
-        <svg
-          viewBox="0 0 350 260"
-          width="100%"
-          height="100%"
-          preserveAspectRatio="xMidYMid meet"
-          style={{ position: 'absolute', inset: 0, padding: '16px' }}
+        {/* Drawing canvas — scrollable, auto-expanding viewBox */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            overflow: 'auto',
+            padding: '16px',
+          }}
         >
-          {elements.map(renderElement)}
-        </svg>
+          <svg
+            viewBox={`0 0 350 ${computeViewBoxHeight(elements)}`}
+            width="100%"
+            style={{ minHeight: '100%' }}
+            preserveAspectRatio="xMidYMin meet"
+          >
+            {elements.map(renderElement)}
+          </svg>
+        </div>
 
         {/* Whiteboard label */}
         {elements.length === 0 && (
