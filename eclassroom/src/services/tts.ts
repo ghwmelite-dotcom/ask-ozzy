@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_URL ?? '';
+const API_BASE = import.meta.env.VITE_API_URL ?? 'https://askozzy.work';
 
 export async function fetchTTSAudio(text: string, teacher?: string): Promise<string> {
   const res = await fetch(`${API_BASE}/api/eclassroom/tts`, {

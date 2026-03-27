@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_URL ?? '';
+const API_BASE = import.meta.env.VITE_API_URL ?? 'https://askozzy.work';
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
   const token = sessionStorage.getItem('ec_token');
