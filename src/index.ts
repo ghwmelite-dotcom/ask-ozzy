@@ -49,6 +49,7 @@ import chatRoutes from "./routes/chat";
 import accountRoutes from "./routes/account";
 import miscRoutes from "./routes/misc";
 import eclassroomRoutes from "./routes/eclassroom";
+import { ClassroomDO } from "./lib/classroom-do";
 
 
 function escapeLike(s: string): string { return s.replace(/[%_\\]/g, '\\$&'); }
@@ -1812,6 +1813,8 @@ app.route("/", chatRoutes);
 app.route("/", accountRoutes);
 app.route("/", miscRoutes);
 app.route("/", eclassroomRoutes);
+
+export { ClassroomDO };
 
 export default {
   fetch: app.fetch,

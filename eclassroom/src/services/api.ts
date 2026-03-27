@@ -66,4 +66,16 @@ export const api = {
     answers: Array<{ question_number: number; selected: string; correct: string }>;
   }) =>
     request('/api/eclassroom/quiz/submit', { method: 'POST', body: JSON.stringify(data) }),
+
+  // ── Live Classroom ──
+  createClassroom: (data: { title: string; type: string; lesson_id?: string }) =>
+    request('/api/eclassroom/classroom/create', { method: 'POST', body: JSON.stringify(data) }),
+  joinClassroom: (join_code: string) =>
+    request('/api/eclassroom/classroom/join', { method: 'POST', body: JSON.stringify({ join_code }) }),
+
+  // ── Audio Lessons ──
+  listAudioLessons: () => request('/api/eclassroom/audio'),
+  generateAudio: (lesson_id: string) =>
+    request('/api/eclassroom/audio/generate', { method: 'POST', body: JSON.stringify({ lesson_id }) }),
+  getAudioUrl: (lesson_id: string) => `${API_BASE}/api/eclassroom/audio/${lesson_id}`,
 };

@@ -351,3 +351,45 @@ body {
     scroll-behavior: auto;
   }
 }
+
+/* ============================================
+   Mobile Responsiveness & PWA Polish
+   ============================================ */
+
+/* iOS safe area bottom padding */
+body {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Touch-friendly: minimum 44px for all interactive elements */
+button, a, input, [role="button"], [role="slider"] {
+  min-height: 44px;
+}
+
+/* Header: prevent text wrap on small screens */
+@media (max-width: 380px) {
+  header .max-w-6xl {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  header h1 {
+    font-size: 14px;
+  }
+  header a {
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 10px;
+  }
+}
+
+/* Lesson cards: single column below 480px */
+@media (max-width: 480px) {
+  .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+  /* Teacher roster: 2 columns on very small screens */
+  .grid.grid-cols-2.sm\:grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+}

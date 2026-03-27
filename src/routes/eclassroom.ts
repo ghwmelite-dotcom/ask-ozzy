@@ -1069,4 +1069,282 @@ eclassroom.post("/api/eclassroom/quiz/submit", authMiddleware, async (c) => {
   }
 });
 
+// ─── POST /api/eclassroom/audio/generate ─────────────────────────────
+// Generate TTS audio summary for a lesson (auth required)
+eclassroom.post("/api/eclassroom/audio/generate", authMiddleware, async (c) => {
+  try {
+    // Ensure ec_audio_lessons table exists
+    await c.env.DB.prepare(`
+      CREATE TABLE IF NOT EXISTS ec_audio_lessons (
+        id TEXT PRIMARY KEY,
+        lesson_id TEXT NOT NULL UNIQUE,
+        r2_key TEXT NOT NULL,
+        duration_estimate INTEGER,
+        generated_at TEXT DEFAULT (datetime('now'))
+      )
+    `).run();
+
+    const body = await c.req.json<{ lesson_id: string }>();
+    if (!body?.lesson_id) {
+      return c.json({ error: "lesson_id is required" }, 400);
+    }
+
+    // Fetch lesson from D1
+    const lesson: any = await c.env.DB.prepare(
+      "SELECT id, topic, subject, level, content_json FROM ec_lessons WHERE id = ?"
+    ).bind(body.lesson_id).first();
+
+    if (!lesson) {
+      return c.json({ error: "Lesson not found" }, 404);
+    }
+
+    // Combine all voice_scripts (or fallback to content/text) from steps into lecture text
+    const steps: any[] = lesson.content_json ? JSON.parse(lesson.content_json) : [];
+    const rawLecture = steps
+      .map((s: any) => s.voice_script || s.content || s.text || "")
+      .filter(Boolean)
+      .join(" ");
+
+    // Truncate to 2000 chars (Workers AI TTS limit)
+    const lectureText = rawLecture.substring(0, 2000);
+
+    if (!lectureText.trim()) {
+      return c.json({ error: "No text content found in lesson steps" }, 422);
+    }
+
+    // Generate TTS audio via Workers AI
+    const ttsResponse = await c.env.AI.run(
+      "@cf/myshell-ai/melotts-english-v2" as any,
+      { prompt: lectureText }
+    );
+
+    // ttsResponse is an ArrayBuffer or similar binary
+    const audioBuffer = ttsResponse as unknown as ArrayBuffer;
+
+    // Store audio in R2
+    const r2Key = `eclassroom/audio/${body.lesson_id}.wav`;
+    await c.env.KNOWLEDGE_R2.put(r2Key, audioBuffer, {
+      httpMetadata: { contentType: "audio/wav" },
+    });
+
+    // Rough duration estimate: ~150 words per minute, ~5 chars per word
+    const wordCount = Math.ceil(lectureText.length / 5);
+    const durationEstimate = Math.ceil((wordCount / 150) * 60); // seconds
+
+    const audioId = crypto.randomUUID();
+    const now = new Date().toISOString();
+
+    // Insert or update record in ec_audio_lessons
+    await c.env.DB.prepare(
+      `INSERT INTO ec_audio_lessons (id, lesson_id, r2_key, duration_estimate, generated_at)
+       VALUES (?, ?, ?, ?, ?)
+       ON CONFLICT(lesson_id) DO UPDATE SET
+         r2_key = excluded.r2_key,
+         duration_estimate = excluded.duration_estimate,
+         generated_at = excluded.generated_at`
+    ).bind(audioId, body.lesson_id, r2Key, durationEstimate, now).run();
+
+    log("info", "eclassroom: audio generated", { lesson_id: body.lesson_id, r2Key });
+
+    return c.json({ audio_id: audioId, r2_key: r2Key, duration_estimate: durationEstimate });
+  } catch (err: any) {
+    log("error", "eclassroom: audio generate failed", { error: err?.message });
+    return c.json({ error: "Failed to generate audio" }, 500);
+  }
+});
+
+// ─── GET /api/eclassroom/audio/:lesson_id ─────────────────────────────
+// Stream audio for a lesson (public)
+eclassroom.get("/api/eclassroom/audio/:lesson_id", async (c) => {
+  try {
+    const lessonId = c.req.param("lesson_id");
+
+    const row: any = await c.env.DB.prepare(
+      "SELECT r2_key FROM ec_audio_lessons WHERE lesson_id = ?"
+    ).bind(lessonId).first();
+
+    if (!row) {
+      return c.json({ error: "Audio not found for this lesson" }, 404);
+    }
+
+    const obj = await c.env.KNOWLEDGE_R2.get(row.r2_key);
+    if (!obj) {
+      return c.json({ error: "Audio file missing from storage" }, 404);
+    }
+
+    return new Response(obj.body as ReadableStream, {
+      headers: {
+        "Content-Type": "audio/wav",
+        "Cache-Control": "public, max-age=86400",
+      },
+    });
+  } catch (err: any) {
+    log("error", "eclassroom: audio fetch failed", { error: err?.message });
+    return c.json({ error: "Failed to fetch audio" }, 500);
+  }
+});
+
+// ─── GET /api/eclassroom/audio ────────────────────────────────────────
+// List all available audio lessons (public)
+eclassroom.get("/api/eclassroom/audio", async (c) => {
+  try {
+    const { results } = await c.env.DB.prepare(`
+      SELECT
+        al.lesson_id,
+        el.topic,
+        el.subject,
+        el.level,
+        al.duration_estimate,
+        al.generated_at
+      FROM ec_audio_lessons al
+      JOIN ec_lessons el ON el.id = al.lesson_id
+      ORDER BY al.generated_at DESC
+    `).all();
+
+    return c.json({ audio_lessons: results ?? [] });
+  } catch (err: any) {
+    log("error", "eclassroom: audio list failed", { error: err?.message });
+    return c.json({ error: "Failed to list audio lessons" }, 500);
+  }
+});
+
+// ─── Helper: ensure ec_classrooms table exists ──────────────────────
+async function ensureClassroomsTable(db: D1Database): Promise<void> {
+  await db.prepare(`
+    CREATE TABLE IF NOT EXISTS ec_classrooms (
+      id TEXT PRIMARY KEY,
+      join_code TEXT NOT NULL UNIQUE,
+      title TEXT NOT NULL,
+      lesson_id TEXT,
+      type TEXT DEFAULT 'study_group',
+      created_by TEXT,
+      status TEXT DEFAULT 'active',
+      max_students INTEGER DEFAULT 50,
+      created_at TEXT DEFAULT (datetime('now'))
+    )
+  `).run();
+}
+
+// ─── Helper: generate 6-char join code ───────────────────────────────
+function generateJoinCode(): string {
+  return Array.from(crypto.getRandomValues(new Uint8Array(3)))
+    .map((b) => b.toString(36).toUpperCase())
+    .join("")
+    .slice(0, 6);
+}
+
+// ─── POST /api/eclassroom/classroom/create ───────────────────────────
+// Create a live classroom room (auth required)
+eclassroom.post("/api/eclassroom/classroom/create", authMiddleware, async (c) => {
+  try {
+    const { title, lesson_id, type } = await c.req.json<{
+      title: string;
+      lesson_id?: string;
+      type?: "ai_led" | "study_group";
+    }>();
+
+    if (!title || typeof title !== "string" || title.trim().length === 0) {
+      return c.json({ error: "Title is required" }, 400);
+    }
+
+    await ensureClassroomsTable(c.env.DB);
+
+    const classroomId = crypto.randomUUID();
+    const joinCode = generateJoinCode();
+    const classroomType = type === "ai_led" ? "ai_led" : "study_group";
+    const userId = c.get("userId");
+
+    await c.env.DB.prepare(
+      "INSERT INTO ec_classrooms (id, join_code, title, lesson_id, type, created_by) VALUES (?, ?, ?, ?, ?, ?)"
+    )
+      .bind(classroomId, joinCode, title.trim(), lesson_id ?? null, classroomType, userId)
+      .run();
+
+    return c.json({ join_code: joinCode, classroom_id: classroomId });
+  } catch (err: any) {
+    log("error", "eclassroom: create classroom failed", { error: err?.message });
+    return c.json({ error: "Failed to create classroom" }, 500);
+  }
+});
+
+// ─── POST /api/eclassroom/classroom/join ─────────────────────────────
+// Join a classroom by code
+eclassroom.post("/api/eclassroom/classroom/join", async (c) => {
+  try {
+    const { join_code } = await c.req.json<{ join_code: string }>();
+
+    if (!join_code || typeof join_code !== "string") {
+      return c.json({ error: "Join code is required" }, 400);
+    }
+
+    await ensureClassroomsTable(c.env.DB);
+
+    const row: any = await c.env.DB.prepare(
+      "SELECT id, title, max_students, status FROM ec_classrooms WHERE join_code = ?"
+    )
+      .bind(join_code.trim().toUpperCase())
+      .first();
+
+    if (!row) {
+      return c.json({ error: "Classroom not found" }, 404);
+    }
+
+    if (row.status !== "active") {
+      return c.json({ error: "Classroom is no longer active" }, 410);
+    }
+
+    // Check current occupancy via the DO
+    const doId = c.env.CLASSROOM_DO.idFromName(row.id);
+    const stub = c.env.CLASSROOM_DO.get(doId);
+    const infoRes = await stub.fetch(new Request("https://do/info"));
+    const info = (await infoRes.json()) as { students: number };
+
+    if (info.students >= (row.max_students ?? 50)) {
+      return c.json({ error: "Classroom is full" }, 409);
+    }
+
+    return c.json({
+      classroom_id: row.id,
+      title: row.title,
+    });
+  } catch (err: any) {
+    log("error", "eclassroom: join classroom failed", { error: err?.message });
+    return c.json({ error: "Failed to join classroom" }, 500);
+  }
+});
+
+// ─── GET /api/eclassroom/classroom/:id/ws ────────────────────────────
+// WebSocket upgrade to Durable Object
+eclassroom.get("/api/eclassroom/classroom/:id/ws", async (c) => {
+  const upgradeHeader = c.req.header("Upgrade");
+  if (upgradeHeader !== "websocket") {
+    return c.json({ error: "Expected WebSocket upgrade" }, 426);
+  }
+
+  const classroomId = c.req.param("id");
+  const doId = c.env.CLASSROOM_DO.idFromName(classroomId);
+  const stub = c.env.CLASSROOM_DO.get(doId);
+
+  // Forward the original request (with query params for studentId/name) to the DO
+  return stub.fetch(c.req.raw);
+});
+
+// ─── GET /api/eclassroom/classroom/:id/info ──────────────────────────
+// Get room info from Durable Object
+eclassroom.get("/api/eclassroom/classroom/:id/info", async (c) => {
+  try {
+    const classroomId = c.req.param("id");
+    const doId = c.env.CLASSROOM_DO.idFromName(classroomId);
+    const stub = c.env.CLASSROOM_DO.get(doId);
+
+    const infoRes = await stub.fetch(new Request("https://do/info"));
+    const info = await infoRes.json();
+
+    return c.json(info);
+  } catch (err: any) {
+    log("error", "eclassroom: get classroom info failed", { error: err?.message });
+    return c.json({ error: "Failed to get classroom info" }, 500);
+  }
+});
+
 export default eclassroom;

@@ -37,6 +37,20 @@
       "index_name": "askozzy-knowledge"
     }
   ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "CLASSROOM_DO",
+        "class_name": "ClassroomDO"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_classes": ["ClassroomDO"]
+    }
+  ],
   "triggers": {
     "crons": ["0 */3 * * *"]
   }

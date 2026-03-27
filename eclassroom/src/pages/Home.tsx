@@ -413,7 +413,7 @@ export function Home() {
         </section>
 
         {/* ─── Study Tools CTA ─── */}
-        <section className="pb-16">
+        <section className="pb-4">
           <button
             onClick={() => navigate('/study-tools')}
             className="card-hover animate-in w-full text-left rounded-2xl overflow-hidden"
@@ -457,6 +457,116 @@ export function Home() {
                 <path
                   d="M9 18l6-6-6-6"
                   stroke="var(--accent)"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+          </button>
+        </section>
+
+        {/* ─── Live Classroom CTA ─── */}
+        <section className="pb-4">
+          <button
+            onClick={() => navigate('/live')}
+            className="card-hover animate-in w-full text-left rounded-2xl overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(0, 107, 63, 0.08) 0%, rgba(0, 107, 63, 0.02) 60%, rgba(252, 209, 22, 0.04) 100%)',
+              border: '1px solid rgba(0, 107, 63, 0.25)',
+              cursor: 'pointer',
+              boxShadow: '0 0 40px rgba(0, 107, 63, 0.06)',
+              animationDelay: '100ms',
+            }}
+          >
+            <div className="p-6 flex items-center gap-5">
+              <div
+                className="flex-shrink-0 w-14 h-14 rounded-xl flex items-center justify-center"
+                style={{
+                  background: 'rgba(0, 107, 63, 0.12)',
+                  border: '1px solid rgba(0, 107, 63, 0.25)',
+                }}
+              >
+                <svg width={28} height={28} viewBox="0 0 24 24" fill="none">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="var(--brand-green)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3
+                  className="text-base font-bold mb-1"
+                  style={{ color: 'var(--text-primary)' }}
+                >
+                  Live Classroom
+                </h3>
+                <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                  Join or create a live classroom session with other students.
+                </p>
+              </div>
+              <svg
+                width={20}
+                height={20}
+                viewBox="0 0 24 24"
+                fill="none"
+                className="flex-shrink-0"
+              >
+                <path
+                  d="M9 18l6-6-6-6"
+                  stroke="var(--brand-green)"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+          </button>
+        </section>
+
+        {/* ─── Audio Lessons CTA ─── */}
+        <section className="pb-16">
+          <button
+            onClick={() => navigate('/audio')}
+            className="card-hover animate-in w-full text-left rounded-2xl overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(206, 17, 38, 0.06) 0%, rgba(206, 17, 38, 0.02) 60%, rgba(252, 209, 22, 0.04) 100%)',
+              border: '1px solid rgba(206, 17, 38, 0.2)',
+              cursor: 'pointer',
+              boxShadow: '0 0 40px rgba(206, 17, 38, 0.04)',
+              animationDelay: '200ms',
+            }}
+          >
+            <div className="p-6 flex items-center gap-5">
+              <div
+                className="flex-shrink-0 w-14 h-14 rounded-xl flex items-center justify-center text-2xl"
+                style={{
+                  background: 'rgba(206, 17, 38, 0.1)',
+                  border: '1px solid rgba(206, 17, 38, 0.2)',
+                }}
+              >
+                <svg width={28} height={28} viewBox="0 0 24 24" fill="none">
+                  <path d="M9 18V5l12-2v13M9 18c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3zM21 16c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3z" stroke="var(--brand-red)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3
+                  className="text-base font-bold mb-1"
+                  style={{ color: 'var(--text-primary)' }}
+                >
+                  Audio Lessons
+                </h3>
+                <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                  Listen to AI-generated lesson summaries on the go.
+                </p>
+              </div>
+              <svg
+                width={20}
+                height={20}
+                viewBox="0 0 24 24"
+                fill="none"
+                className="flex-shrink-0"
+              >
+                <path
+                  d="M9 18l6-6-6-6"
+                  stroke="var(--brand-red)"
                   strokeWidth={2}
                   strokeLinecap="round"
                   strokeLinejoin="round"

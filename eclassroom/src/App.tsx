@@ -2,6 +2,8 @@ import { Routes, Route } from 'react-router-dom';
 import { Home } from '@/pages/Home';
 import { LessonPage } from '@/pages/LessonPage';
 import { StudyToolsPage } from '@/pages/StudyToolsPage';
+import { ClassroomPage } from '@/pages/ClassroomPage';
+import { AudioPage } from '@/pages/AudioPage';
 
 export function App() {
   return (
@@ -13,6 +15,8 @@ export function App() {
           <Route path="/lesson/:id" element={<LessonPage />} />
           <Route path="/study-tools" element={<StudyToolsPage />} />
           <Route path="/leaderboard" element={<StudyToolsPage />} />
+          <Route path="/live/:code?" element={<ClassroomPage />} />
+          <Route path="/audio" element={<AudioPage />} />
         </Routes>
       </div>
     </>
