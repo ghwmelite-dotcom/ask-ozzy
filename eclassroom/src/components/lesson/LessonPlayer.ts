@@ -108,8 +108,15 @@ export class LessonPlayer {
         this.callbacks.onMoodChange('explaining');
       }
 
-      // Fetch and play TTS
-      this.abortController = new AbortController();
+      // Execute board actions + TTS audio concurrently
+      // Board actions always run; TTS is best-effort
+      const boardPromise = this.whiteboardTeacher.executeStep(step);
+
+      // Estimate reading time as fallback when TTS fails (~150 wpm)
+      const wordCount = step.voice_script.split(/\s+/).length;
+      const readingTimeMs = Math.max(3000, (wordCount / 150) * 60 * 1000);
+
+      let audioPlayed = false;
       try {
         const audioUrl = await fetchTTSAudio(step.voice_script, this.teacherId);
         if (this.state !== 'playing') {
@@ -120,27 +127,32 @@ export class LessonPlayer {
         this.currentTTSUrl = audioUrl;
         this.audioElement.src = audioUrl;
 
-        // Start audio and board actions concurrently
         const audioPromise = new Promise<void>((resolve) => {
           this.audioElement.onended = () => resolve();
           this.audioElement.onerror = () => resolve();
         });
 
-        await this.audioElement.play().catch(() => {
-          // Autoplay may be blocked; continue with board actions
-        });
-        const boardPromise = this.whiteboardTeacher.executeStep(step);
+        await this.audioElement.play();
+        audioPlayed = true;
 
         // Wait for both audio and board actions
         await Promise.all([audioPromise, boardPromise]);
 
-        // Cleanup TTS URL
         if (this.currentTTSUrl) {
           revokeTTSUrl(this.currentTTSUrl);
           this.currentTTSUrl = null;
         }
       } catch (_err) {
+        // TTS failed — wait for board actions + simulated reading time
         if (this.state !== 'playing') return;
+
+        if (!audioPlayed) {
+          // Wait for board drawing to complete + reading time as fallback
+          await Promise.all([
+            boardPromise,
+            this.delay(readingTimeMs),
+          ]);
+        }
       }
 
       if (this.state !== 'playing') return;
@@ -168,5 +180,9 @@ export class LessonPlayer {
   private setState(state: PlayerState): void {
     this.state = state;
     this.callbacks.onStateChange(state);
+  }
+
+  private delay(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }

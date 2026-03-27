@@ -144,11 +144,23 @@ eclassroom.post("/api/eclassroom/tts", async (c) => {
     }
 
     const result = await c.env.AI.run(
-      "@cf/myshell-ai/melotts-english-v2" as any,
+      "@cf/myshell-ai/melotts" as any,
       { prompt: body.text }
     );
 
-    return new Response(result as ReadableStream, {
+    // MeloTTS returns an object — extract audio data
+    const audioData = (result as any)?.audio;
+    if (!audioData) {
+      log("error", "eclassroom: TTS returned no audio", { result: JSON.stringify(result).slice(0, 200) });
+      return c.json({ error: "TTS returned no audio" }, 500);
+    }
+
+    // audioData may be a Uint8Array, ArrayBuffer, or ReadableStream
+    const body2 = audioData instanceof ReadableStream ? audioData :
+                   audioData instanceof Uint8Array ? audioData.buffer :
+                   audioData;
+
+    return new Response(body2, {
       headers: {
         "Content-Type": "audio/wav",
         "Cache-Control": "public, max-age=3600",
@@ -1114,7 +1126,7 @@ eclassroom.post("/api/eclassroom/audio/generate", authMiddleware, async (c) => {
 
     // Generate TTS audio via Workers AI
     const ttsResponse = await c.env.AI.run(
-      "@cf/myshell-ai/melotts-english-v2" as any,
+      "@cf/myshell-ai/melotts" as any,
       { prompt: lectureText }
     );
 
