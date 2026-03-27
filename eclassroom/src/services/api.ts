@@ -31,4 +31,9 @@ export const api = {
       method: 'POST',
       body: JSON.stringify(data),
     }),
+  askTeacher: (data: { question: string; subject: string; level: string; teacher_id: string }) =>
+    request<{ answer: string; citations: Array<{ source: string; score: number }>; confidence: string }>(
+      '/api/eclassroom/rag/query',
+      { method: 'POST', body: JSON.stringify(data) }
+    ),
 };

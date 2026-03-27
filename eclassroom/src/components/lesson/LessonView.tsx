@@ -5,6 +5,7 @@ import { WhiteboardTeacher } from '@/components/whiteboard/WhiteboardTeacher';
 import { LessonPlayer } from './LessonPlayer';
 import type { PlayerState } from './LessonPlayer';
 import { Checkpoint } from './Checkpoint';
+import { AskTeacher } from './AskTeacher';
 import { TeacherPanel } from '@/components/teacher/TeacherPanel';
 import { LessonProgress } from './LessonProgress';
 import type { Lesson, Checkpoint as CheckpointType } from '@/types/lesson';
@@ -33,6 +34,7 @@ export function LessonView({ lesson }: LessonViewProps) {
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set());
   const [activeCheckpoint, setActiveCheckpoint] = useState<CheckpointType | null>(null);
   const [xpEarned, setXpEarned] = useState(0);
+  const [askTeacherOpen, setAskTeacherOpen] = useState(false);
 
   const teacherId = lesson.teacher_id as TeacherId;
   const isPlaying = playerState === 'playing';
@@ -137,15 +139,80 @@ export function LessonView({ lesson }: LessonViewProps) {
           </span>
         </header>
 
-        {/* Whiteboard + Checkpoint overlay */}
+        {/* Whiteboard + Checkpoint overlay + Ask Teacher */}
         <div className="flex-1 relative">
           <Whiteboard onEditorReady={handleEditorReady} />
 
+          {/* Checkpoint overlay — z-index 40, above FAB */}
           {activeCheckpoint && (
             <Checkpoint
               checkpoint={activeCheckpoint}
               onAnswer={handleCheckpointAnswer}
             />
+          )}
+
+          {/* Ask Teacher slide-up panel — z-index 30, above whiteboard, below checkpoint */}
+          <AskTeacher
+            teacherId={teacherId}
+            teacherName={TEACHER_NAMES[teacherId] ?? teacherId}
+            subject={lesson.subject}
+            level={lesson.level}
+            isOpen={askTeacherOpen}
+            onClose={() => setAskTeacherOpen(false)}
+          />
+
+          {/* Ask Teacher FAB — bottom-right of whiteboard area */}
+          {!askTeacherOpen && (
+            <button
+              onClick={() => setAskTeacherOpen(true)}
+              aria-label="Ask your teacher a question"
+              title="Ask your teacher a question"
+              style={{
+                position: 'absolute',
+                bottom: 20,
+                right: 20,
+                zIndex: 20,
+                width: 48,
+                height: 48,
+                borderRadius: '50%',
+                background: 'var(--accent)',
+                border: 'none',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 4px 16px rgba(252,209,22,0.35), 0 2px 6px rgba(0,0,0,0.3)',
+                transition: 'background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease',
+              }}
+              onMouseEnter={(e) => {
+                const btn = e.currentTarget as HTMLButtonElement;
+                btn.style.background = 'var(--accent-hover)';
+                btn.style.transform = 'scale(1.08)';
+                btn.style.boxShadow = '0 6px 24px rgba(252,209,22,0.5), 0 2px 8px rgba(0,0,0,0.35)';
+              }}
+              onMouseLeave={(e) => {
+                const btn = e.currentTarget as HTMLButtonElement;
+                btn.style.background = 'var(--accent)';
+                btn.style.transform = 'scale(1)';
+                btn.style.boxShadow = '0 4px 16px rgba(252,209,22,0.35), 0 2px 6px rgba(0,0,0,0.3)';
+              }}
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#0f1117"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg>
+            </button>
           )}
         </div>
       </main>

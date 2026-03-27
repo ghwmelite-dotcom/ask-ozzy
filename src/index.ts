@@ -1936,6 +1936,50 @@ export default {
       }
     } catch {}
 
+    // ─── eClassroom: Curriculum freshness check (once per day) ───────
+    try {
+      const lastCheck = await env.SESSIONS.get('ec:freshness:last_check');
+      const now = new Date();
+      const todayStr = now.toISOString().split('T')[0];
+
+      // Only run once per day
+      if (!lastCheck || !lastCheck.startsWith(todayStr)) {
+        const staleThreshold = new Date(now.getTime() - 90 * 86400000)
+          .toISOString().replace('T', ' ').split('.')[0];
+
+        const { results } = await env.DB.prepare(
+          `SELECT document, MAX(embedded_at) as latest_update
+           FROM knowledge_documents
+           WHERE metadata LIKE '%eclassroom%'
+           GROUP BY document
+           HAVING MAX(embedded_at) < ?
+           ORDER BY latest_update ASC`
+        ).bind(staleThreshold).all();
+
+        const staleDocuments = results ?? [];
+        if (staleDocuments.length > 0) {
+          // Log a gateway_metrics entry for each stale subject
+          for (const doc of staleDocuments) {
+            await env.DB.prepare(
+              `INSERT INTO gateway_metrics (date, agent, total_requests, avg_latency_ms, cache_hit_rate, error_rate, confidence_score)
+               VALUES (date('now'), 'eclassroom_freshness', 0, 0, 0, 0, 0)`
+            ).run();
+          }
+          log('info', 'eClassroom: stale curriculum detected', {
+            stale_count: staleDocuments.length,
+            stale_documents: staleDocuments.map((d: any) => ({
+              document: d.document,
+              last_updated: d.latest_update,
+            })),
+          });
+        }
+
+        await env.SESSIONS.put('ec:freshness:last_check', now.toISOString(), { expirationTtl: 86400 });
+      }
+    } catch (err: any) {
+      log('error', 'eClassroom freshness check failed', { error: err?.message });
+    }
+
     // ─── Fetch daily exchange rates for currency converter ───────────
     try {
       const rateRes = await fetch('https://open.er-api.com/v6/latest/GHS');
