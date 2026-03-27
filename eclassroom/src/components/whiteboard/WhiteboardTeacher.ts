@@ -73,14 +73,22 @@ export class WhiteboardTeacher {
   }
 
   private addLabel(action: BoardAction & { action: 'addLabel' }): void {
+    const text = action.text;
+    // Smart font sizing based on content type
+    let fontSize = 11; // default body text
+    if (text === text.toUpperCase() && text.length > 3) fontSize = 13; // TITLES
+    if (text === '•' || text === '→' || text === '✓') fontSize = 10; // bullets
+    if (text.length <= 6) fontSize = 10; // short labels like "OR", "DO:"
+    if (action.position[1] <= 15) fontSize = 13; // top-line titles
+
     this.board.addElement({
       id: `label-${this.shapeCounter++}`,
       type: 'text',
       x: action.position[0],
       y: action.position[1],
-      text: action.text,
+      text,
       color: action.color ?? '#ffffff',
-      fontSize: 14,
+      fontSize,
     });
   }
 

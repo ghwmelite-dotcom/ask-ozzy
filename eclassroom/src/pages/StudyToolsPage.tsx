@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { PageHeader } from '@/components/layout/PageHeader';
 import { api } from '@/services/api';
 import { XPDisplay } from '@/components/gamification/XPDisplay';
 import { StreakCounter } from '@/components/gamification/StreakCounter';
@@ -80,19 +81,10 @@ export function StudyToolsPage() {
 
   return (
     <div className="min-h-screen edu-bg">
+      <PageHeader title="Study Tools" subtitle="Flashcards, XP, Badges & Leaderboard" />
       <div className="max-w-3xl mx-auto px-5 relative z-10">
         {/* Header */}
-        <header className="pt-8 pb-6 animate-in">
-          <a
-            href="/"
-            className="text-xs font-medium inline-flex items-center gap-1.5 mb-4"
-            style={{ color: 'var(--text-muted)', textDecoration: 'none' }}
-          >
-            <svg width={14} height={14} viewBox="0 0 24 24" fill="none">
-              <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            Back to Home
-          </a>
+        <header className="pt-6 pb-4 animate-in">
           <h2
             className="text-2xl font-extrabold tracking-tight"
             style={{ color: 'var(--text-primary)' }}

@@ -1,4 +1,5 @@
 import { useRef, useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Whiteboard } from '@/components/whiteboard/Whiteboard';
 import type { WhiteboardHandle } from '@/components/whiteboard/Whiteboard';
 import { WhiteboardTeacher } from '@/components/whiteboard/WhiteboardTeacher';
@@ -23,6 +24,7 @@ const TEACHER_NAMES: Record<string, string> = {
 };
 
 export function LessonView({ lesson }: LessonViewProps) {
+  const navigate = useNavigate();
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const playerRef = useRef<LessonPlayer | null>(null);
   const whiteboardTeacherRef = useRef<WhiteboardTeacher | null>(null);
@@ -90,21 +92,44 @@ export function LessonView({ lesson }: LessonViewProps) {
       {/* Hidden audio element for TTS */}
       <audio ref={audioRef} />
 
-      {/* Top bar */}
+      {/* Top bar with navigation */}
       <header
-        className="flex items-center justify-between px-4 py-3 border-b flex-shrink-0"
+        className="flex items-center gap-3 px-4 py-3 border-b flex-shrink-0"
         style={{ background: 'var(--bg-secondary)', borderColor: 'var(--border-color)' }}
       >
+        {/* Back button */}
+        <button
+          onClick={() => {
+            playerRef.current?.stop();
+            navigate('/');
+          }}
+          className="flex items-center justify-center flex-shrink-0"
+          style={{
+            width: 36, height: 36, borderRadius: 10,
+            border: '1px solid var(--border-color)', background: 'var(--bg-tertiary)',
+            color: 'var(--text-secondary)', cursor: 'pointer',
+            transition: 'all 0.15s',
+          }}
+          title="Back to lessons"
+          onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border-color)'; e.currentTarget.style.color = 'var(--text-secondary)'; }}
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+          </svg>
+        </button>
+
         <div className="flex-1 min-w-0">
-          <h1 className="text-base font-bold truncate" style={{ color: 'var(--text-primary)' }}>
+          <h1 className="text-sm font-bold truncate" style={{ color: 'var(--text-primary)' }}>
             {lesson.topic}
           </h1>
-          <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
-            {TEACHER_NAMES[teacherId] ?? teacherId} · {lesson.subject.replace(/_/g, ' ')} · {lesson.level.toUpperCase()} · {lesson.estimated_minutes} min
+          <p className="text-[11px]" style={{ color: 'var(--text-muted)' }}>
+            {TEACHER_NAMES[teacherId] ?? teacherId} · {lesson.subject.replace(/_/g, ' ')} · {lesson.level.toUpperCase()}
           </p>
         </div>
+
         <span
-          className="px-2 py-1 rounded-md text-xs font-semibold flex-shrink-0 ml-3"
+          className="px-2 py-1 rounded-md text-xs font-semibold flex-shrink-0"
           style={{ background: 'rgba(252,209,22,0.15)', color: 'var(--accent)' }}
         >
           +{lesson.xp_reward} XP

@@ -157,10 +157,10 @@ export const Whiteboard = forwardRef<WhiteboardHandle, WhiteboardProps>(
               y={el.y ?? 0}
               width={el.width ?? 50}
               height={el.height ?? 50}
-              fill="none"
-              stroke={el.color ?? '#ffffff'}
-              strokeWidth="2"
-              rx="2"
+              fill="rgba(255,255,255,0.03)"
+              stroke={el.color ?? 'rgba(255,255,255,0.3)'}
+              strokeWidth="1"
+              rx="4"
               style={style}
             />
           );

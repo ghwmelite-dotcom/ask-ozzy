@@ -4,12 +4,13 @@ import { LessonPage } from '@/pages/LessonPage';
 import { StudyToolsPage } from '@/pages/StudyToolsPage';
 import { ClassroomPage } from '@/pages/ClassroomPage';
 import { AudioPage } from '@/pages/AudioPage';
+import { NavBar } from '@/components/layout/NavBar';
 
 export function App() {
   return (
     <>
       <div className="flag-stripe" />
-      <div className="min-h-screen" style={{ background: 'var(--bg-primary)', paddingTop: 3 }}>
+      <div className="min-h-screen" style={{ background: 'var(--bg-primary)', paddingTop: 3, paddingBottom: 60 }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/lesson/:id" element={<LessonPage />} />
@@ -19,6 +20,7 @@ export function App() {
           <Route path="/audio" element={<AudioPage />} />
         </Routes>
       </div>
+      <NavBar />
     </>
   );
 }
