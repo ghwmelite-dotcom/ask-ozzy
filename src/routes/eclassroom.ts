@@ -423,4 +423,650 @@ eclassroom.get("/api/eclassroom/rag/documents", adminMiddleware, async (c) => {
   }
 });
 
+// ─── HELPER: Get or create ec_students record ──────────────────────────
+async function getOrCreateStudent(db: D1Database, userId: string): Promise<{ id: string; level: string }> {
+  const existing: any = await db.prepare(
+    "SELECT id, level FROM ec_students WHERE user_id = ?"
+  ).bind(userId).first();
+
+  if (existing) return { id: existing.id, level: existing.level };
+
+  const id = crypto.randomUUID();
+  await db.prepare(
+    "INSERT INTO ec_students (id, user_id, level) VALUES (?, ?, 'shs1')"
+  ).bind(id, userId).run();
+
+  return { id, level: 'shs1' };
+}
+
+// ─── HELPER: Calculate XP level ─────────────────────────────────────────
+function xpLevel(totalXp: number): string {
+  if (totalXp >= 5000) return 'Expert';
+  if (totalXp >= 2000) return 'Master';
+  if (totalXp >= 500) return 'Scholar';
+  return 'Trainee';
+}
+
+// ─── HELPER: Update streak ──────────────────────────────────────────────
+async function updateStreak(db: D1Database, studentId: string): Promise<{ current_streak: number; longest_streak: number; streak_multiplier: number }> {
+  const now = new Date();
+  const todayStr = now.toISOString().split('T')[0];
+  const yesterday = new Date(now.getTime() - 86400000).toISOString().split('T')[0];
+
+  const row: any = await db.prepare(
+    "SELECT id, current_streak, longest_streak, last_activity_date, streak_multiplier FROM ec_streaks WHERE student_id = ?"
+  ).bind(studentId).first();
+
+  if (!row) {
+    const id = crypto.randomUUID();
+    await db.prepare(
+      "INSERT INTO ec_streaks (id, student_id, current_streak, longest_streak, last_activity_date, streak_multiplier, updated_at) VALUES (?, ?, 1, 1, ?, 1.0, ?)"
+    ).bind(id, studentId, todayStr, todayStr).run();
+    return { current_streak: 1, longest_streak: 1, streak_multiplier: 1.0 };
+  }
+
+  if (row.last_activity_date === todayStr) {
+    return { current_streak: row.current_streak, longest_streak: row.longest_streak, streak_multiplier: row.streak_multiplier };
+  }
+
+  let newStreak: number;
+  if (row.last_activity_date === yesterday) {
+    newStreak = row.current_streak + 1;
+  } else {
+    newStreak = 1;
+  }
+
+  const newLongest = Math.max(newStreak, row.longest_streak);
+  const multiplier = Math.min(2.0, 1.0 + (newStreak - 1) * 0.1);
+
+  await db.prepare(
+    "UPDATE ec_streaks SET current_streak = ?, longest_streak = ?, last_activity_date = ?, streak_multiplier = ?, updated_at = ? WHERE id = ?"
+  ).bind(newStreak, newLongest, todayStr, multiplier, todayStr, row.id).run();
+
+  return { current_streak: newStreak, longest_streak: newLongest, streak_multiplier: multiplier };
+}
+
+// ─── HELPER: Check and award badges ─────────────────────────────────────
+async function checkBadges(db: D1Database, studentId: string, streak: number): Promise<Array<{ badge_type: string; badge_name: string }>> {
+  const newBadges: Array<{ badge_type: string; badge_name: string }> = [];
+  const now = new Date().toISOString().replace('T', ' ').split('.')[0];
+
+  // Fetch all XP records for this student
+  const { results: xpRows } = await db.prepare(
+    "SELECT subject, total_xp FROM ec_student_xp WHERE student_id = ?"
+  ).bind(studentId).all();
+  const xpMap = new Map<string, number>();
+  for (const r of (xpRows ?? []) as any[]) {
+    xpMap.set(r.subject.toLowerCase(), r.total_xp);
+  }
+
+  // Fetch existing badges
+  const { results: badgeRows } = await db.prepare(
+    "SELECT badge_type FROM ec_badges WHERE student_id = ?"
+  ).bind(studentId).all();
+  const existingBadges = new Set((badgeRows ?? []).map((b: any) => b.badge_type));
+
+  const badgeDefs: Array<{ type: string; name: string; check: () => boolean }> = [
+    { type: 'first_lesson', name: 'First Steps', check: () => xpMap.size > 0 },
+    { type: 'math_master', name: 'Math Master', check: () => (xpMap.get('mathematics') ?? 0) >= 1000 },
+    { type: 'science_star', name: 'Science Star', check: () => (xpMap.get('science') ?? xpMap.get('integrated science') ?? 0) >= 1000 },
+    { type: 'streak_7', name: '7-Day Streak', check: () => streak >= 7 },
+    { type: 'streak_30', name: '30-Day Streak', check: () => streak >= 30 },
+    {
+      type: 'bece_ready', name: 'BECE Ready', check: () => {
+        const beceSubjects = ['mathematics', 'english', 'integrated science', 'social studies'];
+        return beceSubjects.every(s => (xpMap.get(s) ?? 0) > 0);
+      }
+    },
+    {
+      type: 'wassce_warrior', name: 'WASSCE Warrior', check: () => {
+        const wassceCore = ['mathematics', 'english', 'integrated science', 'social studies'];
+        return wassceCore.every(s => (xpMap.get(s) ?? 0) > 0);
+      }
+    },
+  ];
+
+  for (const bd of badgeDefs) {
+    if (!existingBadges.has(bd.type) && bd.check()) {
+      const id = crypto.randomUUID();
+      try {
+        await db.prepare(
+          "INSERT INTO ec_badges (id, student_id, badge_type, badge_name, earned_at) VALUES (?, ?, ?, ?, ?)"
+        ).bind(id, studentId, bd.type, bd.name, now).run();
+        newBadges.push({ badge_type: bd.type, badge_name: bd.name });
+      } catch (_) {
+        // UNIQUE constraint — badge already exists, skip
+      }
+    }
+  }
+
+  return newBadges;
+}
+
+// ─── POST /api/eclassroom/xp/award ──────────────────────────────────────
+// Award XP to the authenticated student
+eclassroom.post("/api/eclassroom/xp/award", authMiddleware, async (c) => {
+  try {
+    const userId = c.get("userId");
+    const body = await c.req.json<{ subject: string; xp: number; reason: string }>();
+
+    if (!body.subject || typeof body.xp !== 'number' || body.xp <= 0 || !body.reason) {
+      return c.json({ error: "subject (string), xp (positive number), and reason (string) are required" }, 400);
+    }
+
+    if (body.xp > 500) {
+      return c.json({ error: "Maximum XP per award is 500" }, 400);
+    }
+
+    const student = await getOrCreateStudent(c.env.DB, userId);
+    const now = new Date().toISOString().replace('T', ' ').split('.')[0];
+    const subjectLower = body.subject.toLowerCase();
+
+    // UPSERT XP
+    await c.env.DB.prepare(
+      `INSERT INTO ec_student_xp (id, student_id, subject, total_xp, current_level, updated_at)
+       VALUES (?, ?, ?, ?, ?, ?)
+       ON CONFLICT(student_id, subject) DO UPDATE SET
+         total_xp = total_xp + excluded.total_xp,
+         current_level = excluded.current_level,
+         updated_at = excluded.updated_at`
+    ).bind(crypto.randomUUID(), student.id, subjectLower, body.xp, xpLevel(body.xp), now).run();
+
+    // Get updated total
+    const xpRow: any = await c.env.DB.prepare(
+      "SELECT total_xp FROM ec_student_xp WHERE student_id = ? AND subject = ?"
+    ).bind(student.id, subjectLower).first();
+    const totalXp = xpRow?.total_xp ?? body.xp;
+    const level = xpLevel(totalXp);
+
+    // Update the level in the XP row
+    await c.env.DB.prepare(
+      "UPDATE ec_student_xp SET current_level = ? WHERE student_id = ? AND subject = ?"
+    ).bind(level, student.id, subjectLower).run();
+
+    // Update streak
+    const streak = await updateStreak(c.env.DB, student.id);
+
+    // Check badges
+    const newBadges = await checkBadges(c.env.DB, student.id, streak.current_streak);
+
+    return c.json({
+      total_xp: totalXp,
+      level,
+      streak: {
+        current: streak.current_streak,
+        longest: streak.longest_streak,
+        multiplier: streak.streak_multiplier,
+      },
+      new_badges: newBadges,
+    });
+  } catch (err: any) {
+    log("error", "eclassroom: award XP failed", { error: err?.message });
+    return c.json({ error: "Failed to award XP" }, 500);
+  }
+});
+
+// ─── GET /api/eclassroom/xp/profile ─────────────────────────────────────
+// Get the authenticated student's XP profile
+eclassroom.get("/api/eclassroom/xp/profile", authMiddleware, async (c) => {
+  try {
+    const userId = c.get("userId");
+    const student = await getOrCreateStudent(c.env.DB, userId);
+
+    const { results: xpRows } = await c.env.DB.prepare(
+      "SELECT subject, total_xp, current_level FROM ec_student_xp WHERE student_id = ? ORDER BY total_xp DESC"
+    ).bind(student.id).all();
+
+    const { results: badgeRows } = await c.env.DB.prepare(
+      "SELECT badge_type, badge_name, earned_at FROM ec_badges WHERE student_id = ? ORDER BY earned_at DESC"
+    ).bind(student.id).all();
+
+    const streakRow: any = await c.env.DB.prepare(
+      "SELECT current_streak, longest_streak, streak_multiplier FROM ec_streaks WHERE student_id = ?"
+    ).bind(student.id).first();
+
+    return c.json({
+      subjects: (xpRows ?? []).map((r: any) => ({
+        subject: r.subject,
+        total_xp: r.total_xp,
+        level: r.current_level,
+      })),
+      streak: {
+        current: streakRow?.current_streak ?? 0,
+        longest: streakRow?.longest_streak ?? 0,
+        multiplier: streakRow?.streak_multiplier ?? 1.0,
+      },
+      badges: (badgeRows ?? []).map((b: any) => ({
+        badge_type: b.badge_type,
+        badge_name: b.badge_name,
+        earned_at: b.earned_at,
+      })),
+    });
+  } catch (err: any) {
+    log("error", "eclassroom: get XP profile failed", { error: err?.message });
+    return c.json({ error: "Failed to fetch XP profile" }, 500);
+  }
+});
+
+// ─── GET /api/eclassroom/leaderboard ────────────────────────────────────
+// Public leaderboard with optional subject and period filters
+eclassroom.get("/api/eclassroom/leaderboard", async (c) => {
+  try {
+    const subject = c.req.query("subject");
+    const period = c.req.query("period") || "alltime";
+
+    if (!['weekly', 'monthly', 'alltime'].includes(period)) {
+      return c.json({ error: "period must be weekly, monthly, or alltime" }, 400);
+    }
+
+    let sql = `SELECT xp.student_id, xp.total_xp, xp.current_level, s.user_id
+               FROM ec_student_xp xp
+               JOIN ec_students s ON s.id = xp.student_id`;
+    const conditions: string[] = [];
+    const bindings: string[] = [];
+
+    if (subject) {
+      conditions.push("xp.subject = ?");
+      bindings.push(subject.toLowerCase());
+    }
+
+    if (conditions.length > 0) {
+      sql += " WHERE " + conditions.join(" AND ");
+    }
+
+    // For weekly/monthly we'd filter by updated_at but since XP is cumulative,
+    // we order by total and note the period scope for future refinement
+    sql += " ORDER BY xp.total_xp DESC LIMIT 20";
+
+    const stmt = c.env.DB.prepare(sql);
+    const { results } = bindings.length > 0
+      ? await stmt.bind(...bindings).all()
+      : await stmt.all();
+
+    const rankings = (results ?? []).map((r: any, i: number) => ({
+      rank: i + 1,
+      student_id: r.student_id,
+      total_xp: r.total_xp,
+      level: r.current_level,
+    }));
+
+    return c.json({ rankings, period, subject: subject || 'all' });
+  } catch (err: any) {
+    log("error", "eclassroom: leaderboard failed", { error: err?.message });
+    return c.json({ error: "Failed to fetch leaderboard" }, 500);
+  }
+});
+
+// ─── POST /api/eclassroom/flashcards/generate ───────────────────────────
+// AI-generate flashcards from a lesson
+eclassroom.post("/api/eclassroom/flashcards/generate", authMiddleware, async (c) => {
+  try {
+    const userId = c.get("userId");
+    const body = await c.req.json<{ lesson_id: string }>();
+
+    if (!body.lesson_id) {
+      return c.json({ error: "lesson_id is required" }, 400);
+    }
+
+    const student = await getOrCreateStudent(c.env.DB, userId);
+
+    // Fetch lesson
+    const lesson: any = await c.env.DB.prepare(
+      "SELECT id, topic, subject, level, content_json FROM ec_lessons WHERE id = ?"
+    ).bind(body.lesson_id).first();
+
+    if (!lesson) {
+      return c.json({ error: "Lesson not found" }, 404);
+    }
+
+    const steps = lesson.content_json ? JSON.parse(lesson.content_json) : [];
+    const lessonText = steps.map((s: any) => `${s.title || ''}: ${s.content || s.text || ''}`).join('\n');
+
+    // Generate flashcards via Workers AI
+    const aiResponse = await c.env.AI.run('@cf/meta/llama-3.1-8b-instruct' as any, {
+      messages: [
+        {
+          role: 'system',
+          content: `You are a study tool generator. Generate 5-8 flashcard pairs from the lesson content. Return ONLY a JSON array of objects with "front" (question) and "back" (answer) fields. Keep answers concise (1-3 sentences). No markdown, no explanation, just the JSON array.`
+        },
+        {
+          role: 'user',
+          content: `Generate flashcards from this ${lesson.subject} lesson titled "${lesson.topic}":\n\n${lessonText.substring(0, 3000)}`
+        },
+      ],
+      temperature: 0.3,
+      max_tokens: 2000,
+    });
+
+    const rawText = (aiResponse as any)?.response || '[]';
+
+    // Parse the JSON array from AI response
+    let cards: Array<{ front: string; back: string }> = [];
+    try {
+      const jsonMatch = rawText.match(/\[[\s\S]*\]/);
+      if (jsonMatch) {
+        cards = JSON.parse(jsonMatch[0]);
+      }
+    } catch (_) {
+      return c.json({ error: "Failed to parse AI-generated flashcards" }, 500);
+    }
+
+    if (!Array.isArray(cards) || cards.length === 0) {
+      return c.json({ error: "AI did not generate valid flashcards" }, 500);
+    }
+
+    const now = new Date().toISOString().replace('T', ' ').split('.')[0];
+    const insertedCards: any[] = [];
+
+    for (const card of cards.slice(0, 8)) {
+      if (!card.front || !card.back) continue;
+      const id = crypto.randomUUID();
+      await c.env.DB.prepare(
+        `INSERT INTO ec_flashcards (id, student_id, lesson_id, subject, level, front, back, ease_factor, interval_days, repetitions, next_review, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, 2.5, 1, 0, ?, ?)`
+      ).bind(id, student.id, body.lesson_id, lesson.subject, lesson.level, card.front, card.back, now, now).run();
+      insertedCards.push({ id, front: card.front, back: card.back });
+    }
+
+    return c.json({ flashcards: insertedCards, count: insertedCards.length });
+  } catch (err: any) {
+    log("error", "eclassroom: generate flashcards failed", { error: err?.message });
+    return c.json({ error: "Failed to generate flashcards" }, 500);
+  }
+});
+
+// ─── GET /api/eclassroom/flashcards/due ─────────────────────────────────
+// Get flashcards due for review
+eclassroom.get("/api/eclassroom/flashcards/due", authMiddleware, async (c) => {
+  try {
+    const userId = c.get("userId");
+    const student = await getOrCreateStudent(c.env.DB, userId);
+
+    const { results } = await c.env.DB.prepare(
+      `SELECT id, lesson_id, subject, level, front, back, ease_factor, interval_days, repetitions, next_review
+       FROM ec_flashcards
+       WHERE student_id = ? AND next_review <= datetime('now')
+       ORDER BY next_review ASC
+       LIMIT 20`
+    ).bind(student.id).all();
+
+    return c.json({ flashcards: results ?? [], count: (results ?? []).length });
+  } catch (err: any) {
+    log("error", "eclassroom: get due flashcards failed", { error: err?.message });
+    return c.json({ error: "Failed to fetch due flashcards" }, 500);
+  }
+});
+
+// ─── POST /api/eclassroom/flashcards/:id/review ─────────────────────────
+// Record a flashcard review using the SM-2 algorithm
+eclassroom.post("/api/eclassroom/flashcards/:id/review", authMiddleware, async (c) => {
+  try {
+    const userId = c.get("userId");
+    const cardId = c.req.param("id");
+    const body = await c.req.json<{ quality: number }>();
+
+    if (typeof body.quality !== 'number' || body.quality < 0 || body.quality > 5) {
+      return c.json({ error: "quality must be a number between 0 and 5" }, 400);
+    }
+
+    const student = await getOrCreateStudent(c.env.DB, userId);
+
+    const card: any = await c.env.DB.prepare(
+      "SELECT id, subject, ease_factor, interval_days, repetitions FROM ec_flashcards WHERE id = ? AND student_id = ?"
+    ).bind(cardId, student.id).first();
+
+    if (!card) {
+      return c.json({ error: "Flashcard not found" }, 404);
+    }
+
+    const q = body.quality;
+    let repetitions = card.repetitions;
+    let interval = card.interval_days;
+    let easeFactor = card.ease_factor;
+
+    // SM-2 algorithm
+    if (q < 3) {
+      repetitions = 0;
+      interval = 1;
+    } else {
+      if (repetitions === 0) {
+        interval = 1;
+      } else if (repetitions === 1) {
+        interval = 6;
+      } else {
+        interval = Math.round(interval * easeFactor);
+      }
+      repetitions++;
+    }
+
+    easeFactor = Math.max(1.3, easeFactor + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02)));
+
+    // Calculate next review date
+    const nextReview = new Date(Date.now() + interval * 86400000).toISOString().replace('T', ' ').split('.')[0];
+
+    await c.env.DB.prepare(
+      "UPDATE ec_flashcards SET ease_factor = ?, interval_days = ?, repetitions = ?, next_review = ? WHERE id = ?"
+    ).bind(easeFactor, interval, repetitions, nextReview, cardId).run();
+
+    // Award 10 XP for reviewing a flashcard
+    const now = new Date().toISOString().replace('T', ' ').split('.')[0];
+    await c.env.DB.prepare(
+      `INSERT INTO ec_student_xp (id, student_id, subject, total_xp, current_level, updated_at)
+       VALUES (?, ?, ?, 10, 'Trainee', ?)
+       ON CONFLICT(student_id, subject) DO UPDATE SET
+         total_xp = total_xp + 10,
+         updated_at = excluded.updated_at`
+    ).bind(crypto.randomUUID(), student.id, card.subject.toLowerCase(), now).run();
+
+    // Update level after XP award
+    const xpRow: any = await c.env.DB.prepare(
+      "SELECT total_xp FROM ec_student_xp WHERE student_id = ? AND subject = ?"
+    ).bind(student.id, card.subject.toLowerCase()).first();
+    if (xpRow) {
+      await c.env.DB.prepare(
+        "UPDATE ec_student_xp SET current_level = ? WHERE student_id = ? AND subject = ?"
+      ).bind(xpLevel(xpRow.total_xp), student.id, card.subject.toLowerCase()).run();
+    }
+
+    return c.json({
+      next_review: nextReview,
+      ease_factor: easeFactor,
+      interval_days: interval,
+    });
+  } catch (err: any) {
+    log("error", "eclassroom: flashcard review failed", { error: err?.message });
+    return c.json({ error: "Failed to record review" }, 500);
+  }
+});
+
+// ─── POST /api/eclassroom/study-tools/generate ──────────────────────────
+// Generate study tools (flashcards and/or quiz) from a lesson
+eclassroom.post("/api/eclassroom/study-tools/generate", authMiddleware, async (c) => {
+  try {
+    const userId = c.get("userId");
+    const body = await c.req.json<{ lesson_id: string; tools: Array<'flashcards' | 'quiz'> }>();
+
+    if (!body.lesson_id || !body.tools || !Array.isArray(body.tools) || body.tools.length === 0) {
+      return c.json({ error: "lesson_id and tools (array of 'flashcards'|'quiz') are required" }, 400);
+    }
+
+    const validTools = body.tools.filter(t => t === 'flashcards' || t === 'quiz');
+    if (validTools.length === 0) {
+      return c.json({ error: "tools must contain 'flashcards' and/or 'quiz'" }, 400);
+    }
+
+    const student = await getOrCreateStudent(c.env.DB, userId);
+
+    // Fetch lesson
+    const lesson: any = await c.env.DB.prepare(
+      "SELECT id, topic, subject, level, content_json FROM ec_lessons WHERE id = ?"
+    ).bind(body.lesson_id).first();
+
+    if (!lesson) {
+      return c.json({ error: "Lesson not found" }, 404);
+    }
+
+    const steps = lesson.content_json ? JSON.parse(lesson.content_json) : [];
+    const lessonText = steps.map((s: any) => `${s.title || ''}: ${s.content || s.text || ''}`).join('\n').substring(0, 3000);
+
+    const result: any = {};
+
+    // Generate flashcards
+    if (validTools.includes('flashcards')) {
+      const aiResponse = await c.env.AI.run('@cf/meta/llama-3.1-8b-instruct' as any, {
+        messages: [
+          {
+            role: 'system',
+            content: `You are a study tool generator. Generate 5-8 flashcard pairs from the lesson content. Return ONLY a JSON array of objects with "front" (question) and "back" (answer) fields. Keep answers concise (1-3 sentences). No markdown, no explanation, just the JSON array.`
+          },
+          {
+            role: 'user',
+            content: `Generate flashcards from this ${lesson.subject} lesson titled "${lesson.topic}":\n\n${lessonText}`
+          },
+        ],
+        temperature: 0.3,
+        max_tokens: 2000,
+      });
+
+      const rawText = (aiResponse as any)?.response || '[]';
+      let cards: Array<{ front: string; back: string }> = [];
+      try {
+        const jsonMatch = rawText.match(/\[[\s\S]*\]/);
+        if (jsonMatch) cards = JSON.parse(jsonMatch[0]);
+      } catch (_) { /* parse failed */ }
+
+      const now = new Date().toISOString().replace('T', ' ').split('.')[0];
+      const insertedCards: any[] = [];
+
+      for (const card of (cards || []).slice(0, 8)) {
+        if (!card.front || !card.back) continue;
+        const id = crypto.randomUUID();
+        await c.env.DB.prepare(
+          `INSERT INTO ec_flashcards (id, student_id, lesson_id, subject, level, front, back, ease_factor, interval_days, repetitions, next_review, created_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, 2.5, 1, 0, ?, ?)`
+        ).bind(id, student.id, body.lesson_id, lesson.subject, lesson.level, card.front, card.back, now, now).run();
+        insertedCards.push({ id, front: card.front, back: card.back });
+      }
+
+      result.flashcards = insertedCards;
+    }
+
+    // Generate quiz
+    if (validTools.includes('quiz')) {
+      const aiResponse = await c.env.AI.run('@cf/meta/llama-3.1-8b-instruct' as any, {
+        messages: [
+          {
+            role: 'system',
+            content: `You are a quiz generator. Generate a 10-question multiple-choice quiz from the lesson content. Return ONLY a JSON array of objects with these fields: "question_number" (1-10), "question" (the question text), "options" (object with keys A, B, C, D and string values), "correct" (the correct letter A/B/C/D). No markdown, no explanation, just the JSON array.`
+          },
+          {
+            role: 'user',
+            content: `Generate a quiz from this ${lesson.subject} lesson titled "${lesson.topic}":\n\n${lessonText}`
+          },
+        ],
+        temperature: 0.3,
+        max_tokens: 3000,
+      });
+
+      const rawText = (aiResponse as any)?.response || '[]';
+      let questions: Array<{ question_number: number; question: string; options: Record<string, string>; correct: string }> = [];
+      try {
+        const jsonMatch = rawText.match(/\[[\s\S]*\]/);
+        if (jsonMatch) questions = JSON.parse(jsonMatch[0]);
+      } catch (_) { /* parse failed */ }
+
+      result.quiz = {
+        lesson_id: body.lesson_id,
+        subject: lesson.subject,
+        level: lesson.level,
+        questions: questions.slice(0, 10),
+      };
+    }
+
+    return c.json(result);
+  } catch (err: any) {
+    log("error", "eclassroom: generate study tools failed", { error: err?.message });
+    return c.json({ error: "Failed to generate study tools" }, 500);
+  }
+});
+
+// ─── POST /api/eclassroom/quiz/submit ───────────────────────────────────
+// Submit quiz answers and get results
+eclassroom.post("/api/eclassroom/quiz/submit", authMiddleware, async (c) => {
+  try {
+    const userId = c.get("userId");
+    const body = await c.req.json<{
+      lesson_id: string;
+      subject: string;
+      level: string;
+      answers: Array<{ question_number: number; selected: string; correct: string }>;
+    }>();
+
+    if (!body.lesson_id || !body.subject || !body.level || !body.answers || !Array.isArray(body.answers)) {
+      return c.json({ error: "lesson_id, subject, level, and answers array are required" }, 400);
+    }
+
+    if (body.answers.length === 0) {
+      return c.json({ error: "answers array must not be empty" }, 400);
+    }
+
+    const student = await getOrCreateStudent(c.env.DB, userId);
+
+    // Calculate score
+    const total = body.answers.length;
+    let correctCount = 0;
+    for (const a of body.answers) {
+      if (a.selected && a.correct && a.selected.toUpperCase() === a.correct.toUpperCase()) {
+        correctCount++;
+      }
+    }
+
+    const percentage = Math.round((correctCount / total) * 100);
+    const now = new Date().toISOString().replace('T', ' ').split('.')[0];
+
+    // Insert quiz result
+    const resultId = crypto.randomUUID();
+    await c.env.DB.prepare(
+      `INSERT INTO ec_quiz_results (id, student_id, lesson_id, subject, level, score, total_questions, answers_json, taken_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+    ).bind(resultId, student.id, body.lesson_id, body.subject, body.level, correctCount, total, JSON.stringify(body.answers), now).run();
+
+    // Award XP if score >= 70%
+    let xpEarned = 0;
+    if (percentage >= 70) {
+      xpEarned = 50;
+      await c.env.DB.prepare(
+        `INSERT INTO ec_student_xp (id, student_id, subject, total_xp, current_level, updated_at)
+         VALUES (?, ?, ?, 50, 'Trainee', ?)
+         ON CONFLICT(student_id, subject) DO UPDATE SET
+           total_xp = total_xp + 50,
+           updated_at = excluded.updated_at`
+      ).bind(crypto.randomUUID(), student.id, body.subject.toLowerCase(), now).run();
+
+      // Update level
+      const xpRow: any = await c.env.DB.prepare(
+        "SELECT total_xp FROM ec_student_xp WHERE student_id = ? AND subject = ?"
+      ).bind(student.id, body.subject.toLowerCase()).first();
+      if (xpRow) {
+        await c.env.DB.prepare(
+          "UPDATE ec_student_xp SET current_level = ? WHERE student_id = ? AND subject = ?"
+        ).bind(xpLevel(xpRow.total_xp), student.id, body.subject.toLowerCase()).run();
+      }
+
+      // Update streak
+      await updateStreak(c.env.DB, student.id);
+    }
+
+    return c.json({
+      score: correctCount,
+      total,
+      percentage,
+      xp_earned: xpEarned,
+    });
+  } catch (err: any) {
+    log("error", "eclassroom: quiz submit failed", { error: err?.message });
+    return c.json({ error: "Failed to submit quiz" }, 500);
+  }
+});
+
 export default eclassroom;

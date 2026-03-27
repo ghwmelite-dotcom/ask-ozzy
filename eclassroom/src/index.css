@@ -313,6 +313,21 @@ body {
    Reduced motion
    ============================================ */
 
+/* ============================================
+   Gamification Animations
+   ============================================ */
+
+@keyframes flamePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(251, 146, 60, 0.15);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 0 18px rgba(251, 146, 60, 0.3);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-in {
     animation: none;

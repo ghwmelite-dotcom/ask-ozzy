@@ -1,3 +1,5 @@
+import type { XPProfile, Flashcard, LeaderboardEntry } from '@/types/gamification';
+
 const API_BASE = import.meta.env.VITE_API_URL ?? 'https://askozzy.work';
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
@@ -36,4 +38,32 @@ export const api = {
       '/api/eclassroom/rag/query',
       { method: 'POST', body: JSON.stringify(data) }
     ),
+
+  // ── Gamification & Study Tools ──
+  getXPProfile: () => request<{ profile: XPProfile }>('/api/eclassroom/xp/profile'),
+  awardXP: (data: { subject: string; xp: number; reason: string }) =>
+    request('/api/eclassroom/xp/award', { method: 'POST', body: JSON.stringify(data) }),
+  getLeaderboard: (params?: { subject?: string; period?: string }) => {
+    const qs = new URLSearchParams(params as Record<string, string>).toString();
+    return request<{ rankings: LeaderboardEntry[] }>('/api/eclassroom/leaderboard' + (qs ? '?' + qs : ''));
+  },
+  getDueFlashcards: () =>
+    request<{ flashcards: Flashcard[]; count: number }>('/api/eclassroom/flashcards/due'),
+  reviewFlashcard: (id: string, quality: number) =>
+    request('/api/eclassroom/flashcards/' + id + '/review', {
+      method: 'POST',
+      body: JSON.stringify({ quality }),
+    }),
+  generateStudyTools: (lessonId: string, tools: string[]) =>
+    request('/api/eclassroom/study-tools/generate', {
+      method: 'POST',
+      body: JSON.stringify({ lesson_id: lessonId, tools }),
+    }),
+  submitQuiz: (data: {
+    lesson_id: string;
+    subject: string;
+    level: string;
+    answers: Array<{ question_number: number; selected: string; correct: string }>;
+  }) =>
+    request('/api/eclassroom/quiz/submit', { method: 'POST', body: JSON.stringify(data) }),
 };

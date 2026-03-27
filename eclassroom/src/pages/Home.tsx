@@ -411,6 +411,60 @@ export function Home() {
             </div>
           )}
         </section>
+
+        {/* ─── Study Tools CTA ─── */}
+        <section className="pb-16">
+          <button
+            onClick={() => navigate('/study-tools')}
+            className="card-hover animate-in w-full text-left rounded-2xl overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, rgba(252, 209, 22, 0.08) 0%, rgba(252, 209, 22, 0.02) 60%, rgba(0, 107, 63, 0.06) 100%)',
+              border: '1px solid var(--accent-border)',
+              cursor: 'pointer',
+              boxShadow: 'var(--gold-glow-soft)',
+            }}
+          >
+            <div className="p-6 flex items-center gap-5">
+              <div
+                className="flex-shrink-0 w-14 h-14 rounded-xl flex items-center justify-center"
+                style={{
+                  background: 'var(--accent-dim)',
+                  border: '1px solid var(--accent-border)',
+                }}
+              >
+                <svg width={28} height={28} viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="var(--accent)" />
+                </svg>
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3
+                  className="text-base font-bold mb-1"
+                  style={{ color: 'var(--text-primary)' }}
+                >
+                  Study Tools & Progress
+                </h3>
+                <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                  Review flashcards, track your XP, earn badges, and climb the leaderboard.
+                </p>
+              </div>
+              <svg
+                width={20}
+                height={20}
+                viewBox="0 0 24 24"
+                fill="none"
+                className="flex-shrink-0"
+              >
+                <path
+                  d="M9 18l6-6-6-6"
+                  stroke="var(--accent)"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+          </button>
+        </section>
       </div>
 
       {/* ─── Footer ─── */}
