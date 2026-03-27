@@ -78,8 +78,13 @@ app.use("/api/*", cors({
       "https://www.askozzy.work",
       "https://askozzy.ghwmelite.workers.dev",
       "https://eclassroom.askozzy.work",
+      "https://askozzy-eclassroom.pages.dev",
     ];
-    return allowed.includes(origin) ? origin : allowed[0];
+    // Also allow *.askozzy-eclassroom.pages.dev preview deployments
+    if (origin && (allowed.includes(origin) || origin.endsWith(".askozzy-eclassroom.pages.dev"))) {
+      return origin;
+    }
+    return allowed[0];
   },
   allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowHeaders: ["Authorization", "Content-Type"],
