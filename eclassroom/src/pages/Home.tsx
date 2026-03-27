@@ -79,12 +79,48 @@ export function Home() {
     setLoading(true);
   };
 
+  const EDU_SYMBOLS = [
+    { icon: '∑', top: '8%', left: '5%', size: 28, delay: 0 },
+    { icon: 'π', top: '15%', right: '8%', size: 32, delay: 1.2 },
+    { icon: '∫', top: '35%', left: '3%', size: 26, delay: 0.5 },
+    { icon: '√', top: '50%', right: '5%', size: 30, delay: 2 },
+    { icon: 'Δ', top: '65%', left: '7%', size: 24, delay: 1.5 },
+    { icon: '∞', top: '22%', left: '92%', size: 28, delay: 0.8 },
+    { icon: 'α', top: '78%', right: '10%', size: 26, delay: 1.8 },
+    { icon: '⊿', top: '42%', left: '95%', size: 22, delay: 2.5 },
+    { icon: 'θ', top: '88%', left: '4%', size: 24, delay: 0.3 },
+    { icon: '∂', top: '55%', left: '90%', size: 20, delay: 3 },
+    { icon: '📐', top: '12%', left: '45%', size: 20, delay: 1 },
+    { icon: '🔬', top: '70%', left: '50%', size: 18, delay: 2.2 },
+    { icon: '📖', top: '30%', left: '88%', size: 18, delay: 1.7 },
+    { icon: '🌍', top: '82%', left: '85%', size: 16, delay: 0.6 },
+  ];
+
   return (
-    <div className="min-h-screen" style={{ background: 'var(--bg-primary)' }}>
+    <div className="min-h-screen edu-bg">
+
+      {/* Floating educational symbols */}
+      <div className="edu-symbols">
+        {EDU_SYMBOLS.map((s, i) => (
+          <span
+            key={i}
+            className="edu-symbol"
+            style={{
+              top: s.top,
+              left: s.left,
+              right: (s as { right?: string }).right,
+              fontSize: s.size,
+              animationDelay: `${s.delay}s`,
+            }}
+          >
+            {s.icon}
+          </span>
+        ))}
+      </div>
 
       {/* ─── Header ─── */}
       <header
-        className="sticky top-[3px] z-40"
+        className="sticky top-[3px] z-50"
         style={{
           background: 'rgba(15, 17, 23, 0.85)',
           backdropFilter: 'blur(12px) saturate(180%)',
@@ -137,21 +173,12 @@ export function Home() {
         </div>
       </header>
 
-      <div className="max-w-6xl mx-auto px-5">
+      <div className="max-w-6xl mx-auto px-5 relative z-10">
 
         {/* ─── Hero ─── */}
         <section
-          className="animate-in pt-10 pb-8 relative"
-          style={{ borderBottom: '1px solid var(--border-color)' }}
+          className="animate-in pt-10 pb-8 relative hero-glow"
         >
-          <div
-            className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-[0.04]"
-            style={{
-              background: 'radial-gradient(circle, var(--accent) 0%, transparent 70%)',
-              filter: 'blur(40px)',
-              pointerEvents: 'none',
-            }}
-          />
           <p
             className="text-[11px] font-bold uppercase tracking-[0.2em] mb-4"
             style={{ color: 'var(--accent)' }}
@@ -171,9 +198,10 @@ export function Home() {
             Prepare for BECE & WASSCE with personalized tutoring — anytime, anywhere.
           </p>
         </section>
+        <div className="section-divider" />
 
         {/* ─── Teacher Roster ─── */}
-        <section className="py-8" style={{ borderBottom: '1px solid var(--border-color)' }}>
+        <section className="py-8">
           <h3
             className="text-[11px] font-bold uppercase tracking-[0.15em] mb-5"
             style={{ color: 'var(--text-muted)' }}
@@ -186,7 +214,7 @@ export function Home() {
             {teachers.map((t, i) => (
               <div
                 key={t.id}
-                className="card-hover animate-in rounded-2xl p-4 flex flex-col items-center text-center"
+                className="card-hover teacher-card animate-in rounded-2xl p-4 flex flex-col items-center text-center"
                 style={{
                   background: 'var(--bg-secondary)',
                   border: '1px solid var(--border-color)',
@@ -217,6 +245,7 @@ export function Home() {
             ))}
           </div>
         </section>
+        <div className="section-divider" />
 
         {/* ─── Level Filter ─── */}
         <section className="pt-8 pb-2">
