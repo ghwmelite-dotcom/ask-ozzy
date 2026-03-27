@@ -11201,3 +11201,38 @@ button, a, [onclick], [role="button"], .tool-pill, .category-tab,
   color: var(--text);
 }
 
+/* ── eClassroom Nav Button ── */
+.btn-eclassroom-nav {
+  background: linear-gradient(135deg, rgba(252, 209, 22, 0.10), rgba(206, 17, 38, 0.06));
+  border: 1px solid rgba(252, 209, 22, 0.22);
+  color: var(--accent);
+  cursor: pointer;
+  padding: 7px 16px;
+  border-radius: 999px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.btn-eclassroom-nav:hover {
+  background: linear-gradient(135deg, rgba(252, 209, 22, 0.22), rgba(206, 17, 38, 0.12));
+  border-color: rgba(252, 209, 22, 0.45);
+  box-shadow: 0 2px 16px rgba(252, 209, 22, 0.15);
+  transform: translateY(-1px);
+  color: var(--accent);
+}
+.btn-eclassroom-nav:active {
+  transform: scale(0.95);
+  box-shadow: none;
+}
+.eclassroom-nav-label { font-weight: 600; }
+
