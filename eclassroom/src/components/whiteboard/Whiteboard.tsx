@@ -84,21 +84,47 @@ export const Whiteboard = forwardRef<WhiteboardHandle, WhiteboardProps>(
             />
           );
 
-        case 'text':
+        case 'text': {
+          const fontSize = el.fontSize ?? 14;
+          const textContent = el.text ?? '';
+          // Split long text into multiple lines (~35 chars per line)
+          const maxChars = 40;
+          const lines: string[] = [];
+          if (textContent.length <= maxChars) {
+            lines.push(textContent);
+          } else {
+            const words = textContent.split(' ');
+            let currentLine = '';
+            for (const word of words) {
+              if ((currentLine + ' ' + word).trim().length > maxChars && currentLine) {
+                lines.push(currentLine.trim());
+                currentLine = word;
+              } else {
+                currentLine = currentLine ? currentLine + ' ' + word : word;
+              }
+            }
+            if (currentLine.trim()) lines.push(currentLine.trim());
+          }
+
           return (
-            <text
-              key={el.id}
-              x={el.x ?? 0}
-              y={el.y ?? 0}
-              fill={el.color ?? '#ffffff'}
-              fontSize={el.fontSize ?? 16}
-              fontFamily="Inter, sans-serif"
-              fontWeight="600"
-              style={style}
-            >
-              {el.text}
-            </text>
+            <g key={el.id} style={style}>
+              {lines.map((line, i) => (
+                <text
+                  key={i}
+                  x={el.x ?? 0}
+                  y={(el.y ?? 0) + i * (fontSize * 1.5)}
+                  fill={el.color ?? '#ffffff'}
+                  fontSize={fontSize}
+                  fontFamily="'Inter', sans-serif"
+                  fontWeight="600"
+                  dominantBaseline="hanging"
+                >
+                  {line}
+                </text>
+              ))}
+            </g>
           );
+        }
 
         case 'rect':
           return (
@@ -160,11 +186,11 @@ export const Whiteboard = forwardRef<WhiteboardHandle, WhiteboardProps>(
 
         {/* Drawing canvas */}
         <svg
-          viewBox="0 0 400 300"
+          viewBox="0 0 350 260"
           width="100%"
           height="100%"
           preserveAspectRatio="xMidYMid meet"
-          style={{ position: 'absolute', inset: 0 }}
+          style={{ position: 'absolute', inset: 0, padding: '16px' }}
         >
           {elements.map(renderElement)}
         </svg>

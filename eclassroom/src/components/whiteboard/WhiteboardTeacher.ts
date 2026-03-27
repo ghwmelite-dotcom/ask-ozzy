@@ -80,7 +80,7 @@ export class WhiteboardTeacher {
       y: action.position[1],
       text: action.text,
       color: action.color ?? '#ffffff',
-      fontSize: 16,
+      fontSize: 14,
     });
   }
 
