@@ -142,7 +142,7 @@ const _employeeTips = [
   "Pro users can generate official memos with GoG letterheads directly from chat.",
   "Every subscription helps keep AskOzzy free for new government employees.",
   "Refer a colleague, earn real money. Check your affiliate dashboard.",
-  "Upgrade for 200 messages/day, all 11 AI models, and Deep Research mode.",
+  "Upgrade for 200 messages/day, smarter AI, and Deep Research mode.",
   "Join thousands of GoG staff already using Ozzy Pro across departments.",
   "Unlock meeting transcription, workflow automation, and priority response speeds.",
   "Your subscription directly funds the AI models that power AskOzzy \u2014 every cedi keeps our LLMs running.",
@@ -160,7 +160,7 @@ const _studentTips = [
   "Pro students get unlimited conversations \u2014 no daily caps during exam season.",
   "Every subscription helps keep AskOzzy available for all students.",
   "Refer a classmate, earn real money. Check your affiliate dashboard.",
-  "Upgrade for 200 messages/day, all 11 AI models, and Deep Research mode.",
+  "Upgrade for 200 messages/day, smarter AI, and Deep Research mode.",
   "Join hundreds of students already using Ozzy Pro for better grades.",
   "Unlock AI memory \u2014 Ozzy remembers your courses and research topics.",
   "Your subscription funds the AI models behind Ozzy \u2014 every cedi keeps our LLMs running for you.",
@@ -502,7 +502,6 @@ const GUIDE_TRY_IT_ACTIONS = {
   'st-workflows': { label: 'Open Workflows \u2192', action: "closeGuide();openWorkflows();" },
   'st-meetings':  { label: 'Start Meeting \u2192', action: "closeGuide();openMeetingAssistant();" },
   'st-spaces':    { label: 'Open Spaces \u2192', action: "closeGuide();openSpaces();" },
-  'gs-models':    { label: 'View Models \u2192', action: "closeGuide();document.getElementById('model-selector').focus();" },
   'as-pricing':   { label: 'View Plans \u2192', action: "closeGuide();openPricingModal();" },
   'ps-memory':    { label: 'Open Memory \u2192', action: "closeGuide();openMemoryModal();" },
   'fm-upload':    { label: 'Upload a File \u2192', action: "closeGuide();openFileUpload();" },
@@ -541,7 +540,6 @@ const GUIDE_SECTIONS = [
     features: [
       { id: 'gs-register', title: 'Create Your Account', tier: 'free', description: 'Register with your name, email, GoG department, and a referral code. You\'ll receive a personal access code and set up 2FA security.', steps: ['Click "Sign In / Create Account" in the sidebar', 'Switch to the "Register" tab', 'Choose your persona: GoG Employee or Student', 'Enter your full name, email, department, and referral code', 'A referral code is required — get one from a colleague or click "Generate" for a system code', 'Set up 2FA by scanning the QR code with an authenticator app', 'Save your access code and recovery code — shown only once!'] },
       { id: 'gs-signin', title: 'Sign In with Access Code', tier: 'free', description: 'Use your email and access code to sign in. No passwords needed — simple and secure.', steps: ['Click "Sign In / Create Account"', 'Enter your email and access code', 'Enter your 6-digit 2FA code from your authenticator app', 'You\'re signed in with a personalized "Welcome to AskOzzy, [Name]!" greeting', 'Your conversations, preferences, and settings are all restored'] },
-      { id: 'gs-models', title: 'Choose Your AI Model', tier: 'free', description: 'Select from multiple AI models optimized for different tasks. Higher tiers unlock more powerful models.', steps: ['Look for the model selector dropdown in the header', 'Free tier includes Qwen3 30B (default), GPT-OSS 20B, Gemma 3, and Llama 3.1 8B', 'Professional tier unlocks Llama 3.3 70B, Llama 4 Scout, and more', 'Each model has strengths — experiment to find your favorite'] },
       { id: 'gs-persona', title: 'GoG Employee vs Student Mode', tier: 'free', description: 'AskOzzy adapts its interface, templates, and pricing based on whether you\'re a GoG employee or student.', steps: ['Select your persona during registration (GoG Employee or Student)', 'GoG Employees see government-focused templates (memos, briefs, procurement)', 'Students see academic templates (essays, research, study aids)', 'Students get discounted subscription pricing — up to 58% off!', 'Your persona is saved to your account and persists across devices'] },
     ]
   },
@@ -1819,7 +1817,7 @@ async function sendMessage() {
         showLimitReachedBanner(errData);
         state.messages.push({
           role: "assistant",
-          content: `**Daily limit reached** — You've used all ${errData.limit} messages for today on the ${state.user.tier === 'free' ? 'Free' : state.user.tier} plan.\n\nUpgrade your plan to continue chatting with more messages and access to all premium AI models.`,
+          content: `**Daily limit reached** — You've used all ${errData.limit} messages for today on the ${state.user.tier === 'free' ? 'Free' : state.user.tier} plan.\n\nUpgrade your plan to continue chatting with more messages and access to premium features.`,
         });
         renderMessages();
         state.isStreaming = false;
@@ -3494,7 +3492,7 @@ async function openPricingModal() {
         },
         {
           id: 'business', name: 'Org Business', price: 85, popular: true,
-          features: ['All 14 AI models per member', 'Unlimited messages', 'Org knowledge base', 'Org admin portal', 'Priority support', 'Custom agents'],
+          features: ['Smartest AI per member', 'Unlimited messages', 'Org knowledge base', 'Org admin portal', 'Priority support', 'Custom agents'],
         },
         {
           id: 'custom', name: 'Org Custom', price: 0, popular: false,
@@ -3612,7 +3610,7 @@ async function openPricingModal() {
           <div class="trial-banner-icon">&#127873;</div>
           <div class="trial-banner-text">
             <div class="trial-banner-title">Try Professional FREE for 3 days</div>
-            <div class="trial-banner-sub">Full access to all 11 AI models, 200 messages/day, and every premium feature. No card needed.</div>
+            <div class="trial-banner-sub">Full access to smarter AI, 200 messages/day, and every premium feature. No card needed.</div>
           </div>
           <button class="trial-banner-btn" onclick="activateFreeTrial()">Start Free Trial</button>
         `;
@@ -5577,7 +5575,6 @@ function showOnboardingTour() {
   if (localStorage.getItem("askozzy_onboarding_done")) return;
 
   const steps = [
-    { target: ".model-selector", text: "Choose from 11 AI models. Free plans get 3 models, paid plans unlock all 11.", position: "bottom" },
     { target: ".btn-new-chat", text: "Start conversations here. Try a template for guided prompts!", position: "right" },
     { target: ".theme-toggle", text: "Switch between dark and light modes.", position: "bottom" },
     { target: ".usage-badge", text: "Track your daily usage. Click to see upgrade plans.", position: "bottom" },
@@ -9125,7 +9122,7 @@ function showReferralLanding(data, refCode) {
         <div class="referral-landing-features">
           <div class="referral-feature-item">
             <span class="referral-feature-icon">\uD83E\uDD16</span>
-            <span>11 AI Models for every task</span>
+            <span>Smart AI for every task</span>
           </div>
           <div class="referral-feature-item">
             <span class="referral-feature-icon">\uD83D\uDCDD</span>
@@ -9214,7 +9211,7 @@ function showTrialActivatedToast() {
     <div class="trial-toast-icon">\uD83C\uDF89</div>
     <div>
       <div class="trial-toast-title">Professional Trial Activated!</div>
-      <div class="trial-toast-sub">You have 3 days of full access. Enjoy all 11 AI models and premium features.</div>
+      <div class="trial-toast-sub">You have 3 days of full access. Enjoy smarter AI and all premium features.</div>
     </div>
   `;
   document.body.appendChild(toast);
@@ -9242,12 +9239,6 @@ function getOnboardingSteps() {
       text: student
         ? 'Ask study questions, get essay help, or review for exams. Ozzy is your personal tutor.'
         : 'Type your question or paste a document. Ozzy understands memos, reports, and complex queries.',
-      position: 'top'
-    },
-    {
-      target: '#model-selector',
-      title: 'Choose Your AI Model',
-      text: 'Switch between 11 AI models. Each has different strengths \u2014 try a few to find your favorite.',
       position: 'top'
     },
     {

@@ -129,7 +129,7 @@ const PRICING_TIERS: Record<string, {
     studentPrice: 0,
     messagesPerDay: 10,
     models: "basic",
-    features: ["10 messages/day", "Basic models (3)", "Standard response speed"],
+    features: ["10 messages/day", "Standard AI", "Standard response speed"],
   },
   professional: {
     name: "Professional",
@@ -137,7 +137,7 @@ const PRICING_TIERS: Record<string, {
     studentPrice: 25,
     messagesPerDay: 200,
     models: "pro",
-    features: ["200 messages/day", "10 AI models", "Priority speed", "Unlimited history", "Template customisation"],
+    features: ["200 messages/day", "Smarter AI", "Priority speed", "Unlimited history", "Template customisation"],
   },
   enterprise: {
     name: "Enterprise",
@@ -145,7 +145,7 @@ const PRICING_TIERS: Record<string, {
     studentPrice: 45,
     messagesPerDay: -1, // unlimited
     models: "all",
-    features: ["Unlimited messages", "All 14 AI models", "Fastest priority", "Unlimited history", "Custom templates", "Dedicated support"],
+    features: ["Unlimited messages", "Smartest AI", "Fastest priority", "Unlimited history", "Custom templates", "Dedicated support"],
   },
 };
 
@@ -195,13 +195,13 @@ const ORG_PRICING_TIERS: Record<string, {
     name: "Org Starter",
     pricePerSeat: 50,
     memberTier: "professional",
-    features: ["10 AI models per member", "200 messages/day per member", "Org admin portal", "Org analytics"],
+    features: ["Smarter AI per member", "200 messages/day per member", "Org admin portal", "Org analytics"],
   },
   business: {
     name: "Org Business",
     pricePerSeat: 85,
     memberTier: "enterprise",
-    features: ["All 14 AI models per member", "Unlimited messages", "Org knowledge base", "Org admin portal", "Priority support"],
+    features: ["Smartest AI per member", "Unlimited messages", "Org knowledge base", "Org admin portal", "Priority support"],
   },
   custom: {
     name: "Org Custom",

@@ -1,5 +1,17 @@
-// Centralized inference parameters for all AskOzzy agents
-// Lower temperature = more deterministic = fewer creative fabrications
+// Centralized inference parameters for all AskOzzy agents.
+// Lower temperature = more deterministic = fewer creative fabrications.
+//
+// Model tiering (all via env.AI binding — no external API keys):
+//   HIGH_STAKES  — frontier reasoning for legal/procurement/finance/exam grading
+//   LONG_DOC     — 128K-context multilingual draft tier (translation, long-doc retrieval)
+//   ROUTINE      — fast MoE default for everyday agents (cheaper than Llama 3.1 8B)
+//
+// Switching here is the only place model IDs should change. Generator and verifier
+// both read getParams(agentType).model — no hardcoded strings in the pipeline.
+
+const HIGH_STAKES = '@cf/moonshotai/kimi-k2.6';
+const LONG_DOC    = '@cf/zai-org/glm-4.7-flash';
+const ROUTINE     = '@cf/qwen/qwen3-30b-a3b-fp8';
 
 export interface InferenceParams {
   temperature: number;
@@ -12,83 +24,83 @@ export interface InferenceParams {
 
 export const AGENT_PARAMS: Record<string, InferenceParams> = {
   procurement: {
-    temperature: 0.1, top_p: 0.85, top_k: 30, max_tokens: 800,
-    model: '@cf/meta/llama-3.1-8b-instruct',
+    temperature: 0.1, top_p: 0.85, top_k: 30, max_tokens: 1200,
+    model: HIGH_STAKES,
     response_format: { type: 'json_object' }
   },
   legal: {
-    temperature: 0.1, top_p: 0.85, top_k: 30, max_tokens: 800,
-    model: '@cf/meta/llama-3.1-8b-instruct',
+    temperature: 0.1, top_p: 0.85, top_k: 30, max_tokens: 1200,
+    model: HIGH_STAKES,
     response_format: { type: 'json_object' }
   },
   hr: {
     temperature: 0.15, top_p: 0.88, top_k: 35, max_tokens: 600,
-    model: '@cf/meta/llama-3.1-8b-instruct',
+    model: ROUTINE,
     response_format: { type: 'json_object' }
   },
   it: {
     temperature: 0.2, top_p: 0.9, top_k: 40, max_tokens: 600,
-    model: '@cf/meta/llama-3.1-8b-instruct',
+    model: ROUTINE,
     response_format: { type: 'json_object' }
   },
   finance: {
-    temperature: 0.1, top_p: 0.85, top_k: 30, max_tokens: 600,
-    model: '@cf/meta/llama-3.1-8b-instruct',
+    temperature: 0.1, top_p: 0.85, top_k: 30, max_tokens: 1000,
+    model: HIGH_STAKES,
     response_format: { type: 'json_object' }
   },
   governance: {
     temperature: 0.2, top_p: 0.9, top_k: 40, max_tokens: 700,
-    model: '@cf/meta/llama-3.1-8b-instruct',
+    model: ROUTINE,
     response_format: { type: 'json_object' }
   },
   wassce: {
     temperature: 0.15, top_p: 0.88, top_k: 35, max_tokens: 700,
-    model: '@cf/meta/llama-3.1-8b-instruct',
+    model: ROUTINE,
     response_format: { type: 'json_object' }
   },
   bece: {
     temperature: 0.15, top_p: 0.88, top_k: 35, max_tokens: 600,
-    model: '@cf/meta/llama-3.1-8b-instruct',
+    model: ROUTINE,
     response_format: { type: 'json_object' }
   },
   exam_marker: {
     temperature: 0.05, top_p: 0.8, top_k: 20, max_tokens: 400,
-    model: '@cf/meta/llama-3.1-8b-instruct',
+    model: HIGH_STAKES,
     response_format: { type: 'json_object' }
   },
   study_coach: {
     temperature: 0.3, top_p: 0.92, top_k: 50, max_tokens: 600,
-    model: '@cf/meta/llama-3.1-8b-instruct',
+    model: ROUTINE,
     response_format: { type: 'json_object' }
   },
   research: {
     temperature: 0.25, top_p: 0.92, top_k: 45, max_tokens: 1000,
-    model: '@cf/meta/llama-3.1-8b-instruct',
+    model: ROUTINE,
     response_format: { type: 'json_object' }
   },
   translation: {
     temperature: 0.3, top_p: 0.92, top_k: 50, max_tokens: 500,
-    model: '@cf/meta/llama-3.1-8b-instruct'
+    model: LONG_DOC
     // No JSON mode for translation — free-form text
   },
   document_drafter: {
     temperature: 0.35, top_p: 0.93, top_k: 55, max_tokens: 1200,
-    model: '@cf/meta/llama-3.1-8b-instruct'
+    model: LONG_DOC
     // No JSON mode for document drafting
   },
   citizen: {
     temperature: 0.2, top_p: 0.9, top_k: 40, max_tokens: 500,
-    model: '@cf/meta/llama-3.1-8b-instruct',
+    model: ROUTINE,
     response_format: { type: 'json_object' }
   },
   general: {
     temperature: 0.2, top_p: 0.9, top_k: 40, max_tokens: 700,
-    model: '@cf/meta/llama-3.1-8b-instruct',
+    model: ROUTINE,
     response_format: { type: 'json_object' }
   },
   verifier: {
     temperature: 0.05, top_p: 0.8, top_k: 20, max_tokens: 600,
-    model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+    model: HIGH_STAKES,
     response_format: { type: 'json_object' }
   }
 };

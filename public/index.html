@@ -125,31 +125,8 @@
           </a>
         </div>
 
-        <!-- Center zone: model selector -->
-        <div class="header-zone header-zone-center">
-          <select class="model-selector" id="model-selector" onchange="onModelChange()" aria-label="Select AI model">
-            <optgroup label="Enterprise Models" id="optgroup-enterprise">
-              <option value="@cf/openai/gpt-oss-120b" data-tier="enterprise">GPT-OSS 120B — OpenAI (Best)</option>
-              <option value="@cf/deepseek-ai/deepseek-r1-distill-qwen-32b" data-tier="enterprise">DeepSeek R1 32B — Reasoning</option>
-              <option value="@cf/ibm-granite/granite-4.0-h-micro" data-tier="enterprise">Granite 4.0 — IBM</option>
-            </optgroup>
-            <optgroup label="Professional Models" id="optgroup-professional">
-              <option value="@cf/meta/llama-3.3-70b-instruct-fp8-fast" data-tier="professional">Llama 3.3 70B — Meta (Best Pro)</option>
-              <option value="@cf/meta/llama-4-scout-17b-16e-instruct" data-tier="professional">Llama 4 Scout 17B — Meta</option>
-              <option value="@cf/qwen/qwq-32b" data-tier="professional">QwQ 32B — Qwen (Deep Thinking)</option>
-              <option value="@cf/mistralai/mistral-small-3.1-24b-instruct" data-tier="professional">Mistral Small 3.1 24B</option>
-              <option value="@cf/zai-org/glm-4.7-flash" data-tier="professional">GLM 4.7 Flash — 128K Context</option>
-              <option value="@cf/qwen/qwen2.5-coder-32b-instruct" data-tier="professional">Qwen 2.5 Coder 32B</option>
-              <option value="@cf/meta/llama-3.2-11b-vision-instruct" data-tier="professional">Llama 3.2 11B Vision</option>
-            </optgroup>
-            <optgroup label="Free Models" id="optgroup-free">
-              <option value="@cf/qwen/qwen3-30b-a3b-fp8" data-tier="free" selected>Qwen3 30B — Fast &amp; Smart (Default)</option>
-              <option value="@cf/openai/gpt-oss-20b" data-tier="free">GPT-OSS 20B — OpenAI</option>
-              <option value="@cf/google/gemma-3-12b-it" data-tier="free">Gemma 3 12B — Google</option>
-              <option value="@cf/meta/llama-3.1-8b-instruct-fast" data-tier="free">Llama 3.1 8B Fast — Instant</option>
-            </optgroup>
-          </select>
-        </div>
+        <!-- Center zone: reserved -->
+        <div class="header-zone header-zone-center"></div>
 
         <!-- Right zone: utilities -->
         <div class="header-zone header-zone-right">

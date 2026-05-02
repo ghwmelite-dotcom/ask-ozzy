@@ -101,7 +101,7 @@ export async function selfConsistencyCheck(
 ): Promise<number> {
   try {
     const runs = await Promise.all([0.1, 0.25, 0.35].map(temp =>
-      env.AI.run('@cf/meta/llama-3.1-8b-instruct' as any, {
+      env.AI.run('@cf/qwen/qwen3-30b-a3b-fp8' as any, {
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: query }
