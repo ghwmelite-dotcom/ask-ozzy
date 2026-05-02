@@ -85,4 +85,4 @@ src/
 
 ## Database Migrations
 - `schema-anti-hallucination.sql` — New tables: knowledge_documents, hallucination_events, response_feedback, kb_gaps, known_errors, gateway_metrics
-- Run: `npx wrangler d1 execute ghana-civil-ai-db --remote --file=schema-anti-hallucination.sql`
+- Run: `npx wrangler d1 execute askozzy-db --remote --file=schema-anti-hallucination.sql`

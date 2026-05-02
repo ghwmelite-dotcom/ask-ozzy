@@ -15,14 +15,14 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "ghana-civil-ai-db",
-      "database_id": "87f5e159-aabb-4abe-b697-8fca449c94f9"
+      "database_name": "askozzy-db",
+      "database_id": "058dc7ea-dd76-4a8e-88a4-f6ae9fdf0b19"
     }
   ],
   "kv_namespaces": [
     {
       "binding": "SESSIONS",
-      "id": "ab4c606dc306424499681ecdcd99dbdc"
+      "id": "fb51e4ff55754487aaf3b88f521356d1"
     }
   ],
   "r2_buckets": [
