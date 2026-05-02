@@ -78,9 +78,9 @@ export async function runStreamWithGateway(
   try {
     return (await env.AI.run(model as any, streamInput as any, {
       gateway: gatewayOpts,
-    } as any)) as ReadableStream;
+    } as any)) as unknown as ReadableStream;
   } catch (e: any) {
     console.error('AI Gateway stream error, falling back to direct:', e?.message);
-    return (await env.AI.run(model as any, streamInput as any)) as ReadableStream;
+    return (await env.AI.run(model as any, streamInput as any)) as unknown as ReadableStream;
   }
 }
