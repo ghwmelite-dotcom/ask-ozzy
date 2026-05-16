@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "askozzy",
+  "name": "ask-ozzy",
   "main": "src/index.ts",
   "compatibility_date": "2025-12-01",
   "assets": {
